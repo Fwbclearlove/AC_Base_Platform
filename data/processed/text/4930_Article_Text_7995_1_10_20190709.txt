@@ -1,0 +1,1045 @@
+The Thirty-Third AAAI Conference on Artiﬁcial Intelligence (AAAI-19)
+Differential Networks for Visual Question Answering
+Chenfei Wu, Jinlai Liu, Xiaojie Wang, Ruifan Li
+Center for Intelligence Science and Technology
+Beijing University of Posts and Telecommunications
+{wuchenfei, liujinlai, xjwang, rﬂi}@bupt.edu.cn
+Abstract
+The task of Visual Question Answering (VQA) has emerged
+in recent years for its potential applications. To address the
+VQA task, the model should fuse feature elements from both
+images and questions efﬁciently. Existing models fuse image
+feature element vi and question feature element qi directly,
+such as an element product viqi. Those solutions largely ig-
+nore the following two key points: 1) Whether vi and qi
+are in the same space. 2) How to reduce the observation
+noises in vi and qi. We argue that two differences between
+those two feature elements themselves, like (vi −vj) and
+(qi −qj), are more probably in the same space. And the dif-
+ference operation would be beneﬁcial to reduce observation
+noise. To achieve this, we ﬁrst propose Differential Networks
+(DN), a novel plug-and-play module which enables differ-
+ences between pair-wise feature elements. With the tool of
+DN, we then propose DN based Fusion (DF), a novel model
+for VQA task. We achieve state-of-the-art results on four pub-
+licly available datasets. Ablation studies also show the effec-
+tiveness of difference operations in DF model.
+1
+Introduction
+Given an image and a related question, the Visual Ques-
+tion Answering (VQA) task requires the machine to deter-
+mine the correct answer. From an application perspective,
+VQA improves human-computer interaction ability and can
+be applied to many scenarios such as smart home manage-
+ment systems and private virtual assistant (Kaﬂe and Kanan
+2017b). From a research perspective, VQA requires a joint
+understanding of images and questions, and can be consid-
+ered as a component of Visual Turing Test (Malinowski and
+Fritz 2014). As a result, VQA has recently emerged as a
+challenging task and received more and more interest from
+researchers.
+The basic framework of existing VQA models consists of
+three stages. First, the image and the question are encoded
+respectively. Second, the encoded image and question fea-
+ture elements are fused. Third, the fused results are clas-
+siﬁed to derive the answer. Among them, the “fusion” in
+the second step is the key. Therefore, most studies focus on
+this point. Initially, linear models are used to fuse image and
+question feature elements (Yang et al. 2016; Lu et al. 2016;
+Copyright c⃝2019, Association for the Advancement of Artiﬁcial
+Intelligence (www.aaai.org). All rights reserved.
+Question: What
+color is the dress
+that the tallest bear
+is wearing?
+GRU
+RCNN
+Answer: pink
+Fusion
+Differential
+Networks
+Differential
+Networks
+Figure 1: DN-based Fusion (DF) model for Visual Question
+Answering. The image and question feature elements are fed
+into the Differential Networks (DN) and then fused to derive
+the answer.
+Li and Jia 2016; Nam, Ha, and Kim 2017). However, sim-
+ple linear operations cannot bring ﬁne-grained fusions be-
+tween feature elements. Recently, bilinear models are used
+to model the fusion between image and question feature el-
+ements (Fukui et al. 2016; Kim et al. 2017; Yu et al. 2017;
+Ben-younes et al. 2017).
+Note that the fusion in both linear and bilinear models are
+between the feature elements themselves, such as viqi for
+linear models and viqj for bilinear models. However, for the
+VQA problem, we argue that the fusion based on the differ-
+ence between feature elements, like (vi−vj)(qi−qj), would
+be more reasonable. This can be seen from two perspectives.
+For one thing, since vi and qi are from different modalities,
+it is unreasonable to fuse them directly. By contrast, after the
+difference operation, information from both modalities goes
+8997
+to differential representations, and the fusion between them
+becomes more relevant. For another, the difference opera-
+tion can reduce potential observation noises in vi and qi. For
+example, assuming that δ is the noise of the feature elements
+vi and vj, then (vi + δ) −(vj + δ) can effectively ﬁlter the
+noise.
+In this paper, we propose Differential Networks (DN), a
+novel plug-and-play module which enables differences be-
+tween pair-wise feature elements. DN shows an interesting
+relation with Fully-Connected Networks (FCN). Then, with
+the tool of our DN, a new DN-based Fusion (DF) model for
+VQA task is constructed. Intuitively, we show the ﬂowchart
+of our model in Fig. 1. Our DF model ﬁrst makes differ-
+ences on image and text feature elements respectively, and
+then fuse the differential representations to infer the ﬁnal an-
+swer.
+In summary, our contributions are as follows:
+• We propose Differential Networks (DN), a novel plug-
+and-play module which enables differences between pair-
+wise feature elements;
+• We propose DN based Fusion (DF), a novel model for
+VQA task;
+• We achieve state-of-the-art results on all four datasets and
+conduct detailed ablation study to verify the effectiveness
+of differential networks.
+2
+Related Work
+In this section, we introduce the related work in three
+consecutive sections. Firstly, we brieﬂy review the current
+models for VQA task. Secondly, we focus on reviewing
+attention-based VQA models. Thirdly, we further review the
+classical fusion strategies used in these attention models.
+2.1
+Visual Question Answering (VQA)
+Initially, Bayesian-based models were proposed to solve the
+VQA task (Malinowski and Fritz 2014; Kaﬂe and Kanan
+2016). With the success of deep neural networks, many dif-
+ferent methods have been proposed to address the VQA
+task. These methods can be divided into ﬁve categories:
+attention-based models (Yang et al. 2016; Fukui et al. 2016),
+memory-based models (Xiong, Merity, and Socher 2016;
+Su et al. 2018), module-based models (Andreas et al. 2016;
+Hu et al. 2017), relation-based models (Santoro et al. 2017)
+and knowledge-based models (Wu et al. 2016; Wang et al.
+2017). Among them, attention-based models, which select
+the useful part of input information with attention mecha-
+nisms, achieve signiﬁcant performances on the VQA task.
+In this paper, we employ the attention-based framework
+to validate the effectiveness of differential networks.
+2.2
+Attention-based VQA models
+Due to their superior performances, attention-based VQA
+models have been received the most extensive studies. They
+focus on locating relevant objects in input features, such as
+bounding boxes or image regions.
+Initially, (Chen et al. 2015) proposed one-step attention
+to locate relevant objects of images. Furthermore, (Yang
+et al. 2016; Xu and Saenko 2016) proposed multi-step
+attention to update relevant objects of images and infer
+the answer progressively. Additionally, (Lu et al. 2016;
+Schwartz, Schwing, and Hazan 2017) proposed multi-modal
+attention, which ﬁnds not only the relevant objects of images
+but also questions or answers. Recently, (Fukui et al. 2016;
+Kim et al. 2017; Yu et al. 2017; Ben-younes et al. 2017)
+used bilinear fusion in attention mechanism to locate more
+accurate objects of input features.
+In this paper, to validate the effectiveness of differential
+networks, we only use a simple one-step visual attention.
+2.3
+Fusion for Attention Mechanism
+Attention mechanisms require fusion to calculate attention
+distributions. Therefore, the degree of fusion has a high im-
+pact on the quality of attention mechanism.
+Existing attention models focusing on fusion can be di-
+vided into two categories, linear models and bilinear models.
+Initially, linear models are adopted to fuse image and ques-
+tion feature elements. (Yang et al. 2016; Lu et al. 2016) used
+the element-wise sum to fuse image and question feature el-
+ements, (Li and Jia 2016; Nam, Ha, and Kim 2017) used the
+element-wise multiplication to fuse image and question fea-
+ture elements. Recently, bilinear models were used to model
+more ﬁne-grained fusion between image feature and ques-
+tion feature elements. (Fukui et al. 2016) used the outer
+product to fuse image and question feature elements but re-
+sulting in the problem of dimension explosion. To solve the
+problem, (Kim et al. 2017) used the element-wise multipli-
+cation after the low-rank projection of image and question
+features. To further approximate bilinearity, (Yu et al. 2017;
+Ben-younes et al. 2017) used the k-calculated sum and sum-
+pooling of window k respectively to increase the model ca-
+pacity.
+In this paper, we ﬁrst propose DN module, which explic-
+itly models the differences between pair-wise feature ele-
+ments. Then we propose DF model to fuse the differential
+representations.
+3
+Differential Networks
+3.1
+Deﬁnition and Derivation
+Let x = (x1, x2, ..., xm)T be a feature vector. We perform
+full pairwise differences between feature elements mapping
+x to a new vector y = (y1, y2, ..., yn)T. Each element in y
+is calculated in Eq. (1):
+yk =
+X
+i,j
+(xi −xj)w(k)
+ij ,
+(1)
+where w(k)
+ij
+∈R is a learnable parameter, i, j ∈[1, m], k ∈
+[1, n]. Eq. (1) can be written in the form of a matrix, as de-
+noted in Eq. (2):
+yk = xTW (k)1 −xT(W (k))T1,
+(2)
+where W (k) ∈Rm×m is the learnable parameter. 1 ∈Rm
+is an all-ones vector.
+Unfortunately, W ∈Rm×m×n is a third-order tensor,
+which makes the parameter scales large and difﬁcult to train.
+8998
+Differential Networks (DN)
+Fully-Connected Networks (FCN)
+Figure 2: Comparison of Differential Networks (DN) and Fully-Connected Networks (FCN).
+Inspired by Mutan (Ben-younes et al. 2017), we factorize
+W (k) as a sum of S low-rank matrices:
+W (k) =
+S
+X
+s=1
+u(k)
+s
+⊗v(k)
+s ,
+(3)
+where u(k)
+s
+∈Rm and v(k)
+s
+∈Rm are learnable parameters,
+S is a hyper-parameter, ⊗represents the outer product. We
+substitute Eq. (3) into Eq. (2), then we have Eq. (4):
+yk =
+S
+X
+s=1
+[(xTu(k)
+s )(1Tv(k)
+s ) −(xTv(k)
+s )(1Tu(k)
+s )].
+(4)
+Finally, Eq. (4) can be written in the form of a matrix:
+y =
+S
+X
+s=1
+[(xTUs) ⊙(1TVs) −(xTVs) ⊙(1TUs)],
+(5)
+where Us ∈Rm×n, Vs ∈Rm×n are learnable parameters,
+y ∈Rn. ⊙is the element-wise multiplication.
+We call the mapping from x to y Differential Networks
+(DN) and denote Eq. (5) by Eq. (6) for simpliﬁcation:
+y = DN(x).
+(6)
+3.2
+DN vs. FCN
+In this subsection, we compare Differential Networks (DN)
+with Fully-Connected Networks (FCN), which is a com-
+monly used neural network mapping x to y too.
+For convenience of comparison, we rewrite DN as Eq. (7).
+It can be also rewritten as an equation in the lower left part
+of Fig. 2, and illustrated in the upper left part of Fig. 2. FCN
+can be written as Eq. (8) and rewritten as an equation in the
+lower right part of Fig. 2, and can be illustrated in the upper
+right part of Fig. 2.
+y[DN]
+k
+=
+X
+i,j
+(xi −xj)w(k)
+ij
+=
+X
+i,j
+xi(w(k)
+ij −w(k)
+ji )
+(7)
+y[F CN]
+k
+=
+X
+i
+xiwik =
+X
+i
+xiw(k)
+ii ,
+(8)
+where in Eq. (8) we view the parameter matrix of size m×n
+in fully connected networks as n diagnoal matrices of size
+m × m.
+Comparing the illustrations of DN and FCN in the upper
+part of Fig. 2, we can see that the biggest difference between
+DN and FCN is the differential layer (light green) in the mid-
+dle of DN. By the full difference between feature elements,
+the differential layer can effectively reduce the noise of the
+input information.
+Comparing the formulas of DN and FCN in the lower part
+of Fig. 2, we have a very interesting ﬁnding. FCN has only
+weights for the diagonal, and the rest is zero. On the con-
+trary, the diagonal of DN is 0, and the rest has weights. This
+shows that FCN focuses on the feature element itself while
+DN focuses on the interaction between feature elements.
+4
+Differential Fusion Model for VQA
+Our DN based Fusion (DF) model is illustrated in Fig. 3. The
+model includes three parts. Data embedding encodes images
+and questions respectively. Differential Fusion is the major
+part of the model, which implements DN based fusion. De-
+cision making predicts ﬁnal scores of answers.
+4.1
+Data Embedding
+Faster-RCNN (Ren et al. 2015) is used to encode im-
+ages with the static features provided by bottom-up-
+attention (Anderson et al. 2018), GRU (Cho et al. 2014) is
+used to encode text with the parameters initialized with skip-
+thoughts (Kiros et al. 2015), as denoted in Eq. (9):
+V = RCNN(image),
+Q = GRU(question),
+(9)
+where V ∈Rl×dv denotes the visual features of the top-
+ranked l detection boxes and Q ∈Rdq denotes the question
+embedding.
+8999
+Question: What color
+is the dress that the
+tallest bear is
+wearing?
+GRU
+RCNN
+Linear
+Linear
+Linear
+softmax
+Answer: pink
+Linear
+softmax
+Decision
+Making
+Differential Fusion
+Data Embedding
+Differential Networks
+Differential Networks
+Differential Networks
+Differential Networks
+Differential Networks
+Figure 3: The overall structure of the proposed model for solving the VQA task. It consists of Data Embedding, Differential
+Fusion and Decision Making, marked with dash lines respectively.
+Then, the visual features and question features are pro-
+jected to the same dimension, as denoted in Eq. (10):
+V f = relu(V Wv),
+Qf = relu(QWq),
+(10)
+where Wf and Wq are learnable parameters. V f ∈Rl×d
+and Qf ∈Rd are projected features. We omit the bias b for
+simplicity.
+4.2
+Differential Fusion
+Based on DN discussed in Sec. 3, we propose differential
+fusion, as denoted in Eq. (11):
+H =
+R
+X
+r=1
+DN r(V f) ⊙DN r(Qf),
+(11)
+where ⊙is the element-wise operation, R is a hyperparam-
+eter, DN r means the rth DN with different learnable pa-
+rameters. H ∈Rl×dh is the result of the fusion. Then, multi
+glimpse attention distributions are calculated in Eq. (12).
+α = softmax(HWh),
+(12)
+where Wh ∈Rdh×g is a learnable parameter, g is the num-
+ber of attention glimpses. Note that here softmax is per-
+formed on the ﬁrst dimension of matrix HWh ∈Rl×g.
+α ∈Rl×g is a matrix representing g attention distributions.
+Then, these attentions are used to attend the visual features,
+as denoted in Eq. (13):
+eV = flatten(relu(αTV Wα)),
+(13)
+where
+Wα
+∈
+Rdv× d′
+g
+is
+a
+learnable
+parameter,
+relu(αTV Wα) ∈Rg× d′
+g , eV
+∈Rd′. Then, the decision
+maker interacts eV and Qf again as denoted in Eq. (14):
+F =
+R
+X
+r=1
+DN r(eV ) ⊙DN r(Qf),
+(14)
+where F ∈Rdf is the result of the fusion.
+4.3
+Decision Making
+In Decision Making process, a linear layer with a softmax
+activation function is used to predict the score of the candi-
+date answer in Eq. (15):
+ˆa = softmax(FWf),
+(15)
+where Wf ∈Rdf ×|D|is the learnable parmater, ˆa ∈R|D| is
+the predicted answer, D is the answer dictionary, |D| is the
+number of candidate answers.
+4.4
+Training
+We ﬁrst calculate the ground-truth answer distribution in
+Eq. (16):
+ai =
+PN
+j=1 1{uj = i}
+N −PN
+j=1 1{uj /∈D}
+,
+(16)
+where a ∈R|D| is the ground-truth answer distribution, ui
+is the answer given by the ith annotator. N is the number
+of annotators. In detail, N is 10 in the VQA 1.0 and VQA
+2.0 dataset; N is 1 in the COCO-QA dataset and the TDIUC
+dataset.
+Finally, we use the KL-divergence as the loss function be-
+tween a and ˆa in Eq. (17):
+L (ˆa, a) =
+|D|
+X
+i=1
+ai log
+ai
+ˆai
+
+.
+(17)
+5
+Experiments
+5.1
+Datasets and evaluation metrics
+We evaluate our model on four public datasets: the VQA 1.0
+dataset (Antol et al. 2015), the VQA 2.0 dataset (Goyal et al.
+2017), the COCO-QA dataset (Ren, Kiros, and Zemel 2015),
+and the TDIUC dataset (Kaﬂe and Kanan 2017a). The VQA
+9000
+VQA 1.0 Test-dev
+VQA 1.0 Test-std
+Open-Ended
+MC
+Open-Ended
+MC
+Method
+All
+Y/N
+Num.
+Other
+All
+All
+Y/N
+Num.
+Other
+All
+HighOrderAtt (Schwartz, Schwing,
+and Hazan 2017)
+-
+-
+-
+-
+69.4
+-
+-
+-
+-
+69.3
+MLB(7) (Kim et al. 2017)
+66.77
+84.54
+39.21
+57.81
+-
+66.89
+84.61
+39.07
+57.79
+-
+Mutan(5) (Ben-younes et al. 2017)
+67.42
+85.14
+39.81
+58.52
+-
+67.36
+84.91
+39.79
+58.35
+-
+DualMFA (Lu et al. 2018)
+66.01
+83.59
+40.18
+56.84
+70.04
+66.09
+83.37
+40.39
+56.89
+69.97
+ReasonNet
+(Ilievski
+and
+Feng
+2017)
+-
+-
+-
+-
+-
+67.9
+84.0
+38.7
+60.4
+-
+DF (36boxes) (ours)
+68.62
+86.08
+43.52
+59.38
+73.31
+68.48
+85.81
+42.87
+59.23
+73.05
+Table 1: Comparision with the state-of-the-arts on the VQA 1.0 dataset.
+VQA 2.0 Test-dev
+VQA 2.0 Test-std
+Method
+All
+Y/N
+Num.
+Other
+All
+Y/N
+Num.
+Other
+MF-SIG-VG (Zhu et al. 2017)
+64.73
+81.29
+42.99
+55.55
+-
+-
+-
+-
+Up-Down (36 boxes) (Teney et al. 2018)
+65.32
+81.82
+44.21
+56.05
+65.67
+82.20
+43.90
+56.26
+LC Baseline (100 boxes) (Zhang, Hare,
+and Pr¨ugel-Bennett 2018)
+67.50
+82.98
+46.88
+58.99
+67.78
+83.21
+46.60
+59.20
+LC Counting (100 boxes) (Zhang, Hare,
+and Pr¨ugel-Bennett 2018)
+68.09
+83.14
+51.62
+58.97
+68.41
+83.56
+51.39
+59.11
+DF (36 boxes) (ours)
+67.73
+83.91
+46.7
+58.7
+67.86
+84.1
+46.15
+58.7
+DF (100 boxes) (ours)
+68.31
+84.33
+48.2
+59.22
+68.59
+84.56
+47.1
+59.61
+Table 2: Comparision with the state-of-the-arts on the VQA 2.0 dataset.
+Method
+All
+Obj.
+Num.
+Color
+Loc.
+WUPS0.9
+WUPS0.0
+QRU (Li and Jia 2016)
+62.50
+65.06
+46.90
+60.50
+56.99
+72.58
+91.62
+HieCoAtt (Lu et al. 2016)
+65.4
+68.0
+51.0
+62.9
+58.8
+75.1
+92.0
+Dual-MFA (Lu et al. 2018)
+66.49
+68.86
+51.32
+65.89
+58.92
+76.15
+92.29
+DF (36 boxes) (ours)
+69.36
+70.53
+54.92
+73.67
+61.22
+78.25
+92.99
+Table 3: Comparision with the state-of-the-arts on the COCO-QA dataset.
+Question Type
+MCB-A
+(Fukui et al. 2016)
+RAU
+(Kaﬂe and Kanan 2017a)
+CATL-QTA-W
+(Shi et al. 2018)
+DF (36 boxes)
+(ours)
+Sceen Recognition
+93.06
+93.96
+93.80
+94.47
+Sport Recognition
+92.77
+93.47
+95.55
+95.90
+Color Attributes
+68.54
+66.86
+60.16
+74.47
+Other Attributes
+56.72
+56.49
+54.36
+60.82
+Activity Recognition
+52.35
+51.60
+60.10
+62.01
+Positional Reasoning
+35.40
+35.26
+34.71
+40.76
+Sub. Object Recognition
+85.54
+86.11
+86.98
+88.71
+Absurd
+84.82
+96.08
+100.00
+94.56
+Utility and Affordances
+35.09
+31.58
+31.48
+41.52
+Object Presence
+93.64
+94.38
+94.55
+95.58
+Counting
+51.01
+48.43
+53.25
+58.37
+Sentiment Understanding
+66.25
+60.09
+64.38
+68.77
+Overall(Arithmetric MPT)
+67.90
+67.81
+69.11
+72.97
+Overall(Harmonic MPT)
+60.47
+59.00
+60.08
+65.79
+Overall Accuracy
+81.86
+84.26
+85.03
+86.73
+Table 4: Comparision with the state-of-the-arts on the TDIUC dataset.
+9001
+1.0 dataset contains a total of 614,163 samples and is divided
+into three splits: train(40.4%), val(19.8%), test(39.8%). Fur-
+ther, the test set includes two types: test-dev and test-
+std. The dataset has two subtasks: Open-Ended (OE) and
+Multiple-Choice (MC). The VQA 2.0 dataset contains a to-
+tal of 1,105,904 samples and is divided into three splits:
+train(40.1%), val(19.4%), test(40.5%). It is more balanced
+compared to the VQA 1.0 dataset. The COCO-QA dataset
+contains a total of 117,684 samples and is divided into two
+splits: train(66.9%), test(33.1%). The TDIUC dataset con-
+tains a total of 1,654,167 samples and is divided into two
+splits: train(67.4%), test(32.6%). For the VQA 1.0 and VQA
+2.0 dataset, we use the evaluation tool proposed in (Antol et
+al. 2015) to evaluate the model, as denoted in Eq. (18):
+Acc(ans) = min
+#humans that said ans
+3
+, 1
+
+.
+(18)
+For the COCO-QA dataset and TDIUC dataset, we evalu-
+ate the model in Eq. (19):
+Acc(ans) = 1{ans = ground truth}.
+(19)
+5.2
+Implementation details
+During the data embedding phase, the image features are
+mapped to the size of 36 × 2048 and the text features are
+mapped to the size of 2400. In the differential fusion phase,
+the number of hidden layer in DF is 510; hyperparameter S
+is 1, R is 5. The attention hidden unit number is 620. In the
+decision making phase, the number of hidden layer in DF is
+510. All the nonlinear layers of the model all use the relu ac-
+tivation function and dropout (Srivastava et al. 2014) to pre-
+vent overﬁtting. All settings are commonly used in previous
+work. We implement the model using Pytorch. We use Adam
+(Kingma and Ba 2014) to train the model with a learning
+rate of 10−4 and a batch size of 128. More details, including
+source codes, will be published in the near future.
+5.3
+Comparisons with state-of-the-arts
+In this section, we compare DF model with the state-of-the-
+art models on the VQA 1.0 dataset, the VQA 2.0 dataset,
+the COCO-QA dataset and the TDIUC dataset. In the VQA
+1.0 dataset and the VQA 2.0 dataset, DF is trained on the
+train+val set and tested on the test-dev and test-std set. In the
+COCO-QA dataset and the TDIUC dataset, DF is trained on
+the train set and tested on the test set.
+Firstly, Tab. 1 shows the comparison with the state-of-
+the-art models on the VQA 1.0 dataset. DF achieves new
+state-of-the-art results in both Multiple-Choice (MC) task
+and Open-Ended (OE) task. Using a single image feature,
+DF not only outperforms all the models that use single image
+feature but also outperforms ReasonNet (Ilievski and Feng
+2017), which uses six input image features including face
+analysis, object classiﬁcation, scene classiﬁcation and so on.
+Especially, there is an improvement of 3.08% of MC task in
+test-std set.
+Secondly, Tab. 2 shows the comparison with the state-of-
+the-art models on the VQA 2.0 dataset. Compared with Up-
+Down (36boxes) (Teney et al. 2018), which is the winning
+model in the VQA challenge 2017, DF (36boxes) achieves
+Method
+Validation
+MLB
+62.91
+Mutan
+63.61
+DF with PR
+r=1 V fW r
+vf ⊙DN r(Qf)
+64.46
+DF with PR
+r=1 DN r(V f) ⊙QfW r
+qf
+64.58
+DF without dropout
+61.05
+DF with tanh
+64.78
+DF
+64.89
+Table 5: Ablation study on the VQA 2.0 Validation.
+2.19% higher accuracy. Compared with the most recent
+state-of-the-art model LC counting (100boxes) (Zhang,
+Hare, and Pr¨ugel-Bennett 2018), our single DF (100boxes)
+model achieves a new state-of-the-art result of 68.59% in the
+test-std set.
+Thirdly, Tab. 3 shows the comparison with the state-of-
+the-art models on the COCO-QA dataset. DF improves the
+overall accuracy of the state-of-the-art Dual-MFA (Lu et al.
+2018) from 66.49% to 69.36%. There is an improvement in
+accuracy of 3.6% in “Num.” question and 7.78% in “Color”
+question.
+Fourthly, Tab. 4 shows the comparison with the state-of-
+the-art models on the TDIUC dataset. DF improves the over-
+all accuracy of the state-of-the-art CATL-QTA-W (Shi et al.
+2018) from 85.03% to 86.73%. There is also an improve-
+ment of 5.12% in “Counting” question and 5.93% in “Color
+Attributes” question.
+In summary, the strong capability of the DF is shown in
+all four datasets.
+5.4
+Ablation study
+In this section, we conduct some ablation studies. For a fair
+comparison, all the data provided in this section are trained
+under the VQA 2.0 training set and tested on the VQA 2.0
+validation set. All the models use the exact same bottom-up-
+attention feature (36 boxes) extracted from faster-rcnn.
+The ﬁrst part of Tab. 5 compares DF with other attention
+models. Mutan can be viewed as the fusion between two
+FCNs, i.e. PR
+r=1 V fW r
+vf ⊙QfW r
+qf . DF outperforms Mu-
+tan by 1.28%. This shows the effectiveness of the DN.
+To further validate the effectiveness of DN, the models in
+the second part of Tab. 5 mix FCN and DN. DF-Q means
+using DN only for questions. In detail, DF-Q replaces Eq.
+(11) with H = PR
+r=1 V fW r
+vf ⊙DN r(Qf) and replaces
+Eq. (14) with F = PR
+r=1 eV W r
+ev ⊙DN r(Qf). Similary, DF-
+V means using DN only for images. As we can see, com-
+pared with DF, both DF-Q and DF-V lower the performance
+(64.89→64.46/64.58).
+The third part of the Tab. 5 studies some tips and tricks.
+We ﬁnd that using tanh does not affect performance much,
+but using relu does perform better. In addition, we ﬁnd that
+using dropout is crucial — not using dropout will signiﬁ-
+cantly lower the performance (64.89→61.05).
+9002
+Mutan
+DF-Q
+DF-V
+DF
+Example 1
+Question: How many zebras?
+Ground-truth: 4
+3
+3
+4
+4
+Example 2
+Question: What is in front the window on a stand?
+Ground-truth: tv
+table 
+tv 
+books 
+tv 
+Example 3
+Question: Are there people in the water?
+Ground-truth: no
+yes 
+yes 
+yes 
+no 
+Example 4
+Question: How many frames are on the wall?
+Ground-truth: 7
+6 
+4 
+6 
+6 
+Figure 4: Visualization of DF and its comparative models.
+5.5
+Qualitative evaluation
+In this section, we visualize some results of DF model and
+its comparative models in Fig. 4. Four examples are given
+including three success cases and one failure case of DF
+model. Each example compares the visualization of atten-
+tions of four models: Mutan, DF-Q, DF-V, and DF. The
+probability value of the attention is shown in the box upper
+left of each bounding box. For example, in Example 1, al-
+though both DF and DF-Q answered correctly, the bounding
+box for DF is more accurate and has a high attention prob-
+ability of 0.62. As we can see from Example 1∼3, whether
+DF-Q or DF-V is wrong or they are both wrong, DF still
+answers correctly. This shows that the difference operation
+plays an important role. In Example 4, all four models an-
+swered incorrectly. This shows that counting is still a chal-
+lenge for attention-based models. Even so, the DF model
+still boxes all the frames on the wall with a high attention
+probability of 0.72. This shows that by reducing the noise
+of the input features and map the image and the question
+to the same differential space, DF efﬁciently improves the
+attention accuracy and conﬁdence.
+6
+Conclusion
+In this paper, we propose a general DN module. Based on
+DN, we propose a new DF model for VQA task. We achieve
+state-of-the-art results on four publicly available datasets. In
+the future, we plan to use DN for other tasks and validate its
+generality and effectiveness.
+9003
+7
+Acknowledgments
+We would like to thank the anonymous reviewers for their
+valuable comments. This paper is supported by NSFC
+(No. 61273365), NSSFC (2016ZDA055), 111 Project (No.
+B08004), Beijing Advanced Innovation Center for Imaging
+Technology, Engineering Research Center of Information
+Networks of MOE, China. Correspondence author is Xiaojie
+Wang.
+References
+Anderson, P.; He, X.; Buehler, C.; Teney, D.; Johnson, M.; Gould,
+S.; and Zhang, L. 2018. Bottom-up and top-down attention for im-
+age captioning and visual question answering. In CVPR, volume 3,
+6.
+Andreas, J.; Rohrbach, M.; Darrell, T.; and Klein, D. 2016. Neural
+module networks. In CVPR, 39–48.
+Antol, S.; Agrawal, A.; Lu, J.; Mitchell, M.; Batra, D.;
+Lawrence Zitnick, C.; and Parikh, D. 2015. Vqa: Visual question
+answering. In ICCV, 2425–2433.
+Ben-younes, H.; Cadene, R.; Cord, M.; and Thome, N. 2017. MU-
+TAN: Multimodal Tucker Fusion for Visual Question Answering.
+In ICCV, 2631–2639.
+Chen, K.; Wang, J.; Chen, L.-C.; Gao, H.; Xu, W.; and Nevatia,
+R. 2015. ABC-CNN: An attention based convolutional neural net-
+work for visual question answering. arXiv:1511.05960.
+Cho, K.; van Merrienboer, B.; Bahdanau, D.; and Bengio, Y.
+2014. On the Properties of Neural Machine Translation: Encoder-
+Decoder Approaches. arXiv preprint arXiv:1409.1259.
+Fukui, A.; Park, D. H.; Yang, D.; Rohrbach, A.; Darrell, T.; and
+Rohrbach, M.
+2016.
+Multimodal compact bilinear pooling for
+visual question answering and visual grounding. In EMNLP, 457–
+468.
+Goyal, Y.; Khot, T.; Summers-Stay, D.; Batra, D.; and Parikh, D.
+2017. Making the V in VQA matter: Elevating the role of image
+understanding in Visual Question Answering. In CVPR, volume 1,
+9.
+Hu, R.; Andreas, J.; Rohrbach, M.; Darrell, T.; and Saenko, K.
+2017. Learning to reason: End-to-end module networks for visual
+question answering. In ICCV.
+Ilievski, I., and Feng, J. 2017. Multimodal Learning and Reasoning
+for Visual Question Answering. In NIPS, 551–562.
+Kaﬂe, K., and Kanan, C. 2016. Answer-type prediction for visual
+question answering. In CVPR, 4976–4984.
+Kaﬂe, K., and Kanan, C. 2017a. An Analysis of Visual Question
+Answering Algorithms. In ICCV.
+Kaﬂe, K., and Kanan, C.
+2017b.
+Visual question answering:
+Datasets, algorithms, and future challenges. Computer Vision and
+Image Understanding 163:3–20.
+Kim, J.-H.; On, K.-W.; Kim, J.; Ha, J.-W.; and Zhang, B.-T. 2017.
+Hadamard product for low-rank bilinear pooling. In ICLR.
+Kiros, R.; Zhu, Y.; Salakhutdinov, R. R.; Zemel, R.; Urtasun, R.;
+Torralba, A.; and Fidler, S. 2015. Skip-thought vectors. In NIPS,
+3294–3302.
+Li, R., and Jia, J. 2016. Visual question answering with question
+representation update (qru). In NIPS, 4655–4663.
+Lu, J.; Yang, J.; Batra, D.; and Parikh, D.
+2016.
+Hierarchical
+Question-Image Co-Attention for Visual Question Answering. In
+NIPS.
+Lu, P.; Li, H.; Zhang, W.; Wang, J.; and Wang, X.
+2018.
+Co-
+attending Free-form Regions and Detections with Multi-modal
+Multiplicative Feature Embedding for Visual Question Answering.
+In AAAI.
+Malinowski, M., and Fritz, M.
+2014.
+A multi-world approach
+to question answering about real-world scenes based on uncertain
+input. In NIPS, 1682–1690.
+Nam, H.; Ha, J.-W.; and Kim, J. 2017. Dual attention networks for
+multimodal reasoning and matching. In CVPR.
+Ren, S.; He, K.; Girshick, R.; and Sun, J.
+2015.
+Faster r-cnn:
+Towards real-time object detection with region proposal networks.
+In NIPS, 91–99.
+Ren, M.; Kiros, R.; and Zemel, R. 2015. Exploring models and
+data for image question answering. In NIPS, 2953–2961.
+Santoro, A.; Raposo, D.; Barrett, D. G.; Malinowski, M.; Pascanu,
+R.; Battaglia, P.; and Lillicrap, T. 2017. A simple neural network
+module for relational reasoning. In NIPS.
+Schwartz, I.; Schwing, A. G.; and Hazan, T. 2017. High-Order
+Attention Models for Visual Question Answering. In NIPS.
+Shi, Y.; Furlanello, T.; Zha, S.; and Anandkumar, A. 2018. Ques-
+tion Type Guided Attention in Visual Question Answering.
+In
+ECCV.
+Su, Z.; Zhu, C.; Dong, Y.; Cai, D.; Chen, Y.; and Li, J. 2018. Learn-
+ing Visual Knowledge Memory Networks for Visual Question An-
+swering. In CVPR, 7736–7745.
+Teney, D.; Anderson, P.; He, X.; and van den Hengel, A. 2018.
+Tips and Tricks for Visual Question Answering: Learnings from
+the 2017 Challenge. In CVPR.
+Wang, P.; Wu, Q.; Shen, C.; van den Hengel, A.; and Dick, A. 2017.
+Explicit knowledge-based reasoning for visual question answering.
+In IJCAI.
+Wu, Q.; Wang, P.; Shen, C.; van den Hengel, A.; and Dick, A. 2016.
+Ask Me Anything: Free-form Visual Question Answering Based on
+Knowledge from External Sources. In CVPR.
+Xiong, C.; Merity, S.; and Socher, R. 2016. Dynamic memory
+networks for visual and textual question answering. In ICML.
+Xu, H., and Saenko, K. 2016. Ask, attend and answer: Exploring
+question-guided spatial attention for visual question answering. In
+ECCV, 451–466.
+Yang, Z.; He, X.; Gao, J.; Deng, L.; and Smola, A. 2016. Stacked
+attention networks for image question answering. In CVPR.
+Yu, Z.; Yu, J.; Fan, J.; and Tao, D. 2017. Multi-modal Factorized
+Bilinear Pooling with Co-Attention Learning for Visual Question
+Answering. In ICCV.
+Zhang, Y.; Hare, J.; and Pr¨ugel-Bennett, A. 2018. Learning to
+Count Objects in Natural Images for Visual Question Answering.
+In ICLR.
+Zhu, C.; Zhao, Y.; Huang, S.; Tu, K.; and Ma, Y. 2017. Structured
+Attentions for Visual Question Answering. In ICCV.
+9004

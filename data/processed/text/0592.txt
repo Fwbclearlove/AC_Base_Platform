@@ -1,0 +1,958 @@
+Show and Tell More: Topic-Oriented Multi-Sentence Image Captioning
+Yuzhao Mao, Chang Zhou, Xiaojie Wang, Ruifan Li
+Center for Intelligence Science and Technology, School of Computer Science,
+Beijing University of Posts and Telecommunications
+{maoyuzhao,elani,xjwang,rﬂi}@bupt.edu.cn
+Abstract
+Image captioning aims to generate textual descrip-
+tions for images. Most previous work generates a
+single-sentence description for each image. How-
+ever, a picture is worth a thousand words. Single-
+sentence can hardly give a complete view of an im-
+age even by humans. In this paper, we propose a
+novel Topic-Oriented Multi-Sentence (TOMS) cap-
+tioning model, which can generate multiple topic-
+oriented sentences to describe an image. Differ-
+ent from object instances or visual attributes, topics
+mined by the latent Dirichlet allocation reﬂect hid-
+den thematic structures in reference sentences of an
+image. In our model, each topic is integrated to a
+caption generator with a Fusion Gate Unit (FGU) to
+guide the generation of a sentence towards a certain
+topic perspective.
+With multiple sentences from
+different topics, our TOMS provides a complete de-
+scription of an image. Experimental results on both
+sentence and paragraph datasets demonstrate the
+effectiveness of our TOMS in terms of topical con-
+sistency and descriptive completeness.
+1
+Introduction
+Image captioning, usually generates a single textual descrip-
+tion for an image, has grabbed the attention of researchers
+from various ﬁelds. With standard datasets available, such
+as Flickr8k, Flickr30k and COCO, the Single-Sentence (SS)
+image captioning has been progressing fast.
+The state-
+of-the-art results on COCO have been improved from 20
+to 33 in BLEU [Kiros et al., 2014; Vinyals et al., 2015;
+Xu et al., 2015; You et al., 2016; Gan et al., 2017]. However,
+a picture is worth a thousand words. It is often insufﬁcient
+to describe an image with SS. Not only because the same im-
+age can be described in many different ways, but also, even
+humans can hardly use SS to cover all the image contents de-
+scribing an image. A more reasonable and complete descrip-
+tion is using Multiple-Sentence (MS) to caption an image,
+especially for a semantically rich one.
+A few work aimed at achieving more diverse descrip-
+tions for image captioning. By adopting a randomly sam-
+pled vector in the architecture of conditional variational auto-
+encoder [Wang et al., 2017] or generative adversarial net-
+Figure 1: An image with human-annotated reference sentences. The
+colors denote LDA-inferred topics in sentences and words. We no-
+tice that sentences with different topics depict the image with differ-
+ent emphases.
+work [Dai et al., 2017], their models can capture the uncer-
+tainty about what is depicted in an image. For those meth-
+ods, sentences generated are diversiﬁed, however, often de-
+scribing part of the same object instances within an image.
+Their objective cannot guarantee the completeness of describ-
+ing an image.
+[Johnson et al., 2016; Mao et al., 2016;
+Krause et al., 2017; Liang et al., 2017] reasoned about de-
+scribing image regions of interest with MS or paragraph.
+However, to train those models require additional annota-
+tions, such as object instances and their descriptions, which
+is labor-intensive. Besides, one object a sentence is often
+monotonous as a description.
+Note that, descriptions of an image are annotated by per-
+sons with different backgrounds. Those reference sentences
+are partially overlapped, though, for the most of time, de-
+scribing an image with different emphases (See Figure 1). To-
+gether they form a semantically complete description. In this
+paper, we use Latent Dirichlet Allocation (LDA) to mine top-
+ics of interest from textual descriptions, and caption an image
+more completely according to the mined topics. Textual topic
+and visual attribute are both semantic concepts. The latter,
+already adopted in many other captioning models [You et al.,
+2016; Gan et al., 2017], can be viewed as a bag of indepen-
+dent words showing what is depicted in an image. While the
+former are bags of correlational words reﬂecting hidden the-
+matic structure in sentences such as the different emphases in
+delineating an image. It is natural to describe an image with
+sentences of emphases. Besides, the correlational words in a
+topic often cover more than one object instances which may
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4258
+help enrich the description. Furthermore, topics are discov-
+ered in an unsupervised fashion, which makes it possible for
+MS captioning without additional annotations. As such, we
+propose a Topic-Oriented Multi-Sentence (TOMS) captioning
+model for MS captioning, one topic a sentence. In our model,
+each topic is represented as a topic embedding for guidance.
+We design a Fusion Gate Unit (FGU) to integrate the topic
+embeddings into Long Short-Term Memory (LSTM), so that
+topical consistency can be maintained between the guidance
+and the generated sentence. Inspired by [Liu et al., 2017], a
+topic classiﬁer is added to the ﬁrst step of LSTM for seman-
+tic regularization and topic prediction. In our experiments,
+we set up the evaluation criteria and compare our model with
+a set of baselines to present the advances of our TOMS.
+The main contributions of this paper are as follows. 1) A
+novel topic-oriented captioning model, TOMS, is proposed to
+describe an image more completely in MS. 2) An FGU is
+designed to integrate topic embeddings and maintain topical
+consistency. 3) Extensive experiments are conducted on both
+sentence and paragraph datasets to demonstrate the effective-
+ness of our TOMS in terms of topical consistency and descrip-
+tive completeness.
+2
+Related Work
+SS captioning. Traditionally, image captioning was rooted
+in the community of cognitive science. Approaches to this
+problem were typically template based [Kulkarni et al., 2013;
+Kuznetsova et al., 2014].
+Extracted visual concepts were
+ﬁlled into predeﬁned templates to generate image descrip-
+tions. Those models heavily relied on the extracted concepts
+and predeﬁned less ﬂexible templates. Therefore, some re-
+cent works considered captioning an image directly with an
+encoder-decoder framework by training recurrent neural net-
+work language models conditioned on image features [Kiros
+et al., 2014; Karpathy and Fei-Fei, 2015; Vinyals et al., 2015;
+Jia et al., 2015]. However, a single sentence is often partially
+descriptive to an image. Encoding the entire image to gener-
+ate a single sentence often suffers from the discrepancy be-
+tween encoding and decoding. Thus, some approaches to im-
+age captioning reasoned about image regions rather than the
+entire image with the attention mechanism [Xu et al., 2015;
+You et al., 2016]. To improve the interpretability of the cap-
+tioning model, [Dong et al., 2017] also introduced the con-
+cept of topic for SS captioning. However, SS often describes
+the partial image and is regarded as an incomplete solution.
+MS captioning. To completely depict an image, MS is con-
+sidered as the viable description. Very recently, some meth-
+ods generated MS by captioning regions of interest within an
+image. [Johnson et al., 2016] introduced a dense captioning
+task, which jointly detected and captioned regions of inter-
+est. [Mao et al., 2016] aimed at mutual inference between
+regions and descriptions giving each region an unambigu-
+ous text description. [Krause et al., 2017] and [Liang et al.,
+2017] generated a paragraph description in which each sen-
+tence was region-based. Instead, our TOMS generates differ-
+ent sentences from topics of interest. These textually mined
+topics can capture linguistic distinctions in describing an im-
+age, which is unavailable from the visual side. [Krause et al.,
+2017; Liang et al., 2017] also used the term of topic. How-
+ever, it refers to the regions of interest in an image. This
+meaning of topics is different from that in our TOMS. [Dai et
+al., 2017] introduced a random vector for controlling the di-
+versity of a sentence with generative adversarial nets. [Wang
+et al., 2017] use conditional variational auto-encoder to sam-
+ple the random vector. However, the random diversity, like
+obtained with in beam-search, lacks clear directionality and
+cannot guarantee the descriptive completeness.
+Sentences
+generated by our TOMS are highly directional guaranteed by
+an explicit topic embeddings. Mined from all the reference
+sentences, topics try to cover more content in captioning an
+image.
+[Yu et al., 2016] generated MS for only video cap-
+tioning by capturing strong temporal dependencies which is
+unavailable from image information.
+3
+Model
+3.1
+Formulation
+Let I be an image, and S = {w0, ..., wT } be a sentence with
+T + 1 words. Traditionally, the objective of an image cap-
+tioning model is to maximize the log likelihood of sentence
+given image, which is
+log p(S|I) =
+T
+X
+t=1
+log p(wt|wt−1,...,0, I)
+As discussed previously, reference sentences often empha-
+size different parts of an image. To learn those distinctions,
+we introduce the topic variable. Let z ∈{z1, ..., zK} be the
+topic of a sentence. The objective function is modiﬁed as a
+joint distribution, p(S, z|I). The log likelihood of p(S, z|I)
+can be unfolded into two terms with Bayes, which is
+log p(S, z|I) = log p(S|z, I)p(z|I)
+= log p(S|z, I) + log p(z|I)
+(1)
+where
+log p(S|z, I) =
+T
+X
+t=1
+log p(wt|wt−1,...,0, z, I)
+Figure 2 is the architecture of our TOMS. It comprises
+three main components, LSTM (Sec. 3.2), topic embedding
+(Sec. 3.3) and FGU (Sec. 3.4), and two outputs correspond-
+ing to the two terms in Eq.(1). p(S|z, I) is to formulate a
+topic-oriented language model, which aims to learn speciﬁc
+language style of a topic. p(z|I) is a topic classiﬁer given im-
+age. For training, the topic inferred by LDA given a reference
+sentence, is adopted as not only the guidance for training the
+language model, but also the label for training the classiﬁer.
+For testing, the classiﬁer predicts topics to guide language
+model generating topic-oriented descriptions.
+3.2
+LSTM
+In our model, LSTM is employed to encode image-sentence
+pairs into representations. Speciﬁcally, the LSTM receives
+the image feature in the ﬁrst step, then the sentence word by
+word, which is formulated as
+ht =
+LSTM(x0)
+(t = 0)
+LSTM(ht−1, xt)
+(t > 0)
+(2)
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4259
+where x0 is the image feature and xt(t > 0) is the word
+embedding. The ﬁrst hidden state, h0, preserving only visual
+information is the image representation. It enforces the gener-
+ated sentence pertinent to the image. ht(t > 0) is the context
+representation, which enforces the generated sentence ﬂuent.
+Both representations are fed to the FGU for further process-
+ing.
+3.3
+Topic Embedding
+Let w = {w1, ..., wV } be the vocabulary with V words, z =
+{z1, ..., zK} be the topic set of size K, and d = {d1, ..., dM}
+be the document set of size M with each reference sentence
+as a document. LDA deﬁnes the generative process for a doc-
+ument d as follows,
+• Choose θ ∼Dirichlet(α).
+• For each of the N words wn in d:
+- Choose a topic zn ∼Multinomial(θ).
+- Choose a word wn from P(wn|zn, β), a multino-
+mial probability conditioned on the topic zn.
+where θ is the mixing proportion and is drawn from a
+Dirichlet prior with parameter α. Both α and β are hyper-
+parameters for the symmetric Dirichlet distributions that the
+discrete distributions, per-document topic and per-topic word
+distribution, are drawn from. The probability of a document
+d in a corpus is deﬁned as,
+P(d|α, β) =
+Z
+θ
+P(θ|α)(
+N
+Y
+n=1
+X
+zk
+P(zk|θ)P(wn|zk, β))dθ
+Learning LDA [Grifﬁths and Steyvers, 2004] on reference
+sentences provides two sets of parameters: word probabili-
+ties given topic p(w|z) and topic probabilities given docu-
+ment p(z|d). By choosing N most probable words under
+each topic according to p(w|z), we construct each topic em-
+bedding as a weighted sum of the top N word embeddings,
+which is
+p(w|zk) = (φ1,k, φ2,k, ..., φN,k)
+(3)
+⃗zk =
+N
+X
+n=1
+φn,k ⃗wn
+(4)
+where ⃗wn and ⃗zk are the n-th word and k-th topic embedding.
+φn,k is the probability of the n-th top word in p(w|zk).
+It’s worth mentioning that topic embeddings are updated
+along with the word embeddings while keeping φn,k un-
+changed. In this case, our TOMS not only maintains the rela-
+tive importance of the top N words in each topic, but also dis-
+tributes more weight in training word embeddings for those
+top N words. Thus, sentence generated tends to describe an
+image using the top N words of the given topic.
+3.4
+FGU
+We design a Fusion Gate Unit (FGU) to fuse three sources of
+representations from image, context and topic. Speciﬁcally,
+the unit ﬁrstly uses Hadamard product to obtain a common
+representation from image and topic, then concatenate the
+Figure 2: The architecture of our TOMS model. It comprises three
+primary components which are LSTM, topic embedding and FGU.
+For training, a topic is inferred from a sentence with externally
+trained LDA. One line of the topic is used as the label to train the
+topic classiﬁer, the other is represented as topic embedding to train
+the caption generator. For inference, topics are observed with the
+topic classiﬁer, then feed to the caption generator generating MS.
+common representation to a sequence of context representa-
+tions. To emphasize, different from summation or concatena-
+tion that compute OR between two vectors, Hadamard prod-
+uct computes AND by remaining neurons activated in both
+vectors. Besides, we can balance the forces between keeping
+sentence ﬂuent and being pertinent to image and topic by reg-
+ulating the size ratio when concatenating. The fusion process
+is mathematically depicted as follows,
+˜ct = σ(Wcht + bc)(t > 0)
+(5)
+˜v = σ(Wvh0 + bv)
+(6)
+˜z = σ(Wzˆz + bz)
+(7)
+f t = [˜z ⊙˜v, ˜ct]
+(8)
+where ˜ct, ˜v and ˜z are the representations of context, image
+and topic transformed by weight matrices Wc, Wv and Wz
+with biases and sigmoid activation function σ. The weight
+matrices regulate the vectors size to ensure the lengths of ˜v
+and ˜z are equal. ⊙denotes Hadamard product. f t is the ﬁnal
+fused representation. ˆz is the supervised topic embedding.
+The topic for constructing the topic embedding is obtained
+from reference sentence when training (see Sec. 3.5), and
+from image when inference (see Sec. 3.6).
+3.5
+Training
+Our TOMS outputs a topic classiﬁer given image p(z|x0)
+computed by a multi-label logistic regression and a topic-
+oriented language model p(xt+1|xt,.,0, ˆz) computed by a
+softmax. The formulae of the two outputs are as follows,
+p(zk|x0) = σ(θT
+k ˜v + bk)
+(9)
+p(xt+1|xt,.,0, ˆz) = softmax(Wff t + bf)
+(10)
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4260
+where xt,.,0 denotes the context with x0 being the image. Wf
+and θT
+k are the corresponding weight matrix and vector. ˆz
+is the supervised topic embedding. Choosing the topic for
+training is a sampling process, which is
+p(1k = 1|dm) = ηk,m
+(11)
+ˆz =
+K
+X
+k=1
+1k · ⃗zk
+(12)
+where dm is the input sentence. p(z|dm), inferred by LDA,
+can be viewed as a categorical distribution parameterized by
+{ηk,m}. 1k is an indicator one-hot variable that is set to 1
+when the k-th topic is sampled. To avoid sampling irrelevant
+topics, only topn topics are considered.
+The label to train p(xt+1|xt,.,0, ˆz) is the ground-truth
+word, yt+1. And the label to train p(zk|x0) is the indicator
+variable 1k. Our training loss is a sum of two cross-entropy
+terms, the sentence loss ℓsent on p(xt+1|xt,.,0, ˆz), and the
+topic loss ℓtopic on p(zi|x0), which is
+ℓ=
+X
+t=1
+ℓsent(p(xt+1|xt,.,0, ˆz), yt+1)+
+X
+i=1
+ℓtopic(p(zi|x0), 1k)
+3.6
+Inference
+MS is generated based on topics observed from a given im-
+age, one topic a sentence. Speciﬁcally, the observed topics
+are obtained as follows,
+1. Normalize Eq.(9) to ensure PK
+k=1 p(zk|x0) = 1;
+2. Rank the topics in descending order;
+3. Sum up the probabilities of top n topics, initially n=1;
+4. Repeat 3 with n+=1 until the sum larger than a threshold;
+5. Choose the n topics as the observed topics.
+Let zk be an observed topic. Each sentence is generated by
+sampling word by word using p(xt+1|xt,.,0, zk) until the end
+of sentence token. It seems fantastic to directly observe top-
+ics from a topic model trained on both images and sentences.
+Note that the reference sentences are invisible during gener-
+ation. It is impossible to learn sentences distinctions using
+image based topic model. Therefore, we use p(z|x0) to ap-
+proximate p(z|d) for generation.
+4
+Experiment
+4.1
+Datasets and Metrics
+We evaluate our model on two different types of datasets.
+First are standard datasets, including Flickr8k [Hodosh et
+al., 2013], Flickr30k [Young et al., 2014] and COCO [Lin
+et al., 2014] for sentence level MS captioning and second
+is a paragraph dataset collected by
+[Krause et al., 2017]
+for paragraph level MS captioning. The paragraph dataset
+comprises of 19,551 COCO and Visual Genome images with
+each annotated with a paragraph description.
+For making
+use of paragraph level data in our model, each descrip-
+tion is split into sentences.
+The same preprocessing and
+data splits as previous works [Karpathy and Fei-Fei, 2015;
+Krause et al., 2017] are used in our experiments.
+We use coco-caption1 to generally evaluate our model.
+The code adopts four evaluation metrics, including BELU
+(B@1, B@2, B@3, B@4) [Papineni et al., 2002], METEOR
+(MT) [Lavie and Agarwal, 2007], ROUGE L (RG) [Lin,
+2010] and CIDEr (CD) [Vedantam et al., 2014].
+We also use Instance Coverage (IC) to evaluate the descrip-
+tive completeness of generated MS. With Stanford natural
+language parser2, we choose notional word, including ’NN’,
+’NNP’, ’NNPS’, ’NNS’, ’PRP’ as entity instances, ’VB’,
+’VBD’, ’VBG’, ’VBN’, ’VBP’, ’VBZ’ as action instances,
+’JJ’, ’JJR’, ’JJS’ as attribute instances, from both reference
+sentences and generated MS. The same instances count only
+once. Let C be the instances of generated MS and R be in-
+stances of reference. IC is computed as,
+IC = Count(C ∩R)
+Count(R)
+4.2
+Implementation
+We build our code based on pytorch3. It provides off-the-
+shelf pre-trained CNN models for extracting image features.
+We use the resulting fully-connected 2048-dimensional ac-
+tivations from ResNet-152 network as image features. We
+implement two layers LSTM with each hidden dimension
+of 512. Both topic and word embedding size are set 256.
+In FGU, topic and image are 512-dimensional vectors, and
+1024 for context representations. Dropout is adopted in both
+input and output layer. This is a strong implementation of
+image captioning model. The re-implementation of [Vinyals
+et al., 2015]’s NIC obtains evaluation scores of CD: 90.6,
+B@4: 30.2, B@3: 40.7, B@2: 54.4, B@1: 71.1, RG: 52.1,
+MT: 23.6 on COCO, which outperforms NeuralTalk24 and
+the original implementation.
+4.3
+MS Captioning Experiment
+Sentence level MS Captioning. To demonstrate the differ-
+ence between random and topic-oriented MS captioning, we
+compare TOMS with NIC and ATT-FCN [You et al., 2016].
+Both comparative model randomly generate MS of n sen-
+tences with n size beam search. For a fair comparison, n
+is equal to the number of the observed topics (See Sec.3.6).
+We present the results in Table 1. Our TOMS outperforms
+the other models.
+By observing generated sentences (See
+Figure 3), we ﬁnd that, for the most of time, Beam Search
+only generates outwardly different MS. Those sentences tend
+to tell the same conspicuous scenes in an image. However,
+our TOMS can mine inconspicuous scenes with topics to give
+more complete descriptions. The signiﬁcant improvement of
+IC has proved that TOMS depicts more image content than
+the other models.
+Paragraph level MS Captioning.
+For better evaluating
+the performance of our model, we make a comparison
+with existing paragraph description models, including RTT-
+GAN [Liang et al., 2017], Regions-Hierarchical [Krause et
+1https://github.com/tylin/coco-caption
+2https://nlp.stanford.edu/software/lex-parser.shtml
+3http://pytorch.org/
+4https://github.com/karpathy/neuraltalk2
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4261
+Datasets
+Models
+CD
+B@1
+B@2
+B@3
+B@4
+RG
+MT
+IC
+Flickr8k
+NIC
+35.8
+67.9
+48
+32.1
+21
+42.9
+19.8
+15.3
+ATT-FCN
+34.2
+63.8
+45
+30.2
+19.3
+39.3
+18.2
+13.6
+TOMS(ours)
+37.3
+70
+49.8
+33.2
+21.4
+44.2
+20.1
+25.1*
+Flickr30k
+NIC
+35.8
+66.5
+45.9
+30.3
+20.1
+41.8
+17.3
+13.1
+ATT-FCN
+35.6
+62.3
+44.6
+30
+21.1
+40.2
+17
+12.1
+TOMS(ours)
+37.3
+69.1
+47.2
+31.2
+20.8
+43.3
+18.1
+24.9*
+COCO
+NIC
+88
+68.9
+52.6
+38.4
+28.3
+50.9
+22.5
+16.2
+ATT-FCN
+88.6
+69.3
+53.2
+39.4
+28.7
+51.4
+23.4
+15.3
+TOMS(ours)
+90.3
+72.3
+54.1
+39.2
+28.9
+52.1
+23
+28.6*
+Table 1: Results of sentence level MS captioning. All the models generate the same number of sentences. Our TOMS outperforms the other
+models, especially in term of IC metric.
+Models
+CD
+B@1
+B@2
+B@3
+B@4
+MT
+S-C
+6.8
+31.1
+15.1
+7.6
+4
+12.1
+R-H
+13.5
+41.9
+24.1
+14.2
+8.7
+16
+RTT-GAN
+20.4
+42.1
+25.4
+14.9
+9.2
+18.4
+TOMS(ours)
+20.8
+43.1
+25.8
+14.3
+8.4
+18.6
+Table 2: Results of paragraph level MS captioning on paragraph
+dataset. R-H and S-C denotes Regions-Hierarchical and Sentence-
+Concat, respectively.
+al., 2017] and its baselines, Sentence-Concat. To adapt our
+TOMS for paragraph level MS captioning, we also employ
+sentence concatenation. Different from Sentence-Concat that
+concatenates randomly generated sentences, our TOMS con-
+catenates topic-oriented sentences which is proven more ad-
+vanced in the previous experiment. The results are presented
+in Table 2. Our TOMS challenges the other paragraph de-
+scriptive models, even though the connection between sen-
+tences is not considered. The reason is that a paragraph de-
+scription depicts more details with each sentence describing a
+speciﬁc theme. Our TOMS is good at capturing those textual
+details. Organized by observed topics, one topic a sentence
+the details are described by the generated MS. The combina-
+tion of the MS can comprehensively describe the image de-
+spite the weakness in connecting sentences.
+4.4
+Topical Consistency
+Topical consistency and descriptive completeness are the two
+main features of our TOMS. We use IC to evaluate the de-
+scriptive completeness (See Table 1). For topical consistency,
+we set up experiment as follows. We choose the most proba-
+ble topic in Eq.(11) to annotate each reference sentence with
+a topic label. Those labels cluster reference sentences of an
+image into groups, namely topic groups. Each description
+is generated based on the topic label. For instance, given
+an image, three reference sentences annotated with the same
+topic form a topic group. Our TOMS generates description of
+that topic and use coco-caption to compute evaluation met-
+rics with reference sentences in that topic group. Scores in all
+topic groups are averaged for the ﬁnal evaluation. We set up
+three baselines and present the results in Table 3.
+NIC [Vinyals et al., 2015] is a classical SS captioning model.
+Datasets
+Models
+CD
+B@4
+RG
+MT
+Flickr8k
+NIC
+40
+7.1
+30
+12.4
+NIC-MS
+51
+7.9
+31.8
+13
+gLSTM
+51.6
+7.5
+32
+13.2
+SCN-RNN
+53.2
+7.9
+33.3
+13.6
+TOMS(ours)
+55.6
+8.5
+34.2
+13.9
+Flickr30k
+NIC
+24.6
+6.3
+27.7
+11
+NIC-MS
+35.7
+7.8
+28.8
+11.7
+gLSTM
+36
+8
+28.1
+11.3
+SCN-RNN
+38.8
+8.5
+29.2
+11.6
+TOMS(ours)
+48.3
+9.1
+31.4
+12.4
+COCO
+NIC
+54.6
+8.9
+33.5
+13.6
+NIC-MS
+60.2
+10.3
+34.8
+14
+gLSTM
+61.1
+10.8
+35.2
+14.3
+SCN-RNN
+63.8
+11.3
+36.6
+15.1
+TOMS(ours)
+88.6
+12.6
+38.1
+16.8
+Table 3: Topical consistency results of our TOMS compared with
+baselines in topic groups. Higher is better
+It generates the same description in every topic groups. The
+poor performance of NIC is due to the lack of topic informa-
+tion. The same single description may obtain a high score in
+one topic group and low scores in the others.
+NIC-MS comprises of sub-NIC models trained separately on
+image-sentence pairs of each topic.
+Compared with NIC,
+the outperformance of NIC-MS indicates the effectiveness of
+topic in discovering sentences distinctions.
+gLSTM [Jia et al., 2015] is a modiﬁed LSTM for integrat-
+ing semantic information by element-wise addition. We use
+gLSTM to replace FGU for comparison. The results prove the
+advance of FGU. Since a topic often contains several irrele-
+vant words in captioning an image, FGU can better capture
+the common information and lead to better topical consis-
+tency.
+SCN-RNN [Gan et al., 2017] combines topic embedding with
+both hidden and input neurons by Hadamard product. We use
+SCN-RNN to take place FGU for comparison. With the same
+Hadamard product, FGU combines topic embedding with im-
+age feature, then concatenates to hidden neurons. The results
+demonstrate the advances of using image features to ﬁlter
+topic embedding for better topical consistency.
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4262
+Figure 3: Qualitative results of descriptions based on different topics. Descriptions generated by beam-search is listed for comparison. Topic
+words of each supervised topic are highlighted with the same color. 57th topic in the right side is an incorrect observed topic
+Figure 4: Qualitative results of descriptions based on the same topic.
+The top is descriptions generated by the NIC. The middle is the topic
+words of the sampled topic. And the bottom is descriptions gener-
+ated by our model supervised by the sampled topic.
+4.5
+Qualitative Results
+Descriptions based on different topics. In this experiment,
+we example descriptions of an image generated by TOMS on
+different observed topics. We also list descriptions generated
+by NIC with beam search for comparison. The examples are
+depicted in Figure 3. We notice that descriptions generated by
+NIC are outwardly different describing the same scenes in an
+image. On the other hand, each description generated by our
+TOMS has a major theme and depict different content within
+the image. We highlight topic words of the supervised topic
+with colors. By raising the probabilities of these topic words,
+our TOMS caption an image with a speciﬁc topic perspective.
+Descriptions based on the same topic. In this experiment,
+we example descriptions of different images generated by
+TOMS based on the same observed topic. Firstly, we ran-
+domly choose a topic from the topic set and list 10 most
+probable topic words to represent the chosen topic. Then, we
+randomly choose three images that have the chosen topic ob-
+served. Description of each image is generated based on the
+same chosen topic. Notice that, all the three images involve
+the same scene of using cell phone, which is also mentioned
+in the topic words of the chosen topic. See Figure 4, all the
+descriptions generated by our model correctly describe this
+scene, however, NIC only describes the conspicuous scenes
+in images.
+Topic Exploration. One of the beneﬁts for topic model is the
+IDs
+Topic Words
+#7
+front outside building house store nearby shop
+#46
+trees near surrounded buildings tall bushes around
+#53
+street city busy buildings corner crossing crowded
+#58
+light trafﬁc signs pole city intersection buildings
+#61
+clock building tower tall brick church roof stone
+#29
+across along towards moving path elephants walks
+#71
+elephant baby nurse adult trunk mother feeding
+#41
+water elephants drinking pool swimming bushes
+#8
+umbrella walking pink rain underneath purple
+#16
+beach sand walking surfboards sandy chairs ocean
+#36
+people several waiting line cross walk lined wait
+#66
+side road dirt walk car crossing gravel light passing
+Table 4: Example topics of 100 topics LDA on COCO. We can see
+that topics are diversiﬁed. Scenes like building, elephant and walk-
+ing are described by different topics from different viewpoints.
+interpretability. We can visualize topics with clusters of topic
+words. Table 4 are the topic words of several topics obtained
+by LDA on COCO. We notice that the same scene, such as
+building, is described from multiple perspectives. With the
+guidance of these topics, our model describes an image from
+different topic perspectives.
+5
+Conclusion
+This work proposes a novel TOMS captioning model. Top-
+ics, represented as topic embedding, are used to arrange the
+MS generation. A FGU is designed to combine information
+from topic, image and context. Compared with baselines, our
+TOMS performs better. Experimental results prove that topic-
+oriented MS can better capture the details of an image than
+SS. Evaluations demonstrate the robustness, effectiveness and
+interpretability of our models.
+Acknowledgments
+This
+paper
+is
+supported
+by
+NSFC
+(No.61273365),
+NSSFC(2016ZDA055), 111 Project (No. B08004), Beijing
+Advanced
+Innovation
+Center
+for
+Imaging
+Technology,
+Engineering Research Center of Information Networks of
+MOE, China.
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4263
+References
+[Dai et al., 2017] Bo Dai, Dahua Lin, Raquel Urtasun, and
+Sanja Fidler. Towards diverse and natural image descrip-
+tions via a conditional gan. CVPR, 2017.
+[Dong et al., 2017] Yinpeng Dong, Hang Su, Jun Zhu, and
+Bo Zhang. Improving interpretability of deep neural net-
+works with semantic information. CVPR, 2017.
+[Gan et al., 2017] Zhe Gan, Chuang Gan, Xiaodong He,
+Yunchen Pu, Kenneth Tran, Jianfeng Gao, Lawrence
+Carin, and Li Deng. Semantic compositional networks for
+visual captioning. In CVPR, volume 2, 2017.
+[Grifﬁths and Steyvers, 2004] Thomas L Grifﬁths and Mark
+Steyvers.
+Finding scientiﬁc topics.
+Proceedings of the
+National academy of Sciences, 101(suppl 1):5228–5235,
+2004.
+[Hodosh et al., 2013] Micah Hodosh, Peter Young, and Ju-
+lia Hockenmaier. Framing image description as a ranking
+task: Data, models and evaluation metrics. Journal of Ar-
+tiﬁcial Intelligence Research, 47:853–899, 2013.
+[Jia et al., 2015] Xu Jia, Efstratios Gavves, Basura Fer-
+nando, and Tinne Tuytelaars.
+Guiding long-short term
+memory for image caption generation. ICCV, 2015.
+[Johnson et al., 2016] Justin Johnson, Andrej Karpathy, and
+Li Fei-Fei.
+Densecap: Fully convolutional localization
+networks for dense captioning. 2016.
+[Karpathy and Fei-Fei, 2015] Andrej Karpathy and Li Fei-
+Fei. Deep visual-semantic alignments for generating im-
+age descriptions. In CVPR, pages 3128–3137, 2015.
+[Kiros et al., 2014] Ryan Kiros, Ruslan Salakhutdinov, and
+Richard S Zemel. Multimodal neural language models. In
+ICML, volume 14, pages 595–603, 2014.
+[Krause et al., 2017] Jonathan Krause, Justin Johnson, Ran-
+jay Krishna, and Li Fei-Fei. A hierarchical approach for
+generating descriptive image paragraphs. CVPR, 2017.
+[Kulkarni et al., 2013] Girish Kulkarni, Visruth Premraj, Vi-
+cente Ordonez, Sagnik Dhar, Siming Li, Yejin Choi,
+Alexander C Berg, and Tamara L Berg. Babytalk: Under-
+standing and generating simple image descriptions. IEEE
+Transactions on Pattern Analysis and Machine Intelli-
+gence, 35(12):2891–2903, 2013.
+[Kuznetsova et al., 2014] Polina Kuznetsova, Vicente Or-
+donez, Tamara L Berg, and Yejin Choi. Treetalk: Com-
+position and compression of trees for image descriptions.
+TACL, 2(10):351–362, 2014.
+[Lavie and Agarwal, 2007] Alon Lavie and Abhaya Agar-
+wal. Meteor: An automatic metric for mt evaluation with
+high levels of correlation with human judgments. In Pro-
+ceedings of the Second Workshop on Statistical Machine
+Translation, pages 228–231. Association for Computa-
+tional Linguistics, 2007.
+[Liang et al., 2017] Xiaodan Liang, Zhiting Hu, Hao Zhang,
+Chuang Gan, and Eric P Xing. Recurrent topic-transition
+gan for visual paragraph generation. ICCV, 2017.
+[Lin et al., 2014] Tsung-Yi Lin, Michael Maire, Serge Be-
+longie, James Hays, Pietro Perona, Deva Ramanan, Piotr
+Doll´ar, and C Lawrence Zitnick. Microsoft coco: Com-
+mon objects in context. pages 740–755, 2014.
+[Lin, 2010] Lin. Rouge: A package for automatic evaluation
+of summaries. 2010.
+[Liu et al., 2017] Feng
+Liu,
+Tao
+Xiang,
+Timothy
+M
+Hospedales, Wankou Yang, and Changyin Sun. Semantic
+regularisation for recurrent image annotation.
+CVPR,
+2017.
+[Mao et al., 2016] Junhua Mao, Huang Jonathan, Alexander
+Toshev, Oana Camburu, Alan Yuille, and Kevin Murphy.
+Generation and comprehension of unambiguous object de-
+scriptions. CVPR, 2016.
+[Papineni et al., 2002] Kishore Papineni,
+Salim Roukos,
+Todd Ward, and Wei-Jing Zhu.
+Bleu:
+a method for
+automatic evaluation of machine translation.
+In ACL,
+pages 311–318. Association for Computational Linguis-
+tics, 2002.
+[Vedantam et al., 2014] Ramakrishna
+Vedantam,
+C. Lawrence Zitnick, and Devi Parikh. Cider: Consensus-
+based image description evaluation.
+Computer Science,
+pages 4566–4575, 2014.
+[Vinyals et al., 2015] Oriol
+Vinyals,
+Alexander
+Toshev,
+Samy Bengio, and Dumitru Erhan. Show and tell: A neu-
+ral image caption generator. In CVPR, pages 3156–3164,
+2015.
+[Wang et al., 2017] Liwei Wang, Alexander Schwing, and
+Svetlana Lazebnik. Diverse and accurate image descrip-
+tion using a variational auto-encoder with an additive gaus-
+sian encoding space. In NIPS, pages 5758–5768, 2017.
+[Xu et al., 2015] Kelvin
+Xu,
+Jimmy
+Ba,
+Ryan
+Kiros,
+Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov,
+Rich Zemel, and Yoshua Bengio. Show, attend and tell:
+Neural image caption generation with visual attention.
+In International Conference on Machine Learning, pages
+2048–2057, 2015.
+[You et al., 2016] Quanzeng You,
+Hailin Jin,
+Zhaowen
+Wang, Chen Fang, and Jiebo Luo. Image captioning with
+semantic attention. CVPR, 2016.
+[Young et al., 2014] Peter Young, Alice Lai, Micah Hodosh,
+and Julia Hockenmaier. From image descriptions to visual
+denotations: New similarity metrics for semantic inference
+over event descriptions. Transactions of the Association
+for Computational Linguistics, 2:67–78, 2014.
+[Yu et al., 2016] Haonan Yu, Jiang Wang, Zhiheng Huang,
+Yi Yang, and Wei Xu. Video paragraph captioning using
+hierarchical recurrent neural networks. In CVPR, pages
+4584–4593, 2016.
+Proceedings of the Twenty-Seventh International Joint Conference on Artiﬁcial Intelligence (IJCAI-18)
+4264

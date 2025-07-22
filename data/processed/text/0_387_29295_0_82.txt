@@ -1,0 +1,323 @@
+SKFD-ISOMAP FOR FACE RECOGNITION
+Ruifan L\\ Cong Wang^, and Xuyan Tu^
+^Beijing University of Posts and Telecommunications, Beijing, China
+University of Science and Technology Beijing, Beijing, China
+Abstract:
+Recently, neuroscientists emphasized the manifold ways of perception and
+proposed Isomap for manifold learning. Favorable results have been achieved
+using Isomap for data description and visualization. However, since the
+unsupervised Isomap is developed based on minimizing the reconstruction
+error with multidimensional scaling (MDS) without using the class specific
+information, it may not be optimal from the perspective of pattern
+classification. Therefore, an improved version of Isomap, namely SKFD-
+Isomap, is proposed using class information to construct the neighborhood,
+and kernel Fisher discriminant (KFD) to achieve the nonlinear embedding. A
+nearest neighbor classifier is then applied in the subspace for classification.
+Experimental results show the effectiveness of the proposed approach.
+Key words:
+face recognition, manifold, Isomap (isometric feature mapping), KFD
+1.
+INTRODUCTION
+Recent years, a growing interest has been shown in subspace methods for
+face recognition [1-5]. As facial images, represented as high-dimensional
+pixel arrays, often belong to a subspace of intrinsically low dimension.
+Eigenfaces [2] and Fisherfaces [3] are two typical examples. Eigenfaces,
+based on Principle component Analysis (PCA), is an unsupervised learning
+algorithm. PCA performs dimensionality reduction by projecting the original
+N -dimensional data onto the J ( < < TV^ )-dimensional linear subspace spanned
+by the leading eigenvectors of covariance matrix of the original data. For
+linearly embedding manifolds, PCA is guaranteed to produce a compact
+758
+Ruifan Li, Cong Wang, andXuyan Tu
+representation for data visualization. However, without using the class
+information this method may be not effective for pattern classification.
+Fisherfaces is based on Fisher Linear Discriminant (FLD). Contrasted to
+PCA, which finds a projection direction that retains maximum variance,
+FLD finds the optimal projection direction that maximized the distances
+between classes and minimized the distances within classes. In general, the
+FLD-based methods perform better than those of PCA-based [4]. However,
+Fisherfaces are confronted with the singularity of with-class matrix caused
+by the small samples against their high dimensions. Moreover, they both
+search for a linear subspace for further classification, failing to deal with
+nonlinear changes in face images.
+As enhancements for PCA and FLD, kernel Eigenfaces and Fisherfaces
+[6, 7] showed expressive results in face recognition, in which the samples are
+first implicitly mapped onto a high-dimensional feature spaces, then PCA or
+FLD is applied, equivalent to extracting the most discriminant nonlinear
+features in the original input space. These methods can discover the nonlinear
+structure in the face images. However, none of them explicitly considers the
+structure of the manifold on which the face images possibly reside.
+Recently, neuroscientists emphasized the manifold ways of perception,
+and showed the face images may reside on a nonlinear manifold [8]. Some
+manifold learning methods, i.e. Isomap (or Isometric feature mapping) [9],
+Locally Liner Embedding (LLE) [10], and Laplacian eigenmaps [11] are
+proposed. Although these methods have demonstrated excellent results in
+finding the embedding manifolds that best describe the data points, they are
+subopfimal from the classification viewpoint.
+In this paper, an improved version of Isomap, namely SKFD-Isomap, is
+proposed for face recognition. SKFD-Isomap utilizes class information to
+guide the construction of neighborhood graph, and then applies Kernel
+Fisher Discriminant (KFD) to find an optimal projection direction using
+geodesic distances as feature vectors. Experimental results demonstrated the
+effectiveness of SKFD-Isomap for face recognition.
+The rest of this paper is organized as follows. In section 2, Isomap is
+briefly reviewed. In section 3, SKFD-Isomap is proposed. In section 4,
+experiments are reported. Finally, section 5 ends with some conclusions.
+2.
+ISOMAP
+For data lying on a nonlinear manifold, the true distance between two data
+points is the geodesic distance on the manifold, i.e. the distance along the
+surface of the manifold, rather than the straight-line Euclidean distance, as
+shown in Figure 1. Isomap [9] builds on Multi-Dimensional Scaling (MDS)
+SKFD-Isomap for face recognition
+759
+but seeks to preserve the intrinsic geometry of the data, as captured in the
+geodesic manifold distances between all pairs of data points. The crux is
+estimating the geodesic distance between faraway points, given only input
+space distances. For neighboring points, Euclidean distance in input space
+provides a good approximation to geodesic distance. For faraway points,
+geodesic distance can be approximated by adding up a sequence of short hops
+between neighboring points.
+* - ''i' >'. %"% it
+?*^*^:'t t: K^l
+Figure 1. S-curve and geodesic distance
+Given a set ofn samples, {xjjl^i, each elements, G D ^. Isomap can find an
+implicit mapping/:n''->D''((i< A^) from the input space onto the feature
+space, generating the lower coordinate vector SQX {y.y.^^ of {x.}"^^ . The
+procedures of Isomap are listed as follows:
+Step 1, Construct neighborhood graph: First compute Euclidean distance,
+d){{Xi,xD between any two data points x, and Xj in the input space. Next, define
+the graph G over all data points by connecting neighborhood points x, and x,,
+in which the neighborhood of any point can be defined either as the K nearest
+points or all the points within a fixed radius s.
+Step 2, Compute shortest paths: Initialize the element doixuXj) of graph
+matrix G as d)^Xi,Xj) if X/and x, are linked by an edge; doix^Xj) = oo otherwise.
+Then for each k= I,---, /? in turn, replace all entries dcix^xj) by min{dG{Xi,xj),
+dQ{Xi,Xk) + doix^Xj)}, The matrix of final values DQ = {doixuXj)] will contain
+the shortest path distances between all pairs of points in G.
+Step 3, Construct J-dimensional embedding applying MDS to the matrix of
+graph distance DQ. Computer(Dj withr defined as-HSH/2,
+where S is the
+matrix of squared distance S^j - D.j^ , and H is the centering matrix
+{H.j =5.j-\l N). Let Xp be the p-Ah eigenvalue (in decreasing order) of the
+matrix r(D^), and v^ be the /-th component of the/?-th eigenvector. Then set
+the jt?-th component of the <i-dimensional coordinate vector;;, equal toJÄ^v'^.
+760
+Ruifan Li, Cong Wang, andXuyan Tu
+As for classification tasks, Isomap can be viewed as a feature extraction
+process. However, the mapping between input space and feature space is
+implicit. It should be learned by some nonlinear interpolation techniques, such
+as Generalized Regression Neural Network (GRNN) [15] for the new test
+samples. Moreover, MDS used in Isomap is based on minimizing the
+reconstruction error, thus, discriminant information cannot be extracted
+effectively. From this, Yang [12] proposed Ext-Isomap algorithm with FLD
+replacing the MDS used in the original Isomap for pattern classification.
+Nevertheless, in Ext-Isomap, when constructing the neighborhood graph no
+class-label information are used. Therefore, fiirther modifications should be
+made on Isomap for pattern classification.
+3.
+SKFD-ISOMAP
+Consider a set of c disjoint subsetsX - U/'Li-^, with each elements e D ^,
+and each subset has /?, samples, i.e.Z/Li«, ^n.ln
+SKFD-Isomap, the first step
+is to determine the neighbors of each sample x, on the low-dimensional
+manifold M based on Euclidean distance metric dx{Xi,Xj). Whereas, contrasted
+to the unsupervised nature of Isomap, the SKFD-Isomap utilizes the class
+information by rescaling the Euclidean distance between two data points with
+a constant factor A (0 <Ä< 1) if the class labels are the same. Then, the
+modified distance matrix between any two data points is utilized to determine
+whether two points are neighbors or not. These neighborhood relationships are
+represented in a weighted graph G in which doipcuXj) = d;^Xi,Xj) if x, and Xj are
+neighbors, and d)^Xi,Xj) =oo otherwise.
+The next step is to estimate geodesic distance djJXi,Xj) between any pair of
+points on the manifold M. For neighboring points, input space distance
+provides a good approximation to geodesic distance. For faraway points,
+geodesic distance can be approximated by a sequence of short hops between
+neighboring data points. In other words, djjixuxj) is approximated by the
+shortest path between x, and Xj on G, which is computed by min{dG{Xi,Xj),
+dG{xi,Xk) + doixkyXj)}, for each k= \, '*\n. The shortest paths between any two
+points are represented in a matrix D, where Ay ^ dcix^Xj).
+Thus, each data point is represented as a feature vector of its geodesic dis-
+tance to any points. In other words, the feature vector of data point x, is an n-
+dimensional vector/ = [Ay] where/ = 1, •••,« and A/ = 0. We then apply KFD
+on the feature vectors find an optimal projection direction for classification.
+In KFD, each vector/ is projected to a high-dimensional feature space, G ^ ,
+by a nonlinear mapping fiinction, (/>:D" ->D^ , f > n. Note that the
+dimensionality of the image space D ^ can be arbitrarily large. Then, we
+SKFD-Isomap for face recognition
+761
+formulate the FLD problem in the high-dimensional feature space only using
+dot products [13].
+We assume the projection^(/J) are centered inD^, i-G-iZ/Li^(^) = 0,
+which could be implemented as in [14]. The between-class and within-class
+scatter matrix are defined as
+si=Yn,^t{^ty
+i=\
+i=\
+j=\
+, where^/ is the mean of class / inD ^. Applying FLD in feature in kernel
+space, we need to find eigenvalues and eigenvectors ^ of
+S^ßW^=ÄS^w^
+, which can be obtained by
+^^.^^argmax'^
+. \ \
+' :^[M;f,«»»,<]
+, where {wf jj^^jis the set of generalized eigenvectors corresponding to the m
+largest generalized eigenvalues {A,}Jli.
+From the theory of reproducing kernels, any solution w^ GD ^must lie in
+the span of all the mapping of training samples [8], and there exist coefficients
+a. such that
+We define the kernel Sanction as Ä:(X,3/) = ^(X)-^(;^) , thus the kernel
+matrix in high-dimensional space can be denoted as K, i.e., Kij = kifuf]) ^
+^(//) • ^Uj)^ which is a nx n symmetric matrix. We can also define a matrix Z:
+Z = (Z;)i=i, .,C5 where Z/ is a w, x nt matrix with terms all equal to 1/^2,, i.e., Z is an
+nx n block diagonal matrix. Thus, the KFD problem becomes
+XKKa = KZKa
+We can now project the vectors in D ^ to a lower dimensional space
+spanned by the eigenvector. Let / be the feature vector of a test sample x,
+whose projection is ^(/) in D ^ , then the projection of D ^ onto the
+eigenvectors as follows:
+^'•Hf) = tccMf,J)
+/=1
+The above procedures can learn a subspace for further classification. To
+summarize, the SKFD-Isomap for classification has five steps as follows: SI,
+Compute original distances matrix between data points, and rescaling them
+with class information, i.e., d^dixuxj) = Äd)^XuXj). S2, Compute shortest paths
+on the manifold, and feature can be denoted as / . S3, Compute projection
+762
+Ruifan Li, Cong Wang, andXuyan Tu
+direction with KFD applied to the matrix of shortest paths. S4, For new test
+sample use GRNN to approximate its mapping from input space onto the
+feature space. S5, Map the feature vector to kernel space and then predict its
+class-label using simple classier, such as AT nearest neighbor.
+4.
+EXPERIMENTS
+In this section, SKFD-Isomap is compared with kernel Fisherfaces for face
+recognition using the Yale face database. In those two methods, the
+polynomial kernel functions with second or third order are selected. The
+parameters for most of the methods are determined empirically to achieve the
+best results. For SFKD-Isomap, different values of A between 0.1 and 0.5 are
+tested. For kernel Fisherfaces, the samples are projected to a subspace spanned
+by the c -1 largest eigenvectors.
+This Yale database contains 165 images, each size 320 by 243, of 15
+subjects in a variety of conditions including with and without glasses,
+illumination variation, and changes in facial expression. Since the database has
+large background, to reduce the adverse effect, original images have been
+cropped without containing the facial contours with size 87 by 123.
+Furthermore, each image has been resized to 58 by 82 for computational
+efficiency. Figure 2 shows closely cropped images of a few subjects.
+Figure 2. Some chopped face images from database
+In this experiment, each image is represented as a raster scan vector of
+intensity values, and then normalized to be zero-mean unit-variance vectors.
+The training set and test set are selected randomly. When performing the ex-
+periment, for each subject, eight images are selected for training, and the other
+two samples are left as test samples. All the images are then projected to a
+reduced space and recognition is performed using a nearest neighbor classier.
+To reduce the fluctuation among the results as possible, the experiments are
+SKFD-Isomap for face recognition
+763
+performed 400 times. The best experimental results with the order of kernel
+functions (i = 2, AT = 40, and /I = 0.3 are given in table 1.
+Table 1. Performance comparison on the Yale Database
+Method
+Kernel Fisherfaces
+SKFD-Isomap
+Parameters
+d = 2
+d = 2,K=40, Ä--= 0.3
+Dimension of
+14
+14
+Space Error Rate (%)
+12.37
+8.62
+In addition, we test the performance of SKFD-Isomap with different values
+of and with different order of polynomial kernel function, i.e. d = 2 or 3.
+Figure 3(a) shows the results, where AT = 40. The order of polynomial kernel, d
+= 2 performs better that higher order. This phenomena may caused by the
+overfitting with higher order. For the neighborhood parameter, K, its
+performance impact on SKFD-Isomap is also test. The results are shown in
+figure 3(b), where d = 2 and/l= 0.3. We can see that the proposed approach
+shows better compared with that of Ext-Isomap. We suppose that the class
+information used in SKFD-Isomap improved the feature extraction for fiirther
+classification.
+.1
+0.15
+02
+026
+0.3
+0.35
+0.4
+0.45
+0.5
+10
+20
+30
+40
+70
+80
+90
+1(
+Figure 3. a) SKFD-Isomap with of = 2 or 3; b) performance of Ext-Isomap and SKFD-Isomap
+CONCLUSION
+In this paper, an improved version of Isomap, namely SKFD-Isomap, is
+proposed for face recognition. The SKFD-Isomap utilizes class information to
+guide the construction of the distances matrix between any two data points.
+Moreover, the geodesic distances between all pairs of points are applied as
+feature vectors replacing MDS with KFD to find an optimal projection
+direction for classification. In face recognition experiments, SKFD-Isomap
+serves as a feature extraction process compared with Ext-Isomap and Kernel
+Fisherfaces, combined with a nearest neighbor classier. Experimental results
+show that SKFD-Isomap excels kernel Fisherfaces and Ext-Isomap.
+764
+Ruifan Li, Cong Wang, andXuyan Tu
+ACKNOWLEDGEMENTS
+The authors would Uke to thank AT&T laboratory Cambridge and Center
+for Computational Vision and Control at Yale University for their devotion
+of face database for public research.
+REFERENCES
+[I]
+Zhao, W., Chellappa, R., Phillips, P., Rosenfeld, A.: Face recognition: A literature
+survey. ACM Computing Surveys, 35 (2003), 399-458
+[2]
+Turk, M.A., Pentland, A.P.: Eigenfaces for recognition. Journal of Cognitive
+Neuroscience, 3 (1991), 72-86
+[3]
+Belhumeur, P.N., Hespanha, J.P., Kriegman, D.J.: Eigenfaces vs. Fisherfaces:
+recognition using class specie linear projection. IEEE Transactions on Pattern Analysis
+and Machine Intelligence, 19 (1997), 711-720
+[4]
+Martinez, Aleix M.; Kak, A.C.: Pea versus Ida. IEEE Transactions on Pattern
+Analysis and Machine Intelligence, 23 (2001), 228-233
+[5]
+He, X., Yan, S., Hu, Y., Zhang, H.: Learning a locality preserving subspace for
+visual recognition. In: Proc. IEEE Ninth International Conference on Computer
+Vision (ICCV03), Nice, France, (2003), 385-392
+[6]
+Yang, M.H.: Kernel eigenfaces vs. kernel fisherfaces: face recognition using kernel
+methods. In: Proc. IEEE Sixth International Conference on Automatic Face and
+Gesture recognition (FGR02), Washington D.C. (2002), 215-220
+[7]
+Liu, Q., Huang, R., Lu, H., Ma, S.: Kernel-based nonlinear discriminant analysis for
+face recognition. In: Proc. IEEE Sixth International Conference on Automatic Face
+and Gesture recognition (FGR02), Washington D.C. (2002), 788-795
+[8]
+Seung, H.S., Lee, D.D.: The manifold ways of perception. Science, 290 (2000),
+2268-2269
+[9]
+Silva, v., Tenenbaum, J., Langford, J.: A global geometric framework for nonlinear
+dimensionality reduction. Science, 290 (2000), 2219-2223
+[10] Roweis, S., Saul, L.: Nonlinear dimensionality reduction by locally linear embedding.
+Science, 290 (2000), 2223-2226
+[II] Belkin, M., Niyogi, P.: Laplacian eigenmaps and spectral techniques for embedding
+and clustering. In: Advances in Neural Information Processing Systems, Vancouver,
+British Columbia, Cannada, (2001), 788-795
+[12] Yang, M.H.: Face recognition using extended isomap. In: Proc. IEEE International
+Conference on Image Processing, Rochester, NY, (2002), 117-120
+[13] Mika, S., Ratsch, G., Weston, J., Scholkopf, B., Müller, K.: Fisher discriminant
+analysis with kernels. In: Proc. IEEE Neural Networks for Signal Processing Workshop,
+Madison, Wisconsin, (1999), 41-48
+[14] Scholkopf, B., Smola, A., Müller, K.: Nonlinear component analysis as a kernel
+eigenvalue problem. Neural Computation, 10 (1998), 1299-1319
+[15] Specht, D.F.: A general regression neural network. IEEE Transactions on Neural
+network, 2 (1991), 568-576

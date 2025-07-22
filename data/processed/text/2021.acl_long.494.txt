@@ -1,0 +1,1312 @@
+Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics
+and the 11th International Joint Conference on Natural Language Processing, pages 6319–6329
+August 1–6, 2021. ©2021 Association for Computational Linguistics
+6319
+Dual Graph Convolutional Networks for Aspect-based Sentiment Analysis
+Ruifan Li1∗, Hao Chen1, Fangxiang Feng1,
+Zhanyu Ma1, Xiaojie WANG1, and Eduard Hovy2
+1 School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications, China
+2 Language Technologies Institute, Carnegie Mellon University, USA
+{rfli, ccchenhao997, fxfeng, mazhanyu, xjwang}@bupt.edu.cn
+hovy@cmu.edu
+Abstract
+Aspect-based sentiment analysis is a ﬁne-
+grained sentiment classiﬁcation task.
+Re-
+cently, graph neural networks over depen-
+dency trees have been explored to explicitly
+model connections between aspects and opin-
+ion words. However, the improvement is lim-
+ited due to the inaccuracy of the dependency
+parsing results and the informal expressions
+and complexity of online reviews.
+To over-
+come these challenges, in this paper, we pro-
+pose a dual graph convolutional networks (Du-
+alGCN) model that considers the complemen-
+tarity of syntax structures and semantic cor-
+relations simultaneously.
+Particularly, to al-
+leviate dependency parsing errors, we design
+a SynGCN module with rich syntactic knowl-
+edge.
+To capture semantic correlations, we
+design a SemGCN module with self-attention
+mechanism.
+Furthermore, we propose or-
+thogonal and differential regularizers to cap-
+ture semantic correlations between words pre-
+cisely by constraining attention scores in the
+SemGCN module.
+The orthogonal regular-
+izer encourages the SemGCN to learn seman-
+tically correlated words with less overlap for
+each word. The differential regularizer encour-
+ages the SemGCN to learn semantic features
+that the SynGCN fails to capture. Experimen-
+tal results on three public datasets show that
+our DualGCN model outperforms state-of-the-
+art methods and verify the effectiveness of our
+model.
+1
+Introduction
+Sentiment analysis has become a popular topic in
+natural language processing (Liu, 2012; Li and
+Hovy, 2017).
+Aspect-based sentiment analysis
+(ABSA) talks an entity-level oriented ﬁne-grained
+sentiment analysis task that aims to determine sen-
+timent polarities of given aspects in a sentence. In
+∗Corresponding author.
+Figure 1: An example sentence with its dependency
+tree from the restaurant reviews. This sentence contains
+two aspects but with opposite sentiment polarities.
+Figure 1, the comment is about a restaurant review.
+The sentiment polarity of the two aspects “price”
+and “service” are positive and negative, respec-
+tively. Thus, ABSA can precisely identify user’s
+attitudes towards a certain aspect, rather than sim-
+ply assigning a sentiment polarity for a sentence.
+The key point in solving the ABSA task is to
+model the dependency relationship between an as-
+pect and its corresponding opinion expressions.
+Nevertheless, there probably exist multiple aspects
+and different opinion expressions in a sentence. To
+judge the sentiment of a particular aspect, previous
+studies (Wang et al., 2016; Tang et al., 2016a; Ma
+et al., 2017; Chen et al., 2017; Fan et al., 2018;
+Huang et al., 2018; Gu et al., 2018) have proposed
+various recurrent neural networks (RNNs) with at-
+tention mechanisms to generate aspect-speciﬁc sen-
+tence representations and have achieved appealing
+results. However, an inherent defect makes the
+attention mechanism vulnerable to noise in the sen-
+tence. Take Figure 1 as an example; for the aspect
+“service”, the opinion word “reasonable” may re-
+ceive more attention than the opinion word “poor”.
+However, the “reasonable” refers to another as-
+pect, i.e., “price”.
+More recent efforts (Zhang et al., 2019; Sun
+et al., 2019b; Huang and Carley, 2019; Zhang and
+Qian, 2020; Chen et al., 2020; Liang et al., 2020;
+Wang et al., 2020; Tang et al., 2020) have been de-
+6320
+voted to graph convolutional networks (GCNs) and
+graph attention networks (GATs) over dependency
+trees, which explicitly exploit the syntactic struc-
+ture of a sentence. Consider the dependency tree
+in Figure 1; the syntactic dependency can establish
+connections between the words in a sentence. For
+example, a dependency relation exists between the
+aspect “price” and the opinion word “reasonable”.
+However, two challenges arise when applying syn-
+tactic dependency knowledge to the ABSA task: 1)
+the inaccuracy of the dependency parsing results
+and 2) GCNs over dependency trees do not work
+well as expected on datasets that are not sensitive
+to syntactic dependency due to the informal expres-
+sion and complexity of online reviews.
+In this paper, we propose a novel architecture,
+the dual graph convolution network (DualGCN), as
+shown in Figure 2, to solve the aforementioned
+challenges. For the ﬁrst challenge, we use the
+probability matrix of all dependency arcs from a
+dependency parser to build a syntax-based graph
+convolutional network (SynGCN). The idea behind
+this approach is that the probability matrix rep-
+resenting dependencies between words contains
+rich syntactic information compared with the ﬁnal
+discrete output of a dependency parser. For the
+second, we construct a semantic correlation-based
+graph convolutional network (SemGCN) by utiliz-
+ing a self-attention mechanism. The idea behind
+this approach is that the attention matrix shaped
+by self-attending, also viewed as an edge-weighted
+directed graph, can represent semantic correlations
+between words. Moreover, motivated by the work
+of DGEDT (Tang et al., 2020), we utilize a BiAfﬁne
+module to bridge relevant information between the
+SynGCN and SemGCN modules.
+Furthermore, we design two regularizers to en-
+hance our DualGCN model. We observe that the
+semantically related terms of each word should not
+overlap. Therefore, we encourage the attention
+probability distributions over words to be orthog-
+onal. To this end, we incorporate an orthogonal
+regularizer on the attention probability matrix for
+the SemGCN module. Moreover, the two represen-
+tations learned from the SynGCN and SemGCN
+modules should contain signiﬁcantly distinct infor-
+mation captured by the syntactic dependency and
+the semantic correlation. Therefore, we expect that
+the SemGCN module could learn semantic repre-
+sentations different from syntactic representations.
+Thus, we propose a differential regularizer between
+the SynGCN and SemGCN modules.
+Our contributions are highlighted as follows:
+• We propose a DualGCN model for the ABSA
+task. Our DualGCN considers both the syntactic
+structure and the semantic correlation within a
+given sentence. Speciﬁcally, our DualGCN in-
+tegrates the SynGCN and SemGCN networks
+through a mutual BiAfﬁne module.
+• We propose orthogonal and differential regular-
+izers. The orthogonal regularizer encourages
+the SemGCN network to learn an orthogonal se-
+mantic attention matrix, whereas the differential
+regularizer encourages the SemGCN network to
+learn semantic features distinct from the syntac-
+tic ones built from the SynGCN network.
+• We conduct extensive experiments on the Se-
+mEval 2014 and Twitter datasets. The experi-
+mental results demonstrate the effectiveness of
+our DualGCN model. Additionally, the source
+code and preprocessed datasets used in our work
+are provided on GitHub1.
+2
+Related Work
+Traditional sentiment analysis tasks are sentence-
+level or document-level oriented.
+In contrast,
+ABSA is an entity-level oriented and a more ﬁne-
+grained task for sentiment analysis. Earlier meth-
+ods (Titov and McDonald, 2008; Jiang et al., 2011;
+Kiritchenko et al., 2014; Vo and Zhang, 2015) are
+usually based on handcrafted features and fail to
+model the dependency between the given aspect
+and its context.
+Recently, various attention-based neural net-
+works have been proposed to implicitly model the
+semantic relation of an aspect and its context to cap-
+ture the opinion expression component (Wang et al.,
+2016; Tang et al., 2016a,b; Ma et al., 2017; Chen
+et al., 2017; Fan et al., 2018; Huang et al., 2018; Gu
+et al., 2018; Li et al., 2018a; Tan et al., 2019). For
+instance, (Wang et al., 2016) proposed attention-
+based LSTMs for aspect-level sentiment classiﬁca-
+tion. (Tang et al., 2016b) and (Chen et al., 2017)
+both introduced a hierarchical attention network to
+identify important sentiment information related
+to the given aspect. (Fan et al., 2018) exploited a
+multi-grained attention mechanism to capture the
+word-level interaction between aspects and their
+context. (Tan et al., 2019) designed a dual attention
+1https://github.com/CCChenhao997/DualGCN-ABSA
+6321
+network to recognize conﬂicting opinions. In addi-
+tion, the pre-trained language model BERT (Devlin
+et al., 2019) has achieved remarkable performance
+in many NLP tasks, including ABSA. (Sun et al.,
+2019a) transformed ABSA task into a sentence pair
+classiﬁcation task by constructing an auxiliary sen-
+tence. (Xu et al., 2019) proposed a post-training
+approach on the BERT to enhance the performance
+of ﬁne-tuning stage for the ABSA task.
+Another trend explicitly leverages syntactic
+knowledge. This type of knowledge helps to es-
+tablish connections between the aspects and the
+other words in a sentence to learn syntax-aware
+feature representations of aspects. (Dong et al.,
+2014) proposed a recursive neural network to adap-
+tively propagate the sentiment of words to the as-
+pect along the dependency tree. (He et al., 2018)
+introduced an attention model that incorporated
+syntactic information to compute attention weights.
+(Phan and Ogunbona, 2020) utilized the syntactic
+relative distance to reduce the impact of irrelevant
+words.
+Following this line, a few works extend the GCN
+and GAT models by means of a syntactical depen-
+dency tree and develop several outstanding mod-
+els (Zhang et al., 2019; Sun et al., 2019b; Huang
+and Carley, 2019; Wang et al., 2020; Tang et al.,
+2020). These works explicitly exploit the syntactic
+structure information to learn node representations
+from adjacent nodes. Thus, the dependency tree
+shortens the distance between the aspects and opin-
+ion words of a sentence and alleviates the problem
+of long-range dependency.
+Most recently, several works explore the idea
+of combining different types of graph for ABSA
+task. For instance, (Chen et al., 2020) combined a
+dependency graph and a latent graph to generate
+the aspect representation. (Zhang and Qian, 2020)
+observed the characteristics of word co-occurrence
+in linguistics and designed hierarchical syntactic
+and lexical graphs. (Liang et al., 2020) constructed
+aspect-focused and inter-aspect graphs to learn de-
+pendency feature of the key aspect words and sen-
+timent relations between different aspects.
+In this paper, we propose a GCN based method
+combining syntactic and semantic features. We use
+a dependency probability matrix with richer syntac-
+tic information and elaborately design orthogonal
+and differential regularizers to enhance the ability
+to precisely capture the semantic associations.
+3
+Graph Convolutional Network (GCN)
+Motivated by conventional convolutional neural
+networks (CNNs) and graph embedding, a GCN is
+an efﬁcient CNN variant that operates directly on
+graphs (Kipf and Welling, 2017). For graph struc-
+tured data, a GCN can apply the convolution oper-
+ation on directly connected nodes to encode local
+information. Through the message passing of mul-
+tilayer GCNs, each node in a graph can learn more
+global information. Given a graph with n nodes,
+the graph can be represented as an adjacency ma-
+trix A ∈Rn×n. Most previous work (Zhang et al.,
+2019; Sun et al., 2019b) extend GCN models by
+encoding dependency trees and incorporating de-
+pendency paths between words. They build the ad-
+jacency matrix A over the syntactical dependency
+tree of a sentence. Thus, an element Aij in A in-
+dicates whether the i-th node is connected to the
+j-th node. Speciﬁcally, Aij = 1 if the i-th node is
+connected to the j-th node, and Aij = 0 otherwise.
+In addition, the adjacency matrix A, composed of
+0 and 1, can be deemed as the ﬁnal discrete output
+of a dependency parser. For the i-th node at the
+l-th layer, formally, its hidden state representation,
+denoted as hl
+i, is updated by the following equation:
+hl
+i = σ
+
+
+n
+X
+j=1
+AijW lhl−1
+j
++ bl
+
+
+(1)
+where W l is a weight matrix, bl is a bias term, and
+σ is an activation function (e.g., ReLU).
+4
+Proposed DualGCN
+Figure 2 provides an overview of DualGCN. In
+the ABSA task, a sentence-aspect pair (s, a) is
+given, where a = {a1, a2, ..., am} is an aspect.
+It is also a sub-sequence of the entire sentence
+s = {w1, w2, ..., wn}. Then, we utilize BiLSTM
+or BERT as sentence encoder to extract hidden con-
+textual representations, respectively. For the BiL-
+STM encoder, we ﬁrst obtain the word embeddings
+x = {x1, x2, ..., xn} of the sentence s from an em-
+bedding lookup table E ∈R|V |×de, where |V | is
+the size of vocabulary and de denotes the dimen-
+sionality of word embeddings. Next, the word em-
+beddings of the sentence are fed into a BiLSTM to
+produce hidden state vectors H = {h1, h2, ..., hn},
+where hi ∈R2d is the hidden state vector at time t
+from the BiLSTM. The dimensionality of a hidden
+state vector d is output by a unidirectional LSTM.
+6322
+Figure 2: The overall architecture of DualGCN, which is composed primarily of SynGCN and SemGCN. SynGCN
+uses the probability matrix generated by the dependency parser, while SemGCN leverages the attention score
+matrix generated by the self-attention layer. The orthogonal and differential regularizers are designed to further
+improve the ability of capturing semantic correlations. Details of these components are described in the main text.
+For the BERT encoder, we construct a sentence-
+aspect pair “[CLS] sentence [SEP] aspect [SEP]”
+as input to obtain aspect-aware hidden representa-
+tions of the sentence. Moreover, in order to match
+the wordpiece-based representations of BERT with
+the result of syntactic dependency based on word,
+we expand dependencies of a word into its all of
+subwords. Then, the hidden representations of sen-
+tence are input into the SynGCN and SemGCN
+modules, respectively. A BiAfﬁne module is then
+adopted for effective information ﬂow. Finally, we
+aggregate all the aspect nodes’ representations from
+the SynGCN and SemGCN modules via pooling
+and concatenation to form the ﬁnal aspect repre-
+sentation. Next, we elaborate on the details of our
+proposed DualGCN model.
+4.1
+Syntax-based GCN (SynGCN)
+The SynGCN module takes the syntactic encoding
+as input. To encode syntactic information, we uti-
+lize the probability matrix of all dependency arcs
+from a dependency parser. Compared to the ﬁnal
+discrete output of a dependency parser, the depen-
+dency probability matrix could capture rich struc-
+tural information by providing all latent syntactic
+structures. Therefore, the dependency probability
+matrix is used to alleviate dependency parsing er-
+rors. Here, we use the state-of-the-art dependency
+parsing model LAL-Parser (Mrini et al., 2019).
+With the syntactic encoding of an adjacency
+matrix Asyn
+∈
+Rn×n, the SynGCN module
+takes the hidden state vectors H from BiLSTM
+as initial node representations in the syntactic
+graph. The syntactic graph representation Hsyn =
+{hsyn
+1 , hsyn
+2 , ..., hsyn
+n } is then obtained from the Syn-
+GCN module using Eq. (1). Here, hsyn
+i
+∈Rd is a
+hidden representation of the ith node. Note that for
+aspect nodes, we use symbols {hsyn
+a1 , hsyn
+a2 , ..., hsyn
+am}
+to denote their hidden representations.
+4.2
+Semantic-based GCN (SemGCN)
+Instead of utilizing additional syntactic knowledge,
+as in SynGCN, SemGCN obtains an attention ma-
+trix as an adjacency matrix via a self-attention
+mechanism. On the one hand, self-attention can
+capture the semantically related terms of each word
+in a sentence, which is more ﬂexible than the syn-
+tactic structure. One the other hand, SemGCN can
+adapt to online reviews that are not sensitive to
+syntactic information.
+6323
+Self-Attention Self-attention (Vaswani et al.,
+2017) computes the attention score of each pair
+of elements in parallel. In our DualGCN, we com-
+pute the attention score matrix Asem ∈Rn×n using
+a self-attention layer. We then take the attention
+score matrix Asem as the adjacency matrix of our
+SemGCN module, which can be formulated as:
+Asem = softmax
+QW Q ×
+ KW KT
+√
+d
+!
+(2)
+where matrices Q and K are both equal to the graph
+representations of previous layer of our SemGCN
+module, while W Q and W K are learnable weight
+matrices. In addition, d is the dimensionality of
+the input node feature. Note that we use only one
+self-attention head to obtain an attention score ma-
+trix for a sentence. Similar to the SynGCN module,
+the SemGCN module obtains the graph represen-
+tation Hsem. Additionally, we use the symbols
+{hsem
+a1 , hsem
+a2 , ..., hsem
+am } to denote the hidden repre-
+sentations of all aspect nodes.
+BiAfﬁne Module To effectively exchange relevant
+features between the SynGCN and SemGCN mod-
+ules, we adopt a mutual BiAfﬁne transformation as
+a bridge. We formulate the process as follows:
+Hsyn′ = softmax
+
+HsynW1(Hsem)T
+Hsem (3)
+Hsem′ = softmax
+
+HsemW2(Hsyn)T
+Hsyn (4)
+where W1 and W2 are trainable parameters.
+Finally, we apply average pooling and concatena-
+tion operations on the aspect nodes of the SynGCN
+and SemGCN modules. Thus, we obtain the ﬁnal
+feature representation for the ABSA task, i.e.,
+hsyn
+a
+= f
+ hsyn
+a1 , hsyn
+a2 , ..., hsyn
+am
+
+(5)
+hsem
+a
+= f
+ hsem
+a1 , hsem
+a2 , ..., hsem
+am
+
+(6)
+r = [hsyn
+a , hsem
+a
+]
+(7)
+where f(·) is an average pooling function applied
+over the aspect node representations. Then, the
+obtained representation r is fed into a linear layer,
+followed by a softmax function to produce a senti-
+ment probability distribution p, i.e.,
+p(a) = softmax (Wpr + bp)
+(8)
+where Wp and bp are the learnable weight and bias.
+4.3
+Regularizer
+To improve the semantic representation, we pro-
+pose two regularizers for the SemGCN module,
+i.e., orthogonal and differential regularizers.
+Orthogonal Regularizer Intuitively, the related
+items of each word should be in different regions
+in a sentence, so the attention score distributions
+rarely overlap. Therefore, we expect a regularizer
+to encourage orthogonality among the attention
+score vectors of all words. Given an attention score
+matrix Asem ∈Rn×n, the orthogonal regularizer is
+formulated as follows:
+RO = ∥AsemAsemT −I∥F
+(9)
+where I is an identity matrix. The subscript F
+denotes the Frobenius norm. As a result, each
+nondiagonal element of AsemAsemT is minimized
+to maintain the matrix Asem orthogonal.
+Differential Regularizer We expect that two types
+of feature representations learned from the Syn-
+GCN and SemGCN modules represent distinct in-
+formation contained within the syntactic depen-
+dency trees and semantic correlations. Therefore,
+we adopt a differential regularizer between the two
+adjacency matrices of the SynGCN and SemGCN
+modules. Note that the regularizer is only restric-
+tive to Asem and is given as
+RD =
+1
+∥Asem −Asyn∥F
+.
+(10)
+4.4
+Loss Function
+Our training goal is to minimize the following total
+objective function:
+ℓT = ℓC + λ1RO + λ2RD + λ3∥Θ∥2
+(11)
+where λ1, λ2 and λ3 are regularization coefﬁcients
+and Θ represents all trainable model parameters.
+ℓC is a standard cross-entropy loss and is deﬁned
+for the ABSA task as follows:
+ℓC = −
+X
+(s,a)∈D
+X
+c∈C
+log p(a)
+(12)
+where D contains all sentence-aspect pairs and C
+is the collection of distinct sentiment polarities.
+5
+Experiments
+5.1
+Datasets
+We conduct experiments on three public standard
+datasets.
+The Restaurant and Laptop datasets
+6324
+Dataset
+Division
+# Positive
+# Negative
+# Neutral
+Restaurant
+Training
+2164
+807
+637
+Testing
+727
+196
+196
+Laptop
+Training
+976
+851
+455
+Testing
+337
+128
+167
+Twitter
+Training
+1507
+1528
+3016
+Testing
+172
+169
+336
+Table 1: Statistics for the three experimental datasets.
+are made public from the SemEval ABSA chal-
+lenge (Pontiki et al., 2014). Following (Chen et al.,
+2017), we remove the instances using the “conﬂict”
+label. In addition, the Twitter dataset is a collection
+of tweets (Dong et al., 2014). All three datasets
+have three sentiment polarities: positive, negative
+and neutral. Each sentence in these datasets is an-
+notated with marked aspects and their correspond-
+ing polarities. Statistics for the three datasets are
+shown in Table 1.
+5.2
+Implementation Details
+The LAL-Parser (Mrini et al., 2019), which is used
+for dependency parsing, provides an off-the-shelf
+parser2. For all the experiments, we use pretrained
+300-dimensional Glove3 vectors (Pennington et al.,
+2014) to initialize the word embeddings. The di-
+mensionality of the position (i.e., the relative po-
+sition of each word in a sentence with respect to
+the aspect) embeddings and part-of-speech (POS)
+embeddings is set to 30. Thus, we concatenate the
+word, POS and position embeddings and then input
+them into a BiLSTM model, whose hidden size is
+set to 50. To alleviate overﬁtting, we apply dropout
+at a rate of 0.7 to the input word embeddings of
+the BiLSTM. The dropout rate of the SynGCN and
+SemGCN modules is set to 0.1, and the number of
+SynGCN and SemGCN layers is set to 2. All the
+model weights are initialized from a uniform distri-
+bution. We use the Adam optimizer with a learning
+rate of 0.002. The DualGCN model is trained in 50
+epochs with a batch size of 16. The regularization
+coefﬁcients, λ1 and λ2 are set to (0.2, 0.3), (0.2,
+0.2) and (0.3, 0.2) for the three datasets, respec-
+tively, and λ3 is set to 10−4. For DualGCN+BERT,
+we use the bert-base-uncased4 English version. See
+our code for more details about BERT’s experi-
+ments. Additionally, following (Marcheggiani and
+Titov, 2017), we add a self-loop for each node in
+2https://github.com/KhalilMrini/LAL-Parser
+3https://nlp.stanford.edu/projects/glove/
+4https://github.com/huggingface/transformers
+the SynGCN and SemGCN modules.
+5.3
+Baseline Methods
+We compare DualGCN with state-of-the-art base-
+lines. The models are brieﬂy described as follows.
+1) ATAE-LSTM (Wang et al., 2016) utilizes aspect
+embedding and the attention mechanism in aspect-
+level sentiment classiﬁcation.
+2) IAN (Ma et al., 2017) employs two LSTMs
+and an interactive attention mechanism to generate
+representations for the aspect and sentence.
+3) RAM (Chen et al., 2017) uses multiple atten-
+tion and memory networks to learn the sentence
+representation.
+4) MGAN (Fan et al., 2018) designs a multigrained
+attention mechanism to capture word-level interac-
+tions between the aspect and context.
+5) TNet (Li et al., 2018b) transforms BiLSTM em-
+beddings into target-speciﬁc embeddings and uses
+CNN to extract ﬁnal embeddings for classiﬁcation.
+6) ASGCN (Zhang et al., 2019) ﬁrst proposed us-
+ing GCN to learn the aspect-speciﬁc representa-
+tions for aspect-based sentiment classiﬁcation.
+7) CDT (Sun et al., 2019b) utilizes a GCN over
+a dependency tree to learn aspect representations
+with syntactic information.
+8) BiGCN (Zhang and Qian, 2020) uses hierarchi-
+cal graph structure to integrate word co-occurrence
+information and dependency type information.
+9) kumaGCN (Chen et al., 2020) employs a latent
+graph structure to complement syntactic features.
+10) InterGCN (Liang et al., 2020) utilizes a GCN
+over a dependency tree to learn aspect representa-
+tions with syntactic information.
+11) R-GAT (Wang et al., 2020) proposes a aspect-
+oriented dependency tree structure and then en-
+codes new dependency trees with a relational GAT.
+12) DGEDT (Tang et al., 2020) proposes a depen-
+dency graph enhanced dual-transformer network by
+jointly considering ﬂat representations and graph-
+based representations.
+13) BERT (Devlin et al., 2019) is the vanilla BERT
+model by feeding the sentence-aspect pair and us-
+ing the representation of [CLS] for predictions.
+14) R-GAT+BERT (Wang et al., 2020) is the R-
+GAT model that uses a pre-trained BERT to replace
+BiLSTM as an encoder.
+15) DGEDT+BERT (Tang et al., 2020) is the
+DGEDT model that uses a pre-trained BERT to
+replace BiLSTM as an encoder.
+6325
+5.4
+Comparison Results
+To evaluate the ABSA models, we use the accu-
+racy and macro-averaged F1-score as the main
+evaluation metrics. The main experimental results
+are reported in Table 2. Our DualGCN model
+consistently outperforms all attention-based and
+syntax-based methods on the Restaurant, Laptop
+and Twitter datasets. These results demonstrates
+that our DualGCN effectively integrates syntactic
+knowledge and semantic information. In addition,
+the DualGCN accurately ﬁts datasets that contain
+formal, informal or complicated reviews. Com-
+pared to attention-based methods such as ATAE-
+LSTM, IAN and RAM, our DualGCN model uti-
+lizes syntactic knowledge to establish dependencies
+between words, so it can avoid noises introduced
+by the attention mechanism. Moreover, the syntax-
+based methods, such as ASGCN, CDT, R-GAT and
+so on, achieve better performance than attention-
+based methods, but they ignore the semantic cor-
+relation between words. However, when consider-
+ing informal or complicated sentences, using only
+syntactic knowledge results in poor performance.
+In Table 2, on the other side, the results from the
+last group shows that the basic BERT outperforms
+most of the models based on static word embedding.
+Moreover, based on BERT, our DualGCN+BERT
+achieves better performance.
+5.5
+Ablation Study
+To further investigate the role of modules in the
+DualGCN model, we conduct extensive ablation
+studies. The results are reported in Table 2. The
+SynGCN-head model uses the discrete outputs of
+a dependency parser to construct the adjacency
+matrix of the GCNs. In contrast, SynGCN lever-
+ages the probability matrix generated in a depen-
+dency parser as the adjacency matrix. The Syn-
+GCN model outperforms the SynGCN-head on
+the Restaurant and Laptop datasets, which demon-
+strates that rich syntactic knowledge can alleviate
+dependency parsing errors. The SemGCN model
+utilizes a self-attention layer to construct the adja-
+cency matrix of the semantic graph. This SemGCN
+model outperforms the SynGCN on the Twitter
+dataset because the reviews from Twitter, compared
+to those from Restaurant and Laptop datasets, are
+largely informal and insensitive to syntactic infor-
+mation. DualGCN w/o BiAfﬁne means that we
+remove the BiAfﬁne module so that the SynGCN
+and SemGCN modules cannot interact with each
+other. Therefore, the performance degrades sub-
+stantially on the Restaurant and Laptop datasets.
+DualGCN w/o RO&RD indicates that we remove
+both the orthogonal and differential regularizers.
+Similarly, DualGCN w/o RO or RD denotes that
+we remove only one of the regularizers. The ex-
+perimental results show that our two regularizers
+encourage the DualGCN to capture semantic cor-
+relations precisely. Overall, our DualGCN with all
+modules achieves the best performance.
+5.6
+Case Study
+Table 4 shows a few sample cases analyzed us-
+ing different models. The notations P, N and O
+represent positive, negative and neutral sentiment,
+respectively. We highlight the aspect words in red
+and in blue. For the aspect “food” in the ﬁrst
+sample, the attention-based methods, i.e., ATAE-
+LSTM and IAN, are prone to attend to the noisy
+word “dreadful”. Although the syntactic depen-
+dency can establish direct connections between an
+aspect and some words, no association exists be-
+tween the aspect and the opinion words for com-
+plicated sentences. Take the second sample as an
+example; the aspect “apple os” is far from the opin-
+ion word “happy” in terms of syntactic distance.
+Thus, the SynGCN model fails. Additionally, in
+the third sample, feature representations of the key
+words “did not” are not captured by the SynGCN
+model. In contrast, the SemGCN model can attend
+to the semantic correlation between words. The last
+two samples demonstrate that our DualGCN, which
+fully considers the complementarity of syntactic
+knowledge and semantic information, can address
+complicated and informal sentences with the help
+of the orthogonal and differential regularizers.
+5.7
+Attention Visualization
+To investigate the effectiveness of the two regulariz-
+ers in capturing the semantic correlations between
+words, we visualized the attention score matrix of
+the DualGCN w/o RO&RD and the intact Dual-
+GCN. Consider the sample sentence, i.e., “Web
+browsing is very quick with Safari browser.” with
+“Safari browser” as an aspect. As shown in Figure 3
+(a), the attention score matrix is dense, and the re-
+lated terms of each word overlap in the DualGCN
+w/o RO&RD model. This result is attributed to the
+lack of semantic constraints in the self-attention
+layers. The overlap of semantic correlations will
+lead to redundancy and noise during information
+propagation. The seventh and eighth rows of the
+6326
+Models
+Restaurant
+Laptop
+Twitter
+Accuracy
+Macro-F1
+Accuracy
+Macro-F1
+Accuracy
+Macro-F1
+ATAE-LSTM (Wang et al., 2016)
+77.20
+-
+68.70
+-
+-
+-
+IAN (Ma et al., 2017)
+78.60
+-
+72.10
+-
+-
+-
+RAM (Chen et al., 2017)
+80.23
+70.80
+74.49
+71.35
+69.36
+67.30
+MGAN (Fan et al., 2018)
+81.25
+71.94
+75.39
+72.47
+72.54
+70.81
+TNet (Li et al., 2018b)
+80.69
+71.27
+76.54
+71.75
+74.90
+73.60
+ASGCN (Zhang et al., 2019)
+80.77
+72.02
+75.55
+71.05
+72.15
+70.40
+CDT (Sun et al., 2019b)
+82.30
+74.02
+77.19
+72.99
+74.66
+73.66
+BiGCN (Zhang and Qian, 2020)
+81.97
+73.48
+74.59
+71.84
+74.16
+73.35
+kumaGCN (Chen et al., 2020)
+81.43
+73.64
+76.12
+72.42
+72.45
+70.77
+InterGCN (Liang et al., 2020)
+82.23
+74.01
+77.86
+74.32
+-
+-
+R-GAT (Wang et al., 2020)
+83.30
+76.08
+77.42
+73.76
+75.57
+73.82
+DGEDT (Tang et al., 2020)
+83.90
+75.10
+76.80
+72.30
+74.80
+73.40
+Our DualGCN
+84.27
+78.08
+78.48
+74.74
+75.92
+74.29
+BERT-SPC (Devlin et al., 2019)
+86.15
+80.29
+81.01
+76.69
+75.18
+74.01
+R-GAT+BERT (Wang et al., 2020)
+86.60
+81.35
+78.21
+74.07
+76.15
+74.88
+DGEDT+BERT (Tang et al., 2020)
+86.30
+80.00
+79.80
+75.60
+77.90
+75.40
+Our DualGCN+BERT
+87.13
+81.16
+81.80
+78.10
+77.40
+76.02
+Table 2: Experimental results comparison on three publicly available datasets.
+Models
+Restaurant
+Laptop
+Twitter
+Accuracy
+Macro-F1
+Accuracy
+Macro-F1
+Accuracy
+Macro-F1
+SynGCN-head
+82.93
+75.29
+76.27
+72.39
+75.04
+73.85
+SynGCN
+83.74
+76.97
+76.58
+73.17
+74.59
+72.86
+SemGCN
+83.29
+76.30
+76.90
+73.72
+75.18
+73.86
+DualGCN w/o BiAfﬁne
+82.84
+75.31
+76.90
+73.23
+75.33
+73.92
+DualGCN w/o RO&RD
+82.93
+75.79
+76.58
+72.03
+74.59
+73.20
+DualGCN w/o RO
+83.56
+77.43
+76.58
+72.78
+75.18
+73.55
+DualGCN w/o RD
+83.65
+76.34
+77.53
+73.72
+74.45
+72.82
+DualGCN
+84.27
+78.08
+78.48
+74.74
+75.92
+74.29
+Table 3: Experimental results of ablation study.
+attention score matrix are the attention probabil-
+ity distributions of “safari” and “browser”, respec-
+tively. The information to which “safari browser”
+pays attention is redundant and it does not pay more
+attention to the key opinion word “quick”. Thus,
+the DualGCN w/o RO&RD failed. In comparison,
+in Figure 3 (b), the attention score matrix produced
+by our DualGCN is relatively sparse. Both “safari”
+and “browser” are semantically related to “quick”,
+and their other attended items are also semantically
+reasonable. In addition, the attention scores of the
+related terms of each words tend to be distinct and
+precise due to the semantic constraints of these two
+regularizers. Therefore, our DualGCN model can
+readily predict the correct sentiment polarity of the
+aspect “safari browser”.
+5.8
+Impact of the DualGCN Layer Number
+To investigate the impact of the DualGCN layer
+number, we evaluate our DualGCN model with
+one to eight layers on the Restaurant and Laptop
+datasets. As shown in Figure 4, our model with
+two DualGCN layers performs the best. On one
+the hand, node representations cannot propagate
+far when the number of layers is small. On the
+other hand, if the number of layers is excessive, the
+model will become unstable due to the vanishing
+gradient and information redundancy.
+6
+Conclusion
+In this paper, we propose a DualGCN architecture
+to address the disadvantages of attention-based and
+dependency-based methods for ABSA tasks. Our
+6327
+#
+Review
+ATAE-LSTM
+IAN
+SynGCN
+SemGCN
+DualGCN
+1
+Great food but the service was dreadful!
+(N, N)
+(N, N)
+(P, N)
+(P, N)
+(P, N)
+2
+Works well, and I am extremely happy to be back to an apple OS.
+(P, P)
+(P, P)
+(P, O)
+(P, P)
+(P, P)
+3
+Did not enjoy the new Windows 8 and touchscreen functions.
+(O, P)
+(O, N)
+(P, O)
+(N, N)
+(N, N)
+4
+I never tried any external mics with that iMac.
+O
+N
+N
+N
+O
+5
+In mi burrito, here was nothing but dark chicken that had that
+cooked last week and just warmed up in a microwave taste.
+(N, P)
+(N, N)
+(N, O)
+(N, O)
+(N, N)
+Table 4: Case studies of our DualGCN model compared with state-of-the-art baselines.
+(a) The attention score matrix of DualGCN
+w/o RO&RD
+(b) The attention score matrix of DualGCN
+Figure 3: An illustration on how orthogonal and differ-
+ential regularizers contribute to the self-attention layer.
+DualGCN model integrates syntactic knowledge
+and semantic information by means of the SynGCN
+and SemGCN modules. Moreover, to effectively
+capture the semantic correlation between words,
+we propose orthogonal and differential regularizers
+in the SemGCN module. These regularizers can
+attend to the semantically related items with less
+overlap of each word and capture feature represen-
+tations that differ from the syntactic structure. Ex-
+tensive experiments on benchmark datasets show
+that our DualGCN model outperforms baselines.
+Figure 4: Effect of the number of DualGCN layers.
+Acknowledgments
+This work was supported in part by the Na-
+tional Key R&D Program of China under Grant
+2019YFF0303300 and Subject II under Grant
+2019YFF0303302, in part by the National Nat-
+ural Science Foundation of China under Grants
+61906018 and 62076032, in part by the 111 Project
+under Grant B08004, and in part by the Funda-
+mental Research Funds for the Central Universities
+under Grant 2021RC36.
+References
+Chenhua Chen, Zhiyang Teng, and Yue Zhang. 2020.
+Inducing target-speciﬁc latent structures for aspect
+sentiment classiﬁcation. In Proceedings of the 2020
+Conference on Empirical Methods in Natural Lan-
+guage Processing (EMNLP), pages 5596–5607, On-
+line. Association for Computational Linguistics.
+Peng Chen, Zhongqian Sun, Lidong Bing, and Wei
+Yang. 2017. Recurrent attention network on mem-
+ory for aspect sentiment analysis. In Proceedings of
+the 2017 Conference on Empirical Methods in Nat-
+ural Language Processing, pages 452–461, Copen-
+6328
+hagen, Denmark. Association for Computational
+Linguistics.
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and
+Kristina Toutanova. 2019.
+BERT: Pre-training of
+deep bidirectional transformers for language under-
+standing.
+In Proceedings of the 2019 Conference
+of the North American Chapter of the Association
+for Computational Linguistics: Human Language
+Technologies, Volume 1 (Long and Short Papers),
+pages 4171–4186, Minneapolis, Minnesota. Associ-
+ation for Computational Linguistics.
+Li Dong, Furu Wei, Chuanqi Tan, Duyu Tang, Ming
+Zhou, and Ke Xu. 2014. Adaptive recursive neural
+network for target-dependent Twitter sentiment clas-
+siﬁcation. In Proceedings of the 52nd Annual Meet-
+ing of the Association for Computational Linguistics
+(Volume 2), pages 49–54, Baltimore, Maryland. As-
+sociation for Computational Linguistics.
+Feifan Fan, Yansong Feng, and Dongyan Zhao. 2018.
+Multi-grained attention network for aspect-level sen-
+timent classiﬁcation.
+In Proceedings of the 2018
+Conference on Empirical Methods in Natural Lan-
+guage Processing, pages 3433–3442, Brussels, Bel-
+gium. Association for Computational Linguistics.
+Shuqin Gu, Lipeng Zhang, Yuexian Hou, and Yin Song.
+2018. A position-aware bidirectional attention net-
+work for aspect-level sentiment analysis.
+In Pro-
+ceedings of the 27th International Conference on
+Computational Linguistics, pages 774–784, Santa
+Fe, New Mexico, USA. Association for Computa-
+tional Linguistics.
+Ruidan He, Wee Sun Lee, Hwee Tou Ng, and Daniel
+Dahlmeier. 2018. Effective attention modeling for
+aspect-level sentiment classiﬁcation.
+In Proceed-
+ings of the 27th International Conference on Com-
+putational Linguistics, pages 1121–1131, Santa Fe,
+New Mexico, USA. Association for Computational
+Linguistics.
+Binxuan Huang and Kathleen Carley. 2019.
+Syntax-
+aware aspect level sentiment classiﬁcation with
+graph attention networks.
+In Proceedings of the
+2019 Conference on Empirical Methods in Natu-
+ral Language Processing and the 9th International
+Joint Conference on Natural Language Processing
+(EMNLP-IJCNLP), pages 5469–5477, Hong Kong,
+China. Association for Computational Linguistics.
+Binxuan Huang, Yanglan Ou, and Kathleen M. Car-
+ley. 2018. Aspect level sentiment classiﬁcation with
+attention-over-attention neural networks.
+CoRR,
+abs/1804.06536.
+Long Jiang, Mo Yu, Ming Zhou, Xiaohua Liu, and
+Tiejun Zhao. 2011.
+Target-dependent Twitter sen-
+timent classiﬁcation. In Proceedings of the 49th An-
+nual Meeting of the Association for Computational
+Linguistics: Human Language Technologies, pages
+151–160, Portland, Oregon, USA. Association for
+Computational Linguistics.
+Thomas N. Kipf and Max Welling. 2017.
+Semi-
+supervised classiﬁcation with graph convolutional
+networks. In 5th International Conference on Learn-
+ing Representations, ICLR 2017, Toulon, France,
+April 24-26, 2017.
+Svetlana Kiritchenko, Xiaodan Zhu, Colin Cherry, and
+Saif Mohammad. 2014. NRC-Canada-2014: Detect-
+ing aspects and sentiment in customer reviews. In
+Proceedings of the 8th International Workshop on
+Semantic Evaluation (SemEval 2014), pages 437–
+442, Dublin, Ireland. Association for Computational
+Linguistics.
+Jiwei Li and Eduard Hovy. 2017. Reﬂections on senti-
+ment/opinion analysis. In A Practical Guide to Sen-
+timent Analysis, pages 41–59, Cham. Springer Inter-
+national Publishing.
+Lishuang Li, Yang Liu, and AnQiao Zhou. 2018a. Hier-
+archical attention based position-aware network for
+aspect-level sentiment analysis. In Proceedings of
+the 22nd Conference on Computational Natural Lan-
+guage Learning, pages 181–189, Brussels, Belgium.
+Association for Computational Linguistics.
+Xin Li, Lidong Bing, Wai Lam, and Bei Shi. 2018b.
+Transformation networks for target-oriented senti-
+ment classiﬁcation. In Proceedings of the 56th An-
+nual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pages 946–
+956, Melbourne, Australia. Association for Compu-
+tational Linguistics.
+Bin Liang, Rongdi Yin, Lin Gui, Jiachen Du, and
+Ruifeng Xu. 2020. Jointly learning aspect-focused
+and inter-aspect relations with graph convolutional
+networks for aspect sentiment analysis. In Proceed-
+ings of the 28th International Conference on Com-
+putational Linguistics, pages 150–161, Barcelona,
+Spain (Online). International Committee on Compu-
+tational Linguistics.
+Bing Liu. 2012. Sentiment analysis and opinion min-
+ing. Synthesis lectures on human language technolo-
+gies, 5(1):1–167.
+Dehong Ma, Sujian Li, Xiaodong Zhang, and Houfeng
+Wang. 2017.
+Interactive attention networks for
+aspect-level sentiment classiﬁcation.
+In Proceed-
+ings of the 26th International Joint Conference on
+Artiﬁcial Intelligence, IJCAI’17, page 4068–4074.
+AAAI Press.
+Diego Marcheggiani and Ivan Titov. 2017. Encoding
+sentences with graph convolutional networks for se-
+mantic role labeling.
+In Proceedings of the 2017
+Conference on Empirical Methods in Natural Lan-
+guage Processing, pages 1506–1515, Copenhagen,
+Denmark. Association for Computational Linguis-
+tics.
+Khalil Mrini, Franck Dernoncourt, Trung Bui, Wal-
+ter Chang, and Ndapa Nakashole. 2019.
+Re-
+thinking
+self-attention:
+An
+interpretable
+self-
+attentive encoder-decoder parser.
+arXiv preprint
+arXiv:1911.03875.
+6329
+Jeffrey Pennington, Richard Socher, and Christopher
+Manning. 2014.
+GloVe: Global vectors for word
+representation. In Proceedings of the 2014 Confer-
+ence on Empirical Methods in Natural Language
+Processing (EMNLP), pages 1532–1543,
+Doha,
+Qatar. Association for Computational Linguistics.
+Minh Hieu Phan and Philip O. Ogunbona. 2020. Mod-
+elling context and syntactical features for aspect-
+based sentiment analysis.
+In Proceedings of the
+58th Annual Meeting of the Association for Compu-
+tational Linguistics, pages 3211–3220, Online. As-
+sociation for Computational Linguistics.
+Maria Pontiki, Dimitris Galanis, John Pavlopoulos,
+Harris Papageorgiou, Ion Androutsopoulos, and
+Suresh Manandhar. 2014. SemEval-2014 task 4: As-
+pect based sentiment analysis. In Proceedings of the
+8th International Workshop on Semantic Evaluation
+(SemEval 2014), pages 27–35, Dublin, Ireland. As-
+sociation for Computational Linguistics.
+Chi Sun, Luyao Huang, and Xipeng Qiu. 2019a. Uti-
+lizing BERT for aspect-based sentiment analysis via
+constructing auxiliary sentence. In Proceedings of
+the 2019 Conference of the North American Chap-
+ter of the Association for Computational Linguistics:
+Human Language Technologies, Volume 1, pages
+380–385, Minneapolis, Minnesota. Association for
+Computational Linguistics.
+Kai Sun, Richong Zhang, Samuel Mensah, Yongyi
+Mao, and Xudong Liu. 2019b. Aspect-level senti-
+ment analysis via convolution over dependency tree.
+In Proceedings of the 2019 Conference on Empirical
+Methods in Natural Language Processing and the
+9th International Joint Conference on Natural Lan-
+guage Processing (EMNLP-IJCNLP), pages 5679–
+5688, Hong Kong, China. Association for Computa-
+tional Linguistics.
+Xingwei Tan, Yi Cai, and Changxi Zhu. 2019. Rec-
+ognizing conﬂict opinions in aspect-level sentiment
+classiﬁcation with dual attention networks. In Pro-
+ceedings of the 2019 Conference on Empirical Meth-
+ods in Natural Language Processing and the 9th In-
+ternational Joint Conference on Natural Language
+Processing (EMNLP-IJCNLP), pages 3426–3431,
+Hong Kong, China. Association for Computational
+Linguistics.
+Duyu Tang, Bing Qin, and Ting Liu. 2016a. Aspect
+level sentiment classiﬁcation with deep memory net-
+work.
+In Proceedings of the 2016 Conference on
+Empirical Methods in Natural Language Processing,
+pages 214–224, Austin, Texas. Association for Com-
+putational Linguistics.
+Duyu Tang, Bing Qin, and Ting Liu. 2016b. Aspect
+level sentiment classiﬁcation with deep memory net-
+work.
+In Proceedings of the 2016 Conference on
+Empirical Methods in Natural Language Processing,
+pages 214–224, Austin, Texas. Association for Com-
+putational Linguistics.
+Hao Tang, Donghong Ji, Chenliang Li, and Qiji
+Zhou. 2020.
+Dependency graph enhanced dual-
+transformer structure for aspect-based sentiment
+classiﬁcation.
+In Proceedings of the 58th Annual
+Meeting of the Association for Computational Lin-
+guistics, pages 6578–6588, Online. Association for
+Computational Linguistics.
+Ivan Titov and Ryan McDonald. 2008. Modeling on-
+line reviews with multi-grain topic models. In Pro-
+ceedings of the 17th International Conference on
+World Wide Web, page 111–120, New York, NY,
+USA. Association for Computing Machinery.
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob
+Uszkoreit, Llion Jones, Aidan N Gomez, Ł ukasz
+Kaiser, and Illia Polosukhin. 2017. Attention is all
+you need. In I. Guyon, U. V. Luxburg, S. Bengio,
+H. Wallach, R. Fergus, S. Vishwanathan, and R. Gar-
+nett, editors, Advances in Neural Information Pro-
+cessing Systems 30, pages 5998–6008. Curran Asso-
+ciates, Inc.
+Duy-Tin Vo and Yue Zhang. 2015. Deep learning for
+event-driven stock prediction. In Proceedings of IJ-
+CAI, BueNos Aires, Argentina.
+Kai Wang, Weizhou Shen, Yunyi Yang, Xiaojun Quan,
+and Rui Wang. 2020. Relational graph attention net-
+work for aspect-based sentiment analysis. In Pro-
+ceedings of the 58th Annual Meeting of the Asso-
+ciation for Computational Linguistics, pages 3229–
+3238, Online. Association for Computational Lin-
+guistics.
+Yequan Wang, Minlie Huang, Xiaoyan Zhu, and
+Li Zhao. 2016. Attention-based LSTM for aspect-
+level sentiment classiﬁcation.
+In Proceedings of
+the 2016 Conference on Empirical Methods in Nat-
+ural Language Processing, pages 606–615, Austin,
+Texas. Association for Computational Linguistics.
+Hu Xu, Bing Liu, Lei Shu, and Philip Yu. 2019. BERT
+post-training for review reading comprehension and
+aspect-based sentiment analysis. In Proceedings of
+the 2019 Conference of the North American Chap-
+ter of the Association for Computational Linguistics:
+Human Language Technologies, Volume 1, pages
+2324–2335, Minneapolis, Minnesota. Association
+for Computational Linguistics.
+Chen Zhang, Qiuchi Li, and Dawei Song. 2019.
+Aspect-based sentiment classiﬁcation with aspect-
+speciﬁc graph convolutional networks. In Proceed-
+ings of the 2019 Conference on Empirical Methods
+in Natural Language Processing and the 9th Interna-
+tional Joint Conference on Natural Language Pro-
+cessing, pages 4568–4578, Hong Kong, China. As-
+sociation for Computational Linguistics.
+Mi Zhang and Tieyun Qian. 2020. Convolution over
+hierarchical syntactic and lexical graphs for aspect
+level sentiment analysis. In Proceedings of the 2020
+Conference on Empirical Methods in Natural Lan-
+guage Processing (EMNLP), pages 3540–3549, On-
+line. Association for Computational Linguistics.

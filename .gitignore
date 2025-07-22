@@ -1,0 +1,11 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+# IDE/Editor specific
+.idea/
+.vscode/
+*.swp
+# OS generated files
+.DS_Store
+Thumbs.db
