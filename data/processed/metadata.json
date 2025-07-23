@@ -1,240 +1,568 @@
 {
     "0_387_29295_0_82": {
         "id": "0_387_29295_0_82",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\0-387-29295-0_82.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\0-387-29295-0_82.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\0_387_29295_0_82.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 17
     },
     "0592": {
         "id": "0592",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\0592.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\0592.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\0592.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 31
     },
     "0628": {
         "id": "0628",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\0628.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\0628.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\0628.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 31
+    },
+    "10.5560_zna.2012_0029": {
+        "id": "10.5560_zna.2012_0029",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\10.5560_zna.2012-0029.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\10.5560_zna.2012_0029.txt",
+        "error": null,
+        "chunk_count": 24
     },
     "1307.0414v1": {
         "id": "1307.0414v1",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\1307.0414v1.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\1307.0414v1.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\1307.0414v1.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 21
     },
     "1307.1275v1": {
         "id": "1307.1275v1",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\1307.1275v1.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\1307.1275v1.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\1307.1275v1.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 23
     },
     "1911.09359v1": {
         "id": "1911.09359v1",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\1911.09359v1.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\1911.09359v1.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\1911.09359v1.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 50
     },
     "2021.acl_long.494": {
         "id": "2021.acl_long.494",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2021.acl-long.494.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2021.acl-long.494.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2021.acl_long.494.txt",
-        "error": null
-    },
-    "2022.acl_long.212_(1)": {
-        "id": "2022.acl_long.212_(1)",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2022.acl-long.212 (1).pdf",
-        "status": "text_extracted",
-        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2022.acl_long.212_(1).txt",
-        "error": null
+        "error": null,
+        "chunk_count": 41
     },
     "2022.acl_long.212": {
         "id": "2022.acl_long.212",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2022.acl-long.212.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2022.acl-long.212.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2022.acl_long.212.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 46
     },
     "2022.coling_1.234": {
         "id": "2022.coling_1.234",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2022.coling-1.234.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2022.coling-1.234.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2022.coling_1.234.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 25
     },
     "2022.emnlp_main.212": {
         "id": "2022.emnlp_main.212",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2022.emnlp-main.212.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2022.emnlp-main.212.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2022.emnlp_main.212.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 46
     },
     "2022.findings_emnlp.6": {
         "id": "2022.findings_emnlp.6",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2022.findings-emnlp.6.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2022.findings-emnlp.6.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2022.findings_emnlp.6.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 46
     },
     "2023.acl_long.802": {
         "id": "2023.acl_long.802",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2023.acl-long.802.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2023.acl-long.802.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2023.acl_long.802.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 50
     },
     "2025.coling_main.22": {
         "id": "2025.coling_main.22",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2025.coling-main.22.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2025.coling-main.22.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2025.coling_main.22.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 43
     },
     "2408.03632v3": {
         "id": "2408.03632v3",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2408.03632v3.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2408.03632v3.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2408.03632v3.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 57
     },
     "2504.15958v2": {
         "id": "2504.15958v2",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\2504.15958v2.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2504.15958v2.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2504.15958v2.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 50
+    },
+    "2647868.2654902": {
+        "id": "2647868.2654902",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2647868.2654902.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2647868.2654902.txt",
+        "error": null,
+        "chunk_count": 43
+    },
+    "2808205": {
+        "id": "2808205",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2808205.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2808205.txt",
+        "error": null,
+        "chunk_count": 54
+    },
+    "2820400": {
+        "id": "2820400",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\2820400.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\2820400.txt",
+        "error": null,
+        "chunk_count": 4
+    },
+    "3191835.3191989": {
+        "id": "3191835.3191989",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3191835.3191989.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3191835.3191989.txt",
+        "error": null,
+        "chunk_count": 23
+    },
+    "3394171.3416296": {
+        "id": "3394171.3416296",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3394171.3416296.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3394171.3416296.txt",
+        "error": null,
+        "chunk_count": 24
+    },
+    "3469877.3490585": {
+        "id": "3469877.3490585",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3469877.3490585.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3469877.3490585.txt",
+        "error": null,
+        "chunk_count": 38
+    },
+    "3483207.3483233": {
+        "id": "3483207.3483233",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3483207.3483233.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3483207.3483233.txt",
+        "error": null,
+        "chunk_count": 30
+    },
+    "3548636.3548646": {
+        "id": "3548636.3548646",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3548636.3548646.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3548636.3548646.txt",
+        "error": null,
+        "chunk_count": 24
+    },
+    "3664647.3680897": {
+        "id": "3664647.3680897",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3664647.3680897.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3664647.3680897.txt",
+        "error": null,
+        "chunk_count": 53
+    },
+    "3664647.3681466": {
+        "id": "3664647.3681466",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\3664647.3681466.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\3664647.3681466.txt",
+        "error": null,
+        "chunk_count": 47
     },
     "4930_Article_Text_7995_1_10_20190709": {
         "id": "4930_Article_Text_7995_1_10_20190709",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\4930-Article Text-7995-1-10-20190709.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\4930-Article Text-7995-1-10-20190709.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\4930_Article_Text_7995_1_10_20190709.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 28
+    },
+    "978_3_642_23223_7_60": {
+        "id": "978_3_642_23223_7_60",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\978-3-642-23223-7_60.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\978_3_642_23223_7_60.txt",
+        "error": null,
+        "chunk_count": 14
+    },
+    "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words": {
+        "id": "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words.txt",
+        "error": null,
+        "chunk_count": 22
+    },
+    "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction": {
+        "id": "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction.txt",
+        "error": null,
+        "chunk_count": 30
+    },
+    "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining": {
+        "id": "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\A_Weighted_Cross-entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross-lingual_Continual_Pretraining.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining.txt",
+        "error": null,
+        "chunk_count": 26
+    },
+    "Designing_a_Japanese_idiom_education_support_system_for_overseas_students": {
+        "id": "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Designing_a_Japanese_idiom_education_support_system_for_overseas_students.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Designing_a_Japanese_idiom_education_support_system_for_overseas_students.txt",
+        "error": null,
+        "chunk_count": 24
+    },
+    "Dimensionality_reduction_for_text_using_LLE": {
+        "id": "Dimensionality_reduction_for_text_using_LLE",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Dimensionality_reduction_for_text_using_LLE.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Dimensionality_reduction_for_text_using_LLE.txt",
+        "error": null,
+        "chunk_count": 27
+    },
+    "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": {
+        "id": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect-Based_Sentiment_Analysis.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis.txt",
+        "error": null,
+        "chunk_count": 73
+    },
+    "electronics_12_03521_v2": {
+        "id": "electronics_12_03521_v2",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\electronics-12-03521-v2.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\electronics_12_03521_v2.txt",
+        "error": null,
+        "chunk_count": 69
+    },
+    "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method": {
+        "id": "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Enhanced Prompt Learning for Few-shot Text Classification Method.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method.txt",
+        "error": null,
+        "chunk_count": 21
+    },
+    "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning": {
+        "id": "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few-shot_Learning.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning.txt",
+        "error": null,
+        "chunk_count": 25
+    },
+    "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis": {
+        "id": "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Exploring_Global_and_Local_Linguistic_Representations_for_Text-to-Image_Synthesis.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis.txt",
+        "error": null,
+        "chunk_count": 63
     },
     "FAIA_372_FAIA230600": {
         "id": "FAIA_372_FAIA230600",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\FAIA-372-FAIA230600.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\FAIA-372-FAIA230600.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\FAIA_372_FAIA230600.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 44
+    },
+    "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding": {
+        "id": "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding.txt",
+        "error": null,
+        "chunk_count": 30
+    },
+    "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol": {
+        "id": "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three-particle+Greenberger-Horne-Zeilinger+State+in+Two-step+Quantum+Direct+Communication+Protocol.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol.txt",
+        "error": null,
+        "chunk_count": 19
+    },
+    "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image": {
+        "id": "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Improving_deep_convolutional_neural_networks_for_real-world_clothing_image.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Improving_deep_convolutional_neural_networks_for_real_world_clothing_image.txt",
+        "error": null,
+        "chunk_count": 35
+    },
+    "Improving_Image_Paragraph_Captioning_with_Dual_Relations": {
+        "id": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Improving_Image_Paragraph_Captioning_with_Dual_Relations.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Improving_Image_Paragraph_Captioning_with_Dual_Relations.txt",
+        "error": null,
+        "chunk_count": 29
+    },
+    "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension": {
+        "id": "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\LGR-NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension.txt",
+        "error": null,
+        "chunk_count": 65
     },
     "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text": {
         "id": "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 49
+    },
+    "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": {
+        "id": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Mathematical Problems in Engineering - 2015 - Li - Obtaining Cross Modal Similarity Metric with Deep Neural Architecture.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture.txt",
+        "error": null,
+        "chunk_count": 43
+    },
+    "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis": {
+        "id": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Modality_Disentangled_Discriminator_for_Text-to-Image_Synthesis.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis.txt",
+        "error": null,
+        "chunk_count": 57
+    },
+    "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification": {
+        "id": "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Multi-level fusion with deep neural networks for multimodal sentiment classification.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification.txt",
+        "error": null,
+        "chunk_count": 34
+    },
+    "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding": {
+        "id": "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Multimodal_Co-Attention_Mechanism_for_One-stage_Visual_Grounding.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding.txt",
+        "error": null,
+        "chunk_count": 24
     },
     "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition": {
         "id": "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition",
-        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文（免费下载）\\Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition.pdf",
-        "status": "text_extracted",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition.pdf",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 52
+    },
+    "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension": {
+        "id": "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension.txt",
+        "error": null,
+        "chunk_count": 45
+    },
+    "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding": {
+        "id": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding.txt",
+        "error": null,
+        "chunk_count": 23
+    },
+    "全卷积神经结构的段落式图像描述算法": {
+        "id": "全卷积神经结构的段落式图像描述算法",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\全卷积神经结构的段落式图像描述算法.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\全卷积神经结构的段落式图像描述算法.txt",
+        "error": null,
+        "chunk_count": 13
+    },
+    "基于无监督方法的电力文本专业词汇识别研究.pdf": {
+        "id": "基于无监督方法的电力文本专业词汇识别研究.pdf",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\基于无监督方法的电力文本专业词汇识别研究.pdf.pdf",
+        "status": "extraction_failed",
+        "error": "Failed to extract text from D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\基于无监督方法的电力文本专业词汇识别研究.pdf.pdf"
+    },
+    "基于统计和加权的提高击键认证识别方法(英文)": {
+        "id": "基于统计和加权的提高击键认证识别方法(英文)",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\基于统计和加权的提高击键认证识别方法(英文).pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于统计和加权的提高击键认证识别方法(英文).txt",
+        "error": null,
+        "chunk_count": 19
+    },
+    "多视图有监督的LDA模型": {
+        "id": "多视图有监督的LDA模型",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\多视图有监督的LDA模型.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\多视图有监督的LDA模型.txt",
+        "error": null,
+        "chunk_count": 11
+    },
+    "考虑合成灰数灰度性质的改进区间灰数预测模型": {
+        "id": "考虑合成灰数灰度性质的改进区间灰数预测模型",
+        "source_path": "D:\\AC_Base_Platform\\data\\raw\\RuifanLi 老师论文\\考虑合成灰数灰度性质的改进区间灰数预测模型.pdf",
+        "status": "chunked",
+        "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\考虑合成灰数灰度性质的改进区间灰数预测模型.txt",
+        "error": null,
+        "chunk_count": 11
     },
     "全卷积神经结构的段落式图像描述算法_李睿凡": {
         "id": "全卷积神经结构的段落式图像描述算法_李睿凡",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\和导师合作论文\\全卷积神经结构的段落式图像描述算法_李睿凡.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\全卷积神经结构的段落式图像描述算法_李睿凡.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 13
     },
     "增强提示学习的少样本文本分类方法_李睿凡": {
         "id": "增强提示学习的少样本文本分类方法_李睿凡",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\和导师合作论文\\增强提示学习的少样本文本分类方法_李睿凡.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\增强提示学习的少样本文本分类方法_李睿凡.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 21
     },
     "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦": {
         "id": "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 86
     },
     "基于实体的概念指导的少样本关系抽取研究与应用_王泽元": {
         "id": "基于实体的概念指导的少样本关系抽取研究与应用_王泽元",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于实体的概念指导的少样本关系抽取研究与应用_王泽元.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于实体的概念指导的少样本关系抽取研究与应用_王泽元.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 71
     },
     "基于常识知识的多选式问答研究_张力翚": {
         "id": "基于常识知识的多选式问答研究_张力翚",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于常识知识的多选式问答研究_张力翚.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于常识知识的多选式问答研究_张力翚.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 97
     },
     "基于提示学习的少样本文本分类研究与应用_魏志宇": {
         "id": "基于提示学习的少样本文本分类研究与应用_魏志宇",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于提示学习的少样本文本分类研究与应用_魏志宇.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于提示学习的少样本文本分类研究与应用_魏志宇.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 79
     },
     "基于树结构的图像段落描述研究_石祎晖": {
         "id": "基于树结构的图像段落描述研究_石祎晖",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于树结构的图像段落描述研究_石祎晖.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于树结构的图像段落描述研究_石祎晖.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 98
     },
     "基于深度卷积结构的图像段落描述研究_梁昊雨": {
         "id": "基于深度卷积结构的图像段落描述研究_梁昊雨",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于深度卷积结构的图像段落描述研究_梁昊雨.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于深度卷积结构的图像段落描述研究_梁昊雨.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 80
     },
     "基于知识增强的方面级情感分析研究及应用_杜一帆": {
         "id": "基于知识增强的方面级情感分析研究及应用_杜一帆",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于知识增强的方面级情感分析研究及应用_杜一帆.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于知识增强的方面级情感分析研究及应用_杜一帆.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 86
     },
     "基于非自回归方法的图像描述研究及应用_张煜松": {
         "id": "基于非自回归方法的图像描述研究及应用_张煜松",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\基于非自回归方法的图像描述研究及应用_张煜松.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\基于非自回归方法的图像描述研究及应用_张煜松.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 95
     },
     "多元组细粒度情感分析研究及应用_翟泽鹏": {
         "id": "多元组细粒度情感分析研究及应用_翟泽鹏",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\多元组细粒度情感分析研究及应用_翟泽鹏.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\多元组细粒度情感分析研究及应用_翟泽鹏.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 106
     },
     "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷": {
         "id": "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 81
     },
     "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然": {
         "id": "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 18
     },
     "面向复杂文本的指称表达理解研究_陆明聪": {
         "id": "面向复杂文本的指称表达理解研究_陆明聪",
         "source_path": "D:\\AC_Base_Platform\\data\\raw\\学生论文\\面向复杂文本的指称表达理解研究_陆明聪.pdf",
-        "status": "text_extracted",
+        "status": "chunked",
         "text_path": "D:\\AC_Base_Platform\\data\\processed\\text\\面向复杂文本的指称表达理解研究_陆明聪.txt",
-        "error": null
+        "error": null,
+        "chunk_count": 97
     }
 }

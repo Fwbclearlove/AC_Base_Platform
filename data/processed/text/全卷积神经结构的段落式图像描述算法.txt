@@ -1,0 +1,549 @@
+2019 年12 月
+第42 卷第6 期
+北京邮电大学学报
+Journal of Beijing University of Posts and Telecommunications
+Dec. 2019
+Vol. 42 No. 6
+摇摇
+文章编号:1007鄄5321(2019)06鄄0155鄄07
+DOI:10. 13190 / j. jbupt. 2019鄄057
+全卷积神经结构的段落式图像描述算法
+李睿凡
+1,2,摇梁昊雨
+1,摇冯方向
+1,摇张光卫
+2,3,摇王小捷
+1,2
+(1. 北京邮电大学计算机学院, 北京100876; 2. 教育部信息网络工程研究中心, 北京100876;
+3. 北京邮电大学网络技术研究院, 北京100876)
+摘要: 针对段落式图像描述生成研究中提升描述语句之间的连贯性问题,提出了一种基于全卷积结构的图像段落
+描述算法. 采用基于卷积网络的区域检测器获取图像表示,结合段落在语言学角度的层次性,构建一种层次性的深
+度卷积解码器对图像表示解码,自动生成段落式文本描述. 同时将门控机制嵌入卷积解码器网络中,以提升模型的
+记忆能力. 实验结果表明,相比于基于循环神经网络等传统段落图像的描述方法,新算法能够为图像生成更为连贯
+的段落式文本描述,在评测指标上取得较好的结果.
+关摇键摇词: 卷积网络; 深度学习; 图像描述; 连贯性
+中图分类号: TN309郾2摇摇摇摇文献标志码: A
+OSID 码:
+Paragraph Image Captioning with Deep Fully
+Convolutional Neural Networks
+LI Rui鄄fan1,2,摇LIANG Hao鄄yu1,摇FENG Fang鄄xiang1,摇ZHANG Guang鄄wei2,3,摇
+WANG Xiao鄄jie1,2
+(1. School of Computer Science, Beijing University of Posts and Telecommunications, Beijing 100876, China;
+2. Engineering Research Center of Information Networks, Ministry of Education, Beijing 100876, China;
+3. Institute of Network Technology, Beijing University of Posts and Telecommunications, Beijing 100876, China)
+Abstract: How to improve the coherence among descriptive sentences for the paragraph image captioning
+is paid attention currently. A fully convolutional neural architecture for paragraph image captioning was
+proposed. An image representation is first obtained using a region detector based on a convolutional net鄄
+work. Then a hierarchical deep convolutional decoder is constructed to translate the image representation,
+automatically generating a paragraph text description. In addition, the gating mechanism is embedded in
+the convolutional decoder network to improve memory capacity of the model. Experiments demonstrate
+that compared with those traditional methods based on recurrent neural networks, the proposed algorithm
+can generate more coherent paragraph text descriptions for images, achieving better results on evaluation
+metrics.
+Key words: convolutional networks; deep learning; image captioning; coherence
+收稿日期: 2019鄄04鄄14
+基金项目: 国家重点研发计划项目(2019YFF0303302); 国家自然科学基金项目(61906018); 国家电网公司总部科技项目(5200鄄
+201918255A鄄0鄄0鄄00)
+作者简介: 李睿凡(1975—), 男, 副教授, E鄄mail:rfli@ bupt. edu. cn.
+摇摇段落式图像描述(paragraph image captioning)的
+目标是为给定的图像生成描述性的自然语言段落.
+该任务一方面连接着计算机视觉和自然语言处理两
+个领域,是跨模态智能的重要研究方向. 另一方面,
+它是盲人导航以及幼儿早期教育等前沿应用的核心
+技术. 因而开展段落式图像描述的研究有着十分重
+要的意义.
+当前,段落式图像描述算法主要延伸了编码器
+与解码器组合的端到端结构[1]. 具体地,基于卷积
+神经网络(CNN,convolutional neural networks) 的编
+码器首先将图像表示为较低维的视觉向量. 随后采
+用基于循环神经网络( RNN, recurrent neural net鄄
+work)的解码器将该视觉向量解码为自然语言段落.
+其中,循环神经网络解码器在时间序列建模上有一
+定优势. 但是其长时记忆能力有限,且在训练过程
+中易遭遇梯度消失问题. 因而导致其建模较长段落
+的能力较差,生成段落的连贯性不能令人满意.
+为了提升生成描述段落的连贯性,笔者提出了
+一种全卷积神经结构的段落式图像描述算法. 该神
+经网络结构的解码器由双层的门控卷积网络构成.
+其中,句子CNN 解码器捕捉段落内的句子之间关系
+以强调句子间的连贯性,词CNN 解码器负责生成段
+落内的单词. 相较于RNN 解码器,CNN 解码器具有
+更好的“长时冶视野. 通过门控机制,增强了解码器
+的长时记忆能力. 实验结果表明,该解码器在段落
+式描述任务上具有更好的效果.
+1摇相关工作
+早期的图像描述任务研究集中于单句式描述
+上,即为给定图像生成一个描述性句子. 近年来,随
+着数据时代的到来,且得益于硬件计算能力的提升,
+深度学习成为解决图像描述问题的主流方法. Vin鄄
+yals 等[1]在2015 年提出了基于神经网络的编码器—
+解码器框架,此后的大多数研究都基于该框架展开.
+得益于RNN 解码器在短文本建模上的优良能力,单
+句式描述研究已经取得了瞩目的进展[2 - 7].
+随着单句描述研究逐渐成熟,研究人员将注意
+力转向更具挑战性的段落式描述任务中. 该任务由
+Krause 等[8]于2017 年提出,目前已成为深度学习、
+多模态智能领域热门的研究方向之一. 作为图像描
+述的深化任务,图像段落描述的解决方案同样基于
+编码器-解码器结构. 而相比于单句描述任务,段落
+式描述需要更细粒度的图像内容理解和更强刻画能
+力的语言模型.
+Krause 等[8]根据段落的层次性,提出了层次性
+的RNN 语言解码器,表明了层次模型在段落生成任
+务上的优越性,但其对句子间连贯性的监督较为粗
+糙,生成的段落连贯性有待提高. 随后有几个显著
+的研究工作. Liang 等[9] 采用对抗学习[10] 方法来增
+强具有3 个层次的RNN 解码器的段落建模能力,以
+提高生成段落的连贯性,但生成对抗网络结合3 层
+RNN 解码器的网络训练复杂,模型收敛慢. Chatter鄄
+jee 等[11]通过更丰富多样的监督信息指导层次RNN
+生成更为连贯的段落. 而Che 等[12] 和Wang 等[13]
+通过增加视觉侧的监督信息,如图像深度估计图、对
+象关系等,以期丰富段落的描述内容. 然而,这些方
+法都延伸于RNN 解码器的框架之下, 无法避免
+RNN 的固有问题. 当建模长文本时,随着时间序列
+的向后推移,RNN 隐藏信息的衰减极大地削弱了解
+码器关注“上文冶的视野大小,由此带来的长时记忆
+能力不足造成生成段落连贯性的下降.
+针对现有方法中采用RNN 解码器造成的不足,
+启发于卷积网络的非时间序列特性,提出了一种基
+于卷积结构的段落语言解码器,扩大了解码器的视
+野大小,增强了解码器的“长时冶关注能力. 论文将
+卷积结构应用于图像段落描述生成任务上,并结合
+门控机制,增强了解码器的长时记忆能力,改进了现
+有方法生成段落连贯性较差的问题.
+2摇全卷积段落解码器
+2郾1摇模型框架
+编码器由目标检测器和卷积神经网络组成,将
+输入图像表示为压缩的图像特征. 解码器由句子
+CNN 解码器和词CNN 解码器构成. 句子CNN 接收
+图像特征,并分析上下文语义,为段落中的每句话生
+成多模态语义向量. 词CNN 接收每句话的语义向
+量,生成句子中的所有单词. 将所有句子按序排列,
+得到输出段落. 模型总体框架图如图1 所示.
+2郾2摇卷积解码器
+模型中的句子CNN 解码器和词CNN 解码器具
+有相似的结构. 区别在于,句子CNN 以图像特征为
+原始输入,词CNN 以每句话的多模态语义向量为原
+始输入. 且句子CNN 分析句子层的上下文语义,词
+CNN 分析词层面的上下文语义.
+对于词解码器,在图像描述任务的解码过程中,
+每个时间步需要生成一个单词. 因而解码器的任务
+就是在每个时间步接收过去时间步的“上文冶信息,
+并综合图像语义信息,生成当前时间步相应的单词.
+6
+5
+1
+北京邮电大学学报摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇第42 卷
+图1摇模型框架图
+摇
+传统的循环网络解码器通常以长短时记忆网络
+(LSTM,long鄄short term memory) 单元为基本元素,
+“上文冶信息依赖于隐藏单元存储. 在第t 个时间
+步,根据此时隐藏单元信息ht 生成单词wt,即
+wt = softmax(fc(ht))
+(1)
+ht = LSTM(ht - 1,wt - 1,v)
+(2)
+其中:v 表示图像信息,fc 表示全连接神经网络层.
+随着时间步的增长,隐藏单元中的“上文冶信息将发
+生衰减,解码器的“长时冶能力减弱,导致生成段落
+的质量较差.
+为赋予解码器更强的长时记忆能力,对解码器
+的基本组成单元进行改进,将LSTM 改进为带有门
+控的卷积网络. 2 种结构的对比如图2 所示. 在t 时
+刻,共有t - 1 个“上文冶信息. 由于信息衰减,LSTM
+解码器视野小于t - 1,而CNN 解码器视野大小始终
+保持为t - 1. 卷积解码器直接以上文所有单词作为
+输入,具有更强的“长时冶能力. 同时,当生成一个长
+度为n 的句子时, LSTM 解码器的序列操作数为
+O(n),而CNN 解码器仅需O(1)级别的序列操作.
+图2摇2 种结构生成单词的差异比较
+摇
+门控卷积解码器结构如图3 所示. 该结构包含
+3 个网络层:嵌入层、门控卷积层以及输出层. 嵌入
+层将输入单词映射为低维向量. 门控卷积层接收所
+有已生成单词的向量并输出预测向量. 输出层则将
+预测向量映射成词表上的概率分布.
+图3摇门控卷积解码器结构
+摇
+在生成每个单词时,卷积解码器直接将所有已
+生成单词的嵌入表示向量作为输入,无需通过隐藏
+层向量记忆上下文信息,其单词生成过程可表示为
+wt = CNN(v,w1,w2,…,wt - 1)
+(3)
+具体而言,使用一维卷积核对图像信息和输入
+单词序列进行操作,单词嵌入表示向量的每一维可
+被视作一个通道,卷积核的大小决定了视野的大小.
+通过堆叠多层卷积核,可达到在每个时间步能观察
+到已生成的所有单词的目的.
+需要指出,传统CNN 的卷积层和池化层的组合
+并不能给解码器带来记忆能力. 为赋予所提解码器
+“记忆冶能力,在卷积层后加入门控模块[14]. 卷积层
+的输出为2 个相同维度的向量Ut 和Gt. 其中Ut 蕴
+含已生成单词的语义信息. 而Gt 则充当控制门的
+角色,将Ut 中的信息选择性地传递到输出层中:
+Ut = WU*X + bU
+(4)
+Gt = WG*X + bG
+(5)
+hc
+t = Ut已滓(Gt)
+(6)
+其中:X 表示卷积层的输入,即上文单词嵌入序列,
+符号*表示卷积运算,WU、WG、bU、bG 表示可学习参
+数,已表示向量按元素乘法,滓表示sigmoid 函数,即
+滓(x) = 1 / (1 + e - x).
+进一步,输出层将hc
+t 映射为在词表上的概率分
+布,即
+pt = softmax(Wphc
+t )
+(7)
+最后,根据概率分布pt 对单词进行采样,得到t
+位置的单词.
+3摇段落生成算法
+基于卷积神经结构的段落式图像描述算法分为
+7
+5
+1
+第6 期摇摇摇摇摇摇摇摇摇摇摇摇李睿凡等: 全卷积神经结构的段落式图像描述算法
+2 个主要过程:一个是利用基于卷积网络的目标检
+测器对图像进行编码;另一个是通过卷积解码器对
+图像特征进行层次性的解码,得到描述性段落. 算
+法实现步骤可总结如下.
+算法1摇基于全卷积神经结构的段落式图像描
+述算法PCIC
+输入:图像I
+输出:描述段落P,包含m 个语句,其中第i 句
+话包含ni 个单词.
+步骤1摇
+利用目标检测器( region proposal net鄄
+work)提取图像中K 个感兴趣区域.
+步骤2摇通过预训练的卷积神经网络,对每个
+感兴趣区域提取出维度为4 096 的特征,并使用全
+连接前馈神经网络将其压缩为1 024 维的向量表
+示,从而得到图像区域向量集{v1,v2,…,vK}.
+步骤3摇
+对区域向量集进行按位最大池化操
+作,得到该图像的全局向量表示v.
+步骤4摇在t = 1 时刻,通过词嵌入层获取句子
+开始标志的嵌入向量S0,将S0 和v 拼接,输入到句
+子CNN 解码器中,获得指导第一句话生成的多模态
+语义向量I1.
+步骤5摇将I1 输入到词CNN 解码器中,解码得
+到第一个句子y1 = {w11,w12,…,w1n1}.
+步骤6摇
+在t = 2,…,m 时刻,通过词嵌入层获
+取第t - 1 句话的综合嵌入特征St - 1,该特征为句子
+中所有词嵌入向量的按位平均向量. 将St - 1和v 拼
+接,输入到句子CNN 解码器中,获得指导第t 句话
+生成的多模态语义向量It.
+步骤7摇将It 作为t 时刻的图像语义信息,输
+入到词CNN 解码器中,解码得到第t 个句子yt =
+{wt1,wt2,…,wtnt}.
+步骤8摇将m 个句子y1,y2,…,ym 按序排列,即
+可得到描述段落P.
+在以上图像段落描述算法中,解码生成句子的
+步骤7 可采取2 种常用的单词采样算法,即最大概
+率采样和集束搜索方法. 简言之,最大概率采样基
+于一种贪心策略. 它在每个时间步选取当前概率最
+大的单词. 该算法具有较小的时间和空间复杂度,
+但容易忽视全局最优解. 而集束搜索是一种启发式
+搜索算法. 它在每个时间步保留含有概率最大的若
+干词,词的数量由束大小确定. 相比于最大概率采
+样,集束搜索的时间和空间消耗稍大,但更容易获得
+较优解. 而当束的大小设定为1 时,集束搜索方法
+退化为最大概率采样方法.
+4摇实验
+4郾1摇实验设置
+为验证算法有效性,采用斯坦福大学最新建
+立的图像段落描述公开数据集[8] . 该数据集包含
+从Visual Genome[15] 和MS COCO[16] 两个图像数据
+集中选取的19 551 张图片,每张图片对应一个描
+述文本段落. 总体而言,每个段落平均包含5郾7 个
+句子,且每个句子包含11郾9 个词. 为了与基线方
+法进行公平比较,遵循其他文献将数据集划分为3
+个子集:训练集、验证集以及测试集. 它们分别包
+含14 757、2 487 以及2 489 个图像—文本段落描
+述对的样本.
+整个实验所使用的服务器操作系统环境为
+Linux. 该服务器配置了英伟达GeForce GTX
+1080Ti 显卡. 软件环境为采用Python 编程语言的
+开源框架PyTorch. 一些实验参数设置如下. 区域
+检测器所检测的区域个数设定为50,且每个区域
+向量的编码维度为1 024. 而词嵌入的维度同样设
+定为1 024. 经过对比实验,采用集束搜索方法生
+成段落. 其中束的大小设置为2. 段落中最大句子
+数目设定为6,同时每句话的最大单词数设定为
+30. 整个模型使用Adam 优化器进行训练,其中的
+学习率设置为10 - 4. 实验中依据算法在验证集上
+的表现确定超参数.
+4郾2摇性能评估
+采用5 个客观评价指标评价算法生成描述段落
+的质量,包括BLEU鄄1(B鄄1),BLEU鄄2(B鄄2),BLEU鄄3
+(B鄄3),BLEU鄄4 ( B鄄4) [17] 以及CIDEr[18]. 与BLEU
+指标相比,CIDEr 指标更贴近人的主观评价,因而在
+图像描述任务上具有更好的评价意义,更能衡量描
+述的连贯性,因而为众多研究者采用.
+为了验证提出方法的有效性,实验将所提方法
+PCIC 和3 种基线方法进行对比, 包括Sentence鄄
+Concat[2],Image鄄Flat[2] 以及Hierarchical鄄RNN[3]. 其
+中,方法Sentence鄄concat 将5 个独立的单句描述拼
+接起来合成段落. 方法Image鄄Flat 通过单层的RNN
+解码器生成段落. 而方法Hierarchical鄄RNN 通过层
+次性的RNN 解码器生成段落. 表1 所示为所提算
+法和基线方法的客观评价指标对比. 此外,为了说
+明人类描述段落和机器生成段落的差异,该表的最
+后一行展示了人类描述段落在5 个评价指标上的得
+8
+5
+1
+北京邮电大学学报摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇第42 卷
+分. 这些图像描述的文字段落来自于斯坦福图像段
+落数据集中随机抽取的500 个段落.
+表1摇不同模型以及人评测指标结果
+模型
+CIDEr
+B鄄1
+B鄄2
+B鄄3
+B鄄4
+Sentence鄄Concat
+6郾8
+31郾1
+15郾1
+7郾6
+4郾0
+Image鄄Flat
+11郾1
+34郾0
+20郾0
+12郾2
+7郾7
+Hierarchical鄄RNN
+13郾5
+41郾9
+24郾1
+14郾2
+8郾7
+PCIC
+15郾9
+41郾3
+23郾9
+14郾1
+8郾2
+Human
+28郾6
+42郾9
+25郾7
+15郾6
+9郾7
+摇摇仔细观察表1 可以看出,人类描述段落和机器
+生成段落的BLEU 得分较为接近,而CIDEr 得分相
+差巨大. 这说明CIDEr 评价指标能够更好地说明机
+器描述方法和人类描述之间的显著差异. 相较于
+BLEU 指标仅考虑n 元组的匹配程度而忽略了语
+义,基于共识的CIDEr 指标更好地反映生成段落的
+连贯性. 在CIDEr 指标上, 所提方法较Sentence鄄
+Concat 方法高出133郾8% . 这显示出段落描述任务
+和单句描述任务间的巨大差异. 而且提出的方法比
+Image鄄Flat 方法高出43郾2% . 这验证了所提解码器
+的层次性结构的有效性. 进一步,所提方法较Hier鄄
+archical鄄RNN 方法高出17郾8% ,说明了所提解码器
+卷积结构的优势. 对比Sentence鄄Concat、Image鄄Flat、
+Hierarchical鄄RNN 3 种方法,所提方法在CIDEr 指标
+上取得了更好的评测结果,提高了生成段落的质量,
+有效地弥补了传统方法建模段落描述能力不足的
+缺点.
+如前所述,束大小是影响所提算法性能的一
+个重要参数,因而笔者评估了该参数对指标影响
+的结果. 表2 显示了集束搜索中不同束大小参数
+对评测结果的影响. 参数的设置从1 ~ 4. 其中,束
+大小为1 的集束搜索等价于最大概率采样,即在
+每个时刻取当前概率最大的单词. 从表2 可看出,
+当束大小为2 时,评测结果达到最优. 当束大小为
+1 时,由于单词搜索空间过小,丢失了较多解码信
+息,生成的段落非较优解. 当束大小逐渐增大时,
+单词搜索空间也不断增大,更容易获得较优解. 然
+而,当束大小大于2 时,搜索空间的增大会使段落
+间句子重复度增加,损害了段落的多样性,造成评
+价指标的下降. 同时,束大小过大会导致解码时间
+复杂度大幅增加. 因此,束大小取2 是平衡生成段
+落质量和解码时间复杂度的较好选择.
+表2摇不同束大小参数的评测指标结果
+束大小
+CIDEr
+B鄄1
+B鄄2
+B鄄3
+B鄄4
+1
+14郾8
+40郾9
+23郾1
+13郾6
+7郾7
+2
+15郾9
+41郾3
+23郾9
+14郾1
+8郾2
+3
+15郾1
+41郾5
+23郾7
+14郾0
+7郾8
+4
+13郾7
+40郾4
+22郾3
+12郾8
+7郾5
+摇摇进一步,笔者考察迭代过程中各个指标的变化,
+表明各指标结果的一致性. 图4 所示为不同迭代轮
+次时,BLEU鄄1 和BLEU鄄2、BLEU鄄3 和BLEU鄄4 以及
+图4摇评测指标随训练轮次变化
+CIDEr 等5 个指标的评测结果变化. 总体而言,这些
+指标随着迭代轮次的变化趋势基本保持一致. 在第
+5 ~ 15 个轮次之间,评测指标呈上升趋势. 在第15
+个轮次左右时达到最优性能. 此后,模型出现了一
+9
+5
+1
+第6 期摇摇摇摇摇摇摇摇摇摇摇摇李睿凡等: 全卷积神经结构的段落式图像描述算法
+定程度的过拟合,指标有一定的下降趋势.
+4郾3摇主观评价
+为进一步展示所提方法的有效性,笔者将细致
+考察生成段落描述的细节,随机选取测试集中的图
+片以及对应的标签段落,并分别使用所提方法和
+Hierarchical鄄RNN 方法生成描述段落. 图5 展示了
+图像以及标注段落、所提方法、Hierarchical鄄RNN 方
+法产生的内容.
+图5摇部分段落生成结果
+摇
+摇摇针对第1 幅图,所提方法生成的段落用第1 句
+话首先描述了图像中的最显著信息:两只长颈鹿
+(There are two giraffes). 随后的第2 ~ 第5 句话从
+不同的角度描述了长颈鹿的细节特征( tall、horn、
+neck 等). 最后一句话描述了图片中的非显著内容.
+其他3 幅图的段落描述结果也有类型现象. 通过与
+Hierarchical鄄RNN 方法对比可看出,所提方法的生成
+段落具有更强的上下文连贯性和语言逻辑性. 相比
+于Hierarchical鄄RNN 的生成段落存在大量冗余信
+息,一些句子存在重复,所提方法减少了信息的重复
+表达. 而且,这种金字塔式的描述方法和人类的认
+知系统非常贴近.
+5摇结束语
+笔者提出一种基于全卷积神经网络结构的段落
+式图像描述生成模型. 用基于卷积网络的区域检测
+器获取图像表示. 针对语言段落的层次,构建一种
+层次性的深度卷积解码器对图像表示解码,并引入
+门控机制提升模型的记忆能力,生成更具连贯的段
+落式图像描述. 实验结果表明,该算法能够在评测
+指标上取得较好的结果,生成更为连贯的段落式图
+像文本描述.
+参考文献:
+[1]摇Vinyals O, Toshev A, Bengio S, et al. Show and tell: a
+neural image caption generator[C]椅2015 IEEE Confer鄄
+ence
+on
+Computer
+Vision
+and
+Pattern
+Recognition
+(CVPR). New York: IEEE Press, 2015: 3156鄄3164.
+[2]摇Lu Jiasen, Xiong Caiming, Parikh D, et al. Knowing
+when to look: adaptive attention via a visual sentinel for
+image captioning[ C] 椅2017 IEEE Conference on Com鄄
+puter Vision and Pattern Recognition ( CVPR).
+New
+York: IEEE Press, 2017: 375鄄383.
+[3]摇Mao Yuzhao, Zhou Chang, Wang Xiaojie, et al. Show
+and tell more: topic鄄oriented multi鄄sentence image captio鄄
+ning[C]椅Proceedings of the 27th International Joint Con鄄
+ference on Artificial Intelligence. California: International
+Joint Conferences on Artificial Intelligence Organization,
+2018: 4258鄄4264.
+[4]摇Xu K, Ba J, Kiros R, et al. Show, attend and tell: neu鄄
+ral image caption generation with visual attention[ C] 椅
+International Conference on Machine Learning.
+Lille,
+France: ACM, 2015: 2048鄄2057.
+[5]摇You Quanzeng, Jin Hailin, Wang Zhaowen, et al. Image
+captioning with semantic attention[C]椅2016 IEEE Con鄄
+ference on Computer Vision and Pattern Recognition
+(CVPR). New York: IEEE Press, 2016: 4651鄄4659.
+0
+6
+1
+北京邮电大学学报摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇摇第42 卷
+[6]摇Karpathy A, Li Feifei. Deep visual鄄semantic alignments
+for generating image descriptions[C] 椅2015 IEEE Con鄄
+ference on Computer Vision and Pattern Recognition
+(CVPR). New York: IEEE Press, 2015: 3128鄄3137.
+[7]摇Anderson P, He Xiaodong, Buehler C, et al. Bottom鄄up
+and top鄄down attention for image captioning and visual
+question answering[C]椅2018 IEEE/ CVF Conference on
+Computer Vision and Pattern Recognition.
+New York:
+IEEE Press, 2018: 6077鄄6086.
+[8]摇Krause J, Johnson J, Krishna R, et al. A hierarchical
+approach for generating descriptive image paragraphs[C]椅
+2017 IEEE Conference on Computer Vision and Pattern
+Recognition ( CVPR). New York: IEEE Press, 2017:
+317鄄325.
+[9]摇Liang Xiaodan, Hu Zhiting, Zhang Hao, et al. Recurrent
+topic鄄transition GAN for visual paragraph generation[C]椅
+2017 IEEE International Conference on Computer Vision
+(ICCV). New York: IEEE Press, 2017: 3362鄄3371.
+[10]摇Goodfellow I, Pouget鄄Abadie J, Mirza M, et al. Gener鄄
+ative adversarial nets[C]椅Advances in Neural Informa鄄
+tion Processing Systems. Cambridge: MA, MIT Press,
+2014: 2672鄄2680.
+[11]摇Chatterjee M, Schwing A G. Diverse and coherent para鄄
+graph generation from images [ M] 椅Computer Vision鄄
+ECCV 2018. Cham: Springer International Publishing,
+2018: 747鄄763.
+[12]摇Wang Z, Luo Y, Li Y, et al. Look deeper see richer:
+depth鄄aware image paragraph captioning [ C] 椅2018
+ACM Multimedia Conference. Association for Computing
+Machinery. New York: ACM Press, 2018: 672鄄680.
+[13]摇Che Wenbin, Fan Xiaopeng, Xiong Ruiqin, et al. Para鄄
+graph generation network with visual relationship detec鄄
+tion[C] 椅2018 ACM Multimedia Conference on Multi鄄
+media鄄MM蒺18. New York: ACM Press, 2018: 1435鄄
+1443.
+[14]摇Dauphin Y N, Fan A, Auli M, et al. Language model鄄
+ing with gated convolutional networks[C]椅The 34th In鄄
+ternational Conference on Machine Learning鄄Volume 70.
+Sydney, Australia: ACM Press, 2017: 933鄄941.
+[15]摇Krishna R, Zhu Yuke, Groth O, et al. Visual genome:
+connecting language
+and
+vision
+using
+crowdsourced
+dense image annotations [ J].
+International Journal of
+Computer Vision, 2017, 123(1): 32鄄73.
+[16]摇Chen X, Fang H, Lin T Y, et al. Microsoft COCO cap鄄
+tions: data collection and evaluation server[ J]. arXiv
+preprint arXiv: 1504. 00325, 2015.
+[17]摇Papineni K, Roukos S, Ward T, et al. BLEU: a meth鄄
+od for automatic evaluation of machine translation[C]椅
+The 40th Annual Meeting on Association for Computa鄄
+tional Linguistics (ACL). PA, USA: ACL, 2002: 311鄄
+318.
+[18]摇
+Vedantam R, Zitnick C L, Parikh D. CIDEr: consen鄄
+sus鄄based image description evaluation[C]椅2015 IEEE
+Conference on Computer Vision and Pattern Recognition
+(CVPR). New York: IEEE Press, 2015: 4566鄄4575.
+1
+6
+1
+第6 期摇摇摇摇摇摇摇摇摇摇摇摇李睿凡等: 全卷积神经结构的段落式图像描述算法
