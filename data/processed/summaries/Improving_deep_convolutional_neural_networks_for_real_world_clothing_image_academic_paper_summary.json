@@ -1,0 +1,40 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "Clothing image recognition and retrieval",
+  "research_problem": "Handling variations in clothing appearance, multiple categories and attributes, and the prevalence of erroneous or incomplete labels from retailers, as well as the imbalance among image categories",
+  "methodology": "Multi-task deep learning framework and multi-weight convolutional neural networks",
+  "key_innovations": [
+    "Multi-weight CNNs for imbalance learning",
+    "Category-relevant parameters to regularize learning process"
+  ],
+  "experimental_results": "Experiments demonstrate improved performance in clothing image retrieval on the e-Clothing1.4M dataset",
+  "conclusions": "The proposed multi-weight CNN effectively learns robust representations and handles label errors and data imbalance",
+  "keywords": [
+    "Clothing Image recognition",
+    "Convolutional neural network",
+    "Multi-task",
+    "Multi-weight"
+  ],
+  "application_domains": [
+    "E-commerce platforms",
+    "Multimedia processing",
+    "Computer vision"
+  ],
+  "technical_concepts": [
+    "CNNs",
+    "Multi-task learning",
+    "Deep learning",
+    "Imbalance learning",
+    "e-Clothing1.4M dataset"
+  ],
+  "performance_metrics": "mAP scores for multi-label, multi-task, and multi-weight CNNs on the e-Clothing1.4M dataset",
+  "summary": "This paper introduces a multi-task deep learning framework and multi-weight convolutional neural networks to address the challenges of recognizing and retrieving clothing images on e-commerce platforms. The proposed method demonstrates effectiveness in dealing with label errors and data imbalance, achieving improved performance on a large-scale dataset.",
+  "file_id": "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image",
+  "source_type": "cleaned",
+  "text_length": 14789,
+  "generation_time": "2025-07-31 21:21:37"
+}

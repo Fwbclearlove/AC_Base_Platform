@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Maintenance Decision Generator for Electrical Equipment Based on Reinforcement Learning",
+  "authors": [
+    "Ruifan Li",
+    "Zeyuan Wang",
+    "Yifan Du",
+    "Zepeng Zhai",
+    "Yongping Xiong",
+    "Ziqun Liu"
+  ],
+  "main_topic": "Electric equipment maintenance using reinforcement learning",
+  "research_problem": "Traditional methods for electrical equipment maintenance lack generalization and are inefficient",
+  "methodology": "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+  "key_innovations": [
+    "Dynamic policy generator",
+    "Equipment weight modeling",
+    "State communication through cut sets"
+  ],
+  "experimental_results": "Improved decision-making effectiveness in power grid scenarios",
+  "conclusions": "The paper demonstrates the effectiveness of reinforcement learning in developing equipment maintenance strategies",
+  "keywords": [
+    "Electric equipment maintenance",
+    "Reinforcement learning",
+    "Dynamic decision making"
+  ],
+  "application_domains": [
+    "Electrical equipment maintenance",
+    "Power grid management"
+  ],
+  "technical_concepts": [
+    "Markov hypothesis",
+    "Dynamic programming",
+    "Multi-Agent Reinforcement Learning",
+    "Cut set"
+  ],
+  "performance_metrics": "Comparison of reinforcement learning-based policy with template policies and dynamic programming methods",
+  "summary": "This paper presents a reinforcement learning-based maintenance decision model for electrical equipment, incorporating the power grid's cut set to enhance dynamic programming solutions. The model demonstrates improved decision-making and strategy optimization in various power grid scenarios, without the need for extensive empirical experience.",
+  "file_id": "3483207.3483233",
+  "source_type": "cleaned",
+  "text_length": 14263,
+  "generation_time": "2025-07-31 21:16:03"
+}

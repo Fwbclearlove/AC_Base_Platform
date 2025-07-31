@@ -1,0 +1,43 @@
+引入深度学习的人工智能类课程
+
+李睿凡1,2王小捷1，钟义信1
+
+（1．北京邮电大学计算机学院，北京100876；2．北京邮电大学教育部信息网络工程研究中心，北京100876）
+
+摘要：深度学习是人工智能领域的最新进展，取得了显著的研究成果和应用进展。本文提出了在人工智能类课程中引入深度学习的初步内容和实施建议，分析了其必要性和可行性。
+
+关键词：人工智能；深度学习；教学建议
+
+1 深度学习背景
+
+深度学习在语音识别、计算机视觉等领域取得了突出进展。2006年，Hinton教授提出深度学习，成为研究热点。从学术界与工业界的研究态势看，深度学习已成为人工智能领域的研究热点。
+
+2 必要性与可行性
+
+2.1 必要性
+
+（1）深度学习是人工智能的前沿。
+（2）深度学习是人工智能的突破。
+（3）深度学习是人工智能的延伸。
+（4）深度学习是学生的潜在兴趣点。
+
+2.2 可行性
+
+（1）深度学习与现有人工智能联系密切。
+（2）深度学习的基本内容并不深。
+（3）深度学习的资料容易获得。
+
+3 实施建议
+
+在教学中适当安排深度学习的基本内容，根据教学对象调整。本科生高年级专业课可安排1学时，介绍层次训练的基本算法；研究生可根据课程主题安排4～6学时，包括波尔兹曼机、深层信念网络等内容。增加小规模实验辅助理解，课件可通过对优质资料修改得到。
+
+深度学习在人工智能领域取得的进展举世瞩目。建议将深度学习引入人工智能类课程，共同推进教学工作。
+
+参考文献：
+[1] 觚l I，Rose D C，Kamowsl【i TP．Deep machine Learning：a new frontier in artificial intelligence research[J]．IEEE Compumfional Intelligence Magazine，2010，5(4)：13-18．
+[2] Dalai G E，Sainath T N，Hinton G E．Improving deep neural networks for LVCSR using rectified linear units and dropout[C]／／2013IEEE Imemafional conference on acoustic speech and signal processing，2013．
+[3] Krizhevsky A，Sutskever I，Hinton G．ImageNet classification with deep convolutional neural networks[J]．Advances in Neural Information Processing Systems，2012(25)：1 106-1 114．
+[4] Hinton G，Salaldautdinov 1L Reducing the dimensionality of data丽tll neural networks[J]．Science，2006，5786(3 13)：504—507．
+[5] Haykin．Neural networks and learning machines[M]．New York：Prentice Hall，2008．
+[6] 钟义信．高等人工智能：人工智能理论的新阶段[J]．计算机教育，2012(9)：6．11．
+[7] Bengio YLearning de印architecturesfor AJ[J]．Foundations and Trendsin Machine Learning，2009，2(1)，1-127．

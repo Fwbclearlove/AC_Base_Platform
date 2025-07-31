@@ -1,0 +1,483 @@
+随着电力需求的快速增长，电力运检领域积累了大量数据资料，其中包括大量非结构化文本，造成专职人员在信息阅读和整理方面的不便。开展电力运检领域的自动化、智能化工作，是现代电网的必然需求。知识图谱以图的方式表达了人类对世界万物的认知方式，使用知识图谱技术可以发现知识、有效的组织知识并高效的检索知识，从而帮助电力运检领域实现业务智能化。目前，电力运检领域知识图谱中知识抽取面临两个问题：一是缺乏针对电力运检领域的知识抽取算法模型，二是没有公开可用的标注语料。为此，本文研究并参考知识抽取算法在其他领域范围的研究材料和具体应用状况，最后结合本文所处的实际情况，设计并实现了面向电力运检的知识抽取算法。
+
+为实现电力检修领域的自动化和智能化，提高检修效率，减少工作疏漏，利用非结构化文本文档资料中的电力运检知识成为关键。首先，需要将海量文本数据转化为计算机易识别和处理的数据格式，然后挖掘电力运检领域的知识点并构建知识库，最后利用信息管理能力实现知识数据的管理，方便索引和查询相关知识点。构建电力运检知识图谱是智能搜索的基础，通过对运行检修规范文件和日志数据的智能分析和深度挖掘，实现数据关联分析，建立语义化关联关系，实现数据的可视化，提高数据检索的准确性和智能性。构建知识图谱使用的数据包括指导手册、相关百度百科数据、运检日志等非结构化数据。知识图谱以图的方式表达概念、实体及其关系，通过使用知识图谱的方式使互联网中信息数据的表达方式更符合人类思考认知世界的形式。知识图谱技术在语义化搜索和智能问答应用方面表现不俗，已成为互联网新一代以知识驱动为基础的智能服务应用的重要基础设施。知识图谱技术包含知识图谱构建技术和知识图谱应用技术，是一个集知识表示推理与计算、自然语言处理、信息抽取与检索、语义网、机器学习与深度学习等众多方向于一身的交叉研究。从大数据中可以半自动化或自动化获取高质量知识，根据知识建立智能化系统并最终为互联网提供智能化的知识服务是如今大数据时代的必然需求。
+
+本文针对电力运检知识图谱的知识抽取算法及应用进行研究，主要研究内容包括：
+
+1. 针对电力运检实体抽取任务，生成伪标注数据集，并研究在伪标注有噪音的情况下的电力运检命名实体识别算法。
+
+2. 针对数据不平衡问题，提出通过层次编码来缓解标签类别不平衡的方法。
+
+3. 针对电力运检文本结构复杂专业，关系隐含在句子中的问题，提出基于依存句法分析的电力运检关系抽取方法。
+
+4. 将知识抽取算法抽取到的三元组存入数据库，封装成可调用的服务供后续电力运检知识图谱管理系统调用。
+
+5. 设计并实现电力运检知识图谱管理系统，包括需求分析、概要设计、详细设计、具体实现与系统测试。
+
+6. 总结与展望，回顾课题在电力运检知识图谱知识抽取算法设计与应用的主要工作，并展望未来可能的进一步工作。
+
+清洗后的内容如下：
+
+---
+
+Transformer模型是一种基于多层编码器-多层解码器结构的网络模型。最初该结构是为了提升机器翻译任务的效率，由于循环神经网络是顺序执行的，t时刻的任务没有完成，就没办法进行t+1时刻的解码工作，因此训练过程中难以并行化，该网络提出的自注意力机制不仅在功能上可以替代循环神经网络，并且可以并行运算。
+
+自注意力机制如图2-5所示，对于每个输入向量都会生成三个新变量<2、尺、V，分别表示query向量、key向量和value向量。query向量在编码当前词的时候可以去注意到其他词，key向量和value向量是一对键值对，key向量是索引，value向量是该词真正内容，其表达式为公式2-12所示，自注意力机制在Transformer模型中被升级为由多个自注意力机制组成的多头注意力机制，多头注意力机制的结构图如图2-6所示其表达式为公式2-13和公式2-14。多头注意力机制在计算一个词向量时会从多个维度进行自注意力机制的计算从而得到不同的角度的结果并将结果进行拼接。
+
+BERT模型是由Google于2018年提出的面向自然语言处理任务的通用预训练模型架构且该架构在多项自然语言处理任务中表现优秀。BERT模型通过利用海量无标注的互联网文本数据进行无监督训练来获得包含字、词、句子以及句间关系等丰富的语义信息的文本表征并通过将BERT模型预训练得到富含丰富语义的文本表征在特定自然语言处理任务中进行轻微调整或特征集成来最终应用于特定领域的特定场景下的自然语言处理任务。
+
+BERT模型的预训练阶段将会进行两个任务的训练：随机遮盖文章部分词并训练模型预测遮盖词任务和判断两句话是否连贯任务。随机遮盖文章部分词并训练模型预测遮盖词任务是让模型根据文章的上下文像做完形填空一样来预测文章中被随机遮盖的词汇；判断两句话是否连贯任务主要判断B句是否紧跟在A句之后。模型可以通过两个任务的无监督预训练后学到通用的语言表征。微调是指通过BERT预训练阶段后获得BERT模型及对应网络结构(Transformer)后，微调训练阶段仍采用与预训练过程结构相同的网络结构进行模型训练，并将特定任务的特定数据直接用在该网络上进行模型训练使得预训练阶段获得的网络参数得到特定领域数据的修正。BERT模型在命名实体识别任务上的微调如图2-8所示。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息和乱码，保留了核心学术内容、技术术语和数据、原有逻辑结构、公式和图表说明。
+
+清洗后的内容如下：
+
+---
+
+电气设备，如压力表、高低压开关柜、温度计等
+
+电力领域相关机构名称，如国家电网公司、国家电网公司国家电力调度中心、省公司运检部等
+
+参数 人为传进去的变量，如运行电压、持续时间等
+
+环境变量 非人为变量，如相对湿度、环境温度等
+
+不可单独使用的设备部件，如气体收集袋、聚四氟乙烯垫片、聚氯乙烯管等
+
+可以单独使用的不属于一次和二次设备的设备，如真空泵、吹风机、吸湿器、排水泵等
+
+实验相关实体 电力检测实验中相关实体，如带电检测记录、档案分析判断法、波形图、趋势图等
+
+非1-8的其他可以作为实体的电力名词，如PMS系统、放电信号、杂质微粒等
+
+---
+
+远程监督的思想最早由文献[59]引入到关系抽取任务中。训练一个特定领域的关系抽取模型，需明确待识别关系的两个目标实体和出现的文本上下文，且待识别的关系是预先明确定义的。这是由于传统的监督限定域关系抽取模型是无法自主地完成对关系的命名。远程监督是一种利用外界海量知识来指导标注数据集的弱监督方法。将其应用于关系抽取任务即假设存在两个实体且这两个实体能够和知识库中已存在的实体对匹配，则这两个实体同时包含了在知识库中匹配的实体对关系。
+
+将远程监督的思想应用于命名实体识别的数据标注任务，需要自行构建一个知识库，本文通过人工标注的方法得到了一个带有电力运检实体类别标注的文本。再对该文本进行去重及提取操作处理，可以得到一个包含电力运检的实体二元组<实体类型，实体名称>的知识库。本文把所有的《五通一措》文本数据按照一定的顺序进行遍历，当在某位置的实体与知识库中存储的实体名匹配时，则按照BEMO的方式将该命名实体机器标注为电力运检二元知识库中存储的相应的电力运检命名实体类型，机器标注完成后即可得到一个伪标注的电力运检命名实体的文本数据集。
+
+---
+
+数据标注流程：首先，从整个《五通一措》数据中抽出部分(总数据的1/4)未标注数据，然后根据上文中的标注方法对其进行人工标注得到部分标注数据，进一步从这部分标注数据中提取标注的电力运检实体形成电力运检实体二元组<实体类型，实体名称>并将其存入知识库，然后使用该电力运检二元实体知识库对整个待标注的《五通一措》语料进行机器程序伪人工标注，最后代替人工标注使用机器生成的伪人工标注数据语料对模型进行训练。本文中对《五通一措》语料进行数据伪标注流程如图3-3所示。其中，本文把所有的数据重新标注的原因是可以避免一些人工标注不一致所带来的错误。
+
+---
+
+标注1/4 人工标注 数据提取 伪人工回标
+
+---
+
+数据标注结果：根据3.2.3小节介绍的数据标注流程，本文得到了一个伪标注数据集，本文“BPT-Power”数据集。“BPT-Power”伪标注数据集的实体统计信息和标注统计信息分别如表3-2、表3-3所示。
+
+---
+
+表3-2 “BPT-Power”数据集实体信息统计 类别编号 类别含义 实体数量 实体标注结果示例
+
+1 ITT 电力变压器、电压互感器、隔离开关、并联电容器 420
+
+AQ 1 真空压力表、高低压开关柜、低压配电屏、电解式湿度计 69
+
+3 机触 量准确度、放电频次、取样总量、气体流量 179
+
+5 环境变量 环境温湿度、气样湿度、风速 17
+
+6 赚 气体收集袋、聚四氟乙烯垫片、聚氯乙烯管 882
+
+7 其他设备 真空泵、吹风机、吸湿器、排水泵 206
+
+8 走萨铂龙壶彼 带电检测记录、档案分析判断法、波形图、趋势图 830
+
+9 其他实体 PMS系统、放电信号、杂质微粒 0
+
+---
+
+表3-3 “BPT-Power”数据集标记统计信息 数据集名称 标签数 句子数 实体数 文件大小/MB
+
+BPT-Power 426 767 19659 28847 3.2
+
+---
+
+为了对比程序伪标注结果与人工标注的差别，我们从全部数据集中随机抽取50个句子通过再次人工标注的方法进行检查，并以指标P进行结果统计，如表3-4所示。
+
+---
+
+表3-4 程序伪标注检查结果 抽取方法 抽取句数 P(%) 
+
+随机抽取 50 92
+
+---
+
+基于层次编码的实体抽取算法：实体抽取任务即命名实体识别是自然语言处理领域中一项重要任务且经过几十年研究发展已取得了显著成果。但在一些特定领域，难以建立足够多针对特定领域的标注语料且数据大多存在数据标记类别数量不平衡问题。大多数现有的实体抽取方法基于数据驱动来实现，即数据样本量越大则模型的学习效果越好。而数据量不够大则会导致模型的效果大打折扣。数据类别标记不平衡是指不同类别的数据样本量差距较大。而部分小样本量类别呈现出的信息可能更具有价值。数据类别标记样本数量的不平衡问题会使模型更关注多数类别的数据并忽略少数更有价值类别数据，从而影响统计学习模型的效果。
+
+针对已有方法需要大量数据驱动的问题，本节基于BERT预训练模型学习语言模型并通过改造数据标签编码方式提出了两种基于变长编码的数据类别平衡方法，本文将其分别命名为BERT-Huffman算法和BERT-Balanced算法。本节方法没有改变原始数据，而是根据数据类别标签数量构建哈夫曼编码与平衡编码，通过分层处理的方法平衡数据标签在每一层的差距。实验结果表明本节提出的两种命名实体识别方法能够有效缓解数据集中类别标记样本数量不平衡的问题并提高电力运检领域命名实体实体识别模型的性能。
+
+---
+
+标注数据分析：在命名实体识别任务中标签样本数量不平衡是常见的问题，首先造成这种问题的原因是由于句子中大多数词不属于实体引起的。如图3-4所示，在BPTpower数据集上“0”标签数量占比达到了75.6%，而电力运检领域命名实体只占到总数据的24.4%。
+
+---
+
+实体抽取模型总体结构：实体抽取模型即命名实体识别模型总体结构如图3-6所示。本文提出的电力运检命名实体识别模型分为两个部分其分别是BERT层、编码解码层(图中树结构部分)。本文使用BERT模型[％的微调方式获得单词的特征表示。编码解码层，本文采用了两种方式来进行层次编码替代传统的独热编码，这种编码本文分别命名为哈夫曼编码和平衡编码。
+
+---
+
+层次编码：(1)哈夫曼层次编码 (2)平衡层次编码
+
+---
+
+实验对比与分析：本小节将在“BPT-Power”数据集以及CLUNER数据集[57]对模型进行训练并与基线方法进行对比，通过实验结果对模型进行分析来验证模型的有效性。
+
+---
+
+实验实现细节：“BPT-Power”数据集划分为两部分分为训练集和测试集其中实验数据集划分统计信息如表3-7所示。
+
+---
+
+表3-7 实验数据集划分 统计类别 训练集 测试集
+
+文件大小/MB 2.75 1 0.260
+
+数据量/实体数 26003 1 2816
+
+数据量/句子数 8828 1 1005
+
+1:5037, 1:596, 
+
+2:3768, 2:418, 
+
+3:3256, 3:419, 
+
+实体分布 4=791 4z88
+
+5:2594, 5:366, 
+
+(未去重) 6:802, 6:95, 
+
+7:4634, 7:568, 
+
+8:635, 8:77, 
+
+0:1590 0:174
+
+---
+
+本文实验使用的服务器是配置了两张FeForce GTX 1080Ti显卡并搭载Linux操作系统。实验通过PyTorch深度学习框架编写所使用得深度学习相关代码。本文模型的训练主要过程描述如下1-6个步骤所示。
+
+---
+
+1) 从维基百科、百度百科爬取海量文本，构成海量文本语料库；
+
+2)对海量本文语料库进行数据预处理并形成语言模型训练语料；
+
+3)BERT语言模型通过语言模型训练语料进行大规模预训练；
+
+4)根据电力运检实体标签在电力运检实体识别语料中的数量构建电力运检实体标签的哈夫曼编码或平衡编码；
+
+5)在预训练得到BERT语言模型后增加分类层构成BERT电力实体识别模型，通过电力运检实体识别语料对BERT电力运检实体识别模型进行再次训练，得到BERT电力运检实体识别模型；
+
+6)在预训练得到BERT语言模型后增加分类层构成BERT电力运检实体识别模型。输入文本经过BERT电力运检实体识别模型时，先经过嵌入层变成文本向量序列，然后经过多层编码器得到BERT语言模型的输出，最后经过分类得到实体标签。分类层包括依次连接的全连接层和Sigmoid激活函数，分类层的输入为BERT语言模型的输出，分类层的输出为预测的电力实体标签的哈夫曼编码或平衡编码，通过编码映射得到对应的电力运检实体标签。采用交叉熵损失计算电力
+
+清洗后的内容如下：
+
+实体识别语料上的真实标签和BERT电力运检实体识别模型输出标签的差异，并通过AdamW优化器训练BERT电力运检实体识别模型。当电力运检实体识别语料验证集上模型的损失不再下降时，模型停止训练，保存模型参数。
+
+将待识别语料输入至BERT电力运检实体识别模型中，得到电力运检实体标签的哈夫曼编码或平衡编码，通过编码映射得到实体标签，进而得到语料中预先定义9个类别的实体。
+
+实验分析首先对比两种本文提出的层次编码效果，两种标签编码方式，在不同的标签数量分布下各具有特点。其次为对比独热编码与层次编码的差别，本文在表中统计了在BUPower数据集上采用独热编码方式的不平衡标签数量。
+
+本文提出的层次编码产生的标签类别不平衡数量更少，在编码上取得了更平衡的效果。为对比模型效果，本文选取了4个最具代表性的命名实体识别模型进行对比。
+
+本文方法没有使用电力运检领域的本身特征，模型具有很好的泛化能力。为验证本文提出模型的泛化能力，本文在CLUNER数据集上对其进行相同模型的验证。
+
+本文通过对实体标签进行哈夫曼编码来缓解类别不平衡造成的问题。平衡编码与哈夫曼编码类似，更注重实体标签类别数量的平衡，在构建编码路径时，每次选择数量相差最小的两个实体标签构成子树，则其0、1分布相较于哈夫曼编码更为平衡，对于实体标签预测存在的标签类别数量不平衡问题的处理效果也会更好。
+
+基于依存句法分析的关系抽取算法由于缺乏电力运检的实体关系的监督信息，本文实现电力运检实体关系抽取将基于对关系抽取算法的调研以及对电力领域现状的分析，本文采用了现有的成熟工具包HanLP使用基于依存句法分析的方法通过无监督的方式挖掘文本中的电力运检实体关系。
+
+本文使用的电力运检实体关系抽取方法首先对待识别的句子使用本文提出的电力运检命名实体识别算法进行命名实体识别，得到正确的电力运检实体并将其加入到HanLP的分词规则中来保障电力运检实体在分词阶段没有被错误切分，然后通过HanLP对待识别句子再次进行中文词性标注和中文依存句法分析操作得到待识别句子的句法依存树，最后通过对得到的句法依存树进行分析来抽取句中关系。在此基础上通过分析谓词与论元(电力运检实体)的句间关系来抽取初步的三元组，然后通过分析挖掘到的关系表述进一步制定电力运检的关系转换规则来生成可用的电力运检三元组，最后通过人工筛选进一步提高电力运检三元组的质量。
+
+本文3.4节中使用的数据是数据预处理模块对《五通一措》的原数据进行数据清洗、去重、切割成适合依存句法分析算法后的文本数据。
+
+基于依存句法分析的关系抽取在依存句法算法中"是描述句子含义的主要信息，而句子中的其他成分例如主宾补等都与之有间接或直接的联系。所以在使用依存句法算法抽取得到的关系将是谓语动词。通过分析句中成分间的关系，我们以关系表述为核心寻找前后电力运检实体论元。由于文本中涉及到的句间关系种类繁多，本文主要实现了如表所示的部分句间关系。
+
+关系表述分为三个部分介绍，首先分析依存句法分析算法适合使用的句子长度，再介绍电力运检关系表述的含义分析，最后再介绍电力关系表述的转换规则。
+
+通过上述方法，本文从23064个句子中一共获取到了6108个三元组，2067个关系表述且其中三元组部分示例如表所示。
+
+由于抽取的文本是电力指导手册，部分抽取结果中不能保证两个论元都是电力实体，这样导致我们抽取三元组不是客观事物间联系的表述，但从结果分析来看，抽取的关系表述也表达了电力运检指导意见的关注重点，隐含了电网公司对于运行检查电力设备的要求、操作等关系，本文对得到的2067个关系表述中三元组统计数量前20的关系表述进行详细统计如表所示。
+
+第7部分内容：
+
+满足某种要求采用方式
+
+清洁现象
+
+完好表现
+
+进行表述过程相关操作良好表现
+
+电力设备的正常状态
+
+指不表现
+
+正吊具体现象表现
+
+使用相关部件大于細細
+
+包括表ｓＳｆ包含牢固牢固的现象
+
+超过范围范围接地接地现象
+
+安装安装操作安装操作应
+
+表３－１８三元组转换结果部分示例
+
+关系表述关系转换三元组原句
+
+金属法兰，注意现象，锈金属法兰无锈蚀、无外伤
+
+Ｔ社音善Ｍ或铸造砂眼
+
+７Ｃ部位表面，注意现象，过套管接线端子等连接部位
+
+热现象表面应无氧化或过热现象
+
+出厂试验电容量值与设备
+
+标志电容，范围，±５％铭牌标志电容量相比超过
+
+超过范围士５％
+
+实测电感值与额定值偏差
+
+差，范围，土５％不应超过±５％
+
+非全相保护继电器，包
+
+带有试验按钮的非全相保护继电器应有警示标志
+
+钢管构架，包含，排水孔钢管构架应有排水？
+
+可以通过规则转换的方式将关系表述转换为更符合知识图谱构建的关系表
+
+述，从而得到更可用更易于人类理解的三元组，例如谓语
+
+，在《五通一措》中，有这样的表达
+
+“ ＭＯＶ接线板表面无氧化、划痕、脏污，接触良好。”
+
+“ＳＦ６密度继电器指示正常，表计防震液无渗漏”
+
+“油断路器本体油位正常，无渗漏”
+
+等，这些句子表达了电力公司想要运检人员关注电力设备这些现象，并要求无这些损坏现象，那么这个谓语关系表述就可以转化为“要求无该类”。
+
+本文的详细电力运检关系表述转换规则及分析如表３－１７所示，表述该项被弃用。通过关系表述规则转换后部分三元组结果如表３－１８所示。
+
+３．４３实验结果
+
+通过这种方式我们得到了１１７７个三元组，为了验证本文提出的电力运检三元组抽取方法的准确率，我们通过人工标注了５０个句子，通过Ｐ、Ｒ和Ｆ指标来验证，验证结果如表３－１９所示。
+
+表３－１９三元组验证结果
+
+抽取方法抽取句数Ｐ（％）Ｒ（％）Ｆ（％）
+
+依存句法分析抽取５０３９．２８３３．９２３６．４０
+
+本文中关系抽取的指标效果较低，主要原因有两个：一个是本身使用的数据是电力运检的指导手册，句子蕴含的电力运检关系数量较少且关系隐含导致关系抽取困难其最终指标较低；二是关系抽取使用的方法是依存句法分析，只使用到实体边界信息，没有使用到实体本身信息导致的关系抽取算法本身具有局限性。
+
+一的关系更为重要，领域关系抽取难度较大，如何增加更多与电力运检领域相关数据也是未来提升模型能力的一个研究方向。
+
+３．５本章小结
+
+数据类别标记失衡是命名实体识别任务中普遍存在的问题。在电力领域也存在着命名实体识别研究较少、标注数据稀缺、数据类别标记失衡的问题，本文在３．３小节针对这一现状创造性地改造了原有的独热编码，提出了以分层平衡数据的哈夫曼编码与平衡编码。实验结果表明，本文提出的基于层次编码的哈夫曼编码与平衡编码的命名实体识别方法能有效缓解数据集标记类别数量失衡问题并有效改善了模型的精确率和召回率。本文方法以分层处理的方式来分级处理标签不平衡，但是哈夫曼编码和平衡编码都是从不同的角度启发式构建，在一些特殊的数据标签分布或下可能会失效，如文中编码的首个位置的标签数量比是３：１，未来可以考虑在该编码上加入平衡因子等数据平衡方法。
+
+本章在３．４小节详细介绍了基于依存句法分析的电力运检关系抽取算法的设计与实现。首先对基于依存句法分析的电力运检关系抽取算法的整体流程进行了简单介绍，然后对基于依存句法分析的关系表述抽取方法进行了介绍，接着分析了电力运检文本数据的关系表述的特点，介绍了电力运检关系抽取关系表述的转换规则后介绍了本文提出的基于依存句法分析的电力运检关系抽取算法的实验结果。
+
+清洗后的内容如下：
+
+本系统采用B/S结构，前后端分离实现，后端采用基于EGG的Web框架技术栈，使用MySQL数据库持久化用户相关数据，并使用Redis作为数据缓存以提高系统查询及存储性能。后端通过Nginx进行多机器负载均衡来提高系统吞吐量。前端采用基于React的单页应用Web应用框架技术栈来实现。前后端通过基于HTTP的Restful API交互数据，使用Nginx做反向代理实现跨域通信。使用JWT技术来实现无状态token，用于验证用户的登录状态和实现权限控制，以保证系统的安全性能。
+
+综合算法研究部分的数据预处理、知识抽取和通过爬虫收集实体属性三个部分，整个系统可以归总为六个部分：数据处理模块、知识图谱构建模块、前端展示模块、后端处理模块、自然语言处理模块以及爬虫模块。整个系统的数据流动如图所示，由数据处理模块对文本进行预处理后将数据送进知识图谱构建模块进行知识抽取与知识的存储，用户通过前端界面发送请求给到后端处理模块，后端处理模块根据请求类型来调用数据库服务或调用自然语言处理服务，爬虫模块通过爬取网页数据并进行解析后存入数据库。
+
+前端页面结构设计如图所示，结合系统模块功能需求分析，为了方便用户使用，本系统的Web端页面结构如图所示。本系统将使用者分为三种角色，分别是：超级管理员、图谱管理员以及图谱查询用户，不同角色登录本系统会依据角色不同展示不同的功能面板。从总体上来说，Web端将分为四个模块，分别是：用户权限、知识图谱、自然语言处理以及日志监控。
+
+系统数据存储分为三个部分：实体及实体关系的知识库数据的存储，用户信息、角色信息以及实体属性信息的存储以及日志监控信息的存储，分别用HugeGraph、MySQL以及文件进行存储。
+
+后端模块即Web后端模块，通过对来自前端的http请求根据请求类型分别转化为SQL语句对MySQL中实体属性信息(实体详情)做查询并生成JSON格式数据返回给前端用于展示、调用HugeGraph图数据库进行查询、存储用户及角色信息。Web后端模块还会通过中间件拦截请求以对用户登录状态及其权限进行管理。后端模块连接了系统的其他模块，为前端模块提供可靠服务。后端的整体处理流程如图所示。
+
+表 5-3 登录请求接口
+- 请求路径: api/user/login
+- 请求方法: POST
+- 接口功能说明: 用户登录
+- 请求参数示例: 
+  - username: iW
+  - password: 1
+  - data: { role: '' }
+- 返回参数示例: 
+  - user_id
+  - username
+  - nickname
+
+表 5-4 查询用户信息请求接口
+- 请求路径: api/user/detail/{userld}
+- 请求方法: GET
+- 接口功能说明: 查询用户信息
+- 请求参数示例: 无
+- 返回参数示例: 
+  - username
+  - email
+  - birthday
+  - role
+
+表 5-5 查询实体属性信息请求接口
+- 请求路径: api/kgdetail/{entityld}
+- 请求方法: GET
+- 接口功能说明: 查询实体属性信息
+- 请求参数示例: 无
+- 返回参数示例: 
+  - entity: { name, type }
+
+数据处理模块流程图如图 5-4 所示。
+
+爬虫模块流程图如图 5-5 所示。
+
+知识图谱模块分为两部分，一部分是建立知识图谱，使用预处理模块持久化的数据，进行知识抽取和三元组筛选，将筛选后的三元组 CSV 文件以及实体 CSV 文件使用 HugeGraph 数据导入工具导入 HugeGraph 图数据库。另一部分是提供对知识图谱进行管理的功能，包含知识图谱查询以及创建修改能力，使用 HugeGraph 语句，对图数据库中数据进行查询、修改以及创建。
+
+自然语言处理模块分为两个部分，一个是调用 HanLP 进行分词、词性标注和依存句法分析，另一个是封装了本文的电力运检命名实体识别模型，可以为知识图谱模块提供命名实体识别的数据处理能力。
+
+日志监控模块分为两部分，分别是登录及日常操作日志 access.log 和系统自定义日志（本系统为报错信息 error.log 和常用信息 info.log 等）。使用 koa-logger 对日志进行格式化，使用 koa-morgan 库使用流的方式提高文件读写性能来记录日志。日志文件会按照时间划分，以天为拆分单位。
+
+系统测试环境如表 5-12 所示。系统开发后需对系统进行详细的功能性测试和非功能性测试。功能性测试旨在满足基本的系统运行条件下，系统功能可以正常运行。非功能性测试旨在测试系统的运行响应速度和页面的兼容性。
+
+清洗后的内容如下：
+
+本文开展了电力运检知识图谱知识抽取算法设计与应用的研究。首先，通过分析电力运检数据资料，确定了研究模型的方向，并确立了相关核心技术。接着，设计了数据处理、实体抽取、关系抽取和爬虫四个模块，实现了电力运检实体和关系的抽取。最后，建立了电力运检知识图谱管理系统，实现了知识图谱可视化、查询和管理功能。本文为电力运检知识图谱知识抽取算法实现和可视化知识图谱管理系统提供了可行性的方案并验证了算法模型和系统的可行性。未来的工作主要包括改进算法性能、提升知识图谱应用、获取更多数据提升模型性能，以及基于知识图谱开发智能问答系统。
+
+参考文献：
+
+[3] Quillian, M. R. (1968). Semantic networks. In M. Minsky (Ed.), Semantic networks: approaches to knowledge representation and research studies (pp. 1-50). Cambridge, MA: MIT Press.
+
+[4] Arrigo, S., Bruin, J. D., & Ding, Y. (1970). Ontology mapping and aligning. In Proceedings of the 1970 conference on artificial intelligence (pp. 1-10). New York: ACM.
+
+[5] Feigenbaum, E. A. (1981). Expert systems in the 1980s. In State of the art report on machine intelligence (pp. 1-50). Maidenhead: Pergamon-Infotech.
+
+[6] Lenat, D. B., Prakash, M., & Shepherd, M. (1985). CYC: Using common sense knowledge to overcome brittleness and knowledge acquisition bottlenecks. AI Magazine, 6(4), 65-75.
+
+[7] Bemers-Lee, T. (1989). Information management: A proposal. http://www.w3.org/History/1989/proposal.html
+
+[8] Bemers-Lee, T. (1998). What the Semantic Web can represent. http://www.w3.org/DesignIssues/RDFnot
+
+[9] Bemers-Lee, T. (1998). Semantic Web roadmap. Internal note. World Wide Web Consortium.
+
+[10] Bemers-Lee, T. (2006). Linked data - design issues. http://www.w3.org/DesignIssues/Link
+
+[11] Bemers-Lee, T. (2009). The next web. TED.com.
+
+[12] Auer, S., Bizer, C., Kobilarov, G., et al. (2007). Dbpedia: A nucleus for a web of open data. The Semantic Web, 722-735.
+
+[13] Zhou, K. (2010). 基于规则的命名实体识别研究 [Research on rule-based named entity recognition]. Hefei: Hefei University of Technology.
+
+[14] Schuster-Boeckler, B., & Bateman, A. (2007). An introduction to hidden Markov models and current protocols in bioinformatics. Current protocols in bioinformatics, 18(1), A3A.1-A3.9.
+
+[15] McCallum, A., Dayne Freitag, & Fernando Pereira, C. N. (2000). Maximum entropy Markov models for information extraction and segmentation. Icml, 17, 2000.
+
+[16] Lafferty, J., McCallum, A., & Pereira, F. C. N. (2001). Conditional random fields: Probabilistic models for segmenting and labeling sequence data. In Proceedings of the 18th International Conference on Machine Learning (pp. 67-72). Morgan Kaufmann.
+
+[17] Huang, Z., Xu, W., & Yu, K. (2015). Bidirectional LSTM-CRF models for sequence tagging. arXiv preprint arXiv:1508.01991.
+
+[18] Zhu, Y., Wang, G., & Karlsson, B. (2019). CAN-NER: Convolutional attention network for Chinese named entity recognition. arXiv preprint arXiv:1905.05583.
+
+[19] Rei, M., Crichton, G. K. O., & Pyysalo, S. (2016). Attending to characters in neural sequence labeling models. arXiv preprint arXiv:1603.01354.
+
+[20] Zukov-Gregoric, A., Bachrach, Y., Minkovskiy, P., et al. (2017). Neural named entity recognition using a self-attention mechanism. In 2017 IEEE 29th International Conference on Tools with Artificial Intelligence (ICTAI) (pp. 1-8). IEEE.
+
+[21] Yan, H., Deng, B., Li, X., Xiao, N., & Qiu, X. (2019). TENER: Adapting transformer encoder for name entity recognition. arXiv preprint arXiv:1911.04474.
+
+[22] Peng, M., Xin, X., & Zhang, Q. (2019). Distantly supervised named entity recognition using positive-unlabeled learning. arXiv preprint arXiv:1905.05583.
+
+[23] Shang, J., Liu, L., Ren, X., et al. (2018). Learning named entity tagger using domain-specific dictionary. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (pp. 1-10).
+
+[24] Liu, Z., Zhu, C., Zheng, D., & Zhao, T. (2019). 面向特定标注数据稀缺领域的命名实体识别 [Named entity recognition for specific domains with scarce annotation data]. Command Information System and Technology, 1-5.
+
+[25] Wang, S., Tang, K., & Yao, X. (2009). Diversity exploration and negative correlation learning on imbalanced data sets. In 2009 International Joint Conference on Neural Networks (pp. 3259-3266). IEEE.
+
+[26] Guo, X., Xinjian, Y., & Yin, G. (2008). On the class imbalance problem. In Proceedings of the 4th International Conference on Natural Computation (pp. 1-4). IEEE.
+
+[27] Douzas, G., Georgios, B., Bacao, F., et al. (2018). Effective data generation for imbalanced learning using conditional generative adversarial networks. Expert Systems with Applications, 114, 322-335.
+
+[28] Akkas, A., & Abbasi, A. (2017). Balanced undersampling: A novel sentence-based undersampling method to improve recognition of named entities in chemical and biomedical text. Applied Intelligence, 48(4), 1-14.
+
+[29] Lin, T. Y., Goyal, P., Girshick, R., et al. (2017). Focal loss for dense object detection. In Proceedings of the IEEE International Conference on Computer Vision (pp. 2999-3007). IEEE.
+
+[30] Nguyen, T., Nguyen, D., & Rao, P. (2020). Adaptive name entity recognition under highly unbalanced data. arXiv preprint arXiv:2003.10296.
+
+[31] Xu, L., Liu, J., & He, X. (2020). 一种解决命名实体识别数据集类别标记失衡的方法 [A method to solve the class label imbalance problem in named entity recognition datasets]. Journal of Sichuan University (Natural Science Edition), 57(1), 1-8.
+
+[32] Li, M., & Yang, J. (2016). 基于依存分析的开放式中文实体关系抽取方法 [Open domain Chinese entity relation extraction method based on dependency analysis]. Computer Engineering, 6, 201-207.
+
+[33] Li, M. (2018). 医学文献中疾病与病症关系抽取研究与应用 [Research and application of disease and symptom relationship extraction in medical literature]. Unpublished doctoral dissertation.
+
+[34] He, L. (2019). 基于依存句法分析的企业税法实体关系抽取方法研究 [Research on enterprise tax law entity relationship extraction method based on dependency syntax analysis]. Unpublished doctoral dissertation.
+
+[35] Kambhatla, N. (2004). Combining lexical, syntactic, and semantic features with maximum entropy models for extracting relations. In Proceedings of the ACL 2004 Interactive Poster and Demonstration Sessions (pp. 22-29).
+
+[36] Yang, Y., Dai, Q., Jia, Z., et al. (2014). 基于弱监督的属性关系抽取方法 [Weakly supervised attribute relation extraction method]. Computer Applications, 34(1), 64-68.
+
+[37] Gan, L., Wan, C., Liu, D., et al. (2016). 基于句法语义特征的中文实体关系抽取 [Chinese entity relation extraction based on syntactic and semantic features]. Journal of Computer Research and Development, 53(2), 284-302.
+
+[38] Zhao, S., & Grishman, R. (2005). Extracting relations with integrated information using kernel methods. In Proceedings of the ACL 2005 Annual Meeting of the Association for Computational Linguistics (pp. 25-30). University of Michigan, USA.
+
+[39] Bunescu, R. C., & Mooney, R. J. (2005). A shortest path dependency kernel for relation extraction. In Proceedings of the Human Language Technology Conference and Conference on Empirical Methods in Natural Language Processing (pp. 6-8). Association for Computational Linguistics.
+
+[40] Zhang, Z. (2008). 无监督关系抽取方法研究 [Research on unsupervised relation extraction methods]. Unpublished doctoral dissertation. Harbin Institute of Technology.
+
+[41] Sun, Y. (2014). 开放领域的中文实体无监督关系抽取 [Unsupervised relation extraction of Chinese entities in the open domain]. Unpublished doctoral dissertation. East China Normal University.
+
+[42] Hashimoto, K., Kazuma, K., et al. (2013). Simple customization of recurrent neural networks for semantic relation classification. In Proceedings of the Conference on Empirical Methods in Natural Language Processing (pp. 1372-1376).
+
+[43] Liu, C., Chunyang, L., et al. (2013). Convolutional neural network for relation extraction. In Proceedings of the International Conference on Advanced Data Mining and Applications (pp. 1-10). Springer.
+
+[44] Zheng, D., Daojir, N., et al. (2014). Relation classification via convolutional deep neural network. In Proceedings of the 25th International Conference on Computational Linguistics: Technical Papers (pp. 2335-2344).
+
+[45] Jiang, X., Xiaotian, W., et al. (2016). Relation extraction with multi-instance multi-label convolutional neural networks. In Proceedings of the 26th International Conference on Computational Linguistics: Technical Papers (pp. 1471-1480).
+
+[46] Zheng, S., Hao, Y., Lu, D., Bao, H., Xu, J., Hao, H., & Xu, B. (2017). Joint entity and relation extraction based on a hybrid neural network. Neurocomputing, 27, 59-66.
+
+[47] Miao, M., & Bansal, M. (2016). End-end relation extraction using lstms on sequences and trees. arXiv preprint arXiv:1601.00770.
+
+[48] Zheng, S., Wang, F., Bao, H., et al. (2017). Joint extraction of entities and relations based on a novel tagging scheme. arXiv preprint arXiv:1706.05075.
+
+[49] Wu, C. (2020). 电力调度知识图谱中知识抽取系统的设计与实现 [Design and implementation of knowledge extraction system in power dispatching knowledge graph]. Unpublished doctoral dissertation. University of Chinese Academy of Sciences (Shenyang Institute of Computing Technology).
+
+[50] Wang, Q. (2020). 电力领域实体关系抽取及知识图谱构建研究 [Research on entity relation extraction and knowledge graph construction in power domain]. Unpublished doctoral dissertation. China University of Geosciences (Beijing).
+
+[51] Zhang, M., Xu, N., Hu, J., Wang, Y., Li, C., Xu, J., & Zhang, S. (2020). 面向变压器智能运检的知识图谱构建和智能问答技术研宄 [Research on knowledge graph construction and intelligent question answering technology for transformer intelligent operation and maintenance]. Global Energy Internet, 3(6), 607-617.
+
+[52] Liu, Z., & Wang, H. (2018). 基于知识图谱技术的电力设备缺陷记录检索方法 [Power equipment defect record retrieval method based on knowledge graph technology]. Electric Power System Automation, 42(14), 158-164.
+
+[53] Ding, Y., Shang, X., & Mi, W. (2019). 基于深度学习的电网调控文本知识抽取方法 [Power grid control text knowledge extraction method based on deep learning]. Electric Power Automation Equipment, 39(11), 1-8.
+
+---
+
+力系统自动化, 2020, 44(24): 161-168.
+
+参考文献:
+
+[54] Manning CD, Surdeanu M, Bauer J, et al. The Stanford CoreNLP Natural Language Processing Toolkit. Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics: System Demonstrations. 2014.
+
+[55] Che WC, Li Z, Liu TL. LTP: A Chinese Language Technology Platform. The 23rd International Conference on Computational Linguistics. 2010.
+
+[56] He HH, Choi JD. Establishing Strong Baselines for the New Decade: Sequence Tagging, Syntactic and Semantic Parsing with BERT. 2019.
+
+[57] Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need. Advances in Neural Information Processing Systems. 2017: 5998-6008.
+
+[58] Devlin J, Chang MW, Lee K, et al. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2018.
+
+[59] Mintz M, Bills S, Snow R, et al. Distant supervision for relation extraction without labeled data. International Joint Conference on Artificial Intelligence. Association for Computational Linguistics. 2009.
+
+[60] Xu L, Dong Q, Qianqian L, Cong Y, Tian Y, Liu W, Li L, Zhang X. CLUENER2020: Fine-grained Named Entity Recognition for Chinese. arXiv preprint arXiv:2001.04351. 2020.
+
+[61] Zhu TT, Du YF, Li WF, Xiong YP. Research on Power Text Specialized Vocabulary Recognition Based on Unsupervised Methods. Electric Power Engineering Technology, 2020, 39(06): 159-165.
+
+---

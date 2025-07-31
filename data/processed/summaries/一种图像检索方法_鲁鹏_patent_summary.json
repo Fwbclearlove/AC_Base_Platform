@@ -1,0 +1,40 @@
+{
+  "document_type": "patent",
+  "title": "一种图像检索方法",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "图像检索",
+  "technical_problem": "计算图像数据库中图像的相关度值，并进行有效检索的问题",
+  "technical_solution": "计算图像间的内点数和直接与间接相关度值，构建赋权邻接矩阵，进行衰减计算和迭代调整",
+  "key_innovations": [
+    "引入间接相关度衰减因子αB",
+    "赋权邻接矩阵A",
+    "迭代计算间接相关度T"
+  ],
+  "implementation_method": "计算步骤包括赋权邻接矩阵A的计算、初始间接相关度矩阵D的生成、迭代计算间接相关度T等",
+  "technical_effects": "提高计算效率，降低存储开销，得到与查询目标高度相关的图像",
+  "keywords": [
+    "图像检索",
+    "内点数",
+    "相关度值",
+    "赋权邻接矩阵",
+    "间接相关度衰减因子"
+  ],
+  "application_scenarios": [
+    "图像数据库检索"
+  ],
+  "technical_concepts": [
+    "内点数计算",
+    "相关度计算",
+    "赋权邻接矩阵",
+    "迭代计算"
+  ],
+  "claims_summary": "未在原文中明确提及",
+  "summary": "本发明涉及一种图像检索方法，通过计算图像间的直接和间接相关度，并引入衰减因子和赋权邻接矩阵，提高检索效率，减少存储需求，适用于图像数据库的快速检索。",
+  "file_id": "一种图像检索方法_鲁鹏",
+  "source_type": "cleaned",
+  "text_length": 590,
+  "generation_time": "2025-07-31 21:25:46"
+}

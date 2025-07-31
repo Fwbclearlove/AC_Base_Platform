@@ -1,0 +1,38 @@
+---
+
+Improved Eavesdropping Detection Strategy Based on Extended Three-particle Greenberger-Horne-Zeilinger State in Two-step Quantum Direct Communication Protocol
+
+LI Jian, YE Xinxin, LI Ruifan, ZOU Yongzhong and LU Xiaofeng
+
+Abstract — An improved eavesdropping detection strategy using extended three-particle GHZ state is proposed to enhance the efficiency in two-step quantum direct communication protocol. The security analysis incorporates the entropy theory and compares the detection strategies quantitatively. The proposed strategy detects eavesdroppers with a rate of 59%, compared to 50% in the original protocol using EPR pair block. The security of the proposed protocol is discussed, demonstrating its enhanced security.
+
+Key words — Quantum key distribution (QKD), Dense coding, Extended three-particle GHZ state, Eavesdropping detection, Entropy.
+
+I. Introduction
+
+The development of quantum information security methods such as QKD, quantum teleportation, and quantum secret sharing has led to the concept of Quantum secure direct communication (QSDC). An improved eavesdropping detection strategy based on extended three-particle GHZ state is proposed for the two-step quantum direct communication protocol. The analysis indicates that this improved protocol is more secure.
+
+II. The TSET Protocol
+
+The TSET protocol enhances eavesdropping detection efficiency by using extended three-particle GHZ states. The process includes:
+
+(S1) Agreement on encoding classical information in Bell states.
+(S2) Preparation of Bell states, insertion of extended three-particle GHZ states, and distribution.
+(S3) Eavesdropping detection through measurements by Alice and Bob.
+(S4) Encoding and transmitting messages using dense coding.
+
+---
+
+Alice applies operations u0, u1, u2, u3 to her particles as described by Eqs.(1), (2), (3), (4), transforming the state |φ+⟩ into |φ+⟩, |φ−⟩, |ψ+⟩, and |ψ−⟩, respectively. These operations correspond to the binary codes 00, 01, 10, and 11. To ensure secure transmission, Alice inserts decoy particles in sequence C, using extended three-particle GHZ states, which she measures with Z-bases without revealing their positions to Bob. Bob decrypts Alice’s message using a Bell-basis measurement on particles B and C. After particle C transmission, Alice reveals the decoy positions, and Bob performs a second eavesdropping check.
+
+The TSET protocol differs from TSE mainly in eavesdropping detection methods. The author of Ref.[17] calculates the maximum information (I) Eve can eavesdrop and the detection probability (d). The function I0 is provided for equal prior probabilities. The detection probabilities for the states |0⟩ and |1⟩ after Eve’s attack are computed, showing that the TSET protocol can detect eavesdropping more efficiently. Eve’s attack strategy is considered, where she performs a unitary attack operation ˆE on the composed system. However, since Eve does not know which particles are used for eavesdropping detection, she treats all particles equally, resulting in a mixed state for the travel qubits.
+
+The detection probability without an eavesdropper is calculated, and the lower bound of the detection probability is derived. The amount of information Eve can gain is analyzed, and it is shown that for the same amount of information, Eve faces a higher detection probability in TSET, making it more secure.
+
+In conclusion, the TSET protocol securely transmits messages without leakage to potential eavesdroppers. It improves upon the TSE protocol by having Bob prepare particles, preventing Eve from capturing the home qubits' states. The TSET protocol also includes a second eavesdropping detection, allowing for the reuse of particles for secure message transmission. Future work will explore the security of other two-step quantum direct communication protocols and their improvements.
+
+Bennett and Brassard's seminal work on quantum cryptography introduced the concept of public-key distribution and coin tossing in 1984 [1]. Subsequent advancements in the field include the teleportation of an unknown quantum state via dual classical and Einstein-Podolsky-Rosen channels [2], and the development of quantum teleportation with a complete Bell state measurement [3]. Notably, Li et al. proposed improved quantum "Ping-pong" protocols based on GHZ and genuine entangled states, as well as classical XOR and CNOT operations [4, 6, 8]. Secure quantum communication has been explored using cluster states and Bell-basis measurements [7], and various strategies for enhancing the security of quantum communication protocols have been proposed [10, 12, 13].
+
+In the realm of quantum secret sharing, Hillery et al. [14] and Singh and Srikanth [15] contributed to the understanding of sharing secrets securely using quantum mechanics. Long and Liu [16] introduced a theoretically efficient high-capacity quantum-key distribution scheme, while Deng et al. [17, 18] proposed quantum direct communication protocols. The efficiency of different detection strategies for the "Ping-pong" protocol has been compared [20], and eavesdropping concerns in such protocols have been addressed [21, 22].
+
+The authors of this work, LI Jian, YE Xinxin, LI Ruifan, ZOU Yongzhong, and LU Xiaofeng, are associated with Beijing University of Posts and Telecommunications, with research interests spanning quantum information, quantum computation, quantum communication security, information security, and artificial intelligence.

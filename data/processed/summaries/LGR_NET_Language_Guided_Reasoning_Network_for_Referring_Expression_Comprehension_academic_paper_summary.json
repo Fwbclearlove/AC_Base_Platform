@@ -1,0 +1,72 @@
+{
+  "document_type": "academic_paper",
+  "title": "Language Guided Reasoning Network for Referring Expression Comprehension",
+  "authors": [
+    "Anderson",
+    "Hong",
+    "Zhu",
+    "Zhang",
+    "Li",
+    "Khattak",
+    "Rezatofighi",
+    "Kazemzadeh",
+    "Plummer",
+    "Liao",
+    "Ye",
+    "Huang",
+    "Zhao",
+    "Ho",
+    "Zhu",
+    "Deng",
+    "Shi",
+    "Krishna",
+    "Wang",
+    "Plummer",
+    "Yu",
+    "Mu",
+    "Lu",
+    "Chen",
+    "Chen",
+    "He"
+  ],
+  "main_topic": "Vision and Language tasks, Referring Expression Comprehension",
+  "research_problem": "Current transformer-based methods treat visual and textual features equally without fully leveraging the guidance of the referring expression.",
+  "methodology": "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss",
+  "key_innovations": [
+    "LGR-NET framework",
+    "TFE for REC tasks",
+    "Coordinate Embedding",
+    "Text-guided Cross-modal Alignment and Fusion",
+    "Cross-modal Loss"
+  ],
+  "experimental_results": "State-of-the-art results on five benchmark datasets, improvements on RefCOCO, RefCOCO+, RefCOCOg, ReferItGame, and Flickr30K Entities",
+  "conclusions": "LGR-NET's emphasis on textual feature guidance for cross-modal reasoning shows effectiveness in REC tasks.",
+  "keywords": [
+    "Referring Expression Comprehension",
+    "cross-modal reasoning",
+    "Language Guided Reasoning",
+    "benchmark datasets",
+    "transformer-based methods"
+  ],
+  "application_domains": [
+    "image captioning",
+    "visual question answering",
+    "visual navigation"
+  ],
+  "technical_concepts": [
+    "LGR-NET",
+    "TFE",
+    "Coordinate Embedding",
+    "TCA",
+    "TCF",
+    "Cross-modal Loss",
+    "transformers",
+    "feature extractors"
+  ],
+  "performance_metrics": "Absolute improvements up to 3.70%, 8.08%, and 6.50% on RefCOCO, RefCOCO+, and RefCOCOg, respectively",
+  "summary": "This paper introduces the Language Guided Reasoning Network (LGR-NET) for Referring Expression Comprehension, which prioritizes linguistic guidance for improved localization. It reports state-of-the-art performance on multiple benchmark datasets and outlines the effectiveness of various innovations like the Textual Feature Extender and a novel cross-modal loss.",
+  "file_id": "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+  "source_type": "cleaned",
+  "text_length": 30309,
+  "generation_time": "2025-07-31 21:22:20"
+}

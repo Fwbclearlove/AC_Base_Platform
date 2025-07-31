@@ -1,0 +1,97 @@
+---
+
+VISUAL PROMPT TUNING FOR WEAKLY SUPERVISED PHRASE GROUNDING
+
+Pengyue Lin, Zhihan Yu, Mingcong Lu, Fangxiang Feng, Ruifan Li*, Xiaojie Wang
+
+School of Artificial Intelligence, Beijing University of Posts and Telecommunications {linpengyue, yzh0, lmc8133, fxfeng, rfli, xjwang}@bupt.edu.cn
+
+ABSTRACT
+
+Weakly supervised phrase grounding (WSG) methods depend on object detectors for RoIs but are limited by the detector's category coverage. We propose a refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations. Combining the visual prompt with learnable features, our method achieves superior results on WSG tasks.
+
+1. INTRODUCTION
+
+WSG localizes objects described by a text phrase without additional annotations. Traditional methods use supervised object detectors, but this excludes numerous unlabeled data and classes. CLIP, a joint vision and language model, demonstrates strong image-text alignment. We enhance the relationship between CLIP and the grounding model by focusing on the grounding image encoder and CLIP image encoder. We compute the cosine similarity of CLIP image embedding with text tokens to create a visual prompt, which is used for fine-tuning the detector-free grounding network. Our contributions include the use of similarity tokens for spatial information capture and detector-free network fine-tuning.
+
+2. RELATED WORK
+
+WSG has gained attention, with detector-based methods converting grounding tasks into retrieval tasks and detector-free methods performing dense localization. Our approach leverages the relationship between CLIP and the grounding model, refining training through visual prompt tuning.
+
+3. METHOD
+
+3.1. Prompt design
+
+---
+
+---
+
+Given an RGB image I ∈ R3×W ×H and an input text T, our method adopts the current state-of-the-art architecture for Weakly-Supervised Grounding (WSG) [2]. We propose a solution for phrase grounding refinement based on similarity tokens. These tokens are derived from the visual embeddings of the CLIP image encoder (eI = CLIPImage(I)) and the text embeddings of the CLIP text encoder (eT = CLIPText(T)). Aggregating these tokens serves as a visual prompt for fine-tuning the WWbl [2] network.
+
+We initially freeze the CLIP model parameters to maintain the semantic associations obtained from vision-language pretraining. The image I is resized to 224×224 to match the CLIP input dimensions, and we obtain 1×768 text embedding eT and 256×768 visual embeddings eI without the [CLS] token. By replicating the text embedding to 256 copies, we calculate the cosine similarity between them, generating 256 similarity tokens. These are reshaped into a 16×16 similarity map SI,T:
+
+SI,T = Reshape(eT * eI / ||eT|| / ||eI||)
+
+The SI,T is a text-related feature map, where textual embeddings eT play a crucial role. This design in the CLIP inference stage can establish connections between encoders, as shown in other downstream tasks [1].
+
+3.2. Visual Prompt Tuning
+
+Our approach involves visual prompt tuning, inspired by recent works [22, 23] that label symbols on images and feed them into pretrained models. We aim to provide a symbol-like visual prompt for the fusion features of the grounding model. However, due to the model not encountering such prompts during training, we perform short training for semantic aggregation of the fusion features guided by the prompt. This approach alters the structure and feature propagation of the pretrained model, akin to freezing part of the model's parameters and using learnable parameters for fine-tuning.
+
+4. EXPERIMENT
+
+4.1. Datasets
+
+Four benchmark datasets are used for experimental evaluation: Flickr30K Entities [24], COCO [25], Visual Genome [26], and ReferIt. Details of these datasets and the construction strategy are provided accordingly.
+
+4.2. Implementation Details and Metrics
+
+We use VGG16 as the visual encoder in WWbl [2] and implement the model on an NVIDIA RTX A6000. Training details, including epochs, optimizers, and metrics such as “pointing game” accuracy and bounding box accuracy, are described.
+
+4.3. Evaluation Results
+
+Our method is trained on COCO and VG train splits and evaluated on the test splits of Flickr30K, VG, and ReferIt. The performance of our method is compared with state-of-the-art DF-WSG methods quantitatively and qualitatively. Our method shows improvements in metrics on Flickr30K and ReferIt, with absolute improvements in pointing game accuracy and bounding box accuracy.
+
+Table 1 presents a comparison of our method with SoTA DF-WSG methods. Figure 2 shows several results from phrase grounding models.
+
+---
+
+We propose a method that breaks the local optimal equilibrium of fully fine-tuning, as evidenced by sample results in Fig. 2, which outperform WWbl [2]. Our method effectively mitigates the task-gap effect between CLIP and the grounding model, as shown in Table 2, where our heatmap generation outperforms CLIP-based methods in bounding box accuracy. This suggests our method overcomes the performance constraints of the CLIP structure, enhancing its grounding task performance.
+
+Our approach not only surpasses detector-free methods like Gbs and WWbl but also outperforms detector-based methods on almost all categories for Flickr30K Entities. The training conditions of CLIP enable it to recognize more categories than pre-trained detectors, and our visual prompt activates the grounding model to perceive and attend to these categories.
+
+In Table 3, we present the effects of visual prompt tuning with different prompts on VG, Flickr30K, and ReferIt datasets. Our approach using the proposed similarity map achieves the best grounding performance. Some prompts tend to focus on the most discriminative region related to the phrase while ignoring object boundary semantics, which reduces IoU. Additionally, CLIP-based methods design grounding schemes for features in the CLIP image encoder, but the contrastive learning framework may lead to a lack of semantic aggregation from text embeddings.
+
+Our work highlights the potential of multimodal information processing techniques in dual-encoder embedding spaces for spatial information extraction. The visual prompt is instrumental in enhancing weakly-supervised phrase grounding. Future research will explore applications to related multi-modal tasks, such as image captioning. This research was supported by the National Natural Science Foundation of China and other foundations.
+
+Hsia, H.-A., et al. “Clipcam: A simple baseline for zero-shot text-guided object and action localization.” ICASSP, 2022, pp. 4453–4457.
+
+Sun, Z., et al. “Alpha-clip: A clip model focusing on wherever you want.” arXiv, 2023.
+
+Liu, P., et al. “Pre-train, prompt, and predict: A systematic survey of prompting methods in natural language processing.” ACM Computing Surveys, vol. 55, no. 9, 2023.
+
+Li, X. and Liang, P. “Prefix-tuning: Optimizing continuous prompts for generation.” ACL-IJCNLP, 2021, pp. 4582–4597.
+
+Du, Y., et al. “Learning to prompt for open-vocabulary object detection with vision-language model.” CVPR, 2022, pp. 14084–14093.
+
+Jia, M., et al. “Visual prompt tuning.” ECCV, 2022, pp. 709–727.
+
+Shtedritski, A., et al. “What does clip know about a red circle? visual prompt engineering for vlms.” ICCV, 2023.
+
+Yang, L., et al. “Fine-grained visual prompting.” NeurIPS, 2023.
+
+Plummer, B.A., et al. “Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models.” ICCV, 2015, pp. 2641–2649.
+
+Lin, T.-Y., et al. “Microsoft coco: Common objects in context.” ECCV, 2014, pp. 740–755.
+
+Krishna, R., et al. “Visual genome: Connecting language and vision using crowdsourced dense image annotations.” IJCV, vol. 123, 2017.
+
+Chen, K., et al. “Query-guided regression network with context policy for phrase grounding.” ICCV, 2017, pp. 824–832.
+
+Grubinger, M., et al. “The iapr tc-12 benchmark: A new evaluation resource for visual information systems.” International workshop ontoImage, 2006, vol. 2, pp. 13–23.
+
+Fang, H., et al. “From captions to visual concepts and back.” CVPR, 2015, pp. 1473–1482.
+
+Liu, Y., et al. “Improving image paragraph captioning with dual relations.” ICME, 2022, pp. 1–6.
+
+Shi, Y., et al. “S2td: A tree-structured decoder for image paragraph captioning.” ACMMM Asia, 2021, pp. 1–7.

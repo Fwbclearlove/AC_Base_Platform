@@ -1,0 +1,45 @@
+面向“智能科学与技术”专业的C语言教学探讨
+
+李睿凡，李蕾
+
+（北京邮电大学计算机学院智能科学技术中心，北京100876）
+
+摘要：本文探讨了“智能科学与技术”专业C语言教学的变革，针对新专业要求和学时压缩的问题，提出教学内容和方法改变的具体措施。引入机器智能前沿问题作为实践项目，旨在培养学生的专业兴趣和能力。
+
+关键词：C语言；智能科学与技术；教学
+
+“C语言程序设计”是众多工科专业的基础课程，现已扩展至非计算机专业。本文针对智能科学与技术专业的特点，研究C语言教学内容的整合设计、前沿研究导向的项目实践，并对教学相关因素进行讨论。
+
+传统教学强调语法规则，易忽视语言应用和程序设计思想。本文提出将课程分为语言学习和项目实践两大部分，各占一半学时。具体教学安排以《C程序设计》一书为参考，见表1和表2。
+
+表1教学环节内容说明
+
+表2实验环节内容说明
+
+此外，本文讨论了教材选择、双语教学、学生差异性和教学细节等因素对教学的影响。
+
+基金项目：国家自然科学基金项目
+
+作者简介：李睿凡，男，2006年7月在北京邮电大学获信号与信息处理专业博士学位，后留校任教，从事智能科学与技术方面的研究与教学工作。
+
+本文对“智能科学与技术”专业C语言教学进行了探讨，分析了教学内容变革与教学进程影响因素，为相关教学提供参考。
+
+参考文献：
+
+[1]谭浩强．C高级语言程序设计[m]．2版．北京：清华大学出版社，2006．
+[2]陈良银，游洪跃，李旭伟．C语言程序设计[m]．C1999．北京：清华大学出版社，2006．
+[3]Brian W．K．，Denni S M．R．The C Programming Language．2版．北京：机械工业出版社，2006．
+[4]TopCoder．ht tp：／／wwW．topcoder．com／．
+[5]蔡自兴，徐光秸．人工智能及其应用(研究生用书)[m]．3版．北京：清华大学出版社，2007．
+[6]钟义信．机器知行学原理[m]．北京：科学出版社，2006．
+[7]Russell S．，Norvig P．Artificial Intelligence：A Modern Approach．2版．北京：人民邮电出版社，2004．
+
+ATentative Discussion on C Course Teaching for Science and Technology of Artificial Intelligence
+
+LI Rui-fan，LI Lei
+
+(School ofComputer Science and Techonology,Beijing University ofPosts and Telecommunications，Beijing 100876，China)
+
+Abstract：This paper discusses the innovation in C course teaching for the major of Science and Technology of Artificial Intelligence, addressing problems faced in this context. From an application-oriented perspective, the paper provides details on content and method innovations.
+
+Key words：C language；Intelligence Science and Technology；teaching

@@ -1,0 +1,359 @@
+智能信息处理 计算机游戏中的智能技术
+
+李睿凡 左申正 李卫
+
+计算机游戏中的智能技术
+
+李睿凡 左申正 李卫 北京邮电大学信息工程学院310信箱100876
+
+E-mail：iiruifan@tom．com zuoshenzheng@1 63．corn
+
+摘要：计算机游戏是计算机应用的一个热点领域。而人工智能技术则是被认为是计算机图形学在计算机游戏中发展到 极致后极具潜在推动力的一个技术。传统认为游戏AI与学术AI有较大差别。但近来的发展表明，学术人-T智能技术将为游 戏产业的发展注入新的活力。本文从游戏设计元素出发，讨论它们与人工智能之间的关系。然后介绍游戏中相对成熟技术， 如A奉算法、有限状态机、群体寻径，再讨论近来游戏开发者关注的问题，如适应与学习。
+
+关键词；人工智能有限状态机群体智能神经网络遗传算法
+
+An Overview ofArtificial Intelligence in Computer Games
+
+Ruifan LI Shenzheng ZUO Wei LI
+
+School ofInformation，Beijing Universiyt ofPosts and Telecommunications,mailbox 310,100876
+
+E-mail：Liruifan@tom．corn Zuoshenzheng@tom．tom liw@nlu．caai．gn
+
+Abstract：Computer game iS all active field in computer science．Compaled with computer graphics，artificial intelligenee(AI)
+
+iS taken as potentiaIIocomotion for computer games．In general，academic AI iS thou曲t as dilyerent from game AI．However，recent
+
+progress has shown that academic A1 will spark new elements in computer games．In this paper,we discussed the relationship between elements in computer games and artificial intelligence．Then some techniques，including A‘algorithm，finite state machine。
+
+path-finding based on swarm,and some problems attracting game·developer's interest,such as adaptivity and learning ale discussed．
+
+Key Words：Artificial Intelligence Finite Smte Machine Swarm Intelligence Neurai Network Genetic Algorithms
+
+1．引言 游戏具有相当长的发展史。广义上，可以认为 游戏的产生是伴随着人类的产生、发展而不断进步
+
+的。古人类之间的嬉戏就是一种朴素的游戏活动。 据史料记载，早在公元前4000年时，上古的尧发
+
+明了一种流传至今的游戏一围棋【l】。而计算机游 戏是现代产物，它是在电子技术、信息技术的发展
+
+中诞生的。1950年，信息论之父Shannon就提出用
+
+里。J下如在物理学发展史上出现的“两朵乌云”一样， 计算机游戏也j下面l瞄一次新的考验。也就是，业界 普遍认为，在图形技术给游戏玩家带来的感官极致 之后，人工智能技术将取而代之成为下一个推动整
+
+个游戏产业的支柱技术f5，6】。
+
+2．游戏元素与人工智能
+
+日前，巾．面上的游戏不计其数，种类繁多，形 式多样。但考察不同的游戏可以发现它们具有一般
+
+论文发表在：中国人工智能学会2007年全国学术年会(CAM’12)
+
+计算机编程方式实现人机对弈的构想，并发起了棋
+
+牌游戏的研究[2】。这是计算机游戏的发端。1984 年，Cris Crawford出版了名为《The Art ofComputer Game Design))的第一本关于计算机游戏的书籍[3】， 标志着计算机游戏时代的来临，是计算机游戏史上
+
+的～个重要里程碑。
+
+目前，在芯片技术、网络技术和图形技术的催 化下，计算机游戏已经在全球范围内发展成为一个 具有每年数十亿美元的产业。据(2003年度中国游
+
+戏产业报告》，中国网络游戏的市场预计在2007年
+
+将达到67亿元人民币【4】。计算机游戏已成为一种 普遍的娱乐方式。但是，游戏的发展也并非晴空万
+
+化的形式元素。Crawford的建议如下【3】：1)表 现：游戏是设计者根据现实而主观抽象出的一个虚 拟世界；2) 交互：游戏是玩家与计算机互动的过 程；3) 冲突：玩家为完成游戏设定的目标而努
+
+力，同时也受到来自游戏设计的阻力；4)安全：危
+
+险源于游戏冲突所产生的心灵体验；游戏是体验现 实世界的～种安伞方式。
+
+这些形式元素表达了游戏的特点，当然也可以 有其他的方式表现游戏的特征，它们都是殊途同归
+
+的。形式元素是设计游戏时候必须考虑的。不论游 戏的形式如何，本质上是人参与的一种活动，其最 终目的是为人娱乐，或者是教育目的。
+
+图1三段路径体系
+
+关f游戏的娱乐目的是显然的，而游戏曲教育 目的可能有些迷惑性。事实上．除了棋牌类菩游戏 之外，游戏的教育功能可能是蒯接的、潜移默化的。
+
+比如，H奉光荣公司出品的“大航海时代”系列游戏
+
+171就是一款以16世纪的航海为背景的寓教于乐的 好游戏。
+
+2 1游戏 I与学术 J Crawford认为计算机游戏是可以与电影并列的 一种新的艺术自忡}形式，这种观点也逐渐为认可。 而游戏中人工智能的水平很大程度上挟定了游戏 的是否能够被玩家和市场所接受。
+
+学术人工智能的一个普遍定义如下【8，9】：即一 种能有效地通过图灵测试的系统。这意味着被测试 的计算机能够就相l司问题提供与人矧样的答案。而 游戏开发者则将用于控制非玩家角色的代码认为 是人工智能，即游戏Al[10]。它确定了游戏对于玩 家输入动作的反应。这种反应可能是符合逻辑的， 也可能是随机的，甚垒是人为的愚蠢，但它们都是 游戏Al。造成游戏Al与学术AI差异的根本原困在 于前者是为游戏的根奉日的——螟乐服务的，而后 者的目的在于探讨智能本身。
+
+蝣戏AI的设计与实现是游戏设计巾的一个重 要环节。事实上，如果没有游戏AI，游戏也就失去 对抗性而不会成为令人愉悦的产品。游戏Al的工 作包含设计与实现两个过程；首先依据游戏奉身的 主题和目标确定游戏AI完成利么工作；然后钊对
+
+完成的工作确定实现的算法、程序。
+
+小同的辩戏类型所要求的AI设计太相径庭。 但可以大体将游戏Al的日标划分如卜110】 I) 挑战玩家：给玩家提供恰到盘『_处的挑战是游戏 AI设计的最基本目标：21建立基本真实感：强俗
+
+地说．就是避免一些显而易见的错误，如避免NPC 绕树行走的明显错误；31增加不确定性：夸玩家 无法准确预测游戏中NPC的行为：4) 辅助情 节的展开：让游戏AI变化游戏故事情节的发展；
+
+5) 刨造逼真的t【|=界：游戏世界虽然是虚拟1H界， 世某些情竹上还需要相对的真实性，如天空中翱翔
+
+e2％ ⋯．“”盘2=
+
+。，=二2。 ‰W” !! ～⋯”” =。一 帮 ¨ 一 ⋯2’⋯～⋯
+
+翻2游戏中有限状态机实啻l嘲
+
+的飞鸟，草地上正在吃草的羊群。这些在一定程度 上可以看成是游戏的装饰物。
+
+叩使学术AI与游戏AI有着明显的差异，但仍 可以看|q学术AI的某些思想、算法是可以用于游 戏AI的设计。刷时，仍然需要注意的是，游戏AI 不是学术AI的测试对象而在于增强玩家体验。但 长期以来．人工智能技术在游戏产业与学术界的发 展是互相独立的。一方面．学术界认为赫戏只是人 工智能技术的一个应用：而游戏产业界则认为学术 界的理论知识一厢情愿的想法。有幸的是，人们已 经注意到GameAI与学术AI之问韵差别。
+
+3．一般的游戏 I技术 上节巾已经谈及游戏AI与学术Al的差异．这 种情形在2001年以前尤为突出。Woodcetk在2001 年的游戏开发者大会(Conference 0n Game
+
+Developer)J=指出工程应用巾的简单化原则(KISS，
+
+i．e KeepIt Simple and Stupid)体现在游戏AI巾则是 应用基于规则的系统与模糊状森机处理几乎所有
+
+的问题⋯1。可见，它们在游戏编程巾的地位，
+
+3．1走步t定向与寻路算法 在游戏中，通常需要让NPc能够聪明地从地图 上某点移动到另一点。这里的“聪明”，基本的古
+
+义是能够避开障碍物，能都找到培近的路。如果至 少存存条路径，在不同的路径搜索算法中，A· 算{土能够找到最短路径．而凡算法速度快。下埘． 简要介绍摹奉A峙#法1121。
+
+首先为每个节点定义g，h和f三个属性：(1) g(goal)是从起始节点到该节点的代价。虽然从起
+
+始节点到该节点的位置有椹多不同路径，但该节点 仅表示条单一路径。 (2)h(heuristic)是该节点 到日标节点估计代价。(3)f(fimess)是g与h之和。 它表示对该路径的昂佳估计。其中的f值越小则认 为该路径越好。另外，A·算法维护两个表：Open 衷和Closed表。Oven袁由来考察的节点组成．而 Closed表由已考察的节点组成。当算法已经检直过
+
+智能信息处理 计算机游戏中的智能技术
+
+李睿凡 左申正 李卫
+
+与某个节点相连的所有节点，计算出它们的g，h 和f’并把它们放入Open表，以待考察，则称这个
+
+节点为“已考察的”。
+
+如何高效地运用A宰算法关键在于代价g与启 发h的计算函数。问题的关键在不同的情境下，A· 算法的差异也将发生变化。比如，地形分析(Terrain
+
+analysis)，瓶颈探测等问题。对于A·算法，在不同
+
+的情形下有不同的变种。主要包括A幸算法对不同
+
+问题的通用性、负载优化、速度和美学优化等。针 对A，|算法的通用性问题，Dan Higgins提出了通用 A·路径搜索引擎的设计[13】，命名为A毒机，将存储、
+
+目标、地图、引擎作为一个通过构架，完成算法的 重用设计。对于多个NPC(上百，甚至更多)同时 寻找路径给计算机中央处理器带来过载而可能死 机的问题，Dan Higgins提出了路径搜索的体系结构 的方法【14】。文中采用了三段路径体系：快速路经、 完整路径、拼接路径，并通过队列路径管理器完成 路径的选择与更新。其思路的示意如图1所示。
+
+在实现速度上，A掌算法优化强调如何高效地存
+
+储及搜索Open表和Closed表05，16]。文献另外， 文献【17】考虑了如何约束A·算法，约束算法何时搜 索、如何搜索、以及充分运用局部路径，从而显著
+
+降低搜索开销的方法。在美学优化上，文献【18】主 要考虑了使得路径更笔直、更平滑、更直接的问题， 这在复杂环境下尤为突出。对于笔直路径问题，主 要的策略有两种：其一是促进A幸算法中笔直路径
+
+的构造；二是在路径计算完毕后再重新清理。路径 平滑则采用Catmull．Rom样条算法。对于分级寻径
+
+(Hierarchical path．finding)导致的路径破坏，则可以
+
+采用改进的分级寻径方法。除A幸算法之外，为适 应手机等处理能力不足的情形，也存在不同的替代
+
+算法。文献[191提出了一种基于加权节点的低耗、 高速的路径搜索算法。
+
+3．2有限状态机
+
+有限状态机(Finite State Machine，i．e．FSM)也是 计算机游戏中应用普遍的人工智能模型。通常，这 类系统描述了一个事件驱动系统模型，易于规则表 达。一般的，状态机可以用状态转移图的方式描绘。 其中的节点表示不同的状态，不同状态之间由于触
+
+发条件而发生转换，用弧线表示。状态转换的条件 写在弧线一卜方，旁边是当转换发生时的可能输出。 图2为有限状态机的实例。
+
+有限状态机在游戏中可以构成管理游戏tH=界 (Game world)的基础，模拟NPC的情绪状态【6】，维
+
+持游戏的状态，分析玩家的输入，或者管理对象的
+
+就有限状态机的实现上，文献[201给出了一个 有限状态机的C++类实现。此外，由于状态机的滥 用，可能导致程序可读性差，调试困难，性能下降。 针对这个问题，Steve Rabin[21]提出一‘种以简单语
+
+言来组织有限状态机的鲁棒方法。继而，【22]将该 方法拓展，用消息机制考虑了人工智能对象间通信 的问题，包括状态机之间的切换、同步等。
+
+作为一般有限状态机的扩展，模糊状态机
+
+(Fuzzy State Machine，i．e．FuSM)也是较为常用的模
+
+型[23】。这种模型可以实现不可预测的行为，即游 戏每次都有i叮能产生不同的行为结果，从而为玩家 提供更多乐趣，也具有更大的重玩_日j．能性。这也是 智能行为的～种表现。
+
+模糊状态机的典型运用包含NPC或玩家角色
+
+的牛命值定义，赛车游戏中汽车的加速与制动[231， NPC情绪的模糊状态等。文献【24】给出了一个通用
+
+的C++模糊状态机设计。与一般状态机类似，模糊 状态机也存在模糊状态增加而导致的组合爆炸。文
+
+献【25】提出了Combs方法用于解决组合爆炸问题。 传统系统中的规则通常考虑输入集合的组合同输 出之间的关系，而Combs则考虑各个集合同输出之
+
+间的关系，每次为一个变量创建规则。
+
+3．3群体智能的模拟 群智能(Swarm Intelligence)是计算智能的一个 研究热点。其典型算法包括：粒子群算法(Particle Swarm Optimization，i．e．PSO)[26]、蚁群算法(Ant
+
+Colony Optimization，i．e．ACO)[27】。而粒子群算法 来源于Reynolds所谓的flocking的生物群体行为， 如鸟群的飞翔、鱼群的游弋的模拟。Reynolds[28】 提出的Boids模型用于模仿群体的定向行为
+
+(Steering Behaviors)。该模型认为，在群体的个体之 间保持统一定向行为存在三个规则：(1)
+
+Separation(分离)：避免临近个体问的碰撞；(2) Alignment(对齐)：匹配临近同伴间的平均速度方
+
+向：(3)Cohesion(内聚)：保持与临近同伴间的相
+
+如果定义Boids群体行为的期望速度为v。，同
+
+时表达对齐、内聚与分离分别为v。，v。，v。，则 期望速度v。是三个有权值分量之和：
+
+v。=wo,7,。+wl审。+w29。。通过不断计算个体的速
+
+度，可以获得整个Boids群体的动态行为。具体的， 个体在每一次的更新中重新计算，而并不存储其它 信息。这令群体表现出了突现行为(emergent behaviors)。即，群体中个体成员无法预知下一步的 动向，而群体则以动态方式保持步调一致。文献[29】 用C++语言实现了flocking类。Reynolds的群体算 法的缺点在于计算开销大，这在大个体数目的情形 下更为突出。为此，文献【30】提出了一种简化策略 用于大规模的实时操作。
+
+3．4学习与适应性
+
+学习与适应是智能的重要特点。而近年来，智 能游戏中也有采用学习与适应技术的趋势[311。其
+
+2008年学术交流年会论文集
+
+有两点较为明显的、宏观上的好处：一是如果“真 将不同的方法融合而构建更为合理的智能行为。游
+
+正”具有不断学习与适应的人工智能，这就使得玩 戏Black&White[38]qb的怪兽采用了不同的学习方 家需要不断尝试新的办法以对付不断改变的游戏 法。文献【39】提出了混合策略下学习的思路。其中 程序；二是让游戏设计者从预先估计玩家的策略中 的学习技巧在于：学习事事情况；学习哪些愿肇具 解脱出来。但是，就目前而言，采用学习、适应机 有支配性，以及不同愿望下的敏感度；学习如何评 制的游戏还不多，即便使用，其水平也不高。 价最大程度地满足智体愿望的方法。学习过程包含 大体上，可以将游戏开发中采用的学习和适用 三种方式：学习过程可以发生在玩家给出反馈之 方法分成两类。第一类方法称为间接方法。即通过 后；学习过程可以发牛在观察其他NPC的行为之 提取游戏运行中的统计数据，控制NPC的行为。 后；学习过程可以发牛在给出命令后。其设计框架 而所采用的数据和数据与行为间的关系由游戏设 是基于Multi-Agent System的信念一愿望一意图结构 计者事先确定。第二类方法称为直接方法。它将学(Belief Desire Intension，i．e．BDI)。信念是一种数据 习算法应用于NPC的行为本身，由游戏开发者指 结构，它存储了单个对象的信息；愿望是智体(Agent) 定需要调整行为的哪些方面。实际中，通常用某种 追求的目标；智体使用愿望、信念和判断产生行为 方法将NPC的行为参数化，然后使用优化算法寻 意图。在此基础上，提出增加判l断(Opinion)结构。 找合适的参数，从而获得良好的性能。 文章中饥饿愿望采用感知器模拟，表达同情愿望采 神经网络(Neural Network,i．e．NN)是人工智能 用决策树模拟。
+
+中典型的可用于学习的模型。有关神经网络的详尽 描述见【32】。文献【33】给出了一个在游戏中使用多层4．前景与展望 感知机(Multi-Layer Perception，i．e．MLP)的例子·问 本文描述了当前计算机游戏中人工智能技术应 题是如何设置坦克炮筒的倾斜角，以命中敌方坦 用的现状，主要针对NPC行为而忽略附加功能， 克。文章采用坦克间的距离、风速大小和方向作为 如自然语言处理、语音识别等应用，更为深入的讨 3层MLP的输入。网络训练不是采用通常的梯度下 论已经超出了本文的所及。关于游戏人工智能技术 降法，而是采用了称为扰动搜索(Perturbation Search) 的最新书籍凶条件所限而未能涉猎【53．57】。 的方法。该方法具有易于编码、确保稳定的优点。 计算机游戏中人工智能无疑将是取代图形学而 具体细节见原文。另一个例子采用多层感知机模拟 成为下一个游戏产业的强大推动力。这为人工智能 NPC的随机变化的方法文献【34】。在上面的坦克例 的研究与应用提供了更为广阔的舞台。人工智能的 子中，尽管神经网络可以模拟游戏者的行为，但只 研究成果已经运用到游戏开发的实践之中。学术界 能重现游戏者行为的确切方面，而不能重现它的随 与产业界不断达成共识，涌现出对于人工智能的更 机变化。文章将差错的范围分割成互不重叠的区 大兴趣。可以预见，游戏中人工智能将成为游戏的 间，称为bin；而用多层感知机计算概率如何随分 大卖点，学术人工智能人员也将创造出与人匹敌的 布的输入变化而变化。 博弈系统。 遗传算法(Genetic Algorithm，i．e．GA)是随机优 化的方法，导引性的著作可参考[35】。3礅[361给出参考文献
+
+絮璺凳警售萎蒸星霎囊登篓冀紫例著翥．型垂描羹絮 【l】何云波，盔睽与亭竭艾纪北京：人民出版社，2001． 何进化出具有偷羊本领的洞穴人。通常而言，在处 卜1”1“％”“。””‘“一”“““⋯“h一～‘
+
+理很多的变量、复杂的环境交互的情形下，可以通 12】C·E·Shannon,1Programming a computer for p_Iaying
+
+过模拟自然界适者生存的进化过程，可以探索出不 chess,。Philosophical Magazine，v01．314，lap．256-275，
+
+同寻常的融合策略，在游戏中将有助于设计出有趣 1950．
+
+的NPC。 【3】c Crawford,The Art矿Computer Game Design。 N—gram模型通常被用于语言建模。简言之，该 BeAeley，CA：McGraw．HilI，1984． 璺譬就是在■苎妾夸妻墓翌j-个{苎：卫，马篓 141 h靶；孟碰剑毽勉曼=璺Q匝i堕鱼缒垒塑坦§垃。丛g亟h蝤!， 科大(Markov)表达。文献f371将N元文法州．gram)—————————_二■———————一 模型用于预测玩家行为。翼寡皋假设在于最蒙的存 ”2003年度中国游戏产业报告·”
+
+为与特征具有局部结构。其局部结构包括：(1)游 【5】八Nareyek,”AI in Computer Games,”ACId Queue，v01．
+
+戏的限制和约束：游戏中的某些动作只有在特定的 1，lap．58-65，2004， 情形下才是合法的；(2)玩家风格：如在模拟飞行 [61 D．J．F岫ge,Artificial Intelligencefor Computer Games． 与格斗游戏中，玩家通常有其特有的操作技术与动 Washington：AK Pete匾Ltd．，2004． 堡要刭≥2’登?≥囊粪磊时耋蠢璧：委型量篡嘉 [71 b鲤：丛Q坠逝丛巡i四：二趔n垡娶：h虹”大航海时代中文 会受到奖励：(4)游戏控制：通过按键控制游戏很2兰匕出曼业墅丛生三g一
+
+“4”～““6
+
+容易得到动作序列。通过训练，N．gram模型可以识
+
+别这些结构化的元素，能够控制NPC的行为。 【8】＆Rouse，Game Design：Theory and Practice．Texas：
+
+不同的学习方法都与其优势与不足。所以需要 Wordware Publishing'inc'2001．
+
+智能信息处理 计算机游戏中的智能技术
+
+李睿凡 左申正 李卫
+
+[9]W．Steven,"Game AI：The state of the Industry [24]J．Robinson and Y．Rahmat-Samii,"Particle Swarm
+
+2000-2001：It's Not Just Art,It's Engineering,”in Game Optimization in Electromagnetics,”IEEE Transaction on
+
+Developer Mag篮ine，2001． Antennas andPropagation,v01．52，PP．397-407，2004．
+
+【i o]B．Stout,"The Basics of A‘for Path Planning,”in Game [25】M．Dorigo,V Maniezzo，and A．Colomi，”The Ant
+
+Programming Gems J，M．Dcloura,Ed．：Charles River System：Optimization by a Colony of Cooperating
+
+Media,2000，PP．254-263． Agents,”IEEE Transactions on Systems Man and
+
+【llJ D．Higgins,”Generic A·Pathfinding,”in AI Game Cybernetics．Part反v01．26,PP．29-41。1996．
+
+Programming Wisdom，，S．Rabin，Ed．：Charles River 【26】C．w．Reynolds,”Flocks,Herds,and Schools：A
+
+Media,2002，PP．1 14-121．Distributed Behavioral Model。”Computer Graphics,v01．
+
+【12】D．Higgins,”Pathfinding Design Architecture,。in AI 4，PP．25-34。1987． Game Programming Wisdam，．S．Rabin,Ed．：Charles [271 S．Woodcock,”Flocking：A Simple Technique for
+
+River Media,2002，PP．122-132． Simulating Group Behavior,。in Game Programming
+
+【13】S．gabin,。A‘Speed Optimization,”in Game Gems，，M．Deloara,Ed．：Charles River Media,2000，PP．
+
+Programming Gems，，M．Dcloura,Ed．：Charles River 305．3 1 8．
+
+Media,2000，PP．272·287． [28】T．Scutt,”Simple Swarms as柚Alternative to Flocking,。
+
+【14J D．Higgins,”How to Achieve Lightning-Fast A。，”in AI in AI Game Programming Wisdom J，S．Rabin，Ed．： Game Programming Wisdom J，S．Rabin,Ed．：Charles Charles River Media,2002．PP．202-208．
+
+River Media,2002，PP．133·145． [29】J．Manslow,”Learning and Adaptation,”in AI Game
+
+【l5】T．Cain,”Practical Optimization for A·Path Generation，。Programming Wisdom，，S．Rabin，Ed．：Charles River
+
+iII AI Game Programming Wisdom，，S．Rabin,Ed．： Media,2002．PP．557-566．
+
+Charles River Media,2002，PP．146-152． 【30】S．Haykin,Neural Networks：A Comprehensive
+
+【16】S．Rat)in,”A‘Aesthetic Optimization，”in Game Foundation．Beijing：Tsinghua University Press,2001．
+
+Programming Gems，，~L Dcloura,Ed：Charles River 【3 11 J．Manslow,”Using a Neural Network in a Game：A
+
+Media,2000，PP．264-271． Concrete Example，”in Game Programming Gems 2，M．
+
+【l 7】M．Mika and C．Charla,”Simple，Cheap Pathfinding,”in 1)eLoura,Ed．：Charles River Media,lnc．，2001，PP．
+
+AIGame Programming W强dom，，S．Rabin，Ed．：Charles 35 1-357．
+
+River Media,2002，PP．1 55·160． [32】J．Manslow,”Imitating Random Variations in Behaviors
+
+【l 8】E．Vybsa．d,”A Finite-State Machine Class,”in Game Using a Neural Network,”in AI Game Programming
+
+Programming Gems，，M．Dcloura,Ed：Charles River Wisdom，，S．Rabin，Ed．：Charles River Media,2002，PP．
+
+Media,2000,PP．237-248． 624--628．
+
+【19】S．Rabin,”Implementing a State Machine Language，”in [33】M．Mitchell，An Introduction to Genetic Algorithms MIT
+
+AI Game Programming Wisdom，，S．Rabin，Ed．：Charles Press,1996．
+
+River Media,2002，PP．3 14-320． [34】E D．Laramee,”Genetic Algorithms：Evolving the Perfect
+
+【20l S．Rabin，”Enhancing a State Machine Language through Troll，”in AI Game Programming Wisdom，，S．Rabin，Ed．：
+
+Messaging,”in AI Game Programming Wisdom，，S． Charles River Media．2002．PP．629-639．
+
+Rabin，Ed．：Charles River Media,2002，PP．321-330． 【35】F．D．Laramee，’’Genetic Algorithms：Evolving the Perfect
+
+【2l】M．MeCuskey,”Fuzzy Logic for Video Games，”in Game Troll，”in AI Game Programming Wisdom，．S．Rabin．Ed．：
+
+Programming Gems，，M．Dcloura,Ed．：Charles River Charles River Media,2002，PP．596-601．
+
+Media,2000，PP．319—329． [36】http：／／www．1ionhead．com／bw2／,”Black＆White Official
+
+【22】E．Dybsand,”A Generic Fuzzy State Machine in C++。“in Web Site．一
+
+Game Programming Gems Z M．DcLoura,Ed．：Charles p刀& Evans, ”Varieties of Learning,” in彳，Game
+
+River Media,lne．，2001，PP．337-341．Programming Wisdom，。S．Rabin，Ed．：Charles River
+
+【23l M．Zarozinski,”Explosion in a Fuzzy SyStem,”in Game Media,2002．PP．567．578．
+
+Programming Gems 2，M．DcLoura,Ed．：Charles River 【38】A．Watt and F．Policarpo，3D Games Real-time Rendering
+
+Media,Inc．，2001，PP．342-350． and Software Technology,Vol，r乒毕二匆．北京：ACM
+
+2008年学术交流年会论文集
+
+Press(机械rT业出版社)，2001(2005)．
+
+【391 J．D．Fungc，at for Games and Animation：A Cognitive
+
+Modeling Approach：八k Peters,Ltd。1999．
+
+脚J S．-J．Yen,J．Yen,and S．￡HSlI，”Move S的1．egies in
+
+Middle Game of Computer Go,”p艘-nted at 7th Th AI，
+
+Taiwain,2002．
+
+【4l】S．Rabin,AI Game Programming W'tsdom 2：Thomson
+
+Learning,2005．
+
+【421丸Kirmse,Game Programming Gems彳：Charles River
+
+Mcdia,Inc．．2004．
+
+H3】IC Pallister,Game Programming Gems 5：Charles River
+
+Media,lne，，2005．
+
+[441 H．1。Herik,H．1ida,and E．A．Heinz,A‘honces in
+
+Computer Games：Many Games,Many Challenges：
+
+Kluwer Academic Publishers，2003．
+
+【45】H．J．Herik,H．1ida,and E．八Heinz,Advances in
+
+Computer Games：KluwerAcademic Publishers,2005．

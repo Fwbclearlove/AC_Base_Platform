@@ -1,0 +1,171 @@
+---
+
+Cross-modal Retrieval with Correspondence Autoencoder
+
+Fangxiang Feng, Xiaojie Wang, Ruifan Li
+Beijing University of Posts and Telecommunications, Beijing, China
+
+Abstract
+This paper addresses the problem of cross-modal retrieval, such as using a text query to search for images and vice versa. We propose a novel model called correspondence autoencoder (Corr-AE) that correlates hidden representations of two uni-modal autoencoders. The model is trained by minimizing a linear combination of representation learning errors for each modality and correlation learning error between hidden representations of two modalities. A parameter α balances the representation learning error and the correlation learning error. We extend the Corr-AE to two other correspondence models: Corr-Cross-AE and Corr-Full-AE. The proposed models are evaluated on three publicly available datasets from real scenes and demonstrate significantly better performance than canonical correlation analysis-based models and popular multi-modal deep models on cross-modal retrieval tasks.
+
+1. INTRODUCTION
+The inclusion of multi-modal data on webpages has become common, leading to a rise in cross-modal retrieval requirements. Unlike traditional information retrieval tasks in a single modality, cross-modal retrieval focuses on mining correlations between data from different modalities.
+
+1.1 Previous Work
+Two main strategies for modeling cross-modal correlations have been employed: shared layer modeling and two-stage frameworks. Shared layer models include topic models like Correspondence LDA and deep architectures such as deep autoencoders, deep belief networks, and deep Boltzmann Machines. Two-stage frameworks involve learning separate features for each modality followed by canonical correlation analysis (CCA) to build a common representation space.
+
+1.2 Motivation
+Perceived data from different modalities for the same object contain common information and modality-specific information. Common information is crucial for cross-modal retrieval, while modality-specific information is not necessary and may even be detrimental.
+
+Figure 1: An image and its tags illustrate common and modality-specific information.
+
+---
+
+---
+
+The shared representation learns both common and modality-specific information, which is not ideally suited for cross-modal retrieval. A representation focusing solely on common information across modalities is more suitable, forming the first motivation for our model. The second strategy involves separating correlation learning from representation learning, which is insufficient for capturing complex correlations, particularly when autoencoders are used. Autoencoders can learn different levels of representation, but determining the optimal level for building correlations between different modalities is challenging. Therefore, correlation learning should be integrated with representation learning, which is the second motivation for our model.
+
+1.3 Contribution
+We propose the correspondence autoencoder (Corr-AE) based on two basic unimodal autoencoders. The Corr-AE integrates representation and correlation learning into a single process, unlike two-stage methods. A novel loss function is designed, incorporating the losses of autoencoders for all modalities and the loss of correlation between modalities. Our model is evaluated on three public datasets and shows effectiveness compared to other multi-modal deep learning models. We extend the Corr-AE to two correspondence models, Corr-Cross-AE and Corr-Full-AE, and experimental results confirm the superiority of combining representation and correlation learning.
+
+2. LEARNING ARCHITECTURE
+This section details the architecture of the basic Corr-AE, proposes a loss function for learning similar representations, introduces extensions of the Corr-AE, and describes the deep architecture with training algorithms.
+
+2.1 Correspondence Autoencoder
+The Corr-AE architecture consists of two subnetworks, each a basic autoencoder, connected by a predefined similarity measure on the code layer. Each subnetwork is responsible for a modality. The mapping from inputs to the code layers is denoted as f(p; Wf) and g(q; Wg), with f and g as logistic activation functions. The similarity measure is defined as:
+
+C(p(i), q(i); Wf, Wg) = ||f(p(i); Wf) - g(q(i); Wg)||^2
+
+The loss function for learning similar representations is:
+
+L(p(i), q(i); Θ) = (1 − α) * (LI(p(i); Θ) + LT(q(i); Θ)) + α * LC(p(i), q(i); Θ)
+
+where LI and LT are the reconstruction error losses, LC is the correlation loss, and α balances the trade-off between correlation and reconstruction losses.
+
+2.2 Correspondence Cross-modal Autoencoder
+The Corr-Cross-AE replaces basic autoencoders with cross-modal autoencoders, which reconstruct input from different modalities. The loss function is:
+
+L(p(i), q(i); Θ) = (1 − α) * (LI(p(i), q(i); Θ) + LT(p(i), q(i); Θ)) + α * LC(p(i), q(i); Θ)
+
+The representation learning in the cross-modal autoencoder considers information from the other modality, capturing correlations in the reconstruction loss.
+
+---
+
+---
+
+2.3 Correspondence Full-modal Autoencoder
+The full-modal autoencoder combines a basic autoencoder and cross-modal autoencoder to model audio and video data. The basic Corr-AE can be extended to the Corr-Full-AE, which reconstructs inputs from different modalities within a shared representation space. The loss function for the Corr-Full-AE is defined as:
+
+L(p(i), q(i); Θ) =(1 −α) LI(p(i), q(i); Θ) + LT (p(i), q(i); Θ) + αLC(p(i), q(i); Θ)
+
+Here, LI, LT, and LC represent the image, text, and correspondence losses, respectively.
+
+2.4 Deep Architecture
+To address the diverse statistical properties of data from different modalities, a deep architecture is proposed. It uses stacked modality-friendly models to learn higher-level representations and Corr-AE to learn similar representations. The deep architecture consists of three components: the first two are restricted Boltzmann machines (RBMs), and the third is a correspondence autoencoder. Gaussian RBM and replicated softmax RBM are used for the first layer to model image and text data, respectively. The second component uses basic RBMs to learn higher-level features. The third component employs one of the three correspondence autoencoders.
+
+3. EXPERIMENTS
+We evaluate our models on three real-world datasets: Wikipedia, Pascal, and NUS-WIDE-10k. These datasets vary in text modality, size, and category numbers. For image representation, features such as Pyramid Histogram of Words (PHOW), Gist, and MPEG-7 descriptors are extracted. Text representation uses a bag of words model. The datasets are split into training, validation, and testing subsets.
+
+---
+
+---
+
+3.2 Evaluation Metric
+We evaluate two cross-modal retrieval tasks: text retrieval from an image query and image retrieval from a text query. We use two metrics, mean average precision (mAP) and top 20% percentage, following [30]. mAP represents the ability to learn discriminative cross-modal mapping functions, while the top 20% percentage reveals the ability to learn corresponding latent concepts. We report mAP@50 in all experiments. Semantic labels are only used for evaluation; our models do not require them for training.
+
+3.3 Baseline
+Our models and baseline methods use features from the first two components of the deep architecture described in section 2.4. The only difference lies in the third component. Cosine distance measures similarity in all experiments. We compare our models with three CCA-based models and two multi-modal models.
+
+3.4 Model Architecture
+We perform grid search for the number of hidden units and restrict all hidden layers to the same number. Validation sets determine the best hyperparameters. For our correspondence models, we set the parameter α to 0.8 for Corr-AE and Corr-Full-AE, and to 0.2 for Corr-Cross-AE. CCA is applied to learn correlations with different numbers of units. Bimodal AE training uses three copies of all training data. We do not weight reconstruction errors from different modalities.
+
+3.5 Results
+Our correspondence autoencoders significantly outperform other models on both retrieval tasks across Wikipedia, Pascal, and NUS-WIDE-10k data sets. Our models improve mAP scores and top 20% performance, demonstrating the effectiveness of combining representation and correlation learning. The advantage of our correspondence models is their integration of these processes, making two-stage methods suboptimal in comparison.
+
+Table 1: Results of two retrieval protocols: mAP scores and top 20% on three data sets.
+
+---
+
+(Note: The table has been left intact as it contains core academic content.)
+
+---
+
+The table below presents the mean Average Precision (mAP) for the top 20% of image and text queries for various models on two data sets, NUS-WIDE-10k and Wikipedia:
+
+**NUS-WIDE-10k**
+- CCA-AE: Image Query 0.161, Text Query 0.153, Average 0.157
+- CCA-Cross-AE: Image Query 0.137, Text Query 0.182, Average 0.159
+- CCA-Full-AE: Image Query 0.148, Text Query 0.177, Average 0.163
+- Bimodal AE: Image Query 0.250, Text Query 0.270, Average 0.260
+- Bimodal DBN: Image Query 0.219, Text Query 0.219, Average 0.219
+- Corr-AE: Image Query 0.290, Text Query 0.279, Average 0.285
+- Corr-Cross-AE: Image Query 0.271, Text Query 0.280, Average 0.276
+- Corr-Full-AE: Image Query 0.281, Text Query 0.276, Average 0.279
+
+**Wikipedia**
+- CCA-AE: Image Query 0.199, Text Query 0.268, Average 0.234
+- CCA-Cross-AE: Image Query 0.199, Text Query 0.344, Average 0.272
+- CCA-Full-AE: Image Query 0.241, Text Query 0.242, Average 0.242
+- Bimodal AE: Image Query 0.250, Text Query 0.297, Average 0.274
+- Bimodal DBN: Image Query 0.173, Text Query 0.203, Average 0.188
+- Corr-AE: Image Query 0.319, Text Query 0.375, Average 0.347
+- Corr-Cross-AE: Image Query 0.349, Text Query 0.348, Average 0.349
+- Corr-Full-AE: Image Query 0.331, Text Query 0.379, Average 0.355
+
+Our models, Corr-AE, Corr-Cross-AE, and Corr-Full-AE, which incorporate representation learning and correlation learning, significantly outperform other baseline models in cross-modal retrieval tasks on all data sets. The analysis of the parameter α shows that both too small and too large values result in poor performance, indicating the importance of balancing "individuality" and "correlation" in the data.
+
+Figures 7, 8, 9, 10, and 11 provide visual examples and analysis of the performance of our models, particularly the impact of varying α on the representation of image and text in the NUS-WIDE-10k test data set.
+
+---
+
+---
+
+[1] M. Bastan, H. Cam, U. Gülüz, and Z. Ulusoy. Bilvideo-7: an MPEG-7-compatible video indexing and retrieval system. IEEE MultiMedia, 17(3):62–73, 2010.
+[2] Y. Bengio. Learning deep architectures for AI. Foundations and Trends in Machine Learning, 2(1):1–127, 2009.
+[3] E. L. Bird and S. Klein. Natural Language Processing with Python. O’Reilly Media Inc., 2009.
+[4] D. M. Blei and M. I. Jordan. Modeling annotated data. ACM SIGIR, pages 127–134, 2003.
+[5] D. M. Blei, A. Y. Ng, and M. I. Jordan. Latent Dirichlet allocation. JMLR, 3:993–1022, 2003.
+[6] A. Bosch, A. Zisserman, and X. Muñoz. Image classification using random forests and ferns. In ICCV, pages 1–8. IEEE, 2007.
+[7] T.-S. Chua, J. Tang, R. Hong, H. Li, Z. Luo, and Y.-T. Zheng. NUS-WIDE: A real-world web image database from National University of Singapore. In CIVR, Santorini, Greece., 2009.
+[8] A. Farhadi, S. M. M. Hejrati, M. A. Sadeghi, P. Young, C. Rashtchian, J. Hockenmaier, and D. A. Forsyth. Every picture tells a story: Generating sentences from images. In ECCV (4), volume 6314 of Lecture Notes in Computer Science, pages 15–29. Springer, 2010.
+[9] A. Frome, G. Corrado, J. Shlens, S. Bengio, J. Dean, M. Ranzato, and T. Mikolov. Devise: A deep visual-semantic embedding model. In NIPS, pages 2121–2129, 2013.
+[10] D. R. Hardoon, S. Szedmák, and J. Shawe-Taylor. Canonical correlation analysis; an overview with application to learning methods. Neural Computation, 16:2639–2664, 2004.
+[11] G. Hinton and R. Salakhutdinov. Reducing the dimensionality of data with neural networks. Science, 313(5786):504–507, 2006.
+[12] G. E. Hinton. Training products of experts by minimizing contrastive divergence. Neural Computation, 14(8):1771–1800, 2002.
+[13] G. E. Hinton, S. Osindero, and Y. Teh. A fast learning algorithm for deep belief nets. Neural Computation, 18(7):1527–1554, 2006.
+[14] Y. Jia, M. Salzmann, and T. Darrell. Learning cross-modality similarity for multinomial data. ICCV, pages 2407–2414, 2011.
+
+[15] J. Kim, J. Nam, and I. Gurevych. Learning semantics with deep belief network for cross-language information retrieval. COLING, pages 579–588, 2012.
+[16] B. S. Manjunath, J. R. Ohm, V. V. Vinod, and A. Yamada. Color and texture descriptors. IEEE Trans. Circuits and Systems for Video Technology, Special Issue on MPEG-7, 11(6):703–715, June 2001.
+[17] J. Ngiam, A. Khosla, M. Kim, J. Nam, H. Lee, and A. Y. Ng. Multimodal deep learning. ICML, pages 689–696, 2011.
+[18] A. Oliva and A. Torralba. Modeling the shape of the scene: A holistic representation of the spatial envelope. IJCV, 42(3):145–175, 2001.
+[19] N. Rasiwasia, J. C. Pereira, E. Coviello, G. Doyle, G. R. G. Lanckriet, R. Levy, and N. Vasconcelos. A new approach to cross-modal multimedia retrieval. ACM MM, pages 251–260, 2010.
+[20] R. Salakhutdinov and G. Hinton. Replicated softmax: an undirected topic model. NIPS, pages 1607–1614, 2009.
+[21] R. R. Salakhutdinov and G. G. Hinton. An efficient learning procedure for deep Boltzmann machines. Neural computation, 24(8):1967–2006, 2012.
+[22] P. Smolensky. Parallel distributed processing: explorations in the microstructure of cognition, vol. 1. chapter Information processing in dynamical systems: foundations of harmony theory, pages 194–281. MIT Press, Cambridge, MA, USA, 1986.
+[23] R. Socher, M. Ganjoo, C. D. Manning, and A. Ng. Zero-shot learning through cross-modal transfer. In NIPS, pages 935–943, 2013.
+[24] N. Srivastava and R. Salakhutdinov. Learning representations for multimodal data with deep belief nets. ICML Representation Learning Workshop, 2012.
+[25] N. Srivastava and R. Salakhutdinov. Multimodal learning with deep Boltzmann machines. NIPS, pages 2231–2239, 2012.
+[26] L. van der Maaten and G. Hinton. Visualizing high-dimensional data using t-SNE. JMLR, 2008.
+[27] A. Vedaldi and B. Fulkerson. VLFeat: an open and portable library of computer vision algorithms. In ACM MM, pages 1469–1472, 2010.
+[28] M. Welling, M. Rosen-Zvi, and G. Hinton. Exponential family harmoniums with an application to information retrieval. In NIPS, pages 501–508, Vancouver, 2004. Morgan Kaufmann.
+[29] J. Weston, S. Bengio, and N. Usunier. Large scale image annotation: Learning to rank with joint word-image embeddings. In ECML, pages 21–35, 2010.
+[30] Y. Zhuang, Y. F. Wang, F. Wu, Y. Zhang, and W. Lu. Supervised coupled dictionary learning with group structures for multi-modal retrieval. In AAAI, 2013.
+
+Figure 7: Three examples of text-based cross-modal retrieval using our Corr-Full-AE and best baseline method. In each example, the query text and its corresponding image are shown on the top; retrieved images of our Corr-Full-AE are presented in the middle; retrieved images of the best baseline model are presented at the bottom. Relevant matches are shown with green bounding box. Irrelevant matches are shown with red bounding box. The text queries come from sport, aeroplane, and grass category respectively.
+
+---
+
+---
+
+Several individuals are depicted waiting to cross a road, including two bicyclists and a pedestrian. In another scene, two women with bicycles are observing the traffic to find a safe moment to cross. A group of people, including four women and two men, are posing while wearing furry hats with earflaps. Additionally, there is a mention of teenagers being silly and visitors wearing fur hats.
+
+(b) Pascal
+
+Keywords: nature, green, quality, spider, flowers, pink, balcony
+
+(c) NUS-WIDE-10k
+
+Figure 9: Image-text pairs from three datasets are presented. Each pair shows the closest images or texts to the query, which are the ground truth. Figure (a) presents pairs from categories of warfare, biology, and history. Figure (b) includes pairs from bicycle, cow, and person categories. Figure (c) displays pairs from animal, flower, and food categories, demonstrating effective retrieval of various images and texts.
+
+---

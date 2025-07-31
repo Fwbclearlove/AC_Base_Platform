@@ -1,0 +1,57 @@
+---
+
+Constructing Hierarchical Image-tags Bimodal Representations for Word Tags Alternative Choice
+
+Fangxiang Feng, Ruifan Li, Xiaojie Wang
+Engineering Research Center of Information Networks, Ministry of Education, School of Computer Science, Beijing University of Posts and Telecommunications, Beijing, 100876 China
+
+Abstract
+This paper presents a solution to the multi-modal learning challenge of ICML, involving the construction of three-level representations in three stages and a data-specific strategy for choosing correct tag words. Level-1 representations are obtained using MPEG-7, gist descriptors, and additional features provided by the contest organizers for images, and a bag-of-words model with a 4000-word dictionary for word tags. Level-2 representations are learned using stacked RBMs for each modality, while a bimodal auto-encoder is proposed for level-3 representations. Our approach achieves a final average accuracy of 100% on the private test set.
+
+1. Introduction
+The multi-modal learning challenge of ICML 2013 focuses on developing a predictive system for word tags using bimodal data: images and texts. The data consists of the Small ESP Game Dataset and a manually labeled dataset by Ian Goodfellow, referred to as ESP and GF, respectively. Our approach models similar representations between image and tag word pairs.
+
+2. System Architecture
+Our solution aims to construct hierarchical representations of bimodal data. The training phase involves three stages: obtaining low-level representations, distilling level-1 representations using RBMs, and learning level-3 similar representations with a quasi-Siamese auto-encoder. The test phase uses a data-specific strategy to choose the correct tag words based on similarity/dissimilarity.
+
+3. Obtaining Level 1 Representations
+For image representation, we adopt features from the contest organizer, MPEG-7, and gist descriptors. The organizer's features are reduced from 816 to 408 dimensions. MPEG-7 descriptors include Color Layout, Color Structure, Edge Histogram, and Scalable Color, resulting in a 784-dimensional feature set. Gist descriptors capture the scene's dominant spatial structure, adding 512 dimensions. Each image is represented as a 1704-dimensional vector.
+
+---
+
+---
+
+For tags representation, we employ a bag-of-words model. We construct a dictionary of 4000 high-frequency words from all the tag words of ESP. Each word in an image tag is represented as a multinomial variable using a 1-of-4000 coding scheme. Thus, each tag is represented as a vector with 4000 binary elements, indicating the presence or absence of the tag word in the dictionary.
+
+In the second stage, we use Restricted Boltzmann Machines (RBM) to build level-2 representations. Given that the level-1 representations of images and tag words have distinct properties, we utilize Gaussian-Bernoulli RBM for real-valued image data and Replicated Softmax for the count data of tag words. The learning process can be efficiently performed using the Contrastive Divergence approximation.
+
+For level-3 representations, we propose a quasi-Siamese auto-encoder for bimodal representations. This architecture is based on the Siamese network, originally designed for signature verification. The quasi-Siamese network consists of two sub-networks with the same architecture but different parameters, connected by a compatibility measure. The loss function is defined to learn similar representations for the two modalities, and the learning process is carried out using the back-propagation algorithm.
+
+---
+
+*Note: All unnecessary formatting, page numbers, and repetitive information have been removed to ensure clarity and focus on the core academic content.*
+
+By obtaining hierarchical three-level representations, the model is ready to choose alternatives. We employ two strategies: a general strategy and a data-specific strategy. The general strategy involves calculating the compatibility LC(pi, qi) between an image pi and its tag word qi, then comparing it with the compatibility LC(pi, eqi) of the image with another tag word eqi. The tag word with higher compatibility is chosen as the correct tag for the image. The data-specific strategy considers the characteristics of the data, particularly the loops among tag words of some images, which can be resolved by finding the image with the maximum discrepancy of compatibility between its two tag words.
+
+In our experiments, we used the datasets ESP and GF. For the ESP dataset, we generated an incorrect counterpart for each image's tag words by randomly choosing from the correct tag words of the remaining images. We extracted level-1, level-2, and level-3 representations successively. For learning level-2 representations, we constructed two stacked RBMs with neuron configurations for images and tag words. For level-3, we used a quasi-Siamese auto-encoder with specific neuron configurations and parameters α = 0.5 and λ = 0.2. We encouraged sparsity in the representations at all layers.
+
+We used both strategies for computation of AUC. The probability P(pi) of dissimilarity between an image and one of its tag words was expressed as the ratio of the squares of the compatibility scores. The general strategy achieved an AUC of 0.87533, while the data-specific strategy achieved 100%. The public and private leaderboard scores confirmed the effectiveness of our approach.
+
+Our results suggest that the strategy for choosing alternatives is crucial and that moderate representations are sufficient for accurate choices. We constructed a hierarchically bimodal representation and data-specific strategy for word tag alternative choice. The three-stage extraction process includes typical methods, RBMs, and a quasi-Siamese auto-encoder. Our approach finds the maximum discrepancy among a link of images based on data characteristics.
+
+Acknowledgments:
+We thank the organizers and Nitish Srivastava for his DeepNet library. Part of this work was supported by the National Sciences Foundation of China and the Fundamental Research Funds for the Central Universities.
+
+Salakhutdinov, R., and Hinton, G. (2007). Learning a non-linear embedding by preserving class neighbourhood structure. In Proceedings of the 11th International Conference on Artificial Intelligence and Statistics, San Juan, PR, pp. 412–419.
+
+Salakhutdinov, R., and Hinton, G. (2009). Replicated softmax: an undirected topic model. In Advances in Neural Information Processing Systems 22, Vancouver, Morgan Kaufmann, pp. 1607–1614.
+
+Smolensky, P. (1986). Information processing in dynamical systems: foundations of harmony theory. In Parallel distributed processing: explorations in the microstructure of cognition, vol. 1, MIT Press, Cambridge, MA, USA, pp. 194–281.
+
+Srivastava, N., and Salakhutdinov, R. (2012). Multimodal learning with deep Boltzmann machines. In Advances in Neural Information Processing Systems 25, Lake Tahoe, NV, Morgan Kaufmann, pp. 2231–2239.
+
+von Ahn, L., and Dabbish, L. (2004). Labeling images with a computer game. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems, Vienna, Austria, ACM, pp. 319–326.
+
+Welling, M., Rosen-Zvi, M., and Hinton, G. (2004). Exponential family harmoniums with an application to information retrieval. In Advances in Neural Information Processing Systems 17, Vancouver, Morgan Kaufmann, pp. 501–508.
+
+LeCun, Y., Chopra, S., Hadsell, R., Ranzato, M., and Huang, F.-J. (2006). A Tutorial on Energy-Based Learning. In Predicting structured data, MIT Press, pp. 1–59.

@@ -1,0 +1,49 @@
+{
+  "document_type": "academic_paper",
+  "title": "Learning Visual Features from Product Title for Image Retrieval",
+  "authors": [
+    "Fangxiang Feng",
+    "Tianrui Niu",
+    "Ruifan Li",
+    "Xiaojie Wang",
+    "Huixing Jiang"
+  ],
+  "main_topic": "Visual feature learning for image retrieval in e-commerce",
+  "research_problem": "Existing methods may not effectively extract features for product images using pre-trained models on large-scale datasets like ImageNet.",
+  "methodology": "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+  "key_innovations": [
+    "Using product titles to guide the learning of visual features",
+    "Conversion of product titles into discrete labels for supervised learning",
+    "Bag of n-grams approach"
+  ],
+  "experimental_results": "The method achieved the fourth position in the 2020 ACM Multimedia AI Meets Beauty Grand Challenge using a single ResNet-50 model.",
+  "conclusions": "Deep CNNs pre-trained and fine-tuned on a dataset built from product images and title information can enhance feature effectiveness for product image retrieval.",
+  "keywords": [
+    "Visual feature learning",
+    "Bag of n-grams",
+    "Image retrieval",
+    "CNN",
+    "MAC"
+  ],
+  "application_domains": [
+    "E-commerce",
+    "Content-based image retrieval"
+  ],
+  "technical_concepts": [
+    "Image representations",
+    "Visual content-based indexing and retrieval",
+    "CNN",
+    "MAC",
+    "SPoC",
+    "RMAC",
+    "RAMAC",
+    "MS-RMAC",
+    "GRMAC"
+  ],
+  "performance_metrics": "MAP@7 of 0.402402 on the private test set",
+  "summary": "This paper proposes a method for learning visual features from product titles for image retrieval in e-commerce. By constructing an image classification dataset from product titles and fine-tuning a pre-trained CNN model, the authors demonstrate improved retrieval performance in the ACM Multimedia AI Meets Beauty Grand Challenge.",
+  "file_id": "3394171.3416296",
+  "source_type": "cleaned",
+  "text_length": 8300,
+  "generation_time": "2025-07-31 21:15:27"
+}

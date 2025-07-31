@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确列出"
+  ],
+  "main_topic": "常识问答任务（Commonsense Question Answering，CQA）",
+  "research_problem": "CQA任务存在知识覆盖不足及知识噪声问题，无监督场景下缺乏易迁移的自适应方法",
+  "methodology": "知识增强型图对比学习（KE-GCL）和提示型知识生成网络（PKGN）",
+  "key_innovations": [
+    "提出自适应采样原始图的边和节点特征",
+    "利用问答对的实体描述性文本作为补充节点信息",
+    "无监督对比学习策略对问题语义进行继续预训练",
+    "设计的提示模版生成问题相关的知识描述"
+  ],
+  "experimental_results": "在CommonsenseQA、OpenbookQA、SociallQA等数据集上进行了定量和定性实验分析，提出的模型在性能上优于当前基线方法",
+  "conclusions": "提出的KE-GCL和PKGN模型在常识问答任务的有监督和无监督场景下均具有较好的性能和鲁棒性",
+  "keywords": [
+    "常识问答",
+    "知识增强",
+    "图对比学习",
+    "无监督学习",
+    "提示型知识生成"
+  ],
+  "application_domains": [
+    "问答系统",
+    "自然语言处理"
+  ],
+  "technical_concepts": [
+    "知识子图",
+    "节点嵌入",
+    "注意力机制",
+    "对比学习",
+    "预训练语言模型"
+  ],
+  "performance_metrics": "在三个基准数据集上的性能指标均优于当前基线方法，具体性能数字和指标未在原文中给出",
+  "summary": "本文针对常识问答任务在监督和无监督场景下的挑战，提出了知识增强型图对比学习和提示型知识生成网络两种方法，并通过实验验证了其有效性和鲁棒性。",
+  "file_id": "基于常识知识的多选式问答研究_张力翚",
+  "source_type": "cleaned",
+  "text_length": 27086,
+  "generation_time": "2025-07-31 21:37:34"
+}

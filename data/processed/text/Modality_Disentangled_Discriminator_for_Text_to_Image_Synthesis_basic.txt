@@ -1,0 +1,473 @@
+2112 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+Modality Disentangled Discriminator for
+
+Text-to-Image Synthesis
+
+Fangxiang Feng , Tianrui Niu , Ruifan Li , Member, IEEE, and Xiaojie Wang
+
+Abstract—Text-to-image (T2I) synthesis aims at generating photo-realistic images from text descriptions, which is a particularly important task in bridging vision and language. Each generated image consists of two parts: the content part related to the text and the style part irrelevant to the text. The existing discriminator does not distinguish between the content part and the style part. This not only precludes the T2I synthesis models from generating the content part effectively but also makes it difﬁcult to manipulate the style of the generated image. In this paper, we propose a modality disentangled discriminator that distinguishes between the content part and the style part at a speciﬁc layer. Speciﬁcally, we enforce the early layers of a certain number in the discriminator to become the disentangled representation extractor through two losses. The extracted common representation for the content part can make the discriminator more effective for capturing the text-image correlation, while the extracted modality- speciﬁc representation for the style part can be directly transferred to other images. The combination of these two representations can also improve the quality of the generated images. Our proposed discriminator is used to substitute the discriminator of each stage in the representative model AttnGAN and the SOTA model DM- GAN. Extensive experiments are conducted on three widely used datasets, i.e. CUB, Oxford-102, and COCO, for the T2I synthesis task, demonstrating the superior performance of the modality disentangled discriminator over the base models. Code for DM- GAN with our modality disentangled discriminator is available at https://github.com/FangxiangFeng/DM-GAN-MDD.
+
+Index Terms—text-to-image synthesis, generative adversarial networks, multi-modal disentangled representation learning.
+
+I. INTRODUCTION T
+
+EXT-TO-IMAGE (T2I) synthesis task focuses on gen- erating images according to natural language descrip- tions, which is one of the challenging tasks for bridging
+
+Manuscript received December 8, 2020; revised March 30, 2021; accepted April 22, 2021. Date of publication April 28, 2021; date of current version April 6, 2022. This work was supported in part by the National Key Research, and Development Program of China under Grant of 2020YFF0305302, in part by the National Natural Science Foundation of China under Grants 61906018, and 62076032, in part by the Fundamental Research Funds for the Central Universi- ties [2021RC36]. The associate editor coordinating the review of this manuscript and approving it for publication was Dr. Ting Yao. (Corresponding author: Fangxiang Feng.)
+
+Fangxiang Feng, Ruifan Li, and Xiaojie Wang are with the School of Arti- ﬁcial Intelligence, Beijing University of Posts and Communications, and the Engineering Research Center of Information Networks, Ministry of Educa- tion, Beijing 100876, China (e-mail: f.fangxiang@gmail.com; rﬂi@bupt.edu.cn; xjwang@bupt.edu.cn).
+
+Tianrui Niu is with the School of Artiﬁcial Intelligence, Beijing Uni- versity of Posts and Communications, Beijing 100876, China (e-mail: niwtr@bupt.edu.cn).
+
+Color versions of one or more ﬁgures in this article are available at https: //doi.org/10.1109/TMM.2021.3075997.
+
+Digital Object Identiﬁer 10.1109/TMM.2021.3075997
+
+vision and language. Due to its signiﬁcant potential in a number of applications, such as interactive art creation and computer- aided drawing, T2I synthesis task has recently become an ac- tive research area [1]–[9]. Most existing methods [10] for this task are built upon the powerful Generative Adversarial Net- works(GAN) [11]. Contrary to fundamental image synthesis problems, T2I synthesis conditions on both text descriptions and noise rather than starting with noise alone. It therefore requires the conditional version of GAN [12], which can generate the fake samples with a speciﬁc condition.
+
+Reed et al. [13] ﬁrst showed that the conditional GAN was capable of generating plausible 64x64 px images from text descriptions. Their follow-up works, i.e. StackGAN [14] and StackGAN-v2 [15], achieved good image quality at the resolu- tion of 256x256 by using the multi-stage architecture. Current research efforts [16]–[20] have primarily focused on enhancing the the image-text correlation from two aspects. One is to in- crease the semantic consistency between the generated image and the text description through an external loss function, such as the DAMSM loss [16] and the STREAM loss [18]. The other one is to introduce the word-level visual attention mechanism to capture ﬁne-grained image-text correlation. Speciﬁcally, when generating the high-resolution images, the attention based mod- els, such as AttnGAN [16] and DM-GAN [20], build the correla- tion between sub-regions of the generated low-resolution images and words in the text descriptions.
+
+Although these recently proposed GAN-based models achieve remarkable progress, they employ the same discrimina- tor and adversarial losses as StackGAN-v2. In general, the ad- versarial losses used in these models usually include two losses: an unconditional loss that determines whether the image is real or fake, and a conditional loss that determines whether the im- age and the text match. We argue that the existing discrimi- nator is not efﬁcient enough for the conditional loss to judge whether the image and text match. This is mainly because each generated image is composed of two parts: the text-related part and the text-irrelevant part. However, the existing discrimina- tor does not distinguish between these two parts. This is suit- able for the unconditional loss since its goal is to classify the entire image into the class of real or fake. But the purpose of the conditional loss is to determine the real or fake of the text-related part, so it is necessary to infer the text-related part of the image explicitly. Therefore, the discriminator that can pro- vide the text-related part of the image is more efﬁcient for the conditional loss to determine whether the generated images are related to the text description. Meanwhile, the text-irrelevant
+
+1520-9210 © 2021 IEEE. Personal use is permitted, but republication/redistribution requires IEEE permission.
+
+See https://www.ieee.org/publications/rights/index.html for more information.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2113
+
+Fig. 1. Difference between the vanilla discriminator and our modality disen- tangled discriminator: our modality disentangled discriminator disentangles the image representation into the common representation and the modality-speciﬁc representation while the vanilla discriminator only learns a single image repre- sentation.
+
+part of the image should be separately classiﬁed as real or fake.
+
+Based on the above observations, it is necessary to distinguish between the text-related part and text-irrelevant part of the im- age in the discriminator. To that effect, a modality disentangled discriminator is proposed in this paper. As shown in Figure 1, we enforce the early layers of a certain number in the discrimi- nator to become the image encoder, and further disentangle the image representation into two parts: the common representation related to the text and the modality-speciﬁc representation inde- pendent with the text. Since the common representation can be obtained by the discriminator network, we can utilize the com- mon representation rather than the full output vector of the dis- criminator to determine if the image and text match or not. This allows the conditional loss to be more focused on determining the image-text correlation. Similarly, since the modality-speciﬁc representation can be directly extracted, we can introduce an unconditional loss for the text-irrelevant part alone, which can classify the text-irrelevant part into real or fake. This can make the style codes extracted from the real image better adapt to the generated image when performing the style transfer task on the ﬁne-grained dataset.
+
+The modality disentangled discriminator is used to substitute the discriminator of each stage in two models, i.e. the classic model AttnGAN and the SOTA model DM-GAN. Due to the efﬁcient modality disentangled representation learned, the mod- els with our proposed discriminator perform better on both the image generation quality measure and text-image correlation measure than the base models without it empirically.
+
+Furthermore, the modality-speciﬁc representation can be uti- lized to perform the style transfer task easily. In the context of T2I synthesis task, the text-related part of the image is called the image content, and the text-irrelevant part is called the image style. For example, in the CUB [21] dataset, the image content is the visual attributes of the bird provided by the text descriptions, and the image style is the other text-irrelevant part, e.g. the back- ground or the bird pose that the captions do not mention. As for the COCO [22] dataset, if all the text descriptions do not involve “sky,” the “sky” shown in the image becomes the style part. For simplicity, we use content to denote text-related part and style to denote text-irrelevant part in the following description.
+
+To further control the style of the generated image, Reed et al.[13]proposeGAN-INT-CLStoexplorethestyletransfertask, which transfers the style of a query image onto the content of a particular text description. An additional convolutional neural network is trained to invert the generator to regress from samples back onto the noise, thereby obtaining the style of the query image. However, as shown in [23], this method is insufﬁcient to achieve disentanglement in real images due to the domain gap between real and fake images. Our proposed discriminator explicitly determines the real and fake of the style and reduces the gap of the real and fake image style, thus obtains a better style transfer result.
+
+In summary, this work has three major contributions. • To the best of our knowledge, our proposed discriminator is the ﬁrst one to learn the modality disentangled representa- tion for T2I synthesis task. This is beneﬁcial in two kinds of ways. On the one hand, the common representation can make the discriminator effectively distinguish the image-text correla- tion. On the other hand, the modality-speciﬁc representation can make it easy to manipulate image synthesis, which is a common requirement of image synthesis tasks.
+
+• We implement modality disentanglement by introducing two correlation losses to the existing discriminator network of GAN. This solution therefore neither increases the model size nor reduces the model efﬁciency.
+
+• The experimental results demonstrate that our modality disentangled discriminator can improve the classic model At- tnGAN and the SOTA model DM-GAN. Moreover, the base models with the proposed discriminator achieve excellent re- sults in style transfer and style embedding interpolation tasks.
+
+II. RELATED WORK
+
+A. Text-to-Image Synthesis
+
+GAN has been widely used in various multimedia material synthesis tasks, such as image synthesis [24], speech synthe- sis [25], image-to-image translation [26]–[29], video-to-video translation [30], [31], and text-to-video synthesis [32]. Most of the T2I synthesis models [2], [3], [13]–[16] are also based on GAN. For instance, [13] construct a conditional GAN-based framework to generate 64x64 images with text descriptions suc- cessfully. Moreover, they also demonstrated that the proposed GAN-INT-CLS can perform the style transfer task successfully. In order to synthesize higher resolution images, some recent work has adopt multi-stage architecture to build the T2I syn- thesis model. For example, the StackGAN [14] is proposed to decompose the T2I generative process into two separate stages. The ﬁrst stage sketches the primitive shape and basic colors and thesecondstagecompletesdetailsbyreadingthetextdescription again. The StackGAN-v2 [15] uses a tree structure to integrate multiple stages into an end-to-end model. Based on this classi- cal architecture, AttnGAN [16], MirrorGAN [18], SEGAN [19], DM-GAN [20], Obj-GAN [33] and CPGAN [34] exploit the attention mechanism to utilize the ﬁne-grained word level in- formation to further improve image generation. Additionally, all these models incorporate the DAMSM into their framework,
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2114 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+thus can compute the correlation between the generated images and the text descriptions.
+
+The design of the discriminator is also one of the research focuses of T2I synthesis task. For example, Obj-GAN [33] pro- posed an object-level discriminator to speciﬁcally determine whether each object is real. In [17], [34], [35], the word-level correlation between the generated image and the text is consid- ered in the discriminator. These models all enhance the ability of the discriminator to determine certain aspects of the gener- ated image by explicitly adding modules, such as determining whether the generated objects are real or fake, and determin- ing whether the image and words match or not. Intuitively, if the original discriminator can be fully optimized, it should also have these capabilities. However, it is difﬁcult to optimize the origi- nal discriminator to perfection. Therefore, some clear goals are needed to guide the discriminator. Similar to these works, our proposed discriminator also enhances the identiﬁcation ability of the model, that is, the ability to determine whether the image content and text match or not and whether the image style are real or fake.
+
+B. Disentangled Representation Learning
+
+Recently, a large quantity of literature [36], [37] has argued that the good representation should be disentangled. For this reason, there has been a variety of work to learn disentangled representation for image [27], [28], [38]–[44], video [45], na- ture language [46], speech [47], recommendation system [48], network analysis [49] and multimodal data [50], [51]. For the multimodal data, [52] propose TD-GAN that ﬁrst maps the im- age and tags into a disentangled common representation space and then generates images from that space. [53] ﬁrst disentan- gle the representation of a talking face sequence into the identity and speech parts, and then reorganize them to generate the new talking face.
+
+The GAN-based models with our modality disentangled dis- criminator are similar to several disentangled image-to-image (I2I) translation models, such as UNIT [27] and MUNIT [28], but has three main differences. 1) We tackle the T2I genera- tion problem rather than I2I translation. In general, the seman- tic gap between text and image is larger than the gap between images with different styles. An obvious piece of evidence is that most research on I2I translation can only use the unpaired image-image data, but the studies on T2I generation are all about paired image-text data. 2) The goal of our discrimina- tor is to disentangle the common and modality-speciﬁc part of multimodal data for manipulating image synthesis easily and enhancing the text-image correlation, which is different from the goal of the disentangled image-to-image translation mod- els, which is to generate diverse outputs from a given source domain image. 3) We implement modality disentanglement by reusing the discriminator in GAN as the feature extractor. This comes from two motivations. The ﬁrst is to reduce the model size and increase the model efﬁciency. The second is that the T2I models include a discriminator that judges the image-text correlation. Intuitively, since the discriminator only depends on the common part, disentangling representation can promote the
+
+training of this discriminator. Moreover, we use Pearson corre- lation instead of L1 used by most I2I translation models as the similarity score function for disentangling representation since the Pearson correlation only requires linear correlation between vectors, thereby can leave some capacities for the discriminator.
+
+C. Representation Learning in Discriminator
+
+The idea of performing representation learning in the discrim- inator of GAN framework has been explored by some recent works. For example, InfoGAN [54], which attempts to generate images from the noise consisting of both the continuous and dis- crete variables, uses the discriminator to reconstruct the discrete noise to obtain the disentangled representation. AC-GAN [55] replaces the discrete noise in InfoGAN with the label of the gen- erated image and then uses the discriminator to reconstruct the label. Very recently, NICE-GAN [56] reuses the discriminator for encoding to perform the unsupervised I2I translation task.
+
+The proposed model is different from InfoGAN/AC-GAN on the goal, the information to be reconstructed and the ap- plication. Firstly, our model aims to disentangle the common and modality-speciﬁc representation of multimodal data, while InfoGAN/AC-GANaimstoimprovesamplequalitywithinasin- gle modality. Secondly, InfoGAN/AC-GAN only reconstructs partial information, i.e. a subset of noise variables/class labels. In contrast, our model reconstructs all information, i.e. text in- formation and all noise variables. Moreover, instead of recon- structing the ﬁxed inputs, our model reconstructs the text repre- sentation that should be learned in the generator. This is a novel attempt, and the experimental results also verify the rationality of this attempt. Thirdly, our model is applied to the problem of image generation conditioned the text rather than the noise and label.
+
+III. GAN WITH MODALITY DISENTANGLED DISCRIMINATOR
+
+A. Model Architecture
+
+As shown in Figure 2, a GAN-based model with the modality disentangled discriminator (GAN-MDD) performs T2I synthe- sis using four consecutive modules: the text encoder ET , the generator network (F, G), the image encoder EI and the dis- criminator network D∗. It has to be noticed that the discrimi- nator of the GAN-based T2I model includes two modules: the image encoder and the discriminator network. We will elaborate each of the four modules below.
+
+The text encoder ET is a simple one-layer fully-connected neural network that converts the text embedding ϕ to the text feature htc. The text embedding is often obtained through a pre-trained image-text matching model. In more detail, both the AttnGAN and DM-GAN adopt the DAMSM model to learn the text embedding. We do not use the Conditioning Aug- mentation (CA) module here because the random noise intro- duced by the CA module causes the text feature to contain the modality-speciﬁc part of the image.
+
+The generator network takes the hidden states h as input and generate the fake image ˆx. The image generation is conditioned
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2115
+
+Fig. 2. The architecture of GAN-based model with the proposed modality disentangled discriminator. The discriminator of the common GAN-based T2I model contains the image encoder and the discriminator network.
+
+on the text description and a noise sample. Formally,
+
+h = F(htc, z),
+
+ˆx = G(h)
+
+Here, z is the noise vector which is randomly sampled from a Gaussian distribution and F is modeled as neural network with several up-sampling blocks.
+
+The image encoder is composed of the ﬁrst few layers of the discriminator in traditional GAN. Thus, the image encoder of GAN-MDD takes the synthesized or real image as input and extract the modality disentangled features respectively as shown in Eq.(2).
+
+(hsc, hss) = EI(ˆx),
+
+(hic, his) = EI(x)
+
+where hsc and hss denote the common feature and modality- speciﬁc feature extracted from the synthesized image, and hic andhis denotethecommonfeatureandmodality-speciﬁcfeature of the real image.
+
+The discriminator network has three branches to produce three decision scores. As illustrated in Figure 2, we denote Ds, Dc, Di as the three branches of the discriminator. The corre- sponding output scores are denoted as ss, sc and si. ss is the score of being visually real of the image style, sc indicates the score of the text-image paired semantic consistency, si measures the score of visual reality of the image. Formally, the three scores for synthesized and real images can be computed as follows:
+
+ss(ˆx) = Ds(hss), ss(x) = Ds(his)
+
+sc(ˆx) = Dc(htc, hsc), sc(x) = Dc(htc, hic)
+
+si(ˆx) = Di(hsc, hss), si(x) = Di(hic, his)
+
+Here, ss depends on the modality-speciﬁc feature of image, sc depends on the common features of text and image and si re- quires both the common and modality-speciﬁc feature of image.
+
+B. Objective Functions and Training Procedure
+
+Theobjectivefunctionsconsistofthreelosses:thecontentloss that aligns the generated image and the text description, the style loss that learns the modality-speciﬁc feature of the generated image, and the adversarial loss that ensures the generated image is visually realistic and matches the text description. Details of these losses are introduced below.
+
+1) Content Loss: Triplet loss is a common ranking objective for image-text alignment. Previous approaches [57]–[59] have employed a hinge-based triplet ranking loss with margin α, i.e.
+
+L(u, v, v−) = [α −f(u, v) + f(u, v−)]+ (4)
+
+where [x]+ = max(0, x) and f is a similarity score function. Here, we use the Pearson correlation as the similarity score func- tion. u is the anchor text, v and v−are the images that match and do not match the anchor text, respectively.
+
+In GAN-MDD, the generator network observes the feature of an anchor text description htc. The discriminator network observes two kinds of image features: the feature of the image synthesized from the anchor text (hsc, hss), and the feature of the image synthesized from the text different with the anchor text (h−
+
+sc, h−
+
+ss). We aim at maximizing the correlation between the matched image and text pairs while minimizing the corre- lation between the mismatching pairs. Thus, the content loss is formulated as follows:
+
+LC = L(htc, hsc, h−
+
+sc) (5)
+
+It is worth noting that the content loss only depends on the com- mon feature of the text description and the image.
+
+2) Style Loss: As mentioned above, the image generation is conditioned on the text description and a noise sample. More speciﬁcally, the text description captures the common informa- tion while the noise vector captures the modality-speciﬁc infor- mation. In order to learn the modality-speciﬁc image feature, the objective of the style loss is to maximize the correlation be- tween the modality-speciﬁc feature of the synthesized image and its corresponding noise vector. Mathematically, the style loss is
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2116 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+deﬁned as
+
+LS = −ρ(z, hss) (6)
+
+where ρ is the Pearson correlation, z is the noise vector and hss is the modality-speciﬁc feature of the synthesized image. The intuition behind this objective is that the style information in the synthesized image is determined by the noise vector, thus learn- ing the image style is equivalent to learning a feature extractor that reconstructs the noise vector.
+
+Here we give an explanation for using Pearson correlation in- stead of the common distance function, such as L1 or L2 as the similarity score measure. In fact, if GAN-MDD uses L1, it will fail to train. This is because the discriminator and the feature extractor in GAN-MDD share the same weights, and the con- straint of L1 is too strict, so that these weights are completely determined by feature extractor, thus have no relation with dis- criminator. In contrast to L1, Pearson correlation, which only requires linear correlation between vectors, can leave some ca- pacities for the discriminator.
+
+3) Adversarial Loss: Following [15], [16], [20], we employ two adversarial losses: the unconditional loss which determines whether the image is real or fake and the conditional loss which determines whether the image and the condition match or not. In contrast to [15], [16], [20], the GAN-MDD utilizes the dis- entangled image features rather than the whole output feature to construct the conditional loss. Speciﬁcally, the conditional loss only involves the common feature of image and text, and the unconditional loss for image depend on both the common and modality-speciﬁc feature. Technically, the generator loss and discriminator loss are deﬁned as
+
+LG = −Eˆx∼pG[log(sc(ˆx))]    conditional loss
+
+−Eˆx∼pG[log(ss(ˆx))]    unconditional loss for style
+
+−Eˆx∼pG[log(si(ˆx))]    unconditional loss for image
+
+LD = −Ex∼pdata[log(sc(x))] −Eˆx∼pGi [log(1 −sc(ˆx))]
+
+   conditional loss
+
+−Ex∼pdata[log(ss(x))] −Eˆx∼pGi[log(1 −ss(ˆx))]    unconditional loss for style
+
+−Ex∼pdata[log(si(x))] −Eˆx∼pGi[log(1 −si(ˆx))]    unconditional loss for image
+
+where x is from the true image distribution pdata, and ˆx is from the model distribution pGi.
+
+4) Training Procedure: Combining the aforementioned con- tent loss, style loss and adversarial loss, the total loss of the GAN-MDD is obtained, i.e.
+
+LDtotal = LD + λCLC + λSLS (9)
+
+LGtotal = LG + λCLC (10)
+
+Thus, the GAN-MDD is trained by alternatively updating the parameters of LDtotal and LGtotal. λC and λS are the hyper- parameters that balance the content loss and the style loss. The
+
+details of the training procedure for GAN-MDD are presented in Algorithm 1.
+
+IV. EXPERIMENTS
+
+To validate the effectiveness of our discriminator, we lever- age the modality disentangled discriminator to substitute the discriminator of all three stages in AttnGAN and DM-GAN, yielding AttnGAN-MDD and DM-GAN-MDD. The two mod- els are evaluated on three widely-used datasets: CUB [21], Oxford-102 [60], and COCO [22]. The CUB dataset contains 11 788 images of birds belonging to 200 different species. The Oxford-102 has 8189 images of ﬂowers from 102 categories. Each image in both datasets has 10 descriptions. The COCO dataset includes a training set with 80 000 images and a test set with 40 000 images. Each image in the COCO dataset has ﬁve text descriptions. In order to keep our evaluation comparable to previous work, for the CUB and COCO dataset, we adopt the same experimental setup as AttnGAN and DM-GAN. As for the Oxford-102 dataset, we use the training and testing split from [15].
+
+A. Implementation Details
+
+We make the same modiﬁcation on AttnGAN and DM-GAN due to their same discriminator network architecture. There- fore, we only introduce the implementation details of AttnGAN- MDD. The parameter settings of the our AttnGAN-MDD are as consistentaspossiblewithAttnGAN.Speciﬁcally,theparameter settings of our AttnGAN-MDD are same as AttnGAN before the last down-sampling block in each discriminator. Here, we only present the implementation details after the last down-sampling block. We ﬁrst split the last down-sampling block of shape
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2117
+
+TABLE I IS,FID ON THE THREE DATASETS. + INDICATES THAT THE VALUE IS CALCULATED BY THE PRE-TRAINED MODEL PROVIDED BY THE AUTHOR AND ∗INDICATES
+
+THAT THE VALUE IS OBTAINED BY TRAINING THE MODEL USING THE OFFICIAL CODE
+
+512x4x4 into two tensors along the channel axis: a 100x4x4 tensor to extract the modality-speciﬁc feature and a 412x4x4 ten- sor which is transformed using a 3x3 convolution to a 128x4x4 tensor to extract the common feature. The modality-speciﬁc fea- ture and common feature are obtained by transforming these two tensors to 100-dimensional modality-speciﬁc image feature and 128-dimensional common image feature via the global average pooling layer.
+
+The modality-speciﬁc tensor and common tensor are followed by three branches corresponding two decision scores as shown in Figure 2. In the higher branch, the modality-speciﬁc tensor is transformed using a 3x3 convolution followed by a 4x4 con- volution to the decision score ss. In the middle branch, the modality-speciﬁc and common tensors are jointly transformed to a 128x4x4 tensor and then the decision score si via two con- volutions. In the lower branch, the common tensor is ﬁrst con- catenated with the text feature and is then transformed to a single scalar sc via two convolutions. The hyperparameters λC and λS are both set to 1.0 in all experimental settings. Our implementa- tion is built on top of the ofﬁcial source code of AttnGAN and DM-GAN.
+
+B. Evaluation
+
+1) Image Generation Quality Measure: Our model is ﬁrst evaluated using the Inception Score (IS, larger is better) [61] and Fr ´e chet Inception Distance (FID, smaller is better) [62]. The implementation comes from the evaluation code organized by DM-GAN.
+
+We compared our two GAN-MDDs with several GAN mod- els for T2I synthesis on test datasets of CUB and COCO. Table I presents all the results. Overall, our DM-GAN-MDD achieves best performance on both the IS and FID on the two datasets. The two GAN-MDDs perform better than their corresponding baseline models. In more detail, our AttnGAN-MDD outper- forms the AttnGAN both on the IS and the FID. It increases the IS from 4.36 to 4.52 and decreases the FID from 23.98 to 20.30 on CUB dataset, increases the IS from 3.88 to 4.13 and decreases the FID from 55.96 to 51.42 on Oxford-102 dataset, increases the IS from 25.98 to 27.35 and decreases the FID from 35.49 to
+
+TABLE II R-PRECISION ON THE THREE DATASETS
+
+33.16 on the COCO dataset. The DM-GAN-MDD also outper- forms the DM-GAN both on the IS and the FID. It increases the IS from 4.75 to 4.86 and decreases the FID from 16.09 to 15.76 on the CUB dataset, increases the IS from 4.18 to 4.23 and de- creases the FID from 41.35 to 40.18 on the Oxford-102 dataset, increases the IS from 30.49 to 34.46 and decreases the FID from 32.64 to 24.30 on the COCO dataset. These results reveal that our proposed modality disentangled discriminator can make the GAN-based T2I models generate images with better quality.
+
+2) Text-Image Correlation Measure: Previous ap- proaches [16], [18], [20] have adopt the R-precision to evaluate the correlation between the generated images and their corresponding text descriptions. As [20], for each model to be evaluated, we generate 30 000 images from random selected unseen text descriptions. The R-precision is measured by retrieving text given the generated image query. For each image query, the candidates include the corresponding text description and 99 randomly selected mismatching text descriptions. As a basis of ranking, the similarity between image and text is the cosine distance between the global image vector and the sentence vector extracted by the DAMSM. The R-precision is the relative number of text, which is correctly retrieved in the ﬁrst place of the ranked list. We divide the generated images into ten folds for retrieval and then take the mean and standard deviation of the resulting scores.
+
+Table II presents the R-precision scores on the two datasets. OurGAN-MDDsoutperformthebaselinemodelsonalldatasets. Speciﬁcally, compared with AttnGAN, AttnGAN-MDD im- proves the R-precision rate from 67.82% to 69.88% on the CUB dataset, from 64.98% to 74.29% on the Oxford-102 dataset and from 85.47% to 88.27% on the COCO dataset. Compared with DM-GAN, our DM-GAN-DMM improves the R-precision rate
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2118 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+Fig. 3. Examples of images generated by DM-GAN and DM-GAN-MDD conditioned on text descriptions from COCO test set.
+
+from 72.31% to 79.73% on the CUB dataset, from 80.75% to 83.70% on the Oxford-102 dataset and from 88.56% to 94.37% on the COCO dataset. This indicates that learning the common representation of the text descriptions and generated images can signiﬁcantly improve the text-image correlation.
+
+Figure 3 presents several images generated by DM-GAN and our DM-GAN-MDD using texts from COCO test set. As it shows, our DM-GAN-MDD generated more realistic im- ages than DM-GAN. For instance, in the ﬁrst example, the im- age generated by DM-GAN-MDD contains a clear clock tower while the image generated by DM-GAN does not. In the sec- ond and third example, the elephants and sheep generated by our DM-GAN-MDD are more realistic and their arrangement is more reasonable.
+
+C. Style Manipulation
+
+In this section, we perform the following two style manipu- lation experiments on CUB dataset to further demonstrate the advantages of modality disentangling for T2I generation task.
+
+1) Style Transfer: The ﬁrst advantage is that our models can utilizethemodality-speciﬁcimagefeaturetoperformstyletrans- fer task directly. Firstly, we extract the text code from the text description by the text encoder. Then, given a style image, we use the modality-speciﬁc feature extracted by the largest scale image encoder as the style code. Finally, the text code and the style code are concatenated to generate the image. In this way, this image will have a similar style to the given image and its content will be consistent with the text description.
+
+Among the previous works, only GAN-INT-CLS [13] is used to perform the style transfer task successfully, it is therefore used to compare with our model. For a fair comparison, we conduct style transfer experiment on the same text descriptions and style images as [13]. Moreover, we also train a one-stage AttnGAN- MDD without attention mechanism (AttnGAN1-MDD) to gen- erate images with a resolution of 64x64 px to reduce the impact of differences between the basic model architectures.
+
+As shown in Figure 4, images generated by GAN-INT-CLS can capture the pose information, but only several cases that the
+
+style transfer preserves detailed background information. For example, the blue background of the ﬁrst two style images is never learned correctly by GAN-INT-CLS, and in the second group of comparison, their model messed up the background completely. In contrast, our AttnGAN1-MDD is able to capture the exact color schemes of backgrounds, and is more precise on detailed factors such as a tree branch upon which the bird is perched, as the tree branch is preserved in every test case no matter how thin it is provided in the style image. This shows that our GAN-MDD can reconstruct the style information more accurately than the GAN-INT-CLS, and the noise vector is only responsible for generating the style of the image.
+
+Figure 4 also presents the result of AttnGAN-MDD and DM-GAN-MDD with three stages. Although these two mod- els generate images with better details, their disentangled per- formance is comparable to AttnGAN1-MDD. This indicates that the content loss and style loss determine the disentangle- ment, while the basic model architecture determines the gen- eration quality. Therefore, the basic model architecture does not affect the quality of the disentanglement. Moreover, in- stead of training the external CNN model in GAN-INT-CLS, the proposed models only utilize the internal image encoder to achieve this result and no additional training process is required.
+
+2) Style Embedding Interpolation: As shown in the style transfer task, our models are able to capture the style of a given image. So additionally, we can also perform interpolation on the latent space of image styles, to further demonstrate the ability of disentangling, as well as the preciseness and expressiveness of captured styles.
+
+To achieve this task, we ﬁx the text embeddings unchanged as some selected text descriptions. We randomly select pairs of real images from the CUB test dataset and use our image encoder to extract the style codes. We then perform linear interpolation on thosestylecodesandfeedthemasnoisevectorintothegenerator. The generation results are shown in Figure 5, where each row corresponds to different texts and each column is for different point of interpolation. The style-providing images are put on both sides for reference.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2119
+
+Fig. 4. Transferring style from the real images to the content from the query text. The top group shows the real images that provide the style for each column. The other groups present three examples. In each group, the top row is the text description, the remaining four rows present the results of GAN-INT-CLS, one-stage AttnGAN1-MDD, three-stage AttnGAN-MDD and DM-GAN-MDD respectively.
+
+As discussed in [13], the style of images include the pose of objects being generated and the background, which is not mentioned in texts. It’s clear in the ﬁgure that our model captures those factors fairly precisely and there’s a smooth transform of both pose and background from left to right. In the left half of the ﬁgure, a bird is standing on top of a horizontal wood branch facing left and the background has a light color, while on the right half the bird turns right and moved to an inclined branch. During the transformation, the content (color of birds) is nearly unchanged, which shows the ability of our model to disentangle features. It’s worth noting that, by combining different style- providingimages,ourmodelisabletogeneratecompletelynovel
+
+TABLE III RESULTS OF ABLATION STUDY OF THE ATTNGAN-MDD ON THE CUB
+
+DATASET
+
+images, without the loss of generation quality. This is because the probabilities of style and content are modeled separately.
+
+D. Ablation Study
+
+In this section, we perform four ablation experiments in or- der to better understand the modality disentangled discriminator. Firstly, we remove some losses involving the modality disentan- gled discriminator and observe the effect on the model. Then, we give an analysis of the impact of the trade-off weights of content loss and style loss under two different similarity metrics. Next, we report the result of our modality disentangled discriminator that does not use a weight sharing strategy. Finally, we present the effect of applying modality disentangled discriminator in different stages of AttnGAN.
+
+1) Remove Some Losses Involving MDD: We make four modiﬁcations to the discriminator of the baseline GAN-based models: adding the content loss (LC), adding the style loss (LS), changing the representation that the conditional adversarial loss depends on (Ddis) and adding style adversarial loss (Ds). To validate the effectiveness of the ﬁrst two modiﬁcations, we con- duct two comparative experiments by excluding/including the content loss and style loss. It has to be noticed that the lack of style loss will make the model lose the ability to perform the style transfer task. For the representation that the conditional adver- sarial loss depends on, we compare the two cases that depends on all representation and depends solely on the disentangled com- mon representation. As for the last modiﬁcation, we also report the results of excluding/including the style adversarial loss.
+
+Table III summarizes the IS, FID and R-precision obtained by the AttnGAN-MDD for those settings on the CUB dataset. The 1st row shows the results of the baseline model. The 2nd and 3 rd rows present the results of the AttnGAN-MDD when one of the two correlation losses (LC and LS) is missing. The AttnGAN-MDD that only uses content loss or style loss only performs slightly better than the baseline model. This is be- cause in this case, the AttnGAN-MDD cannot provide a good disentangled representation for the conditional loss or style ad- versarial loss. The 4th to 6th rows show the result of the case where the disentangled representation is learned using both con- tent loss and style loss. As the 4th row shows, the model that the conditional loss relies on full representations can also obtain signiﬁcantly better result than the baseline. This is because the discriminator has provided the common and modality-speciﬁc representations, although both the representations are used as the input of the conditional loss, it is also easier for the condi- tional loss to ﬁnd the content part of the image. Of course, as
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2120 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+Fig. 5. Images generated by interpolating two style embeddings. In each row, the left side is a text description and the right side is a list of images. The rightmost and leftmost images are real images that provide style information. The others are images generated by interpolating the two embeddings extracted from the style images. The content of the generated images is consistent with the text description.
+
+Fig. 6. IS and FID on CUB as a function of ratio of the content loss weight to the style loss weight. (a) IS. (b) FID.
+
+shown in the 5th row, feeding the common representation alone into conditional loss can achieve better results. At last, adding the style adversarial loss can further improve the performance.
+
+2) Different Conﬁgurations of λC, λS and Similarity Mea- sure: Figure 6 reports the IS and FID on CUB dataset with
+
+seven different ratios of the weights of the content loss (λC) and the weights of style loss (λS). Among these ratios (0.1, 0.2, 0.5, 1, 2, 5, 10), 1 means that both λC and λS are set to 1. Each of the other six values includes two speciﬁc conﬁgurations of λC and λS. For example, the result with a ratio of 0.1 is the bet- ter result between the conﬁguration λC = 0.1, λS = 1 and the conﬁguration λC = 1, λS = 10. And the result with a ratio of 5 is the better result between the conﬁguration λC = 1, λS = 0.2 and the conﬁguration λC = 5, λS = 1. For each ratio, we also report the the results of two different similarity score functions, i.e. Pearson correlation and L2 distance. It should be pointed out that we only used a two-stage AttnGAN-MMD to generate 128x128 pix images due to the computational issue.
+
+As shown in Figure 6, the model whose content loss weight is close to style loss weight achieves better performance. This indicates that both the content loss and the style loss are equally important to our model. Leaning to either side will result in a loss of performance. This is the reason that we set both λC and λS to 1. Compared with the model using L2, the model using Pearson correlation as the similarity score function achieves better per- formance. As we already explained, in calculating the similarity between two vectors, Pearson correlation requires fewer factors than L2, that is, Pearson correlation does not require the mean and variance of two vectors to be the same. In most tasks that rely on the similarity measure to perform retrieval or reconstruction, both Pearson correlation and L2 can usually work. However, in our model, the discriminator depends entirely on the constrained disentangled representation to determine whether the image is real or fake and whether the image and text are relevant. That is to say, if we use the L2 distance to make the common representa- tion reconstruct the text feature vector, and the modality-speciﬁc representation reconstruction the noise vector, then the obtained disentangled representation will be difﬁcult for the discriminator to use effectively. Similarly, if the disentangled representation is meant to serve the discriminator, it will also reduce the perfor- manceofreconstruction.Pearsoncorrelationonlyrequireslinear correlation between vectors, which leaves degrees of freedom
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2121
+
+Fig. 7. Style transfer with AttnGAN-MMD involving different ratios of λC to λS (0.1, 0.2, 0.5, 1, 2, 5, 10) under the Pearson correlation and L2 similarity measures.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2122 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+TABLE IV RESULTS OF APPLYING MDD IN DIFFERENT STAGE OF ATTNGAN ON THE
+
+CUB DATASET
+
+for the learned disentangled representation to serve the discrim- inator.
+
+Figure 7 presents the qualitative results involving style trans- fer task. We can clearly see that the models with L2 distance as the similarity measure obtain very bad results. Regardless of the ratio of λC to λS, the images generated by the model with L2 are of poor quality, and the results of style transfer are also very bad. For example, the orientation of the birds in all the generated images is opposite.
+
+3) MDD Without Using the Weight Sharing Strategy: Fig- ure 6 also shows the result of AttnGAN-MDD without using the weight sharing strategy. It can be seen that MDD without weight sharing achieves slightly better performance than MDD with weight sharing. This indicates that our proposed disentangled representation learning strategy can also be used in the discrim- inator without weight sharing. However, it should be noted that if the weights are not shared, the parameters of the discriminator are increased by nearly three times. As a result, when training a three-stage model that generates 256x256 resolution images, only a small batch size can be used.
+
+4) Apply MDD in Different Stages of AttnGAN: The afore- mentioned AttnGAN-MDD replaces all three stages of At- tnGAN with MDD. Table IV presents the results of using MDD to replace only a single stage of AttnGAN on the CUB dataset. It should be noted that the last column of Table IV shows the result of directly using the common representation to calculate R-Precision rate, in order to further demonstrate the effect of the disentangled common representation on the image-text correla- tion. Since the common image feature (hsc) and text feature (htc) are in the same feature space, we can compute the Pearson cor- relation of htc and hsc as the cross-modal correlation measure.
+
+It can be seen from Table IV that the performance of apply- ing MDD in only one stage is not as good as the performance of applying MDD in all three stages, and the performance of applying MDD in the high resolution stage is better than that in the low resolution stage. This shows the effectiveness of our proposed discriminator. The more stages of MDD applied on AttnGAN, the better performance can be obtained. Moreover, the R-Precision rate calculated based on the common represen- tation is consistent with other evaluation metrics. In other words, the higher the value of R-Prec-htc-hsc, the better the quality of the generated image, and the more relevant the generated image and text description.
+
+V. CONCLUSION
+
+In this work, we propose a novel discriminator to learn the modality disentangled representation for T2I synthesis task. The
+
+common representation can be used to enhance the correlation between the generated images and the text descriptions, while the modality-speciﬁc representation can be utilized to directly perform style manipulation. The acquisition of modality disen- tangled representation allows the model to control the content and style of the generated image at the same time. Compared with the baseline models, the proposed GAN-MDDs have sim- ilar model size and training/testing time but with better per- formance and more capabilities. Extensive experimental results demonstrate that our DM-GAN-MDD achieves effective perfor- mance on three benchmark datasets.
+
+ACKNOWLEDGMENT
+
+The authors would also like to thank the editor and anony- mous reviewers for their valuable comments that allowed them to improve the ﬁnal version of this article.
+
+REFERENCES
+
+[1] M. Yuan and Y. Peng, “CKD: Cross-task knowledge distillation for text-to-
+
+image synthesis,” IEEE Trans. Multimedia, vol. 22, no. 8, pp. 1955–1968, Aug. 2020. [2] R. Li, N. Wang, F. Feng, G. Zhang, and X. Wang, “Exploring global and
+
+local linguistic representations for text-to-image synthesis,” IEEE Trans. Multimedia, vol. 22, no. 12, pp. 3075–3087, Dec. 2020. [3] M. Tao et al., “DF-GAN: Deep fusion generative adversarial networks for
+
+text-to-image synthesis,” 2020, arXiv:2008.05865. [4] S. Pan, L. Dai, X. Zhou, H. Li, and B. Sheng, “ChefGAN: Food image
+
+generation from recipes,” in Proc. 28th ACM Int. Conf. Multimedia, ser. MM ’20, 2020, pp. 4244–4252. [5] J. Cheng, F. Wu, Y. Tian, L. Wang, and D. Tao, “RifeGAN: Rich feature
+
+generation for text-to-image synthesis from prior knowledge,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2020, pp. 10908– 10917. [6] B. Zhu and C.-W. Ngo, “CookGAN: Causality based text-to-image synthe-
+
+sis,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2020, pp. 5518–5526. [7] B. Li, X. Qi, T. Lukasiewicz, and P. H. Torr, “ManiGAN: Text-guided im-
+
+age manipulation,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recog- nit., Jun. 2020, pp. 7877–7886. [8] M. Yuan and Y. Peng, “CKD: Cross-task knowledge distillation for text-to-
+
+image synthesis,” IEEE Trans. Multimedia, vol. 22, no. 8, pp. 1955–1968, Aug. 2020. [9] A. Ramesh et al., “Zero-shot text-to-image generation,” 2021, arXiv:2102.12092. [10] S. Frolov, T. Hinz, F. Raue, J. Hees, and A. Dengel, “Adversarial text-to-
+
+image synthesis: A review,” 2021, arXiv: 2101.09983. [11] I. Goodfellow et al., “Generative adversarial nets,” in Proc. Adv. Neural
+
+Inf. Process. Syst., 2014, pp. 2672–2680. [12] M. Mirza and S. Osindero, “Conditional generative adversarial nets,” 2014,
+
+arXiv:1411.1784. [13] S. Reed et al., “Generative adversarial text to image synthesis,” in Proc.
+
+33rd Int. Conf. Int. Conf. Mach. Learn. - Volume 48, ser. ICML’16, 2016, pp. 1060–1069. [14] H. Zhang et al., “StackGAN: Text to photo-realistic image synthesis with
+
+stacked generative adversarial networks,” in Proc. Int. Conf. Comput. Vis., 2017, pp. 5908–5916. [15] H. Zhang et al., “StackGAN++: Realistic image synthesis with stacked
+
+generative adversarial networks,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 41, no. 8, pp. 1947–1962, Aug. 2019. [16] T. Xu et al., “AttnGAN: Fine-grained text to image generation with atten-
+
+tional generative adversarial networks,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2018, pp. 1316–1324. [17] B. Li, X. Qi, T. Lukasiewicz, and P. Torr, “Controllable text-to-image
+
+generation,” in Proc. Adv. Neural Inf. Process. Syst., 2019, pp. 2065–2075. [18] T. Qiao, J. Zhang, D. Xu, and D. Tao, “MirrorGAN: Learning text-to-image
+
+generation by redescription,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2019, pp. 1505–1514.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+FENG et al.: MODALITY DISENTANGLED DISCRIMINATOR FOR TEXT-TO-IMAGE SYNTHESIS 2123
+
+[19] H. Tan, X. Liu, X. Li, Y. Zhang, and B. Yin, “Semantics-enhanced adver-
+
+sarial nets for text-to-image synthesis,” in Proc. IEEE Int. Conf. Comput. Vis., Oct. 2019, pp. 10500–10509. [20] M. Zhu, P. Pan, W. Chen, and Y. Yang, “Dm-GAN: Dynamic memory
+
+generativeadversarialnetworksfortext-to-imagesynthesis,”inProc.IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2019, pp. 5795–5803. [21] C. Wah, S. Branson, P. Welinder, P. Perona, and S. Belongie, “The caltech-
+
+ucsd birds-200-2011 dataset,” California Institute of Technology, Tech. Rep. CNS-TR-2011-001, 2011. [22] T.-Y. Lin et al., “Microsoft COCO: Common objects in context,” in Proc.
+
+Eur. Conf. Comput. Vis., 2014, pp. 740–755. [23] Y. Li, K. K. Singh, U. Ojha, and Y. J. Lee, “Mixnmatch: Multifactor dis-
+
+entanglement and encoding for conditional image generation,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2020, pp. 8036–8045. [24] A. Radford, L. Metz, and S. Chintala, “Unsupervised representation learn-
+
+ing with deep convolutional generative adversarial networks,” in Proc. Int. Conf. Learn. Representations, 2016. [25] M. Bi´nkowski et al., “High ﬁdelity speech synthesis with adversarial net-
+
+works,” in Proc. Int. Conf. Learn. Representations, 2020. [26] Z. Yi, H. Zhang, P. Tan, and M. Gong, “DualGAN: Unsupervised dual
+
+learning for image-to-image translation,” in Proc. IEEE Int. Conf. Comput. Vis., Oct. 2017, pp. 2868–2876. [27] M.-Y. Liu, T. Breuel, and J. Kautz, “Unsupervised image-to-image transla-
+
+tion networks,” in Proc. Adv. Neural Inf. Process. Syst., 2017, pp. 700–708. [28] X.Huang,M.-Y.Liu,S.Belongie,andJ.Kautz,“Multimodalunsupervised
+
+image-to-image translation,” in Proc. Eur. Conf. Comput. Vis., 2018, pp. 172–189. [29] J.-Y. Zhu, T. Park, P. Isola, and A. A. Efros, “Unpaired image-to-image
+
+translation using cycle-consistent adversarial networks,” in Proc. IEEE Int. Conf. Comput. Vis., 2017, pp. 2242–2251. [30] T.-C. Wang et al., “Video-to-video synthesis,” in Proc. Conf. Neural Inf.
+
+Process. Syst., 2018, pp. 1152–1164. [31] Y. Chen, Y. Pan, T. Yao, X. Tian, and T. Mei, “Mocycle-GAN: Unpaired
+
+video-to-video translation,” in Proc. 27th ACM Int. Conf. Multimedia, ser. MM ’19. New York, NY, USA: Association for Computing Machinery, 2019, pp. 647–655. [32] Y. Pan, Z. Qiu, T. Yao, H. Li, and T. Mei, “To create what you tell: Gen-
+
+erating videos from captions,” in Proc. 25th ACM Int. Conf. Multimedia, ser. MM ’17. New York, NY, USA: Association for Computing Machinery, 2017, pp. 1789–1798. [33] W. Li et al., “Object-driven text-to-image synthesis via adversarial train-
+
+ing,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2019, pp. 12174–12182. [34] J. Liang, W. Pei, and F. Lu, “CPGAN: Full-spectrum content-parsing gen-
+
+erative adversarial networks for text-to-image synthesis,” in Proc. Eur. Conf. Comput. Vis., 2020, pp. 491–508. [35] B.Li,X.Qi,P.Torr,andT.Lukasiewicz,“Lightweightgenerativeadversar-
+
+ial networks for text-guided image manipulation,” in Proc. Adv. Neural Inf. Process. Syst., vol. 33. Curran Associates, Inc., 2020, pp. 22020–22031. [36] Y. Bengio, A. Courville, and P. Vincent, “Representation learning: A re-
+
+view and new perspectives,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 35, no. 8, pp. 1798–1828, Aug. 2013. [37] F. Locatello et al., “Challenging common assumptions in the unsupervised
+
+learning of disentangled representations,” in Proc. Int. Conf. Mach. Learn., 2019, pp. 4114–4124. [38] X. Yang, D. Xie, and X. Wang, “Crossing-domain generative adversarial
+
+networks for unsupervised multi-domain image-to-image translation,” in Proc. 26th ACM Int. Conf. Multimedia, ser. MM ’18. ACM, 2018, pp. 374– 382. [39] A. Gonzalez-Garcia, J. van de Weijer, and Y. Bengio, “Image-to-image
+
+translation for cross-domain disentanglement,” in Proc. Adv. Neural Inf. Process. Syst., 2018, pp. 1287–1298. [40] Y. Liu et al., “Exploring disentangled feature representation beyond face
+
+identiﬁcation,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2018, pp. 2080–2089. [41] C. Donahue, Z. C. Lipton, A. Balsubramani, and J. McAuley, “Semanti-
+
+cally decomposing the latent spaces of generative adversarial networks,” in Proc. Int. Conf. Learn. Representations, 2018. [42] J. Lin et al., “Exploring explicit domain supervision for latent space disen-
+
+tanglement in unpaired image-to-image translation,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 43, no. 4, pp. 1254–1266, Apr. 2021. [43] X. Yan, J. Yang, K. Sohn, and H. Lee, “Attribute2Image: Conditional
+
+image generation from visual attributes,” in Proc. Eur. Conf. Comput. Vis., 2016, pp. 776–791.
+
+[44] L. Ma et al., “Disentangled person image generation,” in Proc. IEEE Int.
+
+Conf. Comput. Vis. Pattern Recognit., 2018, pp. 99–108. [45] C. Vondrick, H. Pirsiavash, and A. Torralba, “Generating videos with scene
+
+dynamics,” in Proc. Adv. Neural Inf. Process. Syst., 2016, pp. 613–621. [46] G. K. Serhii Havrylov and A. Joulin, “Cooperative learning of disjoint
+
+syntax and semantics,” in Proc. Annu. Conf. North Amer. Chapter Assoc. Comput. Linguistics, 2019, pp. 1118–1128. [47] W.-N. Hsu, Y. Zhang, and J. Glass, “Unsupervised learning of disentan-
+
+gled and interpretable representations from sequential data,” in Proc. Adv. Neural Inf. Process. Syst., 2017, pp. 1878–1889. [48] J. Ma, C. Zhou, P. Cui, H. Yang, and W. Zhu, “Learning disentangled
+
+representations for recommendation,” in Proc. Adv. Neural Inf. Process. Syst., 2019, pp. 5711–5722. [49] Y. Liu, X. Wang, S. Wu, and Z. Xiao, “Independence promoted graph
+
+disentangled networks,” in Proc. AAAI Conf. Artif. Intell., 2020, pp. 4916– 4923. [50] Y.-H. H. Tsai, P. P. Liang, A. Zadeh, L.-P. Morency, and R. Salakhutdi-
+
+nov, “Learning factorized multimodal representations,” in Proc. Int. Conf. Learn. Representations, 2019. [51] A. Saha, M. Nawhal, M. M. Khapra, and V. C. Raykar, “Learning disen-
+
+tangled multimodal representations for the fashion domain,” in Proc. IEEE Winter Conf. Appl. Comput. Vis., Mar. 2018, pp. 557–566. [52] C. Wang, C. Wang, C. Xu, and D. Tao, “Tag disentangled generative ad-
+
+versarial network for object image re-rendering,” in Proc. 26th Int. Joint Conf. Artif. Intell., IJCAI-17, 2017, pp. 2901–2907. [53] H. Zhou, Y. Liu, Z. Liu, P. Luo, and X. Wang, “Talking face generation
+
+by adversarially disentangled audio-visual representation,” in Proc. AAAI Conf. Artif. Intell., 2019, pp. 9299–9306. [54] X. Chen et al., “InfoGAN: Interpretable representation learning by infor-
+
+mation maximizing generative adversarial nets,” in Proc. Adv. Neural Inf. Process. Syst., 2016, pp. 2172–2180. [55] A. Odena, C. Olah, and J. Shlens, “Conditional image synthesis with aux-
+
+iliary classiﬁer GANs,” in Proc. 34th Int. Conf. Mach. Learn., ser. Proc. Mach. Learn. Res., vol. 70, Aug. 2017, pp. 2642–2651. [56] R. Chen, W. Huang, B. Huang, F. Sun, and B. Fang, “Reusing dis-
+
+criminators for encoding: Towards unsupervised image-to-image trans- lation,” in Proc. IEEE Int. Conf. Comput. Vis. Pattern Recognit., 2020, pp. 8165–8174. [57] A. Karpathy and L. Fei-Fei, “Deep visual-semantic alignments for gener-
+
+ating image descriptions,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 39, no. 4, pp. 664–676, Apr. 2017. [58] R. Kiros, R. Salakhutdinov, and R. S. Zemel, “Unifying visual-
+
+semantic embeddings with multimodal neural language models,” 2014, arXiv:1411.2539. [59] K. Lee, X. Chen, G. Hua, H. Hu, and X. He, “Stacked cross attention for
+
+image-text matching,” in Proc. Eur. Conf. Comput. Vis., ser. Lecture Notes Comput. Sci., vol. 11208, 2018, pp. 212–228. [60] M.-E. Nilsback and A. Zisserman, “Automated ﬂower classiﬁcation over
+
+a large number of classes,” in Proc. Indian Conf. Comput. Vision, Graph. Image Process., Dec. 2008, pp. 722–729. [61] T. Salimans et al., “Improved techniques for training GANs,” in Proc. Adv.
+
+Neural Inf. Process. Syst., 2016, pp. 2234–2242. [62] M. Heusel, H. Ramsauer, T. Unterthiner, B. Nessler, and S. Hochreiter,
+
+“GANs trained by a two time-scale update rule converge to a local nash equilibrium,”inProc.Adv.NeuralInf.Process.Syst.,2017,pp.6626–6637.
+
+Fangxiang Feng received the B.S. and Ph.D. degrees from the Beijing University of Posts and Telecommu- nications, Beijing, China, in 2010 and 2015, respec- tively. He is currently an Assistant Professor with the School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications. His research inter- ests include multimedia information retrieval, multi- modal deep learning, and computer vision.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.
+
+2124 IEEE TRANSACTIONS ON MULTIMEDIA, VOL. 24, 2022
+
+Tianrui Niu received the B.E. degree in 2018 from the School of Computer Science, Beijing University of Posts and Telecommunications, Beijing, China, where he is currently working toward the master’s degree with the School of Artiﬁcial Intelligence. His research interests include cross-modal generation and machine leaning.
+
+Ruifan Li (Member, IEEE) received the B.S. and M.S. degrees in control systems, and in circuits and systems from the Huazhong University of Science and Technology, Wuhan, China, in 1998 and 2001, respectively, and the Ph.D. degree in signal and in- formation processing from the Beijing University of Posts and Telecommunications, Beijing, China, in 2006. He is currently an Associate Professor with the School of Artiﬁcial Intelligence, Beijing Univer- sity of Posts and Telecommunications (BUPT) and is afﬁliated with Engineering Research Center of In- formation Networks, Ministry of Education. In 2006, he joined the School of Computer Science, BUPT. In February 2011, he spent one year as a Visiting Scholar with the Information Sciences Institute, University of Southern Califor- nia, Los Angeles, CA, USA. His current research interests include multimedia information processing, neural information processing, and statistical machine learning. He is a Member of the China Computer Federation, and Chinese As- sociation of Artiﬁcial Intelligence. He was an Active Reviewer for dozens of peer-reviewed journals.
+
+Xiaojie Wang received the Ph.D. degree from Bei- hang University, Beijing, China, in 1996. He is cur- rently a Full Professor and the Director of the Centre forIntelligenceScienceandTechnology,BeijingUni- versity of Posts and Telecommunications, Beijing, China. His research interests include natural language processing and multimodal cognitive computing. He is an Executive Member of the Council of Chinese Association of Artiﬁcial Intelligence and the Director of the Natural Language Processing Committee. He is a Member of the Council of Chinese Information Processing Society and the Chinese Processing Committee of China Computer Federation.
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22,2025 at 08:24:34 UTC from IEEE Xplore. Restrictions apply.

@@ -1,0 +1,136 @@
+Correspondence Autoencoders for Cross-Modal Retrieval
+
+FANGXIANG FENG, XIAOJIE WANG, RUIFAN LI, Beijing University of Posts and Telecommunications, and IBRAR AHMAD, Beijing University of Posts and Telecommunications and University of Peshawar
+
+This article addresses the cross-modal retrieval problem, where a text query can retrieve images, and vice versa. We propose several novel models based on different autoencoders, which correlate hidden representations of a pair of autoencoders. The models are trained using a novel optimal objective that minimizes a linear combination of representation learning errors and correlation learning error. This approach balances the learning of common information across modalities and the quality of reconstruction for each modality. Our models are categorized into two groups: multimodal reconstruction correspondence autoencoder, which reconstructs both modalities, and unimodal reconstruction correspondence autoencoder, which reconstructs a single modality. Evaluation on three public datasets shows significant performance improvements over canonical correlation analysis models and popular multimodal deep learning models.
+
+Categories and Subject Descriptors: H.3.3 [Information Search and Retrieval]: Retrieval Models; I.2.6 [Artificial Intelligence]: Learning
+General Terms: Algorithms, Design, Experimentation
+Additional Key Words and Phrases: Cross-modal, retrieval, image and text, deep learning, autoencoder
+
+The work was partially supported by the National Natural Science Foundation of China, the National High Technology Research and Development Program of China, and other organizations.
+
+Authors' addresses: F. Feng, X. Wang, R. Li, School of Computer Sciences, Beijing University of Posts and Telecommunications, Beijing, 100876, China; I. Ahmad, School of Computer Sciences, Beijing University of Posts and Telecommunications, Beijing, 100876, China, and Department of Computer Science, University of Peshawar, Pakistan.
+
+The increasing inclusion of multimodal data on the web has led to a rise in cross-modal retrieval tasks. Unlike traditional single-modality information retrieval, cross-modal retrieval focuses on exploiting the correlations between different modalities.
+
+---
+
+1.1. Previous Work
+Many approaches have been proposed for cross-modal retrieval tasks. Two main strategies for modeling cross-modal correlations have been defined. The first strategy involves a shared code layer for correlating different modalities, with some approaches using topic models such as Correspondence Latent Dirichlet Allocation (Corr-LDA). LDA-based models can be seen as a two-layer architecture with one hidden layer. Recently, deep architectures like deep autoencoders (DAE), deep belief networks (DBN), and deep Boltzmann Machines (DBM) have been extended to model multi-modal data. These models have not been used for cross-modal retrieval tasks. The second strategy is a two-stage framework that learns features from each modality and uses Canonical Correlation Analysis (CCA) to build a common representation space. CCA finds maximum correlations between matrices and is used for projecting input pairs into a lower-dimensional space for retrieval.
+
+1.2. Motivation
+The shared layer learned jointly from different modalities may not fit the needs of cross-modal retrieval. Perceived data from different modalities usually contain common and modality-specific information. For instance, "sky" and "blue" are common to both image and text modalities, while "nikon" and "nikkor" are text-specific, and "flowers" and "clouds" are image-specific. Common information is crucial for cross-modal retrieval, and a shared representation that learns both common and modality-specific information may not be suitable. The separation of correlation learning from representation learning is insufficient, especially when autoencoders are used, as modalities may be correlated at different abstract levels of representations.
+
+1.3. Contribution
+To overcome the disadvantages of these strategies, we have proposed the correspondence autoencoder (Corr-AE), which integrates representation learning and correlation learning into a single process, in contrast to two-stage methods that separate these procedures.
+
+---
+
+Fig. 1. An image and its tags illustrate common and modality-specific information.
+
+Fig. 2. The difference between two-stage methods and our Corr-AE is shown, with the latter integrating representation and correlation learning.
+
+---
+
+The difference between the two-stage method and our Corr-AE is illustrated in Figure 2. Corr-AE integrates representation and correlation learning into a single process, with a loss function comprising two parts: the autoencoder loss for both modalities and the correlation loss between modalities. Our model is evaluated using three publicly available datasets and demonstrates increased effectiveness compared to several other multimodal deep learning models. We extend Corr-AE to two correspondence models: Corr-Cross-AE and Corr-Full-AE. Experimental results show that the combination of representation and correlation learning is more effective than the two-stage method.
+
+This article is an extension of our preliminary studies, introducing two novel correspondence autoencoders: Corr-Image-AE and Corr-Text-AE, which reconstruct a single modality. These unimodal reconstruction Corr-AEs provide additional choices for implementing cross-modal retrieval tasks and offer insights into how all Corr-AEs function.
+
+Section 2 details the learning architecture, introducing the three multimodal reconstruction Corr-AEs, the two unimodal reconstruction Corr-AEs, and the deep architecture based on Corr-AEs, along with the training procedure.
+
+The Corr-AE architecture consists of two subnetworks, each a basic autoencoder, connected by a similarity measure on the code layers. The loss function for training the Corr-AE is proposed to learn similar representations of different modalities. The learning can be performed using the standard back-propagation algorithm.
+
+We also propose the Corr-Cross-AE, which replaces basic autoencoders with cross-modal autoencoders. The loss function for the Corr-Cross-AE is defined to reconstruct input from different modalities.
+
+Here, ˆq(k) I and ˆp(k) T represent the reconstruction data from the image and text subnets, respectively. The representation learning in the cross-modal autoencoder considers information from the opposite modality, capturing correlations in the reconstruction loss.
+
+The full-modal autoencoder, a combination of a basic autoencoder and cross-modal autoencoder, is applied to audio and video data. The loss function for the Corr-Full-AE is defined as:
+
+L(p(k), q(k); ) = (1 −α) [LI(p(k), q(k); ) + LT (p(k), q(k); )] + αLC(p(k), q(k); )
+
+with LI, LT, and LC representing the image, text, and correspondence reconstruction losses, respectively.
+
+We propose the Corr-Image-AE and Corr-Text-AE, which reconstruct image and text in their respective modalities. The loss functions for these autoencoders are similar, adjusted for the specific modality.
+
+For a deep architecture, to handle different statistical properties of modalities, we first use stacked modality-friendly models to learn higher-level representations. Then, the Corr-AE is applied to learn similar representations. This architecture includes RBMs and the Corr-AE, trained using contrastive divergence and back-propagation.
+
+In our experiments, we evaluate the models on three real-world datasets, introduce evaluation protocols, report performance, and analyze the impact of the parameter α.
+
+3.1. Datasets and Feature Extraction
+
+The Wikipedia dataset [Rasiwasia et al. 2010] consists of 2,866 image/text pairs from ten semantic categories. It is divided into training, validation, and test sets with 2,173, 231, and 462 cases, respectively. Image features are extracted using Pyramid Histogram of Words (PHOW) [Bosch et al. 2007], Gist [Oliva and Torralba 2001], and MPEG-7 descriptors [Manjunath et al. 2001]. Each image is represented by a 2,296-dimensional feature vector. Text is represented using a bag-of-words model with a dictionary of 3,000 high-frequency words.
+
+The Pascal dataset [Farhadi et al. 2010] contains 1,000 image/text pairs from twenty categories. The images are from the 2008 PASCAL development kit and are labeled with five sentences. The dataset is split into training, validation, and test sets with 800, 100, and 100 cases, respectively. The feature extraction methods are the same as for the Wikipedia dataset, with a 1,000-dimensional text representation.
+
+The NUS-WIDE-10k dataset is a subset of NUS-WIDE [Chua et al. 2009], with 1,000 image/text pairs per category from ten categories. The dataset is randomly split into training, validation, and test sets with 8,000, 1,000, and 1,000 cases, respectively. Images are represented by six descriptors, and text is represented by a 1,000-dimensional bag-of-words.
+
+3.2. Evaluation Metric
+
+Two cross-modal retrieval tasks are considered: text retrieval from an image query and image retrieval from a text query. The retrieval performance is evaluated using mean average precision (mAP) and top 20% percentage. mAP@50 is used for evaluation.
+
+3.3. Baseline
+
+Inputs to our models and baseline methods are features learned by the first two components of the deep architecture described in Section 2.3. Cosine distance is used to measure similarity. We compare our models with three CCA-based models and two multimodal models: CCA-AE, CCA-Cross-AE, CCA-Full-AE, Bimodal AE, and Bimodal DBN.
+
+---
+
+3.4. Model Architecture
+To determine the architecture of all models, we conduct a grid search for the number of hidden neurons per layer, considering settings of 32, 64, 128, 256, 512, and 1,024. We maintain identical numbers of units across all hidden layers in the deep architecture to reduce the search space. Validation sets are employed to identify the optimal number of hidden units and the dimensionality of the CCA latent space, as well as the iteration number for bimodal autoencoders in our correspondence models. For our five models, we select an appropriate value for the parameter α. Our findings indicate that α is not sensitive to datasets. Thus, for all datasets, we set α to 0.8 for Corr-AE and Corr-Full-AE, to 0.2 for Corr-Cross-AE, and to 0.3 and 0.7 for Corr-Image-AE and Corr-Text-AE, respectively. A detailed analysis of α is provided later in this section. For models involving CCA, we apply CCA to learn the correlation between the image and text hidden layers with varying numbers of units to achieve optimal performance. We use three copies of all training data for training bimodal AE: the first includes both modalities, the second contains only image data with text set to zeros, and the third contains only text data with images set to zeros. We do not weight reconstruction errors between different modalities. For the bimodal DBN, we adopt the variational mean field approach with ten steps to generate the unknown modality given a known modality. Gibbs sampling did not demonstrate improvement in our experiments. The code with parameter specifications for our models and baseline methods is available online.
+
+3.5. Results
+
+3.5.1. Multimodal Reconstruction: Corr-AEs vs. Baselines
+Table I summarizes the mAP scores and top 20% results for the two cross-modal retrieval tasks on Wikipedia, Pascal, and NUS-WIDE-10k datasets. Our three multimodal reconstruction Corr-AEs significantly outperform other models on both text and image retrieval tasks across all datasets. Compared to the best baseline results, our models achieve substantial improvements in mAP scores. For instance, Corr-Full-AE improves mAP scores by 12.3% and 16.6% for text-by-image and image-by-text retrieval on Wikipedia, by 12.4% and 2.2% on Pascal, and by 32.4% and 10.2% on NUS-WIDE-10k. Compared to CCA-AE, our Corr-AE enhances the average mAP by 53.6%, 81.5%, and 48.3% on the respective datasets. Similarly, our correspondence models show significant improvement over two-stage methods. The three CCA-AEs first learn image and text representations using unimodal autoencoders and then employ CCA to capture the correlation between modalities. The advantage of our correspondence models is their integration of representation and correlation learning into a single process. The distinction within our correspondence autoencoders is smaller than the differences among the three CCA-AEs, highlighting the effectiveness of combining representation and correlation learning. Our Corr-AE also achieves notable improvements over Bimodal AE and Bimodal DBN. Figures 9, 10, and 11 present retrieval examples and further details.
+
+---
+
+[Table I contents and figure references have been omitted as per the instructions to only clean the provided text content and not to generate a complete structure.]
+
+We compare the performances of two unimodal reconstruction Corr-AEs and three multimodal reconstruction Corr-AEs in cross-modal retrieval tasks. The multimodal reconstruction Corr-AEs exhibit consistent performance with similar mAP scores for both image and text queries. In contrast, the unimodal Corr-AEs show uneven performance, with Corr-Text-AE excelling in text query tasks and Corr-Image-AE in image query tasks. tSNE visualization reveals that representations learned by Corr-Full-AE are well mixed semantically, while those in Corr-Text-AE and Corr-Image-AE show more distinguishable text and image representations, respectively.
+
+Our analysis indicates that the distinct query is crucial for text query image tasks, where Corr-Text-AE achieves the best performance. The diversity in improvement across datasets is linked to the sparsity of text, with Wikipedia benefiting the most due to a higher number of words per example. Consequently, Corr-Text-AE is a better choice for text query-only cross-modal retrieval tasks, while multimodal reconstruction Corr-AEs are suitable for both directions. Figure 12 illustrates the visualization of image and text representations learned by different Corr-AEs on the NUS-WIDE-10k test dataset. Figure 13 shows the mAP values of the correspondence autoencoders with varying α values across all datasets.
+
+3.6. Analysis of the Parameter α
+
+In this section, we analyze the impact of the parameter α using the three multimodal reconstruction Corr-AEs as an example. The mAP values for these models with varying α values across all datasets are presented in Figure 13. Both excessively small and large α values result in poorer performance, reflecting the nature of α in our models. Small α values overemphasize data “individuality” at the cost of correlations, while large α values do the opposite.
+
+To support our hypothesis, tSNE visualization of image and text representations learned by our Corr-Full-AE is used. Figure 14 shows that at α = 0.01, the representation spaces are nearly disjoint, indicating strong “individuality” with no correlations. Conversely, at α = 0.99, the “individuality” is lost due to a confused representation space. At α = 0.2, bimodal data of the same category are clustered together. At α = 0.8, the representation space is effective for cross-modal retrieval, clustering a large number of image-text pairs with the same semantic labels. The yellow line in Figure 13 represents the mAP scores of the best baseline model, which the multimodal reconstruction Corr-AEs consistently outperform across a wide range of α values.
+
+4. CONCLUSION
+
+This work introduces two groups of cross-modal learning models that integrate representation and correlation learning. One group, the multimodal reconstruction Corr-AEs, reconstructs all modalities, learning effective representations for each. The other group, the unimodal reconstruction Corr-AEs, reconstructs only one modality, learning effective representation for the targeted modality. These models are compared against state-of-the-art CCA-based and multimodal deep learning models on three public datasets, demonstrating their effectiveness in cross-modal retrieval tasks.
+
+Muhammet Bastan, Hayati Cam, Ugur Gdkbay, and Ozgur Ulusoy. 2010. Bilvideo-7: An MPEG-7-compatible video indexing and retrieval system. IEEE MultiMedia 17, 3, 62–73.
+Yoshua Bengio. 2009. Learning deep architectures for AI. Found. Trends Machine Learn. 2, 1, 1–127.
+Steven Bird. 2006. NLTK: the natural language toolkit. In Proceedings of the COLING/ACL on Interactive Presentation Sessions (COLING-ACL’06). 69–72.
+David M. Blei and Michael I. Jordan. 2003. Modeling Annotated Data. In Proceedings of the 26th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR’03). 127–134.
+David M. Blei, Andrew Y. Ng, and Michael I. Jordan. 2003. Latent Dirichlet allocation. J. Machine Learn. Res. 3, 993–1022.
+Anna Bosch, Andrew Zisserman, and Xavier Munoz. 2007. Image Classification using Random Forests and Ferns. In Proceedings of the International Conference on Computer Vision (ICCV’07). 1–8.
+Tat-Seng Chua, Jinhui Tang, Richang Hong, Haojie Li, Zhiping Luo, and Yan-Tao Zheng. 2009. NUS-WIDE: A real-world web image database from National University of Singapore. In Proceedings of ACM Conference on Image and Video Retrieval (CIVR’09). 1–9.
+Ali Farhadi, Seyyed Mohammad Mohsen Hejrati, Mohammad Amin Sadeghi, Peter Young, Cyrus Rashtchian, Julia Hockenmaier, and David A. Forsyth. 2010. Every picture tells a story: Generating sentences from images. In Proceedings of the European Conference on Computer Vision (ECCV’10). 15–29.
+Fangxiang Feng, Xiaojie Wang, and Ruifan Li. 2014. Cross-modal retrieval with correspondence autoencoder. In Proceedings of the International Conference on Multimedia (MM’14). 7–16.
+Andrea Frome, Greg Corrado, Jon Shlens, Samy Bengio, Jeffrey Dean, Marc’Aurelio Ranzato, and Tomas Mikolov. 2013. DeViSE: A deep visual-semantic embedding model. In Neural Information Processing Systems (NIPS’13), 2121–2129.
+David R. Hardoon, Sandor Szedmak, and John Shawe-Taylor. 2004. Canonical correlation analysis; An overview with application to learning methods. Neural Comput. 16, 2639–2664.
+G. Hinton and R. Salakhutdinov. 2006. Reducing the dimensionality of data with neural networks. Science 313, 5786, 504–507.
+G. E. Hinton. 2002. Training products of experts by minimizing contrastive divergence. Neural Comput. 14, 8, 1771–1800.
+G. E. Hinton, S. Osindero, and Y. Teh. 2006. A fast learning algorithm for deep belief nets. Neural Comput. 18, 7, 1527–1554.
+Yangqing Jia, Mathieu Salzmann, and Trevor Darrell. 2011. Learning cross-modality similarity for multinomial data. In Proceedings of the International Conference on Computer Vision (ICCV’11). 2407–2414.
+Jungi Kim, Jinseok Nam, and Iryna Gurevych. 2012. Learning semantics with deep belief network for cross-language information retrieval. In Proceedings of the 25th International Conference on Computational Linguistics (COLING’12). 579–588.
+B. S. Manjunath, J. R. Ohm, V. V. Vinod, and A. Yamada. 2001. Color and texture descriptors. IEEE Trans. Circuits Syst. Video Technol. 11, 6, 703–715.
+J. Ngiam, A. Khosla, M. Kim, J. Nam, H. Lee, and A. Y. Ng. 2011. Multimodal deep learning. In Proceedings of the 28th International Conference on Machine Learning (ICML’11). 689–696.
+A. Oliva and A. Torralba. 2001. Modeling the shape of the scene: A holistic representation of the spatial envelope. Int. J. Comput. Vision 42, 3, 145–175.
+Nikhil Rasiwasia, Jose Costa Pereira, Emanuele Coviello, Gabriel Doyle, Gert R. G. Lanckriet, Roger Levy, and Nuno Vasconcelos. 2010. A new approach to cross-modal multimedia retrieval. In Proceedings of the International Conference on Multimedia (MM’10). 251–260.
+R. Salakhutdinov and G. Hinton. 2009. Replicated Softmax: an Undirected Topic Model. In Neural Information Processing Systems (NIPS’09), 1607–1614.
+Ruslan R. Salakhutdinov and Geoffrey G. Hinton. 2012. An efficient learning procedure for deep Boltzmann machines. Neural Comput. 24, 8, 1967–2006.
+Carina Silberer and Mirella Lapata. 2014. Learning grounded meaning representations with autoencoders. In Proceedings of the 52nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 721–732.
+P. Smolensky. 1986. Parallel Distributed Processing: Explorations in the Microstructure of Cognition, Vol. 1. MIT Press, Cambridge, MA, Chapter Information processing in dynamical systems: foundations of harmony theory, 194–281.
+
+Richard Socher, Milind Ganjoo, Christopher D. Manning, and Andrew Ng. 2013. Zero-shot learning through cross-modal transfer. In Neural Information Processing Systems (NIPS’13), 935–943.
+N. Srivastava and R. Salakhutdinov. 2012a. Learning representations for multimodal data with deep belief nets. In Proceedings of the International Conference on Machine Learning Representation Learning Workshop.
+N. Srivastava and R. Salakhutdinov. 2012b. Multimodal learning with deep Boltzmann machines. In Neural Information Processing Systems (NIPS’12), 2231–2239.
+L. J. P. van der Maaten and G. E. Hinton. 2008. Visualizing High-Dimensional Data Using t-SNE. J. Machine Learn. Res. 9, 2579–2605.
+Andrea Vedaldi and Brian Fulkerson. 2010. Vlfeat: An open and portable library of computer vision algorithms. In Proceedings of the International Conference on Multimedia (MM’10). 1469–1472.
+M. Welling, M. Rosen-Zvi, and G. Hinton. 2004. Exponential family harmoniums with an application to information retrieval. In Neural Information Processing Systems (NIPS’04), 501–508.
+Jason Weston, Samy Bengio, and Nicolas Usunier. 2010. Large scale image annotation: Learning to rank with joint word-image embeddings. In Proceedings of the European Conference on Machine Learning and Principles and Practice of Knowledge Discovery in Databases (ECML PKDD’10). 21–35.
+Yueting Zhuang, Yan Fei Wang, Fei Wu, Yin Zhang, and Weiming Lu. 2013. Supervised coupled dictionary learning with group structures for multi-modal retrieval. In Proceedings of the 27th AAAI Conference on Artificial Intelligence (AAAI’13). 1070–1076.

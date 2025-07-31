@@ -1,0 +1,89 @@
+---
+
+采用音质特征和VLAD编码的新冠肺炎检测算法
+
+张昊然 韩易辰 谭咏梅 李雅
+
+（北京邮电大学，人工智能学院，北京100876）
+
+摘要：2020年，世界卫生组织宣布COVID-19疫情为大流行病。本研究通过语音信号分析技术寻找感染COVID-19的语音信号特征，利用咳嗽声片段和语音片段进行自动判断。在INTEＲSPEECH 2021 ComParE竞赛数据集和baseline基础上，首先使用语音端点检测技术增广数据集，其次加入语音质量特征，有效提升了baseline结果，证明了语音质量特征在COVID-19自动语音检测任务上的有效性。引入局部聚合描述子向量（VLAD）对低级别特征进行编码，在小字典规模下有效提升了系统分类性能。最后，通过多算法融合进一步提升分类效果，在两个子任务验证集上UAＲ分别达到73.9%和77.2%。
+
+关键词：COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别
+
+---
+
+2020年3月11日，世界卫生组织宣布COVID-19疫情为大流行病。疫情快速国际化，改变生活多方面。医生和科学家寻找COVID-19线索/指标，希望快速检测控制疫情。除肺部损伤识别外，常见症状包括发烧、咳嗽、肺炎、喉咙痛。研究发现发烧、咳嗽、疲劳、喉咙痛和呼吸短促是重要感染特征，咳嗽和喉咙痛普遍存在。这促使使用语音信号处理技术寻找此类特征，提供可靠快速的COVID-19检测方法。
+
+基于语音的COVID-19识别研究已取得进展。AI4COVID-19项目通过智能手机应用程序收集咳嗽声进行感染筛查。剑桥COVID-19声音数据库收集朗读语音和咳嗽声。学者们提出实时机器人，集成语音识别、温度测量、关键词检测、咳嗽检测等功能。INTEＲSPEECH 2021计算语言学挑战赛组织了公开挑战赛，加速研究进展。
+
+本研究对挑战赛的贡献有三方面：首先，使用语音端点检测进行数据增广；其次，引入语音质量特征；第三，对基线提取的低水平特征进行VLAD编码。本文组织结构如下：第2节介绍方法和系统框架；第3节提出实验对比和分析；第4节总结发现。
+
+2 系统框架
+
+图1展示了算法流程框架。输入原始音频文件，进行数据增广，提取特征，包括VQ特征和VLAD编码。将特征编码输入线性SVM分类器，得到分类结果，通过投票机制融合，得到最终分类结果。
+
+2.1 数据增广
+
+CCS和CSS任务训练集和测试集数据分布不均，采用等时间间隔和基于静音片段的切分方法进行数据增广。
+
+2.2 baseline算法
+
+Baseline使用openSMILE、openXBOW、DeepSpectrum、auDeep和End2You工具进行特征提取，输入到线性SVM中进行分类。
+
+2.3 音质特征
+
+引入音质特征描述发声器官变化，包括基频抖动、振幅抖动、开商、准开商、H1-H2、AQ、NAQ和HＲF等。
+
+---
+
+[注：由于原文中包含图表和公式，这些内容在文本清洗中无法保留，建议在实际论文中查看相关图表和公式。]
+
+本文提出了基于语音内容分析的新冠肺炎自动识别方法，并在INTEＲSPEECH 2021 ComParE竞赛提供的数据集上进行了验证。针对新冠肺炎数据量小的问题，本文通过语音端点检测方法对数据进行切分增广，提升了小数据集上的分类效果。此外，本文引入语音质量特征，用于对发声器官例如喉、声带等器官的变化进行建模，补充openSMILE所提的LLDs对音质特征提取的不足。受到ComParE竞赛基线系统中的BoAW编码的启发，本文还引入VLAD编码对低水平特征进行更深层次的描述，使得在字典规模较小时，就能获得更好得分类效果，证实了VLAD编码在语音特征编码中的有效性。引入VLAD编码能够在获得更快系统响应速度的同时占用相对较小的内存空间，便于检测系统在各种功能移动终端上部署，并能快速计算得到新冠检测结果。但是字典的具体大小并不能提前确定，需要进行多次尝试确定最佳取值。在未来的研究中，可以从深度学习的角度引入新的特征提取网络、分类模型对基于语音的新冠肺炎识别检测任务进行提升。
+
+---
+
+LAGUAＲTA J, PUIG F H, SUBIＲANA B. Covid-19 artificial intelligence diagnosis using only cough recordings. IEEE Open Journal of Engineering in Medicine and Biology, 2020: 275-281.
+
+SCHULLEＲB W, BATLINEＲA, BEＲGLEＲC, et al. The INTEＲSPEECH 2021 computational paralinguistics challenge: COVID-19 cough, COVID-19 speech, escalation & primates. arXiv Preprint arXiv:2102.13468, 2021.
+
+FLOＲIAN E, MAＲTIN W, BJＲN S. Opensmile: the Munich versatile and fast open-source audio feature extractor. Proceedings of the 18th ACM International Conference on Multimedia, 2010: 1459-1462.
+
+MAXIMILIAN S, BJＲN S. openXBOW-Introducing the Passau open-source crossmodal bag-of-words toolkit. The Journal of Machine Learning Ｒesearch, October 2017, 18(96): 1-5.
+
+AMIＲIPAＲIAN S, GEＲCZUK M, OTTL S, et al. Snore sound classification using image-based deep spectrum features. Proceedings INTEＲSPEECH 2017, 18th Annual Conference of the International Speech Communication Association, (Stockholm, Sweden), ISCA, August 2017: 3512-3516.
+
+AMIＲIPAＲIAN S, FＲEITAG M, CUMMINS N, et al. Sequence to sequence autoencoders for unsupervised representation learning from audio. Proceedings of the Detection and Classification of Acoustic Scenes and E-events 2017 Workshop, 2017: 17-21.
+
+TZIＲAKIS P, ZAFEIＲIOU S, SCHULLEＲB W. End2You—the Imperial toolkit for multimodal profiling by end-to-end learning. arXiv Preprint arXiv: 1802.01115, 2018.
+
+MAIDMENT J A. The phonetic description of voice quality. Journal of the International Phonetic Association, 1981, 11(2): 78-84.
+
+ZHU Jianqing, LIN Luxin, SHEN Fei, et al. Fabric retrieval algorithm using SIFT and VLAD feature coding. Journal of Signal Processing, 2019, 35(10): 1725-1731.
+
+BALAJI B, OＲUGANTI V ＲM. Multi-level feature fusion for group-level emotion recognition. Proceedings of the 19th ACM International Conference on Multimodal Interaction, 2017: 583-586.
+
+TZIＲAKIS P, ZHANG Jiehao, SCHULLEＲB W. End-to-end speech emotion recognition using deep neural networks. 2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2018: 5089-5093.
+
+MATTHEW G, PETEＲL. Phonation types: a cross-linguistic overview. Journal of Phonetics, 2001, 29(4): 383-406.
+
+ALKU P, BCKSTＲM T, VILKMAN E. Normalized amplitude quotient for parametrization of the glottal flow. The Journal of the Acoustical Society of America, 2002, 112(2): 701-710.
+
+CHILDEＲS D G, LEE C K. Vocal quality factors: analysis, synthesis, and perception. The Journal of the Acoustical Society of America, 1991, 90(5): 2394-2410.
+
+KANE J. Tools for analysing the voice: developments in glottal source and quality analysis. Dublin, Ireland, Trinity College, 2012.
+
+CHＲISTEＲG, AILBHE N C. The role of voice quality in communicating emotion, mood and attitude. Speech Communication, 2003, 40(1): 189-212.
+
+LI Ya, NICK C, TAO Jianhua. Voice quality: not only about “you” but also about “your interlocutor”. 2015 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2015: 4739-4743.
+
+CAMPBELL N. Listening between the lines: a study of paralinguistic information carried by tone-of-voice. International Symposium on Tonal Aspects of Languages: With Emphasis on Tone Languages, 2004.
+
+---
+
+Authors' information:
+- Zhang Haoran, male, born in 1999, Nantong, Jiangsu. Graduate student at Beijing University of Posts and Telecommunications, majoring in speech language processing and machine learning. E-mail: zhanghaoran@bupt.edu.cn
+- Han Yichen, male, born in 1997, Baotou, Inner Mongolia. Graduate student at Beijing University of Posts and Telecommunications, majoring in speech synthesis and affective computing. E-mail: adelacvgaoiro@bupt.edu.cn
+- Tan Yongmei, female, born in 1975, Lijiang, Yunnan. Associate Professor at Beijing University of Posts and Telecommunications, Ph.D., majoring in natural language processing and machine learning. E-mail: ymtan@bupt.edu.cn
+- Li Ya (corresponding author), female, born in 1984, Xi'an, Shaanxi. Associate Professor at Beijing University of Posts and Telecommunications, Ph.D., majoring in speech interaction and multimodal affective computing. E-mail: yli01@bupt.edu.cn
+
+---

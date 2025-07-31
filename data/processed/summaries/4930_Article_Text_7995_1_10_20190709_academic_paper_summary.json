@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "Differential Networks for Visual Question Answering",
+  "authors": [
+    "Chenfei Wu",
+    "Jinlai Liu",
+    "Xiaojie Wang",
+    "Ruifan Li"
+  ],
+  "main_topic": "Visual Question Answering (VQA)",
+  "research_problem": "Existing VQA models directly fuse image and question feature elements, ignoring their potential difference in space and the reduction of observation noise.",
+  "methodology": "Differential Networks (DN) and DN-based Fusion (DF)",
+  "key_innovations": [
+    "Propose Differential Networks (DN) module",
+    "Introduce DN-based Fusion (DF) model for VQA"
+  ],
+  "experimental_results": "State-of-the-art results on four datasets: VQA 1.0, VQA 2.0, COCO-QA, and TDIUC.",
+  "conclusions": "DN and DF effectively improve attention accuracy and confidence in VQA tasks.",
+  "keywords": [
+    "Visual Question Answering",
+    "Differential Networks",
+    "DN-based Fusion",
+    "attention distribution"
+  ],
+  "application_domains": [
+    "Human-computer interaction",
+    "Image and text understanding"
+  ],
+  "technical_concepts": [
+    "Differential Networks (DN)",
+    "DN-based Fusion (DF)",
+    "pair-wise feature elements",
+    "attention-based models"
+  ],
+  "performance_metrics": "Accuracy metrics for VQA tasks, including Acc(ans), WUPS0.9, WUPS0.0, and Overall Accuracy.",
+  "summary": "This paper introduces a novel module called Differential Networks (DN) and a DN-based Fusion (DF) model for Visual Question Answering (VQA). The proposed methods compute differences between pair-wise feature elements and achieve state-of-the-art results on four public datasets, demonstrating improved attention accuracy and confidence in VQA tasks.",
+  "file_id": "4930_Article_Text_7995_1_10_20190709",
+  "source_type": "cleaned",
+  "text_length": 8155,
+  "generation_time": "2025-07-31 21:17:19"
+}

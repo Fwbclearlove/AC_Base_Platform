@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "A Noisy Context Optimization Approach for Chinese Spelling Correction",
+  "authors": [
+    "Guangwei Zhang",
+    "Yongping Xiong",
+    "Ruifan Li"
+  ],
+  "main_topic": "Chinese Spelling Correction (CSC)",
+  "research_problem": "BERT-based models face performance challenges with noisy contexts",
+  "methodology": "NCO-Spell, multi-character masking strategy, iterative inference algorithm",
+  "key_innovations": [
+    "multi-character masking strategy",
+    "dynamic confusion set",
+    "iterative inference method"
+  ],
+  "experimental_results": "NCO-Spell outperforms compared baseline models on benchmark datasets",
+  "conclusions": "NCO-Spell for CSC task in noisy contexts is effective and future work includes exploring large language models",
+  "keywords": [
+    "Chinese Spelling Correction",
+    "BERT",
+    "NCO-Spell",
+    "noisy contexts",
+    "iterative inference"
+  ],
+  "application_domains": [
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "BERT",
+    "NCO-Spell",
+    "masking strategy",
+    "confusion sets",
+    "iterative inference"
+  ],
+  "performance_metrics": "Character-level and sentence-level evaluation metrics such as precision, recall, and F1 scores",
+  "summary": "This paper proposes NCO-Spell, a method for Chinese Spelling Correction that includes a multi-character masking strategy and iterative inference algorithm to improve performance in noisy contexts. Experiments show that NCO-Spell outperforms existing models and the authors suggest exploring its application with large language models in the future.",
+  "file_id": "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+  "source_type": "cleaned",
+  "text_length": 8237,
+  "generation_time": "2025-07-31 21:18:04"
+}

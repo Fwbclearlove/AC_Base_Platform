@@ -1,0 +1,40 @@
+{
+  "document_type": "patent",
+  "title": "一种基于多层次图卷积网络的电力设备故障溯源方法",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "电力设备故障溯源",
+  "technical_problem": "确定电力设备故障位置",
+  "technical_solution": "使用多层次图卷积网络对电力设备的故障文本信息进行识别",
+  "key_innovations": [
+    "基于多层次图卷积网络",
+    "电力工单图G(V,E)",
+    "TF-IDF指标和PMI指标"
+  ],
+  "implementation_method": "包括步骤1-4，具体涉及TF-IDF和PMI的计算，图卷积网络的构建和训练等",
+  "technical_effects": "提高电力设备故障位置的识别效率",
+  "keywords": [
+    "多层次图卷积网络",
+    "电力设备故障",
+    "TF-IDF",
+    "PMI",
+    "电力工单图"
+  ],
+  "application_scenarios": [
+    "电力工单系统"
+  ],
+  "technical_concepts": [
+    "图卷积网络",
+    "ReLU激活函数",
+    "交叉熵函数",
+    "拉普拉斯矩阵"
+  ],
+  "claims_summary": "未在原文中明确提及",
+  "summary": "该专利提出了一种基于多层次图卷积网络的电力设备故障溯源方法，通过收集故障文本信息并计算TF-IDF和PMI指标，构建电力工单图，进而训练多层次图卷积网络以识别故障位置，旨在提高电力设备故障识别的效率。",
+  "file_id": "一种基于多层次图卷积网络的电力设备故障溯源方法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 875,
+  "generation_time": "2025-07-31 21:27:51"
+}

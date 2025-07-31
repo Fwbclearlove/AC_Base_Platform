@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "Cross-modal Retrieval with Correspondence Autoencoder",
+  "authors": [
+    "Fangxiang Feng",
+    "Xiaojie Wang",
+    "Ruifan Li"
+  ],
+  "main_topic": "Cross-modal retrieval",
+  "research_problem": "The problem of cross-modal retrieval, such as using a text query to search for images and vice versa",
+  "methodology": "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+  "key_innovations": [
+    "Integrates representation and correlation learning into a single process",
+    "Proposes a novel loss function",
+    "Extends the Corr-AE to two other correspondence models"
+  ],
+  "experimental_results": "Evaluated on three real-world datasets: Wikipedia, Pascal, and NUS-WIDE-10k, demonstrating significantly better performance than CCA-based models and multi-modal deep models",
+  "conclusions": "The proposed correspondence autoencoders significantly outperform other models on both retrieval tasks across different datasets, showing the effectiveness of combining representation and correlation learning",
+  "keywords": [
+    "Cross-modal retrieval",
+    "Correspondence autoencoder",
+    "Representation learning",
+    "Correlation learning"
+  ],
+  "application_domains": [
+    "Web image database",
+    "Information retrieval"
+  ],
+  "technical_concepts": [
+    "Autoencoders",
+    "Correlation measure",
+    "Loss function",
+    "Deep architecture",
+    "Canonical correlation analysis"
+  ],
+  "performance_metrics": "mAP scores and top 20% performance",
+  "summary": "This paper addresses the problem of cross-modal retrieval by proposing a novel model called correspondence autoencoder (Corr-AE) and its extensions. The model integrates representation and correlation learning, and experimental results on three datasets show its superiority over existing methods.",
+  "file_id": "2647868.2654902",
+  "source_type": "cleaned",
+  "text_length": 16428,
+  "generation_time": "2025-07-31 21:14:09"
+}

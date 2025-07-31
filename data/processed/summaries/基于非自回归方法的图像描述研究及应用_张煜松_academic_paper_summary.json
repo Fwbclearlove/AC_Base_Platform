@@ -1,0 +1,40 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "图像描述（Image Captioning）",
+  "research_problem": "提升非自回归图像描述方法的效率和效果",
+  "methodology": "结合人类编辑操作的非自回归图像描述方法",
+  "key_innovations": [
+    "编辑器和两阶段图像描述训练策略",
+    "统一编辑器",
+    "多路径交叉熵训练方法",
+    "阈值采样的强化学习训练方法"
+  ],
+  "experimental_results": "UniCap方法实现了8倍的速度提升，并在非自回归图像描述中达到了最先进的效果",
+  "conclusions": "UniCap在质量和速度之间实现了良好的平衡",
+  "keywords": [
+    "图像描述",
+    "非自回归",
+    "编辑操作",
+    "交叉熵",
+    "强化学习"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "Transformer",
+    "编解码器结构",
+    "视觉特征编码",
+    "目标检测"
+  ],
+  "performance_metrics": "CIDEr分数",
+  "summary": "本文提出了一种结合人类编辑操作的非自回归图像描述方法，包括编辑器和两阶段图像描述训练策略。实验结果表明该方法在非自回归图像描述中达到了最先进的效果，并在质量和速度之间实现了良好的平衡。",
+  "file_id": "基于非自回归方法的图像描述研究及应用_张煜松",
+  "source_type": "cleaned",
+  "text_length": 28784,
+  "generation_time": "2025-07-31 21:39:33"
+}

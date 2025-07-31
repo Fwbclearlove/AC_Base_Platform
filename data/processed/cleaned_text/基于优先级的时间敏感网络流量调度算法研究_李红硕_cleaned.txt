@@ -1,0 +1,257 @@
+基于优先级的时间敏感网络流量调度算法研究
+
+近年来，科技进步使得工业自动化等领域对低时延、高可靠性需求不断提升。传统以太网难以满足新技术传输要求，时间敏感网络（TSN）作为一种新型确定性网络，通过流量整形与调度策略增强带宽能力，改善数据传输确定性，具有良好的互联互通性。研究主要分为时钟同步、流量调度等四个方向，其中流量调度是实现确定性传输的核心。
+
+本文针对现有调度方法计算复杂度高和路由规划问题，提出以下工作：
+
+1. 研究TSN的完全集中式配置模型，结合软件定义网络（SDN）构建系统模型，形式化表达网络模型与流量模型。
+2. 针对时间触发流，改进调度对象为时间窗口，设计整数线性规划（ILP）调度方法，优化端到端时延性能。
+3. 面向时间触发流的路由优化问题，提出基于绝对优先级的实时调度路由算法，提高流量的可调度性。
+
+仿真实验验证了调度与路由优化算法的有效性。
+
+关键词：时间敏感网络，软件定义网络，流量调度，整数线性规划，路由优化，绝对优先级
+
+Abstract
+
+In recent years, advancements in technology have led to increasing demands for low latency and high reliability in fields such as industrial automation. Traditional Ethernet struggles to meet the transmission requirements of new technologies. Time-sensitive networking (TSN), as a new type of deterministic network, enhances bandwidth capacity and improves transmission determinism through traffic shaping and scheduling strategies, offering good interconnectivity. Research focuses on four main directions, including clock synchronization and traffic scheduling, with the latter being crucial for achieving deterministic transmission.
+
+This thesis addresses the high computational complexity of existing scheduling methods and routing planning issues, and presents the following contributions:
+
+1. A fully centralized configuration model for TSN is studied, and a system model is constructed combining software-defined networking (SDN), with formalized network and traffic models.
+2. For time-triggered flows, the scheduling object is improved to time windows, and an integer linear programming (ILP) scheduling method is designed to optimize end-to-end delay performance.
+3. A routing optimization algorithm based on strict priority is proposed for time-triggered flows, enhancing traffic schedulability.
+
+Simulation experiments verify the effectiveness of the proposed scheduling and routing optimization algorithms.
+
+Keywords: Time-sensitive networking, Software-defined networking, Traffic scheduling, Integer linear programming, Routing optimization, Strict priority
+
+---
+3.2.1 调度变量定义
+3.2.2 调度约束表达
+3.2.3 目标函数定义
+3.2.4 实验仿真与验证
+3.3 改进时间窗口偏移量
+   3.3.1 时间窗口偏移量优化方法
+   3.3.2 实验仿真与验证
+
+第四章基于绝对优先级的TT流路由规划方法
+4.1 TT流路由问题分析
+4.2 基于绝对优先级的实时调度路由算法
+   4.2.1 优先级选择
+   4.2.2 算法设计
+4.3 实验仿真与验证
+   4.3.1 仿真环境介绍
+   4.3.2 仿真平台搭建
+   4.3.3 仿真实验结果分析
+4.4 本章小结
+
+第五章结论与展望
+5.1 主要结论
+5.2 研究展望
+参考文献
+---
+
+根据您的要求，以下是清洗后的内容：
+
+---
+
+Yu Q等人[38]提出了一种自适应组路由算法，通过预处理、调度合成和后处理三个阶段对路由进行自适应分组，简化整体拓扑结构并寻找最优路由路径。Bülbül S等人[39]重点关注路由问题的求解效率，提出了一种强化学习算法，通过不断与网络环境交互来学习最佳路由策略，得到接近最优的路由规划（接近1.5%）。Feng Z等人[40]关注在线调度过程中TT流路由冗余问题，基于离线路由和调度算法提出了一种更有效的启发式路由算法，有效提升了路由冗余度。Yu Q等人[41]同样面向在线调度过程，设计了一种启发式广度优先搜索路由算法。离线阶段通过引入最小距离树增加可重用调度结果，在线阶段通过所提路由算法尽可能的重用离线阶段的结果，有效解决了TSN面临动态传输需求变化引起的挑战。
+
+不同业务流在TSN交换机的相同出端口转发时导致的相互冲突也是调度过程中需要考虑的要素，这需要对帧传输时隙的求解和路由路径的优化进行综合考虑。一些学者已经展开了对路由与调度联合方案的研究。Atallah A等人[42]基于迭代整数线性规划调度(IIS)技术，采用一种流分区机制降低IIS迭代之间的冲突度(Degree of Conflic,DoC)，提高IIS的成功率；并由DoC感知的多路径路由技术保证容错性，进一步提高调度成功率。杨思锦等人[43]基于深度强化学习设计了联合路由和缓存队列的混合资源调度方案，通过路由与调度联合方案实现了调度过程的迭代更新，有效提高了TT流可调度性。Yang L等人[44]基于图卷积网络解决实际通信场景中的联合优化问题，提出深度强化学习解决方案，采用优先级经验重放来加快模型训练过程的收敛速度，提高了联合优化任务的可行性。Xu L等人[45]同样基于强化学习，设计了一种可扩展调度路由协同设计体系结构。基于探索的领域知识和实际需求的特征流数据集建立了一种流划分方法，并构造了调度与路由协同设计约束，提高了TT流的可调度性。Li J等人[46]解决了需要冗余和安全情况下的时间敏感网络路由和调度联合问题，提出了一种基于模拟退火的元启发式算法，通过求解路由与调度联合规划的约束条件找到成本函数的最优解。
+
+综上，目前国内外对于TT流路由规划方法的研究主要基于最短路径优先算法，通过随机自适应搜索、周期感知、负载均衡等思想对最短路径进行优化，同时基于强化学习、图卷积网络等思想进行路由与调度联合方案的研究。但在进行路由规划时大多数研究主要考虑链路利用率，对于实时调度场景下流量的可调度性问题考虑不足，这将导致新增流量与现有节点中流量发生冲突从而产生调度失败。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息和乱码，保留了核心学术内容、技术术语和数据、原有逻辑结构、公式和图表说明。
+
+清洗后的内容如下：
+
+---
+
+的带宽和优先级，确保TT流的传输质量。
+
+(3)多流量控制模块
+
+此模块部署于交换机的出端口，将已经通过流量过滤与分类之后的各种类型业务流量进行优先级排队、流量调度和整形等操作，提高对流量的处理效率和可靠性，模块实现过程示意如图2-5所示。流量通过交换机入端口的逐流过滤和监管模块后会被分为TT流、AVB流和BE流三种业务类型，然后进入多流量控制模块中进行优先级排队，根据流量业务类型与优先级选择对应算法进行流量调度与整形，最后在交换机出端口按调度后顺序将各种流量进行转发传输。由于本章设计的TSSDN系统模型主要为了方便TT流调度方法的设计，因此流量调度过程主要建立在IEEE 802.1 Qbv[52]标准所定义的门控调度机制基础之上，通过控制各优先级队列的开关门时刻来隔离其他业务流对TT流的传输影响，门控机制的实现过程将在后文进行详细介绍。
+
+图2-5 多流量控制模块实现过程
+
+AVB流和BE流属于事件触发类流量，其中BE流是无时延要求的流量，只需要在其他流量无传输任务时进行传输即可，无需进行额外的流量整形操作。而AVB流主要承载时延要求比TT流低的软实时应用类流量，此类流量多是突发性的媒体数据，因此需要对其进行流量整形控制突发数据流的速率，保证数据流的稳定传输。对于AVB流的整形是通过IEEE 802.1Qav[53]标准中所定义的基于信用的整形机制(Credit Based Shaper，CBS)来实现的。通过CBS机制，可以在不影响TT流优先级的情况下，尽可能保证AVB流的传输质量，使得两者同时有效传输。在CBS机制中，数据只有在队列的信用值(credit)大于等于0时才被允许传输，CBS机制通过4个关键参数进行配置：发送速率sendSlope、空闲速率idleSlope、信用值上限hiCredit、信用值下限loCredit。CBS机制的实现步骤如下：
+
+1)设置credit：为每个队列设置一个信用值，初始时可以将信用值置为0。
+
+2)数据传输准备：当一个队列中的AVB流准备传输数据时，需要检查该队列的credit是否大于等于0。
+
+3)数据传输：
+
+credit下降：当AVB流开始传输数据时，队列的信用值以发送速率sendSlope为斜率线性下降。也就是说随着数据的传输，队列的信用值会逐渐减小。
+
+停止传输：如果其他队列正在传输数据，或者当前队列的信用值降至0以下，则当前队列必须停止传输数据。
+
+credit增加：一旦停止传输，队列的信用值以空闲速率idleSlope为斜率线性增加。这意味着在数据传输暂停期间，队列的信用值会慢慢增加。
+
+如果队列的信用值credit累积到hiCredit或者降低到loCredit，那么当前credit保持不变。
+
+4)数据等待：如果队列中的AVB流没有数据等待传输，那么CBS机制会自动将该队列的credit调整为0。
+
+5)重复步骤：以上步骤会循环执行，以确保在数据传输和数据等待之间保持平衡，同时根据credit的变化来控制数据的传输。
+
+通过以上步骤，CBS机制可以动态调整传输AVB流队列的信用值，保证AVB流的服务质量。CBS机制信用值变化过程如图2-6所示。
+
+图2-6 CBS机制信用值变化过程示意图
+
+(4)TT流调度模块
+
+此模块是为了对控制层下发的TT流调度方法进行配置而设计的，调度方法中通过调度表配置TT流的传输时间。所有网络设备都需要按照调度表中的规定进行流量调度，以确保TT流的及时传输。调度方法的设计将在后文详细展开。
+
+(5)SRP模块
+
+此模块封装了上文所介绍的SRP机制，通过为TT流预留大部分带宽优先保证TT流传输，同时协调AVB流和BE流的带宽资源，保证它们能够达到各自的业务流量要求。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息、乱码、PDF解析错误、多余符号和格式问题，保留了核心学术内容、技术术语和数据、原有逻辑结构、公式和图表说明。
+
+清洗后的内容如下：
+
+---
+
+帧到时间窗口赋值约束定义了时间窗口赋值变量，表示帧实例是否被赋值给时间窗口，其值限制为0或1。每一帧都必须分配给唯一为该链路定义的时间窗口，因此要求某一特定帧的所有时间窗口赋值变量的和为1。
+
+时间窗口大小约束定义了时间窗口大小为分配给某一特定时间窗口的所有帧传输时长之和。另外，时间窗口打开和关闭事件的时间间隔必须等于时间窗口大小。
+
+传输约束规定了帧通过路径上每条链路的时序，即同一帧在前驱链路上的结束时刻必须小于等于后继链路上的开始时刻。
+
+端到端时延约束要求流的最后一帧位于最后一条链路的时间窗口关闭时刻与第一帧位于第一条链路的时间窗口打开时刻之间的差值小于等于流所能容忍的最大端到端时延。
+
+抖动约束要求流的时延变化小于等于流所能容忍的最大抖动。
+
+隔离约束规定了一条链路同一时刻只能存储一条流的帧。
+
+目标函数定义了以时间窗口为调度对象的流量调度问题可以抽象成多维背包问题。目标是确定各个时间窗口的开闭时刻和时间窗口赋值变量，使得所有被调度流的总端到端时延最小化。
+
+实验仿真与验证部分描述了仿真实验环境，实验方法及结果分析。结果显示，本文提出的基于时间窗口的ILP调度方法求解时间减少了41%，但总时延提高了7%。
+
+---
+
+以上内容为清洗后的片段内容，保留了核心学术内容，去除了页眉、页脚、页码等非核心内容。
+
+清洗后的内容如下：
+
+1. 在上节的实例中，交换机1 SW出端口有TT-1和TT-2两条流通过链路1 1 [ , ] ES SW进入交换机中，两条流的周期均为100μs，因此可进行空闲空间判断。在100μs周期内两条流共计传输2个帧，单个帧的帧长为1500B，根据链路速率可得单个帧的传输时长为12μs。因此1 SW的流量周期百分比为24%，空闲空间为76%，空闲空间较大。而在基于时间窗口的ILP方法设计时，并没有考虑到空闲空间因素，因此可从缩短时间窗口的时间间隔入手解决此问题。
+
+2. 在同一个交换机1 SW出端口存在来自不同链路1 1 [ , ] ES SW和2 1 [ , ] ES SW的时间窗口争用问题，这同样会影响端到端时延性能。基于上述的原因分析，本节引入时间窗口偏移量[ , ] a b v v k Offset来对调度方法进行改进。时间窗口偏移量指的是时间窗口相对于超周期的起始位置，改进时间窗口偏移量约束如式(3-21)所示。设链路[ , ] a b v v存在同周期的不同流量传输，且链路[ , ] a b v v共有n个时间窗口：
+
+3. 将新的约束加入上节的调度方法中，重新得到时间窗口赋值变量与各时间窗口的开闭时刻如表3-4和表3-5所示。
+
+4. 改进后的调度方案如图3-9所示，此时可以观察到在1 2 [ , ] SW SW链路上共有5个时间窗口，这是因为经过时间窗口偏移量的改进之后会将之前时间窗口之间多余的空闲空间进行合并消除。
+
+5. 将改进时间窗口偏移量的ILP调度方法与基于帧的ILP调度方法、基于时间窗口的OMT调度方法以及改进之前的调度方法进行对比，如图3-10~图3-11所示，改进时间窗口偏移量的ILP调度方法总时延为135μs。分别与基于帧的ILP调度方法和基于时间窗口的OMT调度方法相比，求解时间分别减少了36%和61%，有效降低了计算复杂度；总时延分别降低了47%和40%，有效改善了时延性能。
+
+6. 本章研究了时间敏感网络中的流量调度技术，针对目前门控调度方法中计算复杂度过高的问题，提出了基于时间窗口的ILP调度方法。将调度变量由求解所有帧实例的传输时刻改进为求解时间裕度，并根据调度变量设计了约束条件与目标函数，同时提出了时间窗口偏移量优化方法改善时延性能。基于Python搭建仿真实验平台并使用Gurobi优化器得出调度结果，通过仿真实验验证了本章提出的调度方法的有效性，所提方法在满足时间触发流的流量特性基础上有效降低了计算复杂度。
+
+清洗后的内容如下：
+
+---
+
+成传输。然后将符合要求的路由进行基于SP的传输选择算法计算，确保新增加的流优先级较高时不会导致与其他流发生帧抢占，避免影响其他流的可调度性。
+
+算法伪代码如表4-1所示。
+
+图4-1 WCED与WCLL各值对应关系
+
+表4-1 RS-SP算法伪代码
+
+Real-time Scheduling Strict Priority Routing Algorithm (RS-SP)
+
+1） Input: Time-triggered (TT) streams S; The current network topology (, ) Gn l.
+
+2） Output: The optimal transmission path ip in the network topology (, ) Gn l.
+
+3） Initiate: Divide TT streams S into small partition is according to the period i.
+
+4） for each stream is S ∈ do
+
+5） Set temporary variable (, ) G G n l ̃= ;
+
+4.3 实验仿真与验证
+
+4.3.1 仿真环境介绍
+
+本节使用OMNET++搭建TSN仿真平台，仿真实验环境配置在4GB RAM和35GB SCSI的Ubuntu虚拟机上。基于IEEE 802.1Qbv协议栈对TSN网络进行建模，并安置所提出的RS-SP算法进行仿真实验，通过丢包率和端到端时延两个性能指标验证所提算法的有效性。
+
+4.3.2 仿真平台搭建
+
+本章使用OMNET++搭建仿真平台，建立网络拓扑模拟真实通信场景下的发送端、接收端、交换机，通过NeSTiNg组件将TSN功能配置到交换机上，实现路由转发的模拟与验证。TSN网络拓扑示例如图4-3所示，此拓扑共包含7个节点与2个TSN交换机，节点的数量与位置均可以通过参数进行设置，本文共进行了3节点、5节点、7节点、9节点、11节点的仿真实验，将在后续参数设置表中进行呈现。
+
+4.3.3 仿真实验结果分析
+
+本文将所提出的RS-SP算法与SP-TSA算法[64]、CBS-TSA算法[64]、SPF算法[65]在不同节点规模的路由场景下进行对比仿真实验，同时结合CBR连接数对仿真实验结果进行分析。RS-SP算法致力于改善TT流的可调度性，这项指标可以通过丢包率和平均端到端时延进行综合判断，仿真实验所得结果如下所示。
+
+(1) 丢包率
+
+仿真实验结果显示本文提出的RS-SP算法整体丢包率较低，即调度成功率较高，尤其在CBR连接数较大时更为明显。
+
+(2) 平均端到端时延
+
+如图4-9所示为不同CBR连接数场景下的各算法平均端到端时延结果对比，整体来看本文所提出的RS-SP算法的平均端到端时延最低，性能最好。但当节点数低于7个时，SP-TSA算法的平均端到端时延性能略优于RS-SP，这是由于拓扑规模较小时路由经过的链路也较少，因此会导致RS-SP将最坏链路时延作为路由决策时往往并不能选择到最优路径。这也说明了RS-SP算法更加适合拓扑规模较大的路由优化场景。
+
+4.4 本章小结
+
+本章研究了时间敏感网络中的路由优化技术，针对目前实时调度场景下可调度性不足的问题，提出了基于绝对优先级的实时调度路由算法。基于端到端时延的四个组成部分建立路由决策，并将最坏情况下端到端时延与绝对优先级传输选择机制相结合设计路由算法。基于OMNET++下的NeSTiNg模型搭建仿真实验平台，通过仿真实验验证了本章提出的路由优化算法的有效性，所提算法可以有效改善TT流的丢包率与平均端到端时延，有效提高了实时调度场景下TT流的可调度性。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息、乱码、PDF解析错误、多余符号和格式问题，保留了核心学术内容、技术术语和数据、原有逻辑结构、公式和图表说明。
+
+在动态场景下，考虑到时间触发流的流量特性进行调度方法设计是一项挑战性的研究方向。本文聚焦于时间触发流的优先调度，这是时间敏感网络中的核心业务流。尽管如此，事件触发流量，其特点为非周期性随机传输，对时延要求不高但承载了大部分应用数据传输，也是重要的。未来研究可以在确保时间触发流性能的基础上，进一步优化事件触发流量的传输性能。
+
+参考文献：
+[1] Wollschlaeger M, Sauter T, Jasperneite J. The Future of Industrial Communication: Automation Networks in the Era of the Internet of Things and Industry 4.0 [J]. IEEE Industrial Electronics Magazine, 2017, 11(1): 17-27.
+[2] Ge X. Ultra-Reliable Low-Latency Communications in Autonomous Vehicular Networks [J]. IEEE Transactions on Vehicular Technology, 2019, 68(5): 5005-5016.
+[3] FINZI A, MIFDAOUI A, FRANCES F, et al. Network Calculus-based Timing Analysis of AFDX networks with Strict Priority and TSN/BLS Shapers [C]. IEEE 13th International Symposium on Industrial Embedded Systems (SIES), 2018: 1-10.
+... [44] Yang L, Wei Y, Yu R, et al. Joint Routing and Scheduling Optimization in Time-Sensitive Networks Using Graph-Convolutional-Network-Based Deep Reinforcement Learning [J]. IEEE Internet of Things Journal, 2022, 9(23): 23981-23994.
+[45] Xu L. Learning-Based Scalable Scheduling and Routing Co-Design With Stream Similarity Partitioning for Time-Sensitive Networking [J]. IEEE Internet of Things Journal, 2022, 9(15): 13353-13363.
+[46] Li J, Li Q, Xiong H. Enhancing low‐priority traffic reconfiguration designs in mixed ‐ critical avionics networks [J]. IET Communications, 2023, 17(13): 1524-1540.
+[47] IEEE Standard for Local and metropolitan area networks--Virtual Bridged Local Area Networks Amendment 14: Stream Reservation Protocol (SRP) [S]. IEEE Std 802.1Qat-2010 (Revision of IEEE Std 802.1Q-2005), 2010: 1-119.
+[48] 张维杰, 周志勇, 任涛林, 等. 时间敏感网络核心机制及标准化进展研究 [J].仪器仪表标准化与计量, 2021, (03): 4-7.
+
+---
+
+[49] IEEE Standard for Local and Metropolitan Area Networks--Bridges and Bridged Networks -- Amendment 31: Stream Reservation Protocol (SRP) Enhancements and Performance Improvements. IEEE Std 802.1Qcc-2018, 2018.
+
+[50] Kreutz D, Ramos V, Veríssimo P, et al. Software-Defined Networking: A Comprehensive Survey. Proceedings of the IEEE, 2015, 103(1): 14-76.
+
+[51] IEEE Standard for Local and Metropolitan Area Networks--Timing and Synchronization for Time-Sensitive Applications. IEEE Std 802.1AS-2020, 2020.
+
+[52] IEEE Standard for Local and metropolitan area networks -- Bridges and Bridged Networks - Amendment 25: Enhancements for Scheduled Traffic. IEEE Std 802.1Qbv-2015, 2016.
+
+[53] IEEE Standard for Local and Metropolitan Area Networks - Virtual Bridged Local Area Networks Amendment 12: Forwarding and Queuing Enhancements for Time-Sensitive Streams. IEEE Std 802.1Qav-2009, 2010.
+
+[54] IEEE Standard for Local and metropolitan area networks--Frame Replication and Elimination for Reliability. IEEE Std 802.1CB-2017, 2017.
+
+[55] 平莉. 时间敏感网络流量调度算法研究. 西安电子科技大学, 2022.
+
+[56] 于珊珊. 时间敏感网络门控调度机制研究. 西安电子科技大学, 2022.
+
+[57] 喻学才, 张田文. 多维背包问题的一个蚁群优化算法. 计算机学报, 2008.
+
+[58] Huang K, Wu J, Jiang X, et al. A Period-Aware Routing Method for IEEE 802.1Qbv TSN Networks. Electronics, 2021, 10(1): 58.
+
+[59] Feng T, Yang H. SMT-based Task- and Network-level Static Schedule for Time Sensitive Network. 2021 International Conference on Communications, Information System and Computer Engineering (CISCE), 2021.
+
+[60] Serna Oliver, Craciunas S, Steiner W. IEEE 802.1Qbv Gate Control List Synthesis Using Array Theory Encoding. 2018 IEEE Real-Time and Embedded Technology and Applications Symposium (RTAS), 2018.
+
+[61] Liu L, James W. Scheduling Algorithms for Multiprogramming in a Hard-Real-Time Environment. ACM, 1973, 20(1): 46–61.
+
+[62] Nakayama Y, Hisano D, Kubo T, et al. Low-latency routing scheme for a fronthaul bridged network. Journal of Optical Communications and Networking, 2018.
+
+[63] Shrivastava L, Tomar G, Bhadoria S, et al. Effect of Number of CBR Connections on the Performance of a Load Balanced Congestion Adaptive Routing for MANET. 2012 Fourth International Conference on Computational Intelligence and Communication Networks, 2012.
+
+[64] Niklas Reusch, Mohammadreza Barzegaran, Luxi Zhao, et al. Configuration optimization for heterogeneous time-sensitive networks. Real-Time Syst., 2023, 59(4): 705–747.
+
+[65] Do Y, Oh S, Lim S, et al. Performance Analysis of Traffic Shaping Approaches in Time-Sensitive Networking(TSN). 2024 18th International Conference on Ubiquitous Information Management and Communication (IMCOM), 2024.
+
+---

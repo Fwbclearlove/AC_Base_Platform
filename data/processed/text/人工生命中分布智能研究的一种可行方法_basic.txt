@@ -1,0 +1,149 @@
+人工生命中分布智能研究的一种可行方法
+
+李睿凡1王枞1涂序彦2 1北京邮电大学信息工程学院，北京，100876 2北京科技大学信息二[：程学院，北京，100083
+
+Email：smartfun@tom．com wangc@bt-t．com tuxuyan@ies．ustb．edu．cn
+
+摘要：针对蚁群算法和粒子群算法提出过程的分析，提出了人工生命分布智能研究的一种方法。该方 法强调理论生物学对人工生命研究的基础性作用，指出从理论生物学中选择研究方向的一般性策略，并就 理论生物学中现存模型的利用展开讨论。这三个过程形成了分布智能的一种研究方法。
+
+关键词：人工生命分布智能蚁群算法粒子群算法
+
+Towards a Feasible Approach to
+
+Distributed Intelligence in Artificial Life
+
+Li Ruifanl．Wang Cong‘．and TU Xuyan2
+
+1Sc．hool oflnformmion Engineering，Beijing University ofPosts and Telecommunications，100876
+
+2School ofInformation Engineering，University of Science and Technology Beijing，100083
+
+Email：smartfun@163．com，wangc@bt-t．com，and tuxuyan@ies．ustb．edu．ca
+
+Abstract：A viable approach for the artificiaIlife(Alife)research，especially the distributed intelligence，iS
+
+presented based on the analysis of the proposals of ant colony optimization(ACO)and particle swarm
+
+optimization(PS0)．The basis of theoretical biology provides background for further research．Guidelines of
+
+choosing a starting point from theoretical biology are presented．Moreover,utilizing the available models of
+
+theoretical biology iS discussed．The three procedures constitute the feasible approach for distributed intelligence and can be extended to Alife research．
+
+Key words：Artificial life(A“fe)，distributed intelligence，ant colony optimization(ACO),particle swam
+
+optimization(PSo)．
+
+人：L生命是涉及生物学、数学和计算机科学的一门新兴交叉学科lq。分布智能，也称群 智能，是人工生命中～个有趣而充满希望的研究方向。多智能体、非中心控制、自组织和突
+
+现式行为是其重要特征。其中，粒子群算法【2】与蚁群算法【3】是分布智能中两种具有广泛应用
+
+的典型算法。
+
+然而，从更为普遍的意义出发，如何在人工生命这一新兴领域进行科学研究是一个吸 引人的问题【4矧。也就是说，如何提出如粒子群算法和蚁群算法等具有良好应用的工具算法 是人工生命科研人员梦寐以求的。他们相信正如其它古老的学科一样，这一新兴学科中应该 存在一些较为普遍的研究规律。从这一问题入手，我们试图分析粒子群算法和蚁群算法提出 过程以期得出一些有意的启示。文章首先讨论了理论生物学与人工生命的关系；然后提出从 理论生物学中选择人工生命研究起点的指导方向；进而给出从自然生命到人工生命模型拓展 的方法；最后对文章所提出方法做了扼要的讨论。
+
+2．从哪里开始?
+
+从哪里开始?这是科学研究中的一个普遍问题。然而，由于人工生命科学相对的不成 熟和广泛的争议性，对于人工生命科学研究者而畜，起始点的选择显得更为重要。
+
+显然，人工生命与生物学，特别是理论生物学存在固有的联系。理论生物学使用数学 语言构建模型，利用计算机工具补充数学分析，进而理解复杂的生物现象与过程。人工生命
+
+涉及生物世界。Langton将人工生命定义为：“研究展现自然生命系统特征的人造系统的学 科”【7】。人工生命的目标不是完成自然生命系统的拷贝，而是以提出的生物学模型为基础研 究生命系统的潜在规律，并以这些潜在规律为基础发展其应用领域。由此，可以绘出理论生 物学与人工生命的学科关系图，如图1。
+
+／—■磊=■、、、
+
+、～：!：三兰，／
+
+图1人工生命与理论生物学关系图
+
+从以上讨论可以得出，人工生命的研究必须植根于理论生物学。换句话说，人工生命 的研究者应该掌握理论生物学的基本知识与观点，然后从其中选择相应的研究问题。然而， 如何从浩如烟海的研究点选择一个有意义、有价值的问题是难解的。下面，我们从粒子群算 法和蚁群算法的提出中对这个问题展开讨论。
+
+选择研究点似易实难。理论生物学是一个已有大量文献的成熟学科。更棘手的是，当 研究者从通常的科学书籍中发现有趣的研究主题时，一般的说来，关于这一主题的研究论文 至少有数百篇，而且绝大部分的问题已经被解决了。那么，如何面对这种境况呢?粒子群算 法和蚁群算法的提出可能为我们揭示了一些线索。
+
+蚁群算法由Dorigo及其同事为解决旅行商问题而提出的，该算法受蚁群搜索食物行为 的启发【羽。在Dorigo深入研究蚁群如何在其巢穴与食物之间找到最短路径问题时，理论生 物学家已经涉足这一问题。事实上，Dorigo的工作利用了这些生物学家的研究成果。
+
+理论生物学家发现蚂蚁在寻路过程中所释放。被称为信息素的物质在蚁群寻路的过程 中起重要作用。蚂蚁个体间能够互相识别所释放的信息素，这在它们之间起到通信的作用。 蚂蚁个体还能够利用其他同类所标记的信息素路径以一定的概率找到其巢穴与食物间的最 短路径。进而，理论生物学家通过实验建立了蚁群在路径选择上偏向于具有较高浓度的信息 素路径。另外，蚁群中的自加速行为，或者称为正反馈过程，形成了这样一种趋势：某一特 定路径被蚂蚁选择得越多，该路径被继续选择的可能性就越高pJ。图2说明了蚁群最短路径 选择过程中信息素标记与自加速过程的作用。
+
+与此同时，Dorigo及其同事集中于离散优化问题的研究。旅行商问题是该领域中的一
+
+图2信息素标记与自加速过程
+
+个基准问题，可简述为：给定一组有限城市及各城市阀的旅行代价，寻找最小代价条件下走 遍所有城市，且每个城市只能访阊一次(出发点出外)，最后回到出发点的问题。显然，旅 行商问题与蚁群在巢穴和食物间寻找最佳路径存在着相似性。由此看来，选择蚁群搜索食物 的过程作为研究对象就很自然了。
+
+下面，讨论粒子群算法的提出过程。粒子群算法由社会心理学家Eberhart和电子工程师
+
+Kennedy受鸟群和鱼群群体行为的启发提出的一种基于种群的随机优化技术¨⋯。
+
+理论生物学家与人工生命研究者都对鸟群的飞行移动机制有浓厚的兴趣。生物学家提 出了几种不周的关于这一群体行为的假说。Matafic定义了一个基本行为集合【11】：自徘徊、 追随性、散布、聚集、自导引性；并将它们作为自适应行为的基本构件。同样地，一些计算 机科学家，Reynolds试图在三个简单规则下模仿鸟类的飞行【121。这三个规则如下：避免与 临近智能体发生碰撞；临近智能体的速度匹配；群体中心化以保持与临近智能体的距离。鱼 群与鸟群的群体行为遵循分布式模型规律：个体行为以相同的简单规则为基础，系统挺体行 为则具有突现性。
+
+作为社会心理学家的Eberhart试图建立人类群体行为的模型。他在注意到人群行为与鸟 群行为差异的同时，也发现了它们之间的共性，特别是分布式的特征。因此，他开始深入研 究计算机仿真下鸟群、鱼群的行为。文献iI习以蜂群寻找某地方具有最多花粉过程解释粒子 群算法的提出背景。
+
+Dorigo与Eberhart的确切想法不可知晓。然而，可以推测，他们所感兴趣的问题与理 论生物学中现存模型或机制的相似性是他们研究方向选择的一个动机。人：[生命中识别有意 义的研究主题确实相当困难。但依然存在一些大致的方向：理论生物学中某些研究热点的边 界应该受到密切关注；两个研究领域的交界处也值得留意。可以这样说，没有对理论生物学 较为全面的了解而试图找到恰当的研究主题是不大可能的。
+
+4．自然到人工的拓展
+
+在从理论生物学中完成研究起始点的选择之后，下一步就是将现存的模型与机制应用 于问题。同样，粒子群算法与蚁群算法给我们提供了很好的范例。
+
+蚁群如何在巢穴与食物间找到最短路径激发了如何解决旅行商问题。然而，自然蚂蚁 与人：[蚂蚁存在着差异。进一步而言，必须对自然蚂蚁的性质作某些修改。如上所述，信息 素和自加速过程很好地解释了自然蚂蚁搜寻路径的过程。而且，最佳路径的获得是由整个蚂 蚁群落完成的，而非某个蚂蚁个体。另外，自然蚂蚁使用的随机决策机制来发现路径。上述
+
+四个基本点在人i蚂蚁中被保留下来。人工蚂蚁还具有某些自然蚂蚁不具有的性质。人工蚂 蚁的生存环境是离散时间；它们能够记忆历史活动：信息素的释放和挥发与自然蚂蚁也存在 着差异。表1简单地小结了这两类蚂蚁的特征。
+
+Eberhart与Kennedy沿着其他人的工作成果，试图模拟鸟群优美而不可预测的舞姿。他
+
+表l自然与人工蚂蚁的特征比较
+
+特征 自然蚂蚁人工蚂蚁
+
+仿真的两个基本出发点是：最近领域速度珏配与狂热因子(craziness)。前者产生移动的一 致性，后者为仿真引入变化以得到鲜活的外观。这里，、。。瘟该注纛到+Reynold的鸟群仿真的基
+
+；r ，“ 本规则。
+
+．。 ’“j。一，、j
+
+从上述的基本仿真出发，接着是一系列的反复试验为基础的模型变换。在鸟群搜寻缺 乏先验知识的玉米地时，该算法定义了“玉米田矢爨"用手每个智能体估计当前位置的适应 度。每个智能体记忆了其本身所发现的最佳位置，同时也记忆了全体智能体所发现的全局最 佳位置。这两个位置分别记为鹏st和gbest。从社会心理学的角度被分剐称为“思乡”或者
+
+认知成分与社交成分j接着，该算法引入了多维空闻搜索扩展与距离的加速。图3小结了最 早期的粒子群算法的提出过程。
+
+从自然蚂蚁到人工蚂蚁的映射是直接的，这样，人工蚂蚁就具有了新特性；同样，粒 子群算法的中模型变换使用了反复试验的方法。仿真在这两种算法中起到基本的作用。
+
+图3粒子群算法提出的过程图
+
+人工生命研究的方法学与其研究本身具有同样的意义。文章在分析粒子群算法与蚁群 算法提出过程的基础上得到了一种人工生命的研究方法。理论生物学为人工生命提供了大量 的研究主题，特别是理论生物学家已经建立的模型与仿真结论。某些研究热点的边界和不同 研究领域的交叉处是人工生命研究者值得关注的。从自然到人工的模型拓展是直接的。
+
+科学研究中方法的作用不可忽视。但是，方法并非人类语言所表述的金科玉律而是客 观地存在于人类科学研究的成败之中。
+
+陈泓娟，班晓娟，艾迪明，涂序彦，卢汉清，”人工生命的概念、内容和方法，”北存群糖走学蝴v01．
+
+24．PP．353．356．2002． R．Eberhart and Y．Shi。”Particle swarm optimization：developments,appl|cations and resources，”Proc of
+
+Congress on Evolutionary Computation，PP．8l一86，2001． M．Dorigo，G．Carp，and L．Gambardella,”Ant algorithms for discrete optimization，”Artificial Life，v01．5，
+
+PP．137．172．1999．
+
+J．Noble，”The scientific status ofartificiaJ life，”Proc ofEuropean Conference on Artificial￡塘(ECAL9矽，
+
+Brighton，UK，1 997．
+
+G．F．Miller,”Artifieiallire as theoretical biology：How to do real science with computer simulation，”TR
+
+215，School ofCognitive and Computing Sciences，University ofSussex，Brighton，UK 1995．
+
+E．A．Di Paolo。”Some false starts in the construction of a research methodology for artificiallire，”TR 258， School of Cognitive and Computing Sciences，University of Sussex l996．
+
+【7】7 C．G．Langton，”Artificial Life，”Proc of Interdisciplinary Workshop on
+
+Living Systems，1 989．
+
+M．Dorigo,V。Maniezzo，and A．Colom，i，”Ant system：optimization by、a colony of cooperating agents,” Systems,Man and Cybernetics，Part E陀EE Transactions on，v01．26，PP．29—4l，1996．
+
+S．Goss，R．Beckers，J．L．Deneubourg，S．Arch，and J．M．Pasteels,’'How Trail Laying and Trall Following Can Solve Foraging Problems for Ant Colonies，”Behaviouraf Mechanisms oyFood Selection，v01．G 20， NA则SISeries．R．N．Hughes,Ed．Berlin：Springer-Verlag,1990．
+
+J．Kennedy and R．Eberhart,”Particle swarm optimization。”Proc 5"of IEEE International Conference on
+
+Neural Networks．Part 4(of6)。NOV 27一Dec l 1995．Perth,Aust,1995．
+
+M．J．Mataric，”Designing and understanding adaptive group bellavior，”Adaptive Behavior,v01．4，PP．5 1·80，
+
+C．W．Reynolds,”Locks，herds，and schools：8 distributed behavioral model，”Proc of Computer Graphics fACM)siGGRAPH，87．Jul 27．31 1987,v01．21，PP．25-34，1987． J．：Robinson and Y．Rahmat．Samii。“Particle swarm optimization in electromagnetics，”Antennas and Propagation,脚Transactions鲫，v01．52,pp．397—407，2
+
+Ⅲ胁网Ⅲ嘲嘲

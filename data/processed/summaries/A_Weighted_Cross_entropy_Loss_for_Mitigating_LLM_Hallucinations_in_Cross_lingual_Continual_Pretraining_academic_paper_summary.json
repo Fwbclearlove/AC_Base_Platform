@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "A Weighted Cross-entropy Loss for Mitigating LLM Hallucinations in Cross-lingual Continual Pretraining",
+  "authors": [
+    "Yuantao Fan",
+    "Ruifan Li",
+    "Guangwei Zhang",
+    "Chuan Shi",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)",
+  "research_problem": "Hallucinations in cross-lingual learning caused by noisy tokens in the dataset",
+  "methodology": "InfoLoss, a novel loss function for continual pretraining",
+  "key_innovations": [
+    "Proposal of InfoLoss for continually pretraining LLMs",
+    "Mitigation of hallucinations in cross-lingual transfer setting"
+  ],
+  "experimental_results": "Experiments on 12 benchmarks, including multi-task Chinese understanding, LLM hallucination evaluation, and multi-task English understanding",
+  "conclusions": "InfoLoss effectively mitigates hallucinations during cross-lingual transfer learning and enhances model's cross-lingual transfer ability",
+  "keywords": [
+    "Cross-lingual Learning",
+    "Pointwise Mutual Information (PMI)",
+    "Hallucination",
+    "Large Language Models (LLMs)"
+  ],
+  "application_domains": [
+    "Cross-lingual transfer learning",
+    "Language model pretraining"
+  ],
+  "technical_concepts": [
+    "InfoLoss",
+    "Cross-entropy loss",
+    "Pointwise Mutual Information (PMI)",
+    "Hallucinations",
+    "Large Language Models (LLMs)"
+  ],
+  "performance_metrics": "Accuracy (%) on multi-task English understanding benchmarks",
+  "summary": "This paper proposes InfoLoss, a weighted cross-entropy loss function, to mitigate hallucinations in cross-lingual continual pretraining. The method considers the co-occurrence of noisy and normal tokens using PMI and enhances the model's ability to adapt to language distributions. Experiments on various benchmarks demonstrate the effectiveness of InfoLoss in reducing hallucinations and improving cross-lingual transfer performance.",
+  "file_id": "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+  "source_type": "cleaned",
+  "text_length": 12140,
+  "generation_time": "2025-07-31 21:18:25"
+}

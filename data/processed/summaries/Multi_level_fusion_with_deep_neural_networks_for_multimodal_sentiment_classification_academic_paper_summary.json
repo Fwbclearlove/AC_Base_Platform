@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "Multi-level fusion with deep neural networks for multimodal sentiment classification",
+  "authors": [
+    "Zhang Guangwei",
+    "Zhao Bing",
+    "Li Ruifan"
+  ],
+  "main_topic": "Multimodal sentiment classification",
+  "research_problem": "Most sentiment analysis research focuses on a single modality, lacking effective feature fusion for joint textual and visual information.",
+  "methodology": "Multi-level fusion classification (MFC) model",
+  "key_innovations": [
+    "Propose a multi-level fusion classification model",
+    "Uses CNNs and Bi-GRU for feature extraction and fusion",
+    "Introduces a rectified conflict detection mechanism"
+  ],
+  "experimental_results": "Performance comparisons on Flickr dataset show the MFC method achieves competitive performance with strong baseline methods.",
+  "conclusions": "The proposed MFC effectively integrates different levels of features from multiple branches in image and text CNNs and achieves competitive performance in multimodal sentiment analysis.",
+  "keywords": [
+    "multimodal fusion",
+    "sentiment analysis",
+    "deep learning"
+  ],
+  "application_domains": [
+    "Social network posts sentiment analysis"
+  ],
+  "technical_concepts": [
+    "CNN",
+    "RNN",
+    "Bi-GRU",
+    "feature fusion",
+    "sentiment classification",
+    "conflict detection"
+  ],
+  "performance_metrics": "Accuracy, Recall, F1 score",
+  "summary": "This paper introduces a multi-level fusion classification model for joint vision and text sentiment analysis. The model uses CNNs and Bi-GRU to extract and fuse features from different levels, addressing the lack of effective feature fusion in existing sentiment analysis methods. Experimental results on the Flickr dataset show the model's competitive performance.",
+  "file_id": "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+  "source_type": "cleaned",
+  "text_length": 12333,
+  "generation_time": "2025-07-31 21:23:29"
+}

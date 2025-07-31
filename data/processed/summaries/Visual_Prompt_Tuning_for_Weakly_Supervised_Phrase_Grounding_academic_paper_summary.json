@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "Visual Prompt Tuning for Weakly Supervised Phrase Grounding",
+  "authors": [
+    "Pengyue Lin",
+    "Zhihan Yu",
+    "Mingcong Lu",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Weakly supervised phrase grounding",
+  "research_problem": "WSG methods are limited by the category coverage of object detectors",
+  "methodology": "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+  "key_innovations": [
+    "Use of similarity tokens for spatial information capture",
+    "Detector-free network fine-tuning"
+  ],
+  "experimental_results": "Performance improvements on WSG tasks on Flickr30K and ReferIt datasets",
+  "conclusions": "The method effectively mitigates the task-gap effect between CLIP and the grounding model, enhancing its grounding task performance",
+  "keywords": [
+    "Weakly supervised phrase grounding",
+    "Visual prompt tuning",
+    "CLIP",
+    "Detector-free"
+  ],
+  "application_domains": [
+    "Image-text alignment",
+    "Multimodal information processing"
+  ],
+  "technical_concepts": [
+    "CLIP",
+    "Grounding model",
+    "Similarity tokens",
+    "Cosine similarity",
+    "VGG16"
+  ],
+  "performance_metrics": "Pointing game accuracy, Bounding box accuracy",
+  "summary": "This paper proposes a refinement-based approach for weakly supervised phrase grounding that uses a detector-free model fine-tuned with a visual prompt. The method improves performance on WSG tasks and demonstrates the potential of multimodal information processing techniques in dual-encoder embedding spaces.",
+  "file_id": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+  "source_type": "cleaned",
+  "text_length": 8347,
+  "generation_time": "2025-07-31 21:24:41"
+}

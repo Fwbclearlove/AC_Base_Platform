@@ -1,0 +1,96 @@
+Challenges in Representation Learning: A report on three machine learning contests
+
+Ian J. Goodfellow et al.
+
+Abstract. The ICML 2013 Workshop on Challenges in Representation Learning focused on three challenges: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge. We describe the datasets created for these challenges and summarize the competition results. We offer suggestions for future challenges and insights from machine learning competitions.
+
+1 Introduction
+
+This paper presents three machine learning contests from the ICML workshop “Challenges in Representation Learning.” The workshop, organized by Ian Goodfellow, Dumitru Erhan, and Yoshua Bengio, aimed to advance representation learning by testing current algorithms and fostering new developments through these contests. Ben Hamner and Will Cukierski managed Kaggle hosting, ensuring smooth contest operations. Google provided prizes for the winners. We summarize the solutions and discuss learnings from the diverse group of participants.
+
+2 The black box learning challenge
+
+The black box learning challenge had two objectives: to obfuscate data to limit human-in-the-loop techniques and to test algorithms on limited labeled data with additional unsupervised data. The BBL-2013 dataset, created by Dumitru Erhan, was an obfuscated subset of the Street View House Numbers dataset. With only 1,000 labeled examples for training, 5,000 for the public leaderboard, and 130,000 unlabeled examples, the contest highlighted semi-supervised learning.
+
+218 teams submitted 1963 entries, with 75 beating the baseline. David Thaler won with an accuracy of 70.22% using a blend of models. Other top performers used methods such as sparse filtering, entropy regularization, and ensemble voting techniques with denoising autoencoders and maxout networks.
+
+3 The facial expression recognition challenge
+---
+
+In the facial expression recognition challenge, we invited participants to create systems for recognizing emotions expressed in facial images. The contest utilized the Facial Expression Recognition 2013 (FER-2013) dataset, compiled by Pierre Luc Carrier and Aaron Courville. This dataset, searchable via the Google image search API, consists of nearly 36,000 images categorized into seven emotions. Human performance on a similar dataset was estimated at 68±5%, while the best "null" model, a convolutional network with no feature learning, achieved an accuracy of 60%. The top-performing teams used convolutional neural networks, with the winner employing an SVM primal objective as the loss function. The contest also included a multimodal learning challenge, intended to encourage algorithms that integrate image and text modalities. However, the matching task proved too easy, resulting in perfect accuracy scores for the top three teams. Recommendations for future contests include enhancing the difficulty of the classification task and providing more test images to prevent the reliance on matching algorithms.
+
+---
+
+Organizing a contest involves considerable effort from all parties. Here are some suggestions for a successful contest:
+
+**Allocation of Time:**
+- Before the contest: Create datasets, verify state-of-the-art algorithms, prepare baseline solutions, and design contest rules.
+- During the contest: Address questions, resolve baseline portability issues.
+- After the contest: Verify winners' submissions, distribute private test data, prepare presentations and papers.
+
+**Designing Rules:**
+- Consider allowing "transductive" methods, prohibiting labeling of public leaderboard data, training with external data, and web scraping.
+- Enforce rules by requiring participants to upload trained models before the test set release.
+- Verify winning submissions' predictions with the uploaded models to deter cheating.
+
+**Difficulty and Participation Rate:**
+- Make the contest challenging enough to be interesting.
+- Hosting on platforms like Kaggle can increase participation.
+
+**Organize Multiple Contests:**
+- Running additional contests has a low marginal cost and ensures interesting results.
+
+**Provide Baselines and a Leaderboard:**
+- Baselines encourage participation by reducing the need for boilerplate code.
+
+**Discussion and Conclusion:**
+- Contests offer a different perspective on machine learning algorithms than research papers.
+- Practitioners use various methods to win, regardless of novelty or inventorship.
+- Contests provide a realistic evaluation of generalization error.
+- This year's contest highlighted SVM loss functions, sparse filtering, and entropy regularization.
+- Future contest organizers can use these insights to plan effective contests.
+
+**Bibliography:**
+- [1] Bengio, Courville, and Vincent. Unsupervised feature learning and deep learning: A review and new perspectives. 2012.
+- [2] Guyon et al. Unsupervised and transfer learning challenge. 2011.
+- [3] Netzer et al. Reading digits in natural images with unsupervised feature learning. 2011.
+- [4] Ngiam et al. Sparse filtering. 2011.
+- [5] Breiman. Random forests. 2001.
+
+---
+
+---
+
+[6] Cortes, C., & Vapnik, V. (1995). Support vector networks. Machine Learning, 20(3), 273–297.
+
+[7] Romaszko, L. (2013). A deep learning approach with an ensemble-based neural network classifier for black box icml 2013 contest. Workshop on Challenges in Representation Learning, ICML.
+
+[8] Lee, D.-H. (2013). Pseudo-label: The simple and efficient semi-supervised learning method for deep neural networks. Workshop on Challenges in Representation Learning, ICML.
+
+[9] Grandvalet, Y., & Bengio, Y. (2005). Semi-supervised Learning by Entropy Minimization. In NIPS’04 (pp. XX-XX). Cambridge, MA: MIT Press.
+
+[10] Vincent, P., Larochelle, H., Bengio, Y., & Manzagol, P.-A. (2008). Extracting and composing robust features with denoising autoencoders. In ICML 2008.
+
+[11] Goodfellow, I. J., Warde-Farley, D., Mirza, M., Courville, A., & Bengio, Y. (2013). Maxout networks. ICML. URL: http://icml.cc/2013/
+
+[12] Susskind, J., Anderson, A., & Hinton, G. E. (2010). The Toronto face dataset. Technical Report UTML TR 2010-001, U. Toronto.
+
+[13] Bergstra, J., & Cox, D. D. (2013). Hyperparameter optimization and boosting for classifying facial expressions: How good can a “null” model be? Workshop on Challenges in Representation Learning, ICML.
+
+[14] Fukushima, K. (1980). Neocognitron: A self-organizing neural network model for a mechanism of pattern recognition unaffected by shift in position. Biological Cybernetics, 36(4), 193-202.
+
+[15] Lowe, D. (1999). Object recognition from local scale invariant features. ICCV’99.
+
+[16] Tang, Y. (2013). Deep learning using linear support vector machines. Workshop on Challenges in Representation Learning, ICML.
+
+[17] Ionescu, R. T., Popescu, M., & Grozea, C. (2013). Local learning to improve bag of visual words model for facial expression recognition. Workshop on Challenges in Representation Learning, ICML.
+
+[18] von Ahn, L., & Dabbish, L. (2004). Labeling images with a computer game. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (CHI ’04) (pp. 319–326). New York, NY, USA: ACM. ISBN: 1-58113-702-8. doi: 10.1145/985692.985733. URL: http://doi.acm.org/10.1145/985692.985733
+
+[19] Feng, F., Li, R., & Wang, X. (2013). Constructing hierarchical image-tags bimodal representations for word tags alternative choice. Workshop on Challenges in Representation Learning, ICML.
+
+[20] Le, Q. V., Ranzato, M., Salakhutdinov, R., Ng, A., & Tenenbaum, J. (2011). NIPS Workshop on Challenges in Learning Hierarchical Models: Transfer Learning and Optimization. URL: https://sites.google.com/site/nips2011workshop
+
+[21] Goodfellow, I., Courville, A., & Bengio, Y. (2012). Large-scale feature learning with spike-and-slab sparse coding. ICML. URL: http://icml.cc/discuss/2012/590.html
+
+---

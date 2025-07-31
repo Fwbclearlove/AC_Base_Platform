@@ -1,0 +1,126 @@
+An improved quantum secure direct communication protocol based on a four-particle Green–Horne–Zeilinger (GHZ) state is presented to enhance the efficiency of eavesdropping detection. The protocol utilizes the four-particle GHZ state for eavesdropper detection and quantum dense coding for message encoding. Entropy theory is employed in the security analysis, quantitatively comparing two detection strategies by examining the relationship between the information obtainable by eavesdroppers and the introduced interference. The detection rate of the proposed protocol is 87%, compared to 50% for the quantum secure direct communication using an Einstein–Podolsky–Rosen (EPR) pair block. The security analysis demonstrates that the proposed protocol offers higher security than others.
+
+In the field of cryptography, the goal is to ensure that only legitimate users, such as Alice and Bob, have access to secret messages. Quantum cryptography, particularly quantum key distribution (QKD), has been shown to be effective in addressing key distribution challenges. Quantum secure direct communication (QSDC) protocols have been proposed, with various detection strategies available to guarantee the security of shared quantum states. A more effective detection strategy can enhance the security of quantum communication protocols. The improved protocol, referred to as SDPP, increases the efficiency of eavesdropping detection compared to the previous TSPP protocol. The analysis results indicate that the proposed protocol is more secure.
+
+The TSPP protocol is reviewed, where an EPR pair can be one of the four Bell states, and each Bell state can carry two bits of classical information. Alice and Bob encode the states |ψ−⟩, |ψ+⟩, |φ−⟩, and |φ+⟩ as 00, 01, 10, and 11, respectively.
+
+Alice extracts particles in the Bell states to form sequences A1 (travel qubits) for message transmission and A2 (home qubits). She sends A1 to Bob, and they perform a check for eavesdropping by measuring photons in A1 and A2. If no eavesdropping is detected, Alice encodes her message on A1 using dense coding with unitary operations U0, U1, U2, and U3, then broadcasts A1. Bob performs Bell-basis measurements to decode the message.
+
+The SDPP protocol involves Bob preparing Bell states and GHZ states, creating a sequence D by inserting decoy photons. Alice extracts and measures these to detect eavesdropping. If secure, Alice encodes her message on particles E using unitary operations and broadcasts the encoded sequence E'. Bob decodes the message with Bell measurements.
+
+The security analysis of the SDPP protocol considers the efficiency of eavesdropping detection compared to TSPP, with an expression for the information Eve can eavesdrop and the probability of her detection. Eve's attack operation ˆE results in states |ϕ'0⟩ and |ϕ'1⟩, with probabilities p and q, and the system's state is described by ρ'. After unitary operations, the state ρ'' is calculated for eavesdropping detection analysis.
+
+With the orthogonal basis {|0,χ0⟩, |1,χ1⟩, |0,χ1⟩, |1,χ0⟩}, the state ρ′′ can be rewritten as
+
+(p0 + p3)|α|2 (p0 − p3)αβ∗ 0 0
+(p0 − p3)α∗β (p0 + p3)|β|2 0 0
+0 0 (p1 + p2)|α|2 (p1 − p2)αβ∗
+0 0 (p1 − p2)α∗β (p1 + p2)|β|2
+
+where p0 + p1 + p2 + p3 = 1. The information I0 that Eve can obtain is given by the Von Neumann entropy,
+
+I0 = −3∑i=0 λi logλi,
+
+with eigenvalues λi (i = 0,1,2,3) as
+
+λ0,1 = 1/2(p0 + p3) [ (p0 + p3)2 − 16p0p3 |α|2 |β|2 ]−1/2,
+λ2,3 = 1/2(p1 + p2) [ (p1 + p2)2 − 16p1p2 |α|2 |β|2 ]−1/2.
+
+The state of the composed system after Eve's attack is
+
+|ψ⟩Eve = ...
+
+The probability without an eavesdropper is
+
+p(|ψ⟩) = 1/2 [ |α4|2 + |β4|2 + |m4|2 + |n4|2 ].
+
+The lower bound of the detection probability is
+
+dlFG = 1 − p(|ψ⟩).
+
+The analysis of the maximum information Eve can gain without a control mode yields
+
+dSD = 1 − p(|ψ⟩) / [ α4 2 + β4 2 + m4 2 + n4 2 ].
+
+In the case p0 = p1 = p2 = p3 = 1/4, the expressions simplify to
+
+λ0,1 = λ2,3 = 1/s [ a−1 2 ].
+
+The maximal amount of information equals the Shannon entropy of a binary channel,
+
+I0 = H(a), I1 = H(t).
+
+The maximum information that Eve can obtain is
+
+I = 1/2 [ H(a) + H(t) ].
+
+The detection probability dSD is given by
+
+dSD = −2a4 + 4a3 − 6a2 + 4a.
+
+The maximum I is
+
+I(dSD) = H [ −3 + √(16 − 8dSD) ].
+
+The analysis shows that the function I(dTS) and I(dSD) have similar algebraic properties. If Eve gains full information (I = 2), the probability of eavesdropping detection is dTS(I = 2) = 0.5 in the TSPP protocol, while in the SDPP protocol, dTS(I = 2) = 0.87.
+
+The probability for Eve to successfully eavesdrop I = nI(d) bits is
+
+s(I,c,d) = [ 1−c / (1−c(1−d)) ] I/I(d).
+
+In the limit when I → ∞, s → 0, so the protocol is asymptotically secure. If the security of the quantum channel is ensured, the protocol is completely secure.
+
+The SDPP protocol is secure and has the following differences compared to the TSPP protocol:
+
+(i) Similar eavesdropping detection method using the four-particle GHZ state.
+(ii) Bell states are prepared by Bob, ensuring no information leak.
+(iii) Based on the four-particle GHZ state, reducing detection times.
+
+An improved QSDC scheme based on the four-particle GHZ state has been introduced, with two eavesdropping detection strategies compared quantitatively. The SDPP protocol shows higher efficiency in eavesdropping detection, ensuring greater security at the cost of sending more particles. Further work includes researching other QSDC protocols' security and improvements.
+
+This work is supported by the National Natural Science Foundation of China (Grant No. 61100205).
+
+References:
+[1] G. S. Vernam, J. Am. Inst. Electr. Eng. 55, 109 (1926).
+[2] C. E. Shannon, Bell Syst. Tech. J. 28, 656 (1949).
+[3] C. H. Bennett and G. Brassard, in: Proc. IEEE Int. Conf. Computers, Systems and Signal Processing, Bangalore 1984, p. 175–179.
+[4] A. K. Ekert, Phys. Rev. Lett. 67, 661 (1991).
+[5] C. H. Bennett, Phys. Rev. Lett. 68, 3121 (1992).
+[6] N. Gisin, G. Ribordy, W. Tittel, and H. Zbinden, Rev. Mod. Phys. 74, 145 (2002).
+[7] K. Boström and T. Felbinger, Phys. Rev. Lett. 89, 187902 (2002).
+[8] G. L. Long and X. S. Liu, Phys. Rev. A 65, 032302 (2002).
+[9] Q. Y. Cai and B. W. Li, Chin. Phys. Lett. 21, 601 (2004).
+[10] F. G. Deng, G. L. Long, and G. L. Long, Phys. Rev. A 69, 052319 (2004).
+[11] M. Lucamarini and S. Mancini, Phys. Rev. Lett. 94, 140501 (2005).
+[12] F. G. Deng, G. L. Long, and X. S. Liu, Phys. Rev. A 68, 042317 (2003).
+[13] Q. Y. Cai and B. W. Li, Phys. Rev. A 69, 054301 (2004).
+[14] T. Gao, F. L. Yan, and Z. X. Wang, Chin. Phys. Lett. 22, 2473 (2005).
+[15] C. Wang, F. G. Deng, Y. S. Li, X. S. Liu, and G. L. Long, Phys. Rev. A 71, 044305 (2005).
+[16] C. Wang, F. G. Deng, and G. L. Long, Opt. Commun. 253, 15 (2005).
+[17] X. H. Li, F. G. Deng, and H. Y. Zhou, Phys. Rev. A 74, 054302 (2006).
+[18] X. H. Li, C. Y. Li, F. G. Deng, P. Zhou, Y. J. Liang, and H. Y. Zhou, Chin. Phys. Lett. 16, 2149 (2007).
+[19] B. A. Nguyen, Phys. Lett. A 328, 6 (2004).
+[20] Z. X. Man, Z. J. Zhang, and Y. Li, Chin. Phys. Lett. 22, 22 (2005).
+[21] X. Ji and S. Zhang, Chin. Phys. Lett. 15, 1418 (2006).
+[22] Z. X. Man, Y. J. Xia, and B. A. Nguyen, J. Phys. B, At. Mol. Opt. Phys. 39, 3855 (2006).
+[23] Z. X. Man and Y. J. Xia, Chin. Phys. Lett. 23, 1680 (2006).
+[24] Y. Xia, C. B. Fu, S. Zhang, S. K. Hong, K. H. Yeon, and C. I. Um, J. Korean Phys. Soc. 48, 24 (2006).
+[25] X. R. Jin, X. Ji, Y. Q. Zhang, S. Zhang, S.-K. Hong, K.-H. Yeon, and C.-I. Um, Phys. Lett. A 354, 67 (2006).
+[26] Z. X. Man and Y. J. Xia, Chin. Phys. Lett. 24, 15 (2007).
+[27] Y. Chen, Z. X. Man, and Y. J. Xia, Chin. Phys. Lett. 24, 19 (2007).
+[28] Y. G. Yang, and Q. Y. Wen, Sci. China Ser. G, Phys. Mech. Astron. 50, 558 (2007).
+[29] A. Wojcik, Phys. Rev. Lett. 90, 157901 (2003).
+[30] F. G. Deng, X. H. Li, C. Y. Li, P. Zhou, and H. Y. Zhou, Chin. Phys. Lett. 16, 277 (2007).
+[31] Q. Y. Cai, Phys. Rev. Lett. 91, 109801 (2003).
+[32] Z. J. Zhang and Z. X. Man, Int. J. Quantum Inf. 2, 521 (2004).
+[33] H. Hoffmann, K. Boström, and T. Felbinger, Phys. Rev. A 72, 016301 (2005).
+[34] F. G. Deng and G. L. Long, Phys. Rev. A 72, 016302 (2005).
+[35] F. G. Deng, X. H. Li, C. Y. Li, P. Zhou, and H. Y. Zhou, Phys. Lett. A 359, 359 (2006).
+[36] A. Beige, B. G. Englert, C. Kurtsiefer, and H. Weinfurter, Acta Phys. A 101, 357 (2002).
+[37] M. Hillery, V. Buzek, and A. Berthiaume, Phys. Rev. A 59, 1829 (1999).
+[38] R. Cleve, D. Gottesman, and H. K. Lo, Phys. Rev. Lett. 83, 648 (1999).
+[39] C. H. Bennett, G. Brassard, and N. D. Mermin, Phys. Rev. Lett. 68, 557 (1992).
+[40] F. Gao, F. Z. Guo, Q. Y. Wen, and F. C. Zhu, Phys. Lett. A 349, 53 (2006).
+[41] C. H Bennet and S. J. Wiesner, Phys. Rev. Lett. 69, 2881 (1992).
+[42] C. Y. Li, H. Y. Zhou, Y. Wang, and F. G. Deng, Chin. Phys. Lett. 22, 1049 (2005).
+[43] C. Y. Li, X. H. Li, F. G. Deng, P. Zhou, Y. J. Liang, and H. Y. Zhou, Chin. Phys. Lett. 23, 2896 (2006).

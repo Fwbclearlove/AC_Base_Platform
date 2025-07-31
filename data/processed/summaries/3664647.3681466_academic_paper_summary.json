@@ -1,0 +1,46 @@
+{
+  "document_type": "academic_paper",
+  "title": "DiffHarmony++: Enhancing Image Harmonization with Harmony-VAE and Inverse Harmonization Model",
+  "authors": [
+    "Pengfei Zhou",
+    "Fangxiang Feng",
+    "Guang Liu",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Computer vision tasks, image harmonization",
+  "research_problem": "Image distortion introduced by the VAE component in latent diffusion models hinders the effectiveness of image harmonization.",
+  "methodology": "Harmony-VAE, inverse harmonization diffusion model",
+  "key_innovations": [
+    "Harmony-VAE to enhance decoded image quality",
+    "Inverse harmonization model for data augmentation",
+    "Introduction of the Human Harmony dataset"
+  ],
+  "experimental_results": "Experiments demonstrate the effectiveness of Harmony-VAE and inverse harmonization model on iHarmony4 and Human Harmony datasets.",
+  "conclusions": "Harmony-VAE improves LDM-based harmonization models, and the inverse harmonization model can significantly expand training data for harmonization datasets.",
+  "keywords": [
+    "image harmonization",
+    "latent diffusion model",
+    "VAE",
+    "data augmentation",
+    "inverse harmonization",
+    "stable diffusion"
+  ],
+  "application_domains": [
+    "Digital editing",
+    "Image generation and editing tasks"
+  ],
+  "technical_concepts": [
+    "Latent diffusion models",
+    "Harmony-VAE",
+    "Inverse harmonization model",
+    "Denoising Diffusion Probabilistic Models (DDPMs)",
+    "Stable Diffusion"
+  ],
+  "performance_metrics": "PSNR, MSE, fMSE",
+  "summary": "This paper introduces Harmony-VAE and an inverse harmonization model to enhance image harmonization. Harmony-VAE integrates composite images into the VAE decoding process, while the inverse harmonization model generates synthetic composite images for data augmentation. The proposed methods are evaluated on iHarmony4 and Human Harmony datasets, demonstrating improved performance in image harmonization tasks.",
+  "file_id": "3664647.3681466",
+  "source_type": "cleaned",
+  "text_length": 23272,
+  "generation_time": "2025-07-31 21:17:01"
+}

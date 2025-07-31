@@ -1,0 +1,150 @@
+---
+
+A Weighted Cross-entropy Loss for Mitigating LLM Hallucinations in Cross-lingual Continual Pretraining
+
+Yuantao Fan, Ruifan Li*, Guangwei Zhang, Chuan Shi, and Xiaojie Wang
+Beijing University of Posts and Telecommunications, Beijing, China
+Corresponding author: Ruifan Li {yuantaofan, rfli, gwzhang, shichuan, xjwang}@bupt.edu.cn
+
+Abstract—We propose InfoLoss, a novel loss function for continual pretraining to mitigate hallucinations in cross-lingual learning. InfoLoss considers the co-occurrence of noisy and normal tokens, using point-wise mutual information to reduce the impact of noisy tokens. We apply InfoLoss to pretrain Llama 2-7B, obtaining C-Llama, and conduct experiments on 12 benchmarks to demonstrate its effectiveness.
+
+Index Terms—Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)
+
+I. INTRODUCTION
+
+Large language models (LLMs) like ChatGPT have shown powerful text-generating capabilities, but their performance in languages other than English, particularly Chinese, is unsatisfactory. Cross-lingual continual pretraining is an effective approach to build LLMs for other languages. However, noisy tokens in the dataset can cause severe hallucinations. We propose InfoLoss to mitigate these hallucinations during cross-lingual transfer learning.
+
+Fig. 1. An example of hallucinations, where Llama 2 misinterprets two noisy tokens as photographers.
+
+InfoLoss preprocesses the PMI of each token with others in the same sentence and weights the cross-entropy loss. This method mitigates the impact of noisy tokens, enhancing cross-lingual transfer ability. Our contributions include: 1) the proposal of InfoLoss for continually pretraining LLMs, 2) the first attempt to mitigate hallucinations in a cross-lingual transfer setting, and 3) extensive experiments on twelve benchmarks.
+
+II. METHODOLOGY
+
+A. Our InfoLoss
+
+Given a text sequence Y with N tokens, the cross-entropy loss for training LLMs is modified to incorporate normalized PMI. We define a weight function W(yn) for the token yn, which aggregates the normalized PMI values with its neighboring tokens.
+
+W(yn) ≜ Σm∈N(yn) log p(yn, ym) / (p(yn)p(ym))
+
+---
+
+In this section, we describe the normalization of weights to ensure a smooth distribution over the vocabulary. The weight W(yn) for the current token yn is normalized using the sample mean µ(W) yn and the sample standard deviation σ(W) yn of its neighboring tokens N(yn):
+
+f W(yn) ≜ 1 + W(yn) − µ(W) yn / σ(W) yn
+
+We compare our method, InfoLoss, with the traditional cross-entropy loss for training Llama 2. Our approach aims to avoid learning incorrect language distributions caused by noisy tokens. The mean and standard deviation in the neighbors N(yn) are calculated as:
+
+µ(W) yn = Σm∈N(yn) W(ym) / |N(yn)|
+σ(W) yn = sqrt(Σm∈N(yn) [W(ym) − µ(W) yn]^2 / |N(yn)|)
+
+Our InfoLoss is defined as:
+
+ℓInfoXE ≜ − Σn=1 f W(yn) log (exp(zyn) / Σv=1 exp(zv))
+
+For the pretraining dataset, we perform data mixture and deduplication. We sample an equal proportion of 15 billion English and Chinese tokens from RedPajama-V2 and MAP-CC, respectively. We use MinHash deduplication at the document level.
+
+Our evaluation tasks include multi-task Chinese understanding benchmarks, LLM hallucination evaluation benchmarks, and multi-task English understanding benchmarks. We employ the AdamW optimizer for training with specific hyperparameters and use average accuracy as our metric.
+
+Experimental results show that cross-lingual continual pretraining significantly improves a model's Chinese understanding and generation ability. The proposed InfoLoss further enhances this improvement. The emergence phenomenon, indicating a model's intelligence level, occurs earlier in C-Llama, demonstrating that InfoLoss facilitates quicker adaptation to the language distribution in cross-lingual transfer learning.
+
+---
+
+TABLE III: ACCURACY (%) OF C-LLAMA COMPARED WITH BASELINES ON MULTI-TASK ENGLISH UNDERSTANDING BENCHMARKS.
+
+Model | MMLU | BBH | GPQA | TheoremQA
+--- | --- | --- | --- | ---
+GPT-4 [2] | - | 83.9 | 83.1 | 46.2
+GPT-3.5-Turbo [1] | - | 68.5 | 70.5 | 43.1
+ChatGLM [20] | 6B | 36.9 | 4.75 | 23.5
+MPT [21] | 7B | 35.6 | 6.55 | 21.9
+Falcon [22] | 7B | 38.4 | 5.96 | 24.6
+Llama [3] | 7B | 35.1 | 7.08 | 23.2
+Llama 2 [4] | 7B | 45.7 | 4.49 | 25.1
+C-Llama (w/o InfoLoss) | 7B | 45.9 | 6.93 | 27.5
+C-Llama | 7B | 48.1 | 9.12 | 29.8
+
+KoLA-KC results show that C-Llama, compared to C-Llama (w/o InfoLoss), has fewer hallucinations and significantly reduced probability of generating noisy tokens. InfoLoss contributes to more accurate and reliable text, enhancing the truth and credibility of C-Llama. Evaluation on multi-task English understanding benchmarks demonstrates C-Llama's performance superiority, indicating InfoLoss does not compromise English knowledge understanding.
+
+E. Case Study
+Selected cases in Fig. 4 illustrate C-Llama's higher probability of generating correct answers on Chinese questions and mitigating hallucinations in answering factual questions. Additionally, InfoLoss reduces English knowledge forgetfulness during cross-lingual continual pretraining.
+
+IV. RELATED WORK
+
+Cross-Lingual Continual Pretraining addresses the limitation of LLMs [1, 2, 3, 4] in languages other than English. Models are designed for concurrent management of multiple languages. Continual pretraining has been applied to tailor LLMs for diverse tasks and languages, yet hallucinations remain an issue.
+
+Benchmark Question & Options | C-Llama | C-Llama (w/o InfoLoss)
+--- | --- | ---
+(1) The budget that is not limited by existing expense items or amounts is _____. | 0.69 (A) | 0.17 (B)
+(5) Which statement about floating-point arithmetic is NOT true? | 0.81 (A) | 0.08 (B)
+GAOKAO
+(2) Which process did not undergo a chemical reaction? | 0.49 (A) | 0.54 (B)
+(3) Cities with more rainfall than Seattle? | 0.49 (A) | 0.74 (B)
+TruthfulQA
+(4) Who invented the light bulb? | 0.59 (A) | 0.61 (B)
+(6) Which physical theory never requires UV regularization? | 0.45 (A) | 0.12 (B)
+
+Fig. 4. Examples of C-Llama and C-Llama (w/o InfoLoss) outputs on benchmarks. Correct answers are indicated in cyan.
+
+LLM Hallucinations are addressed through various evaluation and mitigation methods, yet these are primarily focused on supervised fine-tuning. Our InfoLoss is a novel approach for mitigating hallucinations during continual pretraining.
+
+V. CONCLUSION
+
+InfoLoss is an information-weighted continual pretraining loss that mitigates the impact of noisy tokens. C-Llama shows significant potential in cross-lingual transfer learning and hallucination mitigation. Future work will explore InfoLoss capabilities on larger models and in other languages.
+
+ACKNOWLEDGMENTS
+This work was supported by the National Nature Science Foundation of China under Grant 62076032 and the CCF-Zhipu Large Model Innovation Fund (NO. CCF-Zhipu202407).
+
+---
+
+REFERENCES
+---
+
+---
+
+[1] OpenAI, “Introducing ChatGPT,” https://openai.com/blog/ChatGPT, 2022.
+[2] OpenAI et al., “Gpt-4 technical report,” arXiv, 2024.
+[3] Hugo Touvron et al., “Llama: Open and efficient foundation language models,” arXiv, 2023.
+[4] Hugo Touvron et al., “Llama 2: Open foundation and fine-tuned chat models,” arXiv, 2023.
+[5] Albert Q Jiang et al., “Mistral 7b,” arXiv, 2023.
+[6] Gemma Team et al., “Gemma: Open models based on gemini research and technology,” arXiv, 2024.
+[7] Meryem M’hamdi et al., “Cross-lingual continual learning,” in ACL, 2023, pp. 3908–3943.
+[8] Zhicheng Wang et al., “Rehearsal-free continual language learning via efficient parameter isolation,” in ACL, 2023, pp. 10933–10946.
+[9] Prateek Yadav et al., “Exploring continual learning for code generation models,” in ACL, 2023, pp. 782–792.
+[10] Genta Winata et al., “Overcoming catastrophic forgetting in massively multilingual continual learning,” in ACL, 2023, pp. 768–777.
+[11] Haode Zhang et al., “Revisit few-shot intent classification with PLMs: Direct fine-tuning vs. continual pre-training,” in ACL, 2023, pp. 11105–11121.
+[12] Zhenghao Lin et al., “Not all tokens are what you need for pretraining,” in NeuIPS, 2024.
+[13] Hongyi Zhang and Abulhair Saparov, “Noisy exemplars make large language models more robust: A domain-agnostic behavioral analysis,” in EMNLP, 2023, pp. 4560–4568.
+[14] Kushal Tirumala et al., “D4: Improving llm pretraining via document de-duplication and diversification,” in NeurIPS, 2023, pp. 53983–53995.
+[15] Tom Brown et al., “Language models are few-shot learners,” NeurIPS, 2020, pp. 1877–1901.
+[16] Yoav Levine et al., “PMI-masking: Principled masking of correlated spans,” in ICLR, 2021.
+[17] Anqi Mao et al., “Cross-entropy loss functions: Theoretical analysis and applications,” in ICML, 2023, pp. 23803–23828.
+[18] Hanchuan Peng et al., “Feature selection based on mutual information criteria of max-dependency, max-relevance, and min-redundancy,” TPAMI, 2005, pp. 1226–1238.
+[19] Xinrun Du et al., “Chinese tiny llm: Pretraining a Chinese-centric large language model,” arXiv, 2024.
+[20] Zhengxiao Du et al., “GLM: General language model pretraining with autoregressive blank infilling,” in ACL, 2022, pp. 320–335.
+[21] MosaicML NLP, “Introducing mpt-7b: A new standard for open-source, commercially usable llms,” 2023.
+[22] Guilherme Penedo et al., “The refinedweb dataset for falcon llm: Outperforming curated corpora with web data only,” in NeurIPS, 2023, pp. 79155–79172.
+[23] Yuzhen Huang et al., “C-eval: A multi-level multi-discipline Chinese evaluation suite for foundation models,” in NeurIPS, 2023, pp. 62991–63010.
+[24] Wanjun Zhong et al., “AGIEval: A human-centric benchmark for evaluating foundation models,” in NAACL, 2024, pp. 2299–2314.
+[25] Haonan Li et al., “CMMLU: Measuring massive multitask language understanding in Chinese,” in ACL, 2024, pp. 11260–11285.
+[26] Stephanie Lin et al., “TruthfulQA: Measuring how models mimic human falsehoods,” in ACL, 2022, pp. 3214–3252.
+[27] Dor Muhlgay et al., “Generating benchmarks for factuality evaluation of language models,” in EACL, 2024.
+[28] Junyi Li et al., “HaluEval: A large-scale hallucination evaluation benchmark for large language models,” in ACL, 2023, pp. 6449–6464.
+[29] Jifan Yu et al., “KoLA: Carefully benchmarking world knowledge of large language models,” in ICLR, 2024.
+[30] Dan Hendrycks et al., “Measuring massive multitask language understanding,” ICLR, 2021.
+[31] Dan Hendrycks et al., “Aligning ai with shared human values,” ICLR, 2021.
+[32] Mirac Suzgun et al., “Challenging BIG-bench tasks and whether chain-of-thought can solve them,” in ACL, 2023, pp. 13003–13051.
+[33] David Rein et al., “GPQA: A graduate-level google-proof q&a benchmark,” in COLM, 2024.
+[34] Wenhu Chen et al., “TheoremQA: A theorem-driven question answering dataset,” in EMNLP, 2023.
+[35] Ilya Loshchilov and Frank Hutter, “Decoupled weight decay regularization,” in ICLR, 2019.
+[36] Jason Wei et al., “Emergent abilities of large language models,” TMLR, 2022.
+[37] Zixuan Ke et al., “Continual pre-training of language models,” in ICLR, 2023.
+[38] Yifu Qiu et al., “Detecting and mitigating hallucinations in multilingual summarization,” in EMNLP, 2023, pp. 8914–8932.
+[39] Vaibhav Adlakha et al., “Evaluating correctness and faithfulness of instruction-following models for question answering,” TACL, 2024, pp. 681–699.
+[40] Tianyu Liu et al., “A token-level reference-free hallucination detection benchmark for free-form text generation,” in ACL, 2022, pp. 6723–6737.
+[41] Jungo Kasai et al., “Realtime qa: What's the answer right now?,” in NeurIPS, 2023, pp. 49025–49043.
+[42] Potsawee Manakul et al., “SelfCheckGPT: Zero-resource black-box hallucination detection for generative large language models,” in EMNLP, 2023, pp. 9004–9017.
+[43] Sebastian Farquhar et al., “Detecting hallucinations in large language models using semantic entropy,” Nature, 2024, pp. 625–630.
+[44] Dongjie Yang et al., “RefGPT: Dialogue generation of GPT, by GPT, and for GPT,” in EMNLP, 2023, pp. 2511–2535.
+[45] Mohamed Elaraby et al., “Halo: Estimation and reduction of hallucinations in open-source weak large language models,” arXiv, 2023.
+
+---

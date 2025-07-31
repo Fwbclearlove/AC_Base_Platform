@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Image Captioning Based on An Improved Transformer with IoU Position Encoding",
+  "authors": [
+    "Yazhou Li",
+    "Yihui Shi",
+    "Yun Liu",
+    "Ruifan Li",
+    "Zhanyu Ma"
+  ],
+  "main_topic": "Image captioning",
+  "research_problem": "Vanishing query vectors and the lack of spatial information in the decoding process",
+  "methodology": "Improved Transformer with IoU Position encoding model (TIP)",
+  "key_innovations": [
+    "Intra-modal attention mechanism",
+    "IoU spatial position encoding method"
+  ],
+  "experimental_results": "Experiments on MS-COCO datasets demonstrate the model's effectiveness",
+  "conclusions": "TIP effectively identifies object relationships, resulting in generated sentences closer to the annotated ones",
+  "keywords": [
+    "Image Captioning",
+    "Transformer",
+    "IoU Position Encoding",
+    "Intra-modal Attention"
+  ],
+  "application_domains": [
+    "Computer Vision",
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "CNNs",
+    "RNNs",
+    "Attention Mechanisms",
+    "Transformer Structure",
+    "IoU Spatial Position Encoding"
+  ],
+  "performance_metrics": "CIDEr, BLEU, METEOR, ROUGE, SPICE",
+  "summary": "This paper proposes an improved Transformer with IoU Position Encoding (TIP) for image captioning, addressing issues of vanishing query vectors and spatial information representation. TIP introduces an intra-modal attention module and IoU-based spatial encoding, demonstrating effectiveness through experiments on the MS-COCO dataset.",
+  "file_id": "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+  "source_type": "cleaned",
+  "text_length": 9331,
+  "generation_time": "2025-07-31 21:21:01"
+}

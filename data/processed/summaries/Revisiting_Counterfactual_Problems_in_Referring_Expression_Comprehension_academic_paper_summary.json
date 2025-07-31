@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "Revisiting Counterfactual Problems in Referring Expression Comprehension",
+  "authors": [
+    "Zhihan Yu",
+    "Ruifan Li"
+  ],
+  "main_topic": "Counterfactual Referring Expression Comprehension (C-REC)",
+  "research_problem": "The counterfactual scenario in referring expression comprehension is overlooked, particularly for fine-grained attributes.",
+  "methodology": "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+  "key_innovations": [
+    "Dual-branch attentive fusion module",
+    "Counterfactual sample generation method",
+    "Contrastive learning for counterfactual perception"
+  ],
+  "experimental_results": "Performance metrics on RefCOCO/+/g and C-RefCOCO/+/g datasets, including Acc-Box, Acc-Cls, and Acc-Cf.",
+  "conclusions": "The proposed C-REC framework shows promising results on both traditional REC tasks and counterfactual scenarios, with the inclusion of a DAF module and contrastive learning.",
+  "keywords": [
+    "Counterfactual Referring Expression Comprehension",
+    "Fine-grained Attributes",
+    "Dual-branch Attentive Fusion",
+    "Contrastive Learning"
+  ],
+  "application_domains": [
+    "Vision-Language Tasks",
+    "Image-Text Matching"
+  ],
+  "technical_concepts": [
+    "Counterfactual Sample Generation",
+    "Dual-branch Attentive Fusion",
+    "Contrastive Loss",
+    "IoU",
+    "Cross-Entropy Loss"
+  ],
+  "performance_metrics": "Acc-Box (IoU@0.5), Acc-Cls, and Acc-Cf on various datasets.",
+  "summary": "This paper addresses the counterfactual referring expression comprehension problem, introducing a method for generating fine-grained counterfactual samples and a framework that enhances cross-modal feature learning with dual-branch attentive fusion and contrastive learning. The proposed approach demonstrates strong performance on public REC datasets and constructed C-REC datasets, contributing to the field of vision-language tasks.",
+  "file_id": "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+  "source_type": "cleaned",
+  "text_length": 19809,
+  "generation_time": "2025-07-31 21:24:24"
+}

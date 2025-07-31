@@ -1,0 +1,96 @@
+Show and Tell More: Topic-Oriented Multi-Sentence Image Captioning
+
+Yuzhao Mao, Chang Zhou, Xiaojie Wang, Ruifan Li
+Center for Intelligence Science and Technology, School of Computer Science, Beijing University of Posts and Telecommunications
+{maoyuzhao,elani,xjwang,rﬂi}@bupt.edu.cn
+
+Abstract
+Image captioning generates textual descriptions for images. We propose a Topic-Oriented Multi-Sentence (TOMS) captioning model that generates multiple topic-oriented sentences. Our model uses latent Dirichlet allocation to reflect hidden thematic structures and integrates topics with a Fusion Gate Unit (FGU) for sentence generation. TOMS provides a complete image description and demonstrates effectiveness in terms of topical consistency and descriptive completeness.
+
+1 Introduction
+Image captioning typically generates a single textual description but is often insufficient for a complete view of an image. We present a TOMS model for multi-sentence captioning, focusing on different topics to provide a semantically rich description. Our approach uses Latent Dirichlet Allocation (LDA) to mine topics from textual descriptions, avoiding the need for additional annotations. The TOMS model integrates topic embeddings with LSTM using a Fusion Gate Unit (FGU) for topical consistency. Our contributions include a novel topic-oriented captioning model, the FGU design, and extensive experimental evaluation.
+
+2 Related Work
+Single-sentence (SS) captioning models have been developed using templates and neural network approaches, but they often provide incomplete descriptions. MS captioning methods generate multiple sentences for a complete depiction, with some focusing on regions of interest. Our TOMS model differs by generating sentences from topics of interest, capturing linguistic distinctions in image descriptions.
+
+---
+
+The term "topic" has been used in various studies, such as Liang et al. (2017), where it refers to regions of interest in an image, distinct from our TOMS definition. Dai et al. (2017) introduced a random vector for sentence diversity control using generative adversarial nets, while Wang et al. (2017) employed conditional variational auto-encoder. However, these methods lack directionality and descriptive completeness, unlike our TOMS, which generates directional sentences guided by explicit topic embeddings.
+
+3 Model
+
+3.1 Formulation
+Given an image I and a sentence S = {w0, ..., wT} with T + 1 words, traditional image captioning aims to maximize the log likelihood of the sentence given the image:
+
+log p(S|I) = Σ_t=1 log p(wt|wt−1, ..., w0, I)
+
+We introduce the topic variable z ∈{z1, ..., zK} to learn distinctions from reference sentences. The objective function is modified to represent the joint distribution p(S, z|I), which can be unfolded into two terms:
+
+log p(S, z|I) = log p(S|z, I) + log p(z|I) (1)
+
+3.2 LSTM
+Our model uses LSTM to encode image-sentence pairs. The LSTM processes the image feature initially and then the sentence word by word:
+
+ht = LSTM(x0) (t = 0)
+ht = LSTM(ht−1, xt) (t > 0) (2)
+
+3.3 Topic Embedding
+LDA is applied to reference sentences to generate topic embeddings. Each topic embedding is a weighted sum of the top N word embeddings:
+
+p(w|zk) = Σ_n=1 φn,k * ⃗wn (4)
+
+3.4 FGU
+The Fusion Gate Unit (FGU) fuses three sources of representations: image, context, and topic. It uses Hadamard product and concatenation to emphasize relevant information and maintain sentence fluency.
+
+3.5 Training
+Our TOMS outputs a topic classifier and a topic-oriented language model. The training involves a multi-label logistic regression for the classifier and a softmax for the language model. Topic selection for training is a sampling process based on LDA-inferred probabilities.
+
+The training loss is a sum of two cross-entropy terms: the sentence loss on p(xt+1|xt, ..., x0, ˆz) and the topic loss on p(zi|x0):
+
+Loss = Σ_t=1 ℓsent(p(xt+1|xt, ..., x0, ˆz), yt+1) + Σ_i=1 ℓtopic(p(zi|x0), 1k)
+
+---
+
+---
+
+3.6 Inference MS is generated based on topics observed from a given image, with one topic per sentence. The observed topics are obtained by normalizing Eq.(9) to ensure the probabilities sum to one, ranking the topics, summing the probabilities of the top n topics, and choosing the n topics that exceed a threshold. Each sentence is sampled word by word using p(xt+1|xt,.,0, zk) until the end of the sentence token. Our method observes topics from a topic model trained on both images and sentences, without access to the reference sentences. We use p(z|x0) to approximate p(z|d) for generation.
+
+4 Experiment
+
+4.1 Datasets and Metrics We evaluate our model on standard datasets like Flickr8k, Flickr30k, COCO for sentence level MS captioning, and a paragraph dataset from Krause et al. (2017) for paragraph level MS captioning. We use coco-caption for evaluation with metrics including BELU, METEOR, ROUGE L, and CIDEr. We also introduce Instance Coverage (IC) to measure descriptive completeness.
+
+4.2 Implementation Our code is based on PyTorch and uses pre-trained CNN models for image features. We employ two-layer LSTM with a hidden dimension of 512 and set topic and word embedding size to 256. FGU uses 512-dimensional vectors for topics and images, and 1024 for context representations. Dropout is applied in input and output layers.
+
+4.3 MS Captioning Experiment We compare our TOMS model with NIC and ATT-FCN for sentence level MS captioning and with RTT-GAN, Regions-Hierarchical, and Sentence-Concat for paragraph level MS captioning. Our TOMS demonstrates improved performance, especially in terms of IC.
+
+4.4 Topical Consistency We evaluate our TOMS on topical consistency by annotating reference sentences with topic labels and clustering them into topic groups. Our model generates descriptions based on these topic labels, and the results show improved performance over baselines.
+
+Our proposed Topic-Oriented Multi-Sentence (TOMS) captioning model incorporates topic embedding to guide the generation process. The Fixed Gate Unit (FGU) is designed to integrate topic, image, and context information, enhancing the model's performance compared to NIC, which lacks topic information. NIC-MS, a variant of NIC, demonstrates the effectiveness of considering topics by training sub-models on different image-sentence pairs. The use of gLSTM and SCN-RNN for comparison further validates the superiority of FGU in capturing common information and ensuring topical consistency.
+
+Qualitative results show that TOMS generates descriptions with a clear theme, highlighting topic words and capturing different perspectives of the same scene. In contrast, NIC generates diverse descriptions that may not align with the observed topic. Topic exploration using LDA on COCO reveals diverse topics, each describing the same scene from different viewpoints.
+
+This work's contributions are reflected in the robustness, effectiveness, and interpretability of the TOMS model, which arranges multi-sentence generation using topics. Experimental evaluations confirm that topic-oriented multi-sentence captions capture image details better than single-sentence captions. The research is supported by various funding sources, including NSFC and NSSFC.
+
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr Dollár, and C Lawrence Zitnick. Microsoft COCO: Common Objects in Context. 2014.
+
+Lin. ROUGE: A Package for Automatic Evaluation of Summaries. 2010.
+
+Feng Liu, Tao Xiang, Timothy M Hospedales, Wankou Yang, and Changyin Sun. Semantic Regularisation for Recurrent Image Annotation. CVPR, 2017.
+
+Junhua Mao, Huang Jonathan, Alexander Toshev, Oana Camburu, Alan Yuille, and Kevin Murphy. Generation and Comprehension of Unambiguous Object Descriptions. CVPR, 2016.
+
+Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. BLEU: a Method for Automatic Evaluation of Machine Translation. In ACL, 2002.
+
+Ramakrishna Vedantam, C. Lawrence Zitnick, and Devi Parikh. CIDER: Consensus-based Image Description Evaluation. 2014.
+
+Oriol Vinyals, Alexander Toshev, Samy Bengio, and Dumitru Erhan. Show and Tell: A Neural Image Caption Generator. In CVPR, 2015.
+
+Liwei Wang, Alexander Schwing, and Svetlana Lazebnik. Diverse and Accurate Image Description using a Variational Auto-Encoder with an Additive Gaussian Encoding Space. In NIPS, 2017.
+
+Kelvin Xu, Jimmy Ba, Ryan Kiros, Kyunghyun Cho, Aaron Courville, Ruslan Salakhudinov, Rich Zemel, and Yoshua Bengio. Show, Attend and Tell: Neural Image Caption Generation with Visual Attention. In International Conference on Machine Learning, 2015.
+
+Quanzeng You, Hailin Jin, Zhaowen Wang, Chen Fang, and Jiebo Luo. Image Captioning with Semantic Attention. CVPR, 2016.
+
+Peter Young, Alice Lai, Micah Hodosh, and Julia Hockenmaier. From Image Descriptions to Visual Denotations: New Similarity Metrics for Semantic Inference over Event Descriptions. Transactions of the Association for Computational Linguistics, 2014.
+
+Haonan Yu, Jiang Wang, Zhiheng Huang, Yi Yang, and Wei Xu. Video Paragraph Captioning using Hierarchical Recurrent Neural Networks. In CVPR, 2016.

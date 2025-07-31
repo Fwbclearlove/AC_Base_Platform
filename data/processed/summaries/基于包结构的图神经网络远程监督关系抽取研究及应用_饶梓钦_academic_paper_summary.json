@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "远程监督关系抽取演示系统设计与实现",
+  "authors": [
+    "未在原文中明确列出"
+  ],
+  "main_topic": "自然语言处理中的关系抽取",
+  "research_problem": "传统关系抽取方法需要大量人工标注数据，限制了其应用范围",
+  "methodology": "远程监督方法，L2G-GCN模型",
+  "key_innovations": [
+    "提出L2G-GCN模型框架",
+    "采用互信息最大化MIM作为正则化器",
+    "实现包级关系抽取演示系统"
+  ],
+  "experimental_results": "在NYT-10基准数据集上进行了实验，结果表明L2G-GCN模型和层级训练策略有效",
+  "conclusions": "L2G-GCN模型在远程监督关系抽取中具有优越性能，能有效处理噪声和长尾问题",
+  "keywords": [
+    "远程监督",
+    "关系抽取",
+    "L2G-GCN",
+    "互信息最大化",
+    "长尾问题"
+  ],
+  "application_domains": [
+    "知识图谱构建",
+    "问答系统完善"
+  ],
+  "technical_concepts": [
+    "远程监督",
+    "关系抽取",
+    "图卷积神经网络GCN",
+    "互信息最大化MIM",
+    "包级关系抽取"
+  ],
+  "performance_metrics": "P@N值，AUC值，PR曲线，Hits@K",
+  "summary": "本文针对自然语言处理中的关系抽取问题，提出了一种基于远程监督的L2G-GCN模型，并通过实验验证了其优越性能。模型通过互信息最大化正则化器提高鲁棒性，实现了包级关系抽取演示系统，有助于知识图谱构建和问答系统完善。",
+  "file_id": "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
+  "source_type": "cleaned",
+  "text_length": 23026,
+  "generation_time": "2025-07-31 21:36:54"
+}

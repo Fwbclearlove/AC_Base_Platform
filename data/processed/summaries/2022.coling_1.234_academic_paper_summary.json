@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "A Simple Model for Distantly Supervised Relation Extraction",
+  "authors": [
+    "Ziqin Rao",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Distantly supervised relation extraction",
+  "research_problem": "Noisy training data in distant supervision relation extraction",
+  "methodology": "BERT-based Graph Convolutional network Model (BGM)",
+  "key_innovations": [
+    "Combining a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN)",
+    "Using GCN to directly learn bag representations over instances"
+  ],
+  "experimental_results": "Significant improvements on benchmark datasets NYT10 and GDS1 in terms of P@N, AUC, and Micro-F1 score",
+  "conclusions": "The proposed BGM model is simple yet effective for DS-RE, representing each instance with a BERT-based PLM and using GCN to capture correlations within a bag",
+  "keywords": [
+    "Distant supervision",
+    "Relation extraction",
+    "BERT",
+    "Graph Convolutional Network",
+    "Cross-entropy loss"
+  ],
+  "application_domains": [
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "BERT-based PLM",
+    "Graph Convolutional Network (GCN)",
+    "Bag representation",
+    "Cross-entropy loss",
+    "Gradient descent optimization"
+  ],
+  "performance_metrics": "P@N, AUC, and Micro-F1 score",
+  "summary": "This paper introduces BERT-based Graph Convolutional network Model (BGM) for distantly supervised relation extraction. BGM combines a Pretrained Language Model and a Graph Convolutional Network to learn instance correlations for bag representations, achieving significant improvements on benchmark datasets NYT10 and GDS1 in terms of P@N, AUC, and Micro-F1 score.",
+  "file_id": "2022.coling_1.234",
+  "source_type": "cleaned",
+  "text_length": 8126,
+  "generation_time": "2025-07-31 21:11:49"
+}

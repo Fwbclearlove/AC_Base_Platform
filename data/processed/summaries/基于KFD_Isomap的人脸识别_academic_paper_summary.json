@@ -1,0 +1,39 @@
+{
+  "document_type": "academic_paper",
+  "title": "基于KFD-l somap的人脸识别",
+  "authors": [
+    "李睿凡",
+    "郝红卫",
+    "涂序彦",
+    "王枞"
+  ],
+  "main_topic": "人脸识别",
+  "research_problem": "Isomap流形学习方法在模式分类上并非最优",
+  "methodology": "KFD—Isomap算法",
+  "key_innovations": [
+    "用核Fisher判别替代Isomap中的经典多维尺度分析"
+  ],
+  "experimental_results": "使用KFD-isomap、Isomap、Ext-Isomap、特征脸、Fisher脸等进行人脸识别实验，KFD-Isomap表现出最好的性能",
+  "conclusions": "提出的方法性能优于实验采用的其他方法",
+  "keywords": [
+    "人脸识别",
+    "流形",
+    "Isomap",
+    "核Fisher判别"
+  ],
+  "application_domains": [
+    "人脸识别"
+  ],
+  "technical_concepts": [
+    "KFD-Isomap",
+    "Isomap",
+    "核Fisher判别",
+    "多维尺度分析"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文针对Isomap在模式分类上的不足，提出了一种基于核Fisher判别的改进算法KFD-Isomap，并将其应用于人脸识别。实验结果表明，KFD-Isomap在ORL和Yale两个人脸数据库上的表现优于其他方法。",
+  "file_id": "基于KFD_Isomap的人脸识别",
+  "source_type": "cleaned",
+  "text_length": 700,
+  "generation_time": "2025-07-31 21:33:39"
+}

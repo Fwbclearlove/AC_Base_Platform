@@ -1,0 +1,116 @@
+Multimodal Aspect-Based Sentiment Analysis under Conditional Relation
+
+Xinjing Liu, Ruifan Li, Shuqin Ye, Guangwei Zhang, Xiaojie Wang
+
+Abstract
+
+Multimodal Aspect-Based Sentiment Analysis (MABSA) extracts aspect terms from text-image pairs and identifies their sentiments. Traditional methods assume the image contains objects referred to by the aspects, which is not always true. We propose the COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL). CRD mitigates the impact of unrelated images, while VOL locates condition-related visual regions. We conduct two types of annotations for effective learning: conditional relation and bounding boxes of visual objects. Experiments on our C-MABSA dataset demonstrate CORSA's superior performance.
+
+1 Introduction
+
+Fine-grained MABSA has gained attention for its application in social media sentiment analysis. It involves three subtasks: Multimodal Aspect Term Extraction (MATE), Multimodal Aspect-oriented Sentiment Classification (MASC), and Joint Multimodal Aspects of Sentiment Analysis (JMASA). Existing methods assume images always contain referred objects, but this is not the case, especially in social media. We introduce CORSA to address this issue by filtering irrelevant visual information and precisely locating condition-related regions.
+
+2 Problem Formulation
+
+We frame MABSA as a multi-task framework, aiming to extract aspects and sentiment polarities from a tweet containing an image V and a sentence S. We determine conditional relations and detect visual objects, generating bounding boxes and categories.
+
+3 Methodology
+
+3.1 Data Generation for C-MABSA
+---
+
+We construct datasets for MABSA tasks, specifically C-MABSA with conditional relations. We automatically annotate two popular datasets, TWITTER-15 and TWITTER-17, using UNINEXT for conditional relation detection and YOLOv8 for visual object annotation. UNINEXT generates the probability of an image containing aspects, with thresholds τ1 set for relevance annotation. YOLOv8 detects visual objects, categorizing them as person, object, or background.
+
+Our proposed CORSA framework mitigates the impact of irrelevant conditions using a Conditional Relation Detector (CRD), locates condition-related regions with a Visual Object Localizer (VOL), and extracts aspect-sentiment pairs using a multi-modal BART-based sentiment analyzer. The textual encoder uses BART, while the visual encoder employs YOLOv8's backbone for multi-scale feature extraction.
+
+CRD applies self-attention and cross-modal attention to detect relevance and filters condition-related visual features. VOL enhances CRD by localizing objects and aligning them with aspects using cross-model attention. We use a gating mechanism to concatenate visual features and optimize with losses for regression and classification.
+
+Figure 2 illustrates the CORSA framework, detailing the process from unimodal feature extraction to the final sentiment analysis.
+
+We obtain the condition-aligned visual features ˆHVi = { ˆh1, ..., ˆhj, ..., ˆhm}, i ∈{1, 2, 3}. The visual feature ˆHVi is relevant to aspects and contains the accurate aspect’s visual information. Our Multi-modal Sentiment Analyzer (MSA) encodes multimodal inputs to predict aspects and sentiment. We concatenate three scales of visual features, i.e., ˆH′ = ˆHV1 ⊕WV2 ˆHV2 ⊕WV3 ˆHV3, and use a linear layer to map the concatenated feature to 49-dimensions. The multimodal BART encoder-decoder predicts the token probability distribution.
+
+For the JMASA task, our CORSA model outperforms state-of-the-art multimodal methods on all metrics on Twitter-15 and Twitter-17 datasets. On MATE, our model achieves the best performance in Twitter-15 and is second to CMMT in Twitter-17. For MASC, our model achieves the best results on both datasets in terms of Accuracy and F1 score.
+
+In the ablation study, removing either the Conditional Relation Detection (CRD) or the Visual Object Localization (VOL) module results in a decline in F1 scores. The full CORSA model performs the best, indicating the effectiveness of both modules. Ablation results on different scales of the visual encoder also demonstrate the importance of each scale for the model's performance.
+
+We evaluate the impact of conditional relation detection (CRD) and visual object localization (VOL) on model performance. The removal of CRD results in a significant decrease in F1-scores on Twitter-15 and Twitter-17 datasets, indicating the importance of identifying conditional image regions. The decline in performance is more pronounced when removing VOL, suggesting the sequence of processing is crucial—first eliminating unmet conditional image information, then localizing condition-related regions. The ablation study on multi-scale features demonstrates their effectiveness, with small-scale features proving particularly beneficial. Our experiments with hyper-parameters λD and λL show that our CORSA model is optimal when λD equals 1.0 and λL equals 0.5. The choice of thresholds for annotation data generation is also critical, with different thresholds τ1 and τ2 selected for CRD and VOL, respectively.
+
+Comparative experiments with large language models (LLMs) and multi-modal LLMs (MLLMs) on the JMASA and MASC tasks demonstrate that our model outperforms ChatGPT 3.5, Llama 2, VisualGLM-6B, Llava 1.5, MMICL, mPLUG-Owl2, and GPT4V, showcasing the advantage of multimodal input and the effectiveness of our approach. A case study further illustrates the importance of filtering unmet conditional information and the precise localization of condition-related regions for accurate sentiment predictions.
+
+MABSA encompasses three tasks: MATE, MASC, and JMASA. Early methods for MATE, such as those by Moon et al. (2018), Arshad et al. (2019), and Wu et al. (2020a), employed cross-modal attention mechanisms, which were insufficient for effectively learning multimodal information. Subsequent methods by Yu et al. (2020), Liu et al. (2022), and Zheng et al. (2023) utilized pre-trained language models and modality translation-based approaches. Yu et al. (2023) extended Multimodal NER to MATE using a generative framework. For MASC, existing methods typically rely on attention mechanisms and graph convolutional networks (GCNs). Notably, Zhang et al. (2021) introduced an attention network with a discriminative mechanism, Xiao et al. (2023) proposed a cross-modal fine-grained alignment and fusion network, and Zhao and Yang (2023) presented a fusion model combining GCN and SE-ResNeXt networks. Wang et al. (2023) addressed the issue of irrelevant aspects in images with an aspect-oriented filtration module.
+
+On JMASA, pipeline framework-based methods such as those by Ju et al. (2021) and Yang et al. (2022b) have been proposed, as well as generative models like those by Ling et al. (2022) and Zhou et al. (2023). Liu et al. (2024b) introduced a framework that implicitly calculates the similarity between sentences and images to reduce multi-level modality noise and multi-grained semantic gaps. However, these methods often overlook the conditional multimodal relations between images and texts, and the assumption that images contain objects referred to by text aspects is not always met. In response, we propose the CORSA framework, which explicitly considers this issue.
+
+In this paper, we introduce the CORSA framework for MABSA, which includes two key modules: CRD and VOL. CRD is designed to address the impact of the conditional image issue, while VOL aims to locate condition-related visual regions with aspects. We perform two types of annotations on benchmark datasets for training and demonstrate the effectiveness of our CORSA model. Despite achieving significant performance, there is room for improvement, and we plan to explore annotation methods using MLLMs to enhance annotation accuracy.
+
+Our method has limitations, including the use of a pre-trained model (UNINEXT) for automatic data annotation, which can introduce inaccuracies. This results in a lack of ground truth for conditional relations and affects the CORSA model's performance, presenting challenges for further research.
+
+This work was supported by the National Natural Science Foundation of China under Grant 62076032 and the CCF-Zhipu Large Model Innovation Fund (NO. CCF-Zhipu202407). We thank the anonymous reviewers for their constructive feedback.
+
+Yan Ling, Jianfei Yu, and Rui Xia. 2022. Vision-language pre-training for multimodal aspect-based sentiment analysis.
+
+Haotian Liu et al. 2024a. Improved baselines with visual instruction tuning.
+
+Luping Liu et al. 2022. Uamner: uncertainty-aware multimodal named entity recognition in social media posts.
+
+Yaxin Liu et al. 2024b. Rng: Reducing multi-level noise and multi-grained semantic gap for joint multimodal aspect-sentiment analysis.
+
+Ilya Loshchilov and Frank Hutter. 2017. Fixing weight decay regularization in adam.
+
+Seungwhan Moon, Leonardo Neves, and Vitor Carvalho. 2018. Multimodal named entity recognition for short social media posts.
+
+Jie Mu et al. 2023. Mocolnet: A momentum contrastive learning network for multimodal aspect-level sentiment analysis.
+
+OpenAI. 2023. ChatGPT: A large language model.
+
+OpenAI. 2024. Gpt-4 technical report.
+
+Lin Sun et al. 2021. Rpbert: a text-image relation propagation-based bert model for multimodal ner.
+
+Hugo Touvron et al. 2023. Llama 2: Open foundation and fine-tuned chat models.
+
+Qianlong Wang et al. 2023. Image-to-text conversion and aspect-oriented filtration for multimodal aspect-based sentiment analysis.
+
+Hanqian Wu et al. 2020a. Multimodal aspect extraction with region-aware alignment network.
+
+Zhiwei Wu et al. 2020b. Multimodal representation with embedded visual guiding objects for named entity recognition in social media posts.
+
+Luwei Xiao et al. 2024. Atlantis: Aesthetic-oriented multiple granularities fusion network for joint multimodal aspect-based sentiment analysis.
+
+Luwei Xiao et al. 2023. Cross-modal fine-grained alignment and fusion network for multimodal aspect-based sentiment analysis.
+
+Bin Yan et al. 2023. Universal instance perception as object discovery and retrieval.
+
+Bin Yang and Jinlong Li. 2023. Visual elements mining as prompts for instruction learning for target-oriented multimodal sentiment classification.
+
+Hao Yang et al. 2022a. Face-sensitive image-to-emotional-text cross-modal translation for multimodal aspect-based sentiment analysis.
+
+Juan Yang et al. 2024. Amifn: Aspect-guided multi-view interactions and fusion network for multimodal aspect-based sentiment analysis.
+
+Li Yang et al. 2022b. Cross-modal multitask transformer for end-to-end multimodal aspect-based sentiment analysis.
+
+Qinghao Ye et al. 2024. mplug-owl2: Revolutionizing multi-modal large language model with modality collaboration.
+
+Jianfei Yu and Jing Jiang. 2019. Adapting bert for target-oriented multimodal sentiment classification.
+
+Jianfei Yu et al. 2020. Improving multimodal named entity recognition via entity span detection with unified multimodal transformer.
+
+Jianfei Yu et al. 2023. Grounded multimodal named entity recognition on social media.
+
+Zhewen Yu et al. 2022. Dual-encoder transformers with cross-modal alignment for multimodal aspect-based sentiment analysis.
+
+Jing Zhang et al. 2024. Mcpl: Multi-model co-guided progressive learning for multimodal aspect-based sentiment analysis.
+
+Zhe Zhang et al. 2021. Modalnet: an aspect-level sentiment classification model by exploring multimodal data with fusion discriminant attentional network.
+
+Fei Zhao et al. 2023. M2df: Multi-grained multi-curriculum denoising framework for multimodal aspect-based sentiment analysis.
+
+Haozhe Zhao et al. 2024a. Mmicl: Empowering vision-language model with multi-modal in-context learning.
+
+Hua Zhao et al. 2024b. A survey on multimodal aspect-based sentiment analysis.
+
+Jun Zhao and Fuping Yang. 2023. Fusion with gcn and se-resnext network for aspect based multimodal sentiment analysis.
+
+Changmeng Zheng et al. 2023. Rethinking multimodal entity and relation extraction from a translation point of view.
+
+Ru Zhou, Wenya Guo, Xumeng Liu, Shenglong Yu, Ying Zhang, and Xiaojie Yuan. 2023. Aom: Detecting aspect-oriented information for multimodal aspect-based sentiment analysis. Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers).

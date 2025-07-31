@@ -1,0 +1,97 @@
+Dimensionality Reduction for Text Using LLE
+
+Chuan HE, Zhe DONG, Ruifan LI, Yixin ZHONG
+School of Information Engineering, Beijing University of Posts and Telecommunications, Beijing, China
+zyx@bupt.edu.cn
+
+Abstract:
+Dimensionality reduction is essential in various information processing fields. Locally linear embedding (LLE) is an effective manifold learning algorithm that computes low-dimensional embeddings preserving local neighborhood properties. Although LLE has been primarily used on image data, it is applicable to text processing to address the curse of dimensionality. This paper introduces LLE, analyzes its advantages and limitations, discusses its relationship with latent semantic indexing (LSI) within the graph embedding framework, and presents experimental results using Reuters21578 and TDT2 datasets.
+
+1. Introduction
+1.1 Dimensionality Reduction
+The need for dimensionality reduction arises in numerous applications, including pattern recognition, text processing, and data visualization. High-dimensional data, such as images and documents, pose challenges due to algorithm performance limitations and hardware constraints. Existing methods include feature extraction and feature selection. Principal component analysis (PCA) is a widely used linear technique, while manifold learning methods like LLE offer alternative approaches.
+
+1.2 Text Dimensionality Reduction
+Textual data typically exhibit high dimensionality, with the "bag of words" model commonly used for representation. Techniques such as stemming, lemmatizing, and Document-Frequencies filtering are preprocessing steps for dimensionality reduction. Feature selection and extraction methods, including document frequencies, chi-square, and information gain, play crucial roles. Algorithms like latent semantic analysis (LSA) and locality preserving projection (LPP) are also applied in text dimensionality reduction.
+
+1.3 Arrangement
+This section provides an overview of text dimensionality reduction methods. Subsequent sections will discuss the LLE algorithm's motivation, main idea, computational aspects, and compare it with graph embedding approaches.
+
+In this section, we discuss the Locally Linear Embedding (LLE) algorithm, its motivation, and its main idea. LLE assumes that data are sampled in a low-dimensional nonlinear manifold embedded in a high-dimensional space. The embedding preserves the local configuration of nearest neighbors, ensuring that nearby points in the high-dimensional space remain nearby in the low-dimensional space. LLE uses locally linear reconstruction, where each point is represented by its neighbors, determined by the neighboring graph. The algorithm computes the reconstruction weights that store the local manifold information.
+
+The LLE algorithm formalization involves three steps: constructing the neighborhood graph, minimizing the reconstruction errors with respect to the reconstruction weights, and minimizing the reconstruction errors in the new low-dimensional space. The reconstruction weights connect the high-dimensional and low-dimensional spaces.
+
+We also discuss some drawbacks of LLE, such as the sampling assumption and the use of the Euclidean metric, which may not always capture the true manifold structure. Additionally, the constraint of equalizing reconstruction points to the raw point can lead to suboptimal solutions.
+
+Finally, we categorize dimensionality reduction methods into linear and nonlinear approaches, and analyze LLE from these perspectives. Linear methods include PCA, ICA, and LDA, while nonlinear methods involve kernelized linear approaches and others.
+
+Manifold learning methods, such as kernel PCA, map data to nonlinear spaces using kernel functions. These methods assume that high-dimensional data is sampled from a lower-dimensional nonlinear manifold. Locally linear embedding (LLE) and Isomap are examples of such approaches. LLE is a nonlinear, local, and unsupervised method that reconstructs points using only their neighboring points, offering fast computation. LLE's nonlinearity is based on the assumption that data are sampled from an underlying nonlinear manifold.
+
+Graph embedding provides a dimensionality reduction framework, with LLE being one of its specialized versions. In this framework, a sparse graph is derived from the neighboring relationship, and a weight matrix W is constructed. The key step is to compute the projected points using an optimization formula that involves the graph Laplacian.
+
+Experiments on the Reuters21578 and TDT2 datasets compared text representations in the original space, LLE, and LSI algorithms. For the Reuters21578 dataset, document subsets were vectorized after preprocessing, and the number of topics and documents varied. K-Nearest-Neighbor was used for classification. The results showed that precisions in the LLE-transformed space were generally higher than in the original or LSI-transformed spaces, with significantly lower dimensionalities in the LLE space.
+
+---
+
+Subset #Topics #Docs Baseline LSI LEE 
+Precisions Dims Precisions Dims Precisions 
+1 6 539 86.06 529 86.99 19 91.28 
+2 6 469 77.39 467 78.46 24 91.05 
+3 5 535 91.43 527 91.24 15 95.34 
+4 3 736 89.53 728 90.48 29 95.11 
+5 6 764 70.03 755 71.07 44 86.51 
+6 6 901 83.35 881 84.32 47 93.90 
+7 4 817 89.59 802 89.59 22 92.04 
+8 7 882 89.02 867 90.12 24 94.45 
+9 11 751 68.99 745 69.79 23 84.30 
+10 5 914 82.39 895 84.14 56 92.57 
+11 6 969 88.24 956 88.44 25 95.98 
+12 5 858 76.80 846 77.03 37 83.56 
+13 5 506 77.86 498 78.06 18 90.51 
+14 5 600 83.83 592 84.33 29 89.17 
+15 3 712 86.09 695 86.51 9 98.17 
+16 6 621 85.51 615 85.67 41 90.18 
+17 3 940 94.15 923 94.26 68 98.83 
+18 6 791 78.25 780 78.88 22 90.14 
+19 3 665 96.09 653 96.09 5 99.85 
+20 6 707 75.11 697 77.09 20 94.49 
+
+4.2 Evaluation on TDT2
+4.2.1 Experimental Preparation
+After preprocessing similar to that of Reuters21578, the TDT2 dataset contains 9394 documents across 30 topics. We randomly sample from this collection, obtaining 20 subsets with varying numbers of documents (469 to 969) and topics (3 to 11).
+
+4.2.2 Experimental Design and Results
+The experiments on TDT2 are designed analogously to those on Reuters21578. Table 2 and Figure 5 present the results for specific subsets and the entire collection, respectively. The LEE algorithm achieves the highest precision over the other two methods in all subsets and on average. Additionally, the precisions here are higher than those on Reuters21578, possibly due to TDT2's better-separated collection.
+
+5. Discussion and Conclusion
+The first three sections discuss LLE and text dimensionality reduction theoretically, and Section 4 experimentally demonstrates the effectiveness of the LLE algorithm for text dimensionality reduction. In terms of classification precision, LLE significantly outperforms the other methods. Further exploration is needed in several areas:
+- The computation time of LLE is less than LSI when using K-Nearest-Neighbor, though unproved.
+- The reduced dimensionality of LLE is much less than LSI, with the former allowing adjustable dimensions for optimal precision.
+- The experiments show that the reduced dimensionality of LLE ranges from 5 to 68, suggesting the potential intrinsic dimensionality of the text structure.
+
+References
+[1] Belkin M., and Niyogi P., Laplacian Eigenmaps for Dimensionality Reduction and Data Representation, Neural Computation, Volume 15, 2003
+[2] Bellman, R. E., Adaptive control Processes, Princeton University Press, Princeton, NJ. 1961.
+[3] Bishop C., Machine Learning and Pattern Recognition, Cambridge University Press, 2006
+[4] Cai D. and He X., Orthogonal Locality Preserving Indexing, Proc. of the 28th International ACM SIGIR, 2005
+[5] Cai D., He X. and Han J., Document Clustering Using Locality Preserving Indexing, IEEE Transaction on Knowledge Discovery Engineering, Volume 17, 2005
+[6] Cai D., He X., Hu Y., Han J. and Thomas H., Learning a Spatially Smooth Subspace for Face Recognition, Proc. 2007 IEEE International Conference on Computer Vision and Pattern Recognition, 2007
+[7] Deerwester S., Dumais S. and Harshman R., Indexing by Latent Semantic Analysis, Journal of the American Society for Information Science, 1999
+[8] Duda O. R. and Hart E. P., Pattern Classification, 2nd edition, Wiley-Interscience, 2000
+[9] Forman G., An Extensive Empirical Study of Feature Selection Metrics for Text Classification, Journal of Machine Learning Research, Volume 3, 2003
+[10] Golub H. G. and Charles F. Van Loan, Matrix Computations, 3rd edition, Johns Hopkins University Press, 1996
+[11] He X. and Niyogi P., Locality Preserving Projections, Advances in Neural Information Processing Systems (NIPS) 15, 2003
+[12] He X., Cai D. Liu H. and Ma W., Locality Preserving Indexing for Document Representation, Proc. of 27th International ACM SIGIR, 2004
+[13] Jolliffe I. T., Principal Component Analysis, 2nd edition, Springer, NY, 2002
+[14] Kouropteva O., Okun O., Hadid A., Soriano M., Marcos S. and Pietikainen M., Beyond Locally Linear Embedding Algorithm, Technical Report, MVG, 2002
+[15] Lewis D. D., Yang Y., Rose G. T. and Li F., RCV1: A New Benchmark Collection for Text Categorization Research, Journal of Machine Learning Research, Volume 5, 2004
+[16] Ridder de D., Kouropteva O., Okun O., Pietikainen M. and Duin R. P., Supervised Locally Linear Embedding, Technical Report, MVG, 2003
+[17] Rogati M. and Yang Y., High-Performing Feature Selection for Text Classification, Proc. of the International ACM CIKM, 2002
+[18] Roweis T. S. and Saul K. L., Nonlinear Dimensionality Reduction by Locally Linear Embedding, Science, Volume 290, 2000
+[19] Saul K. L. and Roweis T. S., Think Globally, Fit Locally: Unsupervised Learning of Low-dimensional Manifolds, Journal of Machine Learning Research, Volume 4, 2003
+[20] Scholkopf B., Smola, A. and Muller K. R., Nonlinear Component Analysis as a Kernel Eigenvalue Problem, Neural Computation, Volume 10, Page 1299-1319, 1998
+[21] Tenenbaum J. B. Vin de Silva, and Langford J. C., A Global Geometric Framework for Nonlinear Dimensionality Reduction, Science, Volume 290, 2000
+[22] Yang Y. and Pedersen J., A Comparative Study on Feature Selection in Text Categorization, Proc. of the 14th International Conference on Machine Learning, 1997
+[23] Yan S., Xu D., Zhang B. and Zhang H., Graph Embedding and Extension: a Framework for Dimensionality Reduction, IEEE Transactions on Pattern Analysis and Machine Intelligence, 2007
+
+---

@@ -1,0 +1,206 @@
+Enhanced Multi-Channel Graph Convolutional Network for Aspect Sentiment Triplet Extraction
+
+Hao Chen, Zepeng Zhai, Fangxiang Feng, Ruifan Li, Xiaojie Wang
+School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China
+
+Abstract:
+Aspect Sentiment Triplet Extraction (ASTE) is a sentiment analysis task. Existing studies often focus on new tagging schemes for end-to-end extraction, neglecting word relations. We propose an Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN) to exploit these relations. Our model defines ten relation types, utilizes a biaffine attention module for relation embedding, and treats words and relations as nodes and edges in a multi-channel graph. EMC-GCN incorporates linguistic features and employs a refining strategy that considers implicit aspect and opinion extraction results. Experimental results demonstrate the effectiveness and robustness of our model.
+
+1 Introduction:
+ASTE is a new variant of Aspect-based Sentiment Analysis (ABSA), aiming to extract triplets of aspect, opinion, and sentiment. Previous approaches include pipeline methods, multi-turn machine reading comprehension, and end-to-end frameworks. However, challenges remain in utilizing word relations and linguistic features. We introduce EMC-GCN to address these challenges, enhancing node representations with relation awareness and incorporating syntactic and lexical features. An effective refining strategy for word-pair representation is also proposed. Our contributions include a novel EMC-GCN model, a comprehensive exploitation of linguistic features, and an effective refining strategy, supported by extensive experimental validation. 
+
+2 Related Work
+---
+
+Aspect-based Sentiment Analysis (ABSA) is a fine-grained sentiment analysis task, focusing on aspects or entities. It consists of three basic subtasks: Aspect Term Extraction (ATE), Aspect Sentiment Classification (ASC), and Opinion Term Extraction (OTE). Previous studies often addressed these tasks separately, ignoring their interdependencies. Efforts have been made to couple these subtasks, proposing models for joint extraction of aspect-based pairs.
+
+Our proposed framework is EMC-GCN, which addresses Aspect and Opinion Term Co-Extraction (AOTE) and Aspect-Sentiment Pair Extraction (ASPE). We define ten types of relations between words for the ASTE task, enhancing the model's ability to extract triplets. The relations not only identify aspect and opinion terms but also determine sentiment polarities.
+
+Given a sentence X = {w1, w2, ..., wn}, our model aims to output a set of triplets T = {(a, o, s)m}. The sentiment label set S = {POS, NEU, NEG} includes positive, neutral, and negative polarities. We use a table filling method to construct a relation table for each sentence and decode triplets with an algorithm that considers the predicted relations of word pairs.
+
+The EMC-GCN model consists of an Input and Encoding Layer using BERT for contextual representations and a Biaffine Attention Module to capture relation probability distributions for word pairs. This module uses multi-layer perceptrons and biaffine functions to model the relations between words, forming an adjacency tensor that represents the relations between words in the sentence.
+
+---
+
+3.4.3 Multi-Channel GCN
+Motivated by CNN, GCN is an efficient variant operating on graphs (Kipf and Welling, 2017). A graph's nodes and edges allow GCN to apply convolution operations on connected nodes, aggregating relevant information. For a sentence with n words, an adjacency matrix A ∈ Rn×n is constructed using the syntactic dependency tree (Zhang et al., 2019; Sun et al., 2019). The element Aij represents the edge between nodes wi and wj. Soft edges can be constructed by attention mechanisms (Guo et al., 2019; Chen et al., 2020a; Li et al., 2021). Our EMC-GCN extends the vanilla GCN with a multi-channel adjacency tensor Rba ∈ Rn×n×m, using the biaffine attention module. Each channel models a word relation, and a GCN aggregates information along each channel for each node:
+
+eHba k = σ(Rba(:,:,k)HWk + bk) (6)
+
+ˆHba = f(eHba 1, eHba 2, ..., eHba m) (7)
+
+3.4.4 Linguistic Features
+To enhance EMC-GCN, we introduce four types of linguistic features for each word pair: part-of-speech combination, syntactic dependency type, tree-based distance, and relative position distance. We initialize four adjacency tensors based on these features: Rpsc, Rdep, Rtbd, and Rrpd. The graph convolution operation is repeated using these tensors to obtain node representations ˆHpsc, ˆHdep, ˆHtbd, and ˆHrpd. These are combined with average pooling and concatenation:
+
+H = f(ˆHba, ˆHpsc, ˆHdep, ˆHtbd, ˆHrpd) (8)
+
+R = Rba ⊕ Rpsc ⊕ Rdep ⊕ Rtbd ⊕ Rrpd (9)
+
+3.4.5 Relation Constraint
+We impose a constraint on the adjacency tensor obtained from the biaffine module to capture word relations precisely. The constraint costs are Lba, Lpsc, Ldep, Ltbd, and Lrpd.
+
+3.4.6 Refining Strategy and Prediction Layer
+For label prediction, we concatenate node representations hi, hj and edge representation rij. We refine this using a strategy that considers the implicit results of aspect and opinion extraction. The refined representation sij is:
+
+sij = hi ⊕ hj ⊕ rij ⊕ rii ⊕ rjj (11)
+
+The word pair representation sij is fed into a linear layer followed by a softmax function to produce a label probability distribution pij.
+
+3.5 Loss Function
+Our objective function is:
+
+L = Lp + αLba + β(Lpsc + Ldep + Ltbd + Lrpd) (13)
+
+where Lp is the standard cross-entropy loss.
+
+4 Experiments
+
+4.1 Datasets
+We evaluate our method on two ABSA datasets from the SemEval ABSA Challenges (Pontiki et al., 2014, 2015, 2016).
+
+4.2 Baselines
+We compare EMC-GCN with state-of-the-art baselines, grouped into pipeline methods, end-to-end methods, and MRC-based methods.
+
+4.3 Implementation Details
+We use BERT-base-uncased as the sentence encoder and train EMC-GCN with AdamW optimizer. Hyperparameters and training details are specified.
+
+---
+
+---
+
+Model | 14res | 14lap | 15res | 16res
+--- | --- | --- | --- | ---
+CMLA+♮ | 39.18 | 47.13 | 42.79 | 33.16
+RINANTE+♮ | 31.42 | 34.95 | 29.88 | 23.87
+Li-unified-R♮ | 41.04 | 51.00 | 44.72 | 44.31
+Peng-two-stage♮ | 43.24 | 51.46 | 48.07 | 52.32
+OTE-MTL† | 62.00 | 58.71 | 56.37 | 43.42
+JET-BERT♮ | 70.56 | 62.40 | 64.45 | 57.53
+GTS-BERT† | 68.09 | 68.81 | 59.28 | 55.42
+BMRC† | 75.61 | 67.99 | 68.51 | 57.82
+BART-ABSA† | 65.52 | 65.25 | 59.14 | 59.26
+Our EMC-GCN | 71.21 | 71.78 | 61.54 | 68.33
+
+Table 4: Experimental results on D2 (Xu et al., 2020). The “♮” denotes results from Xu et al. (2020). The “†” indicates reproduced models using released code with original parameters.
+
+The reported results are the average of five runs with different random seeds.
+
+4.4 Main Results
+
+Under the F1 metric, our EMC-GCN model outperforms all pipeline, end-to-end, and MRC-based methods on two groups of datasets. End-to-end and MRC-based methods show more significant improvements than pipeline methods by jointly training multiple subtasks. Our EMC-GCN significantly surpasses GTS-BERT with an average of 1.96% and 2.61% F1-score on D1 and D2, respectively, due to leveraging word relations and linguistic knowledge.
+
+4.5 Model Analysis
+
+4.5.1 Ablation Study
+
+Table 5 presents the F1 scores of the ablation study on D2, showing the effectiveness of different modules in EMC-GCN.
+
+Model | 14res | 14lap | 15res | 16res
+--- | --- | --- | --- | ---
+EMC-GCN | 71.78 | 58.81 | 61.93 | 68.33
+w/o Ten Relations | 70.68 | 57.71 | 59.85 | 66.48
+w/o Linguistic Features | 71.22 | 58.38 | 60.62 | 67.15
+w/o Relation Constraint | 70.59 | 57.28 | 59.83 | 67.89
+w/o Refining Strategy | 70.62 | 56.72 | 60.23 | 67.31
+
+Table 5: F1 scores of ablation study on D2.
+
+4.5.2 Effect of Refining Strategy
+
+Table 6 shows the F1 scores of three sentiment relations on 14rest and 14lap of D2, verifying the effectiveness of the refining strategy.
+
+Model | POS | NEU | NEG
+--- | --- | --- | ---
+EMC-GCN | 74.69 | 62.43 | 67.74
+w/o Refining Strategy | 74.98 | 59.87 | 67.31
+
+Table 6: F1 scores of three sentiment relations on D2.
+
+4.5.3 Channel Visualization
+
+Visualization of the adjacency tensor Rba's POS and NEG relation channels demonstrates the relation between words.
+
+4.5.4 Linguistic Feature Visualization
+
+Visualizations of adjacency tensors for four linguistic features show their contributions to the ASTE task.
+
+4.5.5 Case Study
+
+---
+
+Figure and table references have been retained for context, assuming they are correctly referenced within the full paper.
+
+A case study is presented in Figure 7, where aspect terms are highlighted in blue and opinion terms in yellow. The red line signifies a match between an aspect and opinion term, forming a triplet with a positive sentiment. The term "light" is challenging to identify by GTS-BERT and BMRC, yet "easy" is predicted correctly by all methods due to its closer proximity to "transport" than "light". Consequently, the triplet ("transport", "light", positive) is ignored by these methods, while our EMC-GCN can accurately extract it. We attribute this to the significant connections established between "light" and "transport" through sentiment relations and linguistic features.
+
+In this paper, we introduce the EMC-GCN architecture for the ASTE task. We design a multi-channel graph structure to model various relation types between word pairs and employ graph convolution operations across all channels to learn relation-aware node representations. Moreover, we incorporate linguistic features to enhance the GCN-based model and develop an effective refining strategy for improved triplet extraction. Our EMC-GCN model consistently outperforms all baseline methods on benchmark datasets. Future work will involve analyzing the roles of linguistic features and their combinations.
+
+This work was supported by the National Key R&D Program of China, the National Natural Science Foundation of China, the 111 Project, and the Fundamental Research Funds for the Central Universities.
+
+References:
+[References listed here]
+
+Lyu, Chenyang, Jennifer Foster, and Yvette Graham. 2020. Improving document-level sentiment analysis with user and product context. In Proceedings of the 28th International Conference on Computational Linguistics, 6724–6729.
+
+Ma, Dehong, Sujian Li, and Houfeng Wang. 2018. Joint learning for targeted sentiment analysis. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, 4737–4742.
+
+Ma, Dehong, Sujian Li, Fangzhao Wu, Xing Xie, and Houfeng Wang. 2019. Exploring sequence-to-sequence learning in aspect term extraction. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 3538–3547.
+
+Ma, Dehong, Sujian Li, Xiaodong Zhang, and Houfeng Wang. 2017. Interactive attention networks for aspect-level sentiment classification. In IJCAI’17, 4068–4074.
+
+Mao, Yue, Yi Shen, Chao Yu, and Longjun Cai. 2021. A joint training dual-mrc framework for aspect based sentiment analysis. Proceedings of the AAAI Conference on Artificial Intelligence, 35(15):13543–13551.
+
+Miwa, Makoto, and Yutaka Sasaki. 2014. Modeling joint entity and relation extraction with table representation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), 1858–1869.
+
+Peng, Haiyun, Lu Xu, Lidong Bing, Fei Huang, Wei Lu, and Luo Si. 2020. Knowing what, how and why: A near complete solution for aspect-based sentiment analysis. Proceedings of the AAAI Conference on Artificial Intelligence, 34(05):8600–8607.
+
+Phan, Minh Hieu, and Philip O. Ogunbona. 2020. Modelling context and syntactical features for aspect-based sentiment analysis. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, 3211–3220.
+
+Pontiki, Maria, Dimitris Galanis, Haris Papageorgiou, Ion Androutsopoulos, Suresh Manandhar, Mohammad AL-Smadi, Mahmoud Al-Ayyoub, Yanyan Zhao, Bing Qin, Orphée De Clercq, Véronique Hoste, Marianna Apidianaki, Xavier Tannier, Natalia Loukachevitch, Evgeniy Kotelnikov, Nuria Bel, Salud María Jiménez-Zafra, and Gül¸sen Eryi˘git. 2016. SemEval-2016 task 5: Aspect based sentiment analysis. In Proceedings of the 10th International Workshop on Semantic Evaluation (SemEval-2016), 19–30.
+
+Pontiki, Maria, Dimitris Galanis, Haris Papageorgiou, Suresh Manandhar, and Ion Androutsopoulos. 2015. SemEval-2015 task 12: Aspect based sentiment analysis. In Proceedings of the 9th International Workshop on Semantic Evaluation (SemEval 2015), 486–495.
+
+Pontiki, Maria, Dimitris Galanis, John Pavlopoulos, Haris Papageorgiou, Ion Androutsopoulos, and Suresh Manandhar. 2014. SemEval-2014 task 4: Aspect based sentiment analysis. In Proceedings of the 8th International Workshop on Semantic Evaluation (SemEval 2014), 27–35.
+
+Qi, Peng, Yuhao Zhang, Yuhui Zhang, Jason Bolton, and Christopher D. Manning. 2020. Stanza: A python natural language processing toolkit for many human languages. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics: System Demonstrations, 101–108.
+
+Read, Jesse, Bernhard Pfahringer, Geoff Holmes, and Eibe Frank. 2011. Classifier chains for multi-label classification. Machine learning, 85(3):333–359.
+
+Severyn, Aliaksei, and Alessandro Moschitti. 2015. Twitter sentiment analysis with deep convolutional neural networks. In Proceedings of the 38th International ACM SIGIR Conference on Research and Development in Information Retrieval, 959–962.
+
+Sun, Kai, Richong Zhang, Samuel Mensah, Yongyi Mao, and Xudong Liu. 2019. Aspect-level sentiment analysis via convolution over dependency tree. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), 5679–5688.
+
+Tang, Duyu, Bing Qin, and Ting Liu. 2016. Aspect level sentiment classification with deep memory network. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, 214–224.
+
+Wang, Kai, Weizhou Shen, Yunyi Yang, Xiaojun Quan, and Rui Wang. 2020. Relational graph attention network for aspect-based sentiment analysis. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, 3229–3238.
+
+Wang, Wenya, and Sinno Jialin Pan. 2019. Transferable interactive memory network for domain adaptation in fine-grained opinion extraction. Proceedings of the AAAI Conference on Artificial Intelligence, 33(01):7192–7199.
+
+Wang, Wenya, Sinno Jialin Pan, Daniel Dahlmeier, and Xiaokui Xiao. 2016. Recursive neural conditional random fields for aspect-based sentiment analysis. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, 616–626.
+
+Wang, Wenya, Sinno Jialin Pan, Daniel Dahlmeier, and Xiaokui Xiao. 2017. Coupled multi-layer attentions for co-extraction of aspect and opinion terms. In Proceedings of the Thirty-First AAAI Conference on Artificial Intelligence, 3316–3322.
+
+Wei, Zhenkai, Yu Hong, Bowei Zou, Meng Cheng, and Jianmin Yao. 2020. Don’t eclipse your arts due to small discrepancies: Boundary repositioning with a pointer network for aspect extraction. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, 3678–3684.
+
+Wu, Zhen, Chengcan Ying, Fei Zhao, Zhifang Fan, Xinyu Dai, and Rui Xia. 2020a. Grid tagging scheme for aspect-oriented fine-grained opinion extraction. In Findings of the Association for Computational Linguistics: EMNLP 2020, 2576–2585.
+
+Wu, Zhen, Fei Zhao, Xin-Yu Dai, Shujian Huang, and Jiajun Chen. 2020b. Latent opinions transfer network for target-oriented opinion words extraction. Proceedings of the AAAI Conference on Artificial Intelligence, 34(05):9298–9305.
+
+Xu, Hu, Bing Liu, Lei Shu, and Philip S. Yu. 2018. Double embeddings and CNN-based sequence labeling for aspect extraction. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), 592–598.
+
+Xu, Lu, Yew Ken Chia, and Lidong Bing. 2021. Learning span-level interactions for aspect sentiment triplet extraction. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), 4755–4766.
+
+Xu, Lu, Hao Li, Wei Lu, and Lidong Bing. 2020. Position-aware tagging for aspect sentiment triplet extraction. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), 2339–2349.
+
+Hang Yan, Junqi Dai, Tuo Ji, Xipeng Qiu, and Zheng Zhang. 2021. A unified generative framework for aspect-based sentiment analysis.
+
+Bishan Yang and Claire Cardie. 2012. Extracting opinion expressions with semi-Markov conditional random fields.
+
+Bishan Yang and Claire Cardie. 2013. Joint inference for fine-grained opinion extraction.
+
+Bishan Yang and Claire Cardie. 2014. Context-aware learning for sentence-level sentiment analysis with posterior regularization.
+
+Yichun Yin, Furu Wei, Li Dong, Kaimeng Xu, Ming Zhang, and Ming Zhou. 2016. Unsupervised word and dependency path embeddings for aspect term extraction.
+
+Chen Zhang, Qiuchi Li, and Dawei Song. 2019. Aspect-based sentiment classification with aspect-specific graph convolutional networks.
+
+Chen Zhang, Qiuchi Li, Dawei Song, and Benyou Wang. 2020. A multi-task learning framework for opinion triplet extraction.

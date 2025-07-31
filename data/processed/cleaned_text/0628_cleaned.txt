@@ -1,0 +1,92 @@
+Multi-scale Two-way Deep Neural Network for Stock Trend Prediction
+
+Guang Liu, Yuzhao Mao, Qi Sun, Hailong Huang, Weiguo Gao, Xuan Li, JianPing Shen, Ruifan Li, and Xiaojie Wang
+
+Abstract
+
+Stock Trend Prediction (STP) is crucial for investors and has garnered significant attention in Artificial Intelligence. Most studies focus on single-scale analysis, neglecting the multi-scale perspective essential for intelligent investment decisions. We propose a Multi-scale Two-way Deep Neural Network (MTDNN) that learns from wavelet-based and downsampling-based scale information using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network. MTDNN achieves state-of-the-art performance on FI-2010 and CSI-2016, a long-range stock dataset we published for STP research.
+
+1 Introduction
+
+STP automatically predicts stock price movement and is challenging due to the non-stationary and chaotic nature of stock data. Previous studies smooth data at a single scale, ignoring the multi-scale behavior. We argue that multi-scale information is critical for capturing stock price behavior and propose MTDNN to explore two types of scale-information for STP.
+
+2 Related Works
+
+2.1 Multi-scale for Time Series
+Many studies extract multi-scale patterns from time-series for precise description. Financial time-series have been extensively investigated, with methods using multi-scale information outperforming single-scale methods.
+
+2.2 Stock Trend Prediction
+STP is a classification task traditionally tackled by Support Vector Machine and Neural Networks. Ensemble-based methods like Random Forest and deep learning models have also been explored. However, there is a lack of benchmark datasets and a focus on single-scale models.
+
+3 Task Formulation
+
+STP predicts stock price trends using stock data. A stock event time-series of length T is denoted as x = {xt}T, where xt is a stock event at time t with d dimensions. The dataset D consists of paired data {(xn, yn)}N, where yn represents the trend category. The trend direction is judged by a threshold α and the percentage change ∆pT of the future mid-price.
+
+---
+
+∆pT = mT (k) − pT
+
+where mT (k) = 1/k Σ pT+i, and k is the prediction horizon. STP involves constructing a nonlinear function f(xn; θ) to map input stock data xn to a category yn. The objective is to learn parameters θ that best fit the function to map xn to the correct yn.
+
+4 Model
+
+4.1 Overview
+The MTDNN architecture is a two-way end-to-end model, consisting of a wavelet-based way and a downsampling-based way. These convey discriminative information, with multi-scale information being key to enhancing stock trend prediction.
+
+4.2 Wavelet-based Way
+This approach processes stock data from a signal processing perspective to explore multi-scale behavior. The data is treated as a non-stationary discrete signal and decomposed using DWT to obtain transformed multi-scale components. These are concatenated and input to an XGBoost model to ensemble multi-scale information and output category scores.
+
+4.3 Downsampling-based Way
+Here, a novel strategy uses a RCNN structure to temporally cascade a sequence of increasing multi-scale information. Stock data is downscaled to multi-scale formations and processed by CNNs to extract spatial features. A key operation concatenates these features, and a GRU unit temporally cascades the information to output categories.
+
+4.4 Output and Objective
+A network with two fully connected layers fuses category scores from both ways to output the category prediction results.
+
+---
+
+---
+
+In our model, the output score is denoted by ˆy, with the output layer represented by flogit(·). The loss function used is cross-entropy, which measures the discrepancy between the predicted classification distribution ˆyn and the actual distribution yn:
+
+J = −Σ ynlog(ˆyn)
+
+Our experiments are conducted on two datasets: FI-2010 and CSI-2016. The statistics of these datasets are as follows:
+
+FI-2010:
+- Train: 32.03% of 352,300 samples
+- Test: 31.18% of 31,837 samples
+
+CSI-2016:
+- Train: 38.34% of 143,262 samples
+- Test: 25.99% of 30,000 samples
+
+FI-2010 is the first publicly available benchmark dataset of high-frequency Limit Order Book (LOB) data, while CSI-2016 is a dataset we collected from three one-minute stock index data.
+
+For FI-2010, the experimental settings are:
+- Label threshold α = 0.002
+- Prediction horizon k = 50
+- Input window size T = 100
+- Features used: First 40 z-score normalized dimensions
+
+For CSI-2016, the experimental settings are:
+- Label threshold α = 0.01
+- Prediction horizon k = 5
+- Input window size T = 100
+- Feature dimension d = 6
+- Features normalized by z-score
+
+We evaluate our model's performance using classical methods and advanced models. The results on FI-2010 show that our two-way model achieves state-of-the-art (SOTA) performance with 81.05% F1 score and 81.12% accuracy. On CSI-2016, our MTDNN model achieves the highest accuracy of 63.07% and F1 score of 61.65%.
+
+The ablation study further investigates the multi-scale behavior in stock data, with variations of our model tested in both single- and multi-scale environments. The results demonstrate the effectiveness of different feature extractors and model structures.
+
+In this section, we analyze the performance of single-scale and multi-scale variations in the STP task. Single-scale rows demonstrate the capability of each model, with XGBoost using raw data, CNN employing convolutional feature extraction, RNN considering temporal information, and RCNN capturing temporal information from CNN receptive fields. RCNN shows the best performance on most indices, while XGBoost is less effective. We observe that CNN features significantly improve RNN predictions, and raw data is challenging to predict trends.
+
+In the multi-scale rows, variations are fed with DWT-based, downsampling-based, and CNN multi-kernel size scale-information. XGBoost shows a significant performance increase with DWT features, while the other variations yield mixed results. We attribute this to the similarity between DWT and CNN operations, making it difficult for CNN to extract additional information from DWT-processed features, and the temporal structure breakdown affecting RNN performance.
+
+Comparing RCNN with different multi-scale approaches, our key operation demonstrates superiority in utilizing multi-scale information. We find that downsampling can weaken nonstationarity in raw data, potentially aiding CNN in feature extraction.
+
+Our conclusion is that the MTDNN model effectively utilizes multi-scale information in stock data, achieving state-of-the-art performance on the FI-2010 dataset. We also provide the CSI-2016 dataset for further study. The results highlight the value of multi-scale information and the superiority of our model in utilizing it. Future work will involve incorporating an attention mechanism to dynamically select the most relevant scale of information.
+
+Li et al. (2016) conducted an empirical analysis on stock market prediction using extreme learning machine. Lin et al. (2017) proposed hybrid neural networks for learning trends in time series. Luo and Yu (2019) introduced recurrent highway networks with grouped auxiliary memory. Ntakaris et al. (2018) provided a benchmark dataset for mid-price forecasting of limit order book data using machine learning methods. Papadimitriou and Yu (2006) discussed optimal multi-scale patterns in time series streams. Patel et al. (2015) predicted stock movement using trend deterministic data preparation and machine learning techniques. Tran et al. (2018) presented a temporal attention-augmented bilinear network for financial time series data analysis. Tsai and Hsiao (2010) combined multiple feature selection methods for stock prediction. Tsantekidis et al. (2017a, 2017b, 2018) explored various deep learning approaches for stock price forecasting and change detection in financial markets. Zhang et al. (2019) introduced DeepLOB, a deep convolutional neural network for limit order books.
+
+This research was presented at the Twenty-Ninth International Joint Conference on Artificial Intelligence (IJCAI-20) Special Track on AI in FinTech.

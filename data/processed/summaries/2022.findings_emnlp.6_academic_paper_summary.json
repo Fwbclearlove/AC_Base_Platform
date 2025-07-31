@@ -1,0 +1,40 @@
+{
+  "document_type": "academic_paper",
+  "title": "KE-GCL: Knowledge Enhanced Graph Contrastive Learning for Commonsense Question Answering",
+  "authors": [
+    "Lihui Zhang",
+    "Ruifan Li"
+  ],
+  "main_topic": "Commonsense question answering, Knowledge Enhanced Graph Contrastive Learning, Graph reasoning",
+  "research_problem": "Noise within Knowledge Graphs hinders effective representation learning in Commonsense Question Answering",
+  "methodology": "KE-GCL model, Graph Contrastive Learning, Adaptive sampling, Hard negative graph pairs",
+  "key_innovations": [
+    "Incorporates entity contextual descriptions into KGs",
+    "Adaptive graph augmentation",
+    "Selects hard negatives from incorrect answers"
+  ],
+  "experimental_results": "Consistent performance improvements over strong baselines on CommonsenseQA and OpenBookQA datasets",
+  "conclusions": "KE-GCL effectively reduces KG noise in CQA tasks and shows potential for application in few-shot or unsupervised scenarios",
+  "keywords": [
+    "Commonsense Question Answering",
+    "Graph Contrastive Learning",
+    "Knowledge Enhancement",
+    "KE-GCL"
+  ],
+  "application_domains": [
+    "Natural language understanding",
+    "Question Answering"
+  ],
+  "technical_concepts": [
+    "Knowledge Graphs",
+    "Graph Attention Networks",
+    "Contrastive Learning",
+    "InfoNCE Loss"
+  ],
+  "performance_metrics": "Average accuracy improvement of 1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA",
+  "summary": "This paper introduces KE-GCL, a model that enhances Knowledge Graphs with contextual descriptions and employs Graph Contrastive Learning to improve Commonsense Question Answering. It consistently outperforms previous methods on two benchmark datasets and explores the impact of various model components.",
+  "file_id": "2022.findings_emnlp.6",
+  "source_type": "cleaned",
+  "text_length": 16697,
+  "generation_time": "2025-07-31 21:12:32"
+}

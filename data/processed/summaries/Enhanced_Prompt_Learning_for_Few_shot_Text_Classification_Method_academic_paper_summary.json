@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "增强提示学习的少样本文本分类方法",
+  "authors": [
+    "李睿凡",
+    "魏志宇",
+    "范元涛",
+    "叶书勤",
+    "张光卫"
+  ],
+  "main_topic": "少样本文本分类",
+  "research_problem": "少样本学习场景下的文本分类准确性问题",
+  "methodology": "EPL4FTC算法",
+  "key_innovations": [
+    "提示学习",
+    "三元组损失优化",
+    "自然语言推理"
+  ],
+  "experimental_results": "在中文和英文数据集上，EPL4FTC算法的准确度明显优于对比基线方法",
+  "conclusions": "EPL4FTC算法能有效提升少样本文本分类的准确性",
+  "keywords": [
+    "预训练语言模型",
+    "少样本学习",
+    "文本分类",
+    "提示学习",
+    "三元组损失"
+  ],
+  "application_domains": [
+    "文本分类任务"
+  ],
+  "technical_concepts": [
+    "自然语言推理",
+    "掩码语言模型",
+    "三元组损失",
+    "度量优化"
+  ],
+  "performance_metrics": "表6中展示了自然语言推理词和非自然语言推理词在不同数据集上的性能比较",
+  "summary": "本文针对少样本学习中的文本分类问题，提出了一种基于提示学习和三元组损失优化的EPL4FTC算法。通过将文本分类任务转换为自然语言推理形式，并引入三元组损失进行优化，实验结果表明，该方法在少样本场景下能有效提升文本分类的准确性。",
+  "file_id": "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method",
+  "source_type": "cleaned",
+  "text_length": 1834,
+  "generation_time": "2025-07-31 21:19:54"
+}

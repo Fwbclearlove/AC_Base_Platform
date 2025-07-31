@@ -1,0 +1,164 @@
+Research Article: Obtaining Cross Modal Similarity Metric with Deep Neural Architecture
+
+Authors: Ruifan Li, Fangxiang Feng, Xiaojie Wang, Peng Lu, Bohan Li
+
+Affiliations:
+- School of Computers, Beijing University of Posts and Telecommunications, Beijing 100876, China
+- Engineering Research Center of Information Networks, Ministry of Education, Beijing 100876, China
+
+Correspondence: Ruifan Li; rfli@bupt.edu.cn
+
+The analysis of complex systems using multimodal data, such as images and text, has garnered significant attention. The key to addressing this issue lies in modeling the relationship between different modalities. Inspired by the successful application of deep neural learning in unimodal data, we introduce a deep neural architecture called bimodal deep architecture (BDA) for assessing similarity across modalities. The BDA consists of three interconnected components. The first component for image and text modalities can be established using popular feature extraction methods. The second component involves two types of stacked restricted Boltzmann machines (RBMs): a binary-binary RBM stacked over a Gaussian-binary RBM for image modality, and a binary-binary RBM stacked over a replicated softmax RBM for text modality. The third component employs a variant autoencoder with a predefined loss function to discriminatively learn the regularities between modalities. Experimental results demonstrate the effectiveness of our approach in classifying image tags on publicly available datasets.
+
+1. Introduction
+
+The demand for analyzing complex systems with numerous variables, including multimodal data like images and text, has increased due to advancements in computational power and storage capacity. Information often presents itself in multiple modalities, and analyzing such heterogeneous data can benefit different modalities. Deep neural learning, inspired by biological propagation phenomena in the human brain, has seen rapid development since 2006 and has achieved success in tasks involving single modal data. We propose the BDA to measure similarity in multimodal systems with many variables. The BDA's three components are designed to extract features, stack RBMs, and use a variant autoencoder for discriminative learning.
+
+Aspects of the BDA include:
+- Exploration of additional feature extraction methods for the first component.
+- The potential to stack more RBMs in the second component for better representation.
+- A loss function in the third component to maintain small distances for semantically similar bimodal data and large distances for dissimilar data.
+- The focus on image and text bimodal data, with the potential for extension to other modalities.
+
+The paper is organized as follows: Section 2 discusses related work, Section 3 presents our deep architecture and learning algorithm, Section 4 introduces datasets and reports experimental results, and Section 5 concludes and suggests future work.
+
+2. Related Work
+
+Various approaches have been proposed for learning from cross-modal data. These include extensions of topic models, joint models, and undirected Markov random fields, but these single-hidden-layer models struggle with the complexity of images and text. Recent works using deep neural learning have focused on cross-modal retrieval rather than similarity metrics. Bimodal semantic hashing research uses binary codes and Hamming metric for similarity measurement. Other frameworks have limitations to linear projections or are confined to labeled data. Our work builds upon these foundations to address the need for a similarity metric in the context of deep neural architectures.
+
+Our deep framework aims to construct hierarchical representations of bimodal data, as illustrated in Figure 1. It consists of three consecutive components. The first component involves obtaining low-level representations for each type of data using classical single-modal methods. For images, this includes features extracted by MPEG-7 descriptors and gist features. Tag words are represented using the bag-of-words (BOW) model. The second component distills these low-level representations, often with different dimensions, into mid-level representations using two stacked restricted Boltzmann machines (RBMs) for each modality. The third component introduces a variant of an autoencoder to learn high-level semantic representations, detailed in Section 3.3.
+
+3.1. Basic Representations
+We extract representative features as basic representations for different unimodal data. For images, methods such as MPEG-7 and gist descriptors are used. Gist represents scene structure by perceptual dimensions, while MPEG-7 visual descriptors include color layout, color structure, edge histogram, and scalable color. Text modality uses the bag-of-words model, where a dictionary of high-frequency words is created, and tags are represented as vectors with K one/zero elements.
+
+3.2. Learning Intermediate Representations
+
+3.2.1. Modeling Binary Data
+RBMs are used for binary data, with a joint probabilistic distribution defined by an energy function.
+
+3.2.2. Modeling Real-Valued Data
+Gaussian RBM is used for real-valued image features, with an energy function that includes the variance of the Gaussian distribution for each visible unit.
+
+3.2.3. Modeling Count Data
+Replicated softmax model is used for text features with count data, with an energy function that considers the total number of words in a document.
+
+In the second component, two RBMs are stacked for each modality to learn intermediate representations. These RBMs can be trained by the greedy layer-wise training method and the contrastive divergence approximation.
+
+3.3. Learning Advanced Representations. We propose an autoencoder for bimodal representations to learn similarity. This autoencoder, depicted in Figure 1, consists of two fully connected perceptrons connected by a similarity measure on the code layer. We denote the mapping from inputs to the code layers as 𝑓(𝑝; W𝑓) for image modality and 𝑔(𝑞; W𝑔) for text modality. The compatibility measure between an image 𝑝𝑖 and its given tags 𝑞𝑖 is defined as
+
+𝐶(𝑝𝑖, 𝑞𝑖; W𝑓, W𝑔) = ‖𝑓(𝑝𝑖; W𝑓) − 𝑔(𝑞𝑖; W𝑔)‖2 ,
+
+where ‖ ⋅‖2 is the L2 norm. The loss function to learn similar representations includes data reconstruction errors and a contrastive loss:
+
+ℓ(𝑝𝑖, 𝑞𝑖, 𝛿; Θ) = 𝛼(ℓ𝑓(𝑝𝑖; W𝑓) + ℓ𝑔(𝑞𝑖; W𝑔)) + (1 −𝛼) ℓ𝑐(𝑝𝑖, 𝑞𝑖, 𝛿; Θ) ,
+
+with ℓ𝑓 and ℓ𝑔 as the reconstruction losses and ℓ𝑐 as the contrastive loss. By backpropagation, the autoencoder learns the weights. After learning, the subnetworks have different parameters and can encode new inputs.
+
+4. Experiments and Results
+
+We evaluate our method for image annotation selection against MLP and CCA on two datasets: the Small ESP Game dataset and the MLC-2013 dataset. The ESP dataset contains 100,000 labeled images with corresponding tags, while the MLC dataset has 1,000 manually labeled images with two labels per image. We use the ESP for training and the MLC for testing. Preprocessing involves generating incorrect counterparts for each image's tag words in the ESP dataset.
+
+4.2. Settings of Our BDA Method. We describe the settings of our experiments, including feature extraction methods and neuron configurations in the components.
+
+In the first component, for image modality, we employ three popular methods to extract features. The first group is obtained by preprocessing images, training a K-means dictionary on patches, and extracting soft threshold features, followed by downsampling and global max pooling to create a Bag of Visual Words (BOVW) feature vector. The second group uses MPEG-7 visual descriptors, with varying coefficients for different transformations, resulting in a 784-dimensional feature vector. The third group is derived from the gist descriptor, and the package for this is available at a specified URL. These three groups of features represent each image as a 1704-dimensional vector.
+
+For text representation, we use a bag-of-words model with a dictionary of 4000 high-frequency words. The second component employs a neural configuration of 1704-1024-1024 for image modality and 4000-1024-1024 for text modality within the Gaussian-Bernoulli RBM and replicated softmax. The third component uses a 1024-512 neuron configuration for both modalities in the autoencoders.
+
+We describe the settings of benchmark methods, including Multilayer Perceptrons (MLP) with two hidden layers and Canonical Correlation Analysis (CCA) with RBMs. The MLP structure has 1704 input neurons, two hidden layers with 1024 neurons each, and 4000 output neurons, using logistic activation functions. The CCA system is configured with 1704 neurons for image representation and a replicated softmax RBM with 4000 input and 1024 output neurons, setting the number of canonical components to 1024.
+
+Evaluation criteria are based on the accuracy, which we define as the area under the ROC curve. The ROC is a plot of false positive rate against true positive rate at various decision thresholds. The accuracy is computed as the integral of the true positive rate over the false positive rate.
+
+---
+
+Figure 5: Our experimental setup for Canonical Correlation Analysis (CCA) involves representing image modality with MPEG-7 and gist descriptors, resulting in a vector of size 1,704. This is processed by a Gaussian Restricted Boltzmann Machine (RBM) with 1,704 visible and 1,024 hidden neurons. Similarly, text modality is represented by a Bag of Words (BoW) model, forming a vector of size 4,000, and a replicated softmax RBM with 4,000 visible and 1,024 hidden neurons is employed. A CCA model with 1,024 twin inputs and outputs is then utilized for bimodal representation learning.
+
+The false positive rate at threshold 𝑡, 𝑈1(𝑡), is expressed as the integral of the density function for class 1, 𝑢1(𝑠), from negative infinity to 𝑡. In empirical distributions, this integral is replaced by a sum. We define a continuous valued output 𝑃(𝑝𝑖) for the positive class as the squared compatibility metric of an image 𝑝𝑖 with its true tag words 𝑞𝑖, divided by the sum of squared compatibility metrics with both true and false tag words:
+
+𝑃(𝑝𝑖) ≜ 𝐶2 (𝑝𝑖, 𝑞𝑖) / (𝐶2 (𝑝𝑖, 𝑞𝑖) + 𝐶2 (𝑝𝑖, ̃𝑞𝑖)). (9)
+
+4.5. Results: Our deep neural architecture outperforms an MLP-based system with two hidden layers and a CCA-based system with two RBMs, achieving an accuracy of 88.96%. The CCA-based system performs better than the MLP-based system. The impact of hyperparameter 𝛼 in the loss function is investigated, with the best performance at 𝛼=0.4.
+
+4.6. Discussion: The models share commonalities in their use of modal-specific low-level representations and cross-modal metrics. The MLP-based system assumes a direct nonlinear mapping, while the CCA-based and our BDA-based system assume a common representation space. The BDA system's higher accuracy is due to its nonlinear reconstruction and compatibility constraints, which capture information not addressed by CCA.
+
+5. Conclusion: We propose a deep neural architecture for measuring similarity between image and text modalities. The framework combines feature extraction and deep neural networks, demonstrating effectiveness in classifying image tags. It is flexible and can be extended to other modalities. Future work will explore this flexibility in complex systems.
+
+Conflict of Interests: None declared.
+
+Acknowledgments: The work was supported by various funding sources and the authors thank the editor and reviewers for their contributions.
+
+References:
+[1] L. Li et al., “Chaos-order transition in foraging behavior of ants,” Proceedings of the National Academy of Sciences, vol. 111, no. 23, pp. 8392–8397, 2014.
+[2] Y. Bengio, “Learning deep architectures for AI,” Foundations and Trends in Machine Learning, vol. 2, no. 1, pp. 1–27, 2009.
+[3] K. Chen and A. Salman, “Learning speaker-specific characteristics with a deep neural architecture,” IEEE Transactions on Neural Networks, vol. 22, no. 11, pp. 1744–1756, 2011.
+
+---
+
+Mohamed, A.-R., Dahl, G. E., & Hinton, G. (2012). Acoustic modeling using deep belief networks. IEEE Transactions on Audio, Speech and Language Processing, 20(1), 14–22.
+
+Heigold, G., Vanhoucke, V., Senior, A., et al. (2013). Multilingual acoustic models using distributed deep neural networks. In Proceedings of the 38th IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP ’13) (pp. 8619–8623). IEEE Computer Society, Vancouver, Canada.
+
+Yu, D., Deng, L., & Seide, F. (2013). The deep tensor neural network with applications to large vocabulary speech recognition. IEEE Transactions on Audio, Speech and Language Processing, 21(2), 388–396.
+
+Hinton, G. E., & Salakhutdinov, R. R. (2006). Reducing the dimensionality of data with neural networks. Science, 313(5786), 504–507.
+
+Lee, H., Grosse, R., Ranganath, R., & Ng, A. Y. (2011). Unsupervised learning of hierarchical representations with convolutional deep belief networks. Communications of the ACM, 54(10), 95–103.
+
+Krizhevsky, A., Sutskever, I., & Hinton, G. (2012). Imagenet classification with deep convolutional neural networks. In Advances in Neural Information Processing Systems, vol. 25 (pp. 1106–1114). Morgan Kaufmann, Lake Tahoe, Nev, USA.
+
+Goodfellow, I. J., Erhan, D., Carrier, P. L., et al. (2013). Challenges in representation learning: a report on three machine learning contests. In Proceedings of the 20th International Conference on Neural Information Processing (pp. 117–124). IEEE Computer Society, Daegu, Korea.
+
+Farabet, C., Couprie, C., Najman, L., & Lecun, Y. (2013). Learning hierarchical features for scene labeling. IEEE Transactions on Pattern Analysis and Machine Intelligence, 35(8), 1915–1929.
+
+Feng, F., Wang, X., & Li, R. (2014). Cross-modal retrieval with correspondence autoencoder. In Proceedings of the 22nd ACM International Conference on Multimedia (pp. 7–16). ACM, Orlando, Fla, USA.
+
+Blei, D. M., & Jordan, M. I. (2003). Modeling annotated data. In Proceedings of the 26th Annual International ACM SIGIR Conference on Research and Development in Information Retrieval (pp. 127–134). ACM, New York, NY, USA.
+
+Xing, E. P., Yan, R., & Hauptmann, A. G. (2005). Mining associated text and images with dual-wing harmoniums. In Proceedings of the 21st Annual Conference on Uncertainty in Artificial Intelligence (UAI ’05) (pp. 633–641). AUAI Press, Arlington, Va, USA.
+
+Jia, Y., Salzmann, M., & Darrell, T. (2011). Learning cross-modality similarity for multinomial data. In Proceedings of ACM the International Conference on Multimedia Information Retrieval (pp. 2407–2414). IEEE, Washington, DC, USA.
+
+Chopra, S., Hadsell, R., & LeCun, Y. (2005). Learning a similarity metric discriminatively, with application to face verification. In Proceedings of the IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR ’05) (pp. 539–546). IEEE, Washington, DC, USA.
+
+Ngiam, J., Khosla, A., Kim, M., Nam, J., Lee, H., & Ng, A. Y. (2011). Multimodal deep learning. In Proceedings of the 28th International Conference on Machine Learning (pp. 689–696). Omnipress, Bellevue, Wash, USA.
+
+Srivastava, N., & Salakhutdinov, R. (2012). Multimodal learning with deep Boltzmann machines. In Advances in Neural Information Processing Systems, vol. 25 (pp. 2231–2239). Morgan Kaufmann, Lake Tahoe, Nev, USA.
+
+McFee, B., & Lanckriet, G. (2011). Learning multi-modal similarity. Journal of Machine Learning Research, 12(8), 491–523.
+
+Masci, J., Bronstein, M. M., Bronstein, A. M., & Schmidhuber, J. (2014). Multimodal similarity-preserving hashing. IEEE Transactions on Pattern Analysis and Machine Intelligence, 36(4), 824–830.
+
+Smolensky, P. (1986). Information processing in dynamical systems: foundations of harmony theory. In Parallel Distributed Processing: Explorations in the Microstructure of Cognition, D. E. Rumelhart, J. L. McClelland, and C. PDP Research Group (Eds.), vol. 1 (pp. 194–281). MIT Press, Cambridge, Mass, USA.
+
+Welling, M., Rosen-Zvi, M., & Hinton, G. (2004). Exponential family harmoniums with an application to information retrieval. In Advances in Neural Information Processing Systems 17 (pp. 501–508). Morgan Kaufmann, Vancouver, Canada.
+
+Salakhutdinov, R., & Hinton, G. (2009). Replicated softmax: an undirected topic model. In Advances in Neural Information Processing Systems, vol. 22 (pp. 1607–1614). Morgan Kaufmann, Vancouver, Canada.
+
+Hinton, G. E., Osindero, S., & Teh, Y. W. (2006). A fast learning algorithm for deep belief nets. Neural Computation, 18(7), 1527–1554.
+
+Bengio, Y., Lamblin, P., Popovici, D., & Larochelle, H. (2007). Greedy layer-wise training of deep networks. In Advances in Neural Information Processing Systems 19 (pp. 153–160). MIT Press, Vancouver, Canada.
+
+Hinton, G. E. (2002). Training products of experts by minimizing contrastive divergence. Neural Computation, 14(8), 1771–1800.
+
+LeCun, Y., Chopra, S., Hadsell, R., Ranzato, M., & Huang, F.-J. (2006). A tutorial on energy-based learning. In Predicting Structured Data, G. Bakir, T. Hofman, B. Scholkopf, A. Smola, and B. Taskar (Eds.) (pp. 1–59). MIT Press, Cambridge, Mass, USA.
+
+Rumelhart, D. E., Hinton, G. E., & Williams, R. J. (1986). Learning internal representations by error propagation. Nature, 323(6088), 533–536.
+
+von Ahn, L., & Dabbish, L. (2004). Labeling images with a computer game. In Proceedings of the SIGCHI Conference on Human Factors in Computing Systems (pp. 319–326). ACM Press, Vienna, Austria.
+
+Pinto, N., Cox, D. D., & DiCarlo, J. J. (2008). Why is real-world visual object recognition hard? PLoS Computational Biology, 4(1), e27.
+
+Coates, A., & Ng, A. Y. (2011). The importance of encoding versus training with sparse coding and vector quantization. In Proceedings of the 28th International Conference on Machine Learning (ICML ’11) (pp. 921–928). Bellevue, Wash, USA.
+
+Ham, F. M., & Kostanic, I. (2000). Principles of Neurocomputing for Science and Engineering. McGraw-Hill Higher Education, 1st edition.
+
+Anderson, T. W. (2003). An Introduction to Multivariate Statistical Analysis. John Wiley and Sons, New York, NY, USA, 3rd edition.
+
+Hardoon, D. R., Szedmak, S., & Shawe-Taylor, J. (2004). Canonical correlation analysis: an overview with application to learning methods. Neural Computation, 16(12), 2639–2664.
+
+Rasiwasia, N., Pereira, J. C., Coviello, E., et al. (2010). A new approach to cross-modal multimedia retrieval. In Proceedings of the 18th ACM International Conference on Multimedia (pp. 251–260). ACM, New York, NY, USA.
+
+Kim, J., Nam, J., & Gurevych, I. (2012). Learning semantics with deep belief network for cross-language information retrieval. In Proceedings of the 24th International Conference on Computational Linguistics (pp. 579–588). ACL Press, IIT Bombay, India.
+
+Fawcett, T. (2006). An introduction to ROC analysis. Pattern Recognition Letters, 27(8), 861–874.
+
+Shinkareva, S. V., Malave, V. L., Mason, R. A., Mitchell, T. M., & Just, M. A. (2011). Commonality of neural representations of words and pictures. NeuroImage, 54(3), 2418–2425.

@@ -1,0 +1,147 @@
+---
+
+Clothing images are abundant, particularly on e-commerce platforms due to the growth of e-business. Recognizing and retrieving these images is significant for commercial and social applications, attracting attention from multimedia processing and computer vision. The challenges include variations in clothing appearance and style, multiple categories and attributes, and the prevalence of erroneous or incomplete labels from retailers. Additionally, the imbalance among image categories hinders effective learning. To address these issues, we propose a multi-task deep learning framework and multi-weight convolutional neural networks for imbalance learning. The network structure consists of shared bottom layers and task-dependent top layers. Category-relevant parameters are included to regularize the learning process. We have collected a large-scale dataset containing approximately one million shop photos from four Chinese retailers. Experiments demonstrate that our framework and networks effectively learn robust representations and achieve improved performance.
+
+Keywords—Clothing Image recognition; Convolutional neural network; Multi-task; Multi-weight
+
+I. INTRODUCTION
+
+The availability of clothing images on electronic commercial platforms, such as taobao.com and amazon.com, has led to numerous potential commercial and social applications. The challenge lies in learning effective representations from noisy labels and handling the imbalance among categories within large-scale clothing image data. This paper introduces multi-weight neural networks to address these challenges and improve clothing image retrieval in the real world. We focus on modeling the relationship between real-world images and their unreliable labels, learning robust representations for effective retrieval. The proposed multi-weight CNNs group related categories and attributes, share a common representation, and adapt weights to regularize gradients for different categories. We evaluate our method on a large, complex, and real-world clothing image dataset, e-Clothing1.4M, and demonstrate its effectiveness in dealing with label errors and data imbalance.
+
+II. RELATED WORK
+---
+
+---
+
+With the increasing business value of the shopping industry, automatic clothing image analysis has gained significant attention. Attribute learning has been a key trend, offering fine-grained descriptions for clothing images, widely explored in the computer vision community. However, the major challenge is the lack of well-labeled training data due to the high cost of human labor and the need for domain-specific knowledge. Berg et al. proposed obtaining attributes and visual appearance by mining image descriptive text from webpages. Chen et al. focused on learning attributes of upper-body clothing, while Shankar et al. discovered attributes in an image using deep neural networks in a weakly supervised scenario. These works treat attribute learning as a single task, often neglecting the relationship with clothing categories.
+
+Clothing image analysis also relates to methods in pose estimation and person detection, as human recognition is tied to clothing image recognition. Clothing parsing predicts semantic categories for each pixel in an image, which can be used for clothing recognition. Liu et al. addressed the cross-scenario problem between daily human photos and clothing shop photos, while Kalantidis et al. and Yamaguchi et al. considered pose estimation and unconstrained clothing parsing, respectively.
+
+Deep learning, introduced in 2006, has been applied to various computer vision tasks, with supervised CNNs and unsupervised autoencoders and restricted Boltzmann machines being particularly successful. Deep learning's advantage in multi-task learning makes it a candidate for large-scale clothing image analysis. Recent methods have proposed deep learning for multi-task learning, with Zhang et al. combining part-based models and CNNs under a multi-task framework. However, these frameworks are often designed for small-scale datasets and do not easily extend to large-scale problems.
+
+In this section, we present our multi-weight CNN model and learning algorithm. The model consists of task-independent and task-dependent layers, with weights denoted as Wc and Wt, respectively. Hyperparameters γt balance losses from different categories. The mapping of task-independent layers is φc(·), and that of specific task layers is φt(·). The multi-weight network parameters are learned through an optimization problem, with the output layer adopting a multi-label structure and the loss function being sigmoid cross-entropy.
+
+Our objective is to optimize the function J by minimizing the sum of the losses over all tasks. The gradients of the objective function with respect to Wt and Wc are calculated, and the multi-weight CNNs are trained using stochastic gradient descent. The training algorithm is summarized in Algorithm 1.
+
+Algorithm 1 Learning Algorithm
+---
+
+---
+
+---
+
+1: Initialize the common weights Wc and task-specific weights {Wt} for T tasks, set learning rates ϵc for Wc and ϵt for Wt, and the weight adaptation parameter γt for each task.
+
+2: Compute the common representations for a mini-batch of images Ib, oc ←φc(Ib; Wc).
+
+3: Compute the task-specific outputs, ot ←φt(oc; Wt).
+
+4: Compute the gradients ∇Wc and ∇Wt with respect to the objective function.
+
+5: Update the common weights, Wc ←Wc + ϵc · ∇WcJ.
+
+6: Update the task-specific weights, Wt ←Wt + ϵt · ∇WtJ.
+
+7: Repeat Steps 2 - 6 until convergence.
+
+IV. EXPERIMENTS
+
+A. Dataset
+
+We collected e-Clothing1.4M, a real-world dataset. It consists of 1,462,438 pairs of images and labels of clothing types and attributes. The dataset is divided into training and test sets, with 1,069,901 and 392,537 images, respectively.
+
+B. Evaluation Criteria
+
+We use the mean Average Precision (mAP) metric. The mAP score is obtained by averaging the AP of all queries, using an image retrieval system based on the learned representation.
+
+C. Methods and Settings
+
+We compare multi-weight CNNs with multi-label CNNs and multi-task CNNs on the e-Clothing1.4M dataset. Implementations are based on the Caffe deep learning framework and the AlexNet architecture. Experiments are conducted on a workstation with an NVIDIA K20c GPU.
+
+D. Experimental Results
+---
+
+The experimental results on the eClothing1.4M dataset are presented in Table II. All values are mAP scores. The category names in the leftmost column of Table II are ordered by their normalized proportion, with "Color" at the top and "Wool Thickness" at the bottom. The results of three CNN-based methods—multi-label, multi-task, and multi-weight—are shown in subsequent columns, with the number of iterations indicated. The mAP value in bold represents the best performance among the three methods. The multi-label CNNs perform best in seven categories, multi-task CNNs in five, and multi-weight CNNs in twelve. Across all 24 categories, the average mAP values are 52.48% for multi-label, 53.11% for multi-task, and 55.23% for multi-weight. Multi-weight CNNs show the best performance overall and particularly improve in categories with smaller proportions, such as "Waist," "Feather," and "Sleeve."
+
+For setting weights in the multi-weight neural networks, we propose a smoothing function to address the imbalance issue. The function is defined as:
+
+\[ rn \text{ if } rn \geq \frac{ravg}{c}, \frac{ravg}{c} \text{ if } rn \leq \frac{ravg}{c} \]
+
+Here, \( rn \) is the sample ratio of the nth category to the maximum, \( ravg \) is the mean ratio, and \( c \) is set to 3.0. This regularization strategy effectively learns from the data. Using the new weights, the proposed method outperforms others in nearly all categories, as shown in Table III.
+
+In conclusion, we propose a multi-weight convolutional neural network to handle noisy and imbalanced clothing images. Our method demonstrates effectiveness on a large-scale dataset and could be further improved by incorporating other convolutional networks. Future work includes investigating the impact of weights on network convergence.
+
+---
+
+TABLE III mAP SCORES FOR EACH CATEGORY USING WEIGHT ADAPTATION WITH THEIR NUMBER OF ITERATIONS.
+
+Category | Proportion | Current Best (%) | multi-weight@i45 (%) | 1/3Ratio@i45 (%)
+--- | --- | --- | --- | ---
+Color | 1.0000 | 35.24 | 34.66 | 36.03
+Gender | 0.9646 | 99.52 | 99.52 | 99.55
+Senson | 0.8242 | 70.37 | 70.37 | 70.76
+Style | 0.7773 | 34.40 | 33.78 | 34.34
+Coat | 0.6838 | 74.82 | 74.25 | 75.20
+Version | 0.6062 | 42.75 | 42.62 | 43.66
+Pantsuit | 0.6018 | 57.05 | 56.01 | 57.28
+Length of Sleeve | 0.4200 | 64.19 | 64.19 | 64.57
+Occation | 0.3875 | 45.61 | 45.61 | 45.84
+Craft | 0.3119 | 18.14 | 17.32 | 18.15
+Colar | 0.2436 | 33.71 | 33.71 | 35.27
+Length of Trousers | 0.2292 | 72.97 | 72.97 | 73.90
+Thickness | 0.1961 | 69.54 | 69.54 | 70.39
+Length of Skirts | 0.1866 | 59.44 | 59.44 | 59.41
+Skirt | 0.1766 | 44.42 | 44.22 | 45.26
+Crowd | 0.1456 | 77.51 | 77.51 | 77.93
+Dense | 0.1331 | 94.21 | 94.08 | 94.42
+Leather | 0.0643 | 59.76 | 58.48 | 60.40
+Cardigan | 0.0626 | 39.77 | 38.61 | 41.42
+Waist | 0.0471 | 49.25 | 49.25 | 51.80
+Feather | 0.0428 | 80.10 | 80.10 | 80.47
+Sleeve | 0.0064 | 28.75 | 28.75 | 29.57
+Cheongsam | 0.0006 | 33.84 | 33.65 | 41.08
+Wool Thickness | 0.0002 | 26.42 | 26.27 | 28.43
+
+TABLE IV mAP SCORES FOR COAT V.S. PANTSUIT WITH THE RATIO 10:1
+
+Category | Proportion | Multi-label (%) | Multi-task (%) | Multi-weight (%)
+--- | --- | --- | --- | ---
+Coat | 1 | 57.47 | 58.52 | 57.86
+Pantsuit | 0.1 | 31.94 | 32.28 | 33.25
+
+TABLE V mAP SCORES FOR LENGTH OF SLEEVES V.S. SLEEVE WITH THE RATIO 10:1
+
+Category | Proportion | Multi-label (%) | Multi-task (%) | Multi-weight (%)
+--- | --- | --- | --- | ---
+Length of Sleeve | 1 | 46.71 | 43.06 | 45.58
+Sleeve | 0.1 | 13.58 | 15.43 | 17.04
+
+Fig. 2. Performance comparison over for all twenty-four categories using four kinds of methods.
+
+[5] D. Shankar, S. Narumanchi, H. A. Ananya, P. Kompalli, and K. Chaud- hury, “Deep learning based large scale visual recommendation and search for e-commerce,” arXiv:1703.02344 [cs.CV], 2017.
+[6] A. Zhai, D. Kislyuk, Y. Jing, M. Feng, E. Tzeng, J. Donahue, Y. L. Du, and T. Darrell, “Visual discovery at pinterest,” arXiv:1702.04680 [cs.CV], 2017.
+[7] O. Russakovsky and L. Fei-Fei, “Attribute learning in large-scale datasets,” in European Conference of Computer Vision (ECCV), Inter- national Workshop on Parts and Attributes, Crete, Greece, September 2010.
+[8] N. Kumar, A. C. Berg, P. N. Belhumeur, and S. K. Nayar, “Describable Visual Attributes for Face Veriﬁcation and Image Search.” IEEE Trans- actions on Pattern Analysis and Machine Intelligence, vol. 33, no. 10, pp. 1962–1977, 2011.
+[9] H. Chen, A. Gallagher, and B. Girod, “Describing clothing by seman- tic attributes,” in Proc. of European Conference on Computer Vision (ECCV’12), Firenze, Italy, 2012, pp. 609–623.
+[10] T. L. Berg, A. C. Berg, and J. Shih, “Automatic Attribute Discovery and Characterization from Noisy Web Data,” in European Conference on Computer Vision (ECCV), no. PART 1, 2010, pp. 663–676.
+[11] W. Di, C. Wah, A. Bhardwaj, and R. Piramuthu, “Style ﬁnder: Fine- grained clothing style detection and retrieval,” in Computer Vision and Pattern Recognition Workshops, 2013, pp. 8–13.
+[12] S. Shankar, “DEEP-CARVING : Discovering Visual Attributes by Carv- ing Deep Neural Nets,” in CVPR, 2015.
+[13] K. Lin, H. F. Yang, K. H. Liu, J. H. Hsiao, and C. S. Chen, “Rapid cloth- ing retrieval via deep learning of binary codes and hierarchical search,” in Proc. ACM International Conference on Multimedia Retrieval, 2015, pp. 499–502.
+[14] Q. Dong, S. Gong, and X. Zhu, “Multi-task curriculum transfer deep learning of clothing attributes,” arXiv:1610.03670 [cs.CV], 2016.
+[15] Si Liu, Zheng Song, Guangcan Liu, Changsheng Xu, Hanqing Lu, and Shuicheng Yan, “Street-to-shop: Cross-scenario clothing retrieval via parts alignment and auxiliary set,” in 2012 IEEE Conference on Computer Vision and Pattern Recognition. IEEE, 2012, pp. 3330–3337.
+[16] K. Yamaguchi, M. H. Kiapour, L. E. Ortiz, and T. L. Berg, “Parsing clothing in fashion photographs,” in Computer Vision and Pattern Recognition, 2012, pp. 3570–3577.
+[17] Y. Kalantidis, L. Kennedy, and L.-J. Li, “Getting the look: Clothing recognition and segmentation for automatic product suggestions in everyday photos,” in Proceedings of the 3rd ACM Conference on International Conference on Multimedia Retrieval, ser. ICMR ’13. New York, NY, USA: ACM, 2013, pp. 105–112.
+[18] K. Yamaguchi, M. H. Kiapour, L. E. Ortiz, and T. L. Berg, “Retrieving Similar Styles to Parse Clothing,” IEEE transactions on pattern analysis and machine intelligence, vol. 37, no. 5, pp. 1028–40, 2015.
+[19] P. Tangseng, Z. Wu, and K. Yamaguchi, “Looking at outﬁt to parse clothing,” arXiv:1703.01386 [cs.CV], 2017.
+[20] Y. LeCun, Y. Bengio, and G. Hinton, “Deep learning,” Nature, vol. 521, no. 7553, pp. 436–444, May 2015.
+[21] A. Krizhevsky, I. Sutskever, and G. E. Hinton, “ImageNet classiﬁcation with deep convolutional neural networks,” in Advances in Neural Infor- mation Processing Systems 25, F. Pereira, C. J. C. Burges, L. Bottou, and K. Q. Weinberger, Eds. Curran Associates, Inc., 2012, pp. 1097–1105.
+[22] K. Simonyan and A. Zisserman, “Very deep convolutional networks for large-scale image recognition,” arXiv:1409.1556 [cs.CV], 2015.
+[23] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” Computer Vision and Pattern Recognition, pp. 770–778, 2016.
+[24] F. Feng, R. Li, and X. Wang, “Deep correspondence restricted Boltz- mann machine for cross-modal retrieval,” Neurocomputing, vol. 154, no. C, pp. 50–60, 2015.
+[25] N. Zhang, M. Paluri, M. Ranzato, T. Darrell, and L. D. Bourdev, “PANDA: Pose Aligned Networks for Deep Attribute Modeling.” CVPR, pp. 1637–1644, 2014.
+[26] Y. Bai, K. Yang, W. Yu, W.-Y. Ma, and T. Zhao, “Learning High- level Image Representation for Image Retrieval via Multi-Task DNN using Clickthrough Data.” IEEE Winter Conference on Applications of Computer Vision (WACV), 2013.
+[27] D. Wang, X. Gao, X. Wang, L. He, and B. Yuan, “Multimodal discrim- inative binary embedding for large-scale cross-modal retrieval,” IEEE Transactions on Image Processing A Publication of the IEEE Signal Processing Society, vol. 25, no. 10, pp. 1–1, 2016.
+[28] E. Simoserra and H. Ishikawa, “Fashion style in 128 ﬂoats: Joint ranking and classiﬁcation using weak data for feature extraction,” in IEEE Conference on Computer Vision and Pattern Recognition, 2016, pp. 298– 307.
+[29] Y. Jia, E. Shelhamer, J. Donahue, S. Karayev, J. Long, R. Girshick, S. Guadarrama, and T. Darrell, “Caffe: Convolutional architecture for fast feature embedding,” arXiv preprint arXiv:1408.5093, 2014.
+
+---

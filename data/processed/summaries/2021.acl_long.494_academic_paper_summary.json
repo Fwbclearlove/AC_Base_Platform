@@ -1,0 +1,46 @@
+{
+  "document_type": "academic_paper",
+  "title": "Dual Graph Convolutional Networks for Aspect-based Sentiment Analysis",
+  "authors": [
+    "Ruifan Li",
+    "Hao Chen",
+    "Fangxiang Feng",
+    "Zhanyu Ma",
+    "Xiaojie Wang",
+    "Eduard Hovy"
+  ],
+  "main_topic": "Aspect-based sentiment analysis",
+  "research_problem": "Traditional methods struggle with dependency parsing errors and the complexity of online reviews",
+  "methodology": "DualGCN model",
+  "key_innovations": [
+    "DualGCN architecture",
+    "SynGCN and SemGCN modules",
+    "orthogonal and differential regularizers"
+  ],
+  "experimental_results": "Performance comparison on Restaurant, Laptop, and Twitter datasets",
+  "conclusions": "The DualGCN model effectively integrates syntactic knowledge and semantic information, fitting various review styles and demonstrating superiority on benchmark datasets",
+  "keywords": [
+    "aspect-based sentiment analysis",
+    "dual graph convolutional networks",
+    "dependency parsing",
+    "semantic correlations",
+    "regularizers"
+  ],
+  "application_domains": [
+    "Natural language processing",
+    "Sentiment analysis"
+  ],
+  "technical_concepts": [
+    "Graph Convolutional Networks",
+    "BiLSTM",
+    "BERT",
+    "dependency probability matrix",
+    "self-attention mechanism"
+  ],
+  "performance_metrics": "Accuracy and macro-averaged F1-score",
+  "summary": "This paper proposes a Dual Graph Convolutional Networks (DualGCN) model for aspect-based sentiment analysis. The model integrates syntactic knowledge and semantic information through SynGCN and SemGCN modules, using orthogonal and differential regularizers to enhance the capture of semantic associations. Experimental results on three datasets show the DualGCN model's effectiveness and superiority over attention-based and syntax-based methods.",
+  "file_id": "2021.acl_long.494",
+  "source_type": "cleaned",
+  "text_length": 15277,
+  "generation_time": "2025-07-31 21:11:12"
+}

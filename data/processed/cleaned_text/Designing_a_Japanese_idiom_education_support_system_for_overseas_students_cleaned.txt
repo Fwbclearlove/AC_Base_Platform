@@ -1,0 +1,77 @@
+Designing a Japanese Idiom Education Support System for Overseas’ Students
+
+KONISHI Yusuke, Ruifan LI, Fuji REN
+
+Graduate School of Advanced Technology and Science, The University of Tokushima, Japan
+Institute of Technology and Science, The University of Tokushima, Japan
+School of Computer Science and Technology, Beijing University of Posts and Telecommunications, China
+
+Abstract
+The Japanese idioms, combinations of two or more words with meanings distinct from the original words, pose a challenge for language learners. Our Japanese Idiom Education Support System aims to foster learner interest and teach proper idiom usage. It features idiom retrieval and teaching functions, allowing learners to input idioms or situations for retrieval and explanation. This paper presents the system outline, retrieval method, and questionnaire results.
+
+1 Introduction
+The global advancement of borderless society, economy, and circumstances has led to increased cultural exchanges and a rise in international students in Japan. Despite the growth in Japanese language education abroad, there is a shortage of teachers and a need for improved learning methods that emphasize understanding of culture and manners. Current educational support systems lack flexibility and dynamic correction, leading us to develop a more effective system.
+
+2 The Outline of Japanese Idiom
+Japanese idioms are phrases with meanings not deducible from the original words. They are integral to daily conversation and can express complex feelings. Learners benefit from understanding idioms, which can convey meaning without explicit explanation. The system helps learners navigate the complexities of Japanese idioms, which often differ from English idioms with similar expressions.
+
+3 System Configuration
+This section outlines the Japanese Idiom Education Support System for Overseas Students. The system includes modules, a knowledge base, and a database. User input and system output are categorized as "For retrieving idiom" and "For learning idiom." Input methods include search words, conversation sentences with MS Agent, and various operations. Outputs include idiom explanations, search assistance, teaching exercises, and learner history management.
+
+The system incorporates three main functions: idiom retrieval, idiom teaching, and the MS Agent for operational assistance. Idiom retrieval occurs through direct input or by searching with a part of the idiom or related words, and includes reverse resolution where a learner inputs a situation to find a suitable idiom. The input sentence is analyzed using the Super Function from machine translation, and the system provides meanings, examples, similar idioms, and usage scenarios as search results. MS Agents present the example usage through dialogue.
+
+The idiom teaching function utilizes animation and includes exams to track learning progress, displayed as a graph. Exercise problems are automatically generated based on prepared text, and the system generates idiomatic examples and MS Agent responses accordingly. MS Agent engages in easy conversation with learners using idioms.
+
+The idiom retrieval function is processed by the "Idiom retrieval module" and the "Idiom reverse resolution module." It offers two methods: displaying explanations when an idiom is input, or showing idioms corresponding to a described situation. The system uses ambiguous retrieval and supports the learner with MS Agents.
+
+4.1 Retrieving a meaning of idiom
+Learners can search for idioms directly, by inputting a word within an idiom, or by selecting from a list displayed when characters are entered. The system checks IME and offers ambiguous retrieval to prevent issues from misspellings. It displays explanations or a list of idioms based on the input.
+
+4.2 Retrieving an idiom by a situation
+The Idiom reverse resolution module allows learners to input a situation, which the system analyzes using the Super Function. This function relates to the connection between original and target language sentences, utilizing direction graphs and transformation tables. The input sentence undergoes morphological analysis, preprocessing, classification by meaning, and Super Function classification to retrieve idioms from the edge table of the Super Function Database. The system then displays a list of idioms.
+
+The system leverages the edge and node tables of the Super Function Database to generate exercise problem sentences. This integration allows for simplified input sentence analysis and problem generation through a unified database and methodology. We utilize Super Function for this purpose, registering words into the edge table as shown in Table 1. The created node and edge tables from user input sentences are preserved to analyze learners' input and extend the Super Function Database, aiding future system enhancements. However, the method using Super Function has limitations, including the system's inability to respond to input sentences not present in the database and the exponential increase in the number of Super Functions with the length of the text, necessitating an adequate number of Super Functions for analysis and improvements in methodology.
+
+5 Teaching Idiom Function
+
+The teaching idiom function is managed by "Education guidance module," "Animation management module," "Exercise problems module," and "Record management module," as depicted in Figure 1. This function encompasses methods such as explaining Japanese idioms, generating exercise problems, and user management.
+
+5.1 Explanation of a Japanese Idiom
+
+The idiom teaching function utilizes animation to maintain learner interest, as confirmed by questionnaire results. Figure 5 illustrates an example of teaching an idiom using animation, with TVML employed for explanation and TVML Player for animation display. TVML simplifies animation creation and modification.
+
+5.2 Exercise Problems for Japanese Idioms
+
+Problems in Japanese exercises are answered through methods such as selecting the correct answer, filling in blanks, connecting divided sentences, and inputting answers. The system adjusts problem difficulty and manages results as historical data, automatically creating problem sentences using Idiom DB and Super Function DB, as exemplified in Figure 6.
+
+6 Development of the Questionnaire System
+
+A survey on attitudes towards educational support systems was conducted. The questionnaire targeted first and second-year Japanese language students, with the results indicating a high demand for a Japanese language educational support system. Key findings highlighted the need for animations and dictionary functions within the system.
+
+7 Conclusions
+
+This paper discussed the design of a Japanese Idiom Education Support System, referencing Super Function for input sentence analysis and idiom retrieval. The effectiveness of Super Function in this system requires further verification. Future work involves expanding the Super Function Database and animation content. The questionnaire results emphasized the importance of animation and a dictionary function, with the system currently using TVML for animation. Enhancing the system to display explanations in other languages will require the creation of a bilingual dictionary.
+
+---
+
+Acknowledgements
+
+This work was supported in part by the National Science Foundation of China under grant Nos. 60873001, 2007BAH05B02-04, and 2007BAH05B02-04.
+
+References
+
+[1] Statistics Bureau and the Director-General for Policy Planning. Statistics of Japan which sees in graph. http://www.stat.go.jp/data/nihon/pdf/ngraph.pdf
+[2] Murano Ryoko. Japanese Language Volunteers in Thai Secondary Schools. The Research Center for Japanese Language Education annual bulletin 9, pp. 1-8, 2000.
+[3] The Japan Foundation. 2006 Survey of Overseas Organizations Involved in Japanese-Language Education. The Japan Foundation, 2006.
+[4] Ishida Koji. Development of the science e-learning teaching materials which utilized student knowledge. Modern educational needs measure support program in the Heisei 16 fiscal year.
+[5] SAITO Koichi and TAKAHASHI Satoshi. A Preliminary Study on Modeling for Making Concerning Cause Belonging of "Losing Interest in Science"- Based on the Consideration Investigation of the High School Student. Journal of Tokyo University of Information Sciences Vol.9 No.1, pp. 1-9, 2005.
+[6] Ren Fuji. Super-function based machine translation. Communications of COLIPS, pp. 83-100, 1999.
+[7] Matsumoto Yuji. Japanese Morphological Analysis System Chasen. Information Processing Society of Japan.
+[8] NHK Science and Technical Research Laboratories. TVML. http://www.nhk.or.jp/strl/tvml/english/player2/index.html
+[9] Suzuki Makoto and Nozaki Yukiko. How is elementary science education advanced in many foreign countries? Chemistry & education, Vol.56, No.12, Page. 638-641, 2008.
+[10] ANDO Tadashi. The Advantages and Problems in e-Learning -in the Case of Phonetic Education by Using ALC Net Academy-. Nagoya University of Arts and Sciences, the journal of liberal arts, 2005.
+[11] An Open-Source Large Vocabulary CSR Engine Julius. http://julius.sourceforge.jp/en_index.php
+[12] Fine Speech. http://www.animo.co.jp/index.jsp
+[13] Yin Chengjiu, Ogata Hiroaki, and Yano Yoneo. Participatory Simulation for Collaborative Learning Experiences. Information Science Publishing, New York, USA, Oct. 2008.
+
+---

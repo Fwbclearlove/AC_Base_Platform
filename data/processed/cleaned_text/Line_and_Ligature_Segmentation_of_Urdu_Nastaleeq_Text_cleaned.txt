@@ -1,0 +1,191 @@
+The recognition accuracy of ligature-based Urdu language optical character recognition (OCR) systems is highly dependent on the segmentation accuracy that converts Urdu text into lines and ligatures. This paper presents techniques for segmenting Urdu Nastaleeq text images into lines and subsequently into ligatures. The classical horizontal projection-based segmentation method is enhanced with a curved-line-split algorithm to address issues such as text line split position, overlapping, merged ligatures, and ligatures crossing line split positions. The ligature segmentation algorithm identifies connected components from text lines, categorizes them into primary and secondary classes, and allocates secondary components to the primary class based on width, height, coordinates, overlapping, centroids, and baseline information.
+
+The proposed line segmentation algorithm achieved a 99.17% accuracy on 47 pages. The ligature segmentation algorithm was primarily tested on a large Urdu-printed text images dataset, successfully segmenting 189,000 ligatures from 10,063 text lines with 332,000 connected components. Approximately 142,000 secondary components were allocated to over 189,000 primary ligatures with an accuracy rate of 99.80%. Both segmentation algorithms show superior performance compared to existing algorithms for Urdu Nastaleeq text segmentation. The line segmentation algorithm was also tested on Arabic text, demonstrating successful line extraction.
+
+Urdu, the national language of Pakistan, is widely spoken in India and other Southern Asian countries. It is an Arabic script language primarily written in the Nastaleeq style, which is also used in Persian, Pashto, Panjabi, Baluchi, and Siraiki. The complexities of Nastaleeq, such as context sensitivity, compactness, overlapping, and cursive and diagonal nature, pose significant challenges for its segmentation into lines and ligatures. OCR systems for Nastaleeq text are categorized based on text segmentation into character-based, ligature-based, and sentence-based systems. Current research focuses on ligature and sentence-based OCRs, which heavily rely on the accurate segmentation of document images.
+
+Previous contributions to Urdu line and ligature segmentation are overviewed in the following sections.
+
+---
+
+1) LINE SEGMENTATION
+Text lines extraction is crucial in segmentation procedures. Algorithms for Urdu page segmentation into lines include horizontal and vertical projection, x-y cut, smearing, geometric, ridge-based, and zone-based horizontal projection. The pioneer work used horizontal projection for text lines, followed by component labeling and vertical projection for character extraction. Recursive XY cut, whitespace analysis, and other methods have been applied, with the highest accuracy for Urdu reported at 65.4%. Geometric algorithms tailored for Urdu Nastaleeq documents achieved text line detection accuracy ranging from 72% to 93%. Ridge-based approaches and zone-based methods have achieved accuracies of 96% and 92% for Arabic and Urdu, respectively. A zone-based method proposed for Nastaleeq’s Urdu text lines achieved 99.11% accuracy but overlooked diacritics above zone 1.
+
+2) LIGATURE SEGMENTATION
+A ligature is a combination of characters, and the primary component consists of main strokes, while diacritics are secondary strokes. Efforts have been made for ligature segmentation using vertical histogram, horizontal projection, and bounding box methods, achieving up to 99.02% accuracy. A recent study allocated secondary components to primary components with 92.5% accuracy.
+
+B) MOTIVATION
+Recent algorithms have used zoning and heuristics for line and ligature segmentation, which can be context and font dependent. Our motivation is to reduce the complexity of zoning and merging decisions, relying more on baseline information.
+
+C) CONTRIBUTION
+We present two algorithms for line and ligature segmentation of Urdu Nastaleeq text, which can be applied to other Nastaleeq-based languages. Our line segmentation algorithm depends on horizontal projection, split positions (Curved-Line-Split algorithm), and baseline information, while the ligature segmentation algorithm uses quantitative information like width, height, centroids, and overlapping. Our algorithms achieve accuracies of 99.17% for line segmentation and 99.08% for ligature segmentation.
+
+Algorithm 1 Curved Line Split
+Data: Document Image Page, initial split row numbers
+Result: Coordinates for demarcation/split lines
+...
+[Algorithmic details follow]
+
+---
+
+This section discusses the line segmentation algorithm, which divides a page into text lines using a global horizontal projection method enhanced by the proposed Curved Line Split (CLS) algorithm. It also addresses conflict resolution for components that cross split lines based on baseline information.
+
+The CLS algorithm is capable of identifying curved demarcation lines between consecutive text lines when a straight line is not present. It starts from the middle of the baselines and traverses horizontally, adjusting vertically when text pixels are encountered. The process is detailed in Figs. 7 and 8, and the algorithm is presented in Algorithm 1.
+
+The line segmentation algorithm is applied to Urdu Nastaleeq document images. It improves upon classical horizontal projection methods by incorporating the CLS algorithm, overcoming issues such as text line splits, overlapping, merged ligatures, and ligatures crossing split positions. The main steps include:
+
+1. Finding Line-Peaks by converting the image into a binary image, calculating horizontal projection, and identifying peaks and troughs.
+2. Determining the average text line height.
+3. Identifying and excluding false text lines.
+4. Correcting for missed text lines by adjusting Line-Peak values.
+5. Segmenting the page into text lines using initial split row numbers and the CLS algorithm.
+6. Assigning components to the correct text lines, including handling crossing components and those touching neither baselines nor split lines, such as diacritics or dots.
+
+The possibility of attaching diacritics to the wrong lines is high, particularly in the upper and lower diacritics/dots zones of each text line, excluding the first and last lines. The first line may only have a lower diacritics/dots zone, while the last may have only an upper zone. Components found in these areas are moved to the line with the minimum distance from the neighboring component. This process involves identifying components that do not touch the baseline and are not larger than their respective zones, then relocating them based on the nearest text pixel.
+
+In the case of components touching both baselines, indicating a possible incorrect connection between two ligatures, the position of the joint with the minimum number of pixels is located to split the component appropriately.
+
+The ligature segmentation algorithm splits text lines into constituent ligatures, which are typically composed of 1 to 8 characters forming a primary component with possible secondary components like dots and diacritics. The algorithm finds all components and allocates secondary components to the proper primary component.
+
+The proposed line segmentation algorithm was tested on 47 pages, achieving 100% segmentation for 7 pages from previous studies and an accuracy of 99.17% for the remaining 40 pages from a single-columned Urdu newspaper. This accuracy surpasses that reported in previous works. The comparison with other line segmentation algorithms shows that the proposed method performs better, particularly due to its diacritics allocation mechanism.
+
+---
+
+I. Ahmad et al.: Line and Ligature Segmentation of Urdu Nastaleeq Text
+
+FIGURE 17. Segmented text lines by the proposed line algorithm.
+
+Algorithm 2 Ligature Segmentation Algorithm
+Data: S = Urdu Sentense Images
+Result: List of ligature images for a given Urdu sentence image
+
+begin
+for k = 1 to S do
+    Tk = Extract information(connected comp(Sk))
+    Tk = Decide primary secondary components(Tk)
+    Lk = Allocate secondary to primary(Tk)
+return Lk
+
+Algorithm 3 Extract Information
+Data: Sk = Urdu sentence image
+Result: Table Tk, containing information regarding connected components of a sentence Sk
+
+begin
+    CC = Find connected components for Sk
+    for each connected components CCi do
+        Find starting and ending columns number
+        Find starting and ending rows number
+        Touching baseline or not
+        Calculate height and width
+        Overlapping connected component
+        Centroid
+        Save all above information about CCi in Tk
+    return Tk
+
+FIGURE 18. Total 27, 12 and 21 resultant ligatures from UPTI data set, [28] and [29], respectively.
+
+Algorithm 4 Decide Primary and Secondary Components
+Data: Tk, CC, Secondary Component Height < Connected Comp Height CCH = 1/2 of the height of a text line
+Result: Updated Table Tk
+
+begin
+    for each CCi that overlaps with any other CCj in Tk
+        if CCi is not diacritic and SCCj is a diacritic then
+            update CCj as secondary component of CCi in table Tk
+        if height of CCj < CCH then
+            update CCj as secondary component of CCi in table Tk
+    return Tk
+
+Algorithm 5 Allocate Secondary to Primary Components
+Data: Tk, Secondary Connected Component=SCC, Primary Connected Component=PCC, CCH
+Result: List of ligatures Lk
+
+begin
+    for each SCCi of Tk do
+        if SCCi is not touching baseline then
+            Copy pixels of SCCi at proper coordinates on its allotted PCC
+        else
+            Declare SCCi as PCC in Tk
+    for each PCCi of Tk do
+        Save PCCi as a ligature of kth sentence
+    return Lk
+
+C. RESULTS OF THE PROPOSED LIGATURE SEGMENTATION ALGORITHM
+
+UPTI data set is used for checking the segmentation accuracy of the proposed algorithms. The implemented algorithms achieve an accuracy better than the best reported in [8], i.e., 99.02%. Examples of incorrectly connected dots, diacritics, and ligatures are depicted in Fig. 24.
+
+---
+
+Fig. 24 illustrates two ligatures connected incorrectly in its first and second parts, while the fourth part consists of all secondary components from the third part, incorrectly connected in six dots. These dots exceed the maximum threshold size for secondary components and touch the baseline, leading the ligature segmentation algorithm to classify them as primary components. The proposed algorithm was tested on the undegraded version of the UPTI dataset, showing that the number of secondary components is less than the primary components, with a ratio of approximately 7:5. The UPTI dataset contains 189,584 ligatures according to the ground truths, which our algorithm successfully extracted as shown in Table 4. This table indicates that approximately 189,000 ligatures were extracted from 10,063 text lines, comprising over 332,000 connected components from the UPTI dataset, with an accuracy rate of 99.80%. Fig. 25 presents the percentage statistics of the ligature segmentation algorithm for the four versions of the UPTI dataset.
+
+The primary components touching the baseline account for about 93%, and the secondary components not touching the baseline are approximately 87%. Each ligature consists of about 1.7 connected components on average. Table 5 shows the statistics observed by applying the proposed ligature segmentation algorithms to the first sentence of the UPTI dataset. Table 6 compares the segmentation algorithms and their accuracy, along with the sizes of the datasets used. Our algorithm, which relies on quantitative values such as width, height, centroids, and baseline touching rather than heuristics, demonstrates improved accuracy over previous methods.
+
+In conclusion, this research introduces two algorithms for line and ligature segmentation of Urdu Nastaleeq text images. The proposed algorithms achieve accuracy rates of 99.17% for line segmentation and 99.80% for ligature segmentation, outperforming existing methods. This work can be extended to other Nastaleeq script-based languages and modified for handwritten and scene text. Segmentation of multicolumn Urdu newspaper text poses a challenge for future work.
+
+Pal, U., and Sarkar, A., "Recognition of printed Urdu script," in Proc. ICDAR, 2003, pp. 1183-1187.
+
+Satti, D., and Saleem, K., "Complexities and implementation challenges in offline Urdu Nastaliq OCR," in Proc. Conf. Lang. Technol., 2012, pp. 85-91.
+
+Hussain, S., "Complexity of Asian writing systems: A case study of Nafees Nasta'leeq for Urdu," in Proc. 12th AMIC Annu. Conf. e-Worlds, Governments, Bus. Civil Soc., Asian Media Inf. Center, Singapore, 2003.
+
+Javed, S. T., and Hussain, S., "Improving Nastalique specific pre-recognition process for Urdu OCR," in Proc. IEEE 13th Int. Multitopic Conf. (INMIC), Dec. 2009, pp. 1-6.
+
+Lehal, G. S., "Ligature segmentation for Urdu OCR," in Proc. 12th Int. Conf. Document Anal. Recognit. (ICDAR), Aug. 2013, pp. 1130-1134.
+
+Din, I. U., Malik, Z., Siddiqi, I., and Khalid, S., "Line and ligature segmentation in printed Urdu document images," J. Appl. Environ. Biol. Sci, vol. 6, no. 3, pp. 114-120, 2016.
+
+Shamsher, I., Ahmad, Z., Orakzai, J. K., and Adnan, A., "OCR for printed Urdu script using feed forward neural network," in Proc. World Acad. Sci., Eng. Technol., vol. 23, pp. 172-175, Jan. 2007.
+
+Pathan, I. K., and Ramteke, R., "Recognition of offline handwritten isolated Urdu character," Adv. Comput. Res., vol. 4, no. 1, pp. 117-121, 2012.
+
+Tariq, J., Nauman, U., and Naru, M. U., "Softconverter: A novel approach to construct OCR for printed Urdu isolated characters," in Proc. 2nd Int. Conf. Comput. Eng. Technol. (ICCET), vol. 3, Apr. 2010, p. V3-495.
+
+Akram, Q. U. A., Hussain, S., and Habib, Z., "Font size independent OCR for Noori Nastaleeq," in Proc. Graduate Colloquium Comput. Sci. (GCCS), vol. 1, Lahore, Pakistan, 2010.
+
+Khan, K., Ullah, R., Khan, N. A., and Naveed, K., "Urdu character recognition using principal component analysis," Int. J. Comput. Appl., vol. 60, p. 11, Dec. 2012.
+
+Ahmad, Z., Orakzai, J. K., Shamsher, I., and Adnan, A., "Urdu Nastaleeq optical character recognition," in Proc. World Acad. Sci., Eng. Technol., vol. 26, 2007, pp. 249-252.
+
+Nawaz, T., Naqvi, S., ur Rehman, H., and Faiz, A., "Optical character recognition system for Urdu (naskh font) using pattern matching technique," Int. J. Image Process., vol. 3, no. 3, p. 92, 2009.
+
+Hussain, S., et al., "Nastalique segmentation-based approach for Urdu OCR," Int. J. Document Anal. Recognit., vol. 18, no. 4, pp. 357-374, 2015.
+
+Sabbour, N., and Shafait, F., "A segmentation free approach to Arabic and Urdu OCR," in Proc. DRR, Feb. 2013, p. 8658.
+
+Javed, S. T., and Hussain, S., "Segmentation free nastalique Urdu OCR," in Iberoamerican Congress on Pattern Recognition, Turkey: Springer, 2013.
+
+Ul-Hasan, A., Ahmed, S. B., Rashid, F., Shafait, F., and Breuel, T. M., "Offline printed Urdu Nastaleeq script recognition with bidirectional LSTM networks," in Proc. 12th Int. Conf. Document Anal. Recognit. (ICDAR), Aug. 2013, pp. 1061-1065.
+
+Naz, S., Umar, A. I., Ahmad, R., Ahmed, S. B., Shirazi, S. H., and Razzak, M. I., "Urdu Nasta'liq text recognition system based on multidimensional recurrent neural network and statistical features," Neural Comput. Appl., vol. 28, no. 2, pp. 1-13, 2015.
+
+Naz, S., et al., "Offline cursive Urdu-Nastaliq script recognition using multidimensional recurrent neural networks," Neurocomputing, vol. 177, pp. 228-241, Feb. 2016.
+
+Naz, S., Ahmed, S. B., Ahmad, R., and Razzak, M. I., "Zoning features and 2DLSTM for Urdu text-line recognition," Proc. Comput. Sci., vol. 96, pp. 16-22, Oct. 2016.
+
+Ahmad, I., Wang, X., Li, R., and Rasheed, S., "Offline Urdu Nastaleeq optical character recognition based on stacked denoising autoencoder," China Commun., vol. 14, no. 1, pp. 146-157, Jan. 2017.
+
+Malik, H., and Fahiem, M. A., "Segmentation of printed Urdu scripts using structural features," in Proc. 2nd Int. Conf. Vis. (VIZ), 2009, pp. 191-195.
+
+Kumar, K. S., Kumar, S., and Jawahar, C., "On segmentation of documents in complex scripts," in Proc. 9th Int. Conf. Document Anal. Recognit. (ICDAR), vol. 2, 2007, pp. 1243-1247.
+
+Breuel, T. M., "Two geometric algorithms for layout analysis," in International Workshop on Document Analysis Systems, Berlin, Germany: Springer, 2002, pp. 188-199.
+
+Shafait, F., Hasan, A., Keysers, D., and Breuel, T. M., "Layout analysis of Urdu document images," in Proc. 10th IEEE Int. Multitopic Conf. (INMIC), Islamabad, Pakistan, Dec. 2006, pp. 293-298.
+
+Bukhari, S. S., Shafait, F., and Breuel, T. M., "High performance layout analysis of Arabic and Urdu document images," in Proc. Int. Conf. Document Anal. Recognit. (ICDAR), Sep. 2011, pp. 1275-1279.
+
+Husain, S. A., "A multi-tier holistic approach for Urdu Nastaliq recognition," in Proc. Int. Multi Topic Conf. Abstracts, 2002, p. 84.
+
+Javed, S. T., Hussain, S., Maqbool, A., Asloob, S., Jamil, S., and Moin, H., "Segmentation free nastalique Urdu OCR," World Acad. Sci., Eng. Technol., vol. 46, pp. 456-461, Oct. 2010.
+
+Baird, H. S., "Document image defect models," in Structured Document Image Analysis, Berlin, Germany: Springer, 1992, pp. 546-556.
+
+Bukhari, S. S., Shafait, F., and Breuel, T. M., "Towards generic text-line extraction," in Proc. 12th Int. Conf. Document Anal. Recognit. (IC-DAR), Aug. 2013, pp. 748-752.
+
+Bukhari, S. S., Shafait, F., and Breuel, T. M., "Text-line extraction using a convolution of isotropic Gaussian filter with a set of line filters," in Proc. Document Anal. Recognit. (ICDAR), 2011, pp. 579-583.
+
+Bukhari, S. S., Breuel, T. M., and Shafait, F., "Textline information extraction from grayscale camera-captured document images," in Proc. 16th IEEE Int. Conf. Image Process. (ICIP), Nov. 2009, pp. 2013-2016.
+
+Manzoor Ahmed received the B.E. degree in 1996 and the M.Phil. degree in 2010 from Pakistan, and the Ph.D. degree from the Beijing University of Posts and Telecommunications, China, in 2015. He currently holds a post-doctoral position at the Department of Electronic Engineering, FIB Lab, Tsinghua University, China. His research interests focus on image processing, game theoretic-based resource management in hierarchical heterogeneous networks, interference management in small cell networks, 5G networks, D2D communication resource allocation, physical layer security, information security, Fog-RAN, C-RAN, and fog computing. He was awarded the Best Paper Award at the 2014 Game Nets Conference.
+
+Rahat Ullah obtained the master’s degree in electronics from the University of Peshawar, Pakistan, in 2007, and the Ph.D. degree from the Beijing University of Posts and Telecommunications, China, in 2017. He served as an Assistant Professor at Sarhad University, Peshawar, Pakistan, for six years and is currently an Associate Professor at the School of Physics and Optoelectronics Engineering, Nanjing University of Information Science and Technology. His research interests include all optical signal processing/communications and machine learning.

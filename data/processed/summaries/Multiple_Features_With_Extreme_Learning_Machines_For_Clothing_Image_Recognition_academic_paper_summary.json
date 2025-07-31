@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Clothing Image Recognition Based on Multiple Features and Extreme Learning Machines",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "Clothing image recognition",
+  "research_problem": "The variations in clothing images and complex formation conditions pose challenges for traditional convolutional neural networks (CNNs), which do not always provide a satisfactory balance between training time and recognition performance.",
+  "methodology": "A recognition framework based on multiple features (CNN features, Histograms of Oriented Gradients, and color histograms) and Extreme Learning Machines (ELMs)",
+  "key_innovations": [
+    "Proposed recognition framework",
+    "Feature-level fusion with Autoencoder-ELMs",
+    "Decision-level fusion with ensemble of adaptive ELMs (Ada-ELMs)"
+  ],
+  "experimental_results": "Experiments on the DeepFashion dataset demonstrate the competitiveness and efficiency of the proposed framework, with accuracy reaching 82.0% in the test set.",
+  "conclusions": "The paper introduces a flexible and competitive clothing recognition framework based on multiple features and ELMs, which is especially effective for balancing time and recognition accuracy.",
+  "keywords": [
+    "Clothing image recognition",
+    "extreme learning machines",
+    "feature fusion",
+    "autoencoder ELM",
+    "ensemble learning"
+  ],
+  "application_domains": [
+    "E-commercial platforms",
+    "personal media management"
+  ],
+  "technical_concepts": [
+    "CNNs",
+    "HOG",
+    "color histograms",
+    "ELMs",
+    "Autoencoder-ELMs",
+    "Ada-ELMs",
+    "DeepFashion dataset"
+  ],
+  "performance_metrics": "Accuracy of up to 82.0% in the test set, with training times for ELM and AE-ELM being less than ten seconds, and Ada-ELMs taking approximately 238 seconds.",
+  "summary": "This paper presents a clothing image recognition framework using multiple features and extreme learning machines. The framework demonstrates competitive performance on the DeepFashion dataset, balancing training time and accuracy, with potential for future research in recognizing clothing images with imbalanced categories and fine-grained differences.",
+  "file_id": "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition",
+  "source_type": "cleaned",
+  "text_length": 21566,
+  "generation_time": "2025-07-31 21:24:02"
+}

@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "Improved Keystroke Authentication Accuracy Based on Statistics and Weight",
+  "authors": [
+    "Li Jian",
+    "Guo Xiaojing",
+    "Li Meiyun",
+    "Li Ruifan"
+  ],
+  "main_topic": "Keystroke Dynamics-Based Authentication",
+  "research_problem": "Enhance login-password recognition accuracy using biometric characteristics",
+  "methodology": "TOP10 detector",
+  "key_innovations": [
+    "Filtering outlier data",
+    "Calculating probabilities of each input key",
+    "Selecting less informative features",
+    "Assigning weights"
+  ],
+  "experimental_results": "The proposed detector is more accurate than others, with the smallest sum of FAR and FRR",
+  "conclusions": "The paper presents a methodology that utilizes typing biometrics to enhance login-password authentication",
+  "keywords": [
+    "Keystroke Dynamics",
+    "Authentication",
+    "Feature Extraction",
+    "Probability",
+    "Weight"
+  ],
+  "application_domains": [
+    "Quantum Security Communication"
+  ],
+  "technical_concepts": [
+    "Keystroke eigenvalues",
+    "Normal distribution",
+    "CDF",
+    "Probability vector",
+    "Weight vector"
+  ],
+  "performance_metrics": "FRR, FAR, EER, and the sum of FAR and FRR",
+  "summary": "This paper introduces a methodology for improving the accuracy of keystroke authentication by filtering outliers, calculating probabilities, and assigning weights to features. The proposed TOP10 detector shows better performance than other methods, as evidenced by experimental results using a third-party dataset.",
+  "file_id": "基于统计和加权的提高击键认证识别方法(英文)",
+  "source_type": "cleaned",
+  "text_length": 8405,
+  "generation_time": "2025-07-31 21:25:15"
+}

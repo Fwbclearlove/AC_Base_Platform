@@ -1,0 +1,39 @@
+{
+  "document_type": "academic_paper",
+  "title": "An improved quantum secure direct communication protocol based on a four-particle Green–Horne–Zeilinger (GHZ) state",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "Quantum cryptography, quantum secure direct communication (QSDC), four-particle GHZ state",
+  "research_problem": "To enhance the efficiency of eavesdropping detection in quantum secure direct communication",
+  "methodology": "Four-particle GHZ state for eavesdropper detection and quantum dense coding for message encoding",
+  "key_innovations": [
+    "Improved eavesdropping detection method using the four-particle GHZ state",
+    "Bell states prepared by Bob ensuring no information leak",
+    "Reducing detection times based on the four-particle GHZ state"
+  ],
+  "experimental_results": "The detection rate of the proposed protocol is 87%, compared to 50% for the quantum secure direct communication using an Einstein–Podolsky–Rosen (EPR) pair block",
+  "conclusions": "The SDPP protocol shows higher efficiency in eavesdropping detection, ensuring greater security at the cost of sending more particles",
+  "keywords": [
+    "Quantum cryptography",
+    "Quantum secure direct communication",
+    "GHZ state",
+    "Eavesdropping detection"
+  ],
+  "application_domains": [
+    "Cryptography",
+    "Quantum communication"
+  ],
+  "technical_concepts": [
+    "Four-particle GHZ state",
+    "Quantum dense coding",
+    "Entropy theory",
+    "Eavesdropping detection rate"
+  ],
+  "performance_metrics": "Detection rate of 87% for SDPP protocol, compared to 50% for EPR pair block",
+  "summary": "This paper presents an improved quantum secure direct communication protocol using a four-particle GHZ state for eavesdropping detection. The protocol enhances the efficiency of detection and offers higher security than previous methods, as demonstrated by a detection rate of 87%. The analysis shows the protocol's potential for use in cryptography and quantum communication.",
+  "file_id": "10.5560_zna.2012_0029",
+  "source_type": "cleaned",
+  "text_length": 8901,
+  "generation_time": "2025-07-31 21:10:00"
+}

@@ -1,0 +1,96 @@
+---
+
+A Noisy Context Optimization Approach for Chinese Spelling Correction
+
+Guangwei Zhang1,3, Yongping Xiong1, Ruifan Li2,3
+1School of Computer Science, Beijing University of Posts and Telecommunications, Beijing, China
+2School of Artificial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China
+E-mail: {gwzhang, ypxiong, rfli}@bupt.edu.cn
+
+Abstract—The task of Chinese Spelling Correction (CSC) aims to detect and correct Chinese spelling errors. BERT-based models, dominant in CSC research, face performance challenges with noisy contexts. We propose NCO-Spell, which includes a multi-character masking strategy in pre-training to robustify models in noisy environments and an iterative inference algorithm to correct characters one by one. Experiments on a benchmark dataset demonstrate NCO-Spell's effectiveness.
+
+I. INTRODUCTION
+Chinese spelling errors commonly occur due to human writing, automatic speech recognition, or optical character recognition. CSC has become crucial, with BERT-based models achieving state-of-the-art performance. However, BERT's masking strategy is not optimal for multi-typo contexts. We introduce similarity knowledge using confusion sets and propose an iterative inference method to reduce noise influence.
+
+II. RELATED WORK
+CSC is a challenging NLP task, initially addressed using statistics and rules, later advanced by BERT-like models considering character similarity. Techniques such as masking strategies, confidence-similarity filters, and confusion sets have been integrated into CSC models. However, the performance heavily depends on the quality of confusion sets.
+
+III. METHODOLOGY
+A. Task Formulation
+
+---
+
+Chinese Spelling Correction (CSC) is a sequence labeling problem. Given a text sequence X = (x1, x2, ..., xn) of n Chinese characters, the objective is to output the corrected sequence Y = (y1, y2, ..., yn).
+
+Our proposed NCO-Spell framework includes a multi-character masking strategy and a dynamic confusion set. The masking strategy probabilities are presented in Table II. The masking position is determined by the "masking distance," and the confusion set is dynamically updated as the model trains, enhancing learning for error-prone characters.
+
+The dynamic update strategy involves two points: 1) Selection of samples where corrections fail, and 2) a dynamic update method where new samples are stored and added to the confusion set after multiple training iterations if the loss is reduced to a certain threshold.
+
+For iterative inference, we aim to reduce the noise effect by correcting only the character with the highest probability in each iteration. This method improves recall and ensures each corrected character is the most confident choice. The iterative inference process is model-agnostic and applicable to other CSC methods.
+
+In Section IV, we detail the pre-training settings and fine-tuning results of NCO-Spell on benchmark datasets.
+
+---
+
+Dataset: We utilize ChineseNlpCorpus12 as the pre-training data, resulting in 110.7 million effective sentences after decomposing information using punctuation marks. Parameter Settings: The transformer encoder composition is similar to BERT, with a learning rate of 5e-5. We train based on the PLOME pre-trained model, setting the loss threshold to 4.0 for updating the confusion dictionary.
+
+Fine-tuning Settings: Training data includes 10K manually annotated samples from SIGHAN and 271K automatically generated samples. The evaluation dataset is the latest SIGHAN test dataset. Parameters are set to a maximum sentence length of 180, batch size of 32, and a learning rate of 5e-5. Evaluation Metrics: Precision, recall, and F1 scores are used for character-level and sentence-level evaluation.
+
+Baseline Models: Experimental evaluation includes BERT, PLOME, REALISE, ECOPO, LEAD, CoSPA, PGBERT, PLOME(cfs), PLOME(iter), and NCO-Spell(iter).
+
+Results and Analysis: Main results in Table IV show improvements, especially for PLOME(cfs) and NCO-Spell. The multi-character masking strategy is effective, as demonstrated on the multi-typo subset of SIGHAN15 in Table VI, where iterative inference further enhances performance.
+
+---
+
+---
+
+Method Character-level(%) Sentence-level (%)
+Detection Correction Detection Correction
+PLOME 97.1 79.2 87.2 97.0 76.8 85.7
+PLOME(iter) 97.1 81.0 88.3 97.1 78.6 86.8
+NCO-Spell 98.3 77.5 86.6 96.9 75.1 84.6
+NCO-Spell(iter) 97.5 81.0 88.5 97.1 78.6 86.8
+
+C. Effects of Different Masking Distance
+We suppose that denser noise distributions have a greater impact on character correction. The masking distance was set to 1/2/3 for misspelled position sampling replacement. The model achieves the best performance with a masking distance of 1, validating our hypothesis.
+
+D. Results of Iterative Inference for Continuous Typos
+The dataset was divided into continuous and discontinuous error data for experiments. Iterative inference performs significantly better in sentences with continuous typos. In sentences with discontinuous typos, iterative inference shows less improvement compared to the direct inference method. Continuous typos are greatly affected by neighboring noise, making them difficult for direct inference methods to correct.
+
+TABLE VII ABLATION EXPERIMENT RESULTS (SENTENCE-LEVEL METRICS) FOR DIFFERENT MASKING DISTANCES IN MULTIPLE CHARACTER MASKS.
+
+Masking Distance Whole Set Multi-typo Set
+Detection Correction Detection Correction
+0 79.3 82.2 78.7 63.7
+1 81.5 82.7 67.3
+2 80.0 80.9 63.4
+3 80.8 80.9 64.9
+
+VI. CONCLUSIONS
+We propose NCO-Spell for CSC task in noisy contexts, using a multi-character masking strategy with dynamic confusion sets in the pre-training stage and an iterative inference method. NCO-Spell outperforms compared baseline models. Future work includes exploring large language models.
+
+ACKNOWLEDGMENT
+The authors thank editors and reviewers for their comments. This work was supported by High Performance Computing Platform of BUPT.
+
+REFERENCES
+[References listed here]
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM.
+
+---
+
+[13] L. Huang, J. Li, W. Jiang, et al., “Phmospell: Phonetic and Morphological Knowledge Guided Chinese Spelling Check,” in Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), 2021, pp. 5958–5967.
+
+[14] Y. Li, Q. Zhou, Y. Li, et al., “The Past Mistake is the Future Wisdom: Error-driven Contrastive Probability Optimization for Chinese Spell Checking,” in Findings of the Association for Computational Linguistics: ACL 2022, Dublin, Ireland, May 22-27, 2022, 2022, pp. 3202–3213.
+
+[15] Y. Li, S. Ma, Q. Zhou, et al., “Learning from the Dictionary: Heterogeneous Knowledge Guided Fine-tuning for Chinese Spell Checking,” in Findings of the Association for Computational Linguistics: EMNLP 2022, Abu Dhabi, United Arab Emirates, December 7-11, 2022, 2022, pp. 238–249.
+
+[16] C. L. Liu, M. H. Lai, Y. H. Chuang, and C. Y. Lee, “Visually and Phonologically Similar Characters in Incorrect Simplified Chinese Words,” in COLING 2010, 23rd International Conference on Computational Linguistics, Posters Volume, 23-27 August 2010, Beijing, China.
+
+[17] S.-H. Wu, C.-L. Liu, and L.-H. Lee, “Chinese Spelling Check Evaluation at SIGHAN Bake-off 2013,” in Proceedings of the Seventh SIGHAN Workshop on Chinese Language Processing, 2013, pp. 35–42.
+
+[18] H. Xu, Z. Li, Q. Zhou, et al., “Read, Listen, and See: Leveraging Multimodal Information Helps Chinese Spell Checking,” in Findings of the Association for Computational Linguistics: ACL/IJCNLP 2021, Online Event, August 1-6, 2021, 2021, pp. 716–728.
+
+[19] S. Yang and L. Yu, “COSPA: An Improved Masked Language Model with Copy Mechanism for Chinese Spelling Correction,” in Uncertainty in Artificial Intelligence, Proceedings of the Thirty-Eighth Conference on Uncertainty in Artificial Intelligence, UAI 2022, 1-5 August 2022, Eindhoven, The Netherlands, 2022, pp. 2225–2234.
+
+[20] L. Bao, X. Chen, J. Ren, Y. Liu, and C. Qi, “PGBERT: Phonology and Glyph Enhanced Pre-training for Chinese Spelling Correction,” in Natural Language Processing and Chinese Computing, 2022, pp. 16–28.

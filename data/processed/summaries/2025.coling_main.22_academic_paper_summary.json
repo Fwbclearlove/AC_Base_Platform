@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Multimodal Aspect-Based Sentiment Analysis under Conditional Relation",
+  "authors": [
+    "Xinjing Liu",
+    "Ruifan Li",
+    "Shuqin Ye",
+    "Guangwei Zhang",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+  "research_problem": "Existing methods assume images always contain referred objects, which is not always true, especially in social media.",
+  "methodology": "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+  "key_innovations": [
+    "Proposed CORSA framework",
+    "Conditional Relation Detector (CRD)",
+    "Visual Object Localizer (VOL)"
+  ],
+  "experimental_results": "CORSA model outperforms state-of-the-art multimodal methods on all metrics on Twitter-15 and Twitter-17 datasets.",
+  "conclusions": "The CORSA framework effectively considers conditional multimodal relations between images and texts, improving MABSA performance, but there is room for improvement in annotation methods.",
+  "keywords": [
+    "Multimodal Aspect-Based Sentiment Analysis",
+    "Conditional Relation",
+    "CORSA framework",
+    "Visual Object Localizer"
+  ],
+  "application_domains": [
+    "Social media sentiment analysis"
+  ],
+  "technical_concepts": [
+    "Multimodal Aspect Term Extraction",
+    "Multimodal Aspect-oriented Sentiment Classification",
+    "Joint Multimodal Aspects of Sentiment Analysis",
+    "UNINEXT",
+    "YOLOv8"
+  ],
+  "performance_metrics": "F1 scores, Accuracy, and other metrics on Twitter-15 and Twitter-17 datasets",
+  "summary": "This paper introduces the CORSA framework for MABSA, which includes a Conditional Relation Detector and a Visual Object Localizer. The framework addresses the issue of irrelevant visual information in social media sentiment analysis and demonstrates superior performance on benchmark datasets.",
+  "file_id": "2025.coling_main.22",
+  "source_type": "cleaned",
+  "text_length": 12438,
+  "generation_time": "2025-07-31 21:13:12"
+}

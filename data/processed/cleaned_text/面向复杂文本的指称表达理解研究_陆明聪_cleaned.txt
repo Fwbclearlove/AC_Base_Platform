@@ -1,0 +1,353 @@
+指称表达理解(Refering Expression Comprehension, REC)旨在根据自然语言描述定位图像中的目标物体，是图文多模态领域的重要研究方向。指称表达通常包含物体的外观、属性、位置、与其他物体的关系、上下文场景知识等关键信息，因此文本具有多样性和复杂性。本文聚焦于复杂文本场景下的REC研究。
+
+当前主流方法在跨模态推理时通常简单拼接视觉和文本特征，导致文本信息被视觉信息淹没，难以有效提取关键线索。同时，当前方法在处理复杂场景知识时效果较差。为解决这些问题，本文提出：
+
+1. 语言引导的REC推理网络(LGRNet)，通过分离文本和图像模态，引入跨注意力机制，逐步引导图像模态的对齐，提高跨模态推理效果。
+
+2. 基于大语言模型的场景知识简化方法，设计指令模板过滤无关描述，简化场景知识。
+
+3. 场景知识推理网络(SKRNet)，分别提取指称表达和场景知识特征，进行联合推理。
+
+在多个公开数据集上验证了所提方法的可行性和有效性。
+
+物体的图片中识别和定位出文本指定的目标物体，比目标检测这一传统计算机视觉任务更具挑战性。指称表达是指描述场景中特定物体的自然语言表达，人们经常使用指称表达区分场景中的多个物体，如“穿着蓝色衣服的人”、“左边的那只狗”。指称表达理解任务要求模型根据自由多变的指称表达定位图片中的物体。此外，还会包含丰富的场景知识，进一步提高指称表达的文本长度。这种理解能力对于人工智能在现实世界中的应用至关重要，因为它模拟了人类如何通过语言和视觉信息进行交流和理解。从应用角度来看，在VR领域，能够理解自然语言描述并将其与虚拟环境中的对象关联起来，对于提升用户体验和交互效率至关重要，REC技术可以帮助用户更自然地与虚拟世界互动。在机器人导航中，理解周围环境的自然语言描述对于任务执行是有必要的，REC技术可以帮助此类系统更好地理解人类指令和环境信息。另外，对于视障人士，可以根据指称表达理解技术开发出辅助工具，帮助他们通过语言描述识别和理解周围环境，提高生活质量。因此，开展面向复杂文本的指称表达理解的研究不仅能推动人工智能领域的技术进步，也能为多个行业和日常生活带来实际的应用价值。
+
+在指称表达理解任务中，当前基于Transformer的REC模型存在文本信息淹没问题，导致对文本特征利用不足。此外，REC模型缺乏有效的针对复杂场景知识的推理方案。为解决这些问题，本文提出了语言引导的指称表达理解网络LGNET，通过跨注意力机制分离图文模态，避免文本信息淹没，并从多个角度引入不同抽象层次的文本特征用于引导推理过程。同时，针对基于场景知识的REC任务，本文从数据和模型两个角度提出了简化场景知识的方案，并提出了面向场景知识的指称表达理解模型。通过在多个基准数据集上的实验分析，证明了本文提出方案的有效性。
+
+在本文中，我们主要介绍了Transformer架构及其在自然语言处理和计算机视觉中的应用。首先，我们详细阐述了Transformer的编码器和解码器结构，包括多头注意力机制、位置编码和前馈网络等组成部分。接着，我们讨论了基于Transformer的预训练语言模型BERT和GPT，它们通过在大规模语料上进行预训练，学习到丰富的语言表示，并在下游任务中进行微调，显著提升了自然语言处理的效果。此外，我们还介绍了视觉Transformer(ViT)和改进的Swin Transformer，它们利用Transformer架构提取图像特征，并在某些视觉任务上取得了优异的性能。最后，我们还讨论了Transformer在目标检测和实例分割等密集型视觉任务中的应用。
+
+根据指示，以下是清洗后的学术论文第5部分内容：
+
+---
+
+总体复杂度为4/iwC^2 + 2(iw)^2C。而在W-MSA中，窗口大小为MxM，则窗口数为4。窗口内部复杂度可根据上述MSA复杂度计算，得到最终结果为4hwC^2 + 2M^2。可以发现MSA复杂度为/iw的平方级别，而W-MSA为hv的线性级别(M为常数)。因此使用Swin Transformer可以处理更高分辨率的图片，提高了此类视觉特征提取器的适用范围。
+
+此外，为了实现窗口间的注意力，Swin Transformer通过移动窗口注意力(Shifted window MSA, SW-MSA)实现跨窗口交互。如图2-7所示，通过对原来的窗口划分进行左右、上下的循环移位实现窗口间的信息交互，同时设计了高效的掩码机制避免因移位导致原来不相邻的图片区域之间计算注意力。同时参考CNN的方案，Swin Transformer中的Patch Merging操作逐步对图片特征进行降采样，进一步提高模型的全局建模能力并降低计算复杂度。
+
+后续在Swin Transformer的基础上发展的Swin V2在跨窗口连接，多尺度特征融合等多个角度进行了改进，进一步提升了模型的性能。综上所述，相比传统的卷积神经网络，如今Transformer架构在图像特征提取上也具备强大的竞争力，并逐渐成为视觉表征的一个更佳的方案。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息和乱码，保留了核心学术内容、技术术语和数据、原有逻辑结构、公式和图表说明。
+
+文本特征扩展器（Textual Feature Extender, TFE）从三个方面扩展了文本特征。首先，模型设计了一种基于文本特征的新型坐标嵌入（Coordinate Embedding），并将其整合到预测标记中，以促进其捕获与语言相关的视觉特征。其次，使用提取的文本特征交替进行文本引导的跨模态对齐（Text-guided Cross-modal Alignment, TCA）和融合（Fusion, TCF）。第三，设计了一种新型的跨模态损失函数，以增强指称表达与可学习预测标记之间的跨模态对齐。
+
+LG-R-NET的整体模型框架主要包括文本提取模块、视觉提取模块、文本特征扩展模块、跨模态推理与定位框预测模块，以及模型的损失函数设计。文本提取模块使用BERT作为文本特征提取器。视觉提取模块使用SwimTransformer提取图像特征。文本特征扩展模块生成坐标向量、词向量和句子向量。跨模态推理与定位框预测模块包括TCA和TCF组件，用于跨模态对齐和融合。最后，损失函数包括预测框的回归损失和跨模态对齐损失。
+
+实验部分，首先使用Visual Genome数据集对LG-R-NET模型进行预训练，然后在基准数据集上微调。实验结果显示，LG-R-NET在多个基准数据集上取得了state-of-the-art的性能。
+
+一个多模态双流模型，分别处理视觉和文本输入，并通过协同注意力变换器层进行交互。UNITER提出了通用的图像-文本表示学习，通过在四个图像-文本数据集和四个预训练任务上的大规模预训练学习。MDERT是基于DETR的端到端调制多模态检测器，通过基于查询的变换器解码器来检测所有对象。OFA将不同的视觉-语言任务统一到一个Sequence-to-sequence框架中，并收集大量数据来预训练他们的框架。Shikra使多模态大型语言模型能够处理空间坐标的输入和输出，并将其应用于指代对话。ONE-PEACE构建了一个面向任意模态的通用表示模型，可以无缝地在视觉、音频和语言模态之间对齐和集成。mPLUG引入了一种高效的视觉-语言架构，具有新颖的跨模态跳跃连接，并在大规模图像-文本对上进行了端到端的预训练，同时具有区分性和生成性目标。
+
+表3-1中展示了LG-R-NET在三个基准数据集(RefCOCO、RefCOCO+和RefCOCOg)上的实验结果。可以发现LG-R-NET在三个数据集上均取得了优越的性能。与最佳的基于提议的方法Ref-NMS和基于锚框的方法LBLYL-Net相比，LG-R-NET在各方面都取得了显著的优势。对于RefCOCO和RefCOCOg数据集，test B上的改进尤为显著。这表明LG-R-NET在涉及多样化的指称对象时实现了更好的效果。对于RefCOCOg，指称表达更为复杂，LG-R-NET在val-g上仍然超出LBLYL-Net 12.78%，在val-u、test-u上平均超越Ref-NMS 6.34%。这表明模型在面对复杂的引用表达时能够进行更准确的推理。
+
+此外，可以观察到LG-R-NET在表3-1中仍然优于大部分最近提出的基于Transformer的方法。与TransVGP相比，LG-R-NET在使用resnet-101作为backbone时在RefCOCO、RefCOCO+和RefCOCOg上分别实现了高达3.70%、8.08%和6.50%的绝对提升。这展示了LG-R-NET相较于拼接注意力的跨模态推理方法的优越性。与表现最好的VLTVG相比，LG-R-NET在相同的骨干网络上获得了可比较的结果，进一步，当双方都使用更好的视觉骨干网络swin-S时，本文的方法全面超越了VLTVG，这意味着LG-R-NET对更强骨干网络适应性更好。此外，与那些具有更强视觉骨干网络的基线模型，如ViT-B和CLIP-B相比，LG-R-NET取得了有竞争力的结果。尤其当面对指称表达更长、更复杂的RefCOCOg数据集时，LG-R-NET取得了显著的性能优势。这进一步证明了LG-R-NET在面对复杂文本时的推理性能。
+
+表3-2中展示了LG-R-NET在ReferrltGame和Flickr30K Entities上的实验结果。可以发现LG-R-NET明显优于基于提议和基于锚框的方法。与最佳的基于Transformer的方法相比，LG-R-NET同样展现出有竞争力的结果。值得注意的是，ReferrltGame和Flickr30K Entities中的指称表达主要是简单的名词性短语，不适合展示LG-R-NET面对复杂文本的推理能力。因此，在这两个数据集上获得的提升小于在RefCOCOg上的改进。
+
+表3-3中展示了LG-R-NET模型在预训练设置下的性能对比。一类包括MDERT和RefTR，它们的网络架构是专为检测或分割任务设计的，并只在这些任务的数据集如VG、MS-COCO和Flickr 30K上进行了预训练。由于模型框架的限制，可用的预训练数据集和下游任务相对较少。其他基线属于第二类，如OFA和ONE-PEACE。这些方法将不同类型的多模态任务统一为序列到序列任务，并应用统一的框架来处理它们。这样，它们可以从VQA、图像描述和REC等多种不同的多模态任务中收集数据集。至于REC数据集，它们会将边界框标签转换为类似的。因此，这些方法可以利用更多的数据集进行预训练，如表3-3所示。本文的预训练LG-R-NET属于第一类，因为它仅适用于REC。与RefTR和MDERT相比，预训练LG-R-NET在相同甚至更少的预训练数据上实现了更好的性能，这展示了它的可扩展性。与第二类方法如ONE-PEACE或mPLUG相比，本文的方法性能略差。可见，由多种数据集预训练的通用跨模态框架拥有更高的性能上限。
+
+综上所述，上述实验结果表明了LG-R-NET相比之前的基线方法的优势，尤其是面对具备复杂指称表达的RefCOCOg数据集，LG-R-NET展现出显著的性能优势，说明其面对复杂指称表达时优越的跨模态推理效果。在预训练设置下，LG-R-NET超越了相同设置下的基线，证明了LG-R-NET的可扩展性。
+
+在三个数据集中，空间位置词的指称表达比例存在明显差异，这有助于观察CE的消融效果。结果显示，在RefCOCO+中，由于空间指称表达比例不高，CE对LGR-NET的提升不明显。然而，在RefCOCO和RefCOCOg上，CE对LGR-NET的性能提升显著，在RefCOCO的testB中，CE带来了1.77%的性能提升。这充分说明了CE在捕捉指称表达中关于物体空间位置描述的有效性。
+
+此外，对坐标编码CE融入预测token的方式也进行了消融实验，探索了不同方式的优劣。包括加和(add)、乘积(multiply)、拼接(concatenation)三种方式，其中拼接操作之后会接一个线性层对齐维度。结果显示，使用加和操作向预测token中融入坐标编码的效果最佳。
+
+跨模态损失CL采用的是对比学习的形式，由于对比学习效果受训练过程中的批次大小(batch size, bs)影响明显，对此进行了消融实验。结果显示，当增大batch size时，CL带来的提升更大。当batch size为16时，CL在两个划分下只带来0.12%的平均提升，而当batch size提升至128时，CL带来的性能提升达到1.19%。
+
+跨模态推理模块中的TCA和TCF模块组合起来可以视作一个拥有自定义输入的，标准的TransformerDecoder模块。然而，正是因为这样的自定义输入方式，本文将其分为TCA和TCF模块，即文本模态以TCF中的cross attention的key和value的形式输入跨模态推理模块中，而图像模态输入TCA中。这样在堆叠模块时，文本特征能反复输入，起到引导跨模态推理的效果，同时这个过程中经过TCA中的自注意力机制能逐渐调整预测token与图像特征之间的注意力分布，与指称表达在语义层面上实现对齐，逐渐注意到指称物体。
+
+本模块通过交换输入的图文模态进行关于TCA和TCF的消融实验，即交换跨模态推理模块输入的图像文本，称之为LGR-NET(text-img)。结果显示，交换输入的图文模态后，模型在两个划分上的性能都明显下降，说明了TCA和TCF的有效性。
+
+对跨模态推理模块中TCA和TCF堆叠层数进行消融。结果显示，从1层到6层的过程中，模型在两个数据划分上都得到一致且明显的提升，当堆叠至8层时，一方面在RefCOCOg test-u上提升不够明显，一方面在RefCOCOg val-u上不升反降。考虑到堆叠层数的同时会提高模型的复杂度，因此LGR-NET最终选择堆叠6层TCA和TCF组件。
+
+LGR-NET的损失不仅包含之前方法常用的框回归损失，同时还有跨模态损失，通过权重因子A进行平衡。对权重因子进行消融，结果显示，当权重A=2时模型性能达到最佳。一方面，当A过小时，跨模态损失权重太小，对齐约束不足。另一方面，当A过大时，跨模态损失权重过大，导致模型对预测框的监督约束不充分。两者都会降低模型的收敛性能。消融结果说明了合理的权重因子可以促进跨模态损失的效果。
+
+本章开展了基于语言引导的指称表达理解研究工作并提出了语言引导的推理网络（LGR-NET）。首先，本章从解决先前方法出现的文本信息淹没问题和跨模态推理过程中语言特征利用不足的问题出发，给出了LGR-NET模型的设计动机和解决思路。接下来，本章详细介绍了LGR-NET各个组件的设计细节，该模型核心在于扩展语言特征并充分利用其进行跨模态推理的引导。包括建模指称表达中存在的关于目标物体在图片中的空间位置信息；结合跨注意机制避免文本信息的淹没；优化训练模型的损失函数，增强图文对齐约束。最后在实验验证部分，本章通过全面的定量性能对比、详尽的组件有效性消融分析、关键组件的可视化展示、定性分析全方位地验证了所提方法的可行性和有效性。
+
+清洗后的内容：
+
+高质量的场景数据可以有效降低模型的推理难度，提高模型性能。
+
+表4-2对生成数据的评估分类和说明：
+
+评分：
+1. 简化的场景知识完全不包含原始场景知识中对目标物体的描述。
+2. 简化的场景知识只包含原始场景知识对目标物体的部分描述。
+3. 简化的场景知识包含原始场景知识对目标物体的所有描述，同时也包含其他无关的描述。
+4. 简化的场景知识包含原始场景知识对目标物体所有描述，并且不包含其他无关的描述。
+
+经过GPT4评估后的数据，其中评分为1和2的数据被视作“低质数据”，对其重新调用4.2.1小节的标注过程进行重标，在这个过程中结合人工抽样核验确保数据质量。综合考虑API调用过程中的时间成本和GPT4的API价格，这个过程经历了两轮，流程如图4-5所示。
+
+最终结合少量的人工核验和标注，评分为3和4的数据比例分别为12.03%和87.97%，部分例子如表4-3所示。
+
+表4-3 生成的简化场景知识及其评分样例：
+
+评分3的样例：
+The man wearing a pinkuit and that in the middle of the image is Jonah. He is grabbed by Logan, a girl wearing a black hat with a closed face on his right. Vince, a boy who wearing a hat with the same closed face on Jonah's left, is standing on Jonah's left and staring closely at Jonah. The three of them are performing on the street, attracting many passers-by.
+
+评分4的样例：
+The bald white-haired man Rex is pulling his daughter Anna into the room, completely ignoring his barefoot wife Cathy behind him. Anna wears a whiteuit jacket and is waving her hand to cool down, seeming to feel very hot.
+
+最终在原始SK-VG数据集的基础上得到了新标注的Condensed SK-VG (CSK-VG)数据集。统计两者中场景知识长度结果对比如表44所示，可以发现，本章提出的数据简化方案有效地降低了场景知识的复杂度。
+
+表44 SK-VG和CSK-VG数据集中场景知识复杂度对比：
+
+数据集    最大长度    平均长度
+SK-VG    109    58.28
+CSK-VG    82    47.00
+
+4.3面向场景知识的指称表达理解推理网络
+
+本小节全面介绍SKRN的整体模型框架和设计思路，以及各组件的设计细节。
+
+4.3.1模型总览
+
+SKRN的整体模型框架如图4-6所示，主要包括语言编码器，图像编码器，以及场景知识推理模块，定位框预测模块，以及模型的损失函数设计。其中语言和图像编码器的具体实现、定位框预测模块的设计跟第三章LG-RNET相应部分相同，在此不再赘述。模型首先通过各自的编码器提取指称查询、场景知识、图像的特征并得到特征序列。然后，本节将重点介绍场景知识推理模块，通过三个不共享的多头注意力分别对进行注意力计算并提取特征，在此过程中预测token逐渐捕获相应模态中用于定位目标物体的特征，并在每一层都输出预测框坐标。
+
+4.3.2结合场景知识的指称表达推理模块
+
+为充分利用指称查询、场景知识和图片三方面的特征进行联合的跨模态推理，本节设计了面向场景知识的推理模块。首先参考LG-RNET设置一个预测token PER用于收集来自上述三方面的特征并预测定位框，c为隐向量维度。在每一层的推理过程中依次对指称查询、场景知识、图片进行多头注意力运算。最后，经过一个全连接层和残差连接得到当前层更新后的预测token表示。
+
+4.3.3模型损失函数
+
+为训练SKRN，本小节设计损失函数如下：
+
+total_loss = Σgiou_loss + Σl1_loss
+
+其中U和分别为GIoU损失和L1损失，α和β为平衡两者的超参数。此外，SKRN模型框架更侧重结合指称查询和场景知识的联合，一方面由于SK-REC任务的场景知识中存在一定的噪声，因此SKRN的损失函数没有沿用LG-RNET中包含的跨模态对齐损失，而是仅设置框回归损失来监督模型的训练。
+
+4.4实验对比与分析
+
+4.4.1实验参数与设置
+
+关于SKRN训练过程中的具体设置跟LG-RNET大体相同。主要差异在于损失函数的超参数设置，参考之前工作[28]的经验，设置α和β分别为2和5，此外在模型训练的前10个epoch中冻结视觉和文本编码器的参数以稳定训练过程。由于SKRN对输入的指称表达和场景知识分别进行特征提取，因此结合表4-3的数据集文本长度统计，SKRN设置指称表达最大文本长度为40，SK-VG和CSK-VG数据集下的场景知识最大文本长度分别为120和100。
+
+4.4.2评测指标对比与分析
+
+SK-REC任务以及SK-VG数据集比较新，可用于对比的baseline不如传统REC任务丰富。在此列出所有在该数据集评估过的工作作为对比基线，它们分别是NM-Erase[1(3)], RESC-Large_[2G], FAOA[18], MatNet[14], KEVILI[40]。其中NM-Tree、RESC-Large、FAOA、以及MatNet在3.3.2节中已经介绍过，在此不再赘述。首先简要介绍一下CM-At-Erase和KEVILI：
+
+CM-At-Erase以MatNet作为基础模型，通过移除数据样本中最关键的图文关联信息强迫模型学习到更细节，容易被忽视的图文关联，进而提升模型注意力层的性能。
+
+KEVILI利用场景知识特征与图像特征进行跨注意力计算先对图像特征进行增强，提高对场景知识提及物体的注意权重，再结合3.3.1小节提及的拼接注意力方案对指称表达特征和增强后的图像特征进行跨模态融合。
+
+实验结果对比如表4-5所示，可以发现SKRN取得了最佳的性能表现，说明模型面对复杂场景知识的推理能力。此外，本节还对第三章提出的LG-RNET在SK-VG数据集上进行评估，通过模板“Query: referring expression. Knowledge: scene knowledge.”将SK-VG数据样本中的指称表达和场景知识拼接为的文本序列，并将最大句子长度设置为140，其他设置与3.3.1小节一致。可以发现LG-RNET取得了次优的结果，相比于KEVILI的拼接注意力方案，LG-RNET超越了10个百分点，进一步说明LG-RNET中跨模态推理方案相比拼接注意力方案的优势。另一方面LG-RNET性能表现落后于SKRN模型，说明仅仅通过上述模板对场景知识进行简单的拼接尚不足以应对如此复杂的跨模态推理要求。
+
+表4-5 SKRN模型在SK-VG下的性能对比：
+
+Method    Acc    Method    Acc
+[83]    25.24    MatNet[14]    25.28
+CM-At-Erase[103]    26.08    KEVILI[40]    30.01
+-RESC-Large[2G]    36.68    LG-RNET    40.41
+[18]    16.30    SKRN    43.04
+
+此外，SK-VG数据集中的测试集包含推理难度的标注，分为简单(Easy, E)，中等(Medium, M)和困难(Hard, H)。核心的标注依据为与场景知识相关程度越高，视觉可分辨性越差的指称表达难度越高。其中“E”的评判标准为指称表达中包含目标物体明显的外观信息，与其他物体的关系或者其他视觉线索；“M”的评判标准为指称表达中仅仅提及不明显的视觉信息；“H”的评判标准为答案要求完全来源于场景知识，没有视觉偏向。示例如图4-8所示，面对同一张图片和相同的场景知识，由于不同指称表达指向物体对场景知识的依赖程度不同，导致不同的难度。
+
+根据您提供的指示，以下是清洗后的学术论文第11部分内容：
+
+---
+
+图 4-8 展示了不同难度的指称表达样例。表 4-6 统计了 VG 测试集中不同难度样本的比例。表 4-7 展示了模型在不同难度样本上的表现。结果显示，LG-R-Net 在简单和中等难度样本上获得了明显的性能提升，但在困难样本上的提升相对不够显著。这表明 LG-R-Net 在充分利用语言特征引导跨模态推理方面是正确而有效的，但也需要改进模型架构以处理更复杂的场景知识。SKRN 在不同难度样本上的性能提升更显著且均衡，尤其在困难样本上也有明显改进，说明其推理框架对场景知识的有效推理。
+
+---
+
+以上内容已去除页眉、页脚、页码等非核心学术内容，保留了原文中的学术内容、技术术语、数据、逻辑结构和公式图表说明。
+
+根据您的要求，以下是清洗后的参考文献内容：
+
+1. Ren S, He K, Girshick R, et al. Faster R-CNN: Towards real-time object detection with region proposal networks [J]. Advances in Neural Information Processing Systems, 2015, 28:91-99.
+
+2. Uijlings J R R, Van De Sande K E A, Gevers T, et al. Selective search for object recognition [J]. International Journal of Computer Vision, 2013, 104:154-171.
+
+3. Rohrbach A, Rohrbach M, Hu R, et al. Grounding of textual phrases in images by reconstruction [C]//European Conference on Computer Vision. Springer, 2016:817-834.
+
+4. Nagaraj V K, Morariu V I, Davis L S. Modeling context between objects for referring expression understanding [C]//Em
+
+5. Yu L, Poirson P, Yang S, et al. Modeling context in referring expressions [C]//European Conference on Computer Vision. Springer, 2016:69-85.
+
+6. Hu R, Rohrbach M, Andriluka M, et al. Modeling relationships in referring expressions with compositional modular networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017:4418-4427.
+
+7. Yu L, Lin Z, Shen X, et al. Mattnet: Modular attention network for referring expression comprehension [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018:1307-1315.
+
+8. Wang P, Wu Q, Cao J, et al. Neighbouthood watch: Referring expression comprehension via language-guided graph attention networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019:1960-1968.
+
+9. Yang S, Li G, Yu Y. Dynamic graph attention for referring expression comprehension [C]//Proceedings of the IEEE International Conference on Computer Vision. 2019:4644-4653.
+
+10. Redmon J, Farhadi A. YOLOv3: An incremental improvement [J]. arXiv preprint arXiv:1804.02767, 2018.
+
+11. Yang Z, Gong B, Wang L, et al. A fast and accurate one-stage approach to visual grounding [C]//Proceedings of the IEEE International Conference on Computer Vision. 2019:4683-4693.
+
+12. Liao Y, Liu S, Li G, et al. A real-time cross-modality correlation filtering method for referring expression comprehension [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2020:10880-10889.
+
+13. Yang Z, Chen T, Wang L, et al. Improving one-stage visual grounding by recursive sub-query construction [C]//European Conference on Computer Vision. Springer, 2020:387-404.
+
+14. Sun M, Xiao J, Lim E G. Iterative shrinking for referring expression grounding using deep reinforcement learning [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2021:14060-14069.
+
+15. Dosovitskiy A, Beyer L, Kolesnikov A, et al. An image is worth 16x16 words: Transformers for image recognition at scale [J]. arXiv preprint arXiv:2010.11929, 2020.
+
+16. Liu Z, Lin Y, Cao Y, et al. Swin transformer: Hierarchical vision transformer using shifted windows [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021:10012-10022.
+
+17. Canon N, Massa F, Synnaeve G, et al. End-to-end object detection with transformers [C]//European Conference on Computer Vision. Springer, 2020:213-229.
+
+18. Deng J, Yang Z, Chen T, et al. TransVG: End-to-end visual grounding with transformers [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021:1769-1779.
+
+19. Deng J, Yang Z, Liu D, et al. TransVG: End-to-end multi-modal grounding with language conditioned vision transformer [J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2023, 45(11):13636-13652.
+
+20. Ye J, Tian J, Yan M, et al. Shifting more attention to visual backbone: Query-modulated refinement networks for end-to-end visual grounding [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2022:15502-15512.
+
+21. Yang L, Xu Y, Yuan C, et al. Improving visual grounding with visual-linguistic verification and iterative reasoning [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2022:9499-9508.
+
+22. Li M, Sigal L. Referring transformer: A one-step approach to multi-task visual grounding [J]. Advances in Neural Information Processing Systems, 2021, 34:19652-19664.
+
+23. Su W, Miao P, Dou H, et al. Language adaptive weight generation for multi-task visual grounding [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2023:10857-10866.
+
+24. Kamath A, Singh M, LeCun Y, et al. Mdetr-modulated detection for end-to-end multi-modal understanding [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021:1780-1790.
+
+25. Wang P, Yang A, Men R, et al. Ofa: Unifying architectures, tasks, and modalities through a simple sequence-sequence learning framework [C]//International Conference on Machine Learning. PMLR, 2022:23318-23340.
+
+26. Su W, Zhu X, Cao Y, et al. Vl-bert: Pre-training of generic visual-linguistic representations [C]//International Conference on Learning Representations. 2019.
+
+27. Li L H, Yatskar M, D, et al. Visualbert: A simple and performant baseline for vision and language [J]. arXiv preprint arXiv:1908.03557, 2019.
+
+28. Radford A, Kim J W, Hallacy C, et al. Learning transferable visual models from natural language supervision [C]//International Conference on Machine Learning. PMLR, 2021:8748-8763.
+
+29. Li J, Li D, Xiong C, et al. Blip: Bootstrapping language-image pre-training for unified vision-language understanding and generation [C]//International Conference on Machine Learning. PMLR, 2022:12888-12900.
+
+30. Li J, Li D, Savarese S, et al. Blip-2: Bootstrapping language-image pre-training with frozen image encoders and large language models [J]. arXiv preprint arXiv:2301.12597, 2023.
+
+31. Zhu D, Chen J, Shen X, et al. Minigpt-4: Enhancing vision-language understanding with advanced large language models [J]. arXiv preprint arXiv:2304.10592, 2023.
+
+32. Kazerouni S, Ordonez V, Matten M, et al. Referitgame: Referring to objects in photographs of natural scenes [C]//Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing. 2014:787-798.
+
+33. Song Y, Zhang R, Chen Z, et al. Advancing visual grounding with scene knowledge: Benchmark and method [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2023:15039-15049.
+
+34. He K, Zhang X, Ren S, et al. Deep residual learning for image recognition [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016:770-778.
+
+35. Chren W A. One-hot residual coding for low delay-power product CMOS design [J]. IEEE Transactions on Circuits and Systems II: Analog and Digital Signal Processing, 1998, 45(3):303-313.
+
+36. Mikolov T, Chen K, Corrado G, et al. Efficient estimation of word representations in vector space [J]. arXiv preprint arXiv:1301.3781, 2013.
+
+37. Mikolov T, Sutskever I, Chen K, et al. Distributed representations of words and phrases and their compositionality [J].
+
+Advances in Neural Information Processing Systems, 2013, 26(2): 3111-3119.
+
+[45] Huffman D A. A method for the construction of minimum-redundancy codes [J]. Proceedings of the IRE, 1952, 40(9): 1098-1101.
+
+[46] Pennington J, Socher R, Manning C D. GloVe: Global vectors for word representation [C]//Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing. 2014: 1532-1543.
+
+[47] Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need [J]. Advances in Neural Information Processing Systems, 2017, 30: 5998-6008.
+
+[48] Hochreiter S, Schmidhuber J. Long short-term memory [J]. Neural Computation, 1997, 9(8): 1735-1780.
+
+[49] Devlin J, Chang M W, Lee K, et al. Bert: Pre-training of deep bidirectional transformers for language understanding [J]. arXiv preprint arXiv:1810.04805, 2018.
+
+[50] Liu Y, Ott M, Goyal N, et al. RoBERTa: A robustly optimized BERT pretraining approach [J]. arXiv preprint arXiv:1907.11692, 2019.
+
+[51] Lan Z, Chen M, Goodman S, et al. ALBERT: A lite BERT for self-supervised learning of language representations [J]. arXiv preprint arXiv:1909.11942, 2019.
+
+[52] Radford A, Narasimhan K, Salimans T, et al. Improving language understanding by generative pre-training [J]. OpenAI blog, 2018, 1(8): 9.
+
+[53] Radford A, Wu J, Child R, et al. Language models are unsupervised multitask learners [J]. OpenAI blog, 2019, 1(8): 9.
+
+[54] Brown T, Mann B, Ryder N, et al. Language models are few-shot learners [J]. Advances in Neural Information Processing Systems, 2020, 33: 1877-1901.
+
+[55] Ouyang L, Wu J, Jiang X, et al. Training language models to follow instructions with human feedback [J]. Advances in Neural Information Processing Systems, 2022, 35: 27730-27744.
+
+[56] Touvron H, Lavril T, Izacard G, et al. LLaMA: Open and efficient foundation language models [J]. arXiv preprint arXiv:2302.13971, 2023.
+
+[57] Touvron H, Martin L, Stone K, et al. LLaMA 2: Open foundation and fine-tuned chat models [J]. arXiv preprint arXiv:2307.09288, 2023.
+
+[58] Du Z, Qian Y, Liu X, et al. GLM: General language model pretraining with autoregressive blank infilling [J]. arXiv preprint arXiv:2103.10360, 2021.
+
+[59] Lowe D G. Distinctive image features from scale-invariant keypoints [J]. International Journal of Computer Vision, 2004, 60: 91-110.
+
+[60] Harris C, Stephens M. A combined comer and edge detector [C]//Alvey Vision Conference. 1988: 10-5244.
+
+[61] LeCun Y, Bottou L, Bengio Y, et al. Gradient-based learning applied to document recognition [J]. Proceedings of the IEEE, 1998, 86(11): 2278-2324.
+
+[62] Simonyan Zisserman A. Very deep convolutional networks for large-scale image recognition [J]. arXiv preprint arXiv:1409.1556, 2014.
+
+[63] Szegedy C, Liu W, Jia Y, et al. Going deeper with convolutions [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 1-9.
+
+[64] Huang G, Liu Z, van der Maaten L, et al. Densely connected convolutional networks [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017: 4700-4708.
+
+[65] Liu Z, Hu H, Lin Y, et al. Swin Transformer v2: Scaling up capacity and resolution [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2022: 12009-12019.
+
+[66] He K, Gkioxari G, Dollár P, et al. Mask R-CNN [C]//Proceedings of the IEEE International Conference on Computer Vision. 2017: 2961-2969.
+
+[67] Bochkovskiy A, Wang C Y, Liao H Y M. YOLOv4: Optimal speed and accuracy of object detection [J]. arXiv preprint arXiv:2004.10934, 2020.
+
+[68] Kuhn H W. The Hungarian method for the assignment problem [J]. Naval Research Logistics Quarterly, 1955, 2(1): 83-97.
+
+[69] Meng D, Chen X, Fan Z, et al. Conditional detr for fast training convergence [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021: 3651-3660.
+
+[70] Liu S, Li F, Zhang H, et al. DaB-detr: Dynamic anchor boxes are better queries for detr [J]. arXiv preprint arXiv:2201.12329, 2022.
+
+[71] Zhu X, Su W, Lu L, et al. Deformable detr: Deformable transformers for end-to-end object detection [J]. arXiv preprint arXiv:2010.04159, 2020.
+
+[72] Mao J, Huang J, Toshev A, et al. Generation and comprehension of unambiguous object descriptions [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016: 1-20.
+
+[73] Plummer B A, Wang L, Cerban C M, et al. Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models [C]//Proceedings of the IEEE International Conference on Computer Vision. 2015: 2641-2649.
+
+[74] Lin T Y, Maire M, Belongie S, et al. Microsoft COCO: Common objects in context [C]//European Conference on Computer Vision. Springer, 2014: 740-755.
+
+[75] Escolano H, Herandez C A, Gozalez J A, et al. The segmented and annotated LAPR TC benchmark [J]. Computer Vision and Image Understanding, 2010, 114(4): 421-428.
+
+[76] Young P, Lai A, Hodosh M, et al. From image descriptions to visual denotations: New similarity metrics for semantic inference over event descriptions [J]. Transactions of the Association for Computational Linguistics, 2014, 2: 67-78.
+
+[77] Rezatofighi H, Tsoi N, Gwak J Y, et al. Generalized intersection over union: A metric and a loss for bounding box regression [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 658-666.
+
+[78] Krishna R, Zhu Y, Groth O, et al. Visual genome: Connecting language and vision using crowd-sourced dense image annotations [J]. International Journal of Computer Vision, 2017, 123: 32-73.
+
+[79] Zhang H, Niu Y, Chang S F. Grounding referring expressions in images via textual context [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018: 4158-4166.
+
+[80] Plummer B A, Kordas P, Kiapour M H, et al. Conditional image-text embedding networks [C]//European Conference on Computer Vision. Springer, 2018: 249-264.
+
+[81] Yu Z, Yu J, Xiang C, et al. Rethinking diversified and discriminative proposal generation for visual grounding [J]. arXiv preprint arXiv:1805.03508, 2018.
+
+[82] Wang L, Li Y, Huang J, et al. Learning two-branch neural networks for image-text matching tasks [J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2018, 41(2): 394-407.
+
+[83] Liu D, Zhang H, Wu F, et al. Learning to assemble neural module tree networks for visual grounding [C]//Proceedings of the IEEE International Conference on Computer Vision. 2019: 4673-4682.
+
+[84] Chen L, Ma W, Xiao J, et al. Ref-nms: Breaking proposal bottlenecks in two-stage referring expression grounding [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2021, 35(2): 1036-1044.
+
+[85] Mu Z, Tang S, Tan J, et al. Disentangled led motif-aware graph learning for phrase grounding [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2021, 35(15): 13594.
+
+[86] Hong R, Liu D, Mo X, et al. Learning to compose and reason with language tree structures for visual grounding [J].
+
+清洗后的内容如下：
+
+参考文献：
+
+[87] Ye J, Lin X, He L, et al. One-stage visual grounding via semantic-aware feature filter [C]//Proceedings of the 29th ACM International Conference on Multimedia. 2021: 1702-1711.
+
+[88] Huang B, Lian D, Luo W, et al. Look before you leap: Learning landmark features for one-stage visual grounding [C]//Proceedings of the 3EEE/CVF Conference on Computer Vision and Pattern Recognition. 2021: 1688-1697.
+
+[89] Zhao H, Zhou J T, Ong Y S. Word2Pix: Word to pixel cross-attention Transformer in visual grounding [J]. IEEE Transactions on Neural Networks and Learning Systems, 2024, 35(2): 1523-1533.
+
+[90] Ho C H, Appalaraju S, Jasan B, et al. YOLO-lightweightened end-to-end visual grounding [C]//European Conference on Computer Vision. Springer, 2022: 3-23.
+
+[91] Zhu C, Zhou Y, Shen Y, et al. SeqTR: A simple yet universal network for visual grounding [C]//European Conference on Computer Vision. Springer, 2022: 598-615.
+
+[92] Shi F, Gao R, Huang W, et al. Dynamic MDETR: A dynamic multimodal transformer decoder for visual grounding [J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2024, 46(2): 1181-1198.
+
+[93] Lu J, Batra D, Parikh D, et al. VILBERT: Pretraining task-agnostic visual and linguistic representations for vision-and-language tasks [C]//Proceedings of the 33rd International Conference on Neural Information Processing Systems. 2019: 13-23.
+
+[94] Chen Y C, Li L, Yu L, et al. Uniter: Universal image-text representation learning [C]//European Conference on Computer Vision. Springer, 2020: 104-120.
+
+[95] Chen K, Zhang Z, Zeng W, et al. Shikra: Unleashing Multimodal LLMs Referential Dialogue Magic [J]. arXiv preprint arXiv:2306.15195, 2023.
+
+[96] Li C, Xu H, Tian J, et al. mplug: Effective and efficient vision-language learning by cross-modal skip-connections [J]. arXiv preprint arXiv:2205.12005, 2022.
+
+[97] Wang P, Wang S, Lin J, et al. ONE-PEACE: Exploring One General Representation Model Toward Unlimited Modalities [J]. arXiv preprint arXiv:2305.11172, 2023.
+
+[98] Zhang R, Li Y, Ma Y, et al. Llmaaa: Making large language models as active annotators [J].
+
+[99] Dong Q, Li L, Dai D, et al. A survey for in-context learning [J]. arXiv preprint arXiv:2301.00234, 2022.
+
+[100] Wei J, Wang X, Schuurmans D, et al. Chain-of-thought prompting elicits reasoning in large language models [J]. Advances in Neural Information Processing Systems, 2022, 35: 24824-24837.
+
+[101] Kojima T, Gu S S, Reid M, et al. Large language models are zero-shot reasoners [J]. Advances in Neural Information Processing Systems, 2022, 35: 22199-22213.
+
+[102] Achan J, Adler S, Agarwal S, et al. GPT-4 technical report [J]. arXiv preprint arXiv:2303.08774, 2023.
+
+[103] Liu X, Wang Z, Shao J, et al. Improving referring Expression Grounding with Cross-Modal Attention-Guided Reasoning [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019: 1950-1959.

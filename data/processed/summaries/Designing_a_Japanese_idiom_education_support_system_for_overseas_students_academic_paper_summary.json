@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Designing a Japanese Idiom Education Support System for Overseas’ Students",
+  "authors": [
+    "KONISHI Yusuke",
+    "Ruifan LI",
+    "Fuji REN"
+  ],
+  "main_topic": "Japanese Idiom Education Support System",
+  "research_problem": "The Japanese idioms pose a challenge for language learners and there is a shortage of teachers and a need for improved learning methods that emphasize understanding of culture and manners.",
+  "methodology": "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance.",
+  "key_innovations": [
+    "Idiom retrieval and teaching functions",
+    "Use of MS Agent",
+    "Animation in teaching idioms",
+    "Super Function for input sentence analysis"
+  ],
+  "experimental_results": "Questionnaire results indicating a high demand for a Japanese language educational support system and the importance of animation and dictionary functions.",
+  "conclusions": "The paper discussed the design of the Japanese Idiom Education Support System and the need for further verification of the effectiveness of Super Function. Future work involves expanding the Super Function Database and animation content.",
+  "keywords": [
+    "Japanese idioms",
+    "education support system",
+    "language learners",
+    "animation",
+    "Super Function"
+  ],
+  "application_domains": [
+    "Japanese language education"
+  ],
+  "technical_concepts": [
+    "Idiom retrieval module",
+    "Idiom reverse resolution module",
+    "Super Function Database",
+    "MS Agent",
+    "TVML"
+  ],
+  "performance_metrics": "Performance metrics are not explicitly mentioned in the text.",
+  "summary": "This paper presents a Japanese Idiom Education Support System that aims to help overseas students learn Japanese idioms effectively. The system includes innovative features like idiom retrieval, teaching functions, and the use of MS Agent. Animation is used to maintain learner interest. The questionnaire results highlight the system's potential and the need for further development.",
+  "file_id": "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+  "source_type": "cleaned",
+  "text_length": 9382,
+  "generation_time": "2025-07-31 21:18:43"
+}

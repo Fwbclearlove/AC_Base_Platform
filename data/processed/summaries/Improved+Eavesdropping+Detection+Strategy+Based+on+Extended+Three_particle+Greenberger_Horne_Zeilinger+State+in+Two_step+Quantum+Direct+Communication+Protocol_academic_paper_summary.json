@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "Improved Eavesdropping Detection Strategy Based on Extended Three-particle Greenberger-Horne-Zeilinger State in Two-step Quantum Direct Communication Protocol",
+  "authors": [
+    "LI Jian",
+    "YE Xinxin",
+    "LI Ruifan",
+    "ZOU Yongzhong",
+    "LU Xiaofeng"
+  ],
+  "main_topic": "Quantum information security, quantum direct communication",
+  "research_problem": "Enhance the efficiency of eavesdropping detection in two-step quantum direct communication protocol",
+  "methodology": "Extended three-particle GHZ state, entropy theory",
+  "key_innovations": [
+    "Improved eavesdropping detection strategy using extended three-particle GHZ state"
+  ],
+  "experimental_results": "The proposed strategy detects eavesdroppers with a rate of 59%, compared to 50% in the original protocol",
+  "conclusions": "The TSET protocol securely transmits messages without leakage to potential eavesdroppers, improving upon the TSE protocol",
+  "keywords": [
+    "Quantum key distribution (QKD)",
+    "Dense coding",
+    "Extended three-particle GHZ state",
+    "Eavesdropping detection",
+    "Entropy"
+  ],
+  "application_domains": [
+    "Quantum secure direct communication (QSDC)"
+  ],
+  "technical_concepts": [
+    "Bell states",
+    "EPR pair block",
+    "Quantum teleportation",
+    "Quantum secret sharing",
+    "TSET protocol",
+    "TSE protocol"
+  ],
+  "performance_metrics": "Eavesdropping detection rate of 59% in the proposed strategy",
+  "summary": "This paper proposes an improved eavesdropping detection strategy in a two-step quantum direct communication protocol using an extended three-particle GHZ state. The strategy enhances the detection rate to 59% and is shown to be more secure through entropy analysis, providing a higher probability of detecting eavesdroppers and ensuring secure message transmission.",
+  "file_id": "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol",
+  "source_type": "cleaned",
+  "text_length": 5477,
+  "generation_time": "2025-07-31 21:21:19"
+}

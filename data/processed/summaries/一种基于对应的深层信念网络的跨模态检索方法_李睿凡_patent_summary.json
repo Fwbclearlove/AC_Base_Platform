@@ -1,0 +1,41 @@
+{
+  "document_type": "patent",
+  "title": "一种基于对应的深层信念网络的跨模态检索方法",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "跨模态检索",
+  "technical_problem": "不同模态数据检索匹配的准确性问题",
+  "technical_solution": "使用对应的深层信念网络Corr-DBN进行高级向量提取和距离计算",
+  "key_innovations": [
+    "Corr-DBN",
+    "双受限波尔兹曼机RBM结构",
+    "相关性约束的Corr-RBM"
+  ],
+  "implementation_method": "特征提取，使用双RBM模型获得中级向量，通过Corr-RBM模型获得高级向量，计算欧氏距离并排序输出",
+  "technical_effects": "提高检索效率，获取更准确的检索结果",
+  "keywords": [
+    "跨模态检索",
+    "深层信念网络",
+    "Corr-DBN",
+    "双RBM模型",
+    "欧氏距离"
+  ],
+  "application_scenarios": [
+    "图像、文本或语音检索"
+  ],
+  "technical_concepts": [
+    "深层信念网络",
+    "双受限波尔兹曼机",
+    "Corr-RBM",
+    "特征提取",
+    "欧氏距离计算"
+  ],
+  "claims_summary": "利用Corr-DBN进行跨模态检索的方法及其步骤",
+  "summary": "本发明涉及一种基于对应的深层信念网络Corr-DBN的跨模态检索方法，通过双受限波尔兹曼机RBM结构提取高级向量，并使用欧氏距离计算进行检索，有效提高检索效率与准确性，适用于图像、文本或语音等多种模态数据的检索。",
+  "file_id": "一种基于对应的深层信念网络的跨模态检索方法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 1139,
+  "generation_time": "2025-07-31 21:28:08"
+}

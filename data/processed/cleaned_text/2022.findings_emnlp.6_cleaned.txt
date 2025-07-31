@@ -1,0 +1,153 @@
+KE-GCL: Knowledge Enhanced Graph Contrastive Learning for Commonsense Question Answering
+
+Lihui Zhang1 and Ruifan Li1,2∗
+
+1School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China
+2Engineering Research Center of Information Networks, Ministry of Education, China
+{elliot_zlh, rfli}@bupt.edu.cn
+
+Abstract
+
+Commonsense question answering (CQA) aims to select correct answers for commonsense questions. Existing works primarily focus on extracting and reasoning over external knowledge graphs (KG), but noise within KGs hinders effective representation learning. We propose KE-GCL, a Knowledge Enhanced Graph Contrastive Learning model, which incorporates entity contextual descriptions and employs a graph contrastive learning scheme. For QA pairs, we integrate knowledge from KGs and contextual descriptions, inserting context nodes into KGs to form knowledge-enhanced graphs. We design a contrastive learning method on graphs, using an adaptive sampling strategy to create augmented views. Graph reasoning updates representations by scattering edges and aggregating nodes. Hard graph negatives are chosen based on incorrect answers. KE-GCL consistently outperforms previous methods on two benchmark datasets.
+
+1 Introduction
+
+Commonsense question answering (CQA) evaluates machine language understanding by choosing answers to natural language questions about commonsense. External knowledge graphs (KGs) are used for reasoning, but noise in KGs can be problematic. To mitigate this, we enhance KGs with textual descriptions and employ graph contrastive learning (GCL). KE-GCL is an end-to-end model that concatenates QA pairs with Wiktionary descriptions, extracts subgraphs from ConceptNet, and inserts contextual representations into graphs. GCL is integrated into KE-GCL with adaptive graph augmentation. A graph attention network (GAT) based reasoning module scatters edges and aggregates nodes for efficient message propagation. Training is enhanced by selecting hard graph negatives.
+
+We compute graph contrastive loss using positive and negative pairs. Positive pairs are generated from the graph augmented view of the correct answer, while negative pairs consist of the graph and its augmented counterparts from incorrect choices. We also consider other graphs in the mini-batch as common negatives. Our KE-GCL model is trained on a combination of answer prediction loss and graph contrastive loss. Major contributions include: 1) a novel KE-GCL model with a GCL scheme for CQA, using adaptive sampling for graph augmentation and selecting hard negatives from incorrect answers; 2) enhancing the Knowledge Graph (KG) with contextual descriptions of entities, building a knowledge-enhanced graph, and updating graph representations via edge scattering and node aggregation; and 3) extensive experiments on two benchmark datasets showing consistent performance improvements over strong baselines.
+
+In related works, KG-aware methods for CQA have focused on knowledge utilization and graph reasoning. Early works retrieved reasoning paths in KGs, while recent studies used GNNs for graph encoding and message aggregation. However, they often ignored the noise in KGs. Graph contrastive learning extends contrastive learning to graph-structured data, with works focusing on unsupervised representation learning. Our KE-GCL model incorporates GCL into the CQA task to enhance graph representations and training signals.
+
+Our model framework involves: 1) representing the QA pair with its Wiktionary descriptions and retrieving the corresponding subgraph from ConceptNet; 2) inserting the context node and performing attentive knowledge fusion; 3) generating the graph view through adaptive augmentation; 4) edge-scattered reasoning over graphs to obtain representations; and 5) answer prediction and loss computation in a mini-batch.
+
+In the KE-GCL model, knowledge enhancement is achieved through knowledge representation and graph-oriented knowledge fusion. We use PLMs as context encoders and retrieve knowledge graphs from ConceptNet. Node and edge embeddings are initialized and updated, with attention mechanisms applied for improved knowledge fusion.
+
+---
+
+where the mapping 𝑓𝑄 is a MLP and 𝐷𝑔 is the dimension of node embedding. We obtain the knowledge-enhanced graph ˜𝐺𝑖 = (˜𝑉𝑖, ˜𝐸𝑖), 𝑖 ∈ [1, 𝑀] with 𝑛 + 1 nodes and ˜𝑚 edges.
+
+3.3 Graph Contrastive Learning
+
+3.3.1 Adaptive Graph Augmentation
+Based on the knowledge-enhanced graph ˜𝐺𝑖, we construct an augmented view ˆ𝐺𝑖 for GCL through node-feature masking and edge dropping. The influence of each node ˜𝑣𝑖,𝑞 ∈ ˜𝑉𝑖 is defined as,
+
+𝜌˜𝑣𝑖,𝑞 = 𝑓𝑇(˜𝑣𝑖,𝑞) + 𝑓𝑅(˜𝑣𝑖,𝑞, z𝐶𝑖) 
+
+where 𝑓𝑇(·) and 𝑓𝑅(·, ·) represent the topological connectivity and contextual relevance, respectively. The importance weight of dimension 𝑑 for any node in ˜𝑉𝑖 is calculated as,
+
+𝛾𝑖,𝑑 = log ∑˜𝑣 ∈ ˜𝑉𝑖 |˜𝑣[𝑑]| · 𝜌˜𝑣 
+
+For each edge 𝑒 in ˜𝐸𝑖, its importance depends on the importance weight of the tail node ˜𝑣𝑡 which the edge points to. We obtain the augmented view ˆ𝐺𝑖 = (ˆ𝑉𝑖, ˆ𝐸𝑖) of ˜𝐺𝑖 through sampling with these normalized probabilities.
+
+3.3.2 Graph Reasoning
+Both the knowledge-enhanced graph ˜𝐺𝑖 and its augmented view ˆ𝐺𝑖 are performed the same reasoning. Taking ˜𝐺𝑖 = {˜𝑉𝑖, ˜𝐸𝑖} as an example, we reason over the graph via edge scattering and attention-based node aggregating. The hidden states of the context node are chosen as the pooling of the entire knowledge graph, i.e.,
+
+z ˜𝐺𝑖 = Pool(ℎ(𝐿)0, ℎ(𝐿)1, ..., ℎ(𝐿)𝑛) = ℎ(𝐿)0.
+
+3.4 Answer Prediction
+The probability of choice 𝑐𝑖 being the correct answer is calculated using contextual representation z𝐶𝑖 and graph representation z ˜𝐺𝑖,
+
+𝑃(𝑐𝑖|𝑞) = 𝑔𝑖 ⊙ (z𝐶𝑖𝑊𝐶, z ˜𝐺𝑖𝑊˜𝐺)
+
+where the gate 𝑔𝑖 is given as,
+
+𝑔𝑖 = softmax(MLP([z𝐶𝑖, z ˜𝐺𝑖]))
+
+3.5 Training Objective
+We train our KE-GCL model by minimizing the total loss L𝑇 as follows,
+
+L𝑇 = L𝐶𝐸 + 𝜆L𝐶𝐿 
+
+where L𝐶𝐸 and L𝐶𝐿 denote the answer prediction loss and the graph contrastive loss, respectively. The answer prediction loss is a standard cross-entropy loss. The graph contrastive loss is based on the InfoNCE and incorporates hard negatives.
+
+3.5.1 Graph Contrastive Loss
+The graph contrastive loss is designed as,
+
+L𝐶𝐿 = −log(𝑇P / (𝑇P + 𝛽𝑇N𝐻 + 𝑇N𝐶))
+
+with the positive contribution term,
+
+𝑇P = exp(𝜃(z ˜𝐺𝑖, z ˆ𝐺𝑖) / 𝜏)
+
+the hard negatives contribution term, and the common negatives contribution term.
+
+4 Experiments and Results
+
+4.1 Datasets and Metric
+We evaluate our model on CommonsenseQA and OpenbookQA datasets using Accuracy (Acc) as the metric.
+
+4.2 Baselines
+
+---
+
+We compare our KE-GCL with state-of-the-art baselines: RoBERTa-Large (w/o KG), Relation Network (RN), RGCN, GconAttn, KagNet, MHGRN, and QA-GNN. For fair comparison, we use the same backbones and implement our model with Huggingface. The hop size of retrieved subgraphs is set to 2, and the context dimension to 1024. The graph dimension is set to 200 with 3 GAT layers. Hyper-parameters for graph contrastive learning are set as 𝜆=0.1, 𝛽=2, and 𝜏=0.2. We train the model for 30 epochs with RAdam optimizer and apply gradient accumulation.
+
+Our KE-GCL model consistently outperforms other baselines on CommonsenseQA and OpenBookQA datasets. It achieves an average accuracy improvement of 1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA. The effectiveness of incorporating external knowledge is confirmed, with knowledge-aware models showing performance gains over vanilla PLMs.
+
+In the ablation study on CommonsenseQA IHdev set, we find that removing KGs from ConceptNet decreases performance by 3.41%, while removing both ConceptNet and Wiktionary drops performance by 7.86%. This highlights the importance of enhancing KGs with contextual descriptions. Graph augmentation and reasoning components also contribute to the model's performance.
+
+On OpenBookQA, switching the PLM to AristoRoBERTa significantly improves performance, indicating our model's effectiveness in integrating additional science facts. The ablation study demonstrates the benefits of each component in KE-GCL.
+
+---
+
+Table 5 presents a case study of the predicted choices and scores from three distinct models, with correct choices underlined.
+
+Our adaptive sampling strategy is effective; removing it ("w/o Either") leads to a 1.11% decline. Ablation studies on the graph reasoning module show a slight performance decrease when removing either edge scatter or GAT components. The removal of the entire reasoning module ("w/o Either") results in a more significant 1.93% decline, indicating the module's importance in learning graph representations. Graph Contrastive Learning (GCL) ablations demonstrate a heavy performance drop of 2.23% without the contrastive learning objective, confirming GCL's role in differentiating correct answers from distractors. We observe a 0.77% drop when not using hard negative graph pairs, highlighting their importance for GCL.
+
+In 4.6 Attention Visualization, we illustrate the effectiveness of our graph augmentation strategy by visualizing attention weights for a CommonsenseQA dataset case. The attention weights show that the model focuses on the correct answer after augmentation.
+
+Section 4.7 presents a case study where we randomly select four cases from CommonsenseQA. We analyze correct and incorrect predictions, showing the nuances captured by our KE-GCL model and areas for improvement.
+
+4.8 Investigates the impact of hard negatives in GCL by evaluating our KE-GCL model with different values of the weighing factor 𝛽. The best performance is achieved at 𝛽= 2.0, indicating the benefits of appropriate hard negatives.
+
+In the conclusion, we summarize our KE-GCL model's contributions to reducing KG noise in CQA tasks and discuss future work, including applying GCL in few-shot or unsupervised scenarios. Limitations and acknowledgments are also noted, along with references to related work.
+
+---
+
+Ting Chen et al. (2020) introduced a simple framework for contrastive learning of visual representations. Sumit Chopra et al. (2005) proposed a discriminative approach to learning a similarity metric, applied to face verification. Peter Clark et al. (2020) presented an overview of the ARISTO project, which aims to improve performance on science exams. Yanlin Feng et al. (2020) developed a scalable multi-hop relational reasoning method for knowledge-aware question answering.
+
+Tianyu Gao et al. (2021) proposed SimCSE, a simple contrastive learning approach for sentence embeddings. Justin Gilmer et al. (2017) applied neural message passing to quantum chemistry. Raia Hadsell et al. (2006) explored dimensionality reduction by learning an invariant mapping. Kaveh Hassani and Amir Hosein Khasahmadi (2020) introduced contrastive multi-view representation learning on graphs.
+
+Kaiming He et al. (2020) presented Momentum Contrast for unsupervised visual representation learning. Olivier Henaff (2020) investigated data-efficient image recognition with contrastive predictive coding. R Devon Hjelm et al. (2018) focused on learning deep representations through mutual information estimation and maximization. Thomas N. Kipf and Max Welling (2017) introduced graph convolutional networks for semi-supervised classification.
+
+Zhenzhong Lan et al. (2019) proposed ALBERT, a lite BERT for self-supervised learning. Yujia Li et al. (2016) worked on gated graph sequence neural networks. Bill Yuchen Lin et al. (2019) introduced Kagnet, a knowledge-aware graph network for commonsense reasoning. Liyuan Liu et al. (2019a) discussed the variance of the adaptive learning rate. Yinhan Liu et al. (2019b) presented RoBERTa, a robustly optimized BERT pretraining approach.
+
+Shangwen Lv et al. (2020) used graph-based reasoning over heterogeneous external knowledge for commonsense question answering. Yu Meng et al. (2021) proposed Coco-LM for correcting and contrasting text sequences in language model pretraining. Todor Mihaylov et al. (2018) introduced a dataset for open book question answering and explored enhancing cloze-style reading comprehension with external commonsense knowledge.
+
+Ishan Misra and Laurens van der Maaten (2020) focused on self-supervised learning of pretext-invariant representations. Andriy Mnih and Koray Kavukcuoglu (2013) efficiently learned word embeddings with noise-contrastive estimation. Zhen Peng et al. (2020) worked on graph representation learning via graphical mutual information maximization.
+
+Jiezhong Qiu et al. (2020) proposed Graph Contrastive Coding for graph neural network pre-training. Lin Qiu et al. (2019) developed a dynamically fused graph network for multi-hop reasoning. Adam Santoro et al. (2017) introduced a neural network module for relational reasoning. Michael Schlichtkrull et al. (2018) modeled relational data with graph convolutional networks.
+
+Robyn Speer et al. (2017) presented ConceptNet 5.5, an open multilingual graph of general knowledge. Alon Talmor et al. (2019) introduced CommonsenseQA, a question answering challenge targeting commonsense knowledge. Yonglong Tian et al. (2020) proposed Contrastive Multiview Coding. Aaron Van den Oord et al. (2018) worked on representation learning with contrastive predictive coding.
+
+Petar Veličković et al. (2018) introduced Graph Attention Networks. Petar Velickovic et al. (2019) proposed Deep Graph Infomax for ICLR.
+
+Wang, X., Kapanipathi, P., Musa, R., Yu, M., Talamadupula, K., Abdelaziz, I., Chang, M., Fokoue, A., Makni, B., Mattei, N., et al. (2019). Improving natural language inference using external knowledge in the science questions domain. AAAI.
+
+Weissenborn, D., Kočisk`y, T., & Dyer, C. (2017). Dynamic integration of background knowledge in neural NLU systems. arXiv preprint arXiv:1706.02596.
+
+Wolf, T., Debut, L., Sanh, V., Chaumond, J., Delangue, C., Moi, A., Cistac, P., Rault, T., Louf, R., Funtowicz, M., et al. (2020). Transformers: State-of-the-art natural language processing. In Proceedings of the 2020 conference on empirical methods in natural language processing: system demonstrations, 38–45.
+
+Xiong, W., Yu, M., Chang, S., Guo, X., & Wang, W. Y. (2019). Improving question answering over incomplete kbs with knowledge-aware reader. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 4258–4264.
+
+Xu, K., Hu, W., Leskovec, J., & Jegelka, S. (2019). How powerful are graph neural networks? In International Conference on Learning Representations.
+
+Xu, Y., Zhu, C., Xu, R., Liu, Y., Zeng, M., & Huang, X. (2021). Fusing context into knowledge graph for commonsense question answering. In Findings of the Association for Computational Linguistics: ACL-ĲCNLP 2021, 1201–1207.
+
+Yan, Y., Li, R., Wang, S., Zhang, F., Wu, W., & Xu, W. (2021). Consert: A contrastive framework for self-supervised sentence representation transfer. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), 5065–5075.
+
+Yang, H., Chen, H., Pan, S., Li, L., Yu, P. S., & Xu, G. (2022). Dual space graph contrastive learning. In Proceedings of the ACM Web Conference 2022, 1238–1247.
+
+Yang, Z., Dai, Z., Yang, Y., Carbonell, J., Salakhutdinov, R. R., & Le, Q. V. (2019). Xlnet: Generalized autoregressive pretraining for language understanding. Advances in neural information processing systems, 32.
+
+Yasunaga, M., Ren, H., Bosselut, A., Liang, P., & Leskovec, J. (2021). Qa-gnn: Reasoning with language models and knowledge graphs for question answering. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 535–546.
+
+You, Y., Chen, T., Sui, Y., Chen, T., Wang, Z., & Shen, Y. (2020). Graph contrastive learning with augmentations. Advances in Neural Information Processing Systems, 33:5812–5823.
+
+Zhang, D., Li, S., Xiao, W., Zhu, H., Nallapati, R., Arnold, A. O., & Xiang, B. (2021). Pairwise supervised contrastive learning of sentence representations. In Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing, 5786–5798.
+
+Zhu, Y., Xu, Y., Liu, Q., & Wu, S. (2021a). An empirical study of graph contrastive learning. In Thirty-fifth Conference on Neural Information Processing Systems Datasets and Benchmarks Track (Round 2).
+
+Zhu, Y., Xu, Y., Yu, F., Liu, Q., Wu, S., & Wang, L. (2021b). Graph contrastive learning with adaptive augmentation. In Proceedings of the Web Conference 2021, 2069–2080.
+
+Zhuang, C., Zhai, A. L., & Yamins, D. (2019). Local aggregation for unsupervised learning of visual embeddings. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 6002–6012.

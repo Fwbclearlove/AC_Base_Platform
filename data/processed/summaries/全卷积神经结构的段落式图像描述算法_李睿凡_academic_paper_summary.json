@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "段落式图像描述，跨模态智能",
+  "research_problem": "RNN解码器在长时记忆和连贯性方面存在局限",
+  "methodology": "基于全卷积结构的图像段落描述算法",
+  "key_innovations": [
+    "层次性的深度卷积解码器",
+    "门控机制嵌入卷积解码器网络"
+  ],
+  "experimental_results": "新算法在BLEU和CIDEr评测指标上取得较好结果，与现有方法相比有显著提升",
+  "conclusions": "所提方法生成的描述段落具有更强的上下文连贯性和语言逻辑性，减少了信息重复表达",
+  "keywords": [
+    "卷积神经网络",
+    "循环神经网络",
+    "全卷积结构",
+    "门控机制",
+    "段落式图像描述"
+  ],
+  "application_domains": [
+    "盲人导航",
+    "幼儿早期教育"
+  ],
+  "technical_concepts": [
+    "CNN",
+    "RNN",
+    "全卷积解码器",
+    "门控机制",
+    "BLEU",
+    "CIDEr"
+  ],
+  "performance_metrics": "BLEU得分，CIDEr得分，不同束大小参数的评测结果",
+  "summary": "本文针对现有段落式图像描述算法中RNN解码器的局限性，提出了一种基于全卷积结构的图像段落描述算法。该算法通过层次性深度卷积解码器和门控机制提升连贯性和记忆能力，实验结果表明，新算法在连贯性和语言逻辑性方面优于现有方法，适用于盲人导航和幼儿教育等领域。",
+  "file_id": "全卷积神经结构的段落式图像描述算法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 1693,
+  "generation_time": "2025-07-31 21:33:25"
+}

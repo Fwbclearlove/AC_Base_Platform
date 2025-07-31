@@ -1,0 +1,37 @@
+{
+  "document_type": "academic_paper",
+  "title": "使用TAST码的BI-STCM-ID系统中的星座映射分析",
+  "authors": [
+    "赵传钢",
+    "李睿凡"
+  ],
+  "main_topic": "移动通信、编码理论、人工智能",
+  "research_problem": "BI-STCM-ID系统中的星座映射问题",
+  "methodology": "使用TAST空时编码方案的星座映射设计优化问题",
+  "key_innovations": [
+    "证明了在使用TAST码的BI-STCM-ID系统中，高维星座映射设计的最大化编码增益准则与一维星座设计的最大化欧氏距调和均值准则的等价性"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "本文讨论了BI-STCM-ID系统中的星座设计问题，特别是空时编码方案采用TAST编码方案的情形。定理1的结论使得在使用TAST码的BI-STCM-ID系统中高维星座映射设计问题得以简化，对BI-STCM-ID系统中的高维星座映射设计有较好理论意义。",
+  "keywords": [
+    "空时编码调制",
+    "星座映射",
+    "TAST码"
+  ],
+  "application_domains": [
+    "移动通信系统"
+  ],
+  "technical_concepts": [
+    "BI-STCM-ID系统",
+    "TAST码",
+    "星座映射设计",
+    "编码增益",
+    "欧氏距调和均值"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文研究了BI-STCM-ID系统中的星座映射问题，特别是使用TAST空时编码方案的情况。证明了高维星座映射设计的优化问题与一维星座映射设计优化问题等价，简化了星座映射设计，对于移动通信系统的高维星座映射设计具有理论指导意义。",
+  "file_id": "使用TAST码的BI_STCM_ID系统中的星座映射分析",
+  "source_type": "basic_extracted",
+  "text_length": 7913,
+  "generation_time": "2025-07-31 22:21:30"
+}

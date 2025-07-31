@@ -1,0 +1,165 @@
+Multi-Scale RCNN Model for Financial Time-series Classification
+
+Liu Guang · Wang Xiaojie · Li Ruifan
+
+Abstract: Financial time-series classification (FTC) is crucial for investment management and has received significant attention from various research areas, particularly Artificial Intelligence. Existing studies often focus on the Multi-Scale (MS) property or Temporal Dependency (TD) within financial time-series but rarely combine them effectively. We introduce a Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN) to address this issue. Our method extracts MS features using convolutional units and captures TD and scale complementarity with a Recurrent Neural Network. The MSTD-RCNN demonstrates state-of-the-art performance in trend classification and simulated trading on Chinese stock market datasets.
+
+1 Introduction
+
+Financial time-series classification (FTC) is vital for investors and has attracted interest from a broad range of research fields, including Artificial Intelligence. The Effective Market Hypothesis suggests that all market information impacts security prices, leading to extensive research on the use of historical financial data. Due to the large volume of financial data, automated processing technologies are essential. Existing FTC research can be categorized into MS-oriented and TD-oriented methods. MS-oriented methods extract features across multiple scales, while TD-oriented methods focus on the temporal dynamics. However, few studies effectively integrate both properties. We propose the MSTD-RCNN to address this gap, which learns parameters end-to-end and contributes the following:
+
+- A novel method combining both MS and TD properties in financial time-series.
+- MS feature extraction with convolutional units without predefined parameters.
+- Fusion of different scale features using a Recurrent Neural Network to capture temporal dependencies.
+
+Our model is evaluated on three minute-level index price datasets from the Chinese stock market, showing superior performance compared to classical and state-of-the-art models in classification and simulated trading.
+
+2 Related works
+
+2.1 Financial Time-series Prediction
+
+Financial time-series prediction is crucial for effective trading strategies in the financial market. It has received significant attention from researchers, particularly from the Artificial Intelligence community. Research primarily focuses on specific markets such as the stock market, foreign exchange market, and futures market. The challenges arise from the irregular and noisy nature of financial data. Existing research can be categorized into regression and classification approaches. Regression approaches aim to predict future financial time-series values, while classification approaches focus on financial time-series classification (FTC) and often achieve higher profits.
+
+The Multi-Scale (MS) property of time-series has been widely studied, akin to its use in Computer Vision tasks. Time-series, like images, possess MS-property, providing detailed information for similarity analysis. This paper concentrates on predicting financial time-series movement direction using the MS-property.
+
+Temporal Dependency (TD) in financial time-series has been explored in previous research. Methods can be classified into feature-oriented, model-oriented, and integrated approaches. Feature-oriented methods extract effective features, while model-oriented methods focus on improving model fitting. Integrated methods combine various techniques for classification. Deep learning models have shown effectiveness in FTC, inspired by their success in Computer Vision and Natural Language Processing.
+
+This paper defines the financial time-series classification problem and introduces the proposed MSTD-RCNN model. The model addresses the challenges of incorporating MS and TD features for accurate classification. The architecture of MSTD-RCNN consists of three layers: transform, feature, and fusion, each serving specific functions in processing financial time-series data.
+
+---
+
+1 The transform layer converts the input sequence into multi-scale (MS) sequences using downsampling transformations in the time domain. 2 The feature layer employs different convolutional units to extract features from each scale independently. The resulting feature maps are padded to the same length and concatenated. 3 The fusion layer processes the concatenated feature maps with a Gated Recurrent Unit (GRU), followed by fully connected layers and a softmax layer to generate the final output. Our MSTD-RCNN model is an end-to-end system, with all parameters trained jointly via backpropagation.
+
+3.2.1 Transform Layer
+This layer creates multiple sequences with different scales from a single-scale input sequence. Downsampling generates financial data sketches at various scales, potentially enhancing prediction quality. Given an input sequence x = {x1, x2, ..., xT} and a downsampling rate d, the new sequence xd = {xd, x2d, ..., xmd} is formed, with m = T/d. This process generates multiple sequences with different downsampling rates, denoted as X = {x1, x2, ..., xd}.
+
+3.2.2 Feature Layer
+This layer processes MS sequences and outputs concatenated features. It includes convolutional units and a concatenation operation. 1D CNNs are used to extract feature maps from sequences of varying scales, sharing filter size and number. The convolution operation captures features with different receptive fields. Feature maps are padded and concatenated into a feature matrix E.
+
+3.2.3 Fusion Layer
+The fusion layer integrates multi-scale features for prediction. It uses a GRU to handle the temporal dependency and variety in the feature maps. The GRU adaptively captures dependencies of different time scales and is applied to the feature matrix. The GRU output passes through fully connected layers and a softmax activation function to produce a probability distribution over classes.
+
+---
+
+4 Experimental Settings
+
+4.1 Datasets
+We describe the datasets from the Chinese stock market: SH000001, SZ399005, and SZ399006. Data spans from January 1, 2016, to December 30, 2016, with a total of 58,000 data points. The dataset is divided into training, verification, and testing sets. Categorical values are defined based on price changes relative to a threshold δ. The threshold is selected to equally distribute categories in the development set: 0.3 for SH000001, 0.2 for SZ399006, and 0.8 for SZ399005. The window size T = 30 is chosen based on Random Forest performance. Pearson Correlation Coefficient (PCC) analysis shows no strong correlations between datasets.
+
+4.2 Baselines
+Six baseline models are used: Support Vector Machine (SVM), Random Forest (RF), Fuzzy Deep Neural Network (FDNN), TreNet, State-Frequency Memory Recurrent Neural Networks (SFM), and Multi-Scale CNN (MS-CNN). Model parameters are selected based on validation set performance, with a maximum epoch of 100, trained using the Adam optimization algorithm with a learning rate of 0.0005, and a batch size of 32.
+
+4.3 Evaluation Metrics
+Evaluation metrics include accuracy, F-score (F1), Confusion Matrix (CM), and accumulated profit. Accuracy and F1 are calculated based on the Confusion Matrix. The accumulated profit measures profitability.
+
+The recall (R) and precision (P) are calculated as follows:
+
+P = TP / (TP + FP), (17)
+
+R = TP / (TP + FN). (18)
+
+The simulated trading algorithm is based on the predicted result c't, the real trend ct, and the index change value ∆xt. We execute a buy-in or sell-out for each trading signal. For correct predictions in the upward and downward categories, we make a profit; otherwise, we incur losses. For the still category, ∆xt = 0. The transaction cost is set to zero, and the accumulated profit P. is calculated by
+
+P. = Σ (I(c't, ct) × ∆xt) . (19)
+
+Here, P. represents the profit from the change points, and I(c't, ct) is an indicator function that equals 1 when c't = ct, otherwise 0.
+
+5 Results and Analysis
+
+The model's performance is compared with baseline models on three datasets. The effects of the feature layer in extracting Multi-Scale (MS) features and the fusion layer in capturing Temporal Dependent (TD) are analyzed. The profitability of the models is evaluated through simulated trading, and the improvement in profitability is analyzed using the confusion matrix.
+
+5.1 Comprehensive evaluation
+
+Our MSTD-RCNN model is compared with six baseline models on three datasets. The results, listed in Table 5, show that our model achieves the best performance in accuracy and F1. It improves by 3.07%, 3.00%, and 2.13% on SH000001, SZ399005, and SZ399006, respectively. The t-test results in Table 6 confirm the significance of these improvements. Our model effectively extracts MS features and captures Temporal Dependency (TD) within financial time-series.
+
+5.2 Effects of multi-scale features
+
+MSTD-RCNN is evaluated under different scale settings to illustrate its use of MS property. The model's performance increases with the number of scales, as shown in Table 7, indicating the complementary effects of MS features.
+
+5.3 Effects of temporal dependency
+
+The classification performance of MS-CNN and MSTD-RCNN under different scale settings is compared to show the effects of TD. MSTD-RCNN's fusion layer, using a GRU, is more efficient in capturing TD than MS-CNN's fully connected layers.
+
+5.4 Simulated trading
+---
+
+The goal of financial time-series classification is to generate profit. We evaluate the profitability of models using a simulated trading algorithm based on their predictions on testing sets. Table 8 presents the simulated trading results on three datasets, comparing the profitability of models with the baseline strategy, Buy & Hold (B&H). MSTD-RCNN achieves the highest profit on all three datasets, significantly outperforming the most profitable baseline model. Despite market downturns that lead to B&H losses, all models manage to make a profit. The results indicate that our model is not only more accurate in classification but also more profitable than baseline models. We analyze the confusion matrix of our model to understand the source of improved profitability.
+
+The confusion matrix analysis of MSTD-RCNN and MS-CNN on three datasets reveals that MSTD-RCNN has fewer errors in classifying "upward" to "downward" and "downward" to "upward" categories. MSTD-RCNN also exhibits higher precision in classifying "upward" and "downward" categories, contributing to its higher profitability in simulated trading.
+
+In conclusion, this paper introduces MSTD-RCNN, a Multi-Scale Recurrent Convolutional Neural Network for financial time-series classification. MSTD-RCNN effectively combines Multi-Scale and Temporal Dependency features, resulting in a powerful end-to-end classifier. The profitability of our model is confirmed through a simulated trading algorithm, with extensive experimental results demonstrating state-of-the-art performance. Future work will explore different feature extractors, attention mechanisms, and multi-source information integration to further enhance MSTD-RCNN.
+
+This research was funded by the National Social Science Fund of China and the Discipline Building Plan in 111 Base. We acknowledge NVIDIA's GPU donations and appreciate the feedback from editors and reviewers.
+
+---
+
+8. Cho et al.: Learning phrase representations using RNN encoder-decoder for statistical machine translation. arXiv preprint arXiv:1406.1078 (2014)
+9. Choudhry and Garg: A hybrid machine learning system for stock market forecasting. World Academy of Science, Engineering and Technology 39(3), 315–318 (2008)
+10. Cui et al.: Multi-scale convolutional neural networks for time series classification. arXiv preprint arXiv:1603.06995 (2016)
+11. Dacorogna et al.: Changing time scale for short-term forecasting in financial markets. Journal of Forecasting 15(3), 203–227 (1996)
+12. Das et al.: A hybridized ELM-Jaya forecasting model for currency exchange prediction. Journal of King Saud University-Computer and Information Sciences (2017)
+13. De Fortuny et al.: Evaluating and understanding text-based stock price prediction models. Information Processing & Management 50(2), 426–441 (2014)
+14. Deng et al.: A hierarchical fused fuzzy deep neural network for data classification. IEEE Transactions on Fuzzy Systems 25(4), 1006–1012 (2017)
+15. Devlin et al.: Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805 (2018)
+16. Eigen and Fergus: Predicting depth, surface normals and semantic labels with a common multi-scale convolutional architecture. In: Proceedings of the IEEE International Conference on Computer Vision, pp. 2650–2658 (2015)
+17. Fernández et al.: A meta extreme learning machine method for forecasting financial time series. Applied Intelligence 49(2), 532–554 (2019)
+18. Frankel and Froot: Chartists, fundamentalists, and trading in the foreign exchange market. The American Economic Review 80(2), 181–185 (1990)
+19. Geva: Scalenet-multiscale neural-network architecture for time series prediction. IEEE Transactions on neural networks 9(6), 1471–1482 (1998)
+20. Guan et al.: A novel stock forecasting model based on high-order-fuzzy-fluctuation trends and back propagation neural network. PloS one 13(2), e0192366 (2018)
+21. Hochreiter and Schmidhuber: Long short-term memory. Neural computation 9(8), 1735–1780 (1997)
+22. Howard et al.: MobileNets: Efficient convolutional neural networks for mobile vision applications. arXiv preprint arXiv:1704.04861 (2017)
+23. Hsieh et al.: Forecasting stock markets using wavelet transforms and recurrent neural networks: An integrated system based on artificial bee colony algorithm. Applied soft computing 11(2), 2510–2525 (2011)
+24. Hu and Qi: State-frequency memory recurrent neural networks. In: International Conference on Machine Learning, pp. 1568–1577 (2017)
+25. Huang et al.: Application of wrapper approach and composite classifier to the stock trend prediction. Expert Systems with Applications 34(4), 2870–2878 (2008)
+26. Kara et al.: Predicting direction of stock price index movement using artificial neural networks and support vector machines: The sample of the Istanbul Stock Exchange. Expert systems with Applications 38(5), 5311–5319 (2011)
+27. Kim: Financial time series forecasting using support vector machines. Neurocomputing 55(1-2), 307–319 (2003)
+28. Kim and Han: Genetic algorithms approach to feature discretization in artificial neural networks for the prediction of stock price index. Expert systems with Applications 19(2), 125–132 (2000)
+29. Kim: Convolutional neural networks for sentence classification. In: Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pp. 1746–1751 (2014)
+30. Kim et al.: An intelligent hybrid trading system for discovering trading rules for the futures market using rough sets and genetic algorithms. Applied Soft Computing 55, 127–140 (2017)
+31. Krizhevsky et al.: Imagenet classification with deep convolutional neural networks. In: Advances in neural information processing systems, pp. 1097–1105 (2012)
+32. Lee and Ready: Inferring trade direction from intraday data. The Journal of Finance 46(2), 733–746 (1991)
+33. Lee: Using support vector machine with a hybrid feature selection method to the stock trend prediction. Expert Systems with Applications 36(8), 10896–10904 (2009)
+34. Leung et al.: Forecasting stock indices: a comparison of classification and level estimation models. International Journal of Forecasting 16(2), 173–190 (2000)
+35. Li et al.: Empirical analysis: stock market prediction via extreme learning machine. Neural Computing and Applications 27(1), 67–78 (2016)
+36. Lin et al.: Hybrid neural networks for learning the trend in time series. In: Proceedings of the Twenty-Sixth International Joint Conference on Artificial Intelligence, IJCAI-17, pp. 2273–2279 (2017)
+37. Lin et al.: An SVM-based approach for stock market trend prediction. In: Neural Networks (IJCNN), The 2013 International Joint Conference on, pp. 1–7. IEEE (2013)
+38. Liu et al.: Foreign exchange rates forecasting with convolutional neural network. Neural Processing Letters 46(3), 1095–1119 (2017)
+39. Liu and Wang: A numerical-based attention method for stock market prediction with dual information. IEEE Access 7, 7357–7367 (2019)
+40. Malkiel and Fama: Efficient capital markets: A review of theory and empirical work. The journal of Finance 25(2), 383–417 (1970)
+41. Mozer: A focused backpropagation algorithm for temporal pattern recognition. Complex Systems 3, 349–381 (1989)
+42. O’Connor and Madden: A neural network approach to predicting stock exchange movements using external factors. Knowledge-Based Systems 19(5), 371–378 (2006)
+43. Papadimitriou and Yu: Optimal multi-scale patterns in time series streams. In: Proceedings of the 2006 ACM
+
+---
+
+---
+
+44. Patel, J., Shah, S., Thakkar, P., Kotecha, K.: Predicting stock and stock price index movement using trend deterministic data preparation and machine learning techniques. Expert Systems with Applications 42(1), 259–268 (2015)
+
+45. Peng, C.K., Hausdorff, J., Havlin, S., Mietus, J., Stanley, H., Goldberger, A.: Multiple-time scales analysis of physiological time series under neural control. Physica A: Statistical Mechanics and its Applications 249(1-4), 491–500 (1998)
+
+46. Saad, E.W., Prokhorov, D.V., Wunsch, D.C.: Comparative study of stock trend prediction using time delay, recurrent and probabilistic neural networks. IEEE Transactions on neural networks 9(6), 1456–1470 (1998)
+
+47. Schumaker, R.P., Chen, H.: Textual analysis of stock market prediction using breaking financial news: The azfin text system. ACM Transactions on Information Systems (TOIS) 27(2), 12 (2009)
+
+48. Shynkevich, Y., McGinnity, T., Coleman, S., Belatreche, A.: Predicting stock price movements based on different categories of news articles. In: Computational Intelligence, 2015 IEEE Symposium Series on, pp. 703–710. IEEE (2015)
+
+49. Song, Y., Lee, J.W., Lee, J.: A study on novel filtering and relationship between input-features and target-vectors in a deep learning model for stock price prediction. Applied Intelligence pp. 1–15 (2018)
+
+50. Stopar, L., Skraba, P., Grobelnik, M., Mladenic, D.: Streamstory: Exploring multivariate time series on multiple scales. IEEE Transactions on Visualization and Computer Graphics (2018)
+
+51. Sutskever, I., Vinyals, O., Le, Q.V.: Sequence to sequence learning with neural networks. In: Advances in neural information processing systems, pp. 3104–3112 (2014)
+
+52. Teixeira, L.A., De Oliveira, A.L.I.: A method for automatic stock trading combining technical analysis and nearest neighbor classification. Expert systems with applications 37(10), 6885–6890 (2010)
+
+53. Tsai, C.F., Hsiao, Y.C.: Combining multiple feature selection methods for stock prediction: Union, intersection, and multi-intersection approaches. Decision Support Systems 50(1), 258–269 (2010)
+
+54. Wang, Y., Choi, I.C.: Market index and stock price direction prediction using machine learning techniques: an empirical study on the Kospi and HSI. arXiv preprint arXiv:1309.7119 (2013)
+
+55. Wang, Z., Yan, W., Oates, T.: Time series classification from scratch with deep neural networks: A strong baseline. In: Neural Networks (IJCNN), 2017 International Joint Conference on, pp. 1578–1585. IEEE (2017)
+
+56. Yang, J., Nguyen, M.N., San, P.P., Li, X., Krishnaswamy, S.: Deep convolutional neural networks on multichannel time series for human activity recognition. In: IJCAI, vol. 15, pp. 3995–4001 (2015)
+
+57. Zirilli, J.S.: Financial prediction using neural networks. International Thomson Computer Press (1996)
+
+---

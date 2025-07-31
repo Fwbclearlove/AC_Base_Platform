@@ -1,0 +1,50 @@
+{
+  "document_type": "academic_paper",
+  "title": "S2TD: A Tree-Structured Decoder for Image Paragraph Captioning",
+  "authors": [
+    "Yihui Shi",
+    "Yun Liu",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Zhanyu Ma",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Image paragraph captioning",
+  "research_problem": "Previous methods struggle with holistic organization and capturing structural nature in image paragraph captioning.",
+  "methodology": "Splitting to Tree Decoder (S2TD)",
+  "key_innovations": [
+    "Tree-structured decoder",
+    "Top-down binary tree expansion",
+    "Split module",
+    "Score module",
+    "Tree structure loss"
+  ],
+  "experimental_results": "Performance evaluation on the Stanford benchmark dataset shows the effectiveness of S2TD.",
+  "conclusions": "S2TD demonstrates promising performance in generating diverse and coherent paragraphs for image paragraph captioning.",
+  "keywords": [
+    "image captioning",
+    "paragraph generation",
+    "tree-structured decoder",
+    "vision and language"
+  ],
+  "application_domains": [
+    "Computer vision tasks"
+  ],
+  "technical_concepts": [
+    "Computer vision tasks",
+    "Split module",
+    "Score module",
+    "Word-level RNN",
+    "Tree structure loss",
+    "Cosine similarity",
+    "LSTM",
+    "Highway Network",
+    "Sentence-BERT"
+  ],
+  "performance_metrics": "BLEU-1, BLEU-4, CIDEr, METEOR",
+  "summary": "This paper introduces a novel tree-structured decoder, S2TD, for image paragraph captioning. It addresses the research problem of holistic organization and structural nature capturing in previous methods. S2TD includes a split module, a score module, and a word-level RNN, and uses a tree structure loss for end-to-end learning. Experimental results on the Stanford benchmark dataset show the effectiveness of S2TD in generating diverse and coherent paragraphs.",
+  "file_id": "3469877.3490585",
+  "source_type": "cleaned",
+  "text_length": 14823,
+  "generation_time": "2025-07-31 21:15:47"
+}

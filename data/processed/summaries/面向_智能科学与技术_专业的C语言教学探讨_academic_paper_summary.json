@@ -1,0 +1,35 @@
+{
+  "document_type": "academic_paper",
+  "title": "面向‘智能科学与技术’专业的C语言教学探讨",
+  "authors": [
+    "李睿凡",
+    "李蕾"
+  ],
+  "main_topic": "智能科学与技术专业的C语言教学变革",
+  "research_problem": "新专业要求和学时压缩的问题",
+  "methodology": "教学内容和方法改变的具体措施，将课程分为语言学习和项目实践两大部分",
+  "key_innovations": [
+    "引入机器智能前沿问题作为实践项目"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "为相关教学提供参考",
+  "keywords": [
+    "C语言",
+    "智能科学与技术",
+    "教学"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "C语言程序设计",
+    "机器智能前沿问题",
+    "教学进程影响因素"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文针对智能科学与技术专业特点，探讨C语言教学内容整合设计、前沿研究导向的项目实践，并对教学相关因素进行讨论，旨在解决新专业要求和学时压缩问题，培养学生的专业兴趣和能力，为相关教学提供参考。",
+  "file_id": "面向_智能科学与技术_专业的C语言教学探讨",
+  "source_type": "cleaned",
+  "text_length": 1518,
+  "generation_time": "2025-07-31 21:35:29"
+}

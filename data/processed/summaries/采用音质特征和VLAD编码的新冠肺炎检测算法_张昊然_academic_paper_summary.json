@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "采用音质特征和VLAD编码的新冠肺炎检测算法",
+  "authors": [
+    "张昊然",
+    "韩易辰",
+    "谭咏梅",
+    "李雅"
+  ],
+  "main_topic": "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别",
+  "research_problem": "寻找感染COVID-19的语音信号特征，提供可靠快速的COVID-19检测方法",
+  "methodology": "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码",
+  "key_innovations": [
+    "使用语音端点检测技术增广数据集",
+    "加入语音质量特征",
+    "引入局部聚合描述子向量（VLAD）"
+  ],
+  "experimental_results": "在两个子任务验证集上UAＲ分别达到73.9%和77.2%",
+  "conclusions": "语音质量特征在COVID-19自动语音检测任务上有效，VLAD编码在小字典规模下有效提升了系统分类性能",
+  "keywords": [
+    "COVID-19自动检测",
+    "语音切分",
+    "语音质量特征",
+    "局部聚合描述子向量",
+    "情感识别"
+  ],
+  "application_domains": [
+    "新冠肺炎检测"
+  ],
+  "technical_concepts": [
+    "音质特征",
+    "VLAD编码",
+    "线性SVM分类器",
+    "数据增广"
+  ],
+  "performance_metrics": "UAＲ达到73.9%和77.2%",
+  "summary": "本文提出了一种基于音质特征和VLAD编码的新冠肺炎自动识别方法，通过语音端点检测技术对数据增广，并在INTEＲSPEECH 2021 ComParE竞赛数据集上验证了该方法的有效性，实现了在小数据集上分类性能的提升。",
+  "file_id": "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然",
+  "source_type": "cleaned",
+  "text_length": 5878,
+  "generation_time": "2025-07-31 21:42:23"
+}

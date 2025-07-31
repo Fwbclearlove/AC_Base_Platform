@@ -1,0 +1,50 @@
+{
+  "document_type": "academic_paper",
+  "title": "Challenges in Representation Learning: A report on three machine learning contests",
+  "authors": [
+    "Ian J. Goodfellow",
+    "et al."
+  ],
+  "main_topic": "Representation Learning",
+  "research_problem": "To advance representation learning by testing current algorithms and fostering new developments through contests",
+  "methodology": "Three machine learning contests were conducted: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge",
+  "key_innovations": [
+    "black box learning challenge",
+    "facial expression recognition challenge",
+    "multimodal learning challenge",
+    "semi-supervised learning",
+    "convolutional neural networks",
+    "SVM primal objective as loss function"
+  ],
+  "experimental_results": "Detailed results of the contests, including accuracy of winners and methods used by top performers",
+  "conclusions": "Contests offer a different perspective on machine learning algorithms, provide realistic evaluation of generalization error, and highlight methods such as SVM loss functions, sparse filtering, and entropy regularization",
+  "keywords": [
+    "Representation Learning",
+    "Machine Learning Contests",
+    "Semi-supervised Learning",
+    "Facial Expression Recognition",
+    "Multimodal Learning"
+  ],
+  "application_domains": [
+    "Machine Learning",
+    "Computer Vision"
+  ],
+  "technical_concepts": [
+    "black box learning",
+    "facial expression recognition",
+    "multimodal learning",
+    "convolutional neural networks",
+    "SVM",
+    "sparse filtering",
+    "entropy regularization",
+    "ensemble voting",
+    "denoising autoencoders",
+    "maxout networks"
+  ],
+  "performance_metrics": "Accuracy metrics of the contests, such as 70.22% accuracy for the black box learning challenge winner and the performance of 'null' models",
+  "summary": "This paper presents an overview of three machine learning contests held at the ICML 2013 Workshop on Challenges in Representation Learning. It discusses the datasets, contest designs, and results, offering insights into the effectiveness of various algorithms and suggestions for future challenges.",
+  "file_id": "1307.0414v1",
+  "source_type": "cleaned",
+  "text_length": 7870,
+  "generation_time": "2025-07-31 21:10:19"
+}

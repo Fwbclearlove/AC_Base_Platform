@@ -1,0 +1,5941 @@
+{
+  "domain_analysis": {
+    "Face recognition": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding",
+          "count": 1
+        },
+        {
+          "method": "Isomap",
+          "count": 1
+        },
+        {
+          "method": "kernel Fisher discriminant (KFD)",
+          "count": 1
+        },
+        {
+          "method": "geodesic distances",
+          "count": 1
+        },
+        {
+          "method": "nearest neighbor classifier",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "face recognition",
+          "count": 1
+        },
+        {
+          "keyword": "manifold",
+          "count": 1
+        },
+        {
+          "keyword": "Isomap",
+          "count": 1
+        },
+        {
+          "keyword": "KFD",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "0_387_29295_0_82"
+      ]
+    },
+    "Image captioning": {
+      "paper_count": 2,
+      "author_count": 8,
+      "top_methods": [
+        {
+          "method": "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+          "count": 1
+        },
+        {
+          "method": "LSTM",
+          "count": 1
+        },
+        {
+          "method": "FGU",
+          "count": 1
+        },
+        {
+          "method": "LDA",
+          "count": 1
+        },
+        {
+          "method": "Multi-label logistic regression",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Image captioning",
+          "count": 1
+        },
+        {
+          "keyword": "Topic-Oriented Multi-Sentence",
+          "count": 1
+        },
+        {
+          "keyword": "Latent Dirichlet Allocation",
+          "count": 1
+        },
+        {
+          "keyword": "Fusion Gate Unit",
+          "count": 1
+        },
+        {
+          "keyword": "Instance Coverage",
+          "count": 1
+        },
+        {
+          "keyword": "Image Captioning",
+          "count": 1
+        },
+        {
+          "keyword": "Transformer",
+          "count": 1
+        },
+        {
+          "keyword": "IoU Position Encoding",
+          "count": 1
+        },
+        {
+          "keyword": "Intra-modal Attention",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 2
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "0592",
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding"
+      ]
+    },
+    "Stock Trend Prediction in Artificial Intelligence": {
+      "paper_count": 1,
+      "author_count": 9,
+      "top_methods": [
+        {
+          "method": "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+          "count": 1
+        },
+        {
+          "method": "Neural Networks",
+          "count": 1
+        },
+        {
+          "method": "Support Vector Machine",
+          "count": 1
+        },
+        {
+          "method": "Random Forest",
+          "count": 1
+        },
+        {
+          "method": "DWT",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Stock Trend Prediction",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-scale Analysis",
+          "count": 1
+        },
+        {
+          "keyword": "Deep Neural Network",
+          "count": 1
+        },
+        {
+          "keyword": "Wavelet Transform",
+          "count": 1
+        },
+        {
+          "keyword": "Downsampling",
+          "count": 1
+        },
+        {
+          "keyword": "XGBoost",
+          "count": 1
+        },
+        {
+          "keyword": "RCNN",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "0628"
+      ]
+    },
+    "Quantum cryptography, quantum secure direct communication (QSDC), four-particle GHZ state": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "Four-particle GHZ state for eavesdropper detection and quantum dense coding for message encoding",
+          "count": 1
+        },
+        {
+          "method": "Four-particle GHZ state",
+          "count": 1
+        },
+        {
+          "method": "Quantum dense coding",
+          "count": 1
+        },
+        {
+          "method": "Entropy theory",
+          "count": 1
+        },
+        {
+          "method": "Eavesdropping detection rate",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Quantum cryptography",
+          "count": 1
+        },
+        {
+          "keyword": "Quantum secure direct communication",
+          "count": 1
+        },
+        {
+          "keyword": "GHZ state",
+          "count": 1
+        },
+        {
+          "keyword": "Eavesdropping detection",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "10.5560_zna.2012_0029"
+      ]
+    },
+    "Representation Learning": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "Three machine learning contests were conducted: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge",
+          "count": 1
+        },
+        {
+          "method": "black box learning",
+          "count": 1
+        },
+        {
+          "method": "facial expression recognition",
+          "count": 1
+        },
+        {
+          "method": "multimodal learning",
+          "count": 1
+        },
+        {
+          "method": "convolutional neural networks",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Representation Learning",
+          "count": 1
+        },
+        {
+          "keyword": "Machine Learning Contests",
+          "count": 1
+        },
+        {
+          "keyword": "Semi-supervised Learning",
+          "count": 1
+        },
+        {
+          "keyword": "Facial Expression Recognition",
+          "count": 1
+        },
+        {
+          "keyword": "Multimodal Learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "1307.0414v1"
+      ]
+    },
+    "Multi-modal learning, bimodal data representations, image-tags": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+          "count": 1
+        },
+        {
+          "method": "MPEG-7",
+          "count": 1
+        },
+        {
+          "method": "gist descriptors",
+          "count": 1
+        },
+        {
+          "method": "Restricted Boltzmann Machines",
+          "count": 1
+        },
+        {
+          "method": "Siamese network",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Multi-modal learning",
+          "count": 1
+        },
+        {
+          "keyword": "Bimodal representations",
+          "count": 1
+        },
+        {
+          "keyword": "Image-tags",
+          "count": 1
+        },
+        {
+          "keyword": "Word tags",
+          "count": 1
+        },
+        {
+          "keyword": "Restricted Boltzmann Machines",
+          "count": 1
+        },
+        {
+          "keyword": "Siamese network",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "1307.1275v1"
+      ]
+    },
+    "Financial time-series classification": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+          "count": 2
+        },
+        {
+          "method": "convolutional units",
+          "count": 1
+        },
+        {
+          "method": "Gated Recurrent Unit (GRU)",
+          "count": 1
+        },
+        {
+          "method": "backpropagation",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Financial time-series classification",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-Scale",
+          "count": 1
+        },
+        {
+          "keyword": "Temporal Dependency",
+          "count": 1
+        },
+        {
+          "keyword": "Recurrent Convolutional Neural Network",
+          "count": 1
+        },
+        {
+          "keyword": "Simulated trading",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "1911.09359v1"
+      ]
+    },
+    "Aspect-based sentiment analysis": {
+      "paper_count": 1,
+      "author_count": 6,
+      "top_methods": [
+        {
+          "method": "DualGCN model",
+          "count": 1
+        },
+        {
+          "method": "Graph Convolutional Networks",
+          "count": 1
+        },
+        {
+          "method": "BiLSTM",
+          "count": 1
+        },
+        {
+          "method": "BERT",
+          "count": 1
+        },
+        {
+          "method": "dependency probability matrix",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "aspect-based sentiment analysis",
+          "count": 1
+        },
+        {
+          "keyword": "dual graph convolutional networks",
+          "count": 1
+        },
+        {
+          "keyword": "dependency parsing",
+          "count": 1
+        },
+        {
+          "keyword": "semantic correlations",
+          "count": 1
+        },
+        {
+          "keyword": "regularizers",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2021.acl_long.494"
+      ]
+    },
+    "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+          "count": 1
+        },
+        {
+          "method": "EMC-GCN",
+          "count": 1
+        },
+        {
+          "method": "Aspect-based Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "method": "Graph Convolutional Operations",
+          "count": 1
+        },
+        {
+          "method": "Linguistic Features",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Aspect Sentiment Triplet Extraction",
+          "count": 1
+        },
+        {
+          "keyword": "Graph Convolutional Network",
+          "count": 1
+        },
+        {
+          "keyword": "Linguistic Features",
+          "count": 1
+        },
+        {
+          "keyword": "Refining Strategy",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2022.acl_long.212"
+      ]
+    },
+    "Distantly supervised relation extraction": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "BERT-based Graph Convolutional network Model (BGM)",
+          "count": 1
+        },
+        {
+          "method": "BERT-based PLM",
+          "count": 1
+        },
+        {
+          "method": "Graph Convolutional Network (GCN)",
+          "count": 1
+        },
+        {
+          "method": "Bag representation",
+          "count": 1
+        },
+        {
+          "method": "Cross-entropy loss",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Distant supervision",
+          "count": 1
+        },
+        {
+          "keyword": "Relation extraction",
+          "count": 1
+        },
+        {
+          "keyword": "BERT",
+          "count": 1
+        },
+        {
+          "keyword": "Graph Convolutional Network",
+          "count": 1
+        },
+        {
+          "keyword": "Cross-entropy loss",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2022.coling_1.234"
+      ]
+    },
+    "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis": {
+      "paper_count": 1,
+      "author_count": 8,
+      "top_methods": [
+        {
+          "method": "COntext-Masked MRC (COM-MRC) framework",
+          "count": 1
+        },
+        {
+          "method": "COntext-Masked MRC",
+          "count": 1
+        },
+        {
+          "method": "Aspect Extraction",
+          "count": 1
+        },
+        {
+          "method": "Opinion Extraction",
+          "count": 1
+        },
+        {
+          "method": "Sentiment Classification",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Aspect Sentiment Triplet Extraction",
+          "count": 1
+        },
+        {
+          "keyword": "Machine Reading Comprehension",
+          "count": 1
+        },
+        {
+          "keyword": "Context Masking",
+          "count": 1
+        },
+        {
+          "keyword": "Sentiment Analysis",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2022.emnlp_main.212"
+      ]
+    },
+    "Commonsense question answering, Knowledge Enhanced Graph Contrastive Learning, Graph reasoning": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "KE-GCL model, Graph Contrastive Learning, Adaptive sampling, Hard negative graph pairs",
+          "count": 1
+        },
+        {
+          "method": "Knowledge Graphs",
+          "count": 1
+        },
+        {
+          "method": "Graph Attention Networks",
+          "count": 1
+        },
+        {
+          "method": "Contrastive Learning",
+          "count": 1
+        },
+        {
+          "method": "InfoNCE Loss",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Commonsense Question Answering",
+          "count": 1
+        },
+        {
+          "keyword": "Graph Contrastive Learning",
+          "count": 1
+        },
+        {
+          "keyword": "Knowledge Enhancement",
+          "count": 1
+        },
+        {
+          "keyword": "KE-GCL",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2022.findings_emnlp.6"
+      ]
+    },
+    "Structured Sentiment Analysis": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+          "count": 1
+        },
+        {
+          "method": "Structured Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "method": "2D table-filling scheme",
+          "count": 1
+        },
+        {
+          "method": "Bi-axial attention module",
+          "count": 1
+        },
+        {
+          "method": "Bi-lexical dependency parsing",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Structured Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "keyword": "USSA",
+          "count": 1
+        },
+        {
+          "keyword": "Bi-axial attention",
+          "count": 1
+        },
+        {
+          "keyword": "Overlap",
+          "count": 1
+        },
+        {
+          "keyword": "Discontinuity",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2023.acl_long.802"
+      ]
+    },
+    "Multimodal Aspect-Based Sentiment Analysis (MABSA)": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+          "count": 1
+        },
+        {
+          "method": "Multimodal Aspect Term Extraction",
+          "count": 1
+        },
+        {
+          "method": "Multimodal Aspect-oriented Sentiment Classification",
+          "count": 1
+        },
+        {
+          "method": "Joint Multimodal Aspects of Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "method": "UNINEXT",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Multimodal Aspect-Based Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "keyword": "Conditional Relation",
+          "count": 1
+        },
+        {
+          "keyword": "CORSA framework",
+          "count": 1
+        },
+        {
+          "keyword": "Visual Object Localizer",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2025.coling_main.22"
+      ]
+    },
+    "Text-to-image synthesis with multi-concept customization": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+          "count": 1
+        },
+        {
+          "method": "Text-to-image diffusion models",
+          "count": 1
+        },
+        {
+          "method": "Multipath sampling",
+          "count": 1
+        },
+        {
+          "method": "Layout alignment",
+          "count": 1
+        },
+        {
+          "method": "Concept injection",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Text-to-image synthesis",
+          "count": 1
+        },
+        {
+          "keyword": "Personalization",
+          "count": 1
+        },
+        {
+          "keyword": "Concept Conductor",
+          "count": 1
+        },
+        {
+          "keyword": "Attribute leakage",
+          "count": 1
+        },
+        {
+          "keyword": "Layout confusion",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2408.03632v3"
+      ]
+    },
+    "Text-to-image generation, subject-driven image generation, training-free framework": {
+      "paper_count": 1,
+      "author_count": 7,
+      "top_methods": [
+        {
+          "method": "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+          "count": 1
+        },
+        {
+          "method": "FreeGraftor",
+          "count": 1
+        },
+        {
+          "method": "Semantic-Aware Feature Grafting",
+          "count": 1
+        },
+        {
+          "method": "Structure-Consistent Initialization",
+          "count": 1
+        },
+        {
+          "method": "Multimodal-Diffusion Transformer",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Text-to-image generation",
+          "count": 1
+        },
+        {
+          "keyword": "Subject-driven image generation",
+          "count": 1
+        },
+        {
+          "keyword": "Cross-image feature grafting",
+          "count": 1
+        },
+        {
+          "keyword": "Semantic matching",
+          "count": 1
+        },
+        {
+          "keyword": "Efficiency",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-subject generation",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2504.15958v2"
+      ]
+    },
+    "Cross-modal retrieval": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+          "count": 1
+        },
+        {
+          "method": "Autoencoders",
+          "count": 1
+        },
+        {
+          "method": "Correlation measure",
+          "count": 1
+        },
+        {
+          "method": "Loss function",
+          "count": 1
+        },
+        {
+          "method": "Deep architecture",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Cross-modal retrieval",
+          "count": 1
+        },
+        {
+          "keyword": "Correspondence autoencoder",
+          "count": 1
+        },
+        {
+          "keyword": "Representation learning",
+          "count": 1
+        },
+        {
+          "keyword": "Correlation learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2647868.2654902"
+      ]
+    },
+    "Cross-modal retrieval, deep learning, autoencoder": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process",
+          "count": 1
+        },
+        {
+          "method": "Autoencoders",
+          "count": 1
+        },
+        {
+          "method": "Correlation learning",
+          "count": 1
+        },
+        {
+          "method": "Multimodal reconstruction",
+          "count": 1
+        },
+        {
+          "method": "CCA",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Cross-modal",
+          "count": 1
+        },
+        {
+          "keyword": "retrieval",
+          "count": 1
+        },
+        {
+          "keyword": "image and text",
+          "count": 1
+        },
+        {
+          "keyword": "deep learning",
+          "count": 1
+        },
+        {
+          "keyword": "autoencoder",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2808205"
+      ]
+    },
+    "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+          "count": 1
+        },
+        {
+          "method": "Facial emotion recognition",
+          "count": 1
+        },
+        {
+          "method": "Correspondence autoencoders",
+          "count": 1
+        },
+        {
+          "method": "Cross-modal retrieval",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Multimedia",
+          "count": 1
+        },
+        {
+          "keyword": "Deep Learning",
+          "count": 1
+        },
+        {
+          "keyword": "Emotion Recognition",
+          "count": 1
+        },
+        {
+          "keyword": "Speech",
+          "count": 1
+        },
+        {
+          "keyword": "Correspondence Autoencoders",
+          "count": 1
+        },
+        {
+          "keyword": "Cross-Modal Retrieval",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "2820400"
+      ]
+    },
+    "Microblogging emotional classification based on User-Generated Content (UGC)": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation",
+          "count": 1
+        },
+        {
+          "method": "Support Vector Machine (SVM)",
+          "count": 1
+        },
+        {
+          "method": "dictionary-based method",
+          "count": 1
+        },
+        {
+          "method": "rule-based method",
+          "count": 1
+        },
+        {
+          "method": "vector space model",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "emotional classification",
+          "count": 1
+        },
+        {
+          "keyword": "feature extraction",
+          "count": 1
+        },
+        {
+          "keyword": "weight computing",
+          "count": 1
+        },
+        {
+          "keyword": "support vector machine",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3191835.3191989"
+      ]
+    },
+    "Visual feature learning for image retrieval in e-commerce": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+          "count": 1
+        },
+        {
+          "method": "Image representations",
+          "count": 1
+        },
+        {
+          "method": "Visual content-based indexing and retrieval",
+          "count": 1
+        },
+        {
+          "method": "CNN",
+          "count": 1
+        },
+        {
+          "method": "MAC",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Visual feature learning",
+          "count": 1
+        },
+        {
+          "keyword": "Bag of n-grams",
+          "count": 1
+        },
+        {
+          "keyword": "Image retrieval",
+          "count": 1
+        },
+        {
+          "keyword": "CNN",
+          "count": 1
+        },
+        {
+          "keyword": "MAC",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3394171.3416296"
+      ]
+    },
+    "Image paragraph captioning": {
+      "paper_count": 2,
+      "author_count": 6,
+      "top_methods": [
+        {
+          "method": "DualRel model",
+          "count": 2
+        },
+        {
+          "method": "Splitting to Tree Decoder (S2TD)",
+          "count": 1
+        },
+        {
+          "method": "Computer vision tasks",
+          "count": 1
+        },
+        {
+          "method": "Split module",
+          "count": 1
+        },
+        {
+          "method": "Score module",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "image captioning",
+          "count": 1
+        },
+        {
+          "keyword": "paragraph generation",
+          "count": 1
+        },
+        {
+          "keyword": "tree-structured decoder",
+          "count": 1
+        },
+        {
+          "keyword": "vision and language",
+          "count": 1
+        },
+        {
+          "keyword": "Image paragraph captioning",
+          "count": 1
+        },
+        {
+          "keyword": "Dual Relations",
+          "count": 1
+        },
+        {
+          "keyword": "Spatial Relation",
+          "count": 1
+        },
+        {
+          "keyword": "Semantic Relation",
+          "count": 1
+        },
+        {
+          "keyword": "Weakly Supervised",
+          "count": 1
+        },
+        {
+          "keyword": "Relation-aware Attention",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 2
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "3469877.3490585",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations"
+      ]
+    },
+    "Electric equipment maintenance using reinforcement learning": {
+      "paper_count": 1,
+      "author_count": 6,
+      "top_methods": [
+        {
+          "method": "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+          "count": 1
+        },
+        {
+          "method": "Markov hypothesis",
+          "count": 1
+        },
+        {
+          "method": "Dynamic programming",
+          "count": 1
+        },
+        {
+          "method": "Multi-Agent Reinforcement Learning",
+          "count": 1
+        },
+        {
+          "method": "Cut set",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Electric equipment maintenance",
+          "count": 1
+        },
+        {
+          "keyword": "Reinforcement learning",
+          "count": 1
+        },
+        {
+          "keyword": "Dynamic decision making",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3483207.3483233"
+      ]
+    },
+    "Text-based power equipment fault recognition": {
+      "paper_count": 1,
+      "author_count": 7,
+      "top_methods": [
+        {
+          "method": "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)",
+          "count": 1
+        },
+        {
+          "method": "BERT",
+          "count": 1
+        },
+        {
+          "method": "Graph Convolutional Network",
+          "count": 1
+        },
+        {
+          "method": "domain adaptation",
+          "count": 1
+        },
+        {
+          "method": "text classification",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "power equipment fault recognition",
+          "count": 1
+        },
+        {
+          "keyword": "BERT",
+          "count": 1
+        },
+        {
+          "keyword": "GCN",
+          "count": 1
+        },
+        {
+          "keyword": "domain adaptation",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3548636.3548646"
+      ]
+    },
+    "Phrase Grounding under weak supervision": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)",
+          "count": 1
+        },
+        {
+          "method": "Region-Text Alignment",
+          "count": 1
+        },
+        {
+          "method": "Domain Alignment",
+          "count": 1
+        },
+        {
+          "method": "Category Alignment",
+          "count": 1
+        },
+        {
+          "method": "Contrastive Language-Image Pre-Training (CLIP)",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Phrase Grounding",
+          "count": 1
+        },
+        {
+          "keyword": "weak supervision",
+          "count": 1
+        },
+        {
+          "keyword": "zero-shot learning",
+          "count": 1
+        },
+        {
+          "keyword": "alignment strategies",
+          "count": 1
+        },
+        {
+          "keyword": "CLIP",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Computer vision tasks, image harmonization": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Harmony-VAE, inverse harmonization diffusion model",
+          "count": 1
+        },
+        {
+          "method": "Latent diffusion models",
+          "count": 1
+        },
+        {
+          "method": "Harmony-VAE",
+          "count": 1
+        },
+        {
+          "method": "Inverse harmonization model",
+          "count": 1
+        },
+        {
+          "method": "Denoising Diffusion Probabilistic Models (DDPMs)",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "image harmonization",
+          "count": 1
+        },
+        {
+          "keyword": "latent diffusion model",
+          "count": 1
+        },
+        {
+          "keyword": "VAE",
+          "count": 1
+        },
+        {
+          "keyword": "data augmentation",
+          "count": 1
+        },
+        {
+          "keyword": "inverse harmonization",
+          "count": 1
+        },
+        {
+          "keyword": "stable diffusion",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "3664647.3681466"
+      ]
+    },
+    "Visual Question Answering (VQA)": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "Differential Networks (DN) and DN-based Fusion (DF)",
+          "count": 1
+        },
+        {
+          "method": "Differential Networks (DN)",
+          "count": 1
+        },
+        {
+          "method": "DN-based Fusion (DF)",
+          "count": 1
+        },
+        {
+          "method": "pair-wise feature elements",
+          "count": 1
+        },
+        {
+          "method": "attention-based models",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Visual Question Answering",
+          "count": 1
+        },
+        {
+          "keyword": "Differential Networks",
+          "count": 1
+        },
+        {
+          "keyword": "DN-based Fusion",
+          "count": 1
+        },
+        {
+          "keyword": "attention distribution",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "4930_Article_Text_7995_1_10_20190709"
+      ]
+    },
+    "Educational data mining": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction",
+          "count": 1
+        },
+        {
+          "method": "KNN",
+          "count": 1
+        },
+        {
+          "method": "SVD",
+          "count": 1
+        },
+        {
+          "method": "Logistic Regression",
+          "count": 1
+        },
+        {
+          "method": "Classifiers combination",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "data mining",
+          "count": 1
+        },
+        {
+          "keyword": "logistic regression",
+          "count": 1
+        },
+        {
+          "keyword": "k-nearest neighbor",
+          "count": 1
+        },
+        {
+          "keyword": "singular value decomposition",
+          "count": 1
+        },
+        {
+          "keyword": "classifiers combination",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "978_3_642_23223_7_60"
+      ]
+    },
+    "学术论文的清洗工作": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "去除页眉、页脚、页码等非学术内容，修正重复信息和乱码，纠正PDF解析错误，去除多余的符号和格式问题",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "学术论文清洗",
+          "count": 1
+        },
+        {
+          "keyword": "技术术语",
+          "count": 1
+        },
+        {
+          "keyword": "数据",
+          "count": 1
+        },
+        {
+          "keyword": "逻辑结构",
+          "count": 1
+        },
+        {
+          "keyword": "公式",
+          "count": 1
+        },
+        {
+          "keyword": "图表说明",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words"
+      ]
+    },
+    "Chinese Spelling Correction (CSC)": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "NCO-Spell, multi-character masking strategy, iterative inference algorithm",
+          "count": 1
+        },
+        {
+          "method": "BERT",
+          "count": 1
+        },
+        {
+          "method": "NCO-Spell",
+          "count": 1
+        },
+        {
+          "method": "masking strategy",
+          "count": 1
+        },
+        {
+          "method": "confusion sets",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Chinese Spelling Correction",
+          "count": 1
+        },
+        {
+          "keyword": "BERT",
+          "count": 1
+        },
+        {
+          "keyword": "NCO-Spell",
+          "count": 1
+        },
+        {
+          "keyword": "noisy contexts",
+          "count": 1
+        },
+        {
+          "keyword": "iterative inference",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction"
+      ]
+    },
+    "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "InfoLoss, a novel loss function for continual pretraining",
+          "count": 1
+        },
+        {
+          "method": "InfoLoss",
+          "count": 1
+        },
+        {
+          "method": "Cross-entropy loss",
+          "count": 1
+        },
+        {
+          "method": "Pointwise Mutual Information (PMI)",
+          "count": 1
+        },
+        {
+          "method": "Hallucinations",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Cross-lingual Learning",
+          "count": 1
+        },
+        {
+          "keyword": "Pointwise Mutual Information (PMI)",
+          "count": 1
+        },
+        {
+          "keyword": "Hallucination",
+          "count": 1
+        },
+        {
+          "keyword": "Large Language Models (LLMs)",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining"
+      ]
+    },
+    "Japanese Idiom Education Support System": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance.",
+          "count": 1
+        },
+        {
+          "method": "Idiom retrieval module",
+          "count": 1
+        },
+        {
+          "method": "Idiom reverse resolution module",
+          "count": 1
+        },
+        {
+          "method": "Super Function Database",
+          "count": 1
+        },
+        {
+          "method": "MS Agent",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Japanese idioms",
+          "count": 1
+        },
+        {
+          "keyword": "education support system",
+          "count": 1
+        },
+        {
+          "keyword": "language learners",
+          "count": 1
+        },
+        {
+          "keyword": "animation",
+          "count": 1
+        },
+        {
+          "keyword": "Super Function",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Designing_a_Japanese_idiom_education_support_system_for_overseas_students"
+      ]
+    },
+    "Dimensionality reduction in text processing": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "Locally Linear Embedding (LLE)",
+          "count": 2
+        },
+        {
+          "method": "Manifold learning",
+          "count": 1
+        },
+        {
+          "method": "Latent Semantic Indexing (LSI)",
+          "count": 1
+        },
+        {
+          "method": "Graph embedding",
+          "count": 1
+        },
+        {
+          "method": "K-Nearest-Neighbor classification",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Dimensionality reduction",
+          "count": 1
+        },
+        {
+          "keyword": "Locally Linear Embedding",
+          "count": 1
+        },
+        {
+          "keyword": "Text processing",
+          "count": 1
+        },
+        {
+          "keyword": "Manifold learning",
+          "count": 1
+        },
+        {
+          "keyword": "LSI",
+          "count": 1
+        },
+        {
+          "keyword": "Graph embedding",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Dimensionality_reduction_for_text_using_LLE"
+      ]
+    },
+    "Aspect-Based Sentiment Analysis": {
+      "paper_count": 1,
+      "author_count": 6,
+      "top_methods": [
+        {
+          "method": "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+          "count": 1
+        },
+        {
+          "method": "graph neural networks",
+          "count": 1
+        },
+        {
+          "method": "GCNs",
+          "count": 1
+        },
+        {
+          "method": "GATs",
+          "count": 1
+        },
+        {
+          "method": "syntax structures",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Aspect-Based Sentiment Analysis",
+          "count": 1
+        },
+        {
+          "keyword": "DualGCN",
+          "count": 1
+        },
+        {
+          "keyword": "graph convolutional networks",
+          "count": 1
+        },
+        {
+          "keyword": "dependency parsing",
+          "count": 1
+        },
+        {
+          "keyword": "semantic information",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis"
+      ]
+    },
+    "Multimodal Synset Induction": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "Visually Enhanced NeUral Encoder (VENUE)",
+          "count": 1
+        },
+        {
+          "method": "Neural Encoder",
+          "count": 1
+        },
+        {
+          "method": "Multimodal Representations",
+          "count": 1
+        },
+        {
+          "method": "Clustering Algorithms",
+          "count": 1
+        },
+        {
+          "method": "Triplet Loss",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Multimodal Synset Induction",
+          "count": 1
+        },
+        {
+          "keyword": "VENUE",
+          "count": 1
+        },
+        {
+          "keyword": "Visual Interaction",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-granularity Embedding",
+          "count": 1
+        },
+        {
+          "keyword": "Triplet Loss",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "electronics_12_03521_v2"
+      ]
+    },
+    "少样本文本分类": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "EPL4FTC算法",
+          "count": 1
+        },
+        {
+          "method": "自然语言推理",
+          "count": 1
+        },
+        {
+          "method": "掩码语言模型",
+          "count": 1
+        },
+        {
+          "method": "三元组损失",
+          "count": 1
+        },
+        {
+          "method": "度量优化",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "预训练语言模型",
+          "count": 1
+        },
+        {
+          "keyword": "少样本学习",
+          "count": 1
+        },
+        {
+          "keyword": "文本分类",
+          "count": 1
+        },
+        {
+          "keyword": "提示学习",
+          "count": 1
+        },
+        {
+          "keyword": "三元组损失",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method"
+      ]
+    },
+    "Few-shot learning in NLP": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Template selection mechanism using a masked language model",
+          "count": 1
+        },
+        {
+          "method": "Entailment-based Few-shot Learning (EFL)",
+          "count": 1
+        },
+        {
+          "method": "Masked Language Model (MLM)",
+          "count": 1
+        },
+        {
+          "method": "MacBERT",
+          "count": 1
+        },
+        {
+          "method": "PyTorch",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Few-shot learning",
+          "count": 1
+        },
+        {
+          "keyword": "textual entailment",
+          "count": 1
+        },
+        {
+          "keyword": "template selection",
+          "count": 1
+        },
+        {
+          "keyword": "MacBERT",
+          "count": 1
+        },
+        {
+          "keyword": "FewCLUE",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning"
+      ]
+    },
+    "Text-to-image synthesis": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "Cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN)",
+          "count": 1
+        },
+        {
+          "method": "GANs",
+          "count": 1
+        },
+        {
+          "method": "CGL-GAN",
+          "count": 1
+        },
+        {
+          "method": "cross-modal projection block",
+          "count": 1
+        },
+        {
+          "method": "Inception score",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Text-to-image synthesis",
+          "count": 1
+        },
+        {
+          "keyword": "generative adversarial network (GAN)",
+          "count": 1
+        },
+        {
+          "keyword": "linguistic representation",
+          "count": 1
+        },
+        {
+          "keyword": "cross-modal",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis"
+      ]
+    },
+    "Aspect-Based Sentiment Analysis (ABSA), Aspect Sentiment Quadruplet Extraction (ASQE)": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Enhanced Machine Reading Comprehension (EMRC)",
+          "count": 1
+        },
+        {
+          "method": "Machine Reading Comprehension (MRC)",
+          "count": 1
+        },
+        {
+          "method": "BERT",
+          "count": 1
+        },
+        {
+          "method": "bi-directional attention mechanism",
+          "count": 1
+        },
+        {
+          "method": "category classification",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "ABSA",
+          "count": 1
+        },
+        {
+          "keyword": "ASQE",
+          "count": 1
+        },
+        {
+          "keyword": "EMRC",
+          "count": 1
+        },
+        {
+          "keyword": "bi-directional attention",
+          "count": 1
+        },
+        {
+          "keyword": "hierarchical category classification",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "FAIA_372_FAIA230600"
+      ]
+    },
+    "Quantum information security, quantum direct communication": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Extended three-particle GHZ state, entropy theory",
+          "count": 1
+        },
+        {
+          "method": "Bell states",
+          "count": 1
+        },
+        {
+          "method": "EPR pair block",
+          "count": 1
+        },
+        {
+          "method": "Quantum teleportation",
+          "count": 1
+        },
+        {
+          "method": "Quantum secret sharing",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Quantum key distribution (QKD)",
+          "count": 1
+        },
+        {
+          "keyword": "Dense coding",
+          "count": 1
+        },
+        {
+          "keyword": "Extended three-particle GHZ state",
+          "count": 1
+        },
+        {
+          "keyword": "Eavesdropping detection",
+          "count": 1
+        },
+        {
+          "keyword": "Entropy",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "Clothing image recognition and retrieval": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "Multi-task deep learning framework and multi-weight convolutional neural networks",
+          "count": 1
+        },
+        {
+          "method": "CNNs",
+          "count": 1
+        },
+        {
+          "method": "Multi-task learning",
+          "count": 1
+        },
+        {
+          "method": "Deep learning",
+          "count": 1
+        },
+        {
+          "method": "Imbalance learning",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Clothing Image recognition",
+          "count": 1
+        },
+        {
+          "keyword": "Convolutional neural network",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-task",
+          "count": 1
+        },
+        {
+          "keyword": "Multi-weight",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image"
+      ]
+    },
+    "Vision and Language tasks, Referring Expression Comprehension": {
+      "paper_count": 1,
+      "author_count": 23,
+      "top_methods": [
+        {
+          "method": "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss",
+          "count": 1
+        },
+        {
+          "method": "LGR-NET",
+          "count": 1
+        },
+        {
+          "method": "TFE",
+          "count": 1
+        },
+        {
+          "method": "Coordinate Embedding",
+          "count": 1
+        },
+        {
+          "method": "TCA",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Referring Expression Comprehension",
+          "count": 1
+        },
+        {
+          "keyword": "cross-modal reasoning",
+          "count": 1
+        },
+        {
+          "keyword": "Language Guided Reasoning",
+          "count": 1
+        },
+        {
+          "keyword": "benchmark datasets",
+          "count": 1
+        },
+        {
+          "keyword": "transformer-based methods",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Optical Character Recognition (OCR) for Urdu Nastaleeq text": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "Curved Line Split (CLS) algorithm for line segmentation and a ligature segmentation algorithm",
+          "count": 1
+        },
+        {
+          "method": "Horizontal projection",
+          "count": 1
+        },
+        {
+          "method": "Connected components",
+          "count": 1
+        },
+        {
+          "method": "Primary and secondary classes",
+          "count": 1
+        },
+        {
+          "method": "Baseline information",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Urdu Nastaleeq",
+          "count": 1
+        },
+        {
+          "keyword": "OCR",
+          "count": 1
+        },
+        {
+          "keyword": "Line segmentation",
+          "count": 1
+        },
+        {
+          "keyword": "Ligature segmentation",
+          "count": 1
+        },
+        {
+          "keyword": "Curved Line Split",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text"
+      ]
+    },
+    "Multimodal data analysis using deep neural learning": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "Bimodal Deep Architecture (BDA)",
+          "count": 1
+        },
+        {
+          "method": "Multimodal data",
+          "count": 1
+        },
+        {
+          "method": "Deep neural networks",
+          "count": 1
+        },
+        {
+          "method": "Restricted Boltzmann machines",
+          "count": 1
+        },
+        {
+          "method": "Autoencoder",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Multimodal data",
+          "count": 1
+        },
+        {
+          "keyword": "Deep neural learning",
+          "count": 1
+        },
+        {
+          "keyword": "Similarity metric",
+          "count": 1
+        },
+        {
+          "keyword": "Bimodal deep architecture",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture"
+      ]
+    },
+    "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "Modality disentangled discriminator, AttnGAN, DM-GAN",
+          "count": 1
+        },
+        {
+          "method": "Generative Adversarial Networks (GANs)",
+          "count": 1
+        },
+        {
+          "method": "AttnGAN",
+          "count": 1
+        },
+        {
+          "method": "DM-GAN",
+          "count": 1
+        },
+        {
+          "method": "Inception Score (IS)",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "text-to-image synthesis",
+          "count": 1
+        },
+        {
+          "keyword": "generative adversarial networks",
+          "count": 1
+        },
+        {
+          "keyword": "multi-modal disentangled representation learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis"
+      ]
+    },
+    "Multimodal sentiment classification": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "Multi-level fusion classification (MFC) model",
+          "count": 1
+        },
+        {
+          "method": "CNN",
+          "count": 1
+        },
+        {
+          "method": "RNN",
+          "count": 1
+        },
+        {
+          "method": "Bi-GRU",
+          "count": 1
+        },
+        {
+          "method": "feature fusion",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "multimodal fusion",
+          "count": 1
+        },
+        {
+          "keyword": "sentiment analysis",
+          "count": 1
+        },
+        {
+          "keyword": "deep learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification"
+      ]
+    },
+    "云计算和智能系统在现代技术中的重要性": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [],
+      "top_keywords": [
+        {
+          "keyword": "云计算",
+          "count": 1
+        },
+        {
+          "keyword": "智能系统",
+          "count": 1
+        },
+        {
+          "keyword": "效率",
+          "count": 1
+        },
+        {
+          "keyword": "可扩展性",
+          "count": 1
+        },
+        {
+          "keyword": "灵活性",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding"
+      ]
+    },
+    "Clothing image recognition": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "A recognition framework based on multiple features (CNN features, Histograms of Oriented Gradients, and color histograms) and Extreme Learning Machines (ELMs)",
+          "count": 1
+        },
+        {
+          "method": "CNNs",
+          "count": 1
+        },
+        {
+          "method": "HOG",
+          "count": 1
+        },
+        {
+          "method": "color histograms",
+          "count": 1
+        },
+        {
+          "method": "ELMs",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Clothing image recognition",
+          "count": 1
+        },
+        {
+          "keyword": "extreme learning machines",
+          "count": 1
+        },
+        {
+          "keyword": "feature fusion",
+          "count": 1
+        },
+        {
+          "keyword": "autoencoder ELM",
+          "count": 1
+        },
+        {
+          "keyword": "ensemble learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition"
+      ]
+    },
+    "Counterfactual Referring Expression Comprehension (C-REC)": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+          "count": 1
+        },
+        {
+          "method": "Counterfactual Sample Generation",
+          "count": 1
+        },
+        {
+          "method": "Dual-branch Attentive Fusion",
+          "count": 1
+        },
+        {
+          "method": "Contrastive Loss",
+          "count": 1
+        },
+        {
+          "method": "IoU",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Counterfactual Referring Expression Comprehension",
+          "count": 1
+        },
+        {
+          "keyword": "Fine-grained Attributes",
+          "count": 1
+        },
+        {
+          "keyword": "Dual-branch Attentive Fusion",
+          "count": 1
+        },
+        {
+          "keyword": "Contrastive Learning",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension"
+      ]
+    },
+    "Weakly supervised phrase grounding": {
+      "paper_count": 1,
+      "author_count": 6,
+      "top_methods": [
+        {
+          "method": "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+          "count": 1
+        },
+        {
+          "method": "CLIP",
+          "count": 1
+        },
+        {
+          "method": "Grounding model",
+          "count": 1
+        },
+        {
+          "method": "Similarity tokens",
+          "count": 1
+        },
+        {
+          "method": "Cosine similarity",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Weakly supervised phrase grounding",
+          "count": 1
+        },
+        {
+          "keyword": "Visual prompt tuning",
+          "count": 1
+        },
+        {
+          "keyword": "CLIP",
+          "count": 1
+        },
+        {
+          "keyword": "Detector-free",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "段落式图像描述算法": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "全卷积神经结构的段落式图像描述算法",
+          "count": 1
+        },
+        {
+          "method": "卷积神经网络(CNN)",
+          "count": 1
+        },
+        {
+          "method": "循环神经网络(RNN)",
+          "count": 1
+        },
+        {
+          "method": "全卷积神经结构",
+          "count": 1
+        },
+        {
+          "method": "句子CNN解码器",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "段落式图像描述",
+          "count": 1
+        },
+        {
+          "keyword": "全卷积结构",
+          "count": 1
+        },
+        {
+          "keyword": "门控机制",
+          "count": 1
+        },
+        {
+          "keyword": "CIDEr",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "全卷积神经结构的段落式图像描述算法"
+      ]
+    },
+    "Keystroke Dynamics-Based Authentication": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "TOP10 detector",
+          "count": 1
+        },
+        {
+          "method": "Keystroke eigenvalues",
+          "count": 1
+        },
+        {
+          "method": "Normal distribution",
+          "count": 1
+        },
+        {
+          "method": "CDF",
+          "count": 1
+        },
+        {
+          "method": "Probability vector",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Keystroke Dynamics",
+          "count": 1
+        },
+        {
+          "keyword": "Authentication",
+          "count": 1
+        },
+        {
+          "keyword": "Feature Extraction",
+          "count": 1
+        },
+        {
+          "keyword": "Probability",
+          "count": 1
+        },
+        {
+          "keyword": "Weight",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于统计和加权的提高击键认证识别方法(英文)"
+      ]
+    },
+    "多模态数据挖掘和检索": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "双模态数据",
+          "count": 1
+        },
+        {
+          "method": "相似性测度",
+          "count": 1
+        },
+        {
+          "method": "受限波尔兹曼机",
+          "count": 1
+        },
+        {
+          "method": "自动编码器",
+          "count": 1
+        },
+        {
+          "method": "L1范数",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "双模态相似性测度",
+          "count": 1
+        },
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "受限波尔兹曼机",
+          "count": 1
+        },
+        {
+          "keyword": "自动编码器",
+          "count": 1
+        },
+        {
+          "keyword": "L1范数",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种使用深层结构获取双模态相似性测度的方法_李睿凡"
+      ]
+    },
+    "图像检索": {
+      "paper_count": 2,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "内点数计算",
+          "count": 1
+        },
+        {
+          "method": "相关度计算",
+          "count": 1
+        },
+        {
+          "method": "赋权邻接矩阵",
+          "count": 1
+        },
+        {
+          "method": "迭代计算",
+          "count": 1
+        },
+        {
+          "method": "表示向量",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图像检索",
+          "count": 2
+        },
+        {
+          "keyword": "内点数",
+          "count": 1
+        },
+        {
+          "keyword": "相关度值",
+          "count": 1
+        },
+        {
+          "keyword": "赋权邻接矩阵",
+          "count": 1
+        },
+        {
+          "keyword": "间接相关度衰减因子",
+          "count": 1
+        },
+        {
+          "keyword": "负例训练样本",
+          "count": 1
+        },
+        {
+          "keyword": "聚类",
+          "count": 1
+        },
+        {
+          "keyword": "概率",
+          "count": 1
+        },
+        {
+          "keyword": "模型训练",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 2
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "一种图像检索方法_鲁鹏",
+        "负例训练样本采集方法、装置及模型训练方法、装置_李睿凡"
+      ]
+    },
+    "图像处理、自然语言处理": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "CNN",
+          "count": 1
+        },
+        {
+          "method": "句子嵌入层",
+          "count": 1
+        },
+        {
+          "method": "门控卷积层",
+          "count": 1
+        },
+        {
+          "method": "区域感知层",
+          "count": 1
+        },
+        {
+          "method": "词汇嵌入层",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图像文本描述",
+          "count": 1
+        },
+        {
+          "keyword": "句子级子网络",
+          "count": 1
+        },
+        {
+          "keyword": "词汇级子网络",
+          "count": 1
+        },
+        {
+          "keyword": "神经网络",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种图像的文本描述方法及装置_李睿凡"
+      ]
+    },
+    "图像色彩和谐程度的评估": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "条件随机场",
+          "count": 1
+        },
+        {
+          "method": "残差神经网络",
+          "count": 1
+        },
+        {
+          "method": "孪生神经网络",
+          "count": 1
+        },
+        {
+          "method": "RGB色彩值",
+          "count": 1
+        },
+        {
+          "method": "无向图",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图像色彩和谐度",
+          "count": 1
+        },
+        {
+          "keyword": "条件随机场",
+          "count": 1
+        },
+        {
+          "keyword": "神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "美学评估",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种图像色彩和谐程度的评估方法及装置_鲁鹏"
+      ]
+    },
+    "网络内容风控管理": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "内容采集技术",
+          "count": 1
+        },
+        {
+          "method": "文本识别",
+          "count": 1
+        },
+        {
+          "method": "图像识别",
+          "count": 1
+        },
+        {
+          "method": "视频识别",
+          "count": 1
+        },
+        {
+          "method": "音频识别",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人工智能挖掘",
+          "count": 1
+        },
+        {
+          "keyword": "网络内容风控",
+          "count": 1
+        },
+        {
+          "keyword": "内容审核",
+          "count": 1
+        },
+        {
+          "keyword": "新业务内容检测",
+          "count": 1
+        },
+        {
+          "keyword": "网站内容监管",
+          "count": 1
+        },
+        {
+          "keyword": "企业内容安全治理",
+          "count": 1
+        },
+        {
+          "keyword": "UGC审核",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于人工智能挖掘的网络内容风控管理系统_李睿凡"
+      ]
+    },
+    "工业互联网数据安全，工业企业数字化转型": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "数据采集模块",
+          "count": 1
+        },
+        {
+          "method": "数据流转与分布监测模块",
+          "count": 1
+        },
+        {
+          "method": "数据安全事件分析模块",
+          "count": 1
+        },
+        {
+          "method": "数据安全事件溯源模块",
+          "count": 1
+        },
+        {
+          "method": "数据识别特征库",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "数据安全风险监测",
+          "count": 1
+        },
+        {
+          "keyword": "人工智能",
+          "count": 1
+        },
+        {
+          "keyword": "数据流转",
+          "count": 1
+        },
+        {
+          "keyword": "安全事件溯源",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于人工智能的数据安全风险监测追溯系统_黄永军"
+      ]
+    },
+    "图像段落描述": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "LSTM",
+          "count": 1
+        },
+        {
+          "method": "层次注意力",
+          "count": 1
+        },
+        {
+          "method": "空间关系编码器",
+          "count": 1
+        },
+        {
+          "method": "语义关系编码器",
+          "count": 1
+        },
+        {
+          "method": "多标签分类",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "关系编码",
+          "count": 1
+        },
+        {
+          "keyword": "层次注意力",
+          "count": 1
+        },
+        {
+          "keyword": "图像段落描述",
+          "count": 1
+        },
+        {
+          "keyword": "语义关系编码",
+          "count": 1
+        },
+        {
+          "keyword": "空间关系编码",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于关系编码和层次注意力机制的图像段落描述方法_李睿凡"
+      ]
+    },
+    "情感分析": {
+      "paper_count": 3,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "图卷积神经网络",
+          "count": 2
+        },
+        {
+          "method": "句法图卷积子神经网络",
+          "count": 2
+        },
+        {
+          "method": "语义图卷积子神经网络",
+          "count": 2
+        },
+        {
+          "method": "双向长短期记忆网络BiLSTM",
+          "count": 1
+        },
+        {
+          "method": "双仿射模块",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图卷积神经网络",
+          "count": 3
+        },
+        {
+          "keyword": "方面级情感分析",
+          "count": 3
+        },
+        {
+          "keyword": "句法加权图",
+          "count": 1
+        },
+        {
+          "keyword": "自注意力机制",
+          "count": 1
+        },
+        {
+          "keyword": "BiLSTM",
+          "count": 1
+        },
+        {
+          "keyword": "池化层",
+          "count": 1
+        },
+        {
+          "keyword": "softmax分类器",
+          "count": 1
+        },
+        {
+          "keyword": "句法特征",
+          "count": 1
+        },
+        {
+          "keyword": "语义特征",
+          "count": 1
+        },
+        {
+          "keyword": "双向长短期记忆网络",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 3
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "一种基于图卷积神经网络的方面级情感分析方法及装置_冯方向",
+        "一种基于图卷积神经网络的方面级情感分析方法及装置_李睿凡",
+        "一种方面级情感分析方法、装置、电子设备及存储介质_李睿凡"
+      ]
+    },
+    "电力设备故障溯源": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "图卷积网络",
+          "count": 1
+        },
+        {
+          "method": "ReLU激活函数",
+          "count": 1
+        },
+        {
+          "method": "交叉熵函数",
+          "count": 1
+        },
+        {
+          "method": "拉普拉斯矩阵",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "多层次图卷积网络",
+          "count": 1
+        },
+        {
+          "keyword": "电力设备故障",
+          "count": 1
+        },
+        {
+          "keyword": "TF-IDF",
+          "count": 1
+        },
+        {
+          "keyword": "PMI",
+          "count": 1
+        },
+        {
+          "keyword": "电力工单图",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于多层次图卷积网络的电力设备故障溯源方法_李睿凡"
+      ]
+    },
+    "跨模态检索": {
+      "paper_count": 2,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "特征提取",
+          "count": 2
+        },
+        {
+          "method": "欧氏距离计算",
+          "count": 2
+        },
+        {
+          "method": "深层信念网络",
+          "count": 1
+        },
+        {
+          "method": "双受限波尔兹曼机",
+          "count": 1
+        },
+        {
+          "method": "Corr-RBM",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "跨模态检索",
+          "count": 2
+        },
+        {
+          "keyword": "欧氏距离",
+          "count": 2
+        },
+        {
+          "keyword": "深层信念网络",
+          "count": 1
+        },
+        {
+          "keyword": "Corr-DBN",
+          "count": 1
+        },
+        {
+          "keyword": "双RBM模型",
+          "count": 1
+        },
+        {
+          "keyword": "Corr-RBMs",
+          "count": 1
+        },
+        {
+          "keyword": "受限波尔兹曼机",
+          "count": 1
+        },
+        {
+          "keyword": "低级表达向量",
+          "count": 1
+        },
+        {
+          "keyword": "高级表达向量",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 2
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "一种基于对应的深层信念网络的跨模态检索方法_李睿凡",
+        "一种基于深层模型的跨模态检索方法_李睿凡"
+      ]
+    },
+    "电力设备检修": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "割集",
+          "count": 1
+        },
+        {
+          "method": "强化学习",
+          "count": 1
+        },
+        {
+          "method": "动态规划",
+          "count": 1
+        },
+        {
+          "method": "马尔可夫决策过程",
+          "count": 1
+        },
+        {
+          "method": "价值矩阵",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "强化学习",
+          "count": 1
+        },
+        {
+          "keyword": "电力设备检修",
+          "count": 1
+        },
+        {
+          "keyword": "割集",
+          "count": 1
+        },
+        {
+          "keyword": "动态权重",
+          "count": 1
+        },
+        {
+          "keyword": "马尔可夫决策过程",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于强化学习的电力设备检修决策生成方法_李睿凡"
+      ]
+    },
+    "视频分类": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "低级表示内容",
+          "count": 1
+        },
+        {
+          "method": "高级表示内容",
+          "count": 1
+        },
+        {
+          "method": "双模态公共表示内容",
+          "count": 1
+        },
+        {
+          "method": "三模态公共表示内容",
+          "count": 1
+        },
+        {
+          "method": "有监督分类模型",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "自动编码器",
+          "count": 1
+        },
+        {
+          "keyword": "视频分类",
+          "count": 1
+        },
+        {
+          "keyword": "双模态融合",
+          "count": 1
+        },
+        {
+          "keyword": "三模态融合",
+          "count": 1
+        },
+        {
+          "keyword": "Softmax分类器",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种基于自动编码器的视频分类方法及装置_李睿凡"
+      ]
+    },
+    "自然语言处理": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "邻接张量",
+          "count": 1
+        },
+        {
+          "method": "图卷积",
+          "count": 1
+        },
+        {
+          "method": "多层感知机",
+          "count": 1
+        },
+        {
+          "method": "注意力计算",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图卷积网络",
+          "count": 1
+        },
+        {
+          "keyword": "属性情感三元组",
+          "count": 1
+        },
+        {
+          "keyword": "多通道",
+          "count": 1
+        },
+        {
+          "keyword": "注意力机制",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "一种多特征多通道图卷积网络模型训练方法及属性情感三元组抽取方法_李睿凡"
+      ]
+    },
+    "提高视线估计算法的样本集质量": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "编码器",
+          "count": 1
+        },
+        {
+          "method": "无关属性分解模块",
+          "count": 1
+        },
+        {
+          "method": "交叉属性分离模块",
+          "count": 1
+        },
+        {
+          "method": "解码器",
+          "count": 1
+        },
+        {
+          "method": "特征提取",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人脸重定向模型",
+          "count": 1
+        },
+        {
+          "keyword": "特征交换",
+          "count": 1
+        },
+        {
+          "keyword": "视线特征",
+          "count": 1
+        },
+        {
+          "keyword": "头部特征",
+          "count": 1
+        },
+        {
+          "keyword": "正交损失函数",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "人脸重定向模型、模型训练方法及装置_张航"
+      ]
+    },
+    "图像生成": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "句子向量",
+          "count": 1
+        },
+        {
+          "method": "词向量",
+          "count": 1
+        },
+        {
+          "method": "高斯噪声",
+          "count": 1
+        },
+        {
+          "method": "对抗损失函数",
+          "count": 1
+        },
+        {
+          "method": "文本编码器",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图像生成模型",
+          "count": 1
+        },
+        {
+          "keyword": "样本数据",
+          "count": 1
+        },
+        {
+          "keyword": "句子级别编码",
+          "count": 1
+        },
+        {
+          "keyword": "词级别编码",
+          "count": 1
+        },
+        {
+          "keyword": "对抗子网络",
+          "count": 1
+        },
+        {
+          "keyword": "条件对抗损失函数",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "图像生成模型的训练方法和设备以及图像生成方法_杨博"
+      ]
+    },
+    "电力领域": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "BERT电力实体识别模型",
+          "count": 1
+        },
+        {
+          "method": "哈夫曼树编码",
+          "count": 1
+        },
+        {
+          "method": "伪标注语料",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "多层神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "电力实体识别",
+          "count": 1
+        },
+        {
+          "keyword": "BERT",
+          "count": 1
+        },
+        {
+          "keyword": "哈夫曼编码",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于多层神经网络的电力实体识别方法、存储介质和设备_刘子全"
+      ]
+    },
+    "方面情感分析任务": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "方面词推理算法",
+          "count": 1
+        },
+        {
+          "method": "上下文数据增强方法",
+          "count": 1
+        },
+        {
+          "method": "COM-MRC框架",
+          "count": 1
+        },
+        {
+          "method": "注意力矩阵",
+          "count": 1
+        },
+        {
+          "method": "损失函数",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "掩码上下文",
+          "count": 1
+        },
+        {
+          "keyword": "机器阅读理解",
+          "count": 1
+        },
+        {
+          "keyword": "方面情感三元组",
+          "count": 1
+        },
+        {
+          "keyword": "BERT",
+          "count": 1
+        },
+        {
+          "keyword": "数据增强",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于掩码上下文机器阅读理解的方面情感三元组抽取方法_李睿凡"
+      ]
+    },
+    "基于文本生成图像": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "图像生成模型",
+          "count": 1
+        },
+        {
+          "method": "真实度参数",
+          "count": 1
+        },
+        {
+          "method": "子损失函数",
+          "count": 1
+        },
+        {
+          "method": "总体损失函数",
+          "count": 1
+        },
+        {
+          "method": "内容损失函数",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "文本生成图像",
+          "count": 1
+        },
+        {
+          "keyword": "模态解纠缠",
+          "count": 1
+        },
+        {
+          "keyword": "损失函数",
+          "count": 1
+        },
+        {
+          "keyword": "模型训练",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于文本生成图像的模型训练方法、设备和图像生成方法_冯方向"
+      ]
+    },
+    "小样本图像分类": {
+      "paper_count": 3,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "嵌入模块fθ",
+          "count": 2
+        },
+        {
+          "method": "分布学习模块gφ",
+          "count": 1
+        },
+        {
+          "method": "分布原型",
+          "count": 1
+        },
+        {
+          "method": "类别概率计算",
+          "count": 1
+        },
+        {
+          "method": "数据预处理模块",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "嵌入模块",
+          "count": 2
+        },
+        {
+          "keyword": "小样本图像分类",
+          "count": 2
+        },
+        {
+          "keyword": "特征分布迁移",
+          "count": 1
+        },
+        {
+          "keyword": "小样本",
+          "count": 1
+        },
+        {
+          "keyword": "图像特征学习",
+          "count": 1
+        },
+        {
+          "keyword": "分布学习模块",
+          "count": 1
+        },
+        {
+          "keyword": "类别自适应度量学习",
+          "count": 1
+        },
+        {
+          "keyword": "度量模块",
+          "count": 1
+        },
+        {
+          "keyword": "均方误差损失函数",
+          "count": 1
+        },
+        {
+          "keyword": "任务相关度量学习",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 3
+      },
+      "activity_level": "新兴领域",
+      "papers": [
+        "基于特征分布迁移的小样本图像特征学习方法及装置_李晓旭",
+        "融入类别自适应度量学习的小样本图像分类方法及装置_李晓旭",
+        "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭"
+      ]
+    },
+    "小样本图像集成分类": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "卷积特征提取",
+          "count": 1
+        },
+        {
+          "method": "支持集",
+          "count": 1
+        },
+        {
+          "method": "查询集",
+          "count": 1
+        },
+        {
+          "method": "伪标签预测集",
+          "count": 1
+        },
+        {
+          "method": "模型平均",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "自训练",
+          "count": 1
+        },
+        {
+          "keyword": "小样本图像分类",
+          "count": 1
+        },
+        {
+          "keyword": "集成分类器",
+          "count": 1
+        },
+        {
+          "keyword": "Baseline++网络结构",
+          "count": 1
+        },
+        {
+          "keyword": "模型平均",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于自训练的小样本图像集成分类方法及装置_李晓旭"
+      ]
+    },
+    "REC任务": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "Swin Transformer",
+          "count": 1
+        },
+        {
+          "method": "BERT",
+          "count": 1
+        },
+        {
+          "method": "FFN",
+          "count": 1
+        },
+        {
+          "method": "注意力机制",
+          "count": 1
+        },
+        {
+          "method": "多头自注意力机制",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "指称表达式理解",
+          "count": 1
+        },
+        {
+          "keyword": "跨模态推理",
+          "count": 1
+        },
+        {
+          "keyword": "LGR-NET",
+          "count": 1
+        },
+        {
+          "keyword": "TFE",
+          "count": 1
+        },
+        {
+          "keyword": "TCA",
+          "count": 1
+        },
+        {
+          "keyword": "TCF",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡"
+      ]
+    },
+    "C语言教学中的抽象概念": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "实例对比法",
+          "count": 1
+        },
+        {
+          "method": "程序版式",
+          "count": 1
+        },
+        {
+          "method": "可读性",
+          "count": 1
+        },
+        {
+          "method": "命名规则",
+          "count": 1
+        },
+        {
+          "method": "健壮性",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "比较法",
+          "count": 1
+        },
+        {
+          "keyword": "C语言",
+          "count": 1
+        },
+        {
+          "keyword": "可读性",
+          "count": 1
+        },
+        {
+          "keyword": "健壮性",
+          "count": 1
+        },
+        {
+          "keyword": "编码风格",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "C语言实例对比_从抽象概念到代码直观"
+      ]
+    },
+    "人工生命，分布智能": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "从理论生物学中选择研究起点的策略，利用现有模型",
+          "count": 1
+        },
+        {
+          "method": "蚁群算法",
+          "count": 1
+        },
+        {
+          "method": "粒子群算法",
+          "count": 1
+        },
+        {
+          "method": "理论生物学",
+          "count": 1
+        },
+        {
+          "method": "自组织",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人工生命",
+          "count": 1
+        },
+        {
+          "keyword": "分布智能",
+          "count": 1
+        },
+        {
+          "keyword": "蚁群算法",
+          "count": 1
+        },
+        {
+          "keyword": "粒子群优化",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "人工生命中分布智能研究的一种可行方法"
+      ]
+    },
+    "空时编码调制；星座映射；LDC码": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "基于最大化编码增益的高维星座映射设计优化问题；基于最大化欧式距离调和均值的一维星座映射设计优化问题",
+          "count": 1
+        },
+        {
+          "method": "BI-STCM-ID系统",
+          "count": 1
+        },
+        {
+          "method": "LDC码",
+          "count": 1
+        },
+        {
+          "method": "空时编码器",
+          "count": 1
+        },
+        {
+          "method": "MIMO信道模型",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "空时编码调制",
+          "count": 1
+        },
+        {
+          "keyword": "星座映射",
+          "count": 1
+        },
+        {
+          "keyword": "LDC码",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "使用LDC码的BI_STCM_ID系统中的星座映射分析"
+      ]
+    },
+    "段落式图像描述，跨模态智能": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "基于全卷积结构的图像段落描述算法",
+          "count": 1
+        },
+        {
+          "method": "CNN",
+          "count": 1
+        },
+        {
+          "method": "RNN",
+          "count": 1
+        },
+        {
+          "method": "全卷积解码器",
+          "count": 1
+        },
+        {
+          "method": "门控机制",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "循环神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "全卷积结构",
+          "count": 1
+        },
+        {
+          "keyword": "门控机制",
+          "count": 1
+        },
+        {
+          "keyword": "段落式图像描述",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "全卷积神经结构的段落式图像描述算法_李睿凡"
+      ]
+    },
+    "人脸识别": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "KFD—Isomap算法",
+          "count": 1
+        },
+        {
+          "method": "KFD-Isomap",
+          "count": 1
+        },
+        {
+          "method": "Isomap",
+          "count": 1
+        },
+        {
+          "method": "核Fisher判别",
+          "count": 1
+        },
+        {
+          "method": "多维尺度分析",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人脸识别",
+          "count": 1
+        },
+        {
+          "keyword": "流形",
+          "count": 1
+        },
+        {
+          "keyword": "Isomap",
+          "count": 1
+        },
+        {
+          "keyword": "核Fisher判别",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于KFD_Isomap的人脸识别"
+      ]
+    },
+    "少样本文本分类任务": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "EPL4FTC提示学习增强分类算法",
+          "count": 1
+        },
+        {
+          "method": "EPL4FTC算法",
+          "count": 1
+        },
+        {
+          "method": "自然语言推理",
+          "count": 1
+        },
+        {
+          "method": "三元组损失",
+          "count": 1
+        },
+        {
+          "method": "掩码语言模型",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "少样本学习",
+          "count": 1
+        },
+        {
+          "keyword": "文本分类",
+          "count": 1
+        },
+        {
+          "keyword": "自然语言推理",
+          "count": 1
+        },
+        {
+          "keyword": "三元组损失",
+          "count": 1
+        },
+        {
+          "keyword": "掩码语言模型",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "增强提示学习的少样本文本分类方法_李睿凡"
+      ]
+    },
+    "在人工智能类课程中引入深度学习的初步内容和实施建议": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "深度学习",
+          "count": 1
+        },
+        {
+          "method": "层次训练的基本算法",
+          "count": 1
+        },
+        {
+          "method": "波尔兹曼机",
+          "count": 1
+        },
+        {
+          "method": "深层信念网络",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人工智能",
+          "count": 1
+        },
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "教学建议",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "引入深度学习的人工智能类课程"
+      ]
+    },
+    "深度学习教学": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "多层感知器",
+          "count": 1
+        },
+        {
+          "method": "经典后传算法",
+          "count": 1
+        },
+        {
+          "method": "自编码器",
+          "count": 1
+        },
+        {
+          "method": "无监督的特征学习",
+          "count": 1
+        },
+        {
+          "method": "深度神经网络基础",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "智能科学与技术",
+          "count": 1
+        },
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "教学建议",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "探索神经网络深度学习的教学"
+      ]
+    },
+    "智能科学与技术专业本科生导师制的实施方法及质量评价": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "基于北京邮电大学智能科学技术中心实践探索适合2、3年级学生的导师制工作办法",
+          "count": 1
+        },
+        {
+          "method": "导师制",
+          "count": 1
+        },
+        {
+          "method": "教育模式",
+          "count": 1
+        },
+        {
+          "method": "质量评价方法",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "智能科学与技术",
+          "count": 1
+        },
+        {
+          "keyword": "本科生导师制",
+          "count": 1
+        },
+        {
+          "keyword": "工作形式和办法",
+          "count": 1
+        },
+        {
+          "keyword": "质量评价方法",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "智能科学与技术专业本科生导师制的研究与实践"
+      ]
+    },
+    "智能科学技术导论的教学目的、策略和改进思考": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [],
+      "top_keywords": [
+        {
+          "keyword": "智能科学技术导论",
+          "count": 1
+        },
+        {
+          "keyword": "教学目标",
+          "count": 1
+        },
+        {
+          "keyword": "教学策略",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "智能科学技术导论教学目的及策略"
+      ]
+    },
+    "深度学习中的卷积神经网络的教学工作": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "教学内容安排和教学内容之外的考虑",
+          "count": 1
+        },
+        {
+          "method": "人工神经网络",
+          "count": 1
+        },
+        {
+          "method": "深度学习",
+          "count": 1
+        },
+        {
+          "method": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "method": "机器学习",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "智能科学与技术",
+          "count": 1
+        },
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "教学建议",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "深度学习中卷积神经网络的教学探讨"
+      ]
+    },
+    "计算机游戏中的智能技术": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "讨论游戏设计元素与人工智能之间的关系，介绍A*算法、有限状态机、群体寻径等技术，讨论适应与学习等游戏开发者关注的问题",
+          "count": 1
+        },
+        {
+          "method": "A*算法",
+          "count": 1
+        },
+        {
+          "method": "有限状态机",
+          "count": 1
+        },
+        {
+          "method": "群体寻径",
+          "count": 1
+        },
+        {
+          "method": "N-gram模型",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "人工智能",
+          "count": 1
+        },
+        {
+          "keyword": "有限状态机",
+          "count": 1
+        },
+        {
+          "keyword": "群体智能",
+          "count": 1
+        },
+        {
+          "keyword": "神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "遗传算法",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "计算机游戏中的智能技术"
+      ]
+    },
+    "智能科学与技术专业的C语言教学变革": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "教学内容和方法改变的具体措施，将课程分为语言学习和项目实践两大部分",
+          "count": 1
+        },
+        {
+          "method": "C语言程序设计",
+          "count": 1
+        },
+        {
+          "method": "机器智能前沿问题",
+          "count": 1
+        },
+        {
+          "method": "教学进程影响因素",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "C语言",
+          "count": 1
+        },
+        {
+          "keyword": "智能科学与技术",
+          "count": 1
+        },
+        {
+          "keyword": "教学",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "面向_智能科学与技术_专业的C语言教学探讨"
+      ]
+    },
+    "表情识别": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "鲁棒局部保持投影算法",
+          "count": 1
+        },
+        {
+          "method": "局部保持投影算法",
+          "count": 1
+        },
+        {
+          "method": "Laplace Beltrami算子",
+          "count": 1
+        },
+        {
+          "method": "鲁棒主成分分析",
+          "count": 1
+        },
+        {
+          "method": "Gabor小波特征提取",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "局部保持投影",
+          "count": 1
+        },
+        {
+          "keyword": "鲁棒性",
+          "count": 1
+        },
+        {
+          "keyword": "表情识别",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "鲁棒局部保持投影的表情识别"
+      ]
+    },
+    "果园环境下轮式差速转向机器人的控制及行间自主运行问题": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "垂直载荷实时估计方法、轮胎驱动力实时估计与优化分配算法、基于激光雷达传感器的户外自主导航方法",
+          "count": 1
+        },
+        {
+          "method": "滑动轮式转向机器人",
+          "count": 1
+        },
+        {
+          "method": "垂直载荷估计",
+          "count": 1
+        },
+        {
+          "method": "驱动力优化分配",
+          "count": 1
+        },
+        {
+          "method": "激光雷达传感器",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "户外机器人",
+          "count": 1
+        },
+        {
+          "keyword": "差速转向",
+          "count": 1
+        },
+        {
+          "keyword": "轮胎动力学",
+          "count": 1
+        },
+        {
+          "keyword": "参数估计",
+          "count": 1
+        },
+        {
+          "keyword": "轨迹跟踪",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "低郁密度条件下果园轮式机器人行间运行控制方法研究_韩奕非"
+      ]
+    },
+    "时间敏感网络，调度与路由优化": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "完全集中式配置模型，软件定义网络（SDN），整数线性规划（ILP）调度方法，基于绝对优先级的实时调度路由算法",
+          "count": 1
+        },
+        {
+          "method": "TSN",
+          "count": 1
+        },
+        {
+          "method": "SDN",
+          "count": 1
+        },
+        {
+          "method": "ILP",
+          "count": 1
+        },
+        {
+          "method": "绝对优先级调度",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "时间敏感网络",
+          "count": 1
+        },
+        {
+          "keyword": "软件定义网络",
+          "count": 1
+        },
+        {
+          "keyword": "流量调度",
+          "count": 1
+        },
+        {
+          "keyword": "整数线性规划",
+          "count": 1
+        },
+        {
+          "keyword": "路由优化",
+          "count": 1
+        },
+        {
+          "keyword": "绝对优先级",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于优先级的时间敏感网络流量调度算法研究_李红硕"
+      ]
+    },
+    "自然语言处理中的关系抽取": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "远程监督方法，L2G-GCN模型",
+          "count": 1
+        },
+        {
+          "method": "远程监督",
+          "count": 1
+        },
+        {
+          "method": "关系抽取",
+          "count": 1
+        },
+        {
+          "method": "图卷积神经网络GCN",
+          "count": 1
+        },
+        {
+          "method": "互信息最大化MIM",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "远程监督",
+          "count": 1
+        },
+        {
+          "keyword": "关系抽取",
+          "count": 1
+        },
+        {
+          "keyword": "L2G-GCN",
+          "count": 1
+        },
+        {
+          "keyword": "互信息最大化",
+          "count": 1
+        },
+        {
+          "keyword": "长尾问题",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦"
+      ]
+    },
+    "少样本关系抽取任务": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "利用实体概念作为融入知识，设计了结合语义门控机制和距离打分器的知识融合模块，以及领域导向的元训练方法",
+          "count": 1
+        },
+        {
+          "method": "CBOW模型",
+          "count": 1
+        },
+        {
+          "method": "ELMO模型",
+          "count": 1
+        },
+        {
+          "method": "BERT模型",
+          "count": 1
+        },
+        {
+          "method": "少样本学习",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "关系抽取",
+          "count": 1
+        },
+        {
+          "keyword": "少样本学习",
+          "count": 1
+        },
+        {
+          "keyword": "领域迁移",
+          "count": 1
+        },
+        {
+          "keyword": "知识库",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于实体的概念指导的少样本关系抽取研究与应用_王泽元"
+      ]
+    },
+    "常识问答任务（Commonsense Question Answering，CQA）": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "知识增强型图对比学习（KE-GCL）和提示型知识生成网络（PKGN）",
+          "count": 1
+        },
+        {
+          "method": "知识子图",
+          "count": 1
+        },
+        {
+          "method": "节点嵌入",
+          "count": 1
+        },
+        {
+          "method": "注意力机制",
+          "count": 1
+        },
+        {
+          "method": "对比学习",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "常识问答",
+          "count": 1
+        },
+        {
+          "keyword": "知识增强",
+          "count": 1
+        },
+        {
+          "keyword": "图对比学习",
+          "count": 1
+        },
+        {
+          "keyword": "无监督学习",
+          "count": 1
+        },
+        {
+          "keyword": "提示型知识生成",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于常识知识的多选式问答研究_张力翚"
+      ]
+    },
+    "自然语言处理，少样本学习，提示学习，文本分类": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "基于提示学习和三元组损失的少样本文本分类算法",
+          "count": 1
+        },
+        {
+          "method": "提示学习",
+          "count": 1
+        },
+        {
+          "method": "三元组损失",
+          "count": 1
+        },
+        {
+          "method": "自然语言推理",
+          "count": 1
+        },
+        {
+          "method": "智能标注工具",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "预训练语言模型",
+          "count": 1
+        },
+        {
+          "keyword": "少样本学习",
+          "count": 1
+        },
+        {
+          "keyword": "提示学习",
+          "count": 1
+        },
+        {
+          "keyword": "文本分类",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于提示学习的少样本文本分类研究与应用_魏志宇"
+      ]
+    },
+    "多模态人工智能": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "利用树结构显式建模段落结构以及图像区域关系，并将树结构引入图像段落描述模型中",
+          "count": 1
+        },
+        {
+          "method": "树结构段落解码框架S2TD",
+          "count": 1
+        },
+        {
+          "method": "树结构增强的编码器网络TEE",
+          "count": 1
+        },
+        {
+          "method": "图像区域树结构建模方法",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "多模态人工智能",
+          "count": 1
+        },
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "图像段落描述",
+          "count": 1
+        },
+        {
+          "keyword": "树结构",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于树结构的图像段落描述研究_石祎晖"
+      ]
+    },
+    "段落式图像描述任务，连接计算机视觉和自然语言处理两个关键领域": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "提出了基于全卷积神经结构的段落式图像描述方法，包括全卷积解码器和融合区域注意力的段落式图像描述模型Dual-CNN",
+          "count": 1
+        },
+        {
+          "method": "全卷积神经结构",
+          "count": 1
+        },
+        {
+          "method": "层次性RNN解码器",
+          "count": 1
+        },
+        {
+          "method": "区域注意力机制",
+          "count": 1
+        },
+        {
+          "method": "Dual-CNN模型",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "段落式图像描述",
+          "count": 1
+        },
+        {
+          "keyword": "连贯性",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于深度卷积结构的图像段落描述研究_梁昊雨"
+      ]
+    },
+    "方面级情感分析": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "情感感知的双通道图卷积神经网络模型",
+          "count": 1
+        },
+        {
+          "method": "依存句法分析",
+          "count": 1
+        },
+        {
+          "method": "SenticNet",
+          "count": 1
+        },
+        {
+          "method": "ConceptNet",
+          "count": 1
+        },
+        {
+          "method": "WordNet",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "方面级情感分析",
+          "count": 1
+        },
+        {
+          "keyword": "方面词情感分析",
+          "count": 1
+        },
+        {
+          "keyword": "方面类别情感分析",
+          "count": 1
+        },
+        {
+          "keyword": "图卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "知识增强",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于知识增强的方面级情感分析研究及应用_杜一帆"
+      ]
+    },
+    "图像描述（Image Captioning）": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "结合人类编辑操作的非自回归图像描述方法",
+          "count": 1
+        },
+        {
+          "method": "Transformer",
+          "count": 1
+        },
+        {
+          "method": "编解码器结构",
+          "count": 1
+        },
+        {
+          "method": "视觉特征编码",
+          "count": 1
+        },
+        {
+          "method": "目标检测",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "图像描述",
+          "count": 1
+        },
+        {
+          "keyword": "非自回归",
+          "count": 1
+        },
+        {
+          "keyword": "编辑操作",
+          "count": 1
+        },
+        {
+          "keyword": "交叉熵",
+          "count": 1
+        },
+        {
+          "keyword": "强化学习",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于非自回归方法的图像描述研究及应用_张煜松"
+      ]
+    },
+    "方面级三元组抽取和结构化情感分析": {
+      "paper_count": 1,
+      "author_count": 0,
+      "top_methods": [
+        {
+          "method": "掩码上下文机器阅读理解框架",
+          "count": 1
+        },
+        {
+          "method": "掩码上下文机器阅读理解",
+          "count": 1
+        },
+        {
+          "method": "交互式判别模型",
+          "count": 1
+        },
+        {
+          "method": "阶段式推理方法",
+          "count": 1
+        },
+        {
+          "method": "双词汇依赖解析",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "深度学习",
+          "count": 1
+        },
+        {
+          "keyword": "方面级情感分析",
+          "count": 1
+        },
+        {
+          "keyword": "结构化情感分析",
+          "count": 1
+        },
+        {
+          "keyword": "注意力机制",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "多元组细粒度情感分析研究及应用_翟泽鹏"
+      ]
+    },
+    "轮式移动机器人在户外种植园行间的自主行驶技术": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "理论分析和地面地形检测方法",
+          "count": 1
+        },
+        {
+          "method": "深度学习",
+          "count": 1
+        },
+        {
+          "method": "图像分割",
+          "count": 1
+        },
+        {
+          "method": "路径生成",
+          "count": 1
+        },
+        {
+          "method": "车辆通过性检测",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "户外种植园行间",
+          "count": 1
+        },
+        {
+          "keyword": "轮式移动机器人平台",
+          "count": 1
+        },
+        {
+          "keyword": "车辆通过性检测",
+          "count": 1
+        },
+        {
+          "keyword": "地形可通行区域识别",
+          "count": 1
+        },
+        {
+          "keyword": "图像语义分割与路径生成",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "户外种植园行间可通行区域识别与路径生成方法研究_王远航"
+      ]
+    },
+    "果园行间自主导航技术": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "基于激光雷达和单目视觉的导航方法",
+          "count": 1
+        },
+        {
+          "method": "自适应半径滤波",
+          "count": 1
+        },
+        {
+          "method": "交叉像素",
+          "count": 1
+        },
+        {
+          "method": "单目视觉",
+          "count": 1
+        },
+        {
+          "method": "Mask R-CNN",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "自主导航",
+          "count": 1
+        },
+        {
+          "keyword": "位姿测量",
+          "count": 1
+        },
+        {
+          "keyword": "相机模型",
+          "count": 1
+        },
+        {
+          "keyword": "深度神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "自适应半径滤波",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "果园行间自主导航关键技术研究_王宇豪"
+      ]
+    },
+    "草莓自动采摘系统": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "卷积神经网络、全卷积神经网络、目标识别、定位、点云处理",
+          "count": 1
+        },
+        {
+          "method": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "method": "全卷积神经网络",
+          "count": 1
+        },
+        {
+          "method": "目标识别",
+          "count": 1
+        },
+        {
+          "method": "定位",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "草莓自动采摘",
+          "count": 1
+        },
+        {
+          "keyword": "目标识别",
+          "count": 1
+        },
+        {
+          "keyword": "定位",
+          "count": 1
+        },
+        {
+          "keyword": "卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "全卷积神经网络",
+          "count": 1
+        },
+        {
+          "keyword": "遗传算法",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻"
+      ]
+    },
+    "电力运检领域的知识抽取算法及应用": {
+      "paper_count": 1,
+      "author_count": 1,
+      "top_methods": [
+        {
+          "method": "层次编码、BERT预训练模型、依存句法分析",
+          "count": 1
+        },
+        {
+          "method": "层次编码",
+          "count": 1
+        },
+        {
+          "method": "BERT模型",
+          "count": 1
+        },
+        {
+          "method": "自注意力机制",
+          "count": 1
+        },
+        {
+          "method": "依存句法分析",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "电力运检",
+          "count": 1
+        },
+        {
+          "keyword": "知识抽取",
+          "count": 1
+        },
+        {
+          "keyword": "层次编码",
+          "count": 1
+        },
+        {
+          "keyword": "BERT模型",
+          "count": 1
+        },
+        {
+          "keyword": "依存句法分析",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷"
+      ]
+    },
+    "网络化多智能体系统的输出跟踪控制问题": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法",
+          "count": 1
+        },
+        {
+          "method": "状态观测器",
+          "count": 1
+        },
+        {
+          "method": "容错预测控制器",
+          "count": 1
+        },
+        {
+          "method": "时延补偿器",
+          "count": 1
+        },
+        {
+          "method": "闭环系统稳定性",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "网络化多智能体系统",
+          "count": 1
+        },
+        {
+          "keyword": "主动容错预测控制",
+          "count": 1
+        },
+        {
+          "keyword": "执行器故障",
+          "count": 1
+        },
+        {
+          "keyword": "传感器故障",
+          "count": 1
+        },
+        {
+          "keyword": "随机通信约束",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "网络化多智能体系统的主动容错预测控制方法研究_王时通"
+      ]
+    },
+    "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码",
+          "count": 1
+        },
+        {
+          "method": "音质特征",
+          "count": 1
+        },
+        {
+          "method": "VLAD编码",
+          "count": 1
+        },
+        {
+          "method": "线性SVM分类器",
+          "count": 1
+        },
+        {
+          "method": "数据增广",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "COVID-19自动检测",
+          "count": 1
+        },
+        {
+          "keyword": "语音切分",
+          "count": 1
+        },
+        {
+          "keyword": "语音质量特征",
+          "count": 1
+        },
+        {
+          "keyword": "局部聚合描述子向量",
+          "count": 1
+        },
+        {
+          "keyword": "情感识别",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然"
+      ]
+    },
+    "Cross-modal reasoning, referring expression comprehension, scene knowledge": {
+      "paper_count": 1,
+      "author_count": 4,
+      "top_methods": [
+        {
+          "method": "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning.",
+          "count": 1
+        },
+        {
+          "method": "Cross-attention mechanism",
+          "count": 1
+        },
+        {
+          "method": "Scene knowledge simplification",
+          "count": 1
+        },
+        {
+          "method": "Transformer architecture",
+          "count": 1
+        },
+        {
+          "method": "Swin Transformer",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "Cross-modal reasoning",
+          "count": 1
+        },
+        {
+          "keyword": "Referring expression comprehension",
+          "count": 1
+        },
+        {
+          "keyword": "Scene knowledge",
+          "count": 1
+        },
+        {
+          "keyword": "LG-R-NET",
+          "count": 1
+        },
+        {
+          "keyword": "SKRN",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "面向复杂文本的指称表达理解研究_陆明聪"
+      ]
+    },
+    "多视图数据的分类问题": {
+      "paper_count": 1,
+      "author_count": 5,
+      "top_methods": [
+        {
+          "method": "多视图有监督的LDA模型",
+          "count": 1
+        },
+        {
+          "method": "LDA模型",
+          "count": 1
+        },
+        {
+          "method": "Softmax模型",
+          "count": 1
+        },
+        {
+          "method": "变分EM算法",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "多视图分类",
+          "count": 1
+        },
+        {
+          "keyword": "概率主题模型",
+          "count": 1
+        },
+        {
+          "keyword": "变分期望最大化",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "多视图有监督的LDA模型"
+      ]
+    },
+    "区间灰数预测模型": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "合成灰数灰度的定义及其性质分析，建立灰度序列的GM(1,1)模型实现灰度预测",
+          "count": 1
+        },
+        {
+          "method": "GM(1,1)模型",
+          "count": 1
+        },
+        {
+          "method": "合成灰数",
+          "count": 1
+        },
+        {
+          "method": "灰度",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "区间灰数",
+          "count": 1
+        },
+        {
+          "keyword": "预测模型",
+          "count": 1
+        },
+        {
+          "keyword": "合成灰数",
+          "count": 1
+        },
+        {
+          "keyword": "灰度",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "考虑合成灰数灰度性质的改进区间灰数预测模型"
+      ]
+    },
+    "文本挖掘领域": {
+      "paper_count": 1,
+      "author_count": 3,
+      "top_methods": [
+        {
+          "method": "TF-IDF",
+          "count": 1
+        },
+        {
+          "method": "词频",
+          "count": 1
+        },
+        {
+          "method": "逆文档频率",
+          "count": 1
+        },
+        {
+          "method": "加权词频",
+          "count": 1
+        },
+        {
+          "method": "增量逆文档频率",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "词性和位置",
+          "count": 1
+        },
+        {
+          "keyword": "特征关键词",
+          "count": 1
+        },
+        {
+          "keyword": "提取方法",
+          "count": 1
+        },
+        {
+          "keyword": "加权词频",
+          "count": 1
+        },
+        {
+          "keyword": "增量逆文档频率",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于词性和位置的特征关键词提取方法_芦效峰"
+      ]
+    },
+    "信息评级，隐私保护": {
+      "paper_count": 1,
+      "author_count": 8,
+      "top_methods": [
+        {
+          "method": "普遍性分值U",
+          "count": 1
+        },
+        {
+          "method": "敏感性分值S",
+          "count": 1
+        },
+        {
+          "method": "隐私信息的安全等级",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "隐私信息评级",
+          "count": 1
+        },
+        {
+          "keyword": "搜索引擎数据",
+          "count": 1
+        },
+        {
+          "keyword": "普遍性分值",
+          "count": 1
+        },
+        {
+          "keyword": "敏感性分值",
+          "count": 1
+        },
+        {
+          "keyword": "安全等级",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "patent": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "移动通信、编码理论、人工智能": {
+      "paper_count": 1,
+      "author_count": 2,
+      "top_methods": [
+        {
+          "method": "使用TAST空时编码方案的星座映射设计优化问题",
+          "count": 1
+        },
+        {
+          "method": "BI-STCM-ID系统",
+          "count": 1
+        },
+        {
+          "method": "TAST码",
+          "count": 1
+        },
+        {
+          "method": "星座映射设计",
+          "count": 1
+        },
+        {
+          "method": "编码增益",
+          "count": 1
+        }
+      ],
+      "top_keywords": [
+        {
+          "keyword": "空时编码调制",
+          "count": 1
+        },
+        {
+          "keyword": "星座映射",
+          "count": 1
+        },
+        {
+          "keyword": "TAST码",
+          "count": 1
+        }
+      ],
+      "document_types": {
+        "academic_paper": 1
+      },
+      "activity_level": "小众领域",
+      "papers": [
+        "使用TAST码的BI_STCM_ID系统中的星座映射分析"
+      ]
+    }
+  },
+  "hotspot_analysis": {
+    "total_domains": 110,
+    "most_active_domains": [
+      {
+        "domain": "情感分析",
+        "paper_count": 3
+      },
+      {
+        "domain": "小样本图像分类",
+        "paper_count": 3
+      },
+      {
+        "domain": "Image captioning",
+        "paper_count": 2
+      },
+      {
+        "domain": "Image paragraph captioning",
+        "paper_count": 2
+      },
+      {
+        "domain": "图像检索",
+        "paper_count": 2
+      },
+      {
+        "domain": "跨模态检索",
+        "paper_count": 2
+      },
+      {
+        "domain": "Face recognition",
+        "paper_count": 1
+      },
+      {
+        "domain": "Stock Trend Prediction in Artificial Intelligence",
+        "paper_count": 1
+      },
+      {
+        "domain": "Quantum cryptography, quantum secure direct communication (QSDC), four-particle GHZ state",
+        "paper_count": 1
+      },
+      {
+        "domain": "Representation Learning",
+        "paper_count": 1
+      }
+    ]
+  }
+}

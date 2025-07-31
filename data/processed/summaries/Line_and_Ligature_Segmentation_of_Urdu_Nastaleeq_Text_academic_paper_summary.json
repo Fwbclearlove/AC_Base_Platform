@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "Line and Ligature Segmentation of Urdu Nastaleeq Text",
+  "authors": [
+    "I. Ahmad",
+    "S. A. Husain"
+  ],
+  "main_topic": "Optical Character Recognition (OCR) for Urdu Nastaleeq text",
+  "research_problem": "The recognition accuracy of ligature-based Urdu OCR systems is highly dependent on the segmentation accuracy of text into lines and ligatures",
+  "methodology": "Curved Line Split (CLS) algorithm for line segmentation and a ligature segmentation algorithm",
+  "key_innovations": [
+    "Enhanced classical horizontal projection-based segmentation",
+    "Curved-line-split algorithm",
+    "Quantitative information-based ligature segmentation"
+  ],
+  "experimental_results": "99.17% accuracy for line segmentation and 99.80% for ligature segmentation",
+  "conclusions": "The proposed algorithms for line and ligature segmentation of Urdu Nastaleeq text images outperform existing methods and can be extended to other Nastaleeq-based languages",
+  "keywords": [
+    "Urdu Nastaleeq",
+    "OCR",
+    "Line segmentation",
+    "Ligature segmentation",
+    "Curved Line Split"
+  ],
+  "application_domains": [
+    "Urdu text recognition",
+    "Nastaleeq script-based languages"
+  ],
+  "technical_concepts": [
+    "Horizontal projection",
+    "Connected components",
+    "Primary and secondary classes",
+    "Baseline information",
+    "Ligature segmentation algorithm"
+  ],
+  "performance_metrics": "Accuracy rates of 99.17% for line segmentation and 99.80% for ligature segmentation",
+  "summary": "This paper introduces algorithms for accurate line and ligature segmentation in Urdu Nastaleeq text, enhancing the classical horizontal projection method with a curved-line-split algorithm and achieving high segmentation accuracy rates. The research provides a significant improvement for OCR systems dealing with the complex nature of Nastaleeq scripts.",
+  "file_id": "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text",
+  "source_type": "cleaned",
+  "text_length": 19049,
+  "generation_time": "2025-07-31 21:22:37"
+}

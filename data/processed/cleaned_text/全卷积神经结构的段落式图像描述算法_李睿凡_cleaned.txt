@@ -1,0 +1,17 @@
+后的内容：
+
+段落式图像描述的目标是为给定图像生成描述性的自然语言段落。该任务连接计算机视觉和自然语言处理领域，是跨模态智能的重要研究方向，也是盲人导航和幼儿早期教育等应用的核心技术。当前，段落式图像描述算法主要采用编码器与解码器组合的端到端结构。基于卷积神经网络(CNN)的编码器将图像表示为视觉向量，循环神经网络(RNN)解码器将视觉向量解码为自然语言段落。然而，RNN解码器在长时记忆和连贯性方面存在局限。为提升连贯性，本文提出一种基于全卷积结构的图像段落描述算法。采用基于卷积网络的区域检测器获取图像表示，构建层次性的深度卷积解码器对图像表示解码，自动生成段落式文本描述。同时，将门控机制嵌入卷积解码器网络中，以提升模型的记忆能力。实验结果表明，新算法能够为图像生成更为连贯的段落式文本描述，在评测指标上取得较好结果。
+
+观察表1，人类描述段落与机器生成段落的BLEU得分接近，而CIDEr得分差异显著。这表明CIDEr评价指标能更好地揭示机器描述与人类描述之间的显著差异。与仅考虑n元组匹配程度的BLEU指标相比，基于共识的CIDEr指标更能反映生成段落的连贯性。在CIDEr指标上，所提方法比Sentence-Concat方法高出133.8%，显示出段落描述任务与单句描述任务间的巨大差异。此外，所提方法比Image-Flat方法高出43.2%，验证了所提解码器层次性结构的有效性。所提方法较Hierarchical-RNN方法高出17.8%，说明了卷积结构优势。
+
+不同束大小参数的评测结果表明，束大小为2时，评测结果最优。过小的束大小会导致解码信息丢失，过大的束大小则增加了解码时间复杂度并降低了段落多样性。
+
+实验进一步考察了迭代过程中各指标的变化，表明指标结果的一致性。各指标随迭代轮次的变化趋势基本保持一致，在第5至15个轮次之间上升，在第15个轮次左右达到最优性能。
+
+主观评价显示，所提方法生成的描述段落具有更强的上下文连贯性和语言逻辑性，减少了信息重复表达。提出的全卷积神经网络结构的段落式图像描述生成模型，通过层次性深度卷积解码器对图像表示进行解码，引入门控机制提升模型记忆能力，生成更连贯的描述段落。
+
+参考文献：
+[1] Vinyals O, Toshev A, Bengio S, et al. Show and tell: a neural image caption generator. In: 2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). New York: IEEE Press, 2015: 3156-3164.
+[2] Lu Jiasen, Xiong Caiming, Parikh D, et al. Knowing when to look: adaptive attention via a visual sentinel for image captioning. In: 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR). New York: IEEE Press, 2017: 375-383.
+[3] Mao Yuzhao, Zhou Chang, Wang Xiaojie, et al. Show and tell more: topic-oriented multi-sentence image captioning. In: Proceedings of the 27th International Joint Conference on Artificial Intelligence. California: International Joint Conferences on Artificial Intelligence Organization, 2018: 4258-4264.
+...以及其他参考文献。

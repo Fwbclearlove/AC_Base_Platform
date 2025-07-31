@@ -1,0 +1,45 @@
+{
+  "document_type": "academic_paper",
+  "title": "Enhanced Multi-Channel Graph Convolutional Network for Aspect Sentiment Triplet Extraction",
+  "authors": [
+    "Hao Chen",
+    "Zepeng Zhai",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+  "research_problem": "Existing studies neglect word relations and linguistic features in Aspect Sentiment Triplet Extraction (ASTE)",
+  "methodology": "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+  "key_innovations": [
+    "Proposed EMC-GCN to exploit word relations",
+    "Defined ten relation types",
+    "Incorporated linguistic features",
+    "Developed refining strategy for improved triplet extraction"
+  ],
+  "experimental_results": "EMC-GCN outperforms all pipeline, end-to-end, and MRC-based methods on two ABSA datasets",
+  "conclusions": "EMC-GCN effectively extracts aspect sentiment triplets by leveraging word relations and linguistic knowledge",
+  "keywords": [
+    "Aspect Sentiment Triplet Extraction",
+    "Graph Convolutional Network",
+    "Linguistic Features",
+    "Refining Strategy"
+  ],
+  "application_domains": [
+    "Sentiment analysis",
+    "Natural language processing"
+  ],
+  "technical_concepts": [
+    "EMC-GCN",
+    "Aspect-based Sentiment Analysis",
+    "Graph Convolutional Operations",
+    "Linguistic Features",
+    "Biaffine Attention Module"
+  ],
+  "performance_metrics": "Average of five runs with different random seeds, F1 metric",
+  "summary": "This paper introduces an Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN) for Aspect Sentiment Triplet Extraction (ASTE). The EMC-GCN model defines ten relation types, incorporates linguistic features, and employs a refining strategy to improve triplet extraction. Experimental results show the model's effectiveness and robustness in ABSA tasks.",
+  "file_id": "2022.acl_long.212",
+  "source_type": "cleaned",
+  "text_length": 17424,
+  "generation_time": "2025-07-31 21:11:31"
+}

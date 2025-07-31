@@ -1,0 +1,4841 @@
+{
+  "author_profiles": {
+    "Ruifan Li": {
+      "paper_count": 33,
+      "domains": [
+        "Visual Question Answering (VQA)",
+        "Aspect-Based Sentiment Analysis (ABSA), Aspect Sentiment Quadruplet Extraction (ASQE)",
+        "Electric equipment maintenance using reinforcement learning",
+        "Microblogging emotional classification based on User-Generated Content (UGC)",
+        "Face recognition",
+        "Multimodal data analysis using deep neural learning",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Aspect-Based Sentiment Analysis",
+        "Text-based power equipment fault recognition",
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+        "Few-shot learning in NLP",
+        "Distantly supervised relation extraction",
+        "Commonsense question answering, Knowledge Enhanced Graph Contrastive Learning, Graph reasoning",
+        "Chinese Spelling Correction (CSC)",
+        "Text-to-image synthesis with multi-concept customization",
+        "Image paragraph captioning",
+        "Structured Sentiment Analysis",
+        "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+        "Computer vision tasks, image harmonization",
+        "Aspect-based sentiment analysis",
+        "Text-to-image generation, subject-driven image generation, training-free framework",
+        "Image captioning",
+        "Multi-modal learning, bimodal data representations, image-tags",
+        "Counterfactual Referring Expression Comprehension (C-REC)",
+        "Visual feature learning for image retrieval in e-commerce",
+        "Cross-modal retrieval",
+        "Stock Trend Prediction in Artificial Intelligence",
+        "Weakly supervised phrase grounding",
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)",
+        "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning"
+      ],
+      "methods": [
+        "DualRel model",
+        "Template selection mechanism using a masked language model",
+        "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding",
+        "Bimodal Deep Architecture (BDA)",
+        "COntext-Masked MRC (COM-MRC) framework",
+        "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+        "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "Splitting to Tree Decoder (S2TD)",
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)",
+        "KE-GCL model, Graph Contrastive Learning, Adaptive sampling, Hard negative graph pairs",
+        "InfoLoss, a novel loss function for continual pretraining",
+        "Differential Networks (DN) and DN-based Fusion (DF)",
+        "BERT-based Graph Convolutional network Model (BGM)",
+        "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+        "Modality disentangled discriminator, AttnGAN, DM-GAN",
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+        "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+        "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+        "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "DualGCN model",
+        "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation",
+        "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+        "Harmony-VAE, inverse harmonization diffusion model",
+        "Enhanced Machine Reading Comprehension (EMRC)",
+        "Improved Transformer with IoU Position encoding model (TIP)",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+        "NCO-Spell, multi-character masking strategy, iterative inference algorithm"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Bohan Li",
+        "Fangxiang Feng",
+        "Yansong Feng",
+        "Yanquan Zhou",
+        "Cong Wang",
+        "Yongping Xiong",
+        "Yuantao Fan",
+        "Mingcong Lu",
+        "Yihui Shi",
+        "Pengfei Zhou",
+        "Yun Liu",
+        "Xuan Li",
+        "Ziqin Rao",
+        "Dongyan Zhao",
+        "Emily Mower-Provost",
+        "Weiguo Gao",
+        "Hailong Huang",
+        "Zhenyuan Ma",
+        "Zhihan Yu",
+        "Xinjing Liu",
+        "Yifan Du",
+        "Jinlai Liu",
+        "Xuyan Tu",
+        "Ziqun Liu",
+        "Huixing Jiang",
+        "Hao Chen",
+        "Chenfei Wu",
+        "Chuan Shi",
+        "Chen Wei",
+        "Xiaojie Wang",
+        "Zebin Yao",
+        "Peng Lu",
+        "Tianrui Niu",
+        "Zhanyu Ma",
+        "Feifan Fan",
+        "Yuzhao Mao",
+        "Qu-An Zheng",
+        "Zhiyu Wei",
+        "Yusong Zhang",
+        "Zepeng Zhang",
+        "Chang Zhou",
+        "Shuqin Ye",
+        "Qi Sun",
+        "Lihui Zhang",
+        "Guang Liu",
+        "Ding Yuan",
+        "Pengyue Lin",
+        "JianPing Shen",
+        "Eduard Hovy",
+        "Guangwei Zhang",
+        "Yelin Kim",
+        "Zeyuan Wang",
+        "Liqing Liu",
+        "Yazhou Li",
+        "Lei Ren"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 56,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "0_387_29295_0_82",
+        "0592",
+        "0628",
+        "1307.1275v1",
+        "2021.acl_long.494",
+        "2022.acl_long.212",
+        "2022.coling_1.234",
+        "2022.emnlp_main.212",
+        "2022.findings_emnlp.6",
+        "2023.acl_long.802",
+        "2025.coling_main.22",
+        "2408.03632v3",
+        "2504.15958v2",
+        "2647868.2654902",
+        "2820400",
+        "3191835.3191989",
+        "3394171.3416296",
+        "3469877.3490585",
+        "3483207.3483233",
+        "3548636.3548646",
+        "3664647.3681466",
+        "4930_Article_Text_7995_1_10_20190709",
+        "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+        "FAIA_372_FAIA230600",
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+        "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Cong Wang": {
+      "paper_count": 1,
+      "domains": [
+        "Face recognition"
+      ],
+      "methods": [
+        "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding"
+      ],
+      "collaborators": [
+        "Xuyan Tu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0_387_29295_0_82"
+      ]
+    },
+    "Xuyan Tu": {
+      "paper_count": 1,
+      "domains": [
+        "Face recognition"
+      ],
+      "methods": [
+        "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding"
+      ],
+      "collaborators": [
+        "Cong Wang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0_387_29295_0_82"
+      ]
+    },
+    "Yuzhao Mao": {
+      "paper_count": 2,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence",
+        "Image captioning"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+        "Topic-Oriented Multi-Sentence (TOMS) captioning model"
+      ],
+      "collaborators": [
+        "Qi Sun",
+        "Chang Zhou",
+        "Xuan Li",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "JianPing Shen",
+        "Hailong Huang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 9,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "0592",
+        "0628"
+      ]
+    },
+    "Chang Zhou": {
+      "paper_count": 1,
+      "domains": [
+        "Image captioning"
+      ],
+      "methods": [
+        "Topic-Oriented Multi-Sentence (TOMS) captioning model"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Ruifan Li",
+        "Yuzhao Mao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0592"
+      ]
+    },
+    "Xiaojie Wang": {
+      "paper_count": 23,
+      "domains": [
+        "Visual Question Answering (VQA)",
+        "Multimodal data analysis using deep neural learning",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Aspect-Based Sentiment Analysis",
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+        "Distantly supervised relation extraction",
+        "Text-to-image synthesis with multi-concept customization",
+        "Image paragraph captioning",
+        "Structured Sentiment Analysis",
+        "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+        "Computer vision tasks, image harmonization",
+        "Aspect-based sentiment analysis",
+        "Text-to-image generation, subject-driven image generation, training-free framework",
+        "Image captioning",
+        "Multi-modal learning, bimodal data representations, image-tags",
+        "Visual feature learning for image retrieval in e-commerce",
+        "Cross-modal retrieval",
+        "Stock Trend Prediction in Artificial Intelligence",
+        "Weakly supervised phrase grounding",
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)",
+        "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning"
+      ],
+      "methods": [
+        "DualRel model",
+        "Bimodal Deep Architecture (BDA)",
+        "COntext-Masked MRC (COM-MRC) framework",
+        "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "Splitting to Tree Decoder (S2TD)",
+        "InfoLoss, a novel loss function for continual pretraining",
+        "Differential Networks (DN) and DN-based Fusion (DF)",
+        "BERT-based Graph Convolutional network Model (BGM)",
+        "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+        "Modality disentangled discriminator, AttnGAN, DM-GAN",
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+        "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+        "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+        "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "DualGCN model",
+        "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+        "Harmony-VAE, inverse harmonization diffusion model",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Bohan Li",
+        "Fangxiang Feng",
+        "Yansong Feng",
+        "Yuantao Fan",
+        "Mingcong Lu",
+        "Yihui Shi",
+        "Pengfei Zhou",
+        "Yun Liu",
+        "Xuan Li",
+        "Ziqin Rao",
+        "Dongyan Zhao",
+        "Emily Mower-Provost",
+        "Weiguo Gao",
+        "Hailong Huang",
+        "Zhihan Yu",
+        "Xinjing Liu",
+        "Jinlai Liu",
+        "Huixing Jiang",
+        "Hao Chen",
+        "Chenfei Wu",
+        "Chuan Shi",
+        "Chen Wei",
+        "Zebin Yao",
+        "Peng Lu",
+        "Tianrui Niu",
+        "Zhanyu Ma",
+        "Feifan Fan",
+        "Yuzhao Mao",
+        "Chang Zhou",
+        "Shuqin Ye",
+        "Qi Sun",
+        "Guang Liu",
+        "Pengyue Lin",
+        "JianPing Shen",
+        "Eduard Hovy",
+        "Guangwei Zhang",
+        "Yelin Kim",
+        "Lei Ren",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 40,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "0592",
+        "0628",
+        "1307.1275v1",
+        "2021.acl_long.494",
+        "2022.acl_long.212",
+        "2022.coling_1.234",
+        "2022.emnlp_main.212",
+        "2023.acl_long.802",
+        "2025.coling_main.22",
+        "2408.03632v3",
+        "2504.15958v2",
+        "2647868.2654902",
+        "2820400",
+        "3394171.3416296",
+        "3469877.3490585",
+        "3664647.3681466",
+        "4930_Article_Text_7995_1_10_20190709",
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Guang Liu": {
+      "paper_count": 2,
+      "domains": [
+        "Computer vision tasks, image harmonization",
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+        "Harmony-VAE, inverse harmonization diffusion model"
+      ],
+      "collaborators": [
+        "Xuan Li",
+        "Qi Sun",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "JianPing Shen",
+        "Fangxiang Feng",
+        "Hailong Huang",
+        "Yuzhao Mao",
+        "Pengfei Zhou",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 10,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "0628",
+        "3664647.3681466"
+      ]
+    },
+    "Qi Sun": {
+      "paper_count": 1,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Xuan Li",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "JianPing Shen",
+        "Hailong Huang",
+        "Yuzhao Mao",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0628"
+      ]
+    },
+    "Hailong Huang": {
+      "paper_count": 1,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Xuan Li",
+        "Qi Sun",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "JianPing Shen",
+        "Yuzhao Mao",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0628"
+      ]
+    },
+    "Weiguo Gao": {
+      "paper_count": 1,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Xuan Li",
+        "Qi Sun",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "JianPing Shen",
+        "Hailong Huang",
+        "Yuzhao Mao",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0628"
+      ]
+    },
+    "Xuan Li": {
+      "paper_count": 1,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Qi Sun",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "JianPing Shen",
+        "Hailong Huang",
+        "Yuzhao Mao",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0628"
+      ]
+    },
+    "JianPing Shen": {
+      "paper_count": 1,
+      "domains": [
+        "Stock Trend Prediction in Artificial Intelligence"
+      ],
+      "methods": [
+        "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network"
+      ],
+      "collaborators": [
+        "Qi Sun",
+        "Xuan Li",
+        "Guang Liu",
+        "Xiaojie Wang",
+        "Weiguo Gao",
+        "Hailong Huang",
+        "Yuzhao Mao",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "0628"
+      ]
+    },
+    "Ian J. Goodfellow": {
+      "paper_count": 1,
+      "domains": [
+        "Representation Learning"
+      ],
+      "methods": [
+        "Three machine learning contests were conducted: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge"
+      ],
+      "collaborators": [
+        "et al."
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "1307.0414v1"
+      ]
+    },
+    "et al.": {
+      "paper_count": 3,
+      "domains": [
+        "网络化多智能体系统的输出跟踪控制问题",
+        "Representation Learning",
+        "Cross-modal reasoning, referring expression comprehension, scene knowledge"
+      ],
+      "methods": [
+        "Three machine learning contests were conducted: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge",
+        "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法",
+        "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning."
+      ],
+      "collaborators": [
+        "Shuang Liu",
+        "Ian J. Goodfellow",
+        "Pang Z H",
+        "Guangtao Li",
+        "Zhao X Y",
+        "Yao Liao",
+        "Sun J"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "1307.0414v1",
+        "网络化多智能体系统的主动容错预测控制方法研究_王时通",
+        "面向复杂文本的指称表达理解研究_陆明聪"
+      ]
+    },
+    "Fangxiang Feng": {
+      "paper_count": 17,
+      "domains": [
+        "Multi-modal learning, bimodal data representations, image-tags",
+        "Text-to-image synthesis with multi-concept customization",
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+        "Visual feature learning for image retrieval in e-commerce",
+        "Cross-modal retrieval",
+        "Image paragraph captioning",
+        "Distantly supervised relation extraction",
+        "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning",
+        "Weakly supervised phrase grounding",
+        "Computer vision tasks, image harmonization",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Multimodal data analysis using deep neural learning",
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Aspect-based sentiment analysis",
+        "Text-to-image generation, subject-driven image generation, training-free framework",
+        "Aspect-Based Sentiment Analysis"
+      ],
+      "methods": [
+        "Bimodal Deep Architecture (BDA)",
+        "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "DualGCN model",
+        "BERT-based Graph Convolutional network Model (BGM)",
+        "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "Harmony-VAE, inverse harmonization diffusion model",
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+        "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+        "Splitting to Tree Decoder (S2TD)",
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+        "DualRel model",
+        "Modality disentangled discriminator, AttnGAN, DM-GAN",
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "COntext-Masked MRC (COM-MRC) framework"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Bohan Li",
+        "Yansong Feng",
+        "Mingcong Lu",
+        "Yihui Shi",
+        "Pengfei Zhou",
+        "Yun Liu",
+        "Dongyan Zhao",
+        "Ziqin Rao",
+        "Emily Mower-Provost",
+        "Zhihan Yu",
+        "Huixing Jiang",
+        "Hao Chen",
+        "Chen Wei",
+        "Xiaojie Wang",
+        "Zebin Yao",
+        "Peng Lu",
+        "Tianrui Niu",
+        "Feifan Fan",
+        "Zhanyu Ma",
+        "Guang Liu",
+        "Pengyue Lin",
+        "Eduard Hovy",
+        "Yelin Kim",
+        "Lei Ren",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 26,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "1307.1275v1",
+        "2021.acl_long.494",
+        "2022.acl_long.212",
+        "2022.coling_1.234",
+        "2022.emnlp_main.212",
+        "2408.03632v3",
+        "2504.15958v2",
+        "2647868.2654902",
+        "2820400",
+        "3394171.3416296",
+        "3469877.3490585",
+        "3664647.3681466",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Liu Guang": {
+      "paper_count": 1,
+      "domains": [
+        "Financial time-series classification"
+      ],
+      "methods": [
+        "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)"
+      ],
+      "collaborators": [
+        "Li Ruifan",
+        "Wang Xiaojie"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "1911.09359v1"
+      ]
+    },
+    "Wang Xiaojie": {
+      "paper_count": 1,
+      "domains": [
+        "Financial time-series classification"
+      ],
+      "methods": [
+        "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)"
+      ],
+      "collaborators": [
+        "Li Ruifan",
+        "Liu Guang"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "1911.09359v1"
+      ]
+    },
+    "Li Ruifan": {
+      "paper_count": 4,
+      "domains": [
+        "Educational data mining",
+        "Multimodal sentiment classification",
+        "Financial time-series classification",
+        "Keystroke Dynamics-Based Authentication"
+      ],
+      "methods": [
+        "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+        "Multi-level fusion classification (MFC) model",
+        "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction",
+        "TOP10 detector"
+      ],
+      "collaborators": [
+        "Li Jian",
+        "Zhong Yixin",
+        "Liu Guang",
+        "He Chuan",
+        "Wang Xiaojie",
+        "Li Meiyun",
+        "Zhang Guangwei",
+        "Guo Xiaojing",
+        "Zhao Bing"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 9,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "1911.09359v1",
+        "978_3_642_23223_7_60",
+        "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+        "基于统计和加权的提高击键认证识别方法(英文)"
+      ]
+    },
+    "Hao Chen": {
+      "paper_count": 5,
+      "domains": [
+        "Structured Sentiment Analysis",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Aspect-based sentiment analysis",
+        "Aspect-Based Sentiment Analysis"
+      ],
+      "methods": [
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "DualGCN model",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "COntext-Masked MRC (COM-MRC) framework",
+        "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Dongyan Zhao",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Feifan Fan",
+        "Yansong Feng",
+        "Eduard Hovy",
+        "Zhanyu Ma",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 9,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "2021.acl_long.494",
+        "2022.acl_long.212",
+        "2022.emnlp_main.212",
+        "2023.acl_long.802",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis"
+      ]
+    },
+    "Zhanyu Ma": {
+      "paper_count": 6,
+      "domains": [
+        "Image paragraph captioning",
+        "Few-shot learning in NLP",
+        "Aspect-based sentiment analysis",
+        "Image captioning",
+        "Aspect-Based Sentiment Analysis"
+      ],
+      "methods": [
+        "DualGCN model",
+        "Splitting to Tree Decoder (S2TD)",
+        "Template selection mechanism using a masked language model",
+        "DualRel model",
+        "Improved Transformer with IoU Position encoding model (TIP)",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers."
+      ],
+      "collaborators": [
+        "Yun Liu",
+        "Lihui Zhang",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Eduard Hovy",
+        "Yihui Shi",
+        "Zeyuan Wang",
+        "Zhiyu Wei",
+        "Yazhou Li",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 11,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "2021.acl_long.494",
+        "3469877.3490585",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations"
+      ]
+    },
+    "Eduard Hovy": {
+      "paper_count": 2,
+      "domains": [
+        "Aspect-based sentiment analysis",
+        "Aspect-Based Sentiment Analysis"
+      ],
+      "methods": [
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "DualGCN model"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Zhanyu Ma",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "2021.acl_long.494",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis"
+      ]
+    },
+    "Zepeng Zhai": {
+      "paper_count": 4,
+      "domains": [
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Electric equipment maintenance using reinforcement learning",
+        "Structured Sentiment Analysis"
+      ],
+      "methods": [
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "COntext-Masked MRC (COM-MRC) framework",
+        "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid"
+      ],
+      "collaborators": [
+        "Dongyan Zhao",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Yansong Feng",
+        "Yongping Xiong",
+        "Zeyuan Wang",
+        "Yifan Du",
+        "Feifan Fan",
+        "Ziqun Liu",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 11,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "2022.acl_long.212",
+        "2022.emnlp_main.212",
+        "2023.acl_long.802",
+        "3483207.3483233"
+      ]
+    },
+    "Ziqin Rao": {
+      "paper_count": 1,
+      "domains": [
+        "Distantly supervised relation extraction"
+      ],
+      "methods": [
+        "BERT-based Graph Convolutional network Model (BGM)"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2022.coling_1.234"
+      ]
+    },
+    "Feifan Fan": {
+      "paper_count": 1,
+      "domains": [
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis"
+      ],
+      "methods": [
+        "COntext-Masked MRC (COM-MRC) framework"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Dongyan Zhao",
+        "Xiaojie Wang",
+        "Yansong Feng",
+        "Fangxiang Feng",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2022.emnlp_main.212"
+      ]
+    },
+    "Yansong Feng": {
+      "paper_count": 1,
+      "domains": [
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis"
+      ],
+      "methods": [
+        "COntext-Masked MRC (COM-MRC) framework"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Dongyan Zhao",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Feifan Fan",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2022.emnlp_main.212"
+      ]
+    },
+    "Dongyan Zhao": {
+      "paper_count": 1,
+      "domains": [
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis"
+      ],
+      "methods": [
+        "COntext-Masked MRC (COM-MRC) framework"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Xiaojie Wang",
+        "Yansong Feng",
+        "Fangxiang Feng",
+        "Feifan Fan",
+        "Ruifan Li",
+        "Hao Chen"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2022.emnlp_main.212"
+      ]
+    },
+    "Lihui Zhang": {
+      "paper_count": 2,
+      "domains": [
+        "Few-shot learning in NLP",
+        "Commonsense question answering, Knowledge Enhanced Graph Contrastive Learning, Graph reasoning"
+      ],
+      "methods": [
+        "KE-GCL model, Graph Contrastive Learning, Adaptive sampling, Hard negative graph pairs",
+        "Template selection mechanism using a masked language model"
+      ],
+      "collaborators": [
+        "Zhiyu Wei",
+        "Zeyuan Wang",
+        "Ruifan Li",
+        "Zhanyu Ma"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "2022.findings_emnlp.6",
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning"
+      ]
+    },
+    "Xinjing Liu": {
+      "paper_count": 1,
+      "domains": [
+        "Multimodal Aspect-Based Sentiment Analysis (MABSA)"
+      ],
+      "methods": [
+        "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)"
+      ],
+      "collaborators": [
+        "Shuqin Ye",
+        "Guangwei Zhang",
+        "Ruifan Li",
+        "Xiaojie Wang"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2025.coling_main.22"
+      ]
+    },
+    "Shuqin Ye": {
+      "paper_count": 2,
+      "domains": [
+        "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+        "Aspect-Based Sentiment Analysis (ABSA), Aspect Sentiment Quadruplet Extraction (ASQE)"
+      ],
+      "methods": [
+        "Enhanced Machine Reading Comprehension (EMRC)",
+        "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Guangwei Zhang",
+        "Xinjing Liu",
+        "Zepeng Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "2025.coling_main.22",
+        "FAIA_372_FAIA230600"
+      ]
+    },
+    "Guangwei Zhang": {
+      "paper_count": 3,
+      "domains": [
+        "Chinese Spelling Correction (CSC)",
+        "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+        "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)"
+      ],
+      "methods": [
+        "NCO-Spell, multi-character masking strategy, iterative inference algorithm",
+        "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+        "InfoLoss, a novel loss function for continual pretraining"
+      ],
+      "collaborators": [
+        "Shuqin Ye",
+        "Chuan Shi",
+        "Xiaojie Wang",
+        "Yuantao Fan",
+        "Yongping Xiong",
+        "Xinjing Liu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "2025.coling_main.22",
+        "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining"
+      ]
+    },
+    "Zebin Yao": {
+      "paper_count": 2,
+      "domains": [
+        "Text-to-image synthesis with multi-concept customization",
+        "Text-to-image generation, subject-driven image generation, training-free framework"
+      ],
+      "methods": [
+        "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting"
+      ],
+      "collaborators": [
+        "Chen Wei",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Huixing Jiang",
+        "Lei Ren",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "2408.03632v3",
+        "2504.15958v2"
+      ]
+    },
+    "Lei Ren": {
+      "paper_count": 1,
+      "domains": [
+        "Text-to-image generation, subject-driven image generation, training-free framework"
+      ],
+      "methods": [
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting"
+      ],
+      "collaborators": [
+        "Chen Wei",
+        "Xiaojie Wang",
+        "Zebin Yao",
+        "Fangxiang Feng",
+        "Huixing Jiang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2504.15958v2"
+      ]
+    },
+    "Huixing Jiang": {
+      "paper_count": 2,
+      "domains": [
+        "Visual feature learning for image retrieval in e-commerce",
+        "Text-to-image generation, subject-driven image generation, training-free framework"
+      ],
+      "methods": [
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting"
+      ],
+      "collaborators": [
+        "Chen Wei",
+        "Xiaojie Wang",
+        "Zebin Yao",
+        "Fangxiang Feng",
+        "Tianrui Niu",
+        "Lei Ren",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "2504.15958v2",
+        "3394171.3416296"
+      ]
+    },
+    "Chen Wei": {
+      "paper_count": 1,
+      "domains": [
+        "Text-to-image generation, subject-driven image generation, training-free framework"
+      ],
+      "methods": [
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Zebin Yao",
+        "Fangxiang Feng",
+        "Huixing Jiang",
+        "Lei Ren",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2504.15958v2"
+      ]
+    },
+    "FANGXIANG FENG": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal retrieval, deep learning, autoencoder"
+      ],
+      "methods": [
+        "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process"
+      ],
+      "collaborators": [
+        "XIAOJIE WANG",
+        "IBRAR AHMAD",
+        "RUIFAN LI"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2808205"
+      ]
+    },
+    "XIAOJIE WANG": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal retrieval, deep learning, autoencoder"
+      ],
+      "methods": [
+        "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process"
+      ],
+      "collaborators": [
+        "FANGXIANG FENG",
+        "IBRAR AHMAD",
+        "RUIFAN LI"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2808205"
+      ]
+    },
+    "RUIFAN LI": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal retrieval, deep learning, autoencoder"
+      ],
+      "methods": [
+        "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process"
+      ],
+      "collaborators": [
+        "FANGXIANG FENG",
+        "XIAOJIE WANG",
+        "IBRAR AHMAD"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2808205"
+      ]
+    },
+    "IBRAR AHMAD": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal retrieval, deep learning, autoencoder"
+      ],
+      "methods": [
+        "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process"
+      ],
+      "collaborators": [
+        "FANGXIANG FENG",
+        "XIAOJIE WANG",
+        "RUIFAN LI"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2808205"
+      ]
+    },
+    "Yelin Kim": {
+      "paper_count": 1,
+      "domains": [
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia"
+      ],
+      "methods": [
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Emily Mower-Provost",
+        "Fangxiang Feng",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2820400"
+      ]
+    },
+    "Emily Mower-Provost": {
+      "paper_count": 1,
+      "domains": [
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia"
+      ],
+      "methods": [
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Ruifan Li",
+        "Fangxiang Feng",
+        "Yelin Kim"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "2820400"
+      ]
+    },
+    "Ding Yuan": {
+      "paper_count": 1,
+      "domains": [
+        "Microblogging emotional classification based on User-Generated Content (UGC)"
+      ],
+      "methods": [
+        "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation"
+      ],
+      "collaborators": [
+        "Peng Lu",
+        "Yanquan Zhou",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3191835.3191989"
+      ]
+    },
+    "Yanquan Zhou": {
+      "paper_count": 1,
+      "domains": [
+        "Microblogging emotional classification based on User-Generated Content (UGC)"
+      ],
+      "methods": [
+        "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation"
+      ],
+      "collaborators": [
+        "Ruifan Li",
+        "Peng Lu",
+        "Ding Yuan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3191835.3191989"
+      ]
+    },
+    "Peng Lu": {
+      "paper_count": 2,
+      "domains": [
+        "Microblogging emotional classification based on User-Generated Content (UGC)",
+        "Multimodal data analysis using deep neural learning"
+      ],
+      "methods": [
+        "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation",
+        "Bimodal Deep Architecture (BDA)"
+      ],
+      "collaborators": [
+        "Ding Yuan",
+        "Xiaojie Wang",
+        "Bohan Li",
+        "Fangxiang Feng",
+        "Yanquan Zhou",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "3191835.3191989",
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture"
+      ]
+    },
+    "Tianrui Niu": {
+      "paper_count": 2,
+      "domains": [
+        "Visual feature learning for image retrieval in e-commerce",
+        "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning"
+      ],
+      "methods": [
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "Modality disentangled discriminator, AttnGAN, DM-GAN"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Huixing Jiang",
+        "Fangxiang Feng",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "3394171.3416296",
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis"
+      ]
+    },
+    "Yihui Shi": {
+      "paper_count": 3,
+      "domains": [
+        "Image paragraph captioning",
+        "Image captioning"
+      ],
+      "methods": [
+        "Improved Transformer with IoU Position encoding model (TIP)",
+        "DualRel model",
+        "Splitting to Tree Decoder (S2TD)"
+      ],
+      "collaborators": [
+        "Yun Liu",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Zhanyu Ma",
+        "Yazhou Li",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "3469877.3490585",
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations"
+      ]
+    },
+    "Yun Liu": {
+      "paper_count": 3,
+      "domains": [
+        "Image paragraph captioning",
+        "Image captioning"
+      ],
+      "methods": [
+        "Improved Transformer with IoU Position encoding model (TIP)",
+        "DualRel model",
+        "Splitting to Tree Decoder (S2TD)"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Yihui Shi",
+        "Zhanyu Ma",
+        "Yazhou Li",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "3469877.3490585",
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations"
+      ]
+    },
+    "Zeyuan Wang": {
+      "paper_count": 2,
+      "domains": [
+        "Few-shot learning in NLP",
+        "Electric equipment maintenance using reinforcement learning"
+      ],
+      "methods": [
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+        "Template selection mechanism using a masked language model"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Lihui Zhang",
+        "Yongping Xiong",
+        "Yifan Du",
+        "Zhanyu Ma",
+        "Zhiyu Wei",
+        "Ziqun Liu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "3483207.3483233",
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning"
+      ]
+    },
+    "Yifan Du": {
+      "paper_count": 1,
+      "domains": [
+        "Electric equipment maintenance using reinforcement learning"
+      ],
+      "methods": [
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Yongping Xiong",
+        "Zeyuan Wang",
+        "Ziqun Liu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3483207.3483233"
+      ]
+    },
+    "Yongping Xiong": {
+      "paper_count": 3,
+      "domains": [
+        "Chinese Spelling Correction (CSC)",
+        "Text-based power equipment fault recognition",
+        "Electric equipment maintenance using reinforcement learning"
+      ],
+      "methods": [
+        "NCO-Spell, multi-character masking strategy, iterative inference algorithm",
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Zhenyuan Ma",
+        "Mingcong Lu",
+        "Zeyuan Wang",
+        "Yifan Du",
+        "Liqing Liu",
+        "Guangwei Zhang",
+        "Qu-An Zheng",
+        "Ziqun Liu",
+        "Yusong Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 11,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "3483207.3483233",
+        "3548636.3548646",
+        "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction"
+      ]
+    },
+    "Ziqun Liu": {
+      "paper_count": 1,
+      "domains": [
+        "Electric equipment maintenance using reinforcement learning"
+      ],
+      "methods": [
+        "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid"
+      ],
+      "collaborators": [
+        "Zepeng Zhai",
+        "Yongping Xiong",
+        "Zeyuan Wang",
+        "Yifan Du",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3483207.3483233"
+      ]
+    },
+    "Mingcong Lu": {
+      "paper_count": 2,
+      "domains": [
+        "Text-based power equipment fault recognition",
+        "Weakly supervised phrase grounding"
+      ],
+      "methods": [
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Pengyue Lin",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Yongping Xiong",
+        "Zhenyuan Ma",
+        "Zhihan Yu",
+        "Liqing Liu",
+        "Qu-An Zheng",
+        "Yusong Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 10,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "3548636.3548646",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Yusong Zhang": {
+      "paper_count": 1,
+      "domains": [
+        "Text-based power equipment fault recognition"
+      ],
+      "methods": [
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Yongping Xiong",
+        "Zhenyuan Ma",
+        "Mingcong Lu",
+        "Liqing Liu",
+        "Qu-An Zheng",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3548636.3548646"
+      ]
+    },
+    "Qu-An Zheng": {
+      "paper_count": 1,
+      "domains": [
+        "Text-based power equipment fault recognition"
+      ],
+      "methods": [
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Yongping Xiong",
+        "Zhenyuan Ma",
+        "Mingcong Lu",
+        "Liqing Liu",
+        "Yusong Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3548636.3548646"
+      ]
+    },
+    "Zhenyuan Ma": {
+      "paper_count": 1,
+      "domains": [
+        "Text-based power equipment fault recognition"
+      ],
+      "methods": [
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Yongping Xiong",
+        "Mingcong Lu",
+        "Liqing Liu",
+        "Qu-An Zheng",
+        "Yusong Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3548636.3548646"
+      ]
+    },
+    "Liqing Liu": {
+      "paper_count": 1,
+      "domains": [
+        "Text-based power equipment fault recognition"
+      ],
+      "methods": [
+        "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)"
+      ],
+      "collaborators": [
+        "Yongping Xiong",
+        "Zhenyuan Ma",
+        "Mingcong Lu",
+        "Qu-An Zheng",
+        "Yusong Zhang",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 6,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3548636.3548646"
+      ]
+    },
+    "Yibing Song": {
+      "paper_count": 1,
+      "domains": [
+        "Phrase Grounding under weak supervision"
+      ],
+      "methods": [
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)"
+      ],
+      "collaborators": [
+        "Zhihong Chen",
+        "Xiang Wan",
+        "Ruifei Zhang",
+        "Guanbin Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Ruifei Zhang": {
+      "paper_count": 1,
+      "domains": [
+        "Phrase Grounding under weak supervision"
+      ],
+      "methods": [
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)"
+      ],
+      "collaborators": [
+        "Zhihong Chen",
+        "Xiang Wan",
+        "Guanbin Li",
+        "Yibing Song"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Zhihong Chen": {
+      "paper_count": 1,
+      "domains": [
+        "Phrase Grounding under weak supervision"
+      ],
+      "methods": [
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)"
+      ],
+      "collaborators": [
+        "Xiang Wan",
+        "Ruifei Zhang",
+        "Guanbin Li",
+        "Yibing Song"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Xiang Wan": {
+      "paper_count": 1,
+      "domains": [
+        "Phrase Grounding under weak supervision"
+      ],
+      "methods": [
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)"
+      ],
+      "collaborators": [
+        "Zhihong Chen",
+        "Ruifei Zhang",
+        "Guanbin Li",
+        "Yibing Song"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Guanbin Li": {
+      "paper_count": 1,
+      "domains": [
+        "Phrase Grounding under weak supervision"
+      ],
+      "methods": [
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)"
+      ],
+      "collaborators": [
+        "Zhihong Chen",
+        "Xiang Wan",
+        "Ruifei Zhang",
+        "Yibing Song"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3680897"
+      ]
+    },
+    "Pengfei Zhou": {
+      "paper_count": 1,
+      "domains": [
+        "Computer vision tasks, image harmonization"
+      ],
+      "methods": [
+        "Harmony-VAE, inverse harmonization diffusion model"
+      ],
+      "collaborators": [
+        "Ruifan Li",
+        "Fangxiang Feng",
+        "Guang Liu",
+        "Xiaojie Wang"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "3664647.3681466"
+      ]
+    },
+    "Chenfei Wu": {
+      "paper_count": 1,
+      "domains": [
+        "Visual Question Answering (VQA)"
+      ],
+      "methods": [
+        "Differential Networks (DN) and DN-based Fusion (DF)"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Ruifan Li",
+        "Jinlai Liu"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "4930_Article_Text_7995_1_10_20190709"
+      ]
+    },
+    "Jinlai Liu": {
+      "paper_count": 1,
+      "domains": [
+        "Visual Question Answering (VQA)"
+      ],
+      "methods": [
+        "Differential Networks (DN) and DN-based Fusion (DF)"
+      ],
+      "collaborators": [
+        "Chenfei Wu",
+        "Ruifan Li",
+        "Xiaojie Wang"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "4930_Article_Text_7995_1_10_20190709"
+      ]
+    },
+    "He Chuan": {
+      "paper_count": 1,
+      "domains": [
+        "Educational data mining"
+      ],
+      "methods": [
+        "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction"
+      ],
+      "collaborators": [
+        "Li Ruifan",
+        "Zhong Yixin"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "978_3_642_23223_7_60"
+      ]
+    },
+    "Zhong Yixin": {
+      "paper_count": 1,
+      "domains": [
+        "Educational data mining"
+      ],
+      "methods": [
+        "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction"
+      ],
+      "collaborators": [
+        "He Chuan",
+        "Li Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "978_3_642_23223_7_60"
+      ]
+    },
+    "Yuantao Fan": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)"
+      ],
+      "methods": [
+        "InfoLoss, a novel loss function for continual pretraining"
+      ],
+      "collaborators": [
+        "Chuan Shi",
+        "Guangwei Zhang",
+        "Ruifan Li",
+        "Xiaojie Wang"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining"
+      ]
+    },
+    "Chuan Shi": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)"
+      ],
+      "methods": [
+        "InfoLoss, a novel loss function for continual pretraining"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Guangwei Zhang",
+        "Ruifan Li",
+        "Yuantao Fan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining"
+      ]
+    },
+    "KONISHI Yusuke": {
+      "paper_count": 1,
+      "domains": [
+        "Japanese Idiom Education Support System"
+      ],
+      "methods": [
+        "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance."
+      ],
+      "collaborators": [
+        "Ruifan LI",
+        "Fuji REN"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Designing_a_Japanese_idiom_education_support_system_for_overseas_students"
+      ]
+    },
+    "Ruifan LI": {
+      "paper_count": 2,
+      "domains": [
+        "Japanese Idiom Education Support System",
+        "Dimensionality reduction in text processing"
+      ],
+      "methods": [
+        "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance.",
+        "Locally Linear Embedding (LLE)"
+      ],
+      "collaborators": [
+        "Yixin ZHONG",
+        "Fuji REN",
+        "Zhe DONG",
+        "Chuan HE",
+        "KONISHI Yusuke"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+        "Dimensionality_reduction_for_text_using_LLE"
+      ]
+    },
+    "Fuji REN": {
+      "paper_count": 1,
+      "domains": [
+        "Japanese Idiom Education Support System"
+      ],
+      "methods": [
+        "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance."
+      ],
+      "collaborators": [
+        "Ruifan LI",
+        "KONISHI Yusuke"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Designing_a_Japanese_idiom_education_support_system_for_overseas_students"
+      ]
+    },
+    "Chuan HE": {
+      "paper_count": 1,
+      "domains": [
+        "Dimensionality reduction in text processing"
+      ],
+      "methods": [
+        "Locally Linear Embedding (LLE)"
+      ],
+      "collaborators": [
+        "Ruifan LI",
+        "Yixin ZHONG",
+        "Zhe DONG"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Dimensionality_reduction_for_text_using_LLE"
+      ]
+    },
+    "Zhe DONG": {
+      "paper_count": 1,
+      "domains": [
+        "Dimensionality reduction in text processing"
+      ],
+      "methods": [
+        "Locally Linear Embedding (LLE)"
+      ],
+      "collaborators": [
+        "Ruifan LI",
+        "Yixin ZHONG",
+        "Chuan HE"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Dimensionality_reduction_for_text_using_LLE"
+      ]
+    },
+    "Yixin ZHONG": {
+      "paper_count": 1,
+      "domains": [
+        "Dimensionality reduction in text processing"
+      ],
+      "methods": [
+        "Locally Linear Embedding (LLE)"
+      ],
+      "collaborators": [
+        "Ruifan LI",
+        "Zhe DONG",
+        "Chuan HE"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Dimensionality_reduction_for_text_using_LLE"
+      ]
+    },
+    "未在原文中明确列出": {
+      "paper_count": 8,
+      "domains": [
+        "段落式图像描述任务，连接计算机视觉和自然语言处理两个关键领域",
+        "Multimodal Synset Induction",
+        "常识问答任务（Commonsense Question Answering，CQA）",
+        "少样本关系抽取任务",
+        "自然语言处理中的关系抽取",
+        "自然语言处理，少样本学习，提示学习，文本分类",
+        "电力运检领域的知识抽取算法及应用",
+        "草莓自动采摘系统"
+      ],
+      "methods": [
+        "卷积神经网络、全卷积神经网络、目标识别、定位、点云处理",
+        "Visually Enhanced NeUral Encoder (VENUE)",
+        "知识增强型图对比学习（KE-GCL）和提示型知识生成网络（PKGN）",
+        "层次编码、BERT预训练模型、依存句法分析",
+        "提出了基于全卷积神经结构的段落式图像描述方法，包括全卷积解码器和融合区域注意力的段落式图像描述模型Dual-CNN",
+        "利用实体概念作为融入知识，设计了结合语义门控机制和距离打分器的知识融合模块，以及领域导向的元训练方法",
+        "基于提示学习和三元组损失的少样本文本分类算法",
+        "远程监督方法，L2G-GCN模型"
+      ],
+      "collaborators": [],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 0,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "electronics_12_03521_v2",
+        "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
+        "基于实体的概念指导的少样本关系抽取研究与应用_王泽元",
+        "基于常识知识的多选式问答研究_张力翚",
+        "基于提示学习的少样本文本分类研究与应用_魏志宇",
+        "基于深度卷积结构的图像段落描述研究_梁昊雨",
+        "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻",
+        "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷"
+      ]
+    },
+    "李睿凡": {
+      "paper_count": 14,
+      "domains": [
+        "多视图数据的分类问题",
+        "智能科学技术导论的教学目的、策略和改进思考",
+        "文本挖掘领域",
+        "智能科学与技术专业的C语言教学变革",
+        "信息评级，隐私保护",
+        "深度学习中的卷积神经网络的教学工作",
+        "少样本文本分类",
+        "区间灰数预测模型",
+        "在人工智能类课程中引入深度学习的初步内容和实施建议",
+        "计算机游戏中的智能技术",
+        "表情识别",
+        "人脸识别",
+        "移动通信、编码理论、人工智能",
+        "空时编码调制；星座映射；LDC码"
+      ],
+      "methods": [
+        "教学内容安排和教学内容之外的考虑",
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级",
+        "合成灰数灰度的定义及其性质分析，建立灰度序列的GM(1,1)模型实现灰度预测",
+        "使用TAST空时编码方案的星座映射设计优化问题",
+        "鲁棒局部保持投影算法",
+        "多视图有监督的LDA模型",
+        "本发明提供了一种基于词性和位置的特征关键词提取方法，包括文本预处理，去除特定词性的候选关键词，计算加权词频，计算增量逆文档频率，计算权重，排序并选择权重最大的词作为关键词",
+        "基于最大化编码增益的高维星座映射设计优化问题；基于最大化欧式距离调和均值的一维星座映射设计优化问题",
+        "讨论游戏设计元素与人工智能之间的关系，介绍A*算法、有限状态机、群体寻径等技术，讨论适应与学习等游戏开发者关注的问题",
+        "KFD—Isomap算法",
+        "EPL4FTC算法",
+        "教学内容和方法改变的具体措施，将课程分为语言学习和项目实践两大部分"
+      ],
+      "collaborators": [
+        "王文婷",
+        "涂序彦",
+        "钟义信",
+        "郭燕慧",
+        "王小捷",
+        "袁彩霞",
+        "刘咏彬",
+        "李卫",
+        "叶书勤",
+        "张光卫",
+        "王枞",
+        "魏志宇",
+        "范元涛",
+        "焦晨晨",
+        "曲昭伟",
+        "刘海涛",
+        "李晓旭",
+        "芦效峰",
+        "汪秉文",
+        "左申正",
+        "周延泉",
+        "赵传钢",
+        "王大鹏",
+        "冯方向",
+        "陈佳洁",
+        "曹洁",
+        "郝红卫",
+        "李蕾",
+        "李晖",
+        "鲁鹏",
+        "朱强生"
+      ],
+      "document_types": [
+        "academic_paper",
+        "patent"
+      ],
+      "collaboration_strength": 31,
+      "productivity_level": "高产研究者",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method",
+        "使用LDC码的BI_STCM_ID系统中的星座映射分析",
+        "基于KFD_Isomap的人脸识别",
+        "引入深度学习的人工智能类课程",
+        "智能科学技术导论教学目的及策略",
+        "深度学习中卷积神经网络的教学探讨",
+        "计算机游戏中的智能技术",
+        "面向_智能科学与技术_专业的C语言教学探讨",
+        "鲁棒局部保持投影的表情识别",
+        "多视图有监督的LDA模型",
+        "考虑合成灰数灰度性质的改进区间灰数预测模型",
+        "基于词性和位置的特征关键词提取方法_芦效峰",
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰",
+        "使用TAST码的BI_STCM_ID系统中的星座映射分析"
+      ]
+    },
+    "魏志宇": {
+      "paper_count": 1,
+      "domains": [
+        "少样本文本分类"
+      ],
+      "methods": [
+        "EPL4FTC算法"
+      ],
+      "collaborators": [
+        "张光卫",
+        "李睿凡",
+        "叶书勤",
+        "范元涛"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method"
+      ]
+    },
+    "范元涛": {
+      "paper_count": 1,
+      "domains": [
+        "少样本文本分类"
+      ],
+      "methods": [
+        "EPL4FTC算法"
+      ],
+      "collaborators": [
+        "张光卫",
+        "叶书勤",
+        "李睿凡",
+        "魏志宇"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method"
+      ]
+    },
+    "叶书勤": {
+      "paper_count": 1,
+      "domains": [
+        "少样本文本分类"
+      ],
+      "methods": [
+        "EPL4FTC算法"
+      ],
+      "collaborators": [
+        "张光卫",
+        "李睿凡",
+        "魏志宇",
+        "范元涛"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method"
+      ]
+    },
+    "张光卫": {
+      "paper_count": 1,
+      "domains": [
+        "少样本文本分类"
+      ],
+      "methods": [
+        "EPL4FTC算法"
+      ],
+      "collaborators": [
+        "叶书勤",
+        "李睿凡",
+        "魏志宇",
+        "范元涛"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method"
+      ]
+    },
+    "Zhiyu Wei": {
+      "paper_count": 1,
+      "domains": [
+        "Few-shot learning in NLP"
+      ],
+      "methods": [
+        "Template selection mechanism using a masked language model"
+      ],
+      "collaborators": [
+        "Lihui Zhang",
+        "Zeyuan Wang",
+        "Ruifan Li",
+        "Zhanyu Ma"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning"
+      ]
+    },
+    "Zepeng Zhang": {
+      "paper_count": 1,
+      "domains": [
+        "Aspect-Based Sentiment Analysis (ABSA), Aspect Sentiment Quadruplet Extraction (ASQE)"
+      ],
+      "methods": [
+        "Enhanced Machine Reading Comprehension (EMRC)"
+      ],
+      "collaborators": [
+        "Shuqin Ye",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "FAIA_372_FAIA230600"
+      ]
+    },
+    "Yazhou Li": {
+      "paper_count": 1,
+      "domains": [
+        "Image captioning"
+      ],
+      "methods": [
+        "Improved Transformer with IoU Position encoding model (TIP)"
+      ],
+      "collaborators": [
+        "Yun Liu",
+        "Yihui Shi",
+        "Ruifan Li",
+        "Zhanyu Ma"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding"
+      ]
+    },
+    "LI Jian": {
+      "paper_count": 1,
+      "domains": [
+        "Quantum information security, quantum direct communication"
+      ],
+      "methods": [
+        "Extended three-particle GHZ state, entropy theory"
+      ],
+      "collaborators": [
+        "LU Xiaofeng",
+        "ZOU Yongzhong",
+        "YE Xinxin",
+        "LI Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "YE Xinxin": {
+      "paper_count": 1,
+      "domains": [
+        "Quantum information security, quantum direct communication"
+      ],
+      "methods": [
+        "Extended three-particle GHZ state, entropy theory"
+      ],
+      "collaborators": [
+        "LU Xiaofeng",
+        "LI Jian",
+        "ZOU Yongzhong",
+        "LI Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "LI Ruifan": {
+      "paper_count": 1,
+      "domains": [
+        "Quantum information security, quantum direct communication"
+      ],
+      "methods": [
+        "Extended three-particle GHZ state, entropy theory"
+      ],
+      "collaborators": [
+        "LU Xiaofeng",
+        "LI Jian",
+        "YE Xinxin",
+        "ZOU Yongzhong"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "ZOU Yongzhong": {
+      "paper_count": 1,
+      "domains": [
+        "Quantum information security, quantum direct communication"
+      ],
+      "methods": [
+        "Extended three-particle GHZ state, entropy theory"
+      ],
+      "collaborators": [
+        "LU Xiaofeng",
+        "LI Jian",
+        "YE Xinxin",
+        "LI Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "LU Xiaofeng": {
+      "paper_count": 1,
+      "domains": [
+        "Quantum information security, quantum direct communication"
+      ],
+      "methods": [
+        "Extended three-particle GHZ state, entropy theory"
+      ],
+      "collaborators": [
+        "LI Jian",
+        "ZOU Yongzhong",
+        "YE Xinxin",
+        "LI Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol"
+      ]
+    },
+    "Anderson": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Hong": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Zhu": {
+      "paper_count": 2,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 23,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Zhang": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Li": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Khattak": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Rezatofighi": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Kazemzadeh": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Plummer": {
+      "paper_count": 2,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 23,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Liao": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Ye": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Huang": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Zhao": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Ho": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Deng": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Shi": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Krishna": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Wang": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Yu": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Mu": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Lu": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "Chen": {
+      "paper_count": 2,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "He",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 23,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "He": {
+      "paper_count": 1,
+      "domains": [
+        "Vision and Language tasks, Referring Expression Comprehension"
+      ],
+      "methods": [
+        "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss"
+      ],
+      "collaborators": [
+        "Huang",
+        "Anderson",
+        "Mu",
+        "Zhu",
+        "Ye",
+        "Zhang",
+        "Shi",
+        "Yu",
+        "Plummer",
+        "Ho",
+        "Liao",
+        "Khattak",
+        "Chen",
+        "Deng",
+        "Li",
+        "Hong",
+        "Lu",
+        "Krishna",
+        "Kazemzadeh",
+        "Wang",
+        "Rezatofighi",
+        "Zhao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 22,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension"
+      ]
+    },
+    "I. Ahmad": {
+      "paper_count": 1,
+      "domains": [
+        "Optical Character Recognition (OCR) for Urdu Nastaleeq text"
+      ],
+      "methods": [
+        "Curved Line Split (CLS) algorithm for line segmentation and a ligature segmentation algorithm"
+      ],
+      "collaborators": [
+        "S. A. Husain"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text"
+      ]
+    },
+    "S. A. Husain": {
+      "paper_count": 1,
+      "domains": [
+        "Optical Character Recognition (OCR) for Urdu Nastaleeq text"
+      ],
+      "methods": [
+        "Curved Line Split (CLS) algorithm for line segmentation and a ligature segmentation algorithm"
+      ],
+      "collaborators": [
+        "I. Ahmad"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text"
+      ]
+    },
+    "Bohan Li": {
+      "paper_count": 1,
+      "domains": [
+        "Multimodal data analysis using deep neural learning"
+      ],
+      "methods": [
+        "Bimodal Deep Architecture (BDA)"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Peng Lu",
+        "Fangxiang Feng",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture"
+      ]
+    },
+    "Zhang Guangwei": {
+      "paper_count": 1,
+      "domains": [
+        "Multimodal sentiment classification"
+      ],
+      "methods": [
+        "Multi-level fusion classification (MFC) model"
+      ],
+      "collaborators": [
+        "Li Ruifan",
+        "Zhao Bing"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification"
+      ]
+    },
+    "Zhao Bing": {
+      "paper_count": 1,
+      "domains": [
+        "Multimodal sentiment classification"
+      ],
+      "methods": [
+        "Multi-level fusion classification (MFC) model"
+      ],
+      "collaborators": [
+        "Zhang Guangwei",
+        "Li Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification"
+      ]
+    },
+    "Zhihan Yu": {
+      "paper_count": 2,
+      "domains": [
+        "Counterfactual Referring Expression Comprehension (C-REC)",
+        "Weakly supervised phrase grounding"
+      ],
+      "methods": [
+        "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations"
+      ],
+      "collaborators": [
+        "Pengyue Lin",
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Mingcong Lu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Pengyue Lin": {
+      "paper_count": 1,
+      "domains": [
+        "Weakly supervised phrase grounding"
+      ],
+      "methods": [
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations"
+      ],
+      "collaborators": [
+        "Xiaojie Wang",
+        "Fangxiang Feng",
+        "Mingcong Lu",
+        "Zhihan Yu",
+        "Ruifan Li"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding"
+      ]
+    },
+    "Li Jian": {
+      "paper_count": 1,
+      "domains": [
+        "Keystroke Dynamics-Based Authentication"
+      ],
+      "methods": [
+        "TOP10 detector"
+      ],
+      "collaborators": [
+        "Guo Xiaojing",
+        "Li Ruifan",
+        "Li Meiyun"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于统计和加权的提高击键认证识别方法(英文)"
+      ]
+    },
+    "Guo Xiaojing": {
+      "paper_count": 1,
+      "domains": [
+        "Keystroke Dynamics-Based Authentication"
+      ],
+      "methods": [
+        "TOP10 detector"
+      ],
+      "collaborators": [
+        "Li Jian",
+        "Li Ruifan",
+        "Li Meiyun"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于统计和加权的提高击键认证识别方法(英文)"
+      ]
+    },
+    "Li Meiyun": {
+      "paper_count": 1,
+      "domains": [
+        "Keystroke Dynamics-Based Authentication"
+      ],
+      "methods": [
+        "TOP10 detector"
+      ],
+      "collaborators": [
+        "Guo Xiaojing",
+        "Li Jian",
+        "Li Ruifan"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于统计和加权的提高击键认证识别方法(英文)"
+      ]
+    },
+    "赵传钢": {
+      "paper_count": 2,
+      "domains": [
+        "移动通信、编码理论、人工智能",
+        "空时编码调制；星座映射；LDC码"
+      ],
+      "methods": [
+        "使用TAST空时编码方案的星座映射设计优化问题",
+        "基于最大化编码增益的高维星座映射设计优化问题；基于最大化欧式距离调和均值的一维星座映射设计优化问题"
+      ],
+      "collaborators": [
+        "李睿凡"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "使用LDC码的BI_STCM_ID系统中的星座映射分析",
+        "使用TAST码的BI_STCM_ID系统中的星座映射分析"
+      ]
+    },
+    "郝红卫": {
+      "paper_count": 1,
+      "domains": [
+        "人脸识别"
+      ],
+      "methods": [
+        "KFD—Isomap算法"
+      ],
+      "collaborators": [
+        "王枞",
+        "李睿凡",
+        "涂序彦"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于KFD_Isomap的人脸识别"
+      ]
+    },
+    "涂序彦": {
+      "paper_count": 1,
+      "domains": [
+        "人脸识别"
+      ],
+      "methods": [
+        "KFD—Isomap算法"
+      ],
+      "collaborators": [
+        "王枞",
+        "李睿凡",
+        "郝红卫"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于KFD_Isomap的人脸识别"
+      ]
+    },
+    "王枞": {
+      "paper_count": 1,
+      "domains": [
+        "人脸识别"
+      ],
+      "methods": [
+        "KFD—Isomap算法"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "郝红卫",
+        "涂序彦"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于KFD_Isomap的人脸识别"
+      ]
+    },
+    "王小捷": {
+      "paper_count": 3,
+      "domains": [
+        "多视图数据的分类问题",
+        "在人工智能类课程中引入深度学习的初步内容和实施建议",
+        "深度学习中的卷积神经网络的教学工作"
+      ],
+      "methods": [
+        "多视图有监督的LDA模型",
+        "教学内容安排和教学内容之外的考虑"
+      ],
+      "collaborators": [
+        "李晓旭",
+        "冯方向",
+        "钟义信",
+        "李睿凡",
+        "陈佳洁",
+        "周延泉",
+        "曹洁"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "活跃研究者",
+      "papers": [
+        "引入深度学习的人工智能类课程",
+        "深度学习中卷积神经网络的教学探讨",
+        "多视图有监督的LDA模型"
+      ]
+    },
+    "钟义信": {
+      "paper_count": 2,
+      "domains": [
+        "在人工智能类课程中引入深度学习的初步内容和实施建议",
+        "深度学习中的卷积神经网络的教学工作"
+      ],
+      "methods": [
+        "教学内容安排和教学内容之外的考虑"
+      ],
+      "collaborators": [
+        "王小捷",
+        "周延泉",
+        "陈佳洁",
+        "李睿凡"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "引入深度学习的人工智能类课程",
+        "深度学习中卷积神经网络的教学探讨"
+      ]
+    },
+    "周延泉": {
+      "paper_count": 2,
+      "domains": [
+        "深度学习中的卷积神经网络的教学工作",
+        "智能科学技术导论的教学目的、策略和改进思考"
+      ],
+      "methods": [
+        "教学内容安排和教学内容之外的考虑"
+      ],
+      "collaborators": [
+        "钟义信",
+        "李睿凡",
+        "焦晨晨",
+        "陈佳洁",
+        "王小捷"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 5,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "智能科学技术导论教学目的及策略",
+        "深度学习中卷积神经网络的教学探讨"
+      ]
+    },
+    "焦晨晨": {
+      "paper_count": 1,
+      "domains": [
+        "智能科学技术导论的教学目的、策略和改进思考"
+      ],
+      "methods": [],
+      "collaborators": [
+        "李睿凡",
+        "周延泉"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "智能科学技术导论教学目的及策略"
+      ]
+    },
+    "陈佳洁": {
+      "paper_count": 1,
+      "domains": [
+        "深度学习中的卷积神经网络的教学工作"
+      ],
+      "methods": [
+        "教学内容安排和教学内容之外的考虑"
+      ],
+      "collaborators": [
+        "王小捷",
+        "周延泉",
+        "李睿凡",
+        "钟义信"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "深度学习中卷积神经网络的教学探讨"
+      ]
+    },
+    "左申正": {
+      "paper_count": 1,
+      "domains": [
+        "计算机游戏中的智能技术"
+      ],
+      "methods": [
+        "讨论游戏设计元素与人工智能之间的关系，介绍A*算法、有限状态机、群体寻径等技术，讨论适应与学习等游戏开发者关注的问题"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "李卫"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "计算机游戏中的智能技术"
+      ]
+    },
+    "李卫": {
+      "paper_count": 1,
+      "domains": [
+        "计算机游戏中的智能技术"
+      ],
+      "methods": [
+        "讨论游戏设计元素与人工智能之间的关系，介绍A*算法、有限状态机、群体寻径等技术，讨论适应与学习等游戏开发者关注的问题"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "左申正"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "计算机游戏中的智能技术"
+      ]
+    },
+    "李蕾": {
+      "paper_count": 2,
+      "domains": [
+        "信息评级，隐私保护",
+        "智能科学与技术专业的C语言教学变革"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级",
+        "教学内容和方法改变的具体措施，将课程分为语言学习和项目实践两大部分"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "鲁鹏",
+        "李睿凡",
+        "曲昭伟",
+        "李晖",
+        "袁彩霞",
+        "刘咏彬"
+      ],
+      "document_types": [
+        "academic_paper",
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "面向_智能科学与技术_专业的C语言教学探讨",
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "朱强生": {
+      "paper_count": 1,
+      "domains": [
+        "表情识别"
+      ],
+      "methods": [
+        "鲁棒局部保持投影算法"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "刘海涛",
+        "郭燕慧"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "鲁棒局部保持投影的表情识别"
+      ]
+    },
+    "郭燕慧": {
+      "paper_count": 1,
+      "domains": [
+        "表情识别"
+      ],
+      "methods": [
+        "鲁棒局部保持投影算法"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "刘海涛",
+        "朱强生"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "鲁棒局部保持投影的表情识别"
+      ]
+    },
+    "刘海涛": {
+      "paper_count": 1,
+      "domains": [
+        "表情识别"
+      ],
+      "methods": [
+        "鲁棒局部保持投影算法"
+      ],
+      "collaborators": [
+        "郭燕慧",
+        "李睿凡",
+        "朱强生"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "鲁棒局部保持投影的表情识别"
+      ]
+    },
+    "Yu Q": {
+      "paper_count": 1,
+      "domains": [
+        "时间敏感网络，调度与路由优化"
+      ],
+      "methods": [
+        "完全集中式配置模型，软件定义网络（SDN），整数线性规划（ILP）调度方法，基于绝对优先级的实时调度路由算法"
+      ],
+      "collaborators": [
+        "等人"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于优先级的时间敏感网络流量调度算法研究_李红硕"
+      ]
+    },
+    "等人": {
+      "paper_count": 1,
+      "domains": [
+        "时间敏感网络，调度与路由优化"
+      ],
+      "methods": [
+        "完全集中式配置模型，软件定义网络（SDN），整数线性规划（ILP）调度方法，基于绝对优先级的实时调度路由算法"
+      ],
+      "collaborators": [
+        "Yu Q"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于优先级的时间敏感网络流量调度算法研究_李红硕"
+      ]
+    },
+    "王远航": {
+      "paper_count": 1,
+      "domains": [
+        "轮式移动机器人在户外种植园行间的自主行驶技术"
+      ],
+      "methods": [
+        "理论分析和地面地形检测方法"
+      ],
+      "collaborators": [],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 0,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "户外种植园行间可通行区域识别与路径生成方法研究_王远航"
+      ]
+    },
+    "毕松": {
+      "paper_count": 1,
+      "domains": [
+        "果园行间自主导航技术"
+      ],
+      "methods": [
+        "基于激光雷达和单目视觉的导航方法"
+      ],
+      "collaborators": [
+        "王宇豪"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "果园行间自主导航关键技术研究_王宇豪"
+      ]
+    },
+    "王宇豪": {
+      "paper_count": 1,
+      "domains": [
+        "果园行间自主导航技术"
+      ],
+      "methods": [
+        "基于激光雷达和单目视觉的导航方法"
+      ],
+      "collaborators": [
+        "毕松"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 1,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "果园行间自主导航关键技术研究_王宇豪"
+      ]
+    },
+    "Pang Z H": {
+      "paper_count": 1,
+      "domains": [
+        "网络化多智能体系统的输出跟踪控制问题"
+      ],
+      "methods": [
+        "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法"
+      ],
+      "collaborators": [
+        "et al.",
+        "Sun J",
+        "Zhao X Y"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "网络化多智能体系统的主动容错预测控制方法研究_王时通"
+      ]
+    },
+    "Zhao X Y": {
+      "paper_count": 1,
+      "domains": [
+        "网络化多智能体系统的输出跟踪控制问题"
+      ],
+      "methods": [
+        "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法"
+      ],
+      "collaborators": [
+        "Pang Z H",
+        "et al.",
+        "Sun J"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "网络化多智能体系统的主动容错预测控制方法研究_王时通"
+      ]
+    },
+    "Sun J": {
+      "paper_count": 1,
+      "domains": [
+        "网络化多智能体系统的输出跟踪控制问题"
+      ],
+      "methods": [
+        "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法"
+      ],
+      "collaborators": [
+        "Pang Z H",
+        "et al.",
+        "Zhao X Y"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "网络化多智能体系统的主动容错预测控制方法研究_王时通"
+      ]
+    },
+    "张昊然": {
+      "paper_count": 1,
+      "domains": [
+        "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别"
+      ],
+      "methods": [
+        "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码"
+      ],
+      "collaborators": [
+        "韩易辰",
+        "谭咏梅",
+        "李雅"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然"
+      ]
+    },
+    "韩易辰": {
+      "paper_count": 1,
+      "domains": [
+        "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别"
+      ],
+      "methods": [
+        "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码"
+      ],
+      "collaborators": [
+        "李雅",
+        "张昊然",
+        "谭咏梅"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然"
+      ]
+    },
+    "谭咏梅": {
+      "paper_count": 1,
+      "domains": [
+        "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别"
+      ],
+      "methods": [
+        "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码"
+      ],
+      "collaborators": [
+        "韩易辰",
+        "张昊然",
+        "李雅"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然"
+      ]
+    },
+    "李雅": {
+      "paper_count": 1,
+      "domains": [
+        "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别"
+      ],
+      "methods": [
+        "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码"
+      ],
+      "collaborators": [
+        "韩易辰",
+        "张昊然",
+        "谭咏梅"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然"
+      ]
+    },
+    "Yao Liao": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal reasoning, referring expression comprehension, scene knowledge"
+      ],
+      "methods": [
+        "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning."
+      ],
+      "collaborators": [
+        "Guangtao Li",
+        "et al.",
+        "Shuang Liu"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "面向复杂文本的指称表达理解研究_陆明聪"
+      ]
+    },
+    "Shuang Liu": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal reasoning, referring expression comprehension, scene knowledge"
+      ],
+      "methods": [
+        "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning."
+      ],
+      "collaborators": [
+        "et al.",
+        "Guangtao Li",
+        "Yao Liao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "面向复杂文本的指称表达理解研究_陆明聪"
+      ]
+    },
+    "Guangtao Li": {
+      "paper_count": 1,
+      "domains": [
+        "Cross-modal reasoning, referring expression comprehension, scene knowledge"
+      ],
+      "methods": [
+        "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning."
+      ],
+      "collaborators": [
+        "et al.",
+        "Shuang Liu",
+        "Yao Liao"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 3,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "面向复杂文本的指称表达理解研究_陆明聪"
+      ]
+    },
+    "李晓旭": {
+      "paper_count": 1,
+      "domains": [
+        "多视图数据的分类问题"
+      ],
+      "methods": [
+        "多视图有监督的LDA模型"
+      ],
+      "collaborators": [
+        "王小捷",
+        "曹洁",
+        "李睿凡",
+        "冯方向"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "多视图有监督的LDA模型"
+      ]
+    },
+    "冯方向": {
+      "paper_count": 1,
+      "domains": [
+        "多视图数据的分类问题"
+      ],
+      "methods": [
+        "多视图有监督的LDA模型"
+      ],
+      "collaborators": [
+        "王小捷",
+        "李睿凡",
+        "曹洁",
+        "李晓旭"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "多视图有监督的LDA模型"
+      ]
+    },
+    "曹洁": {
+      "paper_count": 1,
+      "domains": [
+        "多视图数据的分类问题"
+      ],
+      "methods": [
+        "多视图有监督的LDA模型"
+      ],
+      "collaborators": [
+        "王小捷",
+        "李睿凡",
+        "李晓旭",
+        "冯方向"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 4,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "多视图有监督的LDA模型"
+      ]
+    },
+    "王大鹏": {
+      "paper_count": 1,
+      "domains": [
+        "区间灰数预测模型"
+      ],
+      "methods": [
+        "合成灰数灰度的定义及其性质分析，建立灰度序列的GM(1,1)模型实现灰度预测"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "汪秉文"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "考虑合成灰数灰度性质的改进区间灰数预测模型"
+      ]
+    },
+    "汪秉文": {
+      "paper_count": 1,
+      "domains": [
+        "区间灰数预测模型"
+      ],
+      "methods": [
+        "合成灰数灰度的定义及其性质分析，建立灰度序列的GM(1,1)模型实现灰度预测"
+      ],
+      "collaborators": [
+        "王大鹏",
+        "李睿凡"
+      ],
+      "document_types": [
+        "academic_paper"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "考虑合成灰数灰度性质的改进区间灰数预测模型"
+      ]
+    },
+    "芦效峰": {
+      "paper_count": 2,
+      "domains": [
+        "文本挖掘领域",
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级",
+        "本发明提供了一种基于词性和位置的特征关键词提取方法，包括文本预处理，去除特定词性的候选关键词，计算加权词频，计算增量逆文档频率，计算权重，排序并选择权重最大的词作为关键词"
+      ],
+      "collaborators": [
+        "王文婷",
+        "李睿凡",
+        "刘咏彬",
+        "李蕾",
+        "曲昭伟",
+        "李晖",
+        "袁彩霞",
+        "鲁鹏"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 8,
+      "productivity_level": "一般研究者",
+      "papers": [
+        "基于词性和位置的特征关键词提取方法_芦效峰",
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "王文婷": {
+      "paper_count": 1,
+      "domains": [
+        "文本挖掘领域"
+      ],
+      "methods": [
+        "本发明提供了一种基于词性和位置的特征关键词提取方法，包括文本预处理，去除特定词性的候选关键词，计算加权词频，计算增量逆文档频率，计算权重，排序并选择权重最大的词作为关键词"
+      ],
+      "collaborators": [
+        "李睿凡",
+        "芦效峰"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 2,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于词性和位置的特征关键词提取方法_芦效峰"
+      ]
+    },
+    "鲁鹏": {
+      "paper_count": 1,
+      "domains": [
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "李睿凡",
+        "李蕾",
+        "曲昭伟",
+        "李晖",
+        "袁彩霞",
+        "刘咏彬"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "袁彩霞": {
+      "paper_count": 1,
+      "domains": [
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "鲁鹏",
+        "李睿凡",
+        "李蕾",
+        "曲昭伟",
+        "李晖",
+        "刘咏彬"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "刘咏彬": {
+      "paper_count": 1,
+      "domains": [
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "李睿凡",
+        "李蕾",
+        "曲昭伟",
+        "李晖",
+        "袁彩霞",
+        "鲁鹏"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "曲昭伟": {
+      "paper_count": 1,
+      "domains": [
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "李睿凡",
+        "刘咏彬",
+        "李蕾",
+        "李晖",
+        "袁彩霞",
+        "鲁鹏"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    },
+    "李晖": {
+      "paper_count": 1,
+      "domains": [
+        "信息评级，隐私保护"
+      ],
+      "methods": [
+        "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级"
+      ],
+      "collaborators": [
+        "芦效峰",
+        "李睿凡",
+        "刘咏彬",
+        "李蕾",
+        "曲昭伟",
+        "袁彩霞",
+        "鲁鹏"
+      ],
+      "document_types": [
+        "patent"
+      ],
+      "collaboration_strength": 7,
+      "productivity_level": "新进研究者",
+      "papers": [
+        "基于采集搜索引擎数据的隐私信息评级方法_芦效峰"
+      ]
+    }
+  },
+  "collaboration_network": {
+    "total_authors": 162,
+    "collaboration_pairs": 625,
+    "top_collaborations": [
+      {
+        "authors": [
+          "Ruifan Li",
+          "Xiaojie Wang"
+        ],
+        "paper_count": 23
+      },
+      {
+        "authors": [
+          "Fangxiang Feng",
+          "Ruifan Li"
+        ],
+        "paper_count": 17
+      },
+      {
+        "authors": [
+          "Fangxiang Feng",
+          "Xiaojie Wang"
+        ],
+        "paper_count": 17
+      },
+      {
+        "authors": [
+          "Ruifan Li",
+          "Zhanyu Ma"
+        ],
+        "paper_count": 6
+      },
+      {
+        "authors": [
+          "Hao Chen",
+          "Ruifan Li"
+        ],
+        "paper_count": 5
+      },
+      {
+        "authors": [
+          "Hao Chen",
+          "Xiaojie Wang"
+        ],
+        "paper_count": 5
+      },
+      {
+        "authors": [
+          "Fangxiang Feng",
+          "Hao Chen"
+        ],
+        "paper_count": 4
+      },
+      {
+        "authors": [
+          "Fangxiang Feng",
+          "Zhanyu Ma"
+        ],
+        "paper_count": 4
+      },
+      {
+        "authors": [
+          "Xiaojie Wang",
+          "Zhanyu Ma"
+        ],
+        "paper_count": 4
+      },
+      {
+        "authors": [
+          "Ruifan Li",
+          "Zepeng Zhai"
+        ],
+        "paper_count": 4
+      }
+    ],
+    "most_productive_authors": [
+      {
+        "author": "Ruifan Li",
+        "paper_count": 33
+      },
+      {
+        "author": "Xiaojie Wang",
+        "paper_count": 23
+      },
+      {
+        "author": "Fangxiang Feng",
+        "paper_count": 17
+      },
+      {
+        "author": "李睿凡",
+        "paper_count": 14
+      },
+      {
+        "author": "未在原文中明确列出",
+        "paper_count": 8
+      },
+      {
+        "author": "Zhanyu Ma",
+        "paper_count": 6
+      },
+      {
+        "author": "Hao Chen",
+        "paper_count": 5
+      },
+      {
+        "author": "Li Ruifan",
+        "paper_count": 4
+      },
+      {
+        "author": "Zepeng Zhai",
+        "paper_count": 4
+      },
+      {
+        "author": "et al.",
+        "paper_count": 3
+      }
+    ]
+  }
+}

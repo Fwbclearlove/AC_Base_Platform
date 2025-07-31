@@ -1,0 +1,40 @@
+{
+  "document_type": "academic_paper",
+  "title": "鲁棒局部保持投影的表情识别",
+  "authors": [
+    "李睿凡",
+    "朱强生",
+    "郭燕慧",
+    "刘海涛"
+  ],
+  "main_topic": "表情识别",
+  "research_problem": "局部保持投影的流形学习算法对于噪声与异常值的敏感性",
+  "methodology": "鲁棒局部保持投影算法",
+  "key_innovations": [
+    "提出了一种鲁棒的局部保持投影算法",
+    "在样本数据集X上执行局部鲁棒主成分分析"
+  ],
+  "experimental_results": "对JAFFE表情数据库进行了实验，结果表明，该方法有效",
+  "conclusions": "鲁棒改进算法的有效性",
+  "keywords": [
+    "局部保持投影",
+    "鲁棒性",
+    "表情识别"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "局部保持投影算法",
+    "Laplace Beltrami算子",
+    "鲁棒主成分分析",
+    "Gabor小波特征提取",
+    "最近邻分类器"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文针对现有局部保持投影算法对噪声和异常值敏感的问题，提出了一种鲁棒局部保持投影算法。通过对JAFFE表情数据库的实验，验证了该方法在表情识别中的有效性。",
+  "file_id": "鲁棒局部保持投影的表情识别",
+  "source_type": "cleaned",
+  "text_length": 2327,
+  "generation_time": "2025-07-31 21:35:43"
+}

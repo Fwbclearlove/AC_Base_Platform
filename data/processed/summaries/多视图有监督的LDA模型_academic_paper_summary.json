@@ -1,0 +1,40 @@
+{
+  "document_type": "academic_paper",
+  "title": "多视图有监督的LDA模型",
+  "authors": [
+    "李晓旭",
+    "李睿凡",
+    "冯方向",
+    "曹洁",
+    "王小捷"
+  ],
+  "main_topic": "多视图数据的分类问题",
+  "research_problem": "如何同时学习多视图数据的分类规则和预测性语义特征",
+  "methodology": "多视图有监督的LDA模型",
+  "key_innovations": [
+    "将集成学习思想引入主题模型中",
+    "结合概率主题模型LDA模型和集成分类方法Softmax混合模型"
+  ],
+  "experimental_results": "在两个真实图像数据集上的实验结果表明提出模型有较好的分类性能",
+  "conclusions": "提出模型充分利用了多视图信息，下一步工作将考虑如何确定主题数目，以及如何确定特征的视图分组等问题",
+  "keywords": [
+    "多视图分类",
+    "概率主题模型",
+    "变分期望最大化"
+  ],
+  "application_domains": [
+    "计算机视觉",
+    "机器学习"
+  ],
+  "technical_concepts": [
+    "LDA模型",
+    "Softmax模型",
+    "变分EM算法"
+  ],
+  "performance_metrics": "在LabelMe数据集上准确率为92.2%，在UIUC-Sport数据集上准确率为99.0%",
+  "summary": "本文提出了一种多视图有监督的LDA模型，通过结合LDA模型和Softmax模型，实现了同时学习多视图数据的分类规则和预测性语义特征。在两个真实图像数据集上的实验结果表明，该模型具有较好的分类性能。下一步工作将考虑如何确定主题数目和特征视图分组等问题。",
+  "file_id": "多视图有监督的LDA模型",
+  "source_type": "basic_extracted",
+  "text_length": 10909,
+  "generation_time": "2025-07-31 22:19:28"
+}

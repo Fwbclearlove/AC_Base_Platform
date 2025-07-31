@@ -1,0 +1,45 @@
+{
+  "document_type": "academic_paper",
+  "title": "Sentiment Analysis of Microblog Combining Dictionary and Rules",
+  "authors": [
+    "Ding Yuan",
+    "Yanquan Zhou",
+    "Ruifan Li",
+    "Peng Lu"
+  ],
+  "main_topic": "Microblogging emotional classification based on User-Generated Content (UGC)",
+  "research_problem": "The challenge of detecting emotional tendencies in microblog content due to its brief and diverse nature",
+  "methodology": "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation",
+  "key_innovations": [
+    "Integration of dictionary and rule-based methods for feature extraction and weight calculation",
+    "Modified CHI algorithm (MCHI) for feature word selection",
+    "Modified TF-IDF (MTF-IDF) algorithm for weight calculation"
+  ],
+  "experimental_results": "The proposed method demonstrates effectiveness, especially on simpler corpuses with a single topic, but indicates room for improvement on complex, multi-topic corpuses and three-classification problems",
+  "conclusions": "The method is effective for emotional polarity analysis of Chinese microblogs and suggests future research directions, including incorporating semantic features and adapting to multi-topic models",
+  "keywords": [
+    "emotional classification",
+    "feature extraction",
+    "weight computing",
+    "support vector machine"
+  ],
+  "application_domains": [
+    "User-Generated Content (UGC) analysis",
+    "Microblog sentiment analysis"
+  ],
+  "technical_concepts": [
+    "Support Vector Machine (SVM)",
+    "dictionary-based method",
+    "rule-based method",
+    "vector space model",
+    "jieba segmentation tool",
+    "Modified CHI algorithm (MCHI)",
+    "Modified TF-IDF (MTF-IDF) algorithm"
+  ],
+  "performance_metrics": "The optimal number of features for highest accuracy is around 4700",
+  "summary": "This paper presents a sentiment classification method for Chinese microblogs, integrating dictionary and rule-based approaches with machine learning techniques. The method shows effectiveness in emotional polarity analysis and suggests directions for further research to enhance performance on complex corpuses and multi-classification problems.",
+  "file_id": "3191835.3191989",
+  "source_type": "cleaned",
+  "text_length": 7288,
+  "generation_time": "2025-07-31 21:15:07"
+}

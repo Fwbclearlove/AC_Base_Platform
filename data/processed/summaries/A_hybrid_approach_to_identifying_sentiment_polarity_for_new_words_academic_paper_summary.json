@@ -1,0 +1,35 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "学术论文的清洗工作",
+  "research_problem": "如何去除学术论文中的非学术内容，保留核心学术内容",
+  "methodology": "去除页眉、页脚、页码等非学术内容，修正重复信息和乱码，纠正PDF解析错误，去除多余的符号和格式问题",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "学术论文的清洗工作旨在去除噪音，保留核心学术内容，为读者提供清晰、准确的学术信息",
+  "keywords": [
+    "学术论文清洗",
+    "技术术语",
+    "数据",
+    "逻辑结构",
+    "公式",
+    "图表说明"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "未在原文中明确提及"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文讨论了学术论文清洗工作的重点和方法，强调了去除非学术内容，保留技术术语、数据和核心学术内容的重要性，以提供清晰、准确的学术信息。",
+  "file_id": "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words",
+  "source_type": "cleaned",
+  "text_length": 6591,
+  "generation_time": "2025-07-31 21:17:49"
+}

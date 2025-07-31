@@ -1,0 +1,76 @@
+---
+
+Learning Visual Features from Product Title for Image Retrieval
+
+Fangxiang Feng, Tianrui Niu, Ruifan Li, Xiaojie Wang, Huixing Jiang
+
+ABSTRACT
+
+The market demand for searching products by images on e-commerce sites is significant. Visual features are crucial in content-based image retrieval. Existing methods primarily use pre-trained models on large-scale datasets like ImageNet, which may not effectively extract features for product images. We address this by utilizing product titles as supervised signals to learn image features. We construct an image classification dataset using n-grams from product titles, fine-tune a pre-trained model on this dataset, and extract the basic max-pooling activation of convolutions (MAC) feature. Our method achieved the fourth position in the 2020 ACM Multimedia AI Meets Beauty Grand Challenge using a single ResNet-50 model without human annotations or additional processing. Code is available at: https://github.com/FangxiangFeng/AI-Meets-Beauty-2020.
+
+CCS CONCEPTS
+
+• Computing methodologies →Image representations; Visual content-based indexing and retrieval
+• Information systems →Retrieval models and ranking
+
+KEYWORDS
+
+Visual feature learning; Bag of n-grams; Image retrieval; CNN; MAC
+
+1 INTRODUCTION
+
+Online shopping has gained popularity, with image-based product search becoming a convenient method for users. Content-based image retrieval (CBIR) is key, with feature extraction being its core. While deep neural networks have shown better performance, they require extensive annotated data. We propose using product titles to guide the learning of visual features. Our pipeline involves constructing a dataset for image classification using n-grams from titles, fine-tuning a pre-trained model, and extracting the MAC feature for retrieval based on cosine similarity.
+
+2 RELATED WORK
+
+CBIR systems rely on automatically indexing images by their visual content, with image features vital to retrieval performance. Traditional CBIR methods used hand-crafted low-level features, while deep CNNs now demonstrate superior performance on various computer vision tasks.
+
+---
+
+---
+
+Deep Convolutional Neural Networks (CNNs) have shown remarkable performance in various visual tasks, including image classification, object detection, and semantic segmentation. Their success has led to their application in image retrieval, where the activations of the penultimate fully connected layer from pre-trained CNNs are commonly used as image features. Advanced pooling methods like SPoC, RMAC, RAMAC, MS-RMAC, and GRMAC have been proposed to enhance retrieval performance by incorporating spatial information. The effectiveness of CNN features is dataset-dependent, with pre-trained models on target datasets generally performing better. However, most image retrieval datasets are small or lack annotations, necessitating methods that utilize pre-trained CNNs on large, annotated datasets, followed by retraining on the target dataset, though this is not feasible when the target dataset lacks labels.
+
+Our method, detailed in Figure 2, addresses this by leveraging the titles of product images. It consists of two stages: an offline stage, where we construct an image classification dataset from product titles, fine-tune a pre-trained CNN (ResNet-50), and extract MAC features; and an online stage, where we compute similarity scores for ranking given an image query. The key innovation is the conversion of product titles into discrete labels for supervised learning. We use "Bag of n-grams" instead of "Bag of Words" to address the overlap issue and multi-label fine-tuning of the ResNet-50 model.
+
+For evaluation, we use the Perfect-500K dataset from the "AI Meets Beauty" challenge, with a private test set provided for the competition. Retrieval performance is measured by Mean Average Precision (MAP), with a focus on MAP@7 in our experiments. We implement our approach using the BiT toolkit, fine-tuning the model on ImageNet-21k, and creating a vocabulary from the product titles.
+
+Our experimental results demonstrate...
+
+---
+
+Table 1 presents the results of five deep CNN models with four different pooling methods on the validation set. The first two models, SEResnet-152 and Densenet-201, are trained on the ImageNet-1k dataset, and were used by the previous year's challenge champion. The third and fourth models are ResNet-50 trained on the ImageNet-1k and ImageNet-21k datasets, respectively. The last model is a ResNet-50 pre-trained on ImageNet-21k and fine-tuned on the Perfect-500K dataset. Observations include: the deepest model, Densenet-201, shows the best performance among the ImageNet-1k trained models, while the shallowest model, ResNet-50, performs the worst, indicating that model complexity correlates with feature effectiveness. The model trained on ImageNet-21k outperforms all ImageNet-1k models, suggesting that dataset scale is a significant factor in feature extraction. Fine-tuning the ResNet-50 with the Perfect-500k dataset further significantly improves retrieval performance, demonstrating the dataset's impact on feature effectiveness. These conclusions hold across all pooling methods.
+
+Table 2 shows the performance on the private test set. Our team, using the fine-tuned ResNet-50 with the simplest MAC feature, ranks fourth with a MAP@7 of 0.402402, only slightly behind the third-place score.
+
+Figure 3 visualizes the retrieval results for two types of queries: real object images and advertisement images, showcasing our method's effectiveness in retrieving relevant products from these application scenarios.
+
+In conclusion, we propose a method for learning product visual representations by building an image classification dataset based on product images and title information. Empirical results show that deep CNNs pre-trained and fine-tuned on this dataset can enhance feature effectiveness for product image retrieval. For Chinese titled products, our method can create a high-quality label set without word segmentation.
+
+We acknowledge the support of NSFC (No. 61906018), MoE-CMCC “Artificial Intelligence” Project (No. MCM20190701), and the Fundamental Research Funds for the Central Universities.
+
+Lin, Z., Xie, H., Kang, P., Yang, Z., Liu, W., & Li, Q. (2019). Cross-domain Beauty Item Retrieval via Unsupervised Embedding Learning. In ACM Multimedia.
+
+Lin, Z., Yang, Z., Huang, F., & Chen, J. (2018). Regional Maximum Activations of Convolutions with Attention for Cross-domain Beauty and Personal Care Product Retrieval. In ACM Multimedia.
+
+Lowe, D. G. (1999). Object Recognition from Local Scale-Invariant Features. In Proceedings of the International Conference on Computer Vision.
+
+Oliva, A., & Torralba, A. (2001). Modeling the Shape of the Scene: A Holistic Representation of the Spatial Envelope. Int’l Journal of Computer Vision.
+
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cournapeau, D., Brucher, M., Perrot, M., & Duchesnay, E. (2011). Scikit-learn: Machine Learning in Python. Journal of Machine Learning Research.
+
+Perronnin, F., & Dance, C. R. (2007). Fisher Kernels on Visual Vocabularies for Image Categorization. In CVPR.
+
+Sharif Razavian, A., Azizpour, H., Sullivan, J., & Carlsson, S. (2014). CNN Features off-the-shelf: an Astounding Baseline for Recognition. http://arxiv.org/abs/1403.6382
+
+Schall, K., Barthel, K. U., Hezel, N., & Jung, K. (2019). Deep Aggregation of Regional Convolutional Activations for Content Based Image Retrieval. In MMSP.
+
+Tolias, G., Sicre, R., & Jégou, H. (2016). Particular object retrieval with integral max-pooling of CNN activations. In ICLR (Poster).
+
+Wang, Q., Lai, J., Xu, K., Liu, W., & Lei, L. (2018). Beauty Product Image Retrieval Based on Multi-Feature Fusion and Feature Aggregation. In ACM Multimedia.
+
+Yu, J., Xie, G., Li, M., Xie, H., & Yu, L. (2019). Beauty Product Retrieval Based on Regional Maximum Activation of Convolutions with Generalized Attention. In ACM Multimedia.
+
+Zhang, Y., Qu, L., He, L., Lu, W., & Gao, X. (2019). Beauty Aware Network: An Unsupervised Method for Makeup Product Retrieval. In ACM Multimedia.
+
+Grand Challenge: AI Meets Beauty MM '20, October 12–16, 2020, Seattle, WA, USA.

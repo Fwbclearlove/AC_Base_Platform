@@ -1,0 +1,39 @@
+{
+  "document_type": "academic_paper",
+  "title": "使用LDC码的BI-STCM-ID系统中的星座映射分析",
+  "authors": [
+    "赵传钢",
+    "李睿凡"
+  ],
+  "main_topic": "空时编码调制；星座映射；LDC码",
+  "research_problem": "BI-STCM-ID系统中的星座映射问题",
+  "methodology": "基于最大化编码增益的高维星座映射设计优化问题；基于最大化欧式距离调和均值的一维星座映射设计优化问题",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "证明了使用LDC码的BI-STCM-ID系统中星座映射的优化问题等价性，并提出其他空时编码方案的研究是下一步的课题",
+  "keywords": [
+    "空时编码调制",
+    "星座映射",
+    "LDC码"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "BI-STCM-ID系统",
+    "LDC码",
+    "空时编码器",
+    "MIMO信道模型",
+    "渐进性能",
+    "星座设计",
+    "调和均值准则"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文研究了BI-STCM-ID系统中采用LDC码的星座映射问题，通过分析证明了高维星座映射设计优化问题与一维星座映射设计优化问题的等价性，并提出了进一步的研究方向。",
+  "file_id": "使用LDC码的BI_STCM_ID系统中的星座映射分析",
+  "source_type": "cleaned",
+  "text_length": 959,
+  "generation_time": "2025-07-31 21:33:09"
+}

@@ -1,0 +1,45 @@
+{
+  "document_type": "academic_paper",
+  "title": "Dimensionality Reduction for Text Using LLE",
+  "authors": [
+    "Chuan HE",
+    "Zhe DONG",
+    "Ruifan LI",
+    "Yixin ZHONG"
+  ],
+  "main_topic": "Dimensionality reduction in text processing",
+  "research_problem": "The curse of dimensionality in textual data",
+  "methodology": "Locally Linear Embedding (LLE)",
+  "key_innovations": [
+    "Application of LLE to text processing",
+    "Comparison of LLE with latent semantic indexing (LSI) within the graph embedding framework"
+  ],
+  "experimental_results": "Experiments on Reuters21578 and TDT2 datasets show higher precisions in LLE-transformed space with significantly lower dimensionalities",
+  "conclusions": "LLE significantly outperforms other methods in terms of classification precision for text dimensionality reduction",
+  "keywords": [
+    "Dimensionality reduction",
+    "Locally Linear Embedding",
+    "Text processing",
+    "Manifold learning",
+    "LSI",
+    "Graph embedding"
+  ],
+  "application_domains": [
+    "Pattern recognition",
+    "Text processing",
+    "Data visualization"
+  ],
+  "technical_concepts": [
+    "Locally Linear Embedding (LLE)",
+    "Manifold learning",
+    "Latent Semantic Indexing (LSI)",
+    "Graph embedding",
+    "K-Nearest-Neighbor classification"
+  ],
+  "performance_metrics": "Precisions and dimensions for LLE, LSI, and baseline methods on Reuters21578 and TDT2 datasets",
+  "summary": "This paper explores the application of Locally Linear Embedding (LLE) to text dimensionality reduction, comparing it with Latent Semantic Indexing (LSI) within the graph embedding framework. Experimental results on Reuters21578 and TDT2 datasets demonstrate LLE's effectiveness in reducing dimensionality while maintaining high classification precision.",
+  "file_id": "Dimensionality_reduction_for_text_using_LLE",
+  "source_type": "cleaned",
+  "text_length": 10467,
+  "generation_time": "2025-07-31 21:19:01"
+}

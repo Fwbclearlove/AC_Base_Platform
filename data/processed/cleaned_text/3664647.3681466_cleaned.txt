@@ -1,0 +1,228 @@
+---
+
+DiffHarmony++: Enhancing Image Harmonization with Harmony-VAE and Inverse Harmonization Model
+
+Pengfei Zhou, Beijing University of Posts & Telecommunications, China
+Fangxiang Feng, Beijing University of Posts & Telecommunications, China
+Guang Liu, Beijing Academy of Artificial Intelligence, China
+Ruifan Li, Beijing University of Posts & Telecommunications, China
+Xiaojie Wang, Beijing University of Posts & Telecommunications, China
+
+Abstract
+
+Latent diffusion models have shown remarkable effectiveness in image generation and editing tasks. Their application to image harmonization, however, is challenged by severe image distortion introduced by the VAE component. We propose Harmony-VAE, which leverages the input of the harmonization task to enhance decoded image quality. The input composite image contains precise pixel-level information that complements the correct foreground appearance and color in denoised latents. Additionally, we train an inverse harmonization diffusion model for data augmentation and create a new dataset with prominent foreground objects. Experiments demonstrate the effectiveness of our Harmony-VAE and inverse harmonization model.
+
+CCS Concepts
+
+• Computing methodologies → Computer vision tasks
+
+Keywords
+
+image harmonization, latent diffusion model, VAE, data augmentation, inverse harmonization, stable diffusion
+
+1 Introduction
+
+Image composition is pivotal in digital editing but often faces the challenge of unrealistic merged images due to inconsistencies in lighting and color. Image harmonization addresses this by modifying the foreground for visual consistency with the background. Advances in deep learning and the latent diffusion model have improved image harmonization. However, issues with image distortion in the VAE decoding process have led to suboptimal performance. We introduce DiffHarmony++, which overcomes these limitations and achieves state-of-the-art performance.
+
+---
+
+---
+
+To address the aforementioned limitations, we introduce Harmony-VAE, which integrates composite images into the VAE decoding process. This enhances the realism of reconstructed images by utilizing the precise object shape information from composites, complementing the denoised latent's foreground appearance and color details. Harmony-VAE's training is independent of denoising UNet fine-tuning, reducing costs and improving LDM-based harmonization models. It also generalizes well to higher-resolution images, despite being trained on 256px images. We term our DiffHarmony model equipped with Harmony-VAE as DiffHarmony++.
+
+The Harmony-VAE-boosted latent diffusion model can be modified to perform inverse image harmonization for data augmentation. Inverse harmonization involves generating synthetic composite images from real images and foreground masks, allowing for a one-to-many image translation task suitable for diffusion models. Based on DiffHarmony++, we train an inverse harmonization model on iHarmony4. This model expands harmonization data significantly. Using the inverse harmonization model, we augment two smaller iHarmony4 subsets, Hday2night and HFlickr, improving performance compared to original data training.
+
+Our proposed model also automates the creation of new harmonization datasets, a long-standing challenge. It outperforms manual efforts, such as the creation of RealHM, and automates the generation of composite images, reducing the need for manual screening. We generate a Human Harmony dataset using the imaterialist dataset and a harmony classifier to filter high-quality data.
+
+Our contributions are:
+
+• Proposal of Harmony-VAE to address VAE decoding distortion in image harmonization.
+• Development of an effective inverse harmonization diffusion model, validated on two datasets.
+• Introduction of the Human Harmony dataset with a harmony classifier for high-quality data filtering.
+
+### 2 Related Works
+
+#### 2.1 Image Harmonization
+
+Early image harmonization methods focused on color matching algorithms. With deep learning, supervised methods emerged, using context, semantic information, and attention modules. Techniques like domain translation and Retinex theory decomposition have also been applied.
+
+#### 2.2 Image Harmonization Dataset
+
+RealHM and other datasets were created manually or using 3D rendering, while iHarmony4 employed automatic color transfer and filtering.
+
+#### 2.3 Diffusion Model
+
+---
+
+[Please note that the section on diffusion models is cut off and does not provide further details. If this is an error and more content is expected, please provide additional context.]
+
+Diffusion models, such as Denoising Diffusion Probabilistic Models (DDPMs), have shown effectiveness in generating realistic images from random noise. Subsequent works like Palette, RePaint, and SR3+ apply diffusion models to image-to-image translation tasks. Latent diffusion models, particularly LDM, which underpins Stable Diffusion, have received significant attention. Stable Diffusion has been used in various image-to-image translation tasks and image harmonization, with works like Appearance Consistency Discriminator and Zero-Shot Image Harmonization by Chen et al. making notable contributions. However, these methods often focus on image inpainting, not the more challenging image harmonization task.
+
+Harmony-VAE is a method designed for image harmonization, which includes repairing the content of the foreground area while maintaining a harmonized appearance. It builds upon the Stable Diffusion model, which is pretrained using a VAE and a denoising U-Net in two stages. The denoising process involves adding noise to the latent variable and updating the U-Net with a latent denoising loss.
+
+In our method, we address the issue of image distortion caused by the VAE decoding process. We propose Harmony-VAE, which enhances the quality of the harmonized image by incorporating a conditional encoder for the composite image and foreground mask. The final latent variables and intermediate features are fused into the VAE decoder through skip connections. The training objective is to reconstruct the real image using the composite image and mask as conditions.
+
+The mathematical formulation of the Harmony-VAE objective function involves reconstructing the real image with the encoded image and mask as conditions. During the denoising stage, pure noise is iteratively refined through the Denoising U-Net, with the encoded composite image and downsampled mask as conditions, to obtain the denoised latent variable, which is then decoded into the harmonized image.
+
+The latent variables corresponding to the real image ˆ𝐼 and the harmonized image ˜𝐼 are close enough that using the encoded real image E(ˆ𝐼) as the model input does not result in significant performance loss. This choice greatly reduces training costs as it eliminates the need for offline or online generation of data samples from the diffusion model. The weights of the conditional encoder E𝑐 are initialized from the original VAE encoder, and zero-initialized convolution layers are added before each skip connection to maintain training stability. We train the conditional encoder E𝑐, decoder D, and all zero-initialized convolution layers. This trained model can be seamlessly integrated into the DiffHarmony inference process, forming DiffHarmony++.
+
+For inverse image harmonization, we propose an inverse harmonization model based on DiffHarmony++. It takes the foreground mask image 𝑀 and the real image ˆ𝐼 as input to output the composite image 𝐼. We train this model on the iHarmony4 dataset and use it to generate additional training data for existing harmonization datasets. We blend 𝐾 candidate composite images for each (ˆ𝐼, 𝑀) data pair with a blending ratio 𝛾, expanding the training data.
+
+We also address the lack of human portrait-specific harmonization datasets by constructing a Human Harmony dataset. Utilizing the imaterialist-fashion-2020-fgvc7 dataset, we pair high-resolution portrait photographs with detailed segmentation maps to create accurate foreground masks. We train a harmony classifier to ensure the quality of the generated harmonization data and select the final composite sample with the highest classification probability.
+
+In our experiments, we use the iHarmony4 dataset, which includes HCOCO, HFlickr, HAdobe5K, and Hday2night sub-datasets, consisting of 65,742 training and 7,404 testing pairs of composite and real images. We evaluate each sub-dataset individually.
+
+---
+
+5.1.2 Human Harmony Dataset
+We create the Human Harmony dataset by filtering the imaterial-fashion-2020-fgvc7 dataset to exclude images with only products. The cleaned dataset contains 29,106 images. We assign the value 1 to all valid segmentation parts (except the background) to form foreground mask images. Using a harmony classifier, we select images with the highest classification probability, setting 𝐾= 10. The Human Harmony dataset is divided into training and testing sets with the same ratio as the iHarmony4 dataset, resulting in a training set of 26,157 and a testing set of 2,946 images.
+
+Figure 2: Cumulative distribution curves of foreground area ratios for both iHarmony4 and Human Harmony datasets. Approximately 70% of the Human Harmony dataset images have foreground ratios above 0.2, compared to less than 15% in iHarmony4.
+
+5.1.3 Evaluation Metrics
+We evaluate all methods using PSNR, MSE, and fMSE, consistent with previous works.
+
+5.2 Implementation Details
+Harmony-VAE is trained using all iHarmony4 training data. The learning rate is set to 1𝑒−4, with a warmup of 0.02, and then kept constant. Training lasts for 10 epochs with the AdamW optimizer, weight_decay=0, 𝛽1 = 0.9, and 𝛽2 = 0.999. Model weights are saved using EMA with max_decay = 0.999. Images are resized to 256px during training. For the diffusion model, we use the pre-trained DiffHarmony. We employ the Euler ancestral discrete scheduler to generate samples in 5 steps during inference. The inverse harmonization model's implementation details are mostly consistent with DiffHarmony++, except for the use of (ˆ𝐼, 𝑀) as conditions and the composite image 𝐼 as the denoising target. The Harmony-VAE training and inference are modified accordingly. For the harmony classifier, we use a pre-trained ResNet50 model for linear probing with the final 2048-dimensional features.
+
+5.3 Performance Comparison
+
+5.3.1 Results on iHarmony4
+Our approach is compared with various image harmonization methods on the iHarmony4 dataset. Our method significantly outperforms previous SOTA methods on the entire test set, achieving the best results on almost all subsets. Harmony-VAE preserves more details, avoiding severe distortion in image decoding compared to using only the VAE from Stable Diffusion.
+
+5.3.2 Effectiveness of Data Augmentation
+Data augmentation experiments with the inverse harmonization model are conducted on two subsets of iHarmony4, Hday2night and HFlickr. The results in Table 2 show that data augmentation significantly improves model performance on both datasets, validating its ability to generate high-quality composite images.
+
+Table 3: Comparison between HDNet trained with high-resolution images and DiffHarmony++ on both iHarmony4 and Human Harmony datasets, with the number of samples in each subset with different foreground proportions.
+
+---
+
+---
+
+5.3.3 Advanced Analysis
+
+Table 3 compares the performance of DiffHarmony++ and HDNet on the iHarmony4 and Human Harmony datasets. Both models use composite images as input for training and inference. HDNet was trained with 512px images (HDNet512) and tested with 1024px images, resized to 256px for evaluation to maintain consistent settings with our approach. On the iHarmony4 dataset, HDNet512 outperforms DiffHarmony++ in samples with small foreground proportions (0% ∼5%), but DiffHarmony++ shows superior performance as the foreground proportion increases. On the Human Harmony dataset, DiffHarmony++ consistently outperforms HDNet512, especially with larger foreground proportions (15% ∼100%).
+
+Qualitative results in Figure 4 show that our approach generates visually appealing outcomes resembling authentic real images.
+
+5.4 Ablation Study
+
+Harmony-VAE's effectiveness is validated through an ablation study. Inference with Harmony-VAE at multiple resolutions improves overall performance, particularly when using lower image resolutions (Table 4). The study also indicates that the zero init strategy and fine-tuning specific parameters are crucial for model training (Table 5).
+
+6 Conclusion
+
+Harmony-VAE leverages conditional information to enhance the VAE component in latent diffusion models for image harmonization. It effectively restores finer details and damaged facial features, architectural patterns, and small text. An inverse harmonization model synthesizes new composite images from real images and foreground masks. Substantial improvements on the Hday2night and HFlickr datasets and the construction of the Human Harmony Dataset demonstrate the efficacy of our model.
+
+---
+
+Acknowledgments
+
+This work was supported by the NSFC, the industry-university cooperation collaborative education project of the Ministry of Education of China, the Science and Technology Project of State Grid Corporation of China, and the Super Computing Platform of Beijing University of Posts and Telecommunications.
+
+References
+
+---
+
+Avrahami, O., Fried, O., & Lischinski, D. (2023). Blended latent diffusion. ACM Transactions on Graphics (TOG), 42(4), 1–11.
+
+Bao, Z., Long, C., Fu, G., Liu, D., Li, Y., Wu, J., & Xiao, C. (2022). Deep image-based illumination harmonization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 18542–18551.
+
+Cao, J., Cong, W., Niu, L., Zhang, J., & Zhang, L. (2021). Deep image harmonization by bridging the reality gap. arXiv preprint arXiv:2103.17104.
+
+Cao, J., Hong, Y., & Niu, L. (2023). Painterly image harmonization in dual domains. In Proceedings of the AAAI Conference on Artificial Intelligence, 268–276.
+
+Chen, H., Gu, Z., Li, Y., Lan, J., Meng, C., Wang, W., & Li, H. (2023). Hierarchical dynamic image harmonization. In Proceedings of the 31st ACM International Conference on Multimedia (MM ’23), 1422–1430.
+
+Chen, J., Zou, Z., Zhang, Y., Chen, K., & Shi, Z. (2023). Zero-shot image harmonization with generative model prior. arXiv preprint arXiv:2307.08182.
+
+Cohen-Or, D., Sorkine, O., Gal, R., Leyvand, T., & Xu, Y.-Q. (2006). Color harmonization. In ACM SIGGRAPH 2006 Papers, 624–630.
+
+Cong, W., Niu, L., Zhang, J., Liang, J., & Zhang, L. (2021). Bargainnet: background-guided domain translation for image harmonization. In 2021 IEEE International Conference on Multimedia and Expo (ICME), 1–6.
+
+Cong, W., Tao, X., Niu, L., Liang, J., Gao, X., Sun, Q., & Zhang, L. (2022). High-resolution image harmonization via collaborative dual transformations. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 18470–18479.
+
+Cong, W., Zhang, J., Niu, L., Liu, L., Ling, Z., Li, W., & Zhang, L. (2020). Dovenet: deep image harmonization via domain verification. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 8394–8403.
+
+Cun, X., & Pun, C.-M. (2020). Improving the harmony of the composite image by spatial-separated attention module. IEEE Transactions on Image Processing, 29, 4759–4771.
+
+Guo, S., Huang, W., Zhang, X., Srikhanta, P., Cui, Y., Li, Y., Adam, H., Scott, M. R., & Belongie, S. (2019). The imaterialist fashion attribute dataset. In Proceedings of the IEEE/CVF International Conference on Computer Vision Workshops.
+
+Guo, Z., Gu, Z., Zheng, B., Dong, J., & Zheng, H. (2022). Transformer for image harmonization and beyond. IEEE Transactions on Pattern Analysis and Machine Intelligence.
+
+Guo, Z., Guo, D., Zheng, H., Gu, Z., Zheng, B., & Dong, J. (2021). Image harmonization with transformer. In Proceedings of the IEEE/CVF international conference on computer vision, 14870–14879.
+
+Guo, Z., Zheng, H., Jiang, Y., Gu, Z., & Zheng, B. (2021). Intrinsic image harmonization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 16367–16376.
+
+Hang, Y., Xia, B., Yang, W., & Liao, Q. (2022). Scs-co: self-consistent style contrastive learning for image harmonization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 19710–19719.
+
+Hao, G., Iizuka, S., & Fukui, K. (2020). Image harmonization with attention-based deep feature modulation. In BMVC, Vol. 1, 2.
+
+He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition, 770–778.
+
+Ho, J., Jain, A., & Abbeel, P. (2020). Denoising diffusion probabilistic models. Advances in Neural Information Processing Systems, 33, 6840–6851.
+
+Jiang, Y., et al. (2021). Ssh: a self-supervised framework for image harmonization. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 4832–4841.
+
+Karras, T., Aittala, M., Aila, T., & Laine, S. (2022). Elucidating the design space of diffusion-based generative models. Advances in Neural Information Processing Systems, 35, 26565–26577.
+
+Ke, Z., Sun, C., Zhu, L., Xu, K., & Lau, R. W. H. (2022). Harmonizer: Learning to perform white-box image and video harmonization. In European Conference on Computer Vision. Springer, 690–706.
+
+Kim, G., Kwon, T., & Ye, J. C. (2022). Diffusionclip: Text-guided diffusion models for robust image manipulation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2426–2435.
+
+Kingma, D. P., & Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114.
+
+Laffont, P. Y., Ren, Z., Tao, X., Qian, C., & Hays, J. (2014). Transient attributes for high-level understanding and editing of outdoor scenes. ACM Transactions on graphics (TOG), 33(4), 1–11.
+
+Li, J., Wang, J., Wang, C., & Xiong, J. (2023). Image harmonization with diffusion model. arXiv preprint arXiv:2306.10441.
+
+Liang, J., Cun, X., Pun, C. M., & Wang, J. (2022). Spatial-separated curve rendering network for efficient and high-resolution image harmonization. In European Conference on Computer Vision. Springer, 334–349.
+
+Ling, J., Xue, H., Song, L., Xie, R., & Gu, X. (2021). Region-aware adaptive instance normalization for image harmonization. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 9361–9370.
+
+Lu, L., Li, J., Cao, J., Niu, L., & Zhang, L. (2023). Painterly image harmonization using diffusion model. In Proceedings of the 31st ACM International Conference on Multimedia, 233–241.
+
+Lugmayr, A., Danelljan, M., Romero, A., Yu, F., Timofte, R., & Van Gool, L. (2022). Repaint: Inpainting using denoising diffusion probabilistic models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 11461–11471.
+
+Luo, Z., Gustafsson, F. K., Zhao, Z., Sjölund, J., & Schön, T. B. (2023). Refusion: Enabling large-size realistic image restoration with latent-space diffusion models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 1680–1691.
+
+Niu, L., Cong, W., Liu, L., Hong, Y., Zhang, B., Liang, J., & Zhang, L. (2021). Making images real again: A comprehensive survey on deep image composition. ArXiv, abs/2106.14490.
+
+Niu, L., Tan, L., Tao, X., Cao, J., Guo, F., Long, T., & Zhang, L. (2023). Deep image harmonization with globally guided feature transformation and relation distillation. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 7723–7732.
+
+Peng, J., Luo, Z., Liu, L., & Zhang, B. (2024). Frih: Fine-grained region-aware image harmonization. In Proceedings of the AAAI Conference on Artificial Intelligence number 5. Vol. 38, 4478–4486.
+
+Rombach, R., Blattmann, A., Lorenz, D., Esser, P., & Ommer, B. (2022). High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 10684–10695.
+
+Ronneberger, O., Fischer, P., & Brox, T. (2015). U-net: Convolutional networks for biomedical image segmentation. In Medical Image Computing and Computer-Assisted Intervention–MICCAI 2015: 18th International Conference, Munich, Germany, October 5-9, 2015, Proceedings, Part III 18. Springer, 234–241.
+
+Sahak, H., Watson, D., Saharia, C., & Fleet, D. (2023). Denoising diffusion probabilistic models for robust image super-resolution in the wild. arXiv preprint arXiv:2302.07864.
+
+Saharia, C., Chan, W., Chang, H., Lee, C. A., Ho, J., Salimans, T., Fleet, D. J., & Norouzi, M. (2021). Palette: Image-to-image diffusion models. ACM SIGGRAPH 2022 Conference Proceedings.
+
+Sofiiuk, K., Popenova, P., & Konushin, A. (2021). Foreground-aware semantic representations for image harmonization. In Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision, 1620–1629.
+
+Song, S., Zhong, F., Qin, X., & Tu, C. (2020). Illumination harmonization with gray mean scale. In Advances in Computer Graphics: 37th Computer Graphics International Conference, CGI 2020, Geneva, Switzerland, October 20–23, 2020, Proceedings 37. Springer, 193–205.
+
+Sunkavalli, K., Johnson, M. K., Matusik, W., & Pfister, H. (2010). Multi-scale image harmonization. ACM Transactions on Graphics (TOG), 29(4), 1–10.
+
+Tsai, Y. H., Shen, X., Lin, Z., Sunkavalli, K., Lu, X., & Yang, M. H. (2017). Deep image harmonization. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 3789–3797.
+
+Valanarasu, J. M. J., et al. (2022). Interactive portrait harmonization. arXiv preprint arXiv:2203.08216.
+
+Wang, Y., Cao, C., & Fu, Y. (2023). Towards stable and faithful inpainting. arXiv preprint arXiv:2312.04831.
+
+Xia, B., Zhang, Y., Wang, S., Wang, Y., Wu, X., Tian, Y., Yang, W., & Van Gool, L. (2023). Diffir: Efficient diffusion model for image restoration. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 13095–13105.
+
+Xing, Y., Li, Y., Wang, X., Zhu, Y., & Chen, Q. (2022). Composite photograph harmonization with complete background cues. In Proceedings of the 30th ACM International Conference on Multimedia (MM ’22).
+
+Xue, B., Ran, S., Chen, Q., Jia, R., Zhao, B., & Tang, X. (2022). Dccf: Deep comprehensible color filter learning framework for high-resolution image harmonization. In European Conference on Computer Vision. Springer, 300–316.
+
+Xue, S., Agarwala, A., Dorsey, J., & Rushmeier, H. (2012). Understanding and improving the realism of image composites. ACM Transactions on graphics (TOG), 31(4), 1–10.
+
+Zhang, L., Rao, A., & Agrawala, M. (2023). Adding conditional control to text-to-image diffusion models. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 3836–3847.
+
+Zhou, P., Feng, F., & Wang, X. (2024). Diffharmony: Latent diffusion model meets image harmonization. arXiv preprint arXiv:2404.06139.
+
+Zhu, Z., Feng, X., Chen, D., Bao, J., Wang, L., Chen, Y., Yuan, L., & Hua, G. (2023). Designing a better asymmetric vqgan for stablediffusion. arXiv preprint arXiv:2306.04632.
+
+Zhu, Z., Zhang, Z., Lin, Z., Wu, R., Chai, Z., & Guo, C. L. (2022). Image harmonization by matching regional references. arXiv preprint arXiv:2204.04715.

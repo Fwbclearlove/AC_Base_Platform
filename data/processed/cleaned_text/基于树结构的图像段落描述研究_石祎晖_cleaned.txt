@@ -1,0 +1,648 @@
+基于树结构的图像段落描述研究
+
+摘要
+
+图像段落描述旨在为给定图像自动生成描述性段落，是对传统的图像单句描述研究的进一步深入，属于多模态人工智能的新兴研究。随着生成目标从单个句子拓展到多句子段落，图像段落描述对模型的视觉线索梳理和文本逻辑建构能力提出了更高的要求。此外，自动生成能够承载更多信息的段落具有更广阔的应用前景。目前，主流研究存在以下问题亟待解决：首先，主流方法缺乏对段落句子结构信息的建模，容易导致生成段落出现内容冗余和上下文不连贯问题。此外，主流方法也缺乏对图像区域结构关系的建模，简单地将图像表示为一个无结构的区域集合，容易导致模型对图像理解不充分，进而导致描述不全面。为此，本文提出利用树结构显式建模段落结构以及图像区域关系，并将树结构引入图像段落描述模型中。具体而言，本文开展的研宄工作如下：针对句子结构缺失问题，本文设计了用于构建段落句子树结构的层次建模方法。将句子树结构作为监督信息，本文提出了种新颖的树结构段落解码框架S2TD（Splitting to Tree Decoder）。该框架将段落生成过程建模为一棵自顶向下不断扩展的二叉树结构。从图像全局特征开始，父节点特征被逐步划分成左右子节点。最终，叶节点特征被解码成句子并组成段落。二、针对区域关系缺失问题，本文设计了图像区域树结构的启发式构建方法。将区域树结构作为指导信息，本文提出了种新颖的树结构增强的编码器网络TEE（Tree Enhanced Encoder）。该编码器网络利用区域树分组结果逐层约束多头自注意力机制，使模型对图像内容的理解更加全面和准确。本文在图像段落描述基准数据集上开展了实验。通过定量分析和定性对比，验证了所提方法的可行性与有效性。实验结果表明，在图像段落描述模型中引入树结构有助于生成质量更高的描述段落。
+
+关键词：多模态人工智能 深度学习 图像段落描述 树结构
+
+图像段落描述任务相比传统的单句描述任务更具挑战性。单句描述任务的生成目标为一个篇幅在三十词以内的单个句子，而段落描述任务的生成目标为一个包含六个句子左右的段落文本。段落描述要求生成的段落句子内容多样、句子间上下文语义连贯，符合视觉观察和写作逻辑。同时，段落的多样和连贯受到图像内容的指导和约束。这要求图像描述模型的设计和训练推理提出更高的要求。图像段落描述研究具有重要的研究意义和应用价值。
+
+图像单句描述研究主要围绕编码器-解码器框架展开，一方面探索如何在编码器端引入更好的视觉编码网络，提升图像特征的表达能力。另一方面研究在解码器端如何更好地利用视觉上下文信息生成文本，并缓解暴露偏差问题。
+
+图像段落描述研究根据段落文本的不同建模视角，相关方法可以划分为两大类模型：层次结构模型和非层次结构模型。层次结构模型将段落生成建模为多个句子的顺序生成，即逐句生成段落。非层次结构模型将段落的生成建模为单个长句子的生成，即逐词生成段落。层次结构模型通过显式计算用于指导句子生成的特征表示，不同的句子由不同特征解码得到并最终组成段落。非层次结构模型对段落内的句子不做显式划分，直接利用得到的视觉表示解码生成段落中的词，不引入句子级别的特征表示。
+
+图像段落描述研究主要围绕提升段落生成的连贯性和多样性展开。相关研究可分为层次结构模型和非层次结构模型两大类。最近，图文多模态领域的研究者开始关注树结构的建模能力和应用价值。在视觉接地任务中，Hong等人提出利用二叉树结构实现文本节点与视觉内容的对齐。在视觉问答任务中，Cao等人将问题文本剖析为依存句法树，并在遍历过程中利用注意力机制挖掘图像中的线索信息。在图像描述领域，Yao等人将图像剖析为包含全局、区域、实例三层的树结构，递归地融合不同粒度的信息增强句子生成质量。Ma等人提出一种应用于单句描述的树结构解码器。Wang等人在图像到食谱文本的生成过程中引入树结构信息，增强生成的准确性和连贯性。本文的主要研究内容如下：1) 基于文本树结构的图像段落描述算法研究；2) 引入视觉树结构的图像段落描述算法研究。本文的主要贡献包括：1) 在图像段落描述任务中，首次提出利用树结构进行图文模态的建模，并结合建模后的树结构进行模型改进；2) 提出了新颖的树结构段落解码框架以及对应的段落句子树层次建模方法；3) 提出了树结构增强的编码器组件以及对应的图像区域树启发式构建方法。
+
+相比于通过图像分类训练得到卷积神经网络，目标检测模型能够提供更加细粒度的图像信息，有助于图像描述模型解码生成更准确的描述文本。具体而言，在图像描述任务中，经过多轮卷积和池化操作，卷积神经网络抽取得到特征图的分辨率往往是原图像的1/16甚至更低，因此只能对图像中形状较大的、特征明显的对象实现有效的响应并提取信息。而将目标检测模型作为特征提取器，有助于缓解上述问题，获取区域级别、语义更为丰富和准确的图像特征表示。
+
+在图文多模态研究领域，由Aderson等人在Visual Genome数据集上预训练的Faster R-CNN模型被广泛用于图像特征抽取。预训练阶段，该模型在学习目标检测的同时，需要对图像内物体的颜色、状态等属性进行预测。通过对物体属性的监督学习，该模型进一步提升了图像区域特征的编码质量，极大地提升了下游任务的表现。
+
+此外，Johnson等人提出的密集描述方法模型Densecap也常被应用于特征抽取。Densecap在Faster R-CNN的基础上，将边界框中物体类别预测任务拓展为描述句子生成任务。值得一提的是，图像段落描述研究的一部分工作是基于Densecap检测的区域特征和对应生成的描述句子开展的。
+
+文本解码器负责文本序列的建模以及生成，完成从编码器得到的中间表示到输出文本的转换。文本解码器的理论基础源于计算语言学中对神经语言模型(Neural Language Model, NLM)的研究。随着深度学习的发展，相关方法在词表示学习、机器翻译等任务中得到了广泛应用，成为了建模文本序列的重要范式。
+
+在训练阶段，给定编码器得到的中间表示V，文本解码器的模型参数为0，优化目标为最大化标签文本S={w1,...,wT}的似然函数：
+
+* = argmax logp(S|V;d)
+
+利用链式法则，可以将联合概率分布拆分为：
+
+logp(S|V;d) = logp(w1|V;d) + logp(w2|V,w1;d) + ... + logp(wT|V,w1,...,wT-1;d)
+
+文本解码器需要通过神经网络完成对p(wt|ht-1,w1,...,wT-1;d)的建模和学习。
+
+在测试阶段，文本解码器通过选取概率最大的值作为输出(贪婪解码)或依据预测的概率分布随机选取(随机采样)，从而实现文本的生成。本节主要介绍两种常用于图像描述任务的解码器组件：循环神经网络和变压器网络。
+
+循环神经网络是一类深度学习模型，因循环利用同一个网络更新隐状态表示(Hidden State)而得名。循环神经网络适用于处理序列形式的输入和输出，包括但不限于文本、语音、时序信号等数据类型。循环神经网络与卷积神经网络类似，也具有参数共享的特点。此外，循环神经网络每个时间步均有输出，且循环神经网络当前时刻的输出与当前时刻的输入以及历史信息有关。
+
+具体而言，设t时刻模型输入为xt，存储历史信息的隐状态表示为ht-1。朴素的循环神经网络的前向过程如下所示：
+
+ht = tanh(Wxxt + Whht-1 + b)
+
+其中，Wx和Wh为可学习的参数矩阵，b为可学习的偏置向量。随着序列输入的改变，隐状态表示将被不断更新。循环神经网络通过BPPT(Backpropagation Through Time)方法实现误差反传和模型参数更新。
+
+然而，朴素的循环神经网络在训练时容易遇到梯度消失和梯度爆炸问题，导致网络参数难以得到有效的更新。此外，朴素的循环神经网络难以利用历史较远的信息，长距离的序列信息捕捉能力有限。
+
+为此，Hochreiter等人提出了长短期记忆网络(Long Short-Term Memory, LSTM)。LSTM利用门控机制，对输入、历史信息和输出进行有选择性的更新。通过有选择的遗忘和更新，LSTM能够更好的处理长序列数据带来的依赖性挑战。
+
+变压器网络(Transformer)是由Vaswani等人在2017年提出的新一代神经网络架构，最早用于解决机器翻译问题，包含一套完整的编码器和解码器设计。与前馈神经网络、卷积神经网络不同，循环神经网络计算时依赖于前一时刻的输出，因此无法进行并行化计算，训练效率成为了瓶颈。此外，LSTM等循环神经网络结构依然存在梯度消失和爆炸问题。为此，变压器网络提出利用多头注意力机制实现序列上下文间的依赖关系的捕捉和编码，极大的降低了训练复杂度，使得训练阶段能够进行并行计算加速训练，逐渐成为了文本建模的新范式。
+
+本节主要介绍变压器网络的解码器组件：
+
+1)多头注意力机制(Multi-Head Attention)
+
+首先，定义注意力操作Attention如下：
+
+Attention(Q,K,V) = softmax(V)
+
+其中，Q、K和V分别代表查询向量(Query)、键值向量(Key)以及值向量(Value)。L为序列长度，df和dk分别为查询向量和键值向量的维度。将原始的(Q,K,V)先投影到维度dm，分别进行h个独立注意力操作，将最终得到的结果拼接，便得到了多头注意力机制如下：
+
+MultiHead(Q,K,V) = Concat(head1,...,headh)W0
+
+其中，headj = Attention(QWjQ,KWjK,VWjV)，WjQ、WjK和WjV为可学习的参数矩阵。
+
+2)位置编码(Position Encoding)
+
+变压器网络通过在词向量中引入额外的位置编码，解决由于多头注意力无法建模序列数据的顺序信息的缺陷。位置编码定义如下：
+
+PE(pos,2i) = sin(pos/10000^(2i/d))
+PE(pos,2i+1) = cos(pos/10000^(2i/d))
+
+其中，pos为词向量在序列中的下标值，i为词向量对应维度的下标值。
+
+3)解码过程
+
+输入为编码器得到的中间表示V和文本序列的词向量矩阵S，变压器网络解码器组件的前向过程如下所示：
+
+S = PE(S)
+
+Sself = MaskedMultiHead(S,S,S)
+
+Sdec = MultiHead(S,K,V)
+
+S = (ReLU(SdecWO + bO)) + b
+
+P = Softmax(S)
+
+其中，为了清晰展示，每一层操作均采用了残差连接并采用LayerNorm进行归一化，即St = LayerNorm(xt + Sublayer(xt-1))。公式2-14、2-15和2-16一组计算称为一层解码网络，实际使用时会层叠多个参数独立的解码网络，提升模型的深度，从而增强模型的建模能力。
+
+此外，最终输出为Pemk，说明可以同时为序列每个位置预测的词概率分布，实现了训练阶段并行化计算。然而在文本生成阶段，变压器模型的解码器仍需要逐步抽样上一时间步的输出，更新输入矩阵，才能得到当前时间步的输出。
+
+值得一提的是，在图像单句描述的研究中，变压器网络逐渐替代LSTM成为首选的解码器组件。然而在图像段落描述研究中，变压器网络作为解码器的探索仍处于早期阶段，LSTM仍是段落描述生成的主流解码器组件。
+
+2.4 数据集及评测指标
+
+2.4.1 图像段落描述基准数据集
+
+当前图像段落描述研究的基准数据集为斯坦福图像段落数据集(Stanford Image Paragraph Dataset)，由Kruse等人在2017年收集并开源。段落基准数据集从MSCOCO和Visual Genome数据集中选取了19551张图像，交由数据众包平台进行人工标注，为每张图像标注了对应的描述段落文本。基准数据进一步划分为训练集、验证集和测试集，分别包含14575、2487和2489个图像和段落描述对。平均每个标注段落的长度为67.5个词，包含约5.7个句子，每个句子包含11.9个词。
+
+对比来看，图像单句描述基准数据集MSCOCO每张图像包含5个描述句子，其句子的平均长度为11.3个词。单句描述和段落描述基准数据集中名词、形容词、动词和代词的比例差异也反映出段落描述更为内容丰富、生成难度更高，具体统计结果展示在图2-1中。
+
+2.4.2 图像段落描述任务评价指标
+
+在图像段落描述任务中，模型的性能由其生成的段落文本质量反映，生成的段落文本越准确、上下文逻辑越连贯以及内容越丰富，则模型的性能越好。人工评价由于不同研究的标准不统一且难以横向比较、耗时费力等客观条件限制，逐渐被自动化评价指标替代。基于“模型生成的文本与人类给出的标准文本越接近，则生成的文本质量越高”的前提假设，自动化评价指标通常遵循如下范式：
+
+Metric = Sim(C,R)
+
+其中，C为模型生成的待评测文本(Candidates)，R为人工标注的、用于参考的标准文本(References或Ground Truth)。本节将对图像段落描述研究中广泛采用的BLEU、METEOR、CIDEr三类自动化评价指标进行说明。
+
+1) BLEU(Bilingual Evaluation Understudy)
+
+BLEU指标是由Papineni等人在2002年提出，最早用于机器翻译模型的自动化评测。BLEU是首个与人工评价具有高相关程度、计算开销低且简单易用的自动化评价指标，被广泛应用于各类与文本生成相关的任务评测中。
+
+BLEU指标是对文本匹配精确率(Precision Rate)的改进。首先，BLEU在文本匹配统计时引入了不同粒度N元组(n-gram)的匹配，包括对应单个词的一元组(unigram)、对应词组的二元组(bigram)等。同时，BLEU对待评测文本N元组的统计上限进行约束，使其不超过标准文本中对应N元组的最大值。最后，BLEU考虑了长度对评测的影响，引入了过度简短惩罚(Brevity Penalty, BP)。
+
+具体而言，针对待评测的生成文本q，给定对应的、包含M个标准文本的集Rt={rt1,rt2,...,rtM}。首先统计匹配的N元组个数，得到匹配程度pn：
+
+pn = min(COUNTn(Q),COUNTn(Rt))
+
+其中，COUNTn(Q)和COUNTn(Rt)是Q和Rt文本中第n个N元组的统计量。
+
+进一步依据生成文本的长度lc和参考文本的有效长度ls，计算惩罚项BP：
+
+BP = (1,lc>ls)
+BP = (e^(-1*lc/ls),lc<ls)
+
+最终，通过引入几何平均，得到BLEU评测结果：
+
+BLEUn = BP * exp(wn * log(pn))
+
+其中，w为权重值，通常取w=1/n。由于当N大于4时，相应的N元组会非常稀疏，因此通常采用N={1,2,3,4}，对应BLEU{1,2,3,4}指标。
+
+2) METEOR(Metric for Evaluation of Translation with Explicit Ordering)
+
+METEOR指标是由Banerjee等人在2005年提出，是对BLEU指标的改进。BLEU指标仅采用了准确率，且要求N元组完整匹配，没有考虑同义词等语义相似的情况。为此，METEOR指标在计算时同时考虑了精确率和召回率(Recall Rate)，并给予召回率更大的权重。METEOR进一步将词干相同、同义词等情况纳入匹配统计，使其与人工评价更为相关。
+
+具体而言，给定待评测的生成文本c以及参考用标准文本r。METEOR首先一元组的匹配，计算相应的精确率和召回率，并采用调和平均进行加权：
+
+P = m/COUNT(c)
+R = m/COUNT(r)
+
+其中，m为待评测文本c和标准文本r最优匹配下的一元组匹配数，COUNT(c)和COUNT(r)分别为待评测文本c和标准文本r中一元组总个数。词干相同、同义词等情况将计入匹配数。如果存在多种一元组匹配的方案，选取匹配连线交叉最少的作为指标计算的依据。
+
+为了对更长的N元组匹配情况进行评估，METEOR引入了惩罚项p，待评测文本和标准文本中不相邻的匹配越多，则惩罚越大。首先要将匹配好的一元组划分到尽可能少的文本块(Chunk)中，文本块越少，则说明待评测文本和参考文本中相邻的一元组匹配越长。如果待评测文本和参考文本完全相同，则相应的惩罚项p为0。
+
+第5部分内容：
+
+文本块数y后，计算惩罚项如下：
+
+p = 0.5 * x * (S) * (2 - 25)
+
+最终，得到METEOR指标如下：
+
+METEOR = Fmeanx * (l - p) * (2 - 26)
+
+3）CIDEr（Consensus-based Image Description Evaluation）
+
+CIDEr指标是由Vedantam等人于2015年提出，是专门针对图像描述任务设计的自动化评测标准。CIDEr采用TF-IDF加权，即词频-逆文本频率指数（Term Frequency-Inverse Document Frequency），为不同的词赋予不同的权重。直观来看，重复出现在描述句子中的词通常视觉信息量更少，因此在利用标准文本评测生成的文本时，应当赋予这类词更低的权重。由此，在图像描述任务评测中，CIDEr能取得相比BLEU和METEOR与人工评测更为一致的结果。
+
+具体而言，给定基于图像生成的文本Ci，以及对应的参考文本集，并且将文本中的词映射到对应的原始词根或词干形式。定义N元组为q，统计其出现在文本和文本Ci中的次数，分别记为和ifc(q)。计算N元组Wfc的TF-IDF权重如下：
+
+Iwzen = (s/per n_i (l, hkr pq))j
+
+其中，ft为包含所有N元组的词表，f为数据集中所有图像的集合。随后，基于平均余弦相似度计算N元组对应的CIDEr值如下：
+
+其中，(Ci)和(Cry)为文本和文本%对应的TF-IDF权重向量。通常采用多个不同长度的N元组捕捉不同粒度的信息：
+
+CIDEr = ^AnCIDErnCcf . i? , - )
+
+n = l
+
+默认米用W = 4，加权权重为 = 1/iV。
+
+2.5本章小结
+
+本章主要介绍了开展图像段落描述研究所涉及的基础知识。本章以编码器-解码器框架为线索，首先简要介绍了框架的基本范式，进一步介绍了卷积神经网络和目标检测模型两大类视觉编码器，以及循环神经网络和变压器网络两大类文本解码器。最后，本章介绍了图像段落描述基准数据集和相应的指标。
+
+一维在0到1之间，用于控制父节点的信息向左子节点的流动程度。为了鼓励左右子节点显式建模图像特征的不同方面，实现父节点特征的有效划分，左右子节点的计算方式如下：
+
+l = vPQg
+
+lv r = vP0(l^J)
+
+其中，⊙代表逐元素乘积。可以看到，当门控向量某一维度的值越接近1，则该维度的信息主要由左子节点获得；值越接近0，则该维度的信息主要由右子节点获得。上述特点使得划分模块能够在监督训练时学习到差异性。同时，满足父节点等于左右子节点的加和，减小了引入噪声的可能性。
+
+实际上，任何由一个特征表示计算得到两个特征表示的方法都可以应用于划分模块，例如直接使用多层感知机或者利用卷积神经网络完成。后续实验发现基于门控的划分机制简单且有效，故S2TD最终采用上述节点划分方式。其他可采用的划分模块设计如下：
+
+1）基于两个独立的门控向量
+
+l = a(Wt⊙LayerNorm(vp)+b)
+
+r = c(Wr⊙LayerNorm(vp)+br)，vPQg
+
+2）基于多层感知机直接计算左右子节点
+
+l = MLPleft(vp)
+
+r = MLPright(vn⊙vPQg)
+
+3.3.3打分模块
+
+如果模型只包含划分模块，那么树结构将会无休止地扩展下去，无法从图像和段落数据中学习到如何生成合适的、有利于段落生成的句子树结构。因此，需要使模型具备停止节点划分的能力并能够从数据集中学习如何决策。
+
+为此，本文提出利用打分模块对划分结果进行评价，完成对树结构扩展的控制，学习段落句子树的拓扑结构。具体而言，给定一组由划分模块得到的节点划分提议集合{vp,vl,vr}，打分模块基于余弦相似度计算得到决策分数sp：
+
+sp = cos(vl,vr)
+
+当sp<a时，打分模块将保留当前节点划分结果，否则拒绝划分。其中，决策阈值a为0和1之间的超参数，需要通过验证集来确定。采用余弦相似度进行度量，具有较好的可解释性：决策分数越大，则说明划分得到的左右子节点的向量表示越相似，更有可能导致冗余的描述句子生成，应当拒绝这次划分；决策分数越小，则说明划分的质量越高，应当采用本次划分结果。
+
+为了有效监督打分模块，首先通过3.2节中提出的段落文本树结构建模方法，基于段落P构造出对应的树结构r作为标签。树结构标签的学习，可以转换为对决策分数的学习。为此，本文提出了一种新颖的树结构损失来实现对决策分数的有效监督，具体计算方式如下所示：
+
+Lt = {max(0, sp - a), sp>a
+     max(0, a - sp), sp<a
+
+其中，Lc代表所有叶子节点的集合。对于非叶子节点，即打分模块的决策为划分的情况，损失Lt鼓励左右节点的差异越明显越好。对于叶子节点，即打分模块的决策为不划分的情况，损失鼓励左右节点的差异略大于阈值a。
+
+相比直接利用二分类损失，例如二元交叉熵损失，上述树结构损失可以鼓励打分模块学习到更平滑的打分策略，从而实现更好的段落生成效果。另外，训练过程中，模型保持与给定标签相同的划分决策，测试时则无需预先给定标签。
+
+与划分模块相同，打分模块设计亦可采用不同的计算方式和优化目标，例如直接使用多层感知机加上sigmoid激活函数作为打分模块，或者采用其他距离函数。后续实验发现，采用余弦相似度打分机制可解释性更强，简单有效，故S2TD最终采用上述打分设计。其他可采用的打分模块设计如下：
+
+1）基于二分类决策
+
+打分模块可以基于父节点的表示进行决策，即给定当前父节点，通过一个二分类器决定是否划分该节点，计算公式如下：
+
+sp = ReLU(VV0⊙vp+b0)+bt
+
+如果决策分数小于0.5，即分类结果为0则决策划分该节点，同时说明该节点为非叶子节点。训练时利用二元交叉熵损失训练。二分类器可以进一步基于预划分的子树三元组进行决策，计算公式如下，其中符号[;]为拼接操作：
+
+sp = a(Wx⊙ReLU(VK0⊙[vp;vl;vr])+b0)+bt
+
+2）基于回归拟合节点深度
+
+打分模块也可以通过预测节点的深度实现树结构划分的控制，同样利用一个多层前馈神经网络预测当前父节点vp的深度分数s，计算公式如下：
+
+s(vp) = <t(VKx⊙ReLU(LV0⊙vp+b0)+bx)
+
+一组节点划分提议集{vp,vl,vr}，划分的决策交由以下不等式进行判别：
+
+s(vp) + s(vr) < J
+
+即如果满足该条件则接受该划分提议，否则拒绝。其中，决策阈值cr为0和1之间的超参数。a越大，打分模块越倾向于拒绝。该设计的动机是，新增节点的平均分数应当大于已有父节点。训练时，分数的回归目标设计为d/D，其中d为节点到根的跳数，D为预设最大深度。
+
+3.3.4词级别RNN
+
+树结构构造完成后，词级别RNN模块负责将叶节点解码得到描述句子，约定从最左边的叶节点开始解码到最右边的叶节点结束，将依次解码得到的句子组成最后的描述段落。由于利用了划分模块和打分模块，从图像全局特征开始，自顶向下不断对全局信息进行拆解，完成了从图像整体到局部的理解。因此，与主要利用循环神经网络的顺序解码相比，S2TD采用的树结构解码能够更好对图像内容进行理解和规划。值得注意的是，词级别RNN可以对树结构中任意一个节点表示实现解码，故可以通过解码树结构中的不同节点，展示模型生成段落的过
+
+本文介绍了基于文本树结构的图像段落描述算法研究。首先，介绍了相关模型方法，包括ATR模型、SCST模型、CRL模型、OR-ATT模型等。然后，通过定量实验比较了不同模型在非强化学习和强化学习设置下的性能。结果显示，所提出的S2TD方法在多个指标上取得了最优效果。进一步，通过消融实验验证了S2TD模型设计的有效性。最后，进行了定性分析，展示了S2TD模型生成的段落、段落对应的句子树以及划分过程可视化，突出了树结构解码带来的可解释性。
+
+第8部分内容：
+
+在本节中，我们首先提出了一个用于构建段落句子树结构的层次建模方法。随后，我们详细介绍了新颖的树结构解码框架S2TD，用于解决图像段落描述任务。该框架将段落生成过程视为一棵自顶向下不断扩展的二叉树。我们进一步介绍了S2TD的三个核心模块：划分模块、打分模块以及词级别RNN，并提出了一个新颖的树结构损失函数，用于监督S2TD学习段落句子树的拓扑结构。最终，我们总结了一个基于S2TD的树结构段落解码生成算法。在实验验证部分，我们通过定量性能比较、消融实验对比验证以及定性生成展示，验证了所提方法的可行性与有效性。
+
+清洗后的内容如下：
+
+一部分，这类方法的编码过程可以抽象如下：
+
+rV,C = Detector(Z)
+
+Tij = Softmax(MLP([vf, if IOU(c, Cj) > 0.5] (4-2))
+
+U = Fusion(F, R)
+
+其中，[;]代表向量拼接操作，为图像区域两两预测的关系矩阵，Fusion代表信息融合的操作。IOU为交并比函数(Intersection over Union)，用于计算两个区域框之间的重叠程度，即只有在框重叠比较高时，才进行关系预测。
+
+尽管上述方法在一定程度上提升了编码器对关系信息的利用，但关系预测的准确性依赖于人工预先定义与额外标注数据，缺少或预测错误的关系结果会引入噪声，影响模型的性能表现。
+
+结合上述分析，本章提出采用树结构来建模图像区域特征间的关系，并利用多头自注意力机制融合编码原始视觉特征和对应的图像区域树结构，过程如下：
+
+V,C = Detector(Z)
+
+T = Parser(C) (4-3)
+
+U = MultiHead(F, r)
+
+其中，Parser为本章提出的启发式树结构建模方法，其利用图像区域的坐标信息剖析得到区域树结构T。进一步利用改进后的多头自注意力机制MultiHead，实现区域特征K和树结构T的融合。可以看到，引入树结构的编码方案充分利用了区域坐标信息，在编码区域关系信息的同时，无需额外的标注和训练开销。此外，区域树结构是对人类观察图像时对信息梳理的模拟，相较于直接引入高度抽象的关系类别，更具可解释性。
+
+本章节的后续内容安排如下：
+
+首先介绍如何利用区域坐标信息启发式地构建区域树结构，进一步详细介绍本文提出的树结构增强的段落描述模型，最终通过实验验证所提方法的有效性。
+
+4.2 图像区域树结构建模方法
+
+一张图像，相比单个句子，想用一个内容丰富的段落进行描述，需要对图像内容进行更深入的观察理解。人类在处理复杂的图像信息时，一种简单有效的规划策略便是对图像内容进行“一分为二”。区别于直接关注到图像中的每一个细节，人类往往将图像先分为“上下”等子区域，逐步地理解子区域中的内容，建立子区域内外的关联。这种“一分为二”的观察过程可以利用二叉树结构进行建模。因此，本文提出在图像段落描述任务中引入区域树结构信息。
+
+具体而言，区域树为一棵完美二叉树(Perfect Binary Tree)，即一个深度为d(d2^0)且有2^(d+1)-1个节点的二叉树。树T中的每一个节点对应一个包含n个图像区域的分组Z。因此，第d层的一共有2^(d-1)个区域分组，记为Z/d = {L0, L1, ..., Ld}，并满足如下条件：
+
+IDA = C (4-4)
+
+VGj, Gj E L, Gnj = 0 (4-5)
+
+其中，公式4-4和4-5要求图像中任意区域仅出现在d层的某一个分组中，不同分组间没有交叉。根据定义，区域树的根节点即为未划分的图像区域全集。
+
+由此，区域树的构建过程抽象如下：
+
+C — {c1, c2, ..., cT} = {L0, L1, ..., L}
+
+为了实现上述变换，本章提出了一种基于图像区域的空间坐标，将图像区域集合启发式地划分为“左与右”子部分的区域树结构建模方法。建模步骤详细说明如下：
+
+首先，给定父节点分组C，目标是将其划分为两个新的子节点分组C1和C2。计算父节点分组整体对应的最大区域Cmax如下：
+
+Cmax = (x0, y0, x1, y1)
+
+父节点分组区域Cmax给出了“左右”划分的最大范围。进一步基于Cmax计算变化需要的基准框y和d如下：
+
+y = (x0, y0, x1, y1 + αx1(xf - xl), yl)
+
+d = (xl, yl, x1 + 2αx1(xf - xl), yl)
+
+其中，αl为放缩的比例。随后，计算父节点分组中某个图像区域cf属于“上”划分中上方区域的置信度如下：
+
+pf = Intersection(cf, c0) / Area(cf)
+
+其中，Intersection函数用于两个坐标框相交面积的大小，Area函数用于计算坐标框的面积。pf的含义为图像区域框cf与基准框y的重合程度，值在0到1之间。如果pf ≥ 0.5则将该框记入新的、代表“上”的分组中，pf < 0.5则记入代表“下”的分组中。至此，完成了一轮放缩比例为αl的“上下”分组划分。
+
+相似的，可以得到区域cf属于“左”划分中左方区域的置信度：
+
+pl = Intersection(cf, c0) / Area(cf)
+
+如果pl ≥ 0.5则将该框记入新的、代表“左”的分组中，pl < 0.5则记入代表“右”的分组中。至此，完成了一轮放缩比例为αl的“左右”分组划分。
+
+采用不同的αl以及不同方向(“上下”、“左右”)可以得到多个不同的新分组，需要对这些新分组进行筛选。为此，本文提出优先选取候选集R中区域数量最为均衡的作为最终结果，即计算分值sy如下：
+
+sy = abs(|GP| - |GP|)
+
+其中，abs为绝对值函数，|代表集合元素数量。分值sy越小，则说明对应的新分组更平衡。优先选取5个最小的新分组，如果存在多组分值相同，则选取最接近0.5的新分组。由于最终目标是得到一棵完美二叉树，因此只需要遍历d-1层的父节点，并逐一采用上述的划分方法，即将树结构扩展到d层。实际应用时，采用αl ∈ {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}与两种方向(“上下”、“左右”)的组合，共计18种情况，原始图像区域总数为K = 36，建模深度为d = 2。
+
+通过引入上述图像区域树结构，能够辅助建模两类区域关系：组内关联，层次关联。组内关联，指位于同一个节点对应的分组下的所有区域是空间相邻或处于一观察逻辑的；层次关联，指父节点对应的分组与子节点对应的分组间具有由整体向局部过度的特点。
+
+图4-1和图4-2中，可视化了由所提方法构建出的区域树结构。其中，图像中的红色框为目标检测模型抽取的区域图像特征。
+
+4.3 编码视觉树结构的图像段落描述模型
+
+4.3.1 模型总览
+
+本文将变压器网络架构应用于图像段落描述任务中，并在编码器端引入了区域树结构信息，提出了一种新颖的树结构增强的编码器网络(Tree-Enhanced Encoder, TEE)。此外，本文提出了一种基于概率分布衰减的段落解码策略，延迟终止(Ending Delay)解码策略，用于改善朴素的变压器网络在解决段落描述问题时存在的解码缺陷，使得变压器架构能够获得与最新方法可比较的性能。
+
+模型总体框架如图4-3所示，由树结构增强的编码器网络、解码器网络以及基于概率分布衰减的段落解码策略三个重要组件构成。计算流程如下：首先将图像输入到TEE的目标检测模块中，得到区域的原始特征和边界框坐标，并通过TEE的树结构剖析模块得到区域树结构。随后，TEE通过改进的多头自注意力机制编码区域的原始特征和区域树结构，得到最终的视觉特征表示。进一步将视觉特征表示输入到解码器网络中，得到段落中词的概率分布。在推理测试阶段，模型采用由延迟终止和重复性惩罚组成的、基于概率分布衰减的段落解码策略，对词的概率分布进行优化，从而得到最终的描述段落并输出。
+
+4.3.2 树结构增强的编码器网络
+
+树结构增强的编码器网络TEE是对朴素的变压器编码组件的改进。TEE由三个模块组成：目标检测器模块、区域树剖析模块以及树结构增强的注意力编码模块(Tree-Enhanced Attention Module, TEAM)。区域树剖析模块基于4.2节提出的图像区域树结构建模方法实现，利用目标检测的结果构建区域树结构。TEAM在朴素的多头自注意力机制的基础上，融合了剖析得到的区域树结构信息，使得编码器TEE能够更好的利用区域间关系，从而得到更好的视觉表示。
+
+首先回顾朴素的变压器编码组件，简记为AM(Attention Module)。输入的原始图像区域特征为K，其前向过程抽象如下：
+
+vself = MultiHead(K, V, V) (4-13)
+
+Kself = ReLU(VselfW0 + b0)Wx + bx (4-14)
+
+其中，每一层操作额外采用了残差连接并采用了LayerNorm方法进行一化，即x = LayerNorm(x + SubLayer0c)。MultiHead函数即为公式2-11定义的多头自注意力操作。实际使用时会层叠多个参数独立的编码组件。
+
+可以看到，AM采用的多头自注意力操作是全连接的，即输入特征可以与所有的特征进行注意力计算。全连接的注意力计算在机器翻译任务中，即用于编码源语言的文本，是合理的。这是因为文本是符号化的信号，其蕴含着规律性的结构，即语法结构。通过监督学习，全连接的注意力计算可以通过文本语义隐式的获取结构。然而，图像与文本不同，图像中物体对象的空间关系是随机的，并不遵循类似于文本语法的约束。因此，在解决图像描述任务，尤其是更为复杂的图像段落描述任务时，需要引入额外的区域信息关系进行指导或约束。
+
+为此，本文提出在AM的基础上引入区域树结构信息，对注意力计算过程进行约束。回顾4.2节中对区域树结构的定义，区域树r = 为一棵完美二叉树，其中Ld = 以及定义为图像区域的一个分组集合。即T的每层Ld将所有的图像区域划分为了2^d个子集合，每个集合内的区域是空间相关。基于上述特点，通过将朴素的全连接方式改进为只允许对子集中的区域进行注意力计算，区域树结构可以被用于约束多层注意力机制。由此，得到了TEAM的基础架构，展示在图4-4中，剖析得到的区域树结构将被逐层输入到编码组件中对多头自注意力进行约束。
+
+需要说明的是，图4-4中展示的只是一种引入区域树结构的策略。在图4-4中，区域树结构的第d层被优先输入到编码组件TEAM中，最终输入根节点。这种从局部到整体的树结构引入方式，定义为自底向上的约束策略(Bottom-up)。同理，可以优先输入根节点，最终输入第d层节点，这种从整体到局部的树结构引入方式，定义为自顶向下的约束策略(Top-down)。此外，树结构的同一层节点可以重复使用，对连续的多层独立参数的TEAM组件进行约束。
+
+得到由区域树结构提供的分组信息Ld后，需要将利用集合表示的Ld转换成矩阵表示，方便后续计算。定义分组矩阵Md为仅包含0和1的方阵。依据Ld给出的区域特征分组，如果区域特征i和区域特征y属于同一个节点(即同一个分组)，则矩阵Md对应位置的=1，反之则=0。
+
+由此，输入的原始区域特征F，对应组件TEAM的前向过程抽象如下：
+
+vself = EnhancedMultiHead(K, V, V, Md) (4-15)
+
+Kself = ReLU(VselfW0 + b0)Wx + bx (4-16)
+
+与组件AM一致，每一层均采用了x = LayerNorm(x + SubLayer0c)操作。其中，EnhancedMultiHead函数在传统多头自注意力机制的基础上额外引入了编码分组信息的矩阵Md。本文提出并尝试了下述的几种改进方案：
+
+硬掩码方案通过硬性约束注意力对象，不允许非同组的特征进行注意力计算。具体而言，考虑公式2-1中定义的注意力操作，其中未归一化的注意力矩阵与分组矩阵Md的维度大小相同，矩阵下标的物理含义分别对应特征i与特征j的注意力强度以及是否处于同组。因此，改进后的计算公式如下：
+
+AttentionH((Q,K,V,Md)) = Softmax + (1 - Mo)x C - 17)
+
+其中，-∞代表负无穷。公式4-17的含义为将不在同一分组的注意力分值置为负无穷，归一化后即为0，从而对关注区域的约束。多头自注意力的计算沿用公式2-11，将对应的注意力计算从公式2-10替换为4-17即可。
+
+软加权方案通过加权朴素的多头自注意力机制和硬掩码方案，实现对区域分组信息的引入。结合公式2-10和4-17，具体计算过程如下：
+
+Attention5 = ax AttentionH + (1 - a)x SG(A) (4 - 18)
+
+其中，a e (0,1)为预设的超参数常量，用于平衡两类注意的计算结果，如果a = 0则本方案退化为朴素的多头自注意力机制，若a = 1则本方案等价于硬掩码方案。SG函数表示在反向传播时取消梯度反传，实验中发现只保留硬掩码单方向的梯度有助于提高性能表现。
+
+中心偏移方案基于相同分组内注意力分值应当更高的假设，首先计算不同分组的键值向量均值作为键值中心，然后计算键值向量与各组中心的相似度分值。理论上，同组内的分值会更高。最终将该分值与原始的注意力权重相加，从而约束注意力计算更倾向于同组的区域。相应的计算过程如下所示：
+
+Kc = -x MdK (4 - 19)
+
+Attentionc(Q,K,V,Md) = Softmax ( -x V2x Kc (4 - 20)
+
+综上，本节介绍了树结构增强的编码组件TEAM，并阐明了引入区域树结构的编码器网络TEE的各个组件以及区域树结构的引入策略。
+
+4.3.3基于概率分布衰减的段落解码策略
+
+在所提模型的解码端，本文沿用变压器网络的解码器组件进行段落生成，相关计算过程见2.3.2节。尽管理论上，相较于循环神经网络，变压器网络能够更好地对文本序列上下文进行理解并生成。然而实验发现，在图像段落描述任务中，由于变压器网络的解码组件仍属于非层次结构的模型，无法显式区分和利用段落中句子层次的信息。因此，受到Melaskyriazi等人[461研究工作的启发，需要在解码推理阶段，采用额外的后处理，才能使模型更好地解码生成描述段落。进一步实验发现，已有的段落解码后处理策略都是针对以循环神经网络为组件的解码器网络设计的，同样的方法直接应用于变压器网络反而会导致性能下降。
+
+为此，本文提出了一套基于概率分布衰减的段落解码策略用于增强变压器解码组件在段落生成时的性能表现。顾名思义，概率分布衰减的策略是指，在解码网络输出的词概率分布的基础上，有策略地调整部分词概率分布的强度，使解码过程更加充分，从而生成质量更高的描述段落。
+
+具体而言，所提策略包含两个主要步骤，延迟终止和重复惩罚。在解码生成的每个时间步，首先对输出词分布进行延迟终止的调整，再对潜在的重复内容生成进行罚分，得到优化后的词分布进行采样生成，最终组成输出段落。相关技术细节说明如下：
+
+1)延迟终止(EndingDelay)
+
+针对变压器网络的最新研究工作[79]指出，变压器网络存在序列长度过拟合的问题，即模型的性能表现受到训练集序列长度分布的影响。在本文展开的实验中，观察到了类似的过拟合问题，由于训练集段落长度方差较大加上非层次结构无法显式表征句子，变压器解码组件会过早结束段落生成，导致生成的段落长度显著不足，从而极大地影响段落内容的丰富程度，降低评测指标。近期的图像单[80]也开始对相关问题进行研究，使生成的描述句子长度可控。
+
+受到上述研究的启发，本文提出在解码阶段，对模型输出的词概率分布进行调整，通过渐进式的罚分衰减，鼓励模型生成段落。设表示段落终止的特殊词为“＜eos＞”以及表示句子终止的句号为“。”。需要提前设定期望生成的句子数Nv以及惩罚因子5e(0,1]。在段落解码过程中的第t时刻，基于句号对已生成的句子个数进行统计，记为Nt。对“＜eos＞”的概率输出调整如下：
+
+ptos = logptos + {Nv - Nt}x log5e (4 - 21)
+
+其中，pteos为调整前的概率值，pteos为进行延迟终止更新后的概率值。5e越小则越倾向于鼓励模型继续生成段落，直到“＜eos＞”被采样生成。公式4-21会随着段落中已生成的句子数量逐渐增多，逐步降低对词“＜eos＞”的概率输出的影响直到满足预设的期望句子生成个数，实现平滑的转换。
+
+2)重复性惩罚(RepetitionPenalty)
+
+重复性惩罚是由Melaskyriazi等人[46]提出的，用于降低非层次结构模型段落生成的冗余度的解码策略。该策略通过在解码过程中统计已生成的段落中的三元组，降低可能导致重复三元组的词的概率，从而增加段落文本内容的多样性。然而该方法是基于循环神经网络解码器设计的，实验发现，该方法不能直接应用于变压器解码组件。进一步研究后，发现变压器解码组件需要先利用所提出的延迟终止策略进行解码增强，随后重复性惩罚策略才能被有效地实施。
+
+重复性惩罚策略对词w概率值的调整如下所示：
+
+logptw = logptw - Xa^ (4 - 22)
+
+其中，^代表t时刻，以词w结尾的、已生成的三元组个数。a^ [0, +∞)为惩罚强度，a^越大则对重复的惩罚越大。
+
+综上所述，本节介绍了本文提出的由延迟终止和重复惩罚组成的解码策略。该策略被用于提升变压器网络中的解码组件在段落生成上的性能表现。
+
+4.4实验对比与分析
+
+4.4.1实验参数与设置
+
+针对本章提出的模型方法和解码策略，为了验证其有效性，本文采用开源深度学习框架Pytorch开发和训练模型，并在基准数据集上进行了定性和定量实验。实验环境为搭载12GB NVIDIA GeForce 1080Ti显卡的Ubuntu 16.04服务器。编码器网络中的目标检测器组件同样采用预训练的Faster R-CNN[21]检测并保留目标检测结果前36个框，每个框抽取的特征为2048维。在训练和测试阶段，参数保持固定。随后，利用多层感知机网络将特征投影=512维。区域树剖析模块遵循4.2节，采用Ae{0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9}与两种方向(“上下”、“左右”)，最终得到的区域树共计3层。模型中采用变压器网络实现遵循Rush[81]开源的变压器网络基准实现和超参数数配置。模型采用了6层树结构增强的编码网络TEE和6层变压器解码网络的配置。依据不同TEAM组件设计，剖析得到的区域树结构将采用不同的方式引入组件中，将在模型对比部分详细说明。词表采用与3.4.1节中相似的流程处理，但不区分句子而是将段落作为一个长序列，段落的预设生成最长长度为175个词，其中包含标点符号。在监督训练阶段，模型采用Adam优化器数据批量大小为10的配置。并采用如下的公式[27]对学习率Zr进行调整：
+
+lr = d^-5 x min(iNtep, Nstep) x N^-5up) (4 - 23)
+
+其中，Ntep为当前训练步数，MvarmuP = 20000为预热步数。此外，遵循变压器网络训练的惯例，采用强度为0.1的标签平滑策略[82] (Label Smoothing)进行训练，避免多元交叉熵损失导致过于自信的预测，从而提升模型的泛化性能。
+
+在测试推理阶段，模型采用的解码策略的超参数设置为：期望生成的最少句子数Nv=7，惩罚因子5e=0.2以及重复性惩罚强度a^=2.1n2。上述超参数是基于模型在验证集上的性能表现选择的。因受限于实验环境的算力，模型没有采用SCST等强化学习技术[83]进行进一步优化。这是由于在每个时间步的强化学习进行的采样，均需要重新计算一次对历史信息的多头注意力机制，因此需要存储的梯度信息远多于循环神经网络，过大的显存和时间开销使得利用SCST技术优化变压器结构的模型极为困难。
+
+4.4.2评测指标对比与分析
+
+本节选取了近年的图像段落描述模型进行定量的性能对比，并将其进一步划分为建模了未建模区域关系组rnnp+rp，DHVP，IMAP[44]以及建模区域关系组VRD[41]，CAVP，OR-ATT，HSGED[45]。为保持一致，通过采用已1^1；3，4p，METEOR，CIDER (C)指标来评价模型的段落生成质量。
+
+对未在3.4.2节介绍的相关模型补充说明如下：
+
+1)RNN+RP模型：该模型基于图像单句描述模型[21]，解码器组件为循环神经网络，通过监督学习训练模型，解码时采用重复性惩罚策略进行优化，属于最简单的基线方法之一。
+
+2)VRD模型：该模型基于经典的段落描述模型RH。其在目标检测模型结果的基础上，对区域关系进行显式的预测，并将有效的区域关系对输入到循环神经网络解码组件中进行段落生成。
+
+3)VRREN模型：该模型是对VRD的改进，利用提出的关系对预测模块替换目标检测模型，该模块基于对抗生成网络实现，同样进行显式的关系标签预测。
+
+4)CAVP模型：该模型由多个感知上下文的视觉策略组件构成，通过将已完成的注意力结果作为上下文信息，隐式的完成对图像区域关系的捕捉和利用。
+
+5)HSGED模型：该模型在层次结构模型RH的基础上引入了场景图，需要预先进行场景图的预测和生成学习。该模型显式建模并引入了图像区域关系信息。同时，该模型采用了复杂的训练和采样手段提升性能指标，是当前最先进的方法。
+
+6)Transformer模型：该模型是直接采用目标检测模型和变压器网络实现的图像段落描述模型，未引入本章提出的编码器和解码策略的改进，同样属于最简单的基线方法之一。
+
+7)Ours w/o Tree：该模型是基于Transformer的实现，未引入区域树结构和树结构增强的编码器组件的改进，只引入了本文提出的基于概率分布衰减的解码策略，包括终止延迟和重复性惩罚，属于基线方法。
+
+8)Ours：即本章提出的引入视觉树结构的完整模型，包括对编码器组件和解码策略的改进。树结构增强的编码器中的TEAM组件采用了硬掩码策略，即公式4-17。区域树结构引入的策略是前3层TEAM组件采用自底向上的约束策略，后3层采用自顶向下的约束策略。
+
+表4-1展示了相关模型方法的性能结果。由于大部分研究工作模型设计复杂且缺少有效的开源，表中结果沿用论文提供的指标。需要说明的是，为了公平比较，表中尽可能汇报相关模型进行监督学习后的性能表现。其中，RTT-GAN，-VAE和HSGED模型采用了额外的方法进行优化。
+
+从表4-1中可以看到，引入区域信息分组内的模型性能与同期的模型相比，都具有性能上的优势：例如早期的方法VRD和VRREN都相较于基线RH模型有提升，近期的方法例如CAVP和HSGED相较于IMAP模型有优势。相关实验结果表明，引入图像区域关系等信息是有助于提升段落生成质量。
+
+本文提出的引入视觉树结构信息的方法取得了良好的性能表现，指标结果普遍优于基线模型，并与最先进的方法HSGED可比较，在评测指标上各有优劣。此外，同样是非层次结构模型的RNN+RP和Transformer基线模型，在性能指标上差异不明显，并且在监督训练设置下性能大幅度低于层次结构模型。然而，在采用本文提出的基于概率分布衰减的段落解码策略进行优化后，变压器网络的性能得到了极大的提升，优于利用了重复性惩罚策略的最新OR-ATT+RP模型的性能，甚至好于大部分层次结构模型。这验证了本文提出的延迟终止策略的有效性，即能够有效的增强变压器网络在段落生成任务上的表现。在进一步引入树结构后，所提模型在BLEU和CIDER指标上均得到了提升。其中，在CIDER指标上提升明显，与未引入树结构的基线模型相比提升了约4.6%。相关结果验证了本文提出的树结构增强的编码器TEE组件的可行性和有效性。
+
+4.4.3消融实验
+
+为进一步验证本章提出的引入视觉树结构的段落描述模型的有效性，本节从区域树结构剖析方法的设计、区域树结构信息的引入机制以及所提段落解码策略三个方面进行了定量实验和分析对比。
+
+针对区域树结构剖析方法的对比结果展示在表4-2中，对比方法说明如下：
+
+1)w/o Tree为未引入任何树结构信息的基线模型。
+
+2)w/BBBox为在w/o Tree的基础上，将区域边界框信息(坐标，长宽，面积)作为新增维度直接拼接在对应的区域特征上作为输入，交由多头自注意力机制自行完成关系隐式计算。与其他方法相比，该模型引入了额外的参数量。
+
+3)Rand Tree为采用了随机平均划分剖析策略得到的基线模型。具体而言，
+
+清洗后的内容如下：
+
+剖析流程与4.2节提出的剖析方法相似，但划分不同分组时不依赖于区域边界框坐标进行划分，而是将当前父节点分组中的区域随机划分成两个大小相等的集合。除此之外，其他配置保持一致。
+
+4) HACTree采用的是自底向上构建视觉树结构的策略，核心流程是计算区域间的距离，然后利用层次聚类方法(Hierarchical Agglomerative Clustering, HAC)完成树结构的构建。区域间距离计算基于图像区域特征表示间的余弦相似度和空间坐标交并比的加权值。在树结构自底向上构建完成后，进行剪枝只保留3层的树结构并转换为对应的矩阵表示，最终引入编码器中。其他配置保持一致。
+
+5) RegionTree即利用4.2节提出的构建方法得到的区域树结构。值得一提的是，编码器端采用的TEAM策略为硬掩码，该方案没有引入额外的参数量。
+
+-2采用区域树结构剖析方法的消融实验结果
+
+w/o Tree 44.48 27.04 16.52 9.96 17.68 26.55  
+w/BBBox 44.31 27.04 16.58 10.00 17.45 26.76  
+RandTree 42.53 26.16 16.10 9.77 16.95 27.10  
+HACTree 43.28 26.05 15.70 9.36 17.12 25.57  
+RegionTree 44.64 27.50 16.88 10.25 17.65 27.78  
+
+从表4-2中可以看到，采用RegionTree的模型取得了最佳的性能表现。对比RandTree和w/o Tree，发现应用随机剖析得到的树结构会损害模型的表现，这说明RegionTree中采用的区域划分策略是有价值的，远好于随机划分。对比HACTree和RandTree，可以看到尽管HACTree采用了语义和空间关系混合打分的方法进行建模，但是其表现甚至差于随机划分。一方面是因为HACTree采用的层次聚类方法会导致剖析得到的树结构不平衡，即不同分组内区域数量差异。另一方面是因为HACTree基于的图像语义距离是基于目标检测模型原始特征得到的，该特征是粗粒的，容易将不同位置相似的物体聚类在一起，引入额外的噪声。而仅基于空间信息构建的RegionTree能够为模型补充额外的信息而非干扰。最后，对比不同的引入区域关系的方案，隐式方案w/BBBox对性能的提升并不明显，RegionTree更好的性能表现验证了引入区域树结构的有效性。
+
+进一步考察不同的树结构约束方案和TEAM组件设计对模型性能的影响。相关结果展示在表4-3中。本节实验了三种TEAM设计，硬掩码方案(HM)、软加权方案(SW)以及中心偏移方案(CS)，以及四种引入树结构约束方案：
+
+1) 自顶向下(TD)：区域树结构引入顺序为从根节点层到叶节点层，每1层分组用2层独立的TEAM组件编码。
+
+2) 自底向上(BU)：区域树结构引入顺序为从叶节点层到根节点层，每1层分组用2层独立的TEAM组件编码。
+
+3) 自顶向下再自底向上(TDBU)：区域树结构引入顺序为从根节点层到叶节点层，叶节点层再到根节点层。每1层分组用1层独立的TEAM组件编码。
+
+4) 自底向上再自顶向下(BUTD)：区域树结构引入顺序为从叶节点层到根节点层，根节点层再到叶节点层。每1层分组用1层独立的TEAM组件编码。
+
+从表4-3中可以看到，不同的TEAM组件设计方案需要采用合适的树结构约束方案，才能取得比基线w/o Tree更好的性能表现。例如，HM+BU TD，SW+TD以及CS+BU的组合。从HM、SW到CS，相关设计对注意力机制的约束程度是从严格约束逐步放松，到完全交由模型自行学习。
+
+可以发现，HW和SW采用BU TD和TD的效果普遍较好，原因是最后阶段的引入是从整体到局部，能够增强最终输入到解码器组件中视觉表示间的区分度，并且能让图像边缘非核心对象的特征获得增强。而TDBU和BU的约束策略效果普遍较差，是因为最后一层采用根节点层对应的全连接，等价于放弃了约束。不同的是，学习型的CS的设计，采用BU策略更好，这是因为CS基于键值的中心表示对注意力进行调整，故先从叶节点层开始编码有助于获取到更好的中心。
+
+总的来说，结合表4-2和表4-3的实验结果，剖析有效的区域树结构并采用合适的方式引入，将有助于提升模型在图像段落描述任务上的性能表现。
+
+表4-4采用不同解码策略的消融实验结果
+
+Transformer 35.27 21.00 12.81 7.83 14.78 22.40  
++RP 34.70 21.00 12.82 7.75 14.93 25.32  
++ED 41.21 24.32 14.77 9.03 17.00 22.64  
++ED +RP 44.48 27.04 16.52 9.96 17.68 26.55  
+
+针对所提的基于概率衰减的段落解码策略，本节在基线模型Transformer上进行了实验对比验证。延迟终止策略简记为ED，重复性惩罚策略简记为RP。相关结果展示在表4-4中。可以看到，直接在变压器解码时采用RP并没有同循环神经网络解码那样对性能指标有一致性的提升，甚至会导致部分指标降低。只引入ED策略时，可以观察到一致性的性能提升，在BLEU和METEOR指标上的提升尤为显著。同时引入ED和RP策略后，基线模型取得了最好的生成结果，RP策略也正常发挥了作用，提升了段落生成的多样性。
+
+综上，通过区域树结构的剖析、引入方式和解码策略三个方面的消融实验，进一步验证了所提的引入视觉树结构的图像段落描述模型的有效性。
+
+4.4.4定性分析
+
+本节通过展示区域树结构剖析结果以及不同模型生成的段落，进行定性分析和对比。相关结果展示在图4-5中，每张输入图像对应一个剖析得到区域树结构、三个由不同模型生成的段落文本。
+
+可以看到，引入区域树结构后，模型能够捕捉图像中更多的细节信息，从而生成质量更好的段落描述。以图4一幅图的生成结果为例，w/o Tree模型仅完成了图像中大象和湖的描述，而在引入区域树后，模型能进一步提及处于图像背景中停留在湖边的飞鸟(“There are small birds sitting on the ground near the small body of water.”)。这得益于区域树结构对于相关子区域的划分，即区域树第二层首个节点，实现了对该区域单独的分组。同样的，在图4-5的第二幅图中，通过引入区域树结构，模型进一步提及了道路中的黄线(“A road has yellow lines.”)和背景处的白色房屋(“There is a white building in the distance.”)。
+
+此外，对图像区域边界框的划分是符合人类认知习惯的。以图4-5中第二幅图的区域树结构为例，区域集合首先被拆分为以上方区域为主的背景以及下方区域为主的前景物体。然后上方的背景被进一步划分，右节点主要涉及房子。下方的的前景也被进一步划分为摩托车以及道路。在更为复杂的第三幅图中，区域树结构剖析的表现稍差，但在首次划分时对不同显示器的划分也是比较准确的。剖析质量下滑的主要原因是目标检测器输出的多个边界框过大，互相重叠严重。尽管如此，通过观察生成的段落，当前的树结构剖析质量是可以接受的。
+
+最后，通过对比基线模型Transformer和w/o Tree生成的段落，可以看到所
+
+提出的延迟终止和重复惩罚的段落解码组合策略能有效提升段落生成质量。段落不仅在句子生成个数上得到了提升，也提及了更多图像中出现的对象。总的来说，通过在编码端引入区域树结构信息，模型能够有效提升描述段落的准确性和丰富程度。生成段落中仍存在局部不连贯和内容冗余的问题，这是由于本节提出的方法仍属于非层次结构模型，需要对解码组件进一步改进。
+
+本章开展了引入视觉树结构的图像段落描述算法的研究工作。本章首先提出一种用于构建图像区域树结构的建模方法。随后，基于变压器网络框架，本章详细介绍了所提出的树结构增强的编码器网络，以及基于概率分布衰减的段落解码策略。最终，得到了一种新颖的编码视觉树结构的图像段落描述模型。在实验部分，本章通过定量分析实验、消融实验对比以及定性展示剖析结构和生成段落，验证了引入视觉树结构的可行性与有效性。
+
+清洗后的内容：
+
+参考文献：
+
+[25] Beng, I.O., Vinyals, O., Jaitly, N., et al. Scheduled Sampling for Sequence Prediction with Recurrent Neural Networks [C]. Advances in Neural Information Processing Systems, 2015: 1171-1179.
+
+[26] Ren, S.J., Marcheret, E., Mroueh, Y., et al. Self-critical Sequence Training for Image Captioning [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017: 7008-7024.
+
+[27] Vaswani, A., Shazeer, N., Parmar, N., et al. Attention is All You Need [A]. Proceedings of the 31st International Conference on Neural Information Processing Systems, 2017: 6000-6010.
+
+[28] Herdade, S., Kappler, A., Boakye, K., et al. Image Captioning: Transforming Objects into Words [A]. Proceedings of the 33rd International Conference on Neural Information Processing Systems, 2019: 11137-11147.
+
+[29] Huang, L., Wang, W., Chen, J., et al. Attention on Attention for Image Captioning [A]. Proceedings of the IEEE/CVF International Conference on Computer Vision, 2019: 4634-4643.
+
+[30] Correia, M., Stefanini, M., Baraldi, L., et al. Meshed-memory Transformer for Image Captioning [A]. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2020: 10578-10587.
+
+[31] Zhou, L., Palangi, H., Zhang, L., et al. Unified Vision-language Pre-training for Image Captioning and VQA [A]. Proceedings of the AAAI Conference on Artificial Intelligence, 2020: 13041-13049.
+
+[32] Deng, C., Ding, N., Tan, M., et al. Length-controllable Image Captioning [A]. European Conference on Computer Vision, 2020: 712-729.
+
+[33] Johnson, J., Karpathy, A., Fei-Fei, L. DenseCap: Fully Convolutional Localization Networks for Dense Captioning [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2016: 4565-4574.
+
+[34] Mao, Y., Zhou, C., Wang, X., et al. Show and Tell More: Topic-oriented Multi-sentence Image Captioning [A]. Proceedings of the Hiie 27th International Joint Conference on Artificial Intelligence, 2018: 4258-4264.
+
+[35] Liang, X., Hu, Z., Zhang, H., et al. Current Topic-Transition GAN for Visual Paragraph Generation [A]. International Conference on Computer Vision, 2017: 3382-3391.
+
+[36] Chattopadhyay, M., Schwingshackl, A. G. Diverse and Coherent Paragraph Generation from Images [A]. European Conference on Computer Vision, 2018: 747-763.
+
+[37] Wang, J., Pan, Y., Yao, T., et al. Convolutional Auto-encoding of Sentence Topics for Image Paragraph Generation [A]. International Joint Conference on Artificial Intelligence, 2019: 940-946.
+
+[38] Wu, S., Zhang, Z., Wang, Z., et al. Denseley Supervised Hierarchical Policy-value Network for Image Paragraph Generation [A]. Proceedings of the 28th International Joint Conference on Artificial Intelligence, 2019: 975-981.
+
+[39] Li Ruifan, Liang Haoyu, Feng Fangxiang, et al. 全卷积神经结构的段落式图像描述算法 [J]. 北京邮电大学学报, 2019(6): 7.
+
+[40] Li, R., Liang, H., Shi, Y., et al. Dual-CNN: A Convolutional Language Decoder for Paragraph Image Captioning [J]. Neurocomputing, 2020, 396: 92-101.
+
+[41] Che, W., Fan, X., Xiong, R., et al. Paragraph Generation Network with Visual Relationship Detection [A]. ACM Multimedia [C], 2018: 1435-1443.
+
+[42] Che, W., Fan, X., Xiong, R., et al. Visual Relationship Embedding Network for Image Paragraph Generation [J]. IEEE Transactions on Multimedia, 2019: 1-1.
+
+[43] Zhang, Z., Liu, D., Zhang, H., et al. Context-aware Visual Policy Network for Fine-grained Image Captioning [J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2019: 1-1.
+
+[44] Xu, C., Li, Y., Li, C., et al. Interactive Key-Value Memory-augmented Attention for Image Paragraph Captioning [A]. Proceedings of the 28th International Conference on Computational Linguistics, 2020: 3132-3142.
+
+[45] Yang, X., Gao, C., Zhang, H., et al. Hierarchical Scene Graph Encoder-Decoder for Image Paragraph Captioning [A]. Proceedings of the 28th ACM International Conference on Multimedia, 2020: 4181-4189.
+
+[46] Melas-Kyriazi, L., Rush, A. M., Han, G., et al. Training for Diversity in Image Paragraph Captioning [A]. Empirical Methods in Natural Language Processing [C], 2018: 1-1.
+
+[47] Wang, Z., Luo, Y., Li, Y., et al. Look Deeper See Richer: Depth-aware Image Paragraph Captioning [A]. ACM Multimedia [C], 2018: 672-680.
+
+[48] Luo, Y., Huang, Z., Zhang, Z., et al. Curiosity-driven Reinforcement Learning for Diverse Visual Paragraph Generation [A]. ACM Multimedia [C], 2019: 2341-2350.
+
+[49] Yang, L., Cai, Y., Yang, C., Hsu, J. Object Relation Attention for Image Paragraph Captioning [A]. Proceedings of the AAAI Conference on Artificial Intelligence, 2021, 35(4): 3136-3144.
+
+[50] Hong, R., Liu, D., Mo, X., et al. Learning to Compose and Reason with Language Tree Structures for Visual Grounding [J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2019: 1-1.
+
+[51] Liu, D., Zhang, H., Wu, F., et al. Learning to Assemble Neural Module Tree Networks for Visual Grounding [A]. Proceedings of the IEEE/CVF International Conference on Computer Vision, 2019: 4673-4682.
+
+[52] Cao, Q., Long, X., Li, B., et al. Visual Question Reasoning on General Dependency Tree [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2018: 7249-7257.
+
+[53] Tang, K., Zhang, H., Wu, B., et al. Learning to Compose Dynamic Tree Structures for Visual Contexts [A]. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 2019: 6619-6628.
+
+[54] Yao, T., Pan, Y., Li, Y., et al. Hierarchy Parsing for Image Captioning [A]. Proceedings of the IEEE/CVF International Conference on Computer Vision, 2019: 2621-2629.
+
+[55] Ma, Z., Yuan, C., Cheng, Y., et al. Image-to-tree: A Tree-structured Decoder for Image Captioning [A]. 2019 IEEE International Conference on Multimedia and Expo [C], 2019: 1294-1299.
+
+[56] Wang, H., Lin, G., Hoi, S. C., et al. Structure-aware Generation Network for Recipe Generation from Images [A]. European Conference on Computer Vision [C], 2020: 1-1.
+
+[57] LeCun, Y., Boser, B., Denker, J. S., et al. Backpropagation Applied to Handwritten Zip Code Recognition [J]. Neural Computation, 1989, 1(4): 541-551.
+
+[58] Deng, J., Dong, W., Socher, R., et al. ImageNet: A Large-scale Hierarchical Image Database [A]. IEEE Conference on Computer Vision and Pattern Recognition [C], 2009: 248-255.
+
+[59] Krizhevsky, A., Sutskever, I., Hinton, G. E. ImageNet Classification with Deep Convolutional Neural Networks [A]. Advances in Neural Information Processing Systems [C], 2012: 84-90.
+
+[60] Simonyan, K., Zisserman, A. Very Deep Convolutional Networks for Large-scale Image Recognition [J]. arXiv preprint arXiv:1409.1556, 2014.
+
+[61] Szegedy, C., Liu, W., Jia, Y., et al. Going Deeper with Convolutions [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2015: 1-9.
+
+[62] He, K., Zhang, X., Ren, S., et al. Deep Residual Learning for Image Recognition [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2016: 770-778.
+
+参考文献：
+
+[63] Hu J, Shen L, Sun G. Squeeze-and-excitation Networks [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2018: 7132-7141.
+
+[64] Xie S, Girshick R, Dollar P, et al. Aggregated Residual Transformations for Deep Neural Networks [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2017: 1492-1500.
+
+[65] Tan M, Le Q. EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks [A]. International Conference on Machine Learning [C], 2019: 6105-6114.
+
+[66] Goodfellow I, Bengio Y, Courville A. Deep Learning [M]. press, 2016.
+
+[67] Redmon J, Divvala S, Girshick R, et al. You Only Look Once: Unified, Real-time Object Detection [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2016: 779-788.
+
+[68] He K, Gkioxari G, Dollar P, et al. Mask R-CNN [A]. Proceedings of the IEEE International Conference on Computer Vision [C], 2017: 2961-2969.
+
+[69] Krishna R, Zhu Y, Groth O, et al. Visual Genome: Connecting Language and Vision Using Crowdsourced Dense Image Annotations [J]. International Journal of Computer Vision, 2017, 123(1): 64-73.
+
+[70] Bengio Y, Ducharme R, Vincent P, et al. A Neural Probabilistic Language Model [J]. Journal of Machine Learning Research, 2003, 3: 1137-1155.
+
+[71] Hochreiter S, Schmidhuber J. Long Short-term Memory [J]. Neural Computation, 1997, 9(8): 1735-1780.
+
+[72] Ba JL, Kiros JR, Hinton GE. Layer Normalization [J]. arXiv preprint arXiv:1607.06450, 2016.
+
+[73] Lin TY, Maire M, Belongie S, et al. Microsoft COCO: Common Objects in Context [A]. European Conference on Computer Vision [C], 2014: 740-755.
+
+[74] Banerjee S, Lavie A. METEOR: An Automatic Metric for MT Evaluation with Improved Correlation with Human Judgments [A]. Proceedings of the ACL Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/or Summarization [C], 2005: 65-72.
+
+[75] Devlin J, Chang M, Lee K, et al. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [J]. arXiv preprint arXiv:1810.04805, 2018.
+
+[76] Reimers N, Gurevych I, Reimers N, et al. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks [A]. Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing [C], 2019: 671-688.
+
+[77] Srivastava R, Greff K, Schmidhuber J. Training Very Deep Networks [A]. Proceedings of the 28th International Conference on Neural Information Processing Systems [C], 2015: 2377-2385.
+
+[78] Kingma DP, Ba J. Adam: A Method for Stochastic Optimization [J]. arXiv preprint arXiv:1412.6980, 2014.
+
+[79] Van den Bergh D, Bojar O. Sequence Length is a Domain: Length-based Overfitting in Transformer Models [A]. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing [C], 2021: 8246-8257.
+
+[80] Deng C, Ding N, Tan M, et al. Length-controllable Image Captioning [A]. European Conference on Computer Vision [C], 2020: 712-729.
+
+[81] Rush A. The Annotated Transformer [A]. Proceedings of Workshop for NLP Open Source Software [C], 2018: 52-60.
+
+[82] Szegedy C, Vanhoucke V, Ioffe S, et al. Rethinking the Inception Architecture for Computer Vision [A]. Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition [C], 2016: 2818-2826.

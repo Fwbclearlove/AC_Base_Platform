@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "USSA: A Unified Table Filling Scheme for Structured Sentiment Analysis",
+  "authors": [
+    "Zepeng Zhai",
+    "Hao Chen",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Structured Sentiment Analysis",
+  "research_problem": "Existing methods fail to effectively address overlap and discontinuity in SSA.",
+  "methodology": "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+  "key_innovations": [
+    "Unified 2D table-filling scheme",
+    "Bi-axial attention module",
+    "Addressing overlap and discontinuity in SSA"
+  ],
+  "experimental_results": "USSA outperforms state-of-the-art methods on five benchmark datasets in terms of Span F1, NSF1, and SF1 metrics.",
+  "conclusions": "The proposed USSA framework effectively addresses overlapping and discontinuous issues in SSA and inspires other tasks involving tuple extraction with similar challenges.",
+  "keywords": [
+    "Structured Sentiment Analysis",
+    "USSA",
+    "Bi-axial attention",
+    "Overlap",
+    "Discontinuity"
+  ],
+  "application_domains": [
+    "Opinion analysis",
+    "Sentiment classification",
+    "Natural language processing"
+  ],
+  "technical_concepts": [
+    "Structured Sentiment Analysis",
+    "2D table-filling scheme",
+    "Bi-axial attention module",
+    "Bi-lexical dependency parsing"
+  ],
+  "performance_metrics": "Average improvements of 3.48 NSF1 and 3.14% SF1 over TGLS, 7.2% F1 score increase for target extraction on MPQA, and a 5.4% F1 score increase for holder extraction on NoReCFine.",
+  "summary": "This paper introduces USSA, a 2D table-filling scheme for Structured Sentiment Analysis that overcomes issues of overlap and discontinuity. The proposed method, which includes a bi-axial attention module, outperforms existing techniques on multiple benchmark datasets and offers insights for tuple extraction tasks with similar challenges.",
+  "file_id": "2023.acl_long.802",
+  "source_type": "cleaned",
+  "text_length": 14066,
+  "generation_time": "2025-07-31 21:12:53"
+}

@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "Visually Enhanced NeUral Encoder (VENUE) for Multimodal Synset Induction",
+  "authors": [
+    "未在原文中明确列出"
+  ],
+  "main_topic": "Multimodal Synset Induction",
+  "research_problem": "Existing methods focus on textual information, neglecting the visual aspects, and lack scalability.",
+  "methodology": "Visually Enhanced NeUral Encoder (VENUE)",
+  "key_innovations": [
+    "Incorporates modules for visual interaction",
+    "Multi-granularity textual representations",
+    "Masking module to filter out weakly relevant visual information",
+    "Gating module to adaptively regulate contributions of different modalities"
+  ],
+  "experimental_results": "Shows superior performance over strong baselines on various evaluation metrics on the MMAI-Synset dataset.",
+  "conclusions": "VENUE encoder outperforms strong baselines and future work may explore fine-grained multimodal representation and reinforcement learning.",
+  "keywords": [
+    "Multimodal Synset Induction",
+    "VENUE",
+    "Visual Interaction",
+    "Multi-granularity Embedding",
+    "Triplet Loss"
+  ],
+  "application_domains": [
+    "未在原文中明确提到"
+  ],
+  "technical_concepts": [
+    "Neural Encoder",
+    "Multimodal Representations",
+    "Clustering Algorithms",
+    "Triplet Loss",
+    "RAdam Optimizer"
+  ],
+  "performance_metrics": "Entropy-based (h, c, v), membership overlap-based (p, r, f), external evaluation methods (FMI, ARI, NMI)",
+  "summary": "This paper introduces VENUE, a multimodal neural encoder that captures visual and textual interactions for synset induction. It demonstrates state-of-the-art performance on a new multimodal dataset, MMAI-Synset, and highlights the importance of filtering weakly relevant visual information and adaptively regulating modal contributions.",
+  "file_id": "electronics_12_03521_v2",
+  "source_type": "cleaned",
+  "text_length": 27553,
+  "generation_time": "2025-07-31 21:19:39"
+}

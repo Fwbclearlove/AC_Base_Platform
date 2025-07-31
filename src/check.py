@@ -7,7 +7,7 @@ import collections
 
 # --- 配置参数 ---
 # PDF文件所在的文件夹路径
-PDF_DIRECTORY = r"C:\Users\86152\Desktop\RuifanLi 老师论文"  # <--- 修改这里！
+PDF_DIRECTORY = r"C:\Users\86152\Desktop\专利"  # <--- 修改这里！
 
 # 标题相似度的阈值 (0-100)。如果两篇论文标题的相似度得分高于此值，则认为它们是重复的。
 # 90 通常是一个比较好的起点。

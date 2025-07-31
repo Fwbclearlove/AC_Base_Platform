@@ -1,0 +1,151 @@
+---
+
+Multi-level fusion with deep neural networks for multimodal sentiment classification
+
+Zhang Guangwei1, Zhao Bing2, Li Ruifan3
+
+1. School of Computer Sciences, Beijing University of Posts and Communications, Beijing 100876, China
+2. School of Science, Yanshan University, Qinhuangdao 066004, China
+3. School of Artificial Intelligence, Beijing University of Posts and Communications, Beijing 100876, China
+
+Abstract
+
+The task of multimodal sentiment classification associates multimodal information, such as images and texts, with sentiment polarities. Most existing methods treat features from various levels independently, lacking effective feature fusion. We propose a multi-level fusion classification (MFC) model that fuses features from different levels by exploiting their dependencies. The architecture uses convolutional neural networks (CNNs) to extract features in image and text modalities and a bi-directional (Bi) recurrent neural network (RNN) to integrate features from different CNN layers. A conflict detection module addresses conflicts between modalities. Experiments on the Flickr dataset show the MFC method achieves comparable performance with strong baseline methods.
+
+Keywords: multimodal fusion, sentiment analysis, deep learning
+
+1. Introduction
+
+Online social networks allow users to post content in various forms, playing an increasingly important role in daily life. Deep neural networks have shown remarkable performance in fields such as computer vision and natural language processing. However, most sentiment analysis research focuses on a single modality. This paper addresses sentiment prediction using joint textual and visual information. We propose a feature fusion method based on multiple neural networks and a conflict detection module to extend our model, the rectified multi-level fusion classification (R-MFC). Experimental results demonstrate the effectiveness of the proposed method for joint vision and text sentiment analysis.
+
+2. Related work
+
+Previous work utilized high-level features for fusion, such as the last outputs of different modal model layers. With the complexity of emotions and differences between text and visual sentiment, more work has proposed exploiting multiple levels of features. CNNs and RNNs have achieved good results in visual and textual sentiment analysis. We explicitly exploit the dependency between low-level and high-level features to improve sentiment classification.
+
+3. MFC model
+
+The MFC model consists of image and text feature extractors and bi-directional gated recurrent unit (Bi-GRU) feature fusion. The input image and text are processed by CNNs with multiple branches to extract features at different levels. Bi-GRU fusion integrates these features by exploiting dependencies. The integrated features are concatenated for sentiment classification.
+
+3.1. Image CNN with multiple branches
+
+The image CNN extracts multiple levels of image features using pre-trained networks with various branches.
+
+3.2. Text CNN with multiple branches
+
+CNNs have been successfully applied in natural language processing. The multi-branch CNN can extract key features in different ranges. This paper uses a multi-branch design to extract text features.
+
+---
+
+---
+
+The architecture involves dimension transformation and rectified linear activation. The five branches from the convolutional layers, along with features extracted from multiple levels, are integrated into a Bi-GRU fusion module. The text CNN is pre-trained on a text sentiment classification task.
+
+**Table 2: Details of text CNN**
+
+| Layer        | Channel | Kernel size/Stride |
+|--------------|---------|--------------------|
+| Conv 1       | 64      | 3x3/1              |
+| Max-pooling  | 64      | 3x3/1              |
+| Mean-pooling | 64      | 3x3/1              |
+| Conv 2       | 128     | 3x3/1              |
+| Conv 3       | 256     | 3x3/1              |
+| Conv 4       | 512     | 3x3/1              |
+| Conv 5       | 512     | 3x3/1              |
+
+**3.3 Multiple Layer Fusion**
+The interaction of image and text features is handled by a Bi-GRU, refining the extracted features further. Pre-trained image and text CNNs extract features at different levels, denoted as {vm} for images and {tm} for text. The features from both modalities are concatenated and processed by the Bi-GRU fusion module. This is expressed in Eq. (1), using G to represent the GRU.
+
+**3.4 R-MFC Module**
+To address sentiment conflicts in social network posts, an R-MFC model is introduced. It calculates the sentiment polarity of each modality before fusion and adapts the fusion strategy based on detected conflicts. A rectified conflict detection mechanism employing a Sigmoid activation function calculates the probability distribution for each modality. The fusion strategy is determined by the consistency of these distributions.
+
+**4. Experiments and Results**
+Performance comparisons with baseline methods are conducted.
+
+**4.1 Dataset and Metric**
+**4.2 Implementation Details**
+The textual part uses a pre-trained Word2Vec model for word representations, while the visual part processes images resized to 224x224. The model is trained with a mini-batch size of 32 using adaptive weight decay optimization on specified hardware.
+
+**4.3 Experimental Baselines**
+Variants of the MFC model are designed to test the contributions of different components, including simple concatenation, GRU, Bi-LSTM, and adaptive fusion strategies.
+
+**4.4 Results and Analysis**
+The MFC model shows improved performance over several baseline methods, with the ITIGNN method achieving the best results.
+
+**Table 3: Experimental results on Flickr dataset**
+
+| Method       | Accuracy | Recall | F1 score |
+|--------------|----------|--------|----------|
+| Image CNN    | 0.783    | 0.799  | 0.790    |
+| Text CNN     | 0.712    | 0.722  | 0.715    |
+| ...          | ...      | ...    | ...      |
+| R-MFC        | 0.884    | 0.890  | 0.888    |
+| MFC          | 0.885    | 0.897  | 0.891    |
+
+**Table 4: Experimental results on human labeled Flickr dataset**
+
+| Method       | Accuracy | Recall | F1 score |
+|--------------|----------|--------|----------|
+| Image CNN    | 0.675    | 0.710  | 0.682    |
+| Text CNN     | 0.633    | 0.660  | 0.647    |
+| ...          | ...      | ...    | ...      |
+| R-MFC        | 0.801    | 0.799  | 0.800    |
+
+---
+
+We propose that our MFC method, employing fewer parameters, outperforms ITIGNN, which uses a pretrained CNN combined with graph neural networks for textual and visual analysis. Among six variant models, the one with five branches and Bi-GRU fusion demonstrates the best performance, indicating that enhanced multi-level fusion can improve multimodal sentiment classification. The variant with five branches shows a significant improvement over those with three or four branches, due to the nonlinear effects of fusion information and the local-to-global features of high-level CNNs. MFC exhibits better performance than R-MFC, potentially because of an underestimation of the trade-off between conflict detection and non-detection in MFC. Moreover, fusing multiple middle layers of two modalities enhances sentiment prediction performance.
+
+In this paper, we introduce a novel fusion method for visual and textual sentiment analysis. Our MFC effectively integrates different levels of features from multiple branches in image and text CNNs by exploiting their dependencies with the Bi-GRU approach. Experimental results show that our multi-level fusion method achieves competitive performance in multimodal sentiment analysis compared to strong baseline approaches. Future work will explore the balance between conflict detection and non-detection.
+
+This work was supported in part by the National Key Research and Development Program of China (2018YFB1403003).
+
+References
+[1] REN F J, WU Y. Predicting user-topic opinions in twitter...
+[2] PENG L, CUI G, ZHUANG M Z, et al. What do seller manipulations...
+[3] ASUR S, HUBERMAN B A. Predicting the future with social media...
+... [28] NICKEL K, GEHRIG T, STIEFELHAGEN R, et al. A joint...
+
+The particle filter for audio-visual speaker tracking. Proceedings of the 7th International Conference on Multimodal Interfaces (ICMI-05), 2005, Torento, Italy.
+
+POTAMITIS I, CHEN H M, TREMOULIS G. Tracking of multiple moving speakers with multiple microphone arrays. IEEE Transactions on Speech and Audio Processing, 2004, 12(5): 520-529.
+
+CAMPOS V, JOU B, GIRÓ-NIETO X. From pixels to sentiment: Fine-tuning CNNs for visual sentiment prediction. Image and Vision Computing, 2017, 65: 15-22.
+
+WANG J, YU L C, LAI K R, et al. Dimensional sentiment analysis using a regional CNN-LSTM model. Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics, 2016, Berlin, Germany.
+
+RAO T R, LI X X, XU M. Learning multi-level deep representations for image emotion classification. Neural Processing Letters, 2020, 51: 2043-2061.
+
+JOU B, CHEN T, PAPPAS N, et al. Visual affect around the world: a large-scale multilingual visual sentiment ontology. Proceedings of the 23rd ACM International Conference on Multimedia (MM-15), 2015, Brisbane, Australia.
+
+YOU Q Z, LUO J B, JIN H L, et al. Cross-modality consistent regression for joint visual-textual sentiment analysis of social multimedia. Proceedings of the 9th ACM International Conference on Web Search and Data Mining (WSDM-16), 2016, San Francisco, CA, USA.
+
+YU Y H, LIN H F, MENG J N, et al. Visual and textual sentiment analysis of a microblog using deep convolutional neural networks. Algorithms, 2016, 9(2): 1-11.
+
+CHEN X Y, WANG Y H, LIU Q J. Visual and textual sentiment analysis using deep fusion convolutional neural networks. Proceedings of the 2017 IEEE International Conference on Image Processing (ICIP-17), 2017, Beijing, China.
+
+HUANG F R, ZHANG X M, ZHAO Z H, et al. Image-text sentiment analysis via deep multimodal attentive fusion. Knowledge-Based Systems, 2019, 167: 26-37.
+
+HUANG F R, WEI K M, WENG J, et al. Attention-based modality-gated networks for image-text sentiment analysis. ACM Transactions on Multimedia Computing, Communications, and Applications, 2020, 16(3): 1-19.
+
+LIAO W X, ZENG B, LIU J Q, et al. Image-text interaction graph neural network for image-text sentiment analysis. Applied Intelligence, 2022, DOI:10.1007/s10489-021-02936-9.
+
+RAGHU A, RAGHU M, BENGIO S, et al. Rapid learning or feature reuse? towards understanding the effectiveness of MAML. Proceeding of the 8th International Conference on Learning Representations (ICLR-20), 2020, Addis Ababa, Ethiopia.
+
+OH J, YOO H, KIM C H, et al. Boil: towards representation change for few-shot learning. Proceeding of the 9th International Conference on Learning Representations (ICLR-21), 2021, Vienna, Austria.
+
+LUO Y D, HUANG Z, ZHANG Z, et al. Continual meta-learning with Bayesian graph neural networks. Proceeding of the 34th AAAI Conference on Artificial Intelligence (AAAI-20), 2020, New York, NY, USA.
+
+SANTORO A, BARTUNOV S, BOTVINICK M, et al. Meta-learning with memory-augmented neural networks. Proceeding of the 33rd International Conference on Machine Learning (ICML-16), 2016, New York, NY, USA.
+
+HUANG H X, ZHANG J J, ZHANG J, et al. Low-rank pairwise alignment bilinear network for few-shot fine-grained image classification. IEEE Transactions on Multimedia, 2020, 23: 1666-1680.
+
+WELINDER P, BRANSON S, MITA T, et al. Caltech-UCSD Birds 200. CNS-TR-2010-001, California Institute of Technology, 2010.
+
+KRAUSE J, STARK M, DENG J, et al. 3D object representations for fine-grained categorization. Proceedings of the 2013 IEEE International Conference on Computer Vision Workshops (ICCV-13), 2013, Sydney, Australia.
+
+KHOSLA A, JAYADEVAPRAKASH N, YAO B P, et al. Novel dataset for fine-grained image categorization: Stanford Dogs. 2011.
+
+RUSSAKOVSKY O, DENG J, SU H, et al. ImageNet large scale visual recognition challenge. International Journal of Computer Vision, 2015, 115: 211-252.
+
+ZHANG X T, QIANG Y T, SUNG F, et al. RelationNet2: deep comparison columns for few-shot learning. Proceedings of the 2020 International Joint Conference on Neural Networks (IJCNN-20), 2020, Glasgow, UK.
+
+ZHANG H G, LI H D, KONIUSZ P. Multi-level second-order few-shot learning. IEEE Transactions on Multimedia, 2022, DOI:10.1109/TMM.2022.3142955.

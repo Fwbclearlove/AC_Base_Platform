@@ -1,0 +1,37 @@
+{
+  "document_type": "academic_paper",
+  "title": "引入深度学习的人工智能类课程",
+  "authors": [
+    "李睿凡",
+    "王小捷",
+    "钟义信"
+  ],
+  "main_topic": "在人工智能类课程中引入深度学习的初步内容和实施建议",
+  "research_problem": "未在原文中明确提及",
+  "methodology": "未在原文中明确提及",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "建议将深度学习引入人工智能类课程，共同推进教学工作。",
+  "keywords": [
+    "人工智能",
+    "深度学习",
+    "教学建议"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "深度学习",
+    "层次训练的基本算法",
+    "波尔兹曼机",
+    "深层信念网络"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文分析了在人工智能类课程中引入深度学习的必要性和可行性，并提出了相应的实施建议，包括教学内容和课件的安排，以推进教学工作的发展。",
+  "file_id": "引入深度学习的人工智能类课程",
+  "source_type": "cleaned",
+  "text_length": 1528,
+  "generation_time": "2025-07-31 21:34:07"
+}

@@ -1,0 +1,415 @@
+基于提示学习的少样本文本分类研究与应用
+
+摘要
+
+近年来，基于深度学习的方法在自然语言处理任务上取得了显著成绩。然而，深度模型通常需要大量高质量的标注语料，而获取这些数据非常困难。文本分类任务作为NLP领域最常见的任务类型之一，对每个新的领域任务都去标注大规模的数据通常是不现实的。少样本学习旨在利用已学习的先验知识，通过有限的带有标注的训练数据，就可以快速地在目标任务上完成模型的优化。通过少样本学习，既可以降低标注数据的获取成本，又可以加速模型的落地部署和缩短迭代周期。
+
+随着BERT等预训练语言模型的提出，基于预训练和微调的两阶段训练范式逐渐成为新的趋势，并在多数的自然语言处理任务上取得了空前的成功。但是在微调阶段，模型的性能通常取决于任务和有标注训练数据的数量。然而在大多数情况下，通常难以获取大量相关领域的标注数据，这使得当模型在面对仅含少量训练样本的下游任务时，往往表现不佳。与微调方法不同的是，基于提示学习的方法，通过添加灵活的提示信息，将具体下游任务与预训练任务在形式上相统一，使得在低资源场景下也能够取得良好的效果。提示学习的优势在于既不需要大量相关领域的数据进行提前训练，也无需显著的改变预训练语言模型结构和参数，仅通过对任务形式和输入形式的改变，就可以达到利用预训练语言模型中已经获得的通用领域知识的目的，实现真正的少样本学习。
+
+本文针对文本分类任务，对基于提示学习的方法进行少样本学习研究，开展如下工作：
+
+1）当前基于提示学习的少样本文本分类方法仅利用了预训练语言模型中的通用知识，而忽略了下游任务中的具体类别表征表示。本文提出一种基于提示学习和三元组损失的少样本文本分类算法。该算法将文本分类任务转换成基于自然语言推理的提示学习形式，通过任务形式的转换，实现在利用预训练语言模型的先验知识的基础上，达到隐式的数据增强，并通过两种不同粒度的损失进行优化。并且，为了捕获下游任务中丰富的类别表征信息，通过三元组损失进行联合优化，同时引入掩码语言模型任务作为正则项，提升模型的泛化能力。此外，本文又在所提出方法的基础上设计了合适的预训练任务进行进一步地预训练。最终在中、英文数据集中验证了本文提出方法的有效性。
+
+2）设计并实现了基于少样本学习的文本分类任务智能标注工具。在本系统中，保留了传统标注工具中通过自定义快捷操作方式进行的人工标注形式，便于用户灵活标注。同时基于上述的算法研究成果，用户仅需提供少量的标注数据，通过简单地参数配置，就可以完成模型的在线训练以及对数据的智能标注工作。此外，用户可通过智能标注结果的反馈，更新训练数据，即通过主动学习策略，持续提升模型性能和数据标注质量。最后通过一系列的系统测试，表明本系统功能能满足设计需求，可稳定运行。
+
+关键词：预训练语言模型，少样本学习，提示学习，文本分类
+
+3.2 基于提示学习和三元组损失的少样本文本分类算法
+
+3.2.1 模型架构
+
+3.2.2 基于自然语言推理的提示学习模块
+
+3.2.3 度量优化模块
+
+3.2.4 基于自然语言推理的继续预训练过程
+
+3.2.5 算法流程
+
+3.3 实验设计和分析
+
+3.3.1 评测数据集介绍
+
+3.3.2 评测指标和基线方法
+
+3.3.3 网络训练参数设置
+
+3.3.4 中文数据集实验结果
+
+3.3.5 英文数据集实验结果
+
+3.3.6 组件有效性分析
+
+3.3.7 提示模版分析
+
+3.3.8 负采样性能分析
+
+3.3.9 可视化分析
+
+3.4 本章小结
+
+第四章 基于少样本学习的文本分类智能标注工具
+
+4.1 需求分析
+
+4.1.1 系统功能性需求
+
+4.1.2 系统非功能性需求
+
+4.2 系统概要设计
+
+4.2.1 总体功能设计
+
+4.3 系统详细设计
+
+4.3.1 人工数据标注模块设计
+
+4.3.2 智能标注模块设计
+
+4.3.3 主动学习模块设计
+
+4.3.4 数据库设计
+
+4.4 系统实现
+
+4.4.1 系统实现环境
+
+4.4.2 标注任务管理模块实现
+
+4.4.3 数据管理模块实现
+
+4.4.4 标签管理模块实现
+
+4.4.5 智能标注模块实现
+
+4.4.6 数据统计模块实现
+
+4.5 系统测试
+
+4.5.1 测试环境
+
+4.5.2 功能性测试
+
+4.5.3 非功能性测试
+
+4.6 本章小结
+
+第五章 总结与展望
+
+5.1 工作总结
+
+5.2 工作展望
+
+参考文献
+
+第一章 绪论
+
+第1章 绪论
+
+1.1 研究背景及意义
+
+1.2 国内外研究现状
+
+1.2.1 基于度量学习的方法
+
+1.2.2 基于元学习的方法
+
+1.2.3 基于提示学习的方法
+
+1.3 主要研究内容
+
+本文介绍了少样本学习任务的研究背景和意义，并调研了国内外少样本学习任务的研究现状和发展历程。文章从基于度量学习的方法、基于元学习的方法以及基于提示学习的方法等方面阐述了目前少样本学习任务的研究现状。此外，本文还介绍了主要工作、创新点以及组织结构。
+
+第二章介绍了少样本学习的概念，相关基础技术，以及提示学习方法，包括提示学习的定义、形式和常见训练策略。
+
+第三章详细介绍了基于提示学习的少样本文本分类算法，包括算法实现细节、实验数据集、实验设计和结果分析。
+
+第四章介绍了基于少样本学习的文本分类智能标注工具的设计和实现，包括需求分析、概要设计和详细设计，以及功能模块的实现和系统测试。
+
+第五章总结了少样本学习任务上的主要工作，分析了研究中的问题，并对未来研究方向进行了展望。
+
+一个长度为A的输入序列(bh tw)，需要根据前1个时刻的文本序列，预测第A个时刻h的出现概率。最终整个序列的概率是每个时刻的条件概率的乘积，如公式2-11所示：
+
+P(bh tw) = ΠP(ti+1|ti, bi+1)
+
+其中，i=1,...,A-1。
+
+同理，对于后向语言模型，如公式2-12所示：
+
+P(bh tw) = ΠP(ti|ti+1, tw-i)
+
+其中，i=1,...,A-1。
+
+最终，模型的优化目标是前向模型与后向模型的联合最大似然，如公式2-13所示：
+
+LSTMf + LSTMb
+
+其中，θf表示前向LSTM隐层参数；θb表示后向LSTM隐层参数；θ表示前向与后向LSTM结合后的隐层参数；OS表示Sotmax层参数。
+
+一个多层双向的语言模型结构。假设共有L层，ELMo会输出2L个LSTM最后隐层向量表示，同时再加上词嵌入层中的向量表示，则在一个L层双向语言模型中，对于一个词的向量化表示/？fc，总共含有2L+1个，如公式2-14所示：
+
+/？fc = [E0, h1, ..., hL]
+
+其中，E0表示词嵌入层；hi表示每层LSTM的隐层向量表示。
+
+有两种常用的方法可以将ELMo中学习的词向量表示应用到下游任务。第一种是使用顶层中的隐层输出作为词向量表示，即E@fc() = hL，这是最简单的一种应用方法。第二种是通过加权的方式计算各层中向量的表示，获得最后的词向量表示：
+
+E{Rk) = Σαask * hik
+
+其中，αask表示Sotmax后的规范化权重因子；yask表示缩放因子，可以根据下游任务情况进行调整。
+
+基于预训练和微调范式的预训练语言模型对NLP的发展产生了巨大的影响，无需使用带有标注的数据，可以直接从海量的无标注数据中学习到通用的知识表示。随着预训练语言模型的不断发展，根据预训练语言模型目标的不同，进一步可以分为自回归语言模型(Autoregressive LM)和自编码语言模型(Autoencoder LM)。
+
+基于提示学习方法的基本形式化表示如下：
+
+对于输入的文本c，有函数prompt_00可以将输入x转换为基于提示学习的形式Y，即：
+
+Y = prompt_00(x)
+
+对于新闻分类任务，假设给定的模板为：
+
+[X]，这是|Z|新闻。
+
+其中，对于原始输入X，需要将其填充到[X]；以及标签的描述性信息Z，同时需要将其填充到[Z]。例如对于原始输入文本X = “因痛失比赛而落泪的职业选手，让人感到心疼。”，通过函数prompt_00函数映射，可以转换为基于提示学习方法的形式，即：
+
+X' = “因痛失比赛而落泪的职业选手，让人感到心疼，这是|MASK|新闻。”
+
+基于提示学习的方法，将下游任务转化为建模语言模型的问题，实现将预训练阶段与下游微调阶段的统一。
+
+提示学习形式的选择通常取决于任务类型和预训练模型本身。通常来说，对于自然语言生成任务或者使用自回归预训练模型，如GPT系列，通常选择前缀式提示学习形式。而对于自然语言理解任务或者使用基于掩码(MASK)的自编码预训练模型，如BERT、Roberta等，通常选择完型填空形式的提示学习形式。因为基于掩码的自编码预训练任务本质上就是完型填空形式，通过被掩盖住的词的上下文去预测当前词，这样就与预训练语言模型任务形式相一致。
+
+对于提示学习形式的构建方式，通常包含手工构建提示模板方式以及自动化构建提示模板方式。
+
+手工自定义提示模板通常是最简单和最常用的方式。具体地，对于自然语言理解任务，通常选择掩码式的预训练语言模型。同时根据具体的下游任务，手工设计完型填空形式的提示模板，通过利用预训练模型已经学习到的先验知识，实现解决目标下游任务。
+
+自动化构建提示模板可以分为离散式提示模板和连续式提示模板。其中，离散式提示模板通常使用目标预训练语言模型或者其他生成式的语言模型，实现生成若干个合适目标任务的自然语言形式的提示模板，也就是说，模板仍然是离散的字符串形式。而对于连续式提示模板，研究人员已经不再关心提示模板的具体形态，此时提示模板可以是非自然语言的表达形式。在该方法中，研究人员希望模型可以自己学习到适合当前任务形式的连续式提示模板形式。
+
+训练策略的选择通常取决于下游任务的样本数量。对于零样本学习问题，通常不需要对语言模型和提示模板参数进行训练更新。对于少量训练实例的情况下，通过仅更新部分模型参数，实现灵活的适应下游任务。对于数据量较大的场景中，通过对预训练语言模型和提示模板参数同时进行更新，可以使模型获得更好的性能。
+
+本文介绍了一种基于提示学习的少样本文本分类算法。该算法通过定义Sentence-Group-Level损失函数，优化一组中的正负样本间关系。具体地，对输入的实例进行数据构造时，会通过输入实例与所对应的正例，以及输入实例与其他的类别进行数据构造，生成n-1个负例，最终总共为每一条输入样本生成n个实例样本。最后，采用交叉熵损失对Sentence-Group-Level进行优化。
+
+此外，本文还提出了基于自然语言推理的提示学习模块的损失函数，以及度量优化模块的损失函数。最后，整体的损失函数由提示学习损失、和度量优化损失Xaux的加权构成。
+
+在实验部分，本文在中文公开文本分类数据集和英文公开文本分类数据集上进行实验。通过与基线方法对比，以及使用组件有效性分析、负采样性能分析和可视化分析等方法，验证了本文提出方法的有效性。
+
+在本文中，我们探讨了基于提示学习的少样本文本分类算法。首先，我们介绍了提示学习的概念，并提出了将文本分类任务转换为自然语言推理形式的完型填空任务的方法。接着，我们详细阐述了算法的组成部分，包括度量优化模块和基于自然语言推理的提示学习模块。在实验部分，我们在中文和英文数据集上进行了性能对比实验，结果显示我们的方法在少样本场景下取得了优异的性能。此外，我们还进行了组件有效性分析，验证了度量优化模块和基于自然语言推理的提示学习模块的有效性。最后，我们对提示模版进行了分析，比较了自然语言形式和非自然语言形式的推理词的性能。实验结果表明，我们的方法在少样本文本分类任务中具有强大的潜力。
+
+表 3-13 中文数据集推理词形式性能分析
+
+| Method | EPRSTMT | CSLDCP | TNEWS | IFLYTEK | MEAN |
+| ------- | ------- | ------- | ------- | ------- | ------- |
+| 自然语言推理词 | 86.0 | 54.3 | 53.5 | 45.4 | 59.8 |
+| 非自然语言推理词 | 85.3 | 55.1 | 54.6 | 46.4 | 60.4 |
+
+表 3-14 英文数据集推理词形式性能分析 (K=8)
+
+| Method | AG | News | Tree | Yelp | Review | MEAN |
+| ------- | ------- | ------- | ------- | ------- | ------- | ------- |
+| 自然语言推理词 | 77.3 | 59.0 | 26.1 | 54.1 |
+| 非自然语言推理词 | 79.5 | 55.8 | 26.1 | 53.8 |
+
+从中文、英文数据集的实验结果可以看出，非自然语言形式的推理词较为稳定，模型性能较好。具体地，对于形式简单、数据区分度高的任务，如EPRSTMT和Tree等任务，自然语言形式的推理词表现较为出众。而对于类别数较多、复杂的任务，例如TNEWS、IFLYTEK和CSLDCP等任务，非自然语言形式的推理词具备更好的性能，这是由于它可以从具体任务中自主学习到更适合当前模版的推理词形式，而不受自然语言形式的限制。也就是说，非自然语言形式的推理词可以从众多的上下文信息中学习到推理词的连续化表达形式，从而有效避免了一推理词的影响。
+
+(2) 提示模版性能分析
+
+在基于提示学习的方法中，手工设计的提示模版通常会对模型的效果产生定的波动，本小节评估手工设计的模版对最终模型性能产生的影响。实验结果如表 3-15所示。
+
+表 3-15 提示模版对模型准确率的影响
+
+| Prompt | TNEWS Classification | Tree Question Classification (K=8) |
+| ------- | ------------------- | ----------------------------------- |
+| 下面<maskdesc>新闻：<text>。 | 54.2 | 50.0 |
+| it<maskdesc>新闻报道：<text>。 | 53.5 | 56.4 |
+| <text>，<desc>新闻？<mask>? | 54.6 | 55.8 |
+| <text>，il<maskdesc>新闻。 | 59.0 | 55.8 |
+
+从实验结果可以看出，不管是中文还是对于英文数据集，模型的性能都会受到提示模版较大的影响。具体地，在中文TNEWS和英文Tree任务上，本小节对模版采用了前缀式与后缀式的形式进行评测。相比之下，在中文数据集上，模型性能差异性相对较小，最大与最小的差值为1.1%。而在英文数据上，模型性能却表现出较大的差异性，最大与最小的差值为6.4%。表明提示模版对模型准确率性能的影响，与具体的下游任务有较大的关系。通过优化模版的形式，可以较大程度提升模型的性能。
+
+3.3.8 负采样性能分析
+
+在本小节中，本文尝试对中文TNEWS数据集，通过控制不同的负采样数据比例，分析负采样对模型性能的影响。
+
+如图3-6所示，随着负采样的不断变大，模型的整体性能(准确率)也在逐渐提升。通过实验发现，在负采样在等于2、4和8的时候，模型的性能有一个迅速的提升。其中，当负采样在8-13之间的性能相对稳定。当负采样达到14时(TNEWS任务包含15个类别)，模型的准确率有一个急速下降的趋势，表明使用全部类别作为负例，并不会提升模型的性能。
+
+3.3.9 可视化分析
+
+为了评估在引入度量优化模块后，本文所提出算法获得任务类别表征表示的有效性，本小节将通过t-SNE对中文TNEWS数据集通过随机采样进行了可视化分析，结果如图3-7所示。
+
+图3-7 实例向量t-SNE分布可视化
+
+通过对实例类别的分布可视化分析，表明度量优化模块可以为整个模型提供更多额外的类别知识等信息。
+
+3.4 本章小结
+
+本章详细介绍了本文提出的基于提示学习和三元组损失的少样本文本分类算法。首先阐述本文提出该算法的动机，接着介绍了模型的整体网络结构，并详细介绍了基于自然语言推理的提示学习模块和度量优化模块。其中，基于自然语言推理的提示学习模块将下游文本分类任务通过添加提示模版转化为掩码式的完型填空形式，使模型能够更好的利用预训练模型中的先验知识，并通过两种不同粒度的损失进行优化。同时，度量优化模块通过三元组损失优化，实现捕获下游具体的任务类别信息。此外，介绍了将基于自然语言推理形式的提示学习融入到继续预训练任务中的方法。接着详细介绍了模型的训练与推理过程。最后通过在中文、英文数据集上进行模型性能的评测，以及对模型的各个组件进行有效性分析等实验，验证了本文提出模型的有效性。
+
+系统需求分析：
+
+1. 易用性需求：系统应简单易用，方便用户快速部署和使用。
+
+2. 可扩展性需求：系统应能灵活接入更多模型进行智能标注，并支持处理一定规模数据的能力。
+
+3. 兼容性需求：前端应适配各种主流浏览器内核，在各种屏幕尺寸和分辨率下正常显示。
+
+4. 安全性需求：用户密码采用加密存储，操作时验证身份和权限，具备日志记录功能。
+
+系统概要设计：
+
+1. 总体功能设计：系统分为用户管理和标注任务管理两部分，标注任务管理细分为数据管理、标签管理、智能标注和标注统计等模块。
+
+2. 系统详细设计：
+
+- 人工数据标注模块：用户导入数据，添加标签，实现快速人工标注。
+- 智能标注模块：用户配置模型，利用少量训练数据进行智能标注。
+- 主动学习模块：用户根据模型反馈进行数据修正，提升模型效果。
+- 数据库设计：使用SQLite存储用户数据和文本数据，文件存储模型日志。
+
+系统实现：
+
+1. 采用B/S架构，前后端分离技术，前端Vue，后端Django，数据库SQLite，智能标注模块使用PyTorch。
+
+2. 用户登录后可进行标注任务管理，包括创建、管理、删除标注任务。
+
+3. 数据管理模块支持数据导入导出、查看、人工标注。
+
+4. 标签管理模块支持标签的创建、修改、删除和查看。
+
+5. 智能标注模块支持模型训练、评测、推理管理。
+
+6. 数据统计模块统计标注情况、标签分布、数据量、任务评测结果。
+
+系统测试：
+
+1. 测试环境：操作系统、Python版本、前端框架、后端框架、数据库等。
+
+2. 测试分类：功能性测试和非功能性测试。
+
+环境
+操作系统：Ubuntu 16.04LTS
+处理器：Intel(R) Xeon(R) CPU E5-2678 v3 @ 2.50GHz
+远程服务端：—
+内存：47GB
+硬盘：2.0TB
+
+操作系统：Windows 10系统
+处理器：Intel(R) Core (TM) i5-1035G1 CPU 1.00GHz 1.19GHz
+本地服务端：  
+内存：16GB
+硬盘：500GB
+
+客户端：  
+内存：16GB
+硬盘：500GB
+浏览器：Microsoft Edge 98.0.1108.43；Firefox 94.0.2
+
+第四章基于少样本学习的文本分类智能标注工具
+4.5.2功能测试
+在功能测试中，本小节主要针对4.1.1节中功能性需求进行测试。具体地，一个功能模块进行了测试。在表4-3中，展示了各个功能模块的测试结果，具体如下：
+
+表4-3功能性测试结果
+功能模块 | 功能 | 测试结果 | 具体信息
+登录 | 通过 | 登录功能正常
+用户管理 | 通过 | 用户名、邮箱、密码校验有效
+数据上传 | 通过 | txt、csv和json格式文件数据上传正常
+数据下载 | 通过 | csv和json格式文件数据下载正常
+数据管理 | 通过 | 数据分页查看功能正常；关键字搜索结果正常且显示正常
+人工数据标注 | 通过 | 通过鼠标点击、快捷键进行人工数据标注正常
+标签定义 | 通过 | 标签创建、修改、删除功能正常
+标签管理 | 通过 | 快捷键定义有效
+标签标识功能 | 通过 | 标签颜色手动、随机切换正常
+模型数据管理 | 通过 | 模据和评测数据的添加、删除功能
+智能任务管理 | 通过 | 智能标注任务创建、删除和查看功能正常
+智能标注结果管理 | 通过 | 结果查看功能正常；结果排序正常；关键字搜索功能正常；标签修正功能正常
+数据标注统计 | 通过 | 数据标注情况统计结果显示正常
+标签分布统计 | 通过 | 标签分布情况统计结果显示正常
+智能标注评测统计 | 通过 | 智能标注评测统计结果显示正常
+数据统计 | 通过 | 数据在不同集合中的统计结果显示正常
+
+4.5.3非功能测试
+在非功能测试中，本小节主要针对4.1.2节中非功能性需求中提出的易用性和兼容性需求进行测试。其中，易用性中主要测试本系统的在不同环境下部署便捷性；兼容性主要测试不同的浏览器是否可以有效的支持本系统前端界面的正常显示。
+
+表4-4后端部署易用性测试
+部署方式 | 名称 | 是否部署方便
+本地部署 | 后端部署 | 是
+远程部署 | 后端部署 | 是
+
+表4-5浏览器兼容性测试
+浏览器 | 名称 | 是否兼容
+Microsoft Edge | 前端显示 | 是
+Firefox | 前端显示 | 是
+大于IE9.0的IE浏览器 | 前端显示 | 是
+
+4.6本章小结
+本章详细介绍了基于少样本学习的文本分类智能标注工具的设计与实现工作。首先分析了系统的功能与非功能性需求；然后对系统的概要设计进行介绍。接下来具体介绍智能标注系统中各个核心模块的详细设计与实现过程。最后通过功能性测试与非功能性测试，确保了本系统的正常运行。
+
+参考文献：
+
+1. Shot Leamers [A] // Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (C). 2021: 2339-2352.
+
+2. Tam D, Menon R R, Bansal M, et al. Improving and Simplifying Pattern Exploiting Training [A] // Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (C). 2021: 4980-4991.
+
+3. Gao T, Fisch A, Chen D. Making Pre-trained Language Models Better Few-shot Learners [A] // Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers) (C). 2021: 3816-3830.
+
+4. Raffel C, Shazeer N, Roberts A, et al. Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer [J]. Journal of Machine Learning Research, 2020, 21: 1-67.
+
+5. Liu X, Zheng Y, Du Z, et al. GPT understands, too [J]. arXiv preprint arXiv:2103.10385, 2021.
+
+6. Wang S, Fang H, Khabsa M, et al. Entailment as few-shot learner [J]. arXiv preprint arXiv:2104.14690, 2021.
+
+7. Jimg Z, Xu F F, Araki J5, et al. How can we know what language models know? [J]. Transactions of the Association for Computational Linguistics, 2020, 8: 423-438.
+
+8. Sun Y, Zheng Y, Hao C, et al. NSP-BERT: A Prompt-based Zero-shot Learner Through an Original Pre-training Task — Next Sentence Prediction [J]. arXiv preprint arXiv:2109.03564, 2021.
+
+9. Xu L, Lu X, Yuan C, et al. Fewclue: A Chinese few-shot learning evaluation benchmark [J]. arXiv preprint arXiv:2107.07498, 2021.
+
+10. Dagan I, Glickman O. Probabilistic textual entailment: Generic applied modeling of language variability [J]. Learning Methods for Text Understanding and Mining, 2004, 2004: 26-29.
+
+11. Dagan I, Glickman O, Magnini B. The Pascal recognizing textual entailment challenge [A] // Machine Learning Challenges Workshop (C), Berlin, Heidelberg: Springer, 2005: 177-190.
+
+12. Hadsell R, Chopra S, LeCun Y. Dimensionality reduction by learning an invariant mapping [A] // 2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'06) (C), 2006, 2: 1735-1742.
+
+13. Mikolov T, Sutskever I, Chen K, et al. Distributed representations of words and phrases and their compositionality [J]. Advances in neural information processing systems, 2013, 26.
+
+14. Peters M, Neumann M, Iyyer M, et al. Deep contextualized word representations [J]. Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (Volume 1: Long Papers), 2018.
+
+15. Radford A, Narasimhan K, Salimans T, et al. Improving language understanding by generative pre-training [J]. 2018.
+
+16. Radford A, Wu J, Child R, et al. Language models are unsupervised multitask learners [J]. OpenAI blog, 2019, 1(8): 9.
+
+17. Devlin J, Chang M W, Lee K, et al. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding [A] // Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (C), 2019.
+
+18. Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need [J]. Advances in neural information processing systems, 2017, 30.
+
+19. Schuster M, Nakajima K. Japanese and Korean voice search [A] // Acoustics, Speech and Signal Processing (ICASSP) (C), IEEE International Conference on, 2012.
+
+20. Liu Y, Ott M, Goyal N, et al. RoBERTa: A robustly optimized BERT pretraining approach [J]. arXiv preprint arXiv:1907.11692, 2019.
+
+21. Sun Y, Wang S, Li Y, et al. ERNIE: Enhanced representation through knowledge integration [J]. arXiv preprint arXiv:1904.09223, 2019.
+
+22. Cui Y, Che W, Liu T, et al. Revisiting Pre-trained Models for Chinese Natural Language Processing [A] // Findings of the Association for Computational Linguistics: EMNLP 2020 (C), 2020: 657-668.
+
+23. Liu P, Yuan W, Fu J, et al. Pre-train, prompt, and predict: A systematic survey of prompting methods in natural language processing [J]. arXiv preprint arXiv:2107.13586, 2021.
+
+24. Petrov F, Rocktäschel T, Riedel S, et al. Language models as knowledge bases? [A] // Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP) (C), 2019: 2463-2473.
+
+25. Li X L, Liang P. Prefix-tuning: Optimizing continuous prompts for generation [A] // Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers) (C), 2021: 4582-4597.
+
+26. Lester B, Al-Rfou R, Constant N. The power of scale for parameter-efficient prompt tuning [A] // Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (C), 2021: 3045-3059.
+
+27. Schroff F, Kalenichenko D, Philbin J. FaceNet: A unified embedding for face recognition and clustering [A] // Proceedings of the IEEE conference on computer vision and pattern recognition (C), 2015: 815-823.
+
+28. Weinberger K Q, Saul L K. Distance metric learning for large margin nearest neighbor classification [J]. Journal of Machine Learning Research, 2009, 10(1): 207-244.
+
+29. Xu L, Hu H, Zhang X, et al. CLUE: A Chinese Language Understanding Evaluation Benchmark [A] // Proceedings of the 28th International Conference on Computational Linguistics (C), 2020: 4762-4772.
+
+30. Li X, Roth D. Learning question classifiers [A] // COLING 2002: The 19th International Conference on Computational Linguistics (C), 2002.
+
+31. Zhang X, Zhao J, LeCun Y. Character-level convolutional networks for text classification [J]. Advances in neural information processing systems, 2015, 28.
+
+32. Paszke A, Gross S, Massa F, et al. PyTorch: An imperative style, high-performance deep learning library [J]. Advances in neural information processing systems, 2019, 32.
+
+33. Cui Y, Che W, Liu T, et al. Pre-training with whole word masking for Chinese BERT [J]. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 2021, 29: 3504-3514.
+
+34. Loshchilov I, Hutter F. Decoupled Weight Decay Regularization [A] // International Conference on Learning Representations (C), 2018.
+
+35. van der Maaten L, Hinton G. Visualizing data using t-SNE [J]. Journal of machine learning research, 2008, 9(11).

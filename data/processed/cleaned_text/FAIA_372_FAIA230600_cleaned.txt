@@ -1,0 +1,181 @@
+Enhanced Machine Reading Comprehension Method for Aspect Sentiment Quadruplet Extraction
+
+Shuqin Ye, Zepeng Zhang, and Ruifan Li*
+
+School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications, China
+Engineering Research Center of Information Networks, Ministry of Education, China
+Key Laboratory of Interactive Technology and Experience System, Ministry of Culture and Tourism, China
+{shuqinye, zepeng, rli}@bupt.edu.cn
+ORCiD ID: Ruifan Li https://orcid.org/0000-0002-3543-6272
+
+Abstract. Aspect-Based Sentiment Analysis (ABSA) has seen significant attention for its ability to perform fine-grained sentiment analysis. Aspect Sentiment Quadruplet Extraction (ASQE) is a challenging task in ABSA, involving the extraction of aspect terms, opinion terms, sentiment polarities, and categories. We propose a novel Enhanced Machine Reading Comprehension (EMRC) method, formalizing ASQE as a multi-turn MRC task. EMRC effectively learns the relationships among subtasks by incorporating previously generated query answers. A hierarchical category classification strategy is designed for structured category prediction, and a bi-directional attention mechanism is employed. Extensive experiments on two benchmark datasets show EMRC outperforms state-of-art baselines. Source code is available at https://github.com/Little-Yeah/EMCR.
+
+1 Introduction
+
+ABSA aims to extract and analyze sentiment information of aspect terms. It involves the identification of aspect terms, opinion terms, aspect categories, and sentiment polarities. ABSA has been decomposed into subtasks like Aspect Target Extraction (ATE), Opinion Target Extraction (OTE), Aspect Category Detection (ACD), and Aspect Sentiment Classiﬁcation (ASC). Recently, works have focused on simultaneous extraction of multiple sentiment elements. ASQE task is proposed to predict all four sentiment elements in the quadruplet form. Existing studies have neglected certain characteristics of ASQE, leading to unsatisfactory results. We consider three challenges: exploiting associations among subtasks, dependencies among aspect and opinion term extractions, and the interrelated nature of extraction and classification subtasks.
+
+*Corresponding Author. Email: rli@bupt.edu.cn.
+
+Figure 1. Example of sentimental elements and ASQE output for a restaurant review sentence. A quadruplet comprises (aspect, category, opinion, sentiment).
+
+The sentiment polarity classification aims to assign positive, negative, or neutral polarity to identified aspect-opinion pairs, while the category prediction task predicts the category of each aspect term. Achieving satisfactory performance in Aspect Sentiment Quadruplet Extraction (ASQE) requires modeling dependencies among subtasks. The challenge lies in accurately performing aspect category classification, particularly with multiple categories. ASQE extends the conventional Aspect Sentiment Triplet Extraction (ASTE) by adding category prediction, making its performance inherently tied to category prediction accuracy. The Laptop-ACOS dataset contains up to 121 categories, necessitating an effective strategy for dealing with multiple categories. Enhancing the input sentence representation is crucial for adapting to different subtasks in ASQE.
+
+We propose an Enhanced Machine Reading Comprehension (EMRC) method for ASQE. This method formulates ASQE as a multi-turn machine reading comprehension task, introducing prior knowledge from previous turns to capture relations among subtasks. We devise a hierarchical category classification strategy to address the complexity of aspect categories and incorporate a bi-directional attention mechanism to enhance the association between context and queries.
+
+Our contributions are:
+- A novel EMRC model that effectively builds associations among sentimental subtasks.
+- A hierarchical category classification strategy to improve the context representation's task-awareness.
+- Extensive experimental results demonstrating EMRC's superiority over existing baselines.
+
+In related work, Aspect-Based Sentiment Analysis (ABSA) has gained interest, evolving from independent prediction of single elements to joint detection of multiple sentiment elements. ASQE is the most comprehensive and challenging task due to its complexity. Existing methods have ignored interactions among quadruplets, leading to potential error propagation. Machine Reading Comprehension (MRC) has emerged as a promising approach in ABSA, with several MRC-based models proposed for various subtasks.
+
+---
+
+Given a review sentence, our Enhanced Machine Reading Comprehension (EMRC) model employs a bi-directional extraction procedure to determine aspect-opinion pairs. These pairs are then used for sentiment and category classification to predict sentiment polarities and aspect categories, respectively, combining into a sentiment quadruplet.
+
+3 Methodology
+
+3.1 Problem Formulation
+Our model aims to produce a set of quadruplets Q = {(a, c, o, s)m}|Q| m=1 from a sentence X = {x1, x2, · · · , xn}, where a is the aspect term, c its category, o the opinion term, and s the sentiment polarity.
+
+3.2 Query Construction
+
+3.2.1 Bi-directional Extraction Query
+The bi-directional extraction procedure handles Aspect Term Extraction (ATE) and Opinion Term Extraction (OTE) subtasks. Queries are constructed to identify aspects and corresponding opinions in both forward (A →O) and backward (O →A) directions.
+
+3.2.2 Hierarchical Category Classification Query
+Our strategy involves classifying aspects into general categories first, followed by subcategory classification, concatenating the two for the final category.
+
+3.2.3 Sentiment Classification Query
+The sentiment classification query is designed to determine the sentiment polarity towards the given aspect and opinion terms.
+
+3.3 Bi-directional Attention
+To capture the relationship between the input context and a given query, we adopt the bi-directional attention mechanism using BERT as the encoder. This mechanism incorporates context-to-query and query-to-context attention to create a task-aware representation.
+
+---
+
+To obtain the attention-enhanced representation ˆH, we duplicate ˆh for n times and combine these copies into a d-by-n matrix. We merge the original context representation H with the attention-enhanced representations  H and ˆH to obtain the task-aware representation ¨H:
+
+¨H:t = β(H:t, ˜H:t, ˆH:t), 
+
+where β(a, b, c) = [a; b; a ⊙ b; a ⊙ c]. This bi-directional attention mechanism captures and links information from both queries and context for a comprehensive understanding of their relations.
+
+For answer prediction, we design multiple classifiers. Each query employs at least one unique classifier. We use eight classifiers to predict the starting or ending positions of the answer spans for four queries. For classification queries, the answer is predicted based on the representation of [CLS].
+
+The training objective involves jointly learning subtasks in ASQE. The loss function is:
+
+L(θ) = LFT + LST + LS + LGC + LSC,
+
+where LFT and LST represent the losses for first-turn and second-turn extraction queries, and LS, LGC, and LSC are the losses for sentiment, general category, and subcategory classification, respectively.
+
+We evaluate our method on two benchmark datasets: Restaurant-ACOS and Laptop-ACOS. The BERT-base encoder is used with specific training settings. We report Precision, Recall, and F1-score as evaluation metrics.
+
+Our EMRC model is compared with state-of-the-art baselines, including pipeline methods like Double-Propagation and Extract-Classify, and end-to-end methods like TAS-BERT and JET.
+
+---
+
+aspect-opinion pairs to form the final ACOS quadruplets. Generative methods include BARTABSA, which unifies all subtasks of Aspect-Based Sentiment Analysis (ABSA) by transforming them into a single generative formulation. GAS approaches ABSA tasks in a unified generative framework, formulating the task as a sentiment element sequence generation problem. Paraphrase detection aims to jointly detect all sentiment elements in quads, using a paraphrase modeling paradigm. Opinion tree generation detects all sentiment elements in a tree for a given review sentence, offering a semantic representation of sentiment element structure. Our EMRC method is based on Machine Reading Comprehension (MRC).
+
+4.4 Main Results
+
+The experimental results in Table 2 show that unified and generative approaches are more effective than pipeline methods. These approaches better capture the dependence between subtasks and mitigate error propagation. The proposed EMRC model outperforms all baselines in overall performance, achieving the highest precision scores on both datasets. In terms of recall and F1 score, our model demonstrates significant improvements compared to other baselines. The precision score's contribution to the F1 score boost indicates our model's higher reliability, which is crucial in real-world applications.
+
+Table 2. Experimental results (%) on two benchmark datasets.
+
+METHOD Restaurant-ACOS Laptop-ACOS
+
+P R F1 P R F1
+
+DP [24] 34.67 15.08 21.04 13.04 0.57 8.00
+Extract-Classify [3] 38.54 52.96 44.61 45.56 29.48 35.80
+JET [32] 59.81 28.94 39.01 44.52 16.25 23.81
+TAS-BERT [28] 26.29 46.29 33.53 47.15 19.22 27.31
+BARTABSA [34] 56.62 55.35 55.98 41.65 40.46 41.05
+GAS [39] 60.69 58.52 59.59 41.60 42.75 42.17
+Paraphrase [38] 58.98 59.11 59.04 41.77 45.04 43.34
+Opinion tree generation [1] 63.96 61.74 62.83 46.11 44.79 45.44
+Our EMRC 64.97 61.18 63.02 47.27 44.66 45.92
+
+Table 3. F1 score (%) of ablation studies on hierarchical category classification strategy.
+
+DATASET METHOD QUADRUPLET CATEGORY
+Restaurant-ACOS EMRC 63.02 78.23
+w/o hierarchical 61.85 (1.17↓) 70.91 (7.32↓)
+Laptop-ACOS EMRC 45.92 60.58
+w/o hierarchical 43.52 (2.40↓) 47.79 (12.79↓)
+
+4.5 Ablation Study
+
+The ablation study on both datasets demonstrates the effectiveness of the hierarchical category classification strategy and the bi-directional attention mechanism in EMRC. Removing these components leads to a significant decline in performance, especially in aspect category classification and quadruplet extraction.
+
+Table 4. F1 score (%) of ablation studies on bi-directional attention mechanism.
+
+DATASET METHOD SUBTASK ASQE ATE OTE AOPE ACD
+
+Restaurant-ACOS EMRC 63.02 83.98 85.74 75.61 78.23
+w/o bi-directional attention 60.92 (2.1↓) 82.13 (1.85↓) 84.01 (1.73↓) 72.59 (3.02↓) 76.68 (1.55↓)
+Laptop-ACOS EMRC 45.92 82.95 89.79 77.32 60.58
+w/o bi-directional attention 42.46 (3.46↓) 81.52 (1.43↓) 88.31 (1.48↓) 75.26 (2.06↓) 59.84 (0.94↓)
+
+4.6 Attention Visualization
+
+Attention visualization shows that the bi-directional attention mechanism in EMRC effectively focuses on query-related words, resulting in more reliable predictions.
+
+4.7 Case Study
+---
+
+A case study is presented in Figure 7, where two error cases are selected to examine the scenarios in which the methods might fail. In Example 1, the sentence 'Great service with amazon on fulfilling my order.' leads Extract-Classify to incorrectly classify the aspect 'service' into the category LAPTOP#OPERATION_PERFORMANCE, while our EMRC model correctly predicts SUPPORT#GENERAL. The hierarchical category classification strategy, as discussed in the ablation study, is crucial for managing the complexity of aspect categories. However, both models struggle to extract the aspect term 'service with amazon'. In Example 2, Paraphrase generates the opinion term 'best', which is not present in the original sentence 'The pizza is delicious and the proprietor is one of the nicest in NYC.', as the generative model tends to 'generate' rather than 'extract'. In contrast, our model extracts the opinion term 'nicest' from the given sentence to avoid such generation errors.
+
+5 Conclusion and Future Work
+
+Our paper introduces a novel EMRC model that frames ASQE as a multi-turn machine reading comprehension task. The model enhances dependencies and facilitates information flow among subtasks by incorporating the answer from the last turn into the current query. It also employs a hierarchical category classification strategy to address complex category situations and utilizes a bi-directional attention mechanism to improve context representation. Experimental results show that EMRC outperforms existing baselines. Future work includes incorporating span-level representation to better predict aspect or opinion terms containing multiple words and developing a query-construction strategy that automatically constructs queries based on the given context.
+
+Acknowledgements
+
+This work was partially supported by the National Natural Science Foundation of China under Grant 62076032 and the 111 Project under Grant B08004. We thank the anonymous reviewers for their constructive feedback.
+
+References
+
+[References listed in the original content are to be retained as they are]
+
+Mao, Y., Shen, Y., Yu, C., & Cai, L. (2021). A joint training dual-mrc framework for aspect based sentiment analysis. In Proc. AAAI, 35, 13543–13551.
+
+Peng, H., Xu, L., Bing, L., Huang, F., Lu, W., & Si, L. (2020). Knowing what, how and why: A near complete solution for aspect-based sentiment analysis. In Proc. AAAI, 34, 8600–8607.
+
+Pontiki, M., Galanis, D., Papageorgiou, H., Androutsopoulos, I., Manandhar, S., AL-Smadi, M., Al-Ayyoub, M., Zhao, Y., Qin, B., De Clercq, O., Hoste, V., Apidianaki, M., Tannier, X., Loukachevitch, N., Kotelnikov, E., Bel, N., Jiménez-Zafra, S. M., & Eryiğit, G. (2016). SemEval-2016 task 5: Aspect based sentiment analysis. In Proceedings of the 10th International Workshop on Semantic Evaluation (SemEval-2016), 19–30.
+
+Qiu, G., Liu, B., Bu, J., & Chen, C. (2011). Opinion word expansion and target extraction through double propagation. Computational Linguistics, 37(1), 9–27.
+
+Seo, M., Kembhavi, A., Farhadi, A., & Hajishirzi, H. (2019). Bidirectional attention flow for machine comprehension. In Proc. ICLR.
+
+Sun, K., Zhang, R., Mensah, S., Mao, Y., & Liu, X. (2019). Aspect-level sentiment analysis via convolution over dependency tree. In Proc. EMNLP-IJCNLP, 5679–5688.
+
+Tai, C.-Y., Li, M.-Y., & Ku, L.-W. (2022). Hyperbolic disentangled representation for fine-grained aspect extraction. In Proc. AAAI, 36, 11358–11366.
+
+Wan, H., Yang, Y., Du, J., Liu, Y., Qi, K., & Pan, J. Z. (2020). Target-aspect-sentiment joint detection for aspect-based sentiment analysis. In Proc. AAAI, 34, 9122–9129.
+
+Wang, W., Pan, S. J., Dahlmeier, D., & Xiao, X. (2016). Recursive neural conditional random fields for aspect-based sentiment analysis. In Proc. EMNLP, 616–626.
+
+Wu, M., Wang, W., & Pan, S. J. (2020). Deep weighted maxsat for aspect-based opinion extraction. In Proc. EMNLP, 5618–5628.
+
+Xu, L., Chia, Y. K., & Bing, L. (2021). Learning span-level interactions for aspect sentiment triplet extraction. In Proc. ACL-IJCNLP, 4755–4766.
+
+Xu, L., Li, H., Lu, W., & Bing, L. (2020). Position-aware tagging for aspect sentiment triplet extraction. In Proc. EMNLP, 2339–2349.
+
+Xu, T., Yang, H., Wu, Z., Chen, J., Zhao, F., & Dai, X. (2023). Measuring your ASTE models in the wild: A diversified multi-domain dataset for aspect sentiment triplet extraction. In Findings of ACL: ACL, 2837–2853.
+
+Yan, H., Dai, J., Ji, T., Qiu, X., & Zhang, Z. (2021). A unified generative framework for aspect-based sentiment analysis. In Proc. ACL-IJCNLP, 2416–2429.
+
+Zhai, Z., Chen, H., Feng, F., Li, R., & Wang, X. (2022). COM-MRC: A context-masked machine reading comprehension framework for aspect sentiment triplet extraction. In Proc. EMNLP, 3230–3241.
+
+Zhai, Z., Chen, H., Li, R., & Wang, X. (2023). USSA: A unified table filling scheme for structured sentiment analysis. In Proc. ACL, 14340–14353.
+
+Zhang, M., Zhu, Y., Liu, Z., Bao, Z., Wu, Y., Sun, X., & Xu, L. (2023). Span-level aspect-based sentiment analysis via table filling. In Proc. ACL, 9273–9284.
+
+Zhang, W., Deng, Y., Li, X., Yuan, Y., Bing, L., & Lam, W. (2021). Aspect sentiment quad prediction as paraphrase generation. In Proc. EMNLP, 9209–9219.
+
+Zhang, W., Li, X., Deng, Y., Bing, L., & Lam, W. (2021). Towards generative aspect-based sentiment analysis. In Proc. ACL-IJCNLP, 504–510.
+
+Zhao, H., Huang, L., Zhang, R., Lu, Q., & Xue, H. (2020). Span-mlt: A span-based multi-task learning framework for pair-wise aspect and opinion terms extraction. In Proc. ACL, 3239–3248.
+
+Zhou, X., Wan, X., & Xiao, J. (2015). Representation learning for aspect category detection in online reviews. In Proc. AAAI, 29.

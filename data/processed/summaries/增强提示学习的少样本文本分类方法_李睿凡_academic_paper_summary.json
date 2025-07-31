@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "少样本文本分类任务",
+  "research_problem": "少样本学习场景中数据量有限，导致模型泛化能力不足和灾难性遗忘问题",
+  "methodology": "EPL4FTC提示学习增强分类算法",
+  "key_innovations": [
+    "将文本分类任务转换为基于自然语言推理的提示学习形式",
+    "引入三元组损失联合优化",
+    "使用掩码语言模型任务作为正则项"
+  ],
+  "experimental_results": "在多个中英文文本分类数据集上进行了实验评估，EPL4FTC方法在准确度性能上明显优于对比的基线方法",
+  "conclusions": "EPL4FTC算法在少样本学习场景中具有有效性，尤其在中文文本分类任务的平均准确率性能上取得了最高的成绩",
+  "keywords": [
+    "少样本学习",
+    "文本分类",
+    "自然语言推理",
+    "三元组损失",
+    "掩码语言模型"
+  ],
+  "application_domains": [
+    "文本分类",
+    "自然语言处理"
+  ],
+  "technical_concepts": [
+    "EPL4FTC算法",
+    "自然语言推理",
+    "三元组损失",
+    "掩码语言模型",
+    "提示学习"
+  ],
+  "performance_metrics": "准确率(Accuracy)",
+  "summary": "本文针对少样本文本分类任务提出EPL4FTC算法，通过自然语言推理和三元组损失优化等方法提升模型泛化能力，实验证明在多种数据集上具有优越性能。",
+  "file_id": "增强提示学习的少样本文本分类方法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 4267,
+  "generation_time": "2025-07-31 21:33:55"
+}

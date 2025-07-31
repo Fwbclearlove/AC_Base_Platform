@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "He Chuan",
+    "Li Ruifan",
+    "Zhong Yixin"
+  ],
+  "main_topic": "Educational data mining",
+  "research_problem": "Predicting student performance in algebraic problem-solving based on historical data",
+  "methodology": "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction",
+  "key_innovations": [
+    "Classifiers combination",
+    "Feature engineering",
+    "Regularized logistic regression model"
+  ],
+  "experimental_results": "KNN: RMSE=0.3257; SVD: RMSE=0.446277; Logistic Regression: RMSE=0.2895; Combination: RMSE=0.2820",
+  "conclusions": "The combined classifier outperforms single classifiers, logistic regression shows the best performance due to its exploitation of detailed feature vectors",
+  "keywords": [
+    "data mining",
+    "logistic regression",
+    "k-nearest neighbor",
+    "singular value decomposition",
+    "classifiers combination"
+  ],
+  "application_domains": [
+    "Educational data mining"
+  ],
+  "technical_concepts": [
+    "KNN",
+    "SVD",
+    "Logistic Regression",
+    "Classifiers combination",
+    "Feature engineering"
+  ],
+  "performance_metrics": "Root mean squared error (RMSE)",
+  "summary": "This paper presents an approach to educational data mining using various classification algorithms and a combination strategy for predicting student performance in algebraic problem-solving. The method achieves competitive results in the KDD Cup 2010, with logistic regression showing the best performance among the individual classifiers.",
+  "file_id": "978_3_642_23223_7_60",
+  "source_type": "cleaned",
+  "text_length": 3728,
+  "generation_time": "2025-07-31 21:17:34"
+}

@@ -1,0 +1,47 @@
+{
+  "document_type": "academic_paper",
+  "title": "COM-MRC: A Context-Masked Machine Reading Comprehension Framework for Aspect Sentiment Triplet Extraction",
+  "authors": [
+    "Feifan Fan",
+    "Yansong Feng",
+    "Dongyan Zhao",
+    "Zepeng Zhai",
+    "Hao Chen",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+  "research_problem": "Existing MRC-based methods for ASTE may fail due to interference from multiple aspect terms.",
+  "methodology": "COntext-Masked MRC (COM-MRC) framework",
+  "key_innovations": [
+    "Context augmentation strategy",
+    "Discriminative model",
+    "Two-stage inference method"
+  ],
+  "experimental_results": "The COM-MRC framework outperforms other baselines in terms of Precision, Recall, and F1 scores on benchmark datasets D1 and D2.",
+  "conclusions": "The COM-MRC framework effectively alleviates interference in ASTE tasks and demonstrates its effectiveness on benchmark datasets.",
+  "keywords": [
+    "Aspect Sentiment Triplet Extraction",
+    "Machine Reading Comprehension",
+    "Context Masking",
+    "Sentiment Analysis"
+  ],
+  "application_domains": [
+    "Aspect-based Sentiment Analysis",
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "COntext-Masked MRC",
+    "Aspect Extraction",
+    "Opinion Extraction",
+    "Sentiment Classification",
+    "Aspect Detection"
+  ],
+  "performance_metrics": "COM-MRC achieves F1 scores of 75.46, 68.91, 72.01, 62.35, 58.16, 60.17, 68.35, 61.24, 64.53, 71.55, 71.59, 71.57 on different metrics.",
+  "summary": "This paper proposes a COM-MRC framework to address interference in Aspect Sentiment Triplet Extraction tasks. The framework includes a context augmentation strategy, a discriminative model, and a two-stage inference method. Experimental results show the effectiveness of the COM-MRC framework, which outperforms existing methods on benchmark datasets.",
+  "file_id": "2022.emnlp_main.212",
+  "source_type": "cleaned",
+  "text_length": 22704,
+  "generation_time": "2025-07-31 21:12:11"
+}

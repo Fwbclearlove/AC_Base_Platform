@@ -1,0 +1,41 @@
+{
+  "document_type": "patent",
+  "title": "一种基于特征分布迁移的小样本图像特征学习方法及装置",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "小样本图像分类",
+  "technical_problem": "小样本图像分类中的原型偏差问题",
+  "technical_solution": "通过特征分布迁移的方法减少原型偏差",
+  "key_innovations": [
+    "特征分布迁移",
+    "小样本图像特征学习",
+    "分布学习模块",
+    "嵌入模块"
+  ],
+  "implementation_method": "包括数据预处理、预训练嵌入模块、分布学习、分布原型计算等步骤",
+  "technical_effects": "提高小样本图像分类效果",
+  "keywords": [
+    "特征分布迁移",
+    "小样本",
+    "图像特征学习",
+    "分布学习模块",
+    "嵌入模块"
+  ],
+  "application_scenarios": [
+    "C-way K-shot分类任务"
+  ],
+  "technical_concepts": [
+    "嵌入模块fθ",
+    "分布学习模块gφ",
+    "分布原型",
+    "类别概率计算"
+  ],
+  "claims_summary": "未在原文中明确提及",
+  "summary": "本专利提出了一种基于特征分布迁移的小样本图像特征学习方法及装置，通过优化分布学习模块和嵌入模块，减少小样本图像分类中的原型偏差，从而提高分类效果。该方法适用于C-way K-shot分类任务，包含数据预处理、特征提取、分布学习和预测等步骤。",
+  "file_id": "基于特征分布迁移的小样本图像特征学习方法及装置_李晓旭",
+  "source_type": "cleaned",
+  "text_length": 1132,
+  "generation_time": "2025-07-31 21:31:06"
+}

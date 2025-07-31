@@ -1,0 +1,247 @@
+COM-MRC: A Context-Masked Machine Reading Comprehension Framework for Aspect Sentiment Triplet Extraction
+
+Zepeng Zhai, Hao Chen, Fangxiang Feng, Ruifan Li*, Xiaojie Wang
+
+School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China
+Engineering Research Center of Information Networks, Ministry of Education, China
+{zepeng, ccchenhao997, fxfeng, rfli, xjwang}@bupt.edu.cn
+
+Abstract:
+Aspect Sentiment Triplet Extraction (ASTE) extracts sentiment triplets from sentences and is formalized as an effective machine reading comprehension (MRC) framework. MRC-based methods may fail due to interference from multiple aspect terms. We propose a COntext-Masked MRC (COM-MRC) framework for ASTE, which includes a context augmentation strategy, a discriminative model, and an inference method. The context augmentation strategy generates masked contexts for each aspect term. The discriminative model consists of aspect and opinion extraction modules, sentiment classification, and aspect detection modules. The two-stage inference method extracts aspects first and then identifies opinions and sentiment through iterative masking. Experimental results on benchmark datasets demonstrate the effectiveness of our COM-MRC framework.
+
+1 Introduction:
+ASTE, a variant of fine-grained Aspect-based Sentiment Analysis (ABSA), extracts sentiment triplets of aspect, opinion, and sentiment polarity. Early methods used a two-stage pipeline framework, which may ignore interactions and lead to error propagation. Recent studies extract sentiment triplets end-to-end, mainly by designing tagging schemes. MRC-based methods formalize ASTE using a multi-turn QA framework but may suffer from interference in sentences with multiple aspects. We introduce masking aspects to alleviate interference and propose the COM-MRC framework. It includes a context augmentation strategy, a discriminative model, and an inference method to better identify information from different aspects and expand the training corpus.
+
+---
+
+Our COM-MRC framework for Aspect-based Sentiment Analysis (ASTE) task consists of three components: a context augmentation strategy, a discriminative model, and an inference method. The framework collaboratively employs four modules: aspect extraction, opinion extraction, sentiment classification, and aspect detection.
+
+2.1 Problem Formulation
+Given a sentence S = {w1, w2, ..., wn}, the ASTE task aims to extract all sentiment triplets T = {(a, o, s)}. Each sentiment triplet consists of an aspect term a, an opinion term o, and a sentiment polarity s ∈ {POS, NEU, NEG}.
+
+2.2 Context Augmentation Strategy
+Our model uses a fixed query to prompt the BERT sentence encoder for adapting to the ASTE task. We augment the training corpus by masking aspect terms, creating 2t instances from each sentence with t aspect terms.
+
+2.3 Discriminative Model
+Our discriminative model includes:
+- Aspect Extraction Module: Predicts the starting and ending positions of the first unmasked aspect term.
+- Opinion Extraction Module: Similar to the aspect module, it predicts opinion terms for the first unmasked aspect.
+- Sentiment Classification Module: Uses multi-head attention to fuse semantic information from the masked context, aspect, and opinion terms.
+- Aspect Detection Module: Detects the existence of aspect terms in the masked context.
+
+The inference method involves two stages: Aspect Inference (AI) and Aspect Accessory Inference (AAI), where aspects are extracted iteratively from left to right.
+
+---
+
+Figure 2 illustrates the overview of our COM-MRC framework.
+
+---
+
+Algorithm 1 outlines the inference algorithm.
+
+Input: Sentence S and query q.
+Output: Triplets T = {(a, o, s)}N.
+
+---
+
+---
+
+1: Initialize T, A = {}, {}
+2: e, a ← GetAI(q, S)
+3: while e = True do
+4: A ← A ∪ {a}
+5: e, a ← GetAI(q, S.Mask(A))
+6: end while
+7: for ai ∈ A do
+8: O, s ← GetAAI(q, S.Mask(A − {ai}))
+9: for oj ∈ O do
+10: T ← T ∪ {(ai, oj, s)}
+11: end for
+12: end for
+13: return T
+
+Loss Function:
+LT = αLA + βLO + γLS + δLE (14)
+
+Inference Method:
+Our method involves two stages: AI and AAI. AI extracts aspects; AAI identifies opinions and sentiment polarities. We illustrate this with an example in Figure 2. During AI, we obtain aspect detection flag e and aspect term a using our trained model. If e is True, we add a to A and mask it in S. We repeat this until e is False. For AAI, we mask all aspects except a, and with the query, we obtain opinion set O and sentiment s. We append triplets to T based on O.
+
+Dataset Statistics:
+Table 2: Statistics for experimental datasets D1 and D2, including #S (sentences), #MA-S (sentences with multiple aspect terms), #T (triplets), and #MA-T (triplets in sentences with multiple aspects).
+
+Experiments:
+3.1 Datasets:
+We use two groups of benchmark datasets from SemEval Challenges (Pontiki et al., 2014, 2015, 2016): D1 (Wu et al., 2020a) and D2 (Xu et al., 2020).
+
+3.2 Baseline Methods:
+We compare our COM-MRC with state-of-the-art baselines, categorized into pipeline, end-to-end, and MRC-based methods.
+
+3.3 Implementation Details:
+We use Bert-Base-Uncased as our base encoder. Our model is trained for 100 epochs with a learning rate of 9 × 10−5. We use an AdamW optimizer with a batch size of 15 and a dropout rate of 0.1. Hyper-parameters α, β, γ, and δ are set to 8.0, 3.2, 1.0, and 1.0, respectively.
+
+3.4 Main Results:
+Our COM-MRC outperforms other baselines in terms of Precision, Recall, and F1 scores on both D1 and D2 datasets, as shown in Tables 3 and 4.
+
+---
+
+---
+
+CMLA+†: 39.18, 47.13, 42.79, 30.09, 36.92, 33.16, 34.56, 39.84, 37.01, 41.34, 42.10, 41.72
+RINANTE+†: 31.42, 39.38, 34.95, 21.71, 18.66, 20.07, 29.88, 30.06, 29.97, 25.68, 22.30, 23.87
+Li-unified-R†: 41.04, 67.35, 51.00, 40.56, 44.28, 42.34, 44.72, 51.39, 47.82, 37.33, 54.51, 44.31
+Peng-two-stage†: 43.24, 63.66, 51.46, 37.38, 50.38, 42.87, 48.07, 57.51, 52.32, 46.96, 64.24, 54.21
+OTE-MTL∗: 62.00, 55.97, 58.71, 49.53, 39.22, 43.42, 56.37, 40.94, 47.13, 62.88, 52.10, 59.96
+JET-BERT†: 70.56, 55.94, 62.40, 55.39, 47.33, 51.04, 64.45, 51.96, 57.53, 70.42, 58.37, 63.83
+GTS-BERT∗: 68.09, 69.54, 68.81, 59.40, 51.94, 55.42, 59.28, 57.93, 58.60, 68.32, 66.86, 67.58
+Unified: 65.52, 64.99, 65.25, 61.41, 56.19, 58.69, 59.14, 59.38, 59.26, 66.60, 68.68, 67.62
+BMRC∗: 75.61, 61.77, 67.99, 70.55, 48.98, 57.82, 68.51, 53.40, 60.02, 71.20, 61.08, 65.75
+SPAN-ASTE: 72.89, 70.89, 71.85, 63.44, 55.84, 59.38, 62.18, 64.45, 63.27, 69.45, 71.17, 70.26
+EMC-GCN: 71.21, 72.39, 71.78, 61.70, 56.26, 58.81, 61.54, 62.47, 61.93, 65.62, 71.30, 68.33
+
+Our COM-MRC: 75.46, 68.91, 72.01, 62.35, 58.16, 60.17, 68.35, 61.24, 64.53, 71.55, 71.59, 71.57
+
+Table 4: Results on the benchmark D2 (Xu et al., 2020). The symbol † indicates results are from Xu et al. (2020), and ∗ from Chen et al. (2022).
+
+To ensure the significance of our experimental results, we conducted pairwise t-tests on F1 scores comparing our COM-MRC with BMRC and EMC-GCN on datasets D1 and D2. All produced p-values were less than 0.05.
+
+4 Analysis
+
+4.1 On Context Augmentation Strategy
+We compared our exponential strategy with linear and NOP strategies. The exponential strategy obtained 2t samples per sentence, while the linear strategy produced 2t samples and the NOP strategy used original sentences without augmentation. Our exponential strategy achieved significantly better performance and increased performance with the number of training samples.
+
+4.2 On Discriminative Model
+Ablation experiments on D2 were conducted by removing aspect representation, opinion representation, existence concatenation, and sentiment attention. The sentiment attention had the largest impact, resulting in a 1.50% decrement in performance. This indicates our attention mechanism effectively fuses semantic information within aspects and opinions.
+
+4.3 On Inference Method
+Two versions of the inference method were compared: AAI 1, which masks aspects one by one, and AAI 2, used in our COM-MRC, which masks all aspects but the current one. AAI 2 significantly outperformed AAI 1 in the multi-aspect setting.
+
+4.4 On Query
+Experiments were conducted with regular, improper (removing the keyword "first"), and null queries. The regular query performed best, indicating the effectiveness of our query design.
+
+---
+
+*Note: Some formatting and structural elements such as tables and figures have been maintained as per the original content, while noise and redundant information have been removed.*
+
+---
+
+Table 9: F1 scores of different queries on D2.
+
+The performance of the improper query decreases by a mean 1.26%, compared with a null query, which experiences a mean decrement of 2.60%. This highlights the effectiveness of our query.
+
+4.5 Attention Visualization
+
+We visualize attention matrices to demonstrate the effective treatment of interference problems. Consider the sentence “good food, bad decor, great customer service, bad manager”. Figure 4(a) shows that for identifying the opinion term “food”, both subfigures focus on the golden opinion “good”. However, the left subfigure indicates non-negligible attention on incorrect opinions, particularly “bad”. In contrast, masking other aspect terms reduces attention on incorrect opinions, as shown on the right. Similarly, Figure 4(b) illustrates reduced attention on incorrect opinions like “great” when other aspects are masked. The span “corresponding opinion terms” in our query receives high attention scores with golden opinions. Masking other aspects effectively aids in identifying the current aspect information.
+
+4.6 Case Study
+
+Table 10 compares our COM-MRC with BMRC on cases with multiple aspects. In the first example, both methods correctly extract the aspect terms “ambience” and “place” with their opinion terms “Nice” and “overrated”, respectively. BMRC, however, fails to identify the correct sentiment polarity of “place”. The second example shows BMRC extracting an incorrect triplet, where “price” and “shipping” do not share the opinion term “great”.
+
+Figure 4: Visualization of attention matrices.
+
+5 Related Work
+
+ABSA includes subtasks like Aspect Term Extraction (ATE), Aspect Sentiment Classification (ASC), and Opinion Term Extraction (OTE). Studies have ignored correlations between these subtasks, with some later works coupling two subtasks, such as Aspect and Opinion Term Co-Extraction (AOTE) and Aspect-Sentiment Pair Extraction (ASPE). ASTE, a new ABSA variant, has gained attention recently. End-to-end approaches and MRC-based methods have been proposed, though they are susceptible to interference from multiple aspect terms.
+
+6 Conclusion and Future Work
+
+We propose a COntext-Masked MRC (COM-MRC) framework to alleviate interference in ASTE tasks. COM-MRC’s components work collaboratively, with the context augmentation strategy effectively expanding the training corpus. Our inference method, involving two stages, reduces interference from other aspects. Experiments on benchmark datasets demonstrate COM-MRC’s effectiveness. Future work includes a one-stage method for faster inference.
+
+Limitations
+
+Our context augmentation strategy may increase training time, preventing COM-MRC from being applied to large-scale data scenarios.
+
+Acknowledgements
+
+This work was supported by the National Key R&D Program of China under Grant 2019YFF0303302 and the National Natural Science Foundation of China under Grant 62076032.
+
+---
+
+References
+
+[References section remains unchanged, as per the instructions to only clean the provided content, not adding or removing any sections like References.]
+
+---
+
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. BERT: Pre-training of deep bidirectional transformers for language understanding. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), pages 4171–4186.
+
+Feifan Fan, Yansong Feng, and Dongyan Zhao. 2018. Multi-grained attention network for aspect-level sentiment classification. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, pages 3433–3442.
+
+Zhifang Fan, Zhen Wu, Xin-Yu Dai, Shujian Huang, and Jiajun Chen. 2019. Target-oriented opinion words extraction with target-fused neural sequence labeling. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), pages 2509–2518.
+
+Ruidan He, Wee Sun Lee, Hwee Tou Ng, and Daniel Dahlmeier. 2019. An interactive multi-task learning network for end-to-end aspect-based sentiment analysis. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 504–515.
+
+Minghao Hu, Yuxing Peng, Zhen Huang, Dongsheng Li, and Yiwei Lv. 2019. Open-domain targeted sentiment analysis via span-based extraction and classification. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 537–546.
+
+Minqing Hu and Bing Liu. 2004. Mining and summarizing customer reviews. In Proceedings of the tenth ACM SIGKDD international conference on Knowledge discovery and data mining, pages 168–177.
+
+Ruifan Li, Hao Chen, Fangxiang Feng, Zhanyu Ma, Xijao Wang, and Eduard Hovy. 2021. Dual graph convolutional networks for aspect-based sentiment analysis. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), pages 6319–6329.
+
+Xin Li, Lidong Bing, Wai Lam, and Bei Shi. 2018a. Transformation networks for target-oriented sentiment classification. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 946–956.
+
+Xin Li, Lidong Bing, Piji Li, and Wai Lam. 2019a. A unified model for opinion target extraction and target sentiment prediction. Proceedings of the AAAI Conference on Artificial Intelligence, 33(01):6714–6721.
+
+Xin Li, Lidong Bing, Piji Li, Wai Lam, and Zhimou Yang. 2018b. Aspect term extraction with history attention and selective transformation. In Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence, IJCAI-18, pages 4194–4200.
+
+Xin Li, Lidong Bing, Wenxuan Zhang, and Wai Lam. 2019b. Exploiting BERT for end-to-end aspect-based sentiment analysis. In Proceedings of the 5th Workshop on Noisy User-generated Text (W-NUT 2019), pages 34–41.
+
+Ilya Loshchilov and Frank Hutter. 2019. Decoupled weight decay regularization. In International Conference on Learning Representations.
+
+Dehong Ma, Sujian Li, and Houfeng Wang. 2018. Joint learning for targeted sentiment analysis. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, pages 4737–4742.
+
+Dehong Ma, Sujian Li, Fangzhao Wu, Xing Xie, and Houfeng Wang. 2019. Exploring sequence-to-sequence learning in aspect term extraction. In Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 3538–3547.
+
+Dehong Ma, Sujian Li, Xiaodong Zhang, and Houfeng Wang. 2017. Interactive attention networks for aspect-level sentiment classification. In Proceedings of the 26th International Joint Conference on Artificial Intelligence, IJCAI’17, pages 4068–4074.
+
+Yue Mao, Yi Shen, Chao Yu, and Longjun Cai. 2021. A joint training dual-mrc framework for aspect based sentiment analysis. Proceedings of the AAAI Conference on Artificial Intelligence, 35(15):13543–13551.
+
+Haiyun Peng, Lu Xu, Lidong Bing, Fei Huang, Wei Lu, and Luo Si. 2020. Knowing what, how and why: A near complete solution for aspect-based sentiment analysis. Proceedings of the AAAI Conference on Artificial Intelligence, 34(05):8600–8607.
+
+Maria Pontiki, Dimitris Galanis, Haris Papageorgiou, Ion Androutsopoulos, Suresh Manandhar, Mohammad AL-Smadi, Mahmoud Al-Ayyoub, Yanyan Zhao, Bing Qin, Orphée De Clercq, Véronique Hoste, Marianna Apidianaki, Xavier Tannier, Natalia Loukachevitch, Evgeniy Kotelnikov, Nuria Bel, Salud María Jiménez-Zafra, and Gülşen Eryiğit. 2016. SemEval-2016 task 5: Aspect based sentiment analysis. In Proceedings of the 10th International Workshop on Semantic Evaluation (SemEval-2016).
+
+Maria Pontiki, Dimitris Galanis, Haris Papageorgiou, Suresh Manandhar, and Ion Androutsopoulos. 2015. SemEval-2015 task 12: Aspect based sentiment analysis. In Proceedings of the 9th International Workshop on Semantic Evaluation (SemEval 2015).
+
+Maria Pontiki, Dimitris Galanis, John Pavlopoulos, Haris Papageorgiou, Ion Androutsopoulos, and Suresh Manandhar. 2014. SemEval-2014 task 4: Aspect based sentiment analysis. In Proceedings of the 8th International Workshop on Semantic Evaluation (SemEval 2014).
+
+Kai Sun, Richong Zhang, Samuel Mensah, Yongyi Mao, and Xudong Liu. 2019. Aspect-level sentiment analysis via convolution over dependency tree. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP).
+
+Duyu Tang, Bing Qin, and Ting Liu. 2016. Aspect level sentiment classification with deep memory network. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing.
+
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. In Advances in Neural Information Processing Systems, volume 30.
+
+Kai Wang, Weizhou Shen, Yunyi Yang, Xiaojun Quan, and Rui Wang. 2020. Relational graph attention network for aspect-based sentiment analysis. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics.
+
+Wenya Wang and Sinno Jialin Pan. 2019. Transferable interactive memory network for domain adaptation in fine-grained opinion extraction. Proceedings of the AAAI Conference on Artificial Intelligence, 33(01).
+
+Wenya Wang, Sinno Jialin Pan, Daniel Dahlmeier, and Xiaokui Xiao. 2016a. Recursive neural conditional random fields for aspect-based sentiment analysis. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 616– 626, Austin, Texas. Association for Computational Linguistics.
+
+Wenya Wang, Sinno Jialin Pan, Daniel Dahlmeier, and Xiaokui Xiao. 2017. Coupled multi-layer attentions for co-extraction of aspect and opinion terms. In Proceedings of the Thirty-First AAAI Conference on Artificial Intelligence, AAAI’17, page 3316–3322. AAAI Press.
+
+Yequan Wang, Minlie Huang, Xiaoyan Zhu, and Li Zhao. 2016b. Attention-based LSTM for aspect- level sentiment classification. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 606–615, Austin, Texas. Association for Computational Linguistics.
+
+Zhenkai Wei, Yu Hong, Bowei Zou, Meng Cheng, and Jianmin Yao. 2020. Don’t eclipse your arts due to small discrepancies: Boundary repositioning with a pointer network for aspect extraction. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 3678–3684, Online. Association for Computational Linguistics.
+
+Zhen Wu, Chengcan Ying, Fei Zhao, Zhifang Fan, Xinyu Dai, and Rui Xia. 2020a. Grid tagging scheme for aspect-oriented fine-grained opinion extraction. In Findings of the Association for Computational Lin- guistics: EMNLP 2020, pages 2576–2585, Online. Association for Computational Linguistics.
+
+Zhen Wu, Fei Zhao, Xin-Yu Dai, Shujian Huang, and Jiajun Chen. 2020b. Latent opinions transfer net- work for target-oriented opinion words extraction. Proceedings of the AAAI Conference on Artificial Intelligence, 34(05):9298–9305.
+
+Hu Xu, Bing Liu, Lei Shu, and Philip S. Yu. 2018. Dou- ble embeddings and CNN-based sequence labeling for aspect extraction. In Proceedings of the 56th An- nual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), pages 592–598, Melbourne, Australia. Association for Computational Linguistics.
+
+Lu Xu, Yew Ken Chia, and Lidong Bing. 2021. Learn- ing span-level interactions for aspect sentiment triplet extraction. In Proceedings of the 59th Annual Meet- ing of the Association for Computational Linguistics and the 11th International Joint Conference on Natu- ral Language Processing (Volume 1: Long Papers), pages 4755–4766, Online. Association for Computa- tional Linguistics.
+
+Lu Xu, Hao Li, Wei Lu, and Lidong Bing. 2020.
+
+Position-aware tagging for aspect sentiment triplet extraction. In Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 2339–2349, Online. Association for Computational Linguistics.
+
+Hang Yan, Junqi Dai, Tuo Ji, Xipeng Qiu, and Zheng Zhang. 2021. A unified generative framework for aspect-based sentiment analysis. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), pages 2416–2429, Online. Association for Computational Linguistics.
+
+Bishan Yang and Claire Cardie. 2012. Extracting opin- ion expressions with semi-Markov conditional ran- dom fields. In Proceedings of the 2012 Joint Con- ference on Empirical Methods in Natural Language
+
+Processing and Computational Natural Language Learning, pages 1335–1345, Jeju Island, Korea. As- sociation for Computational Linguistics.
+
+Bishan Yang and Claire Cardie. 2013. Joint inference for fine-grained opinion extraction. In Proceedings of the 51st Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1640–1649, Sofia, Bulgaria. Association for Computational Linguistics.
+
+Yichun Yin, Furu Wei, Li Dong, Kaimeng Xu, Ming Zhang, and Ming Zhou. 2016. Unsupervised word and dependency path embeddings for aspect term extraction. In Proceedings of the Twenty-Fifth Inter- national Joint Conference on Artificial Intelligence, IJCAI’16, page 2979–2985. AAAI Press.
+
+Chen Zhang, Qiuchi Li, and Dawei Song. 2019. Aspect- based sentiment classification with aspect-specific graph convolutional networks. In Proceedings of the 2019 Conference on Empirical Methods in Natu- ral Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP), pages 4568–4578, Hong Kong, China. Association for Computational Linguistics.
+
+Chen Zhang, Qiuchi Li, Dawei Song, and Benyou Wang. 2020. A multi-task learning framework for opinion triplet extraction. In Findings of the Association for Computational Linguistics: EMNLP 2020, pages 819–828, Online. Association for Computational Lin- guistics.

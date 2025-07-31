@@ -1,0 +1,35 @@
+{
+  "document_type": "academic_paper",
+  "title": "SKFD-ISOMAP FOR FACE RECOGNITION",
+  "authors": [
+    "Ruifan Li",
+    "Cong Wang",
+    "Xuyan Tu"
+  ],
+  "main_topic": "Face recognition",
+  "research_problem": "The unsupervised Isomap may not be optimal for pattern classification in face recognition.",
+  "methodology": "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding",
+  "key_innovations": [
+    "Utilizes class information in feature extraction",
+    "Applies KFD to the matrix of shortest paths"
+  ],
+  "experimental_results": "SKFD-Isomap shows better performance than kernel Fisherfaces and Ext-Isomap in experiments using the Yale face database.",
+  "conclusions": "SKFD-Isomap is effective for face recognition due to its use of class information in the feature extraction process.",
+  "keywords": [
+    "face recognition",
+    "manifold",
+    "Isomap",
+    "KFD"
+  ],
+  "application_domains": [
+    "Face recognition"
+  ],
+  "technical_concepts": [
+    "Isomap",
+    "kernel Fisher discriminant (KFD)",
+    "geodesic distances",
+    "nearest neighbor classifier"
+  ],
+  "performance_metrics": "Performance comparison with kernel Fisherfaces and Ext-Isomap; better performance with different values of A and polynomial kernel functions",
+  "summary": "This paper introduces SKFD-Isomap, an improved version of Isomap for face recognition. It incorporates class information and kernel Fisher discriminant for better pattern classification. Experiments show its effectiveness compared to other methods."
+}

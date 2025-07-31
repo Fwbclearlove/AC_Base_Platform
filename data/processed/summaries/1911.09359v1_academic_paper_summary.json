@@ -1,0 +1,42 @@
+{
+  "document_type": "academic_paper",
+  "title": "Multi-Scale RCNN Model for Financial Time-series Classification",
+  "authors": [
+    "Liu Guang",
+    "Wang Xiaojie",
+    "Li Ruifan"
+  ],
+  "main_topic": "Financial time-series classification",
+  "research_problem": "Existing studies often focus on the Multi-Scale (MS) property or Temporal Dependency (TD) within financial time-series but rarely combine them effectively.",
+  "methodology": "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+  "key_innovations": [
+    "A novel method combining both MS and TD properties in financial time-series",
+    "MS feature extraction with convolutional units without predefined parameters",
+    "Fusion of different scale features using a Recurrent Neural Network to capture temporal dependencies"
+  ],
+  "experimental_results": "Our MSTD-RCNN model is compared with six baseline models on three datasets, showing superior performance in accuracy and F1. It also achieves the highest profit in simulated trading on all three datasets.",
+  "conclusions": "MSTD-RCNN effectively combines Multi-Scale and Temporal Dependency features, resulting in a powerful end-to-end classifier. The profitability of our model is confirmed through a simulated trading algorithm, with extensive experimental results demonstrating state-of-the-art performance.",
+  "keywords": [
+    "Financial time-series classification",
+    "Multi-Scale",
+    "Temporal Dependency",
+    "Recurrent Convolutional Neural Network",
+    "Simulated trading"
+  ],
+  "application_domains": [
+    "Investment management",
+    "Chinese stock market"
+  ],
+  "technical_concepts": [
+    "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+    "convolutional units",
+    "Gated Recurrent Unit (GRU)",
+    "backpropagation"
+  ],
+  "performance_metrics": "Accuracy, F1 score, and profitability in simulated trading",
+  "summary": "This paper introduces MSTD-RCNN, a novel approach for financial time-series classification that effectively integrates multi-scale and temporal dependency features. The model demonstrates state-of-the-art performance in both classification and simulated trading on Chinese stock market datasets.",
+  "file_id": "1911.09359v1",
+  "source_type": "cleaned",
+  "text_length": 19761,
+  "generation_time": "2025-07-31 21:10:55"
+}

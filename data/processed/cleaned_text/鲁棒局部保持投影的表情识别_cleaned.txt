@@ -1,0 +1,39 @@
+鲁棒局部保持投影的表情识别
+
+李睿凡1，朱强生1，郭燕慧1，刘海涛2
+
+(1.北京邮电大学信息工程学院，北京100876；2.中国民航大学通信工程系，天津300300)
+
+摘要：针对局部保持投影的流形学习算法对于噪声与异常值的敏感性，提出了一种鲁棒的局部保持投影算法。其基本出发点是首先对所有数据点进行评估，以获得它们可能成为异常值的信息，然后再将这种信息用于邻域选择与低维嵌套中。采用鲁棒局部保持投影进行人脸的表示方法，对JAFFE表情数据库进行了实验，结果表明，该方法有效。
+
+关键词：局部保持投影；鲁棒性；表情识别
+
+1. 局部保持投影
+
+局部保持投影算法是Laplace Beltrami算子特征函数的一个线性估计，其目标是保持数据之间的相似关系，即原始空间上相邻的数据点在投影空间上也保持相应的邻近关系。
+
+2. 鲁棒局部保持投影
+
+鲁棒局部保持投影首先在样本数据集X上执行局部鲁棒主成分分析。而鲁棒主成分分析则利用了带权值的主成分分析算法。这样，可以得到来自潜在流形上的样本数据的可能性度量。而这种可能性度量可以被看成是每个数据点是异常值的度量。一旦识别出可能的异常值，就可以在随后的局部保持投影算法中削弱它们对于整个算法的影响。
+
+3. 表情识别实验
+
+将鲁棒局部保持投影算法用于人脸表情识别问题，以表情识别中常用的Gabor小波特征提取方法作为参照，比较局部保持投影算法和鲁棒局部保持投影算法性能上的差异，分类器采用最近邻分类器。JAFFE数据库的表情识别实验中，以Gabor小波为基准测试了算法性能。实验结果表明鲁棒改进算法的有效性。
+
+计方法，以及翻译记忆库和术语库技术，避免了人工翻译中重复劳动和术语不一致现象，有效提高了翻译效率和翻译质量。在具体翻译过程中，人机分工协作，由人完成创造性的工作，而机器随时协助人翻译处理，自动提供已有的翻译记录和术语。同时，机器不断学习人的翻译，作为以后翻译的基础。通过辅助写作翻译系统，可以确保相同句子不被翻译两次，类似句子和短语可以提供范例，节省了大量人工翻译中用于术语和短语查询的时间以及相同句子的重复翻译时间。
+
+作为计算机语言辅助工具的计算机辅助写作翻译系统，很大程度上改变了目前翻译软件的现状，为翻译软件的开发提供了一个全新的思路，这一思想已在国外同类软件中得到体现。
+
+[1] Hutchins W J. Latest Developments in MT technology: beginning a new era in MT research. MT Summit-IV, 1993: 11-34.
+[2] Hutchins W J. Machine translations: past, present and future. England Ellis Horwood Ltd, 1986.
+[3] 冯志伟. 机器翻译——从梦想到现实. 中国翻译, 1999, 19(4): 37—40.
+
+[4] Belkin M, Niyogi P. Laplacian eigenmaps and spectral techniques for embedding and clustering. Advances in Neural Information Processing Systems, 2002: 788–795.
+[5] Weinberger K Q, Packer B D, Saul L K. Nonlinear dimensionality reduction by semidefinite programming and kernel matrix factorization. Proceedings of the Tenth International Workshop on AI and Statistics, 2005: 381—388.
+[6] He X, Niyogi P. Locality preserving projections. Advances in Neural Information Processing Systems, 2004: 327—334.
+[7] Seung H S, Lee D D. The manifold ways of perception. Science, 2000, 290(22): 2268—2269.
+[8] de Ridder D, Franc V. Robust manifold learning.
+[9] Chang H, Yeung D Y. Robust locally linear embedding.
+[10] Choi H, Choi S. Kernel isomap on noisy manifold. IEEE International Conference on Development and Learning, 2005: 19—21.
+[11] Chung FR K. Spectral graph theory. NY: American Mathematical Society, 1997.
+[12] Street J O, Carroll R J, Ruppert D. A note on computing robust regression estimates via iteratively reweighted least squares. American Statistician, 1988, 42(2): 152—154.

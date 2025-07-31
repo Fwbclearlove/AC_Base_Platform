@@ -1,0 +1,225 @@
+网络化多智能体系统的主动容错预测控制方法研究
+
+近年来，网络化多智能体系统在控制领域中的研究热度持续增加。网络化多智能体系统是由多个能够通过网络交互的智能体组成的分布式自治系统。与单智能体和网络化控制系统相比，多智能体系统具有与环境交互、信息处理能力和解决复杂问题的能力，被广泛应用于实际场景。本研究针对网络化多智能体系统中随机网络时延、数据包丢失及智能体内部物理组件故障问题，设计了状态观测器和相应的控制律。
+
+本文的主要工作分为以下三个方面：
+
+1. 针对理想通信条件下的多智能体系统，设计了基于状态观测器的主动容错控制方法，实现对执行器故障和传感器故障的主动补偿。
+
+2. 研究了具有执行器故障和双通道随机通信约束的网络化多智能体系统的输出跟踪控制问题，提出了主动容错预测控制方法，并推导了闭环系统稳定性的充分必要条件。
+
+3. 针对具有执行器故障、传感器故障和双通道随机通信约束的网络化多智能体系统，提出了一种基于云的主动容错预测控制方法，通过设计观测器、云节点中的容错预测控制器和时延补偿器，实现了系统的输出跟踪控制。
+
+关键词：网络化多智能体系统，主动容错预测控制，执行器故障，传感器故障，随机通信约束
+
+Active Fault-Tolerant Predictive Control Methods for Networked Multi-Agent Systems
+
+Abstract
+
+The research on networked multi-agent systems (NMASs) has been increasing in the control field. NMASs are distributed autonomous systems consisting of multiple agents that interact through the network. Compared with single-agent and networked control systems, MASs have the ability to interact with the environment, process information, and solve complex problems, and are widely used in practical scenarios. This study designs state observers and corresponding control laws for addressing random network delays, data packet loss, and internal physical component faults in NMASs.
+
+The main contributions of this paper are divided into three aspects:
+
+1. An active fault-tolerant control method based on state observer is designed for MASs under ideal communication conditions, achieving active compensation for actuator and sensor faults.
+
+2. The output tracking control problem of NMASs with actuator faults and two-channel random communication constraints is studied, and an active fault-tolerant predictive control method is proposed. The necessary and sufficient conditions for the stability of the closed-loop system are derived.
+
+3. A cloud-based active fault-tolerant predictive control method is proposed for NMASs with actuator, sensor faults, and two-channel random communication constraints. By designing observers, fault-tolerant predictive controllers in cloud nodes, and delay compensators, the output tracking control of the system is realized.
+
+Key words: Networked multi-agent systems, active fault-tolerant predictive control, actuator fault, sensor fault, random communication constraints
+
+第二章 双故障多智能体系统主动容错跟踪控制
+
+本章针对没有随机通信约束干扰的多智能体系统，提出了一种基于观测器的主动容错跟踪控制方法，用于主动补偿执行器故障和传感器故障。设计了状态观测器，可同时估计智能体状态、执行器故障和传感器故障，并根据估计值设计容错控制策略。理论分析表明，闭环系统的稳定性与执行器故障和传感器故障无关。数值仿真验证了该方法的有效性。
+
+第二章 双故障多智能体系统主动容错跟踪控制
+
+本节旨在设计一种主动补偿执行器故障和传感器故障的控制方法，以使每个智能体的输出跟踪误差趋于0。
+
+考虑一个多智能体系统，其中每个智能体i的状态、输入、控制输出和测量输出分别表示为x_i、u_i、y_i和z_i。执行器故障和传感器故障分别表示为f_i和g_i。系统矩阵为A_i、B_i、C_i、D_i和E_i。系统噪声和测量噪声分别表示为w_i和v_i。主智能体跟踪参考信号r并发送控制输出到各跟随者，以实现输出跟踪控制。
+
+通过构建误差增广系统，将输出跟踪控制问题转化为渐近稳定问题。设计了状态观测器来估计智能体状态、执行器故障和传感器故障。利用估计的跟踪误差代替实际跟踪误差，设计了增量式控制律来实现输出跟踪控制。
+
+稳定性分析表明，闭环系统的稳定性与执行器故障和传感器故障无关。数值仿真验证了该方法的有效性。
+
+第三章 执行器故障网络化多智能体系统主动容错预测控制
+
+本章考虑网络化多智能体系统，提出了一种主动容错预测控制方法，以实现对执行器故障和随机通信约束的主动补偿。
+
+设计了状态观测器来估计执行器故障和智能体状态。利用状态观测器的估计值，设计了容错预测控制器来预测智能体的未来控制输入。同时设计了时延补偿器来补偿随机通信约束。
+
+理论分析表明，闭环系统的稳定性仅与系统矩阵和观测器增益有关。数值仿真和实验结果验证了该方法的有效性。
+
+清洗后的内容如下：
+
+在本节中，重点分析了具有执行器故障的网络化多智能体系统的稳定性。在不损失一般性的情况下，使参考信号。定义智能体i故障增广系统的状态估计误差可以由下式表达：。根据式(3-6)、式(3-7)和式(3-16)，可以推导出故障增广系统的估计误差有如。由式(3-8)和式(3-9)，可得：。其中，由于执行器故障是慢时变的，因此有。由式(3-4)和式(3-11)进行迭代计算，可以得到领导者在k时刻的误差增广状态和误差增广状态的预测值：。由式(3-19)减去式(3-20)可以得到：。其中，。将式(3-4)减去式(3-12)，再结合式(3-21)，可以得到：。利用类似于式(3-21)和式(3-22)的推导，可以得到跟随者实际的误差增广状态和误差增广状态的预测值：。其中，。由式(3-23)可知，跟随者的输出增量预测有如下关系：。结合式(3-4)、式(3-21)、式(3-22)、式(3-23)和式(3-24)将领导者的增量式控制律和跟随者的增量式控制律式(3-13)改写成如下所示：。其中，。将式(3-25)代入到式(3-4)中，可得领导者在时刻的实际误差增广状态和增量输出如下：。结合式(3-26)和式(3-28)，跟随者在时刻的实际误差增广状态式(3-4)可改写为：。结合式(3-17)、式(3-27)和式(3-29)，具有执行器故障的闭环网络化多智能体系统可由下式表示：。其中，矩阵中，存在。值得注意的是，闭环网络化多智能体系统式(3-30)中，系统矩阵是一个与无关的上三角矩阵。其中，与系统(3-30)的稳定性无关，故在本章中进行了省略。由此得出如下定理：定理3-1：当且仅当矩阵和的所有特征值均在单位圆内时，闭环网络化多智能体系统是稳定的。不难看出，矩阵和仅与系统矩阵和控制器参数有关，因此闭环网络化多智能体系统的稳定性与执行器故障和随机通信约束无关。
+
+第四章 双故障网络化多智能体系统云主动容错预测控制
+
+本章节针对具有双通道随机通信约束、执行器故障和传感器故障的网络化多智能体系统，提出了一种基于云的主动容错预测控制方法。该方法将各智能体的容错预测控制器置于云平台中，保证了智能体间的信息交换，并减少了智能体的计算负担。通过MATLAB仿真软件对网络化多智能体系统的主动容错预测控制、网络化预测控制和主动容错控制等3种不同控制方法进行了数值仿真。仿真结果表明，本章中所设计的基于云的主动容错预测控制方法可以实现与无随机通信约束影响的主动容错跟踪控制方法近似的效果。
+
+第五章 结论与展望
+
+本文针对一类线性离散异构网络化多智能体系统的输出跟踪控制问题进行了研究。考虑了具有双通道随机通信约束、执行器故障或传感器故障等不同情形下的控制方法。在不考虑随机通信约束影响的理想通信条件下，针对具有执行器故障和传感器故障的多智能体系统，提出了一种基于观测器的主动容错控制方法；其次，考虑智能体控制回路中具有前向通道随机通信约束和反馈通道随机通信约束，以及执行器故障的情况下，结合主动容错控制和网络化预测控制提出了一种网络化主动容错预测控制方法；最后，考虑系统可能同时具有双通道随机通信约束、执行器故障和传感器故障的情况下，设计了一种基于云的主动容错预测控制方法。本文的主要研究工作总结如下：
+
+(1) 针对一类具有理想通信条件下的线性离散异构多智能体系统，实现了具有执行器故障和传感器故障情况下的输出跟踪控制。为了补偿执行器故障和传感器故障对系统的不利影响，提出了一种基于状态观测器的主动容错控制方法。最后，通过理论分析给出了闭环系统稳定性的充分必要条件，数值仿真证明了所设计控制方法的有效性。
+
+(2) 针对具有双通道随机通信约束和执行器故障的网络化多智能体系统，结合主动容错控制和网络化预测控制提出了一种网络化主动容错预测控制方法，实现了系统的输出跟踪控制。通过3组不同的数值仿真和实验结果对比验证了该方法的有效性。
+
+(3) 针对具有双通道随机通信约束、执行器故障和传感器故障的网络化多智能体系统。在第三章的基础上，考虑可能发生的传感器故障，结合云平台的优点，提出了一种基于云的网络化多智能体系统主动容错预测控制方法。在智能体的控制回路中设计了数据缓存器、容错预测控制器和时延补偿器。其中，各智能体的容错预测控制器均置于云平台中，保证了智能体间的信息传递，并减少计算负担。推导了闭环系统稳定性的充分必要条件，并通过3组不同的数值仿真结果进行对比，表明了所设计的控制方法可以减少双通道随机通信约束、执行器故障和传感器故障对网络化多智能体系统的不利影响，实现系统的输出跟踪控制。
+
+在未来的研究中，需要关注多输入多输出模型预测控制方法的实验验证，考虑多种类型的执行器故障或传感器故障，以及引入事件触发机制或量化控制输入减轻通信负担等方面。
+
+Yu Z, Zhang Y, Jiang B, et al. Decentralized fractional-order backstepping fault-tolerant control of multi-UAVs against actuator faults and wind effects. Aerospace Science and Technology, 2020, 104: 105939.
+
+Yan D H, Zhang W G, Chen H, et al. Robust control strategy for multi-UAVs system using MPC combined with Kalman-consensus filter and disturbance observer. ISA Transactions, 2023, 135: 35-51.
+
+Pang Z H, Xia C G, Sun J, et al. Active fault-tolerant predictive control of networked systems subject to actuator faults and random communication constraints. International Journal of Control, 2022, 95(9): 2357-2363.
+
+Liu G P. Networked predictive control for nonlinear information physical systems with time-varying communication constraints. Control Theory and Application, 2022, 39(1): 145-153.
+
+Pang Z H, Luo W C. Networked multi-agent predictive control based on observers. Control and Decision, 2021, 36(9): 2290-2296.
+
+Yan Y M, Chen Z Y. Cooperative output regulation of linear discrete-time time-delay multi-agent systems by adaptive distributed observers. Neurocomputing, 2019, 331: 33-39.
+
+Wang H, You Y, Li W Q. Distributed output-feedback tracking for stochastic nonlinear multi-agent systems with time-varying delays. IEEE Access, 2022, 10: 69323-69332.
+
+Guo S, You R, Ahn C K. Adaptive consensus for multi-agent systems with switched nonlinear dynamics and switching directed topologies. IEEE Transactions on Control Systems Technology, 2023, 111: 1285-1299.
+
+Sakthivel R, Manickavalli S, Parivallal A, et al. Observer-based bipartite consensus for uncertain Markovian-jumping multi-agent systems with actuator saturation. European Journal of Control, 2021, 61: 13-23.
+
+Cao W J, Zhang J H, Ren W. Leader-follower consensus of linear multi-agent systems with unknown external disturbances. Systems & Control Letters, 2015, 82: 64-70.
+
+Zhang D, Xu Z H, Srinivasan D, et al. Leader-follower consensus of multi-agent systems with energy constraints: A Markovian system approach. IEEE Transactions on Systems, 2017, 47(7): 1727-1736.
+
+Wang H, Li H Z. Event-driven nonlinear multi-agent iterative learning control under data packet loss. Control Theory and Application, 2022, 39(9): 1688-1698.
+
+Lin N, Ling Q. Dynamic periodic event-triggered consensus protocols for linear multi-agent systems with network delay. IEEE Systems Journal, 2023, 17(1): 1204-1215.
+
+Su H, Wang Z, Song Z, et al. Event-triggered consensus of non-linear multi-agent systems with sampling data and time delay. IET Control Theory & Applications, 2017, 11(11): 1715-1725.
+
+Chen J, Chen B, Zeng Z. Synchronization in multiple neural networks with delay and disconnected switching topology via event-triggered impulsive control strategy. IEEE Transactions on Industrial Electronics, 2020, 68(3): 2491-2500.
+
+Chen X, Zhou Q X. Dynamic event-triggered consensus for multi-agent systems with time delay and switching topology. Fire Control and Command Control, 2022, 47(1): 43-49.
+
+Liu G P, Mu J X, Rees D, et al. Design and stability analysis of networked control systems with random communication time delay using the modified MPC. International Journal of Control, 2006, 79(4): 288-297.
+
+Pang Z H, Luo W C, Liu G P, et al. Observer-based incremental predictive control of networked multi-agent systems with random delays and packet dropouts. IEEE Transactions on Circuits and Systems II: Express Briefs, 2021, 68(1): 426-430.
+
+Pang Z, Du T, Zheng C, et al. Event-triggered cooperative predictive control for networked multi-agent systems with random delays and packet dropouts. Symmetry, 2022, 14(3): 541.
+
+Yang R, Yu Y, Sun J, et al. Event-based networked predictive control for networked control systems subject to two-channel delays. Information Sciences, 2020, 524: 136-147.
+
+Pang Z H, Zhao X Y, Sun J, et al. Comparison of three data-driven networked predictive control methods for a class of nonlinear systems. IEEE/CAA Journal of Automatica Sinica, 2022, 9(9): 1714-1716.
+
+Wang B, Shen Y, Zhang Y. Active fault-tolerant control for a quadrotor helicopter against actuator faults and model uncertainties. Aerospace Science and Technology, 2020, 99: 105745.
+
+Ding R, Cheng M, Jiang L, et al. Active fault-tolerant control for electro-hydraulic systems with an independent metering valve against valve faults. IEEE Transactions on Industrial Electronics, 2021, 68(8): 7221-7232.
+
+Wang X. Active fault tolerant control for unmanned underwater vehicle with sensor faults. IEEE Transactions on Instrumentation and Measurement, 2020, 69(12): 9485-9495.
+
+Jiang J, Yu X. Fault-tolerant control systems: A comparative study between active and passive approaches. Annual Reviews in Control, 2012, 36(1): 60-72.
+
+Bahreini M, Zarei J, Razavi-Far R, et al. Robust finite–time stochastic stabilization and fault–tolerant control for uncertain networked control systems considering random delays and probabilistic actuator faults. Transactions of the Institute of Measurement and Control, 2019, 41(12): 3550-3561.
+
+Murugesan S, Liu Y C. Resilient memory event-triggered finite-time bounded for networked control systems with multiple cyber-attacks. American Control Conference, 2021, 2713-2719.
+
+Li H, Pan J, Zhang X, et al. Integral-based event-triggered fault estimation and impulsive fault-tolerant control for networked control systems applied to underwater vehicles. Neurocomputing, 2021, 442: 36-47.
+
+Lu H, Guo C, Hu Y, et al. Event-triggered stability analysis of Semi-Markovian jump networked control system with actuator faults and time-varying delay via Bessel–Legendre inequalities. Complexity, 2019, 2019: 1-16.
+
+Zhang Z, Liang H, Wu C, et al. Adaptive event-triggered output feedback fuzzy control for nonlinear networked systems with packet dropouts and actuator failure. IEEE Transactions on Fuzzy Systems, 2019, 27(9): 1793-1806.
+
+Zhang L, Chen M, Li T, et al. Adaptive event-triggered control for discrete-time networked control systems with actuator faults and nonlinearity. International Journal of Control, Automation and Systems, 2020, 18(11): 2842-2856.
+
+Li Y X, Yang G H. Adaptive asymptotic tracking control of uncertain nonlinear systems with input quantization and actuator faults. Automatica, 2016, 72: 177-185.
+
+Aslam M S, Qaisar I, Saleem M A. Quantized event-triggered feedback control under fuzzy system with time-varying delay and Actuator fault. Nonlinear Analysis: Hybrid Systems, 2020, 35: 100823.
+
+Chen J, Hua C, Guan X. Iterative learning model-free control for networked systems with dual-direction data dropouts and actuator faults. IEEE Transactions on Neural Networks and Learning Systems, 2021, 32(11): 5232-5240.
+
+Lu R, Peng H, Liu S, et al. Reliable filtering for fuzzy Markov stochastic systems with sensor failures and packet dropouts. IET Control Theory & Applications, 2017, 11(14): 2195-2203.
+
+Wang H, Xie S, Zhou B, et al. Non-fragile robust filtering of Takagi-Sugeno fuzzy networked control systems with sensor failures. Sensors, 2019, 20(1):
+
+Mathiyalagan K, Park J H, Sakthivel R. Robust reliable dissipative filtering for networked control systems with sensor failure. IET Signal Processing, 2014, 8(8): 809-822.
+
+He X, Zhao L, Fei M, et al. Event-triggered robust H control for networked control system with sensor faults. Chinese Control and Decision Conference, 2016, 957-961.
+
+Li Z, Zhou C, Che W, et al. Data-based security fault tolerant iterative learning control under denial-of-service attacks. Actuators, 2022, 11(7): 178.
+
+Tian E, Peng C, Yue D. Reliable control for networked control systems with probabilistic sensors and actuators faults. IET Control Theory & Applications, 2010, 4(8): 1478-88.
+
+Mahmoud G, Chen Y, Zhang L, et al. FHOSM tolerant control for networked control systems with disturbances and faults. International Journal of Control, Automation and Systems, 2021, 19(9): 3049-3061.
+
+Yan B, Wu C, Shi P. Formation consensus for discrete-time heterogeneous multi-agent systems.
+
+---
+
+[47] Pang Z H, Xia C G, Zhai W F, et al. Networked active fault-tolerant predictive control for systems with random communication constraints and actuator/sensor faults [J]. IEEE Transactions on Circuits and Systems II: Express Briefs, 2022, 69(4): 2166-2170.
+
+[48] Fragkoulis D, Roux G, Dahhou B. Detection, isolation and identification of multiple actuator and sensor faults in nonlinear dynamic systems: Application to a waste water treatment process [J]. Applied Mathematical Modelling, 2011, 35(1): 522-543.
+
+[49] Hua Y, Dong X, Wang J, et al. Time-varying output formation tracking of heterogeneous linear multi-agent systems with multiple leaders and switching topologies [J]. Journal of the Franklin Institute, 2019, 356(1): 539-560.
+
+[50] Wang C, Wen C, Wang W, et al. Output-feedback adaptive consensus tracking control for a class of high-order nonlinear multi-agent systems [J]. International Journal of Robust and Nonlinear Control, 2017, 27(18): 4931-4948.
+
+[51] Li P, Xu S, Ma Q, et al. Leader-following rendezvous for uncertain Euler–Lagrange multi-agent systems by output feedback [J]. Journal of the Franklin Institute, 2017, 354(10): 4215-4230.
+
+[52] Li W, Zhang H, Ming Z, et al. Fully distributed event-triggered bipartite formation tracking control for heterogeneous multi-agent systems on signed digraph [J]. IEEE Transactions on Circuits and Systems II: Express Briefs, 2022, 69(4): 2181-2185.
+
+[53] Hu J, Sun X, He L. Formation tracking for nonlinear multi-agent systems with input and output quantization via adaptive output feedback control [J]. Journal of Systems Science and Complexity, 2019, 33(2): 401-425.
+
+[54] Zou A M, Li W. Fixed-time output-feedback consensus tracking control for second-order multiagent systems [J]. International Journal of Robust and Nonlinear Control, 2019, 29(13): 4419-4434.
+
+[55] Li Y, Hua C, Guan X. Distributed output feedback leader-following control for high-order nonlinear multiagent system using dynamic gain method [J]. IEEE Transactions on Cybernetics, 2020, 50(2): 640-649.
+
+[56] Chen G, Xiang H, Dai J. Distributed output-feedback finite-time tracking control of nonaffine nonlinear leader-follower multiagent systems [J]. International Journal of Robust and Nonlinear Control, 2020, 30(7): 2977-2998.
+
+[57] Wang R. Distributed time-varying output formation tracking control for general linear multi-Agent systems with multiple leaders and relative output-feedback [J]. IEEE Access, 2021, 9: 59586-59596.
+
+[58] Xu X, Li W, Wang M. Distributed output tracking of nonlinear multi-agent systems by linear sampled-data control [J]. Neurocomputing, 2021, 462: 238-246.
+
+[59] Li H, Li W, Gu J. Distributed output tracking control of nonlinear multi-agent systems with unknown time-varying powers [J]. International Journal of Control, 2021, 95(11): 2960-2971.
+
+[60] Cai X, Wang C, Wang G, et al. Distributed low-complexity output feedback tracking control for nonlinear multi-agent systems with unmodeled dynamics and prescribed performance [J]. International Journal of Systems Science, 2019, 50(6): 1229-1243.
+
+[61] Lu Y, Liao F, Liu H, et al. Cooperative preview tracking problem of discrete-time linear multi-agent systems: A distributed output regulation approach [J]. ISA Transactions, 2019, 85: 33-48.
+
+[62] Fu J, Wang J. Adaptive consensus tracking of high-order nonlinear multi-agent systems with directed communication graphs [J]. International Journal of Control, Automation and Systems, 2014, 12(5): 919-929.
+
+[63] Cai Y, Zhang H, Wang Y, et al. Adaptive bipartite fixed-time time-varying output formation-containment tracking of heterogeneous linear multiagent systems [J]. IEEE Transactions on Neural Networks Learning Systems, 2022, 33(9): 4688-4698.
+
+[64] Hua Y, Dong X, Wang J, et al. Time-varying output formation tracking of heterogeneous linear multi-agent systems with multiple leaders and switching topologies [J]. Journal of the Franklin Institute, 2019, 356(1): 539-560.
+
+[65] Luo W, Lu P, Du C, et al. Cooperative output tracking control of heterogeneous multi-agent systems with random communication constraints: an observer-based predictive control approach [J]. IEEE Transactions on Circuits and Systems II: Express Briefs, 2022, 69(3): 1139-1143.
+
+[66] Guo Z, Xue H, Pan Y. Neural networks-based adaptive tracking control of multi-agent systems with output-constrained and unknown hysteresis [J]. Neurocomputing, 2021, 458: 24-32.
+
+[67] Cui B, Xia Y, Liu K, et al. Cooperative tracking control for general linear multiagent systems with directed intermittent communications: An artificial delay approach [J]. International Journal of Robust and Nonlinear Control, 2019, 29(10): 3063-3077.
+
+[68] Duan Z, Zhang X, Kong L, et al. Tracking control for nonlinear time‐delay multiagent systems with input saturation [J]. International Journal of Adaptive Control and Signal Processing, 2019, 34(2): 127-140.
+
+[69] Wang Z, Liu Q, Wang D, et al. Event-triggered tracking control of heterogeneous multiagent systems based on two kinds of observers with asymmetric delay [J]. International Journal of Robust and Nonlinear Control, 2019, 29(10): 2862-2876.
+
+[70] Cui B, Xia Y, Liu K, et al. Cooperative tracking control for general linear multiagent systems with directed intermittent communications: An artificial delay approach [J]. International Journal of Robust and Nonlinear Control, 2019, 29(10): 3063-3077.
+
+[71] Li K, Hua C-C, You X, et al. Output feedback-based consensus control for nonlinear time delay multiagent systems [J]. Automatica, 2020, 111: 108669.
+
+[72] Fienego G, Lui D G, Petrillo A, et al. Distributed robust output consensus for linear multi-agent systems with input time-varying delays and parameter uncertainties [J]. IET Control Theory & Applications, 2019, 13(2): 203-212.
+
+[73] Jiang Y L, Liu J C, Wang S Q. Cooperative output feedback tracking control for multi-agent consensus with time-varying delays and switching topology[J]. Transactions of the Institute of Measurement and Control, 2015, 37(4): 550-559.
+
+[74] Liu G-P, Xia Y, Rees D, et al. Design and stability criteria of networked predictive control systems with random network delay in the feedback channel [J]. IEEE Transactions on Systems, Man and Cybernetics, Part C (Applications and Reviews), 2007, 37(2): 173-184.
+
+[75] 张天勇. 网络化多智能体跟踪和编队预测控制的设计与实现[D]. 哈尔滨工业大学, 2017.
+
+[76] Hinrichsen, D. and Pritchard, A. J. Mathematical systems theory I: modelling, state space analysis, stability and robustness[M]. Singapore: Springer, 2011.
+
+[77] 卢行远, 侯忠生. 基于改进卡尔曼滤波器的扰动抑制无模型自适应控制方案[J]. 控制理论与应用, 2022, 39(7): 1211-1218.
+
+[78] Liu G-P. Predictive control of networked multiagent systems via cloud computing[J]. IEEE Transactions on Cybernetics, 2017: 47(8): 1852-1859.
+
+[79] Liu G-P. Coordinated control of networked multiagent systems via distributed cloud computing using multistep state predictors[J]. IEEE Transactions on Cybernetics, 2022, 52(2): 810-820.
+
+---

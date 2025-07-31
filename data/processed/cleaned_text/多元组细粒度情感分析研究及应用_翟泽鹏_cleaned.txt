@@ -1,0 +1,535 @@
+多元组细粒度情感分析研究及应用
+
+摘要
+
+互联网上众多平台包含大量的文本，其蕴含的情感信息具有重要的商业价值以及参考价值。与传统的粗粒度情感分析不同，细粒度情感分析可以提取文本中方面词、意见词等更具体的信息。本文聚焦于两大前沿多元组细粒度情感分析任务：方面级三元组抽取(Aspect Sentiment Triplet Extraction, ASTE)以及结构化情感分析(Structured Sentiment Analysis, SSA)。本文主要研究内容如下：
+
+一、在方面级三元组抽取任务中，最近相关研究工作采用机器阅读理解架构通过多轮询问得到方面词以及对应的意见词和情感，并取得了令人印象深刻的结果。然而这些方法在一句话包含多个方面词时会遇到其他方面词造成干扰这一问题，从而不能准确地鉴别各个方面词对应的情感信息。为克服上述挑战，本文提出一种基于掩码上下文的机器阅读理解(Context-based Masking Machine Reading Comprehension, COM-MRC)框架。该方法包含三个部分：掩码式数据增强、交互式判别模型以及阶段式推理方法。三部分协同工作，实验结果表明，COM-MRC取得了先进的性能，验证了方法的有效性。
+
+二、在结构化情感分析任务中，最近相关的研究工作通常将其转化为双词汇依赖解析问题。然而因为该任务存在重叠实体以及非连续实体问题，故这些转化方法都是不等价的。为克服上述挑战，本文介绍一种处理重叠实体以及非连续实体的双词汇依赖解析方法。该方法分为两种类型的解析边：关系预测以及单词提取，分别对应解决重叠实体以及非连续实体问题。并且将双词汇依赖解析方法转化为统一的2D表格填充机制，称为USSA机制。该机制将表格划分为下半三角以及上半三角，分别对应关系预测以及单词提取。最后设计一个模型以适配USSA机制，该模型中的双轴向注意力机制可以捕捉表格中关系类型的行列关联信息，以进行更准确的识别。实验结果表明，USSA取得了先进的性能，验证了方法的有效性。
+
+三、基于对方面级三元组抽取和结构化情感分析任务的研究，本文开发了一个细粒度情感分析系统。该系统支持注册登录、用户管理、在线处理等多个功能，简单易用。
+
+关键词：深度学习，方面级情感分析，结构化情感分析，注意力机制
+
+情感分析从粒度上可分为粗粒度与细粒度。粗粒度情感分析包括篇章级和句子级情感分析，旨在判断整体情感极性。细粒度情感分析则关注方面词、意见词和情感等多个元素，常见任务有方面意见词联合抽取、方面情感对抽取、方面级三元组抽取、意见词挖掘和结构化情感分析。本文选取方面级三元组抽取和结构化情感分析进行研究。方面级三元组抽取旨在抽取方面词、意见词和情感的三元组，而结构化情感分析则包含情感持有者抽取、情感目标抽取、情感表达抽取和情感极性判定等子任务。本文主要研究了机器阅读理解框架和端到端框架在这两个任务上的应用。
+
+尽管前沿的机器阅读理解方法表现令人印象深刻，但当一句话同时存在多个方面词时，这些方法会面临严重的其他方面词带来的干扰问题。首先从直觉来看，一句话包含的方面词数量越多，句子中包含的情感信息就越丰富，方面词对应的意见词和情感也通常就越难判别。如图1.2所示，当句子中同时存在两个“ambience place”时，模型可能会错误地将“overrated”视为“ambience”对应的意见词。而且，训练后的模型因为其内部的transformer架构自带注意力机制，模型会潜在地捕捉方面词与意见词的对应关系。如果模型注意到其他的方面词，那么也就会关注到这些方面词对应的意见词，进而对目前方面词的意见词推理造成干扰。如图1.2所示，对于方面词“ambience”，如果“place”仍存在，模型可能会关注到错误的意见词“overrated”上。需要注意的是表1-1显示多方面词句子在整体中占比很多，这些句子包含的三元组数量更是占比接近一半，因此如何从多方面词句子中排除其他方面词的干扰以更准确地鉴别情感信息是非常有意义的。基于以上的观察，本文提出了掩码一核心思想。掩码方面词不仅可以直接去除对无关方面词的注意力，而且基于此可以进行简单有效的数据增强，这恰好又符合“一句话包含方面词数量越多，所以情感信息量越大，所以应该将这句话增强为多个训练样本”这个直觉。为此，本文提出了一种基于掩码上下文的机器阅读理解(Context-Masked machine reading comprehension, COM-MRC)框架，该方法打破了传统机器阅读“不同的查询、相同的上下文”理念，转而采用“相同的查询，不同”并实现了先进的效果。该框架包括掩码式数据增强、交互式判别模型以及阶段式推理方法三个部分。在掩码式数据增强中，本文针对原始输入句子中每个方面词都会考虑是否掩码，故假设一句话包含t个方面词，数据增强后变为^个句子。将这些增强后的句子作为上下文，并设置固定的一句话作为查询，目的是找到该句中首个方面词以及对应的意见词和情感，因此模型会减少无关方面词带来的干扰，更好地分辨来自不同方面词的情感信息。在交互式判别模型中，为了更加充分地利用三元组个元素的关联关系，本文设计了四个模块，并且允许各模块之间交流信息。这四个模块分别是方面词提取模块、意见词提取模块、情感判别模型以及方面词探测模块，其中最后一个模块是为了探测掩码上下文中是否存在方面词。在阶段式推理方法中，本文设计了两个阶段，分别为方面词推理阶段以及方面词附属物推理阶段。在方面词推理阶段中，通过逐步掩码方面词将所有的方面词提取出来；在方面词附属物推理阶段中，所有无关的方面词都会被掩码以排除它们带来的干扰，由此可以针对每个提取出来的方面词识别对应的意见词和情感；最后综合两个阶段形成三元组。在基准数据集上的大量实验结果证明了本文提出的COM-MRC框架的有效性。
+
+本文在方面级情感分析任务中的研究内容总结如下：
+
+1）首次提出利用掩码方面词的思想进行简单有效的数据增强，提供了一种与传统机器阅读理解思路不同的、用于解决多方面词干扰问题的研究新视角。
+
+2）提出完整的基于掩码上下文的机器阅读理解框架，该框架包括掩码式数据增强、交互式判别模型以及阶段式推理方法三个部分。
+
+3）在基准数据集上做了大量实验，结果表明了COM-MRC方法的有效性。
+
+门控循环单元（Gated Recurrent Unit，GRU）
+
+GRU是一种类似于LSTM的循环神经网络结构，由两个门控单元和一个更新门组成，可以有效地解决长期依赖问题，并且具有比LSTM更少的参数和计算量，是对LSTM的一种简化和改进。GRU只使用一个记忆单元来存储过去的状态信息，并使用两个门控单元，即Reset Gate和Update Gate来控制记忆单元的更新和信息的流动。
+
+卷积神经网络（Convolutional Neural Network，CNN）
+
+CNN是一种可以自动提取图像、音频、文本等数据的特征的神经网络结构，具有优秀的特征提取和分类能力，是计算机视觉和自然语言处理领域最常用的模型之一。CNN的基本组成部分包括卷积层、池化层和全连接层。卷积层通过卷积操作提取输入数据的特征，池化层用于降低卷积层的输出数据的空间尺寸，减少网络参数，全连接层用于将卷积层和池化层的输出特征映射到分类结果。
+
+注意力机制（Attention）
+
+注意力机制是一种可以根据输入的序列自适应地给不同部分分配不同的权重的机制，常用于序列到序列（Seq2Seq）模型和自然语言处理任务中，能够有效提升模型的表现。注意力机制可以视为一种加权求和操作，它会为输入序列中的每个元素分配一个权重，然后利用这些权重对输入序列中的不同部分进行加权求和。常见的注意力机制包括点积注意力（Dot-Product Attention）、加性注意力（Additive Attention）、乘性注意力（Multiplicative Attention）等。
+
+Transformer
+
+Transformer是一种基于自注意力机制的神经网络模型，由Google在2017年提出，用于处理自然语言处理任务，如机器翻译、文本生成等。其核心思想是将自注意力机制和前馈神经网络结合在一起。自注意力机制用于学习输入序列中不同位置的依赖关系，前馈神经网络用于学习特征之间的非线性关系。Transformer模型中还采用了残差连接和层归一化等技术，进一步提高模型的表现。
+
+一种算法。常见的优化器有随机梯度下降(SGD)、Adam(Adaptive Moment Estimation)、AdamW等。本节主要介绍实验中涉及到的Adam以及AdamW优化器。
+
+Adam优化器是一种自适应学习率的优化算法，可以根据梯度的一阶矩估计和二阶矩估计来自适应地调整学习率。它在处理稀疏梯度时表现良好，同时也适用于大规模数据集和深层网络。其是通过计算梯度的一阶矩估计和二阶矩估计来更新模型参数，定义为：
+
+mt = β1 * mt-1 + (1 - β1) * gt  
+vt = β2 * vt-1 + (1 - β2) * gt^2  
+θt+1 = θt - α * mt / (sqrt(vt) + ε)
+
+其中，gt表示梯度，mt和vt分别表示梯度的一阶矩估计和二阶矩估计，β1和β2分别是一阶矩和二阶矩的衰减系数，ε是一个很小的常数，用于避免分母为零。
+
+在实际应用中，Adam优化器可以自适应地调整学习率，同时也适用于大规模数据集和深层网络，因此得到了广泛的应用。需要注意的是，在使用Adam优化器时，需要选择合适的学习率和衰减系数，以达到最好的训练效果。
+
+AdamW是Adam优化器的一种变体，相较于Adam优化器，它添加了权重衰减(WeightDecay)的正则化项，用于避免模型过度拟合训练集。在Adam优化器中，权重衰减是通过在损失函数中添加正则化项来实现的，但是这种方式会使得学习率对于不同的参数具有不同的影响，导致训练结果不稳定。所以AdamW优化器在Adam优化器的基础上，将权重衰减移到了更新步骤中，以使学习率对于所有参数都有相同的影响。AdamW优化器定义为：
+
+θt+1 = θt - α * mt / (sqrt(vt) + ε) - α * λ * θt
+
+其中，λ表示权重衰减系数，它可以控制正则化的强度。相比于Adam优化器，AdamW优化器能够更好地避免模型过度拟合，尤其是在大规模数据集和深层网络中表现更加优异。因此，AdamW优化器在深度学习的实践中得到了广泛的应用。
+
+交互式判别模型分为四个模块：方面词提取模块、意见词提取模块、情感判别模块和方面词探测模块。方面词提取模块使用交叉熵损失函数，意见词提取模块同样使用交叉熵损失函数。情感判别模块使用多头注意力机制融合信息，方面词探测模块使用二元交叉熵损失。整体优化目标是四个模块损失的最小化。阶段式推理方法包含方面词推理和方面词附属物推理两个阶段，以缓解其他方面词的干扰。实验在两组ABSA数据集上进行，评估指标包括精确率、召回率和F1。基线方法包括阶段式、端到端式和机器阅读理解式模型。
+
+第7部分内容：
+
+4.9) 是一种基于双仿射评分器的多任务学习框架，以缓和之前方法在提取方面-意见词对时缺乏情感极性为参照的问题，其可以联合抽取方面词、意见词以及情感极性。
+
+9) JET-BERT [4?1]提出具有位置感知标记方案的端到端模型以联合提取三元组，其中具有位置感知的标记方案是一种融入位置信息的序列标注方法。
+
+3.5) 与GTS相近，同样利用二维网格标注的模式来端到端的抽取三元组，其还利用图神经网络编码词与词之间的语法或语义关系。
+
+12) BMRc [53]一种机器阅读理解方法，其包括两种顺序的提问，先询问方面词再询问意见词，或先询问意见词再询问方面词，综合考虑两个方向的询问结果最后生成三元组。
+
+13) Unified [51＾]ASTE任务转化为生成式任务，并利用BART生成式模型作为基底模型进行实验。
+
+14) SPAN-ASTE [923]是一种基于span标注的方法，其会枚举所有的单词作为开始或结束位置形成span，然后对span进行预测与配对。
+
+15) EMC-GCN [93]一种加强多通道的图神经网络，其首先设计一种二维的网格标注方案，然后利用该图神经网络对词与词之间的关系进行预测，并利用到词性、语法等语言学信息进行特征加强。
+
+3.3.5实验结果
+
+表3-3和表3-4展示了在仏数据集上的评测结果，表3-5和表3-6展示了在?2数据集上的评测结果。
+
+表3-3 在仏数据集中Rest14以及Lap14的评测结果对比
+
+表3-4 在仏数据集中Rest15以及Rest16的评测结果对比
+
+表3-5 在?2数据集中Rest14以及Lap14的评测结果对比
+
+表3-6 在?2数据集中Rest15以及Rest16的评测结果对比
+
+可以看到在：01和：02数据集，基于FI指标，本文的COM-MRC全面超越了所有阶段式、端到端式以及MRC式的方法。值得注意的是在：02数据集上，本文框架同样超越了现有最好的端到端式方法SPAN-ASTE。可以看出相对于阶段式方法，端到端式方法和MRC式方法是更具竞争力的，这是因为他们减缓了错误传播问题并且构建了子任务之间的关联性。更进一步来说，对比另外一个强有力的MRC式方法，即BMRc，本文所提出的COM-MRC方法在仏和?2数据集上分别超越了其3.59%以及4.18%的F1指标。该提升归功于本文的COM-MRC可以通过上下文增强策略、判别式模型以及推理方法有效地缓解千扰问题。
+
+此外，为了体现本研究实验结果的可信性，本文针对F1指标做了t检验，该检验是在%和2）2数据集上对比COM-MRC于BMRc以及EMC-GCN而完成，所有的p值均小于0.05，证明了对应实验结果具有统计学显著性。
+
+3.6实验分析
+
+为了进一步验证COM-MRC框架的有效性，本节分别从上下文增强策略、判别式模型、推理算法、查询的设置、注意力可视化和案例研究进行了定性或定量分析。
+
+3.3.6.1对上下文增强策略的定量分析
+
+本节将应用于COM-MRC的指数级数据增强策略与另外两个策略，即线性级策略和空策略进行了对比。在COM-MRC框架中的模型与推理方法不变的情况下，分别应用以上三种上下文增强策略进行对比实验，指标F1结果以及样本数量如表3-7所示。可以看出对比线性级策略以及空策略，指数级策略实现了显著的性能提升。总的来说，样本数量越多，模型表现越好，但指数级策略对比空策略平均增加约2.5倍的样本量，并不会带来过多的计算负担。
+
+3.3.6.2对判别式模型的定量分析
+
+为验证判别式模型各模块的有效性，本研宄基于D2数据集对各模块进行了消融研究。结果显示所有模块对于该模型在ASTE任务的性能表现均有贡献。
+
+3.3.6.3对推理算法的分析
+
+为验证COM-MRC框架中推理方法的有效性，本文展现了两种不同的推理方法，这两种推理方法包含了相同的方面词推理阶段和不同的方面词附属物推理阶段，并将这两种不同的方面词附属物推理阶段命名为AAI1和AAI2。结果显示AAI2可以有效地缓解方面词之间的干扰问题。
+
+基于掩码上下文机器阅读理解框架的方面级三元组抽取方法研究工作在本章中展开。首先介绍了掩码上下文机器阅读理解框架，包括掩码式数据增强、交互式判别模型和阶段式推理方法。随后，介绍了实验的基准数据集、实验参数与设置、评估指标、基线方法和实验结果，验证了方法的可行性及有效性。最后，对上下文增强方法、判别式模型模块、推理算法以及查询进行了定量分析，并进行了注意力可视化和案例研究，从多方面验证了方法中各部分的有效性，证明了其他方面词会带来干扰问题，而本章提出的方法有效地缓解了该问题，进一步验证了方法的完备性及可行性。
+
+对于结构化情感分析任务，现有方法无法识别重叠和非连续的实体。为解决这一问题，提出了一种新颖的双词汇依赖解析图，包含关系预测(RP)和单词提取(TE)两种有向边。RP边用于处理实体边界和实体间关系，解决重叠问题；TE边用于提取给定边界内的所有token，解决非连续问题。将依赖解析图转化为2D表格填充机制，命名为统一结构化情感分析(UNSA)。基于UNSA，提出了一种模型架构，包括编码层、词对表示层、细化策略和预测层。编码层使用多语言BERT和BiLSTM作为语义编码器。词对表示层使用条件层归一化建模词对表示。细化策略中，提出双轴注意力模块捕捉横纵坐标上的关联信息。最后，预测层用于决定词对关系类型。实验证明，该方法在多个基准数据集上取得了先进性能。
+
+双轴注意力模块用于捕获关系之间的关联性并确保全局连接。首先定义单向注意力如下：
+
+a_Uj = MultiHead{nj, row f, row j} + (4 - 5)
+
+然后利用对称的轴向注意力及词对本身的表示构造语义表示C：
+
+cu = aU_nj / , i (4 - 6)
+
+为加强表示，引入相对距离特征，得到最终表示V：
+
+vi,j = ci,j * di-j (4 - 7)
+
+预测层将细化表示V输入至前馈神经网络(FFN)和双仿射预测头(biaffine predictor)。
+
+FFN预测头得到关系预测分值：
+
+s{j = FFN(Vy) (4 - 8)
+
+Biaffine预测头利用Biaffine模块得到关系分值：
+
+hj = FNNa
+
+hj = FNNb(hj) (4 - 9)
+
+最后的关系标签概率分布由两部分计算得到：
+
+Pij = softmax(as + (1 - a)(4 - 10))
+
+损失函数是最小化交叉熵损失：
+
+Loss = -ΣNΣN KVij log(Pij) (4 - 11)
+
+其中W是句子中token的数量，R是USSA预定义的关系集合。
+
+实验对比和分析部分介绍了数据集、实验参数设置、评估指标、基线方法等。实验结果显示，本文提出的USSA方法在多个指标上优于其他基线模型，尤其在处理重叠实体和非连续实体方面表现更好。
+
+本文介绍了基于掩码上下文机器阅读理解框架的方面级三元组抽取和基于统一表格填充机制端到端框架的结构化情感分析方法。方面级三元组抽取旨在提取句子中的(方面词、意见词、情感极性)三元组，而结构化情感分析旨在提取句子中的(持有者、目标、表达、极性)四元组。实验结果表明，所提出的方法在多个数据集上取得了较好的性能。此外，还设计了一个文本细粒度情感分析系统，该系统包含方面级三元组抽取和结构化情感分析两个功能，并采用前后端分离的技术实现。前端使用Flutter框架，后端使用Flask框架，并采用SQLite数据库存储用户信息和操作历史。整体而言，本文在方面级三元组抽取和结构化情感分析两个任务上取得了较好的研究成果，并设计了一个实用的文本细粒度情感分析系统。
+
+分别设计了掩码式数据增强、交互式判别模型以及阶段式推理方法来分别解决以上问题，统称为基于掩码上下文的机器阅读理解（Contexted Masked Machine Reading Comprehension，COM-MRC）框架。掩码式数据增强是通过设置固定的查询以及掩码方面词后的上下文进行简单有效的数据增强；交互式判别模型包括方面词提取模块、意见词提取模块、情感判别模块以及方面词探测模块，并允许各模块之间交互信息；阶段式推理方法首先推理方面词，然后推理方面词对应的意见词和情感，推理时均通过掩码方面词进行，从而可以减少无关方面词的干扰。实验在两组ABSA数据集上进行，实验结果证明了COM-MRC框架的有效性。
+
+结构化情感分析任务旨在提取句子中的（持有者、目标、表达、极性）四元组，现有的深度学习方法主要是将该任务视为双词汇依赖解析问题，然而这些方法并不能同时处理重叠以及非连续问题。本文首先构造了一种双词汇依赖解析图，该图包含两类有向边，即“关系预测”以及“单词提取”，它们分别对应解决了重叠和非连续问题。然后本文将双词汇依赖解析转化为统一的表格填充机制，命名为USSA（Unified Table Filling Scheme for Structured Sentiment Analysis）。在该表格填充机制里，RP与TE分别对应表格的左下三角部分以及右上三角部分。最后，为了很好地适配USSA，本文构造了一个端到端模型进行训练和预测。在该模型中，本文提出了一种双轴注意力模块去有效地捕捉表格中的行与列的关联信息。实验在NoReCFine、MultiBEU、MultiBcA、MPQA以及08触五个基准测试集上进行，实验结果证明了该方法的有效性。
+
+－ １８ １ ．Ａｓｓｏｃｉａｔｉｏｎｆｏｒ  
+
+ＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，１９９７ ．  
+
+［２４］Ｌｉｕ ，Ｂ ．ＳｅｎｔｉｍｅｎｔＡｎａｌｙｓｉｓａｎｄＯｐ ｉｎｉｏｎＭｉｎｉｎｇ
+
+．ＳｙｎｔｈｅｓｉｓＬｅｃｔｕｒｅｓｏｎＨｕｍａｎ  
+
+ＬａｎｇｕａｇｅＴｅｃｈｎｏｌｏｇ ｉｅｓ ．Ｍｏｒｇａｎ＆ＣｌａｙｐｏｏｌＰｕｂｌｉｓｈｅｒｓ，２０１２ ．  
+
+［２５］Ｌｉｕ，Ｂ ．Ｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓａｎｄｓｕｂｊｅｃｔｉｖｉｔｙ
+
+．ＩｎＩｎｄｕｒｋｈｙａ，Ｎ ．ａｎｄＤａｍｅｒａｎ，Ｆ．Ｊ ．  
+
+（ｅｄｓ ．）５ＨａｎｄｂｏｏｋｏｆＮａｔｕｒａｌＬａｎｇｕａｇｅＰｒｏｃｅｓｓｉｎｇ，ＳｅｃｏｎｄＥｄｉｔｉｏｎ ，ｐｐ
+
+．６２７ －６６６．  
+
+ＣｈａｐｍａｎａｎｄＨａｌｌ／ＣＲＣ ５２０１０．  
+
+［２６ ］Ｐａｎｇ，Ｂ ．ａｎｄＬｅｅ ，Ｌ ．Ａｓｅｎｔｉｍｅｎｔａｌｅｄｕｃａｔｉｏｎ：Ｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓｕｓｉｎｇｓｕｂ ｊｅｃｔｉｖｉｔ ｙ  
+
+ｓｕｍｍａｒｉｚａｔｉｏｎｂａｓｅｄｏｎｍｉｎｉｍｕｍｃｕｔｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ４２ｎｄａｎｎｕａｌｍｅｅｔｉｎｇ  
+
+ｏｎＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，ｐｐ
+
+．２７１ ．Ａｓｓｏｃｉａｔｉｏｎｆｏｒ  
+
+Ｃｏｍｐｕｔａｔ ｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，２００４ ．  
+
+［２７ ］Ｇｌｏｒｏｔ ，Ｘ ． ，Ｂｏｒｄｅｓ，Ａ ． ，ａｎｄＢｅｎｇ ｉｏ ，Ｙ．Ｄｏｍａｉｎａｄａｐｔａｔｉｏｎｆｏｒｌａｒｇｅ －ｓｃａｌｅｓｅｎｔｉｍｅｎｔ  
+
+ｃｌａｓｓｉｆｉｃａｔｉｏｎ；Ａｄｅｅｐ ｌｅａｒｎｉｎｇａｐｐｒｏａｃｈ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２８ｔ ｆｉｉｎｔｅｒ ｎａｔｉｏｎａｌ  
+
+ｃｏｎｆｅｒｅｎｃｅｏｎｍａｃｈｉｎｅｌｅａｒｎｉｎｇ（ＩＣＭＬ －１ １ ），ｐｐ
+
+．５ １３ －５２０ ，２０ １１ ．  
+
+［２８ ］Ｍｏｒａｅｓ，Ｒ． ，Ｖａｌｉａｔｉ ，Ｊ．Ｆ． ５ａｎｄＮｅｔｏ，Ｗ．Ｐ．Ｇ ．Ｄｏｃｕｍｅｎｔ －ｌｅｖｅｌｓｅｎｔｉｍｅｎｔ  
+
+ｃｌａｓｓｉｆｉｃａｔ ｉｏｎ：Ａｎｅｍｐ ｉｒ ｉｃａｌｃｏｍｐａｒ ｉｓｏｎｂｅｔｗｅｅｎｓｖｍａｎｄａｎｎ ．Ｅｘｐｅｒ ｔＳｙｓｔｅｍｓ  
+
+ｗｉｔｈＡｐｐ ｌｉｃａｔｉｏｎｓ，４０（２）
+
+：６２１ －６３３ ？２０１３ｂ ．  
+
+［２９ ］Ｐａｎｇ，Ｂ ． ５Ｌｅｅ ，Ｌ ． ，ａｎｄＶａｉｔｈｙａｎａｔｈａｎ ，Ｓ ．Ｔｈｕｍｂｓｕｐ？ ：ｓｅｎｔｉｍｅｎｔｃｌａｓｓｉｆｉｃａｔｉｏｎ  
+
+ｕｓｉｎｇｍａｃｈｉｎｅｌｅａｒｎｉｎｇ ｔｅｃｈｎｉｑｕｅｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔ ｉｉｅＡＣＬ －０２ｃｏｎｆｅｒｅｎｃｅｏｎ  
+
+Ｅｍｐ ｉｒｉｃａｌｍｅｔｈｏｄｓｉｎｎａｔｕｒａｌｌａｎｇｕ＾ｅｐｒｏｃｅｓｓｉｎｇ
+
+－Ｖｏｌｕｍｅ１０ ， ｐｐ
+
+－８６．  
+
+ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，２００２ ．  
+
+［３０］Ｐａｎｇ？Ｂ ． ｓＬｅｅ ，Ｌ ． ？ａｎｄＶａｉｔｈｙａｎａｔｈａｎ ，Ｓ ．Ｔｈｕｍｂｓｕｐ？：ｓｅｎｔｉｍｅｎｔｃｌａｓｓｉｆｉｃａｔｉｏｎ  
+
+ｕｓｉｎｇｍａｃｈｉｎｅｌｅａｒｎｉｎｇｔｅｃｈｎｉｑｕｅｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅＡＣＬ －０２ｃｏｎｆｅｒｅｎｃｅｏｎ  
+
+７５  
+
+北京邮电大学电子信息硕士学位论文  
+
+Ｅｍｐ ｉｒｉｃａｌｍｅｔｈｏｄｓｉｎｎａｔｕｒａｌｌａｎｇｕａｇｅｐｒｏｃｅｓｓｉｎｇ
+
+－Ｖｏｌｕｍｅ１０ ， ｐｐ
+
+－８６．  
+
+ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，２００２ ．  
+
+［３１ ］Ｌｌｏｒｅｔ ，Ｅ ． ？Ｂａｌａｈｕｒ ，Ａ ． ５Ｐａｌｏｍａｒ ，Ｍ． ？ａｎｄＭｏｎｔｏｙｏ ，Ａ ．Ｔｏｗａｒｄｓｂｕｉｌｄｉｎｇａ  
+
+ｃｏｍｐｅｔｉｔｉｖｅｏｐ ｉｎｉｏｎｓｕｍｍａｒ ｉｚａｔｉｏｎｓｙｓｔｅｍ ：Ｃｈａｌｌｅｎｇｅｓａｎｄｋｅｙｓ．ＩｎＨｕｍａｎ  
+
+ＬａｎｇｕａｇｅＴｅｃｈｎｏｌｏｇ ｉｅｓ：ＣｏｎｆｅｒｅｎｃｅｏｆｔｈｅＮｏｒｔｈＡｍｅｒ ｉｃａｎＣｈａｐｔｅｒｏｆｔｈｅ  
+
+ＡｓｓｏｃｉａｔｉｏｎｏｆＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，Ｐｒｏｃｅｅｄｉｎｇｓ ，Ｍａｙ３１ －Ｊｕｎｅ５ ，２００９ ，  
+
+Ｂｏｕｌｄｅｒ ，Ｃｏｌｏｒａｄｏ ，ＵＳＡ ，ＳｔｕｄｅｎｔＲｅｓｅａｒｃｈＷｏｒｋｓｈｏｐａｎｄＤｏｃｔｏｒａｌＣｏｎｓｏｒｔｉｕｍ，  
+
+．７２ －７７ ．ＴｈｅＡｓｓｏｃｉａｔ ｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ，２００９ ．  
+
+［３２ ］Ｙｕ ，Ｈ ．ａｎｄＨａｔｚｉｖａｓｓｉｌｏｇ ｌｏｕ ，Ｖ．Ｔｏｗａｒｄｓａｎｓｗｅｒｉｎｇｏｐ ｉｎｉｏｎ ｑｕｅｓｔｉｏｎｓ ：Ｓｅｐａｒａｔｉｎｇ  
+
+ｆａｃｔｓｆ ｒｏｍｏｐ ｉｎｉｏｎｓａｎｄｉｄｅｎｔｉｆ ｙ ｉｎｇｔｈｅｐｏｌａｒｉｔｙｏｆｏｐ ｉｎｉｏｎｓｅｎｔｅｎｃｅｓ．Ｉｎ  
+
+Ｐｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２００３ｃｏｎｆｅｒｅｎｃｅｏｎＥｍｐ ｉｒｉｃａｌｍｅｔｈｏｄｓｉｎｎａｔｕｒａｌｌａｎｇｕａｇｅ  
+
+ｐｒｏｃｅｓｓｉｎｇ，ｐｐ
+
+－ １３６ ．ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，２００３ ．  
+
+［３３ ］Ｋｉｍ ，Ｓ ．ｍｉｄＨｏｖｙ５Ｅ ．Ｈ．Ｄｅｔｅｒｍｉｎｉｎｇｔｈｅｓｅｎｔｉｍｅｎｔｏｆ ｏｐ ｉｎｉｏｎｓ ．ＩｎＣＯＬＩＮＧ２００４ ，  
+
+２０ｔｈＩｎｔｅｒ ｎａｔｉｏｎａｌＣｏｎｆｅｒｅｎｃｅｏｎＣｏｍｐｕｔ ｅｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，Ｐｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ  
+
+Ｃｏｎｆｅｒｅｎｃｅ，２３ －２７Ａｕｇｕｓｔ２００４ ，Ｇｅｎｅｖａ，Ｓｗｉｔｚｅｒｌａｎｄ ，２００４ ．  
+
+［３４ ］Ｋｏｕｌｏｕｍｐ ｉｓ ，Ｅ” Ｗｉｌｓｏｎ ，Ｔ” ａｎｄＭｏｏｒｅ ， Ｊ ．Ｄ ．Ｔｗｉｔｅｒｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓ ：Ｔｈｅ ｇｏｏｄ  
+
+ｔｈｅｂａｄａｎｄｔｈｅｏｍｇ
+
+！Ｉｃｗｓｍ ，１１（５３８
+
+－５４１） ：１６４，２０１１ ．  
+
+［３５ ］Ｈｕ ？Ｍ ．ａｎｄＬｉｕ ５Ｂ ，Ｍｉｎｉｎｇａｎｄｓｕｍｍａｒ ｉｚｉｎｇｃｕｓｔｏｍｅｒｒｅｖｉｅｗｓ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆ  
+
+ｔｈｅｔｅｎｔｈＡＣＭＳＩＧＫＤＤｉｎｔｅｒ ｎａｔｉｏｎａｌｃｏｎｆｅｒｅｎｃｅｏｎＫｎｏｗｌｅｄｇｅｄｉｓｃｏｖｅｒｙａｎｄ  
+
+ｄａｔａｍｉｎｉｎｇ，ｐｐ
+
+－ １７７ ．ＡＣＭ ５２００４ｂ ．  
+
+Ｐ ６ ］ＪｅｒｅｍｙＢａｒｎｅｓ ，ＲｏｂｉｎＫｕｒｔｚ ，ＳｔｅｐｈａｎＯｅｐｅｎ ，Ｌｉｌ ｊ ａ０ｖｒｅｌｉｄ ，ａｎｄＥｒｉｋＶｅｌｌｄａＬ２０２１？  
+
+Ｓｔｒｕｃｔｕｒｅｄｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓａｓｄｅｐｅｎｄｅｎｃｙｇｒａｐｈ ｐａｒｓｉｎｇ
+
+．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ  
+
+５９ｔｈ ＡｎｎｕａｌＭｅｅｔｉｎｇｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓａｎｄｔｈｅ１ １ｔｈ  
+
+Ｉｎｔｅｒ ｎａｔ ｉｏｎａｌＪｏｉｎｔＣｏｎｆｅｒｅｎｃｅｏｎＮａｔｕｒａｌＬａｎｇｕａｇｅＰｒｏｃｅｓｓｉｎｇ（Ｖｏｌｕｍｅ１ ：Ｌｏｎｇ  
+
+Ｐａｐｅｒｓ），ｐａｇｅｓ３３８７ －３４０２ ，Ｏｎｌｉｎｅ ．Ａｓｓｏｃｉａｔ ｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ．  
+
+［３７ ］ＷａｎｇＷ ｓＰａｎＳＪ ９ＤａｈｌｍｅｉｅｒＤ ，ｅｔａｌ ．ＲｅｃｕｒｓｉｖｅＮｅｕｒａｌＣｏｎｄｉｔｉｏｎａｌＲａｎｄｏｍＦｉｅｌｄｓ  
+
+ｆｏｒＡｓｐｅｃｔ －ｂａｓｅｄＳｅｎｔｉｍｅｎｔＡｎａｌｙｓｉｓ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２０１６ｃｏｎｆｅｒｅｎｃｅｏｎ  
+
+ｅｍｐ ｉｒ ｉｃａｌｍｅｔｈｏｄｓｉｎｎａｔｕｒ ａｌｌａｎｇｕａｇｅ ｐｒｏｃｅｓｓｉｎｇ，Ａｕｓｔ ｉｎ ，Ｔｅｘａｓ ：Ａｓｓｏｃｉａｔｉｏｎｆｏｒ  
+
+ＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，２０１６：６１６ －６２６ ．  
+
+［３ ８ ］ＷａｎｇＷ ５ＰａｎＳＪ ？ＤａｈｌｍｅｉｅｒＤ ，ｅｔａｌ ．Ｃｏｕｐ ｌｅｄｍｕｌｔｉ － ｌａｙｅｒａｔｅｎｔｉｏｎｓｆｏｒｃｏ ？  
+
+ｅｘｔｒａｃｔ ｉｏｎｏｆａｓｐｅｃｔａｎｄｏｐ ｉｎｉｏｎｔｅｒｍｓ ．ＩｎＴｈｉｒｔｙ
+
+－ＦｉｒｓｔＡＡＡＩＣｏｎｆｅｒｅｎｃｅｏｎ  
+
+ＡｒｔｉｆｉｃｉａｌＩｎｔｅｌｌｉｇｅｎｃｅ ，２０１７ ．  
+
+７６  
+
+参考文献  
+
+［３ ９ ］ＤａｉＨ ｓＳｏｎｇＹ．ＮｅｕｒａｌＡｓｐｅｃｔａｎｄＯｐ ｉｎｉｏｎＴｅｒｍＥｘｔｒａｃｔｉｏｎｗｉｔｈＭｉｎｅｄＲｕｌｅｓａｓ  
+
+ＷｅａｋＳｕｐｅｒｖｉｓｉｏｎ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２０１９ｃｏｎｆｅｒｅｎｃｅｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒ  
+
+ＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，Ｆｌｏｒｅｎｃｅ，Ｉｔａｌｙ，２０１９ ：５２６８ －５２７７ ．  
+
+［４０］ＷａｎｇＷ ，ＰａｎＳＪ 〇Ｔｒａｎｓｆｅｒａｂｌｅｉｎｔｅｒａｃｔｉｖｅｍｅｍｏｒｙｎｅｔｗｏｒｋｆｏｒｄｏｍａｉｎａｄａｐ ｔａｔｉｏｎ  
+
+ｉｎｆｉｎｅ － ｇｒａｉｎｅｄｏｐ ｉｎｉｏｎｅｘｔｒａｃｔｉｏｎ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅＡＡＡＩＣｏｎｆｅｒｅｎｃｅｏｎ  
+
+ＡｒｔｉｆｉｃｉａｌＩｎｔｅｌｌｉｇｅｎｃｅ ，２０１９：７１９２ －７１９９ ．  
+
+［４１ ］ＣｈｅｎＳ ５ＬｉｕＪ ，ＷａｎｇＹ５ｅｔａｌ ．ＳｙｎｃｈｒｏｎｏｕｓＤｏｕｂｌｅ －ｃｈａｎｎｅｌＲｅｃｕｒｒｅｎｔＮｅｔｗｏｒｋｆｏｒ  
+
+Ａｓｐｅｃｔ －Ｏｐ ｉｎｉｏｎＰａｉｒＥｘｔｒａｃｔ ｉｏｎ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆ ｔｈｅ５８ｔｈＡｎｎｕａｌＭｅｅｔｉｎｇｏｆ ｔｈｅ  
+
+ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ，２０２０：６５１５ －６５２４ ．  
+
+［４２ ］ＭａＤ ，ＬｉＳ ，ＷａｎｇＨ ．Ｊｏｉｎｔｌｅａｒｎｉｎｇｆｏｒｔａｒｇｅｔｅｄｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓ  
+
+ｏｆｔｈｅ２０１８ＣｏｎｆｅｒｅｎｃｅｏｎＥｍｐ ｉｒｉｃａｌＭｅｔｈｏｄｓｉｎＮａｔｕｒａｌＬａｎｇｕａｇｅＰｒｏｃｅｓｓｉｎｇ，  
+
+２０１８ ：４７３７ －４７４２．  
+
+［４３］ ＨｅＲ ，ＬｅｅＷＳ ，ＮｇＨＴ ３ｅｔａｌ ．ＡｎＩｎｔｅｒａｃｔｉｖｅＭｕｌｔｉ －ＴａｓｋＬｅａｒｎｉｎｇＮｅｔｗｏｒｋｆｏｒ  
+
+Ｅｎｄ －ｔｏ
+
+－ＥｎｄＡｓｐｅｃｔ －ＢａｓｅｄＳｅｎｔｉｍｅｎｔＡｎａｌｙｓｉｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２０１９  
+
+ｃｏｎｆｅｒｅｎｃｅｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ，Ｆｌｏｒｅｎｃｅ ，Ｉｔａｌｙ，  
+
+２０１９ ：５０４ －５１５ ．  
+
+［４４ ］ＬｉＸ ，ＢｉｎｇＬ ，ＬｉＰ ？ｅｔａｌ ．Ａｕｎｉｆｉｅｄｍｏｄｅｌｆｏｒｏｐ ｉｎｉｏｎｔａｒｇｅｔｅｘｔｒａｃｔｉｏｎａｎｄｔａｒｇｅｔ  
+
+ｓｅｎｔｉｍｅｎｔｐｒｅｄｉｃｔｉｏｎ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅＡＡＡＩＣｏｎｆｅｒｅｎｃｅｏｎＡｒｔ ｉｆｉｃｉａｌ  
+
+Ｉｎｔｅｌｌｉｇｅｎｃｅ，２０１９ ：６７１４ －６７２１ ．  
+
+［４５］ＬｉＸ ，ＢｉｎｇＬ ，ＺｈａｎｇＷ ？ｅｔａｌ ．Ｅｘｐ ｌｏｉｔｉｎｇＢＥＲＴｆｏｒＥｎｄ －ｔｏ
+
+－ＥｎｄＡｓｐｅｃｔ
+
+－ｂａｓｅｄ  
+
+ＳｅｎｔｉｍｅｎｔＡｎａｌｙｓｉｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２０１９ｃｏｎｆｅｒｅｎｃｅｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒ  
+
+ＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ，ＨｏｎｇＫｏｎｇ，Ｃｈｉｎａ ，２０１９ ：３４ －４１ ．  
+
+［４６ ］ＰｅｎｇＨ ？ＸｕＬ ，ＢｉｎｇＬ ？ｅｔａｌ ．Ｋｎｏｗｉｎｇｗｈａｔ ，ｈｏｗａｎｄｗｈｙ
+
+：Ａｎｅａｒｃｏｍｐ ｌｅｔｅ  
+
+ｓｏｌｕｔｉｏｎｆｏｒａｓｐｅｃｔ －ｂａｓｅｄｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓ，ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅＡＡＡＩ  
+
+ＣｏｎｆｅｒｅｎｃｅｏｎＡｒｔｉｆｉｃｉａｌＩｎｔｅｌｌｉｇｅｎｃｅ ，２０２０ ：８６００ －８６０７ ．  
+
+［４７ ］ＬｕＸｕ ５ＨａｏＬｉ ，ＷｅｉＬｕ ，ａｎｄＬｉｄｏｎｇＢｉｎｇ
+
+，２０２０ ．Ｐｏｓｉｔｉｏｎ －ａｗａｒｅｔａｇｇ ｉｎｇｆｏｒａｓｐｅｃｔ  
+
+ｓｅｎｔｉｍｅｎｔｔｒ ｉｐ ｌｅｔｅｘｔｒａｃｔｉｏｎ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ２０２０ＣｏｎｆｅｒｅｎｃｅｏｎＥｍｐ ｉｒｉｃａｌ  
+
+ＭｅｔｈｏｄｓｉｎＮａｔｕｒａｌＬａｎｇｕａｇｅＰｒｏｃｅｓｓｉｎｇ（ＥＭＮＬＰ ），ｐ＾ｅｓ２３３９ －２３４９ ，Ｏｎｌｉｎｅ．  
+
+ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ．  
+
+［４８ ］ＺｈｅｎＷｉｌ
+
+，ＣｈｅｎｇｃａｎＹｉｎｇ，ＦｅｉＺｈａｏ，ＺｈｉｆａｎｇＦａｎ，ＸｉｎｙｕＤａｉ ，ａｎｄＲｕｉＸｉａ．２０２０ ．  
+
+Ｇｒ ｉｄｔａｇｇ ｉｎｇｓｃｈｅｍｅｆｏｒａｓｐｅｃｔ －ｏｒ ｉｅｎｔｅｄｆｉｎｅ － ｇｒａｉｎｅｄｏｐ ｉｎｉｏｎｅｘｔｒａｃｔｉｏｎ．Ｉｎ  
+
+ＦｉｎｄｉｎｇｓｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ：ＥＭＮＬＰ２０２０ ，ｐａｇｅｓ  
+
+２５７６ －２５８５ ，Ｏｎｌｉｎｅ ．ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ．  
+
+７７  
+
+北京邮电大学电子信息硕士学位论文  
+
+［４９ ］ＣｈｅｎＺｈａｎｇ，ＱｉｕｃｈｉＬｉ ，ＤａｗｅｉＳｏｎｇ？ａｎｄＢｅｎｙｏｕＷａｎｇ
+
+．２０２０ ．Ａｍｕｌｔｉ －ｔａｓｋ  
+
+ｌｅａｒｎｉｎｇｆ ｒａｍｅｗｏｒｋｆｏｒｏｐ ｉｎｉｏｎｔｒ ｉｐ ｌｅｔｅｘｔｒａｃｔｉｏｎ．ＩｎＦｉｎｄｉｎｇｓｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎ  
+
+ｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ：ＥＭＮＬＰ２０２０ ，ｐａｇｅｓ８１９ －８２８ ，Ｏｎｌｉｎｅ ．Ａｓｓｏｃｉａｔｉｏｎ  
+
+ｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ．  
+
+［５０］ＺｈｅｘｕｅＣｈｅｎ，ＨｏｎｇＨｕａｎｇ，ＢａｎｇＬｉｕ，ＸｕａｎｈｉｘａＳｈｉ ，ａｎｄＨａｉＪｉｎ．２０２１ｂ，Ｓｅｍａｎｔｉｃ  
+
+ａｎｄｓｙｎｔａｃｔｉｃｅｎｈａｎｃｅｄａｓｐｅｃｔｓｅｎｔｉｍｅｎｔｔｒｉｐ ｌｅｔｅｘｔｒａｃｔｉｏｎ．ＩｎＦｉｎｄｉｎｇｓｏｆｔｈｅ  
+
+ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ：ＡＣＬ －ＩＪＣＮＬＰ２０２１ ，ｐａｇｅｓ１４７４— １４８３ ，  
+
+Ｏｎｌｉｎｅ．ＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓ ．  
+
+［５１ ］ ＨａｎｇＹａｎ ，Ｊｕｎｑ ｉＤａｉ ，ＴｕｏＪｉ ？ＸｉｐｅｎｇＱｉｕ ，ａｎｄＺｈｅｎｇＺｈａｎｇ
+
+．２０２ＬＡｕｎｉｆ ｉｅｄ  
+
+ｇｅｎｅｒａｔｉｖｅｆ ｒａｍｅｗｏｒｋｆｏｒａｓｐｅｃｔ －ｂａｓｅｄｓｅｎｔｉｍｅｎｔａｎａｌｙｓｉｓ ．ＩｎＰｒｏｃｅｅｄｉｎｇｓｏｆｔｈｅ  
+
+５９ｔｈＡｎｎｕａｌＭｅｅｔｉｎｇｏｆｔｈｅＡｓｓｏｃｉａｔｉｏｎｆｏｒＣｏｍｐｕｔａｔｉｏｎａｌＬｉｎｇｕｉｓｔｉｃｓａｎｄｔｈｅ１ １ｔｈ  
+
+Ｉｎｔｅｒ ｎａｔｉｏｎａｌＪｏｉｎｔＣｏｎｆｅｒｅｎｃｅｏｎＮａｔｕｒａｌＬａｎｇｕａｇｅＰｒｏｃｅｓｓｉｎｇ（Ｖｏｌｕｍｅ１ ：Ｌｏｎｇ  
+
+以下是清洗后的参考文献内容：
+
+1. Yue Mao, Yi Shen, Chao Yu, and Longjun Cai. 2021. A joint training dual-mrc framework for aspect-based sentiment analysis. Proceedings of the AAAI Conference on Artificial Intelligence, 35(15): 13543-13551.
+
+2. Showei Chen, Yu Wang, Jie Liu, and Yuelin Wang. 2021a. Bidirectional machine reading comprehension for aspect sentiment triplet extraction. Proceedings of the AAAI Conference on Artificial Intelligence, 35(14): 12666-12674.
+
+3. Andre Ely, Fabrizio Sebastiani, and Iaria Urzìuoli. 2008. Annotating expressions of opinion and emotion in the Italian content annotation bank. In Proceedings of the Sixth International Conference on Language Resources and Evaluation (LREC 2008), Marrakech, Morocco. European Language Resources Association (ELRA).
+
+4. Arzoo Katiyar and Claire Cardie. 2016. Investigating LSTMs for joint extraction of opinion entities and relations. In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 919-929, Berlin, Germany. Association for Computational Linguistics.
+
+5. Wei Quan, Jinli Zhang, and Xiaohua Tony Hu. 2019. End-to-end joint opinion role labeling with BERT. In 2019 IEEE International Conference on Big Data (Big Data), pages 2438-2446.
+
+6. Bo Zhang, Yue Zhang, Rui Wang, Zhenghua Li, and Min Zhang. 2020a. Syntax-aware opinion role labeling with dependency graph convolutional networks. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 3249-3258, Online. Association for Computational Linguistics.
+
+7. Qingrong Xia, Bo Zhang, Rui Wang, Zhenghua Li, Yue Zhang, Fei Huang, Si Luo, and Min Zhang. 2021. A unified span-based approach for opinion mining with syntactic constituents. In Proceedings of the 2021 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 1795-1804, Online. Association for Computational Linguistics.
+
+8. Wenxuan Shi, Fei Li, Jingye Li, Hao Fei, and Donghong Ji. 2022. Effective token graph modeling using a novel labeling strategy for structured sentiment analysis. In Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 4232-4241, Dublin, Ireland. Association for Computational Linguistics.
+
+9. David Samuel, Jeremy Bames, Robin Kurtz, Stephan Oepen, Lijia Ovrelid, and Erik Velldal. 2022. Direct parsing to sentiment graphs. In Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), pages 470-478, Dublin, Ireland. Association for Computational Linguistics.
+
+10. Shershtinsky A. Fundamentals of recurrent neural network (RNN) and long short-term memory (LSTM) network [J]. Physics D: Nonlinear Phenomena, 2020, 404: 132306.
+
+11. Chiu CC, Sainath TN, Wu Y, et al. State-of-the-art speech recognition with sequence-to-sequence models [C]//2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP). IEEE, 2018: 4774-4778.
+
+12. Wang S, Jiang J. Learning natural language inference with LSTM [J]. arXiv preprint arXiv:1512.08849, 2015.
+
+13. Wang C, Yang H, Bartz C, et al. Image captioning with deep bidirectional LSTMs [C]//Proceedings of the 24th ACM International Conference on Multimedia. ACM, 2016: 988-997.
+
+14. Schuster M, Paliwal K K. Bidirectional recurrent neural networks [J]. IEEE Transactions on Signal Processing, 1997, 45(11): 2673-2681.
+
+15. Xu G, Meng Y, Qiu X, et al. Sentiment analysis of comment texts based on BiLSTM [J]. IEEE Access, 2019, 7: 51522-51532.
+
+16. Panchevdradjajan R, Amarsaen A. Bidirectional LSTM-CRF for named entity recognition [C]//Proceedings of the 32nd Pacific Asia Conference on Language, Information and Computation. 2018.
+
+17. Wu T W, Chen I F, Gandhe A. Learning to rank with BERT-based confidence models in ASR rescoring [J]. 2022.
+
+18. Cho K, Van Merriënboer B, Gulcehre C, et al. Learning phrase representations using RNN encoder-decoder for statistical machine translation [J]. arXiv preprint arXiv:1406.10785, 2014.
+
+19. O'Shea K, Nash R. An introduction to convolutional neural networks [J]. arXiv preprint arXiv:1511.08458, 2015.
+
+20. Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need [J]. Advances in neural information processing systems, 2017, 30.
+
+21. Bahdanau D, Cho K, Bengio Y. Neural machine translation by jointly learning to align and translate [J]. arXiv preprint arXiv:1409.0473, 2014.
+
+22. Nallapati K, Zhou B, Gulcehre C, et al. Abstractive text summarization using sequence-to-sequence models and beyond [J]. arXiv preprint arXiv:1602.06023, 2016.
+
+23. Xing C, Wu W, Wu Y, et al. Topic aware neural response generation [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2017, 31(1).
+
+24. Xu K, Ba J, Kiros R, et al. Show, attend and tell: New image caption generation with visual attention [C]//International Conference on Machine Learning. PMLR, 2015: 2048-2057.
+
+25. Chorowski J K, Bahdanau D, Serdyuk D, et al. Attention-based models for speech recognition [J]. Advances in neural information processing systems, 2015, 28.
+
+26. An Empirical Comparison of Sequence-to-Sequence Models for Chinese-to-English Machine Translation.
+
+27. Devlin J, Chang M W, Lee K, et al. Bert: Pre-training of deep bidirectional transformers for language understanding [J]. arXiv preprint arXiv:1810.04805, 2018.
+
+28. Srivastava N, Hinton G, Krizhevsky A, et al. Dropout: a simple way to prevent neural networks from overfitting [J]. The Journal of Machine Learning Research, 2014, 15(1): 1929-1958.
+
+29. Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift [C]//International Conference on Machine Learning. PMLR, 2015: 448-456.
+
+30. Ba J L, Kiros J R, Hinton G, et al. Layer normalization [J]. arXiv preprint arXiv:1607.06450, 2016.
+
+31. Wu Y, He K. Group normalization [C]//Proceedings of the European Conference on Computer Vision (ECCV). 2018: 3-19.
+
+32. Ulyanov D, Vedaldi A, Lempitsky V. Instance normalization: The missing ingredient for fast stylization [J]. arXiv preprint arXiv:1607.08022, 2016.
+
+33. Wang Z, Bovik A C. Mean squared error: Love it or leave it? A new look at signal fidelity measures [J]. IEEE Signal Processing Magazine, 2009, 26(1): 98-117.
+
+34. Feng L, Shu S, Lin Z, et al. Can cross entropy loss be robust to label noise? [C]//Proceedings of the Twenty-Ninth International Joint Conferences on Artificial Intelligence. 2021: 2206-2212.
+
+35. Kim T, Oh J, Kim N Y, et al. Comparing kl divergence and mean squared error loss in knowledge distillation [J]. arXiv preprint arXiv:2105.08919, 2021.
+
+36. Ruder S. An overview of gradient descent optimization algorithms [J]. arXiv preprint arXiv:1609.04747, 2016.
+
+37. Klingner D, Pfeiffer J, Ba J, Adam: A method for stochastic optimization [J]. arXiv preprint arXiv:1607.06450, 2016.
+
+参考文献：
+
+[89] Loshchilov I, Hutter F. Fixing weight decay regularization in Adam[J]. arXiv preprint arXiv:1412.6980, 2014.
+
+[90] Duchi J, Hazan E, Singer Y. Adaptive subgradient methods for online learning and stochastic optimization[J]. Journal of machine learning research, 2011, 12(7).
+
+[91] He R, Lee WS, Ng HT, et al. An Interactive Multi-Task Learning Network for End-to-End Aspect-Based Sentiment Analysis[A]. Florence, Italy: Association for Computational Linguistics, 2019: 504-515.
+
+[92] Xu L, Chia YK, Bing L. Learning span-level interactions for aspect sentiment triplet extraction[J]. arXiv preprint arXiv:2107.12214, 2021.
+
+[93] Chen H, Zhai Z, Feng F, et al. Enhanced multi-channel graph convolutional network for aspect sentiment triplet extraction[C]//Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 2022: 2974-2985.
+
+[94] Yucheng Wang, Bowen Yu, Hongsheng Zhu, Tingwen Liu, Nan Yu, and Limin Sun. Discontinuous named entity recognition as maximal clique discovery[A]. Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers), pages 764-774, Online. Association for Computational Linguistics, 2021.
+
+[95] Jonathan Ho, Nal Kalchbrenner, Diederik P. Kingma, and Tim Salimans. Axial attention in multidimensional transformers[J]. arXiv preprint arXiv:1912.12180, 2019.
+
+[96] Huiyu Wang, Yukun Zhu, Bradley Green, Haftwig Adam, Alan Loddon Yullie, and Chi-eh Chen. Axial-deepLab: Stand-alone axial-attention for panoptic segmentation[A]. European Conference on Computer Vision, 2020.
+
+[97] Zilong Huang, Xinggang Wang, Lichao Huang, Chang Huang, Yunchao Wei, Humphrey Shi, and Wenyu Liu. Ccenet: Cross-attention for semantic segmentation[A]. IEEE/CVF International Conference on Computer Vision (ICCV), pages 603-612, 2019.
+
+[98] Jingye Li, Hao Fei, Jiang Lin, Shengqiong Wu, Meishan Zhang, Chongteng Ji, and Fei Li. Unified named entity recognition as word-word relation classification[A]. Proceedings of the AAAI Conference on Artificial Intelligence, 36(10):10965-10973, 2022.
+
+[99] Jingye Li, Kang Xu, Fei Li, Hao Fei, Yafeng Ren, and Donghong Ji. MRN: A locally and globally mention-based reasoning network for document-level relation extraction[A]. Findings of the Association for Computational Linguistics: ACL-IJCNLP 2021, pages 1359-1370, Online. Association for Computational Linguistics, 2021.
+
+[100] Zhiyang Chen and Tieyun Qian. Relation-aware collaborative learning for unified aspect-based sentiment analysis[A]. Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages 3685-3694, Online. Association for Computational Linguistics, 2020.
+
+[101] David Samuel and Milan Straka. UFAL at MRP 2020: Permutation-invariant semantic parsing in PERIN[A]. Proceedings of the CONLL 2020 Shared Task: Cross-Framework Meaning Representation Parsing, pages 53-64, Online. Association for Computational Linguistics, 2020.
+
+[102] He K, Zhang X, Ren S, et al. Deep residual learning for image recognition[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016: 770-778.
+
+[103] Szegedy C, Liu W, Jia Y, et al. Going deeper with convolutions[C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 1-9.
+
+[104] Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image recognition[J]. arXiv preprint arXiv:1409.1556, 2014.
+
+[105] Minghao Hu, Yuxing Peng, Zhen Huang, Dongsheng Li, and Yiwei Lv. Open-domain targeted sentiment analysis via span-based extraction and classification[A]. Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, pages 537-546, Florence, Italy. Association for Computational Linguistics, 2019.
+
+[106] Lili Javrelidze, Peter Maschler, Jeremy Bames, and Erik Velldal. A fine-grained sentiment dataset for Norwegian[A]. Proceedings of the Twelfth Language Resources and Evaluation Conference, pages 5025-5033, Marseille, France. European Language Resources Association, 2020.
+
+[107] Jeremy Bames, Toni Badia, and Patrik Lambert. MultiBooked: A corpus of Basque and Catalan hotel reviews annotated for aspect-level sentiment classification[A]. Proceedings of the Eleventh International Conference on Language Resources and Evaluation (LREC 2018), Miyazaki, Japan. European Language Resources Association (ELRA), 2018.
+
+[108] Janyce Wiebe, Theresa Wilson, and Clare Cardie. Annotating expressions of opinions and emotions in language[J]. Language resources and evaluation, 39(3):165-210, 2005.
+
+[109] Cigdem Toprak, Niklas Jakob, and Iryna Gurevych. Sentence and expression level annotation of opinions in user-generated discourse[A]. Proceedings of the 48th Annual Meeting of the Association for Computational Linguistics, pages 575-584, Uppsala, Sweden. Association for Computational Linguistics, 2010.

@@ -1,0 +1,5007 @@
+{
+  "0_387_29295_0_82": {
+    "document_type": "academic_paper",
+    "title": "SKFD-ISOMAP FOR FACE RECOGNITION",
+    "authors": [
+      "Ruifan Li",
+      "Cong Wang",
+      "Xuyan Tu"
+    ],
+    "main_topic": "Face recognition",
+    "research_problem": "The unsupervised Isomap may not be optimal for pattern classification in face recognition.",
+    "methodology": "SKFD-Isomap, which uses class information to construct the neighborhood and kernel Fisher discriminant (KFD) for nonlinear embedding",
+    "key_innovations": [
+      "Utilizes class information in feature extraction",
+      "Applies KFD to the matrix of shortest paths"
+    ],
+    "experimental_results": "SKFD-Isomap shows better performance than kernel Fisherfaces and Ext-Isomap in experiments using the Yale face database.",
+    "conclusions": "SKFD-Isomap is effective for face recognition due to its use of class information in the feature extraction process.",
+    "keywords": [
+      "face recognition",
+      "manifold",
+      "Isomap",
+      "KFD"
+    ],
+    "application_domains": [
+      "Face recognition"
+    ],
+    "technical_concepts": [
+      "Isomap",
+      "kernel Fisher discriminant (KFD)",
+      "geodesic distances",
+      "nearest neighbor classifier"
+    ],
+    "performance_metrics": "Performance comparison with kernel Fisherfaces and Ext-Isomap; better performance with different values of A and polynomial kernel functions",
+    "summary": "This paper introduces SKFD-Isomap, an improved version of Isomap for face recognition. It incorporates class information and kernel Fisher discriminant for better pattern classification. Experiments show its effectiveness compared to other methods.",
+    "file_id": "0_387_29295_0_82",
+    "source_type": "cleaned",
+    "text_length": 5058,
+    "generation_time": "2025-07-31 21:08:57"
+  },
+  "0592": {
+    "document_type": "academic_paper",
+    "title": "Show and Tell More: Topic-Oriented Multi-Sentence Image Captioning",
+    "authors": [
+      "Yuzhao Mao",
+      "Chang Zhou",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Image captioning",
+    "research_problem": "Single-sentence image captioning often provides insufficient descriptions",
+    "methodology": "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+    "key_innovations": [
+      "Latent Dirichlet Allocation (LDA) for topic mining",
+      "Fusion Gate Unit (FGU) for sentence generation",
+      "Multi-label logistic regression and softmax for training"
+    ],
+    "experimental_results": "Evaluation on standard datasets like Flickr8k, Flickr30k, COCO, and a paragraph dataset from Krause et al. (2017) using metrics including BELU, METEOR, ROUGE L, CIDEr, and Instance Coverage (IC)",
+    "conclusions": "The TOMS model generates topic-oriented multi-sentence captions that capture image details better than single-sentence captions",
+    "keywords": [
+      "Image captioning",
+      "Topic-Oriented Multi-Sentence",
+      "Latent Dirichlet Allocation",
+      "Fusion Gate Unit",
+      "Instance Coverage"
+    ],
+    "application_domains": [
+      "Computer Vision",
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "LSTM",
+      "FGU",
+      "LDA",
+      "Multi-label logistic regression",
+      "Softmax",
+      "BELU",
+      "METEOR",
+      "ROUGE L",
+      "CIDEr",
+      "Instance Coverage"
+    ],
+    "performance_metrics": "Improved performance in terms of IC and topical consistency",
+    "summary": "This paper introduces a Topic-Oriented Multi-Sentence (TOMS) image captioning model that uses Latent Dirichlet Allocation and a Fusion Gate Unit to generate multiple topic-oriented sentences. The model demonstrates effectiveness in providing complete and semantically rich descriptions of images, as evidenced by experimental evaluations on standard datasets.",
+    "file_id": "0592",
+    "source_type": "cleaned",
+    "text_length": 9105,
+    "generation_time": "2025-07-31 21:09:18"
+  },
+  "0628": {
+    "document_type": "academic_paper",
+    "title": "Multi-scale Two-way Deep Neural Network for Stock Trend Prediction",
+    "authors": [
+      "Guang Liu",
+      "Yuzhao Mao",
+      "Qi Sun",
+      "Hailong Huang",
+      "Weiguo Gao",
+      "Xuan Li",
+      "JianPing Shen",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Stock Trend Prediction in Artificial Intelligence",
+    "research_problem": "The lack of multi-scale analysis in stock trend prediction",
+    "methodology": "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+    "key_innovations": [
+      "Two-way end-to-end model",
+      "Wavelet-based and downsampling-based scale information",
+      "Enhancing stock trend prediction with multi-scale information"
+    ],
+    "experimental_results": "State-of-the-art performance on FI-2010 and CSI-2016 datasets, with F1 score and accuracy metrics",
+    "conclusions": "The MTDNN model effectively utilizes multi-scale information in stock data, achieving state-of-the-art performance",
+    "keywords": [
+      "Stock Trend Prediction",
+      "Multi-scale Analysis",
+      "Deep Neural Network",
+      "Wavelet Transform",
+      "Downsampling",
+      "XGBoost",
+      "RCNN"
+    ],
+    "application_domains": [
+      "Intelligent Investment",
+      "Financial Time Series Analysis"
+    ],
+    "technical_concepts": [
+      "Neural Networks",
+      "Support Vector Machine",
+      "Random Forest",
+      "DWT",
+      "CNN",
+      "GRU",
+      "Cross-entropy Loss"
+    ],
+    "performance_metrics": "81.05% F1 score and 81.12% accuracy on FI-2010; 63.07% accuracy and 61.65% F1 score on CSI-2016",
+    "summary": "This paper introduces a Multi-scale Two-way Deep Neural Network (MTDNN) for stock trend prediction, which incorporates wavelet-based and downsampling-based scale information to enhance prediction accuracy. The proposed model achieves state-of-the-art performance on the FI-2010 and CSI-2016 datasets, demonstrating the value of multi-scale information in stock trend prediction.",
+    "file_id": "0628",
+    "source_type": "cleaned",
+    "text_length": 8174,
+    "generation_time": "2025-07-31 21:09:38"
+  },
+  "10.5560_zna.2012_0029": {
+    "document_type": "academic_paper",
+    "title": "An improved quantum secure direct communication protocol based on a four-particle Green–Horne–Zeilinger (GHZ) state",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "Quantum cryptography, quantum secure direct communication (QSDC), four-particle GHZ state",
+    "research_problem": "To enhance the efficiency of eavesdropping detection in quantum secure direct communication",
+    "methodology": "Four-particle GHZ state for eavesdropper detection and quantum dense coding for message encoding",
+    "key_innovations": [
+      "Improved eavesdropping detection method using the four-particle GHZ state",
+      "Bell states prepared by Bob ensuring no information leak",
+      "Reducing detection times based on the four-particle GHZ state"
+    ],
+    "experimental_results": "The detection rate of the proposed protocol is 87%, compared to 50% for the quantum secure direct communication using an Einstein–Podolsky–Rosen (EPR) pair block",
+    "conclusions": "The SDPP protocol shows higher efficiency in eavesdropping detection, ensuring greater security at the cost of sending more particles",
+    "keywords": [
+      "Quantum cryptography",
+      "Quantum secure direct communication",
+      "GHZ state",
+      "Eavesdropping detection"
+    ],
+    "application_domains": [
+      "Cryptography",
+      "Quantum communication"
+    ],
+    "technical_concepts": [
+      "Four-particle GHZ state",
+      "Quantum dense coding",
+      "Entropy theory",
+      "Eavesdropping detection rate"
+    ],
+    "performance_metrics": "Detection rate of 87% for SDPP protocol, compared to 50% for EPR pair block",
+    "summary": "This paper presents an improved quantum secure direct communication protocol using a four-particle GHZ state for eavesdropping detection. The protocol enhances the efficiency of detection and offers higher security than previous methods, as demonstrated by a detection rate of 87%. The analysis shows the protocol's potential for use in cryptography and quantum communication.",
+    "file_id": "10.5560_zna.2012_0029",
+    "source_type": "cleaned",
+    "text_length": 8901,
+    "generation_time": "2025-07-31 21:10:00"
+  },
+  "1307.0414v1": {
+    "document_type": "academic_paper",
+    "title": "Challenges in Representation Learning: A report on three machine learning contests",
+    "authors": [
+      "Ian J. Goodfellow",
+      "et al."
+    ],
+    "main_topic": "Representation Learning",
+    "research_problem": "To advance representation learning by testing current algorithms and fostering new developments through contests",
+    "methodology": "Three machine learning contests were conducted: the black box learning challenge, the facial expression recognition challenge, and the multimodal learning challenge",
+    "key_innovations": [
+      "black box learning challenge",
+      "facial expression recognition challenge",
+      "multimodal learning challenge",
+      "semi-supervised learning",
+      "convolutional neural networks",
+      "SVM primal objective as loss function"
+    ],
+    "experimental_results": "Detailed results of the contests, including accuracy of winners and methods used by top performers",
+    "conclusions": "Contests offer a different perspective on machine learning algorithms, provide realistic evaluation of generalization error, and highlight methods such as SVM loss functions, sparse filtering, and entropy regularization",
+    "keywords": [
+      "Representation Learning",
+      "Machine Learning Contests",
+      "Semi-supervised Learning",
+      "Facial Expression Recognition",
+      "Multimodal Learning"
+    ],
+    "application_domains": [
+      "Machine Learning",
+      "Computer Vision"
+    ],
+    "technical_concepts": [
+      "black box learning",
+      "facial expression recognition",
+      "multimodal learning",
+      "convolutional neural networks",
+      "SVM",
+      "sparse filtering",
+      "entropy regularization",
+      "ensemble voting",
+      "denoising autoencoders",
+      "maxout networks"
+    ],
+    "performance_metrics": "Accuracy metrics of the contests, such as 70.22% accuracy for the black box learning challenge winner and the performance of 'null' models",
+    "summary": "This paper presents an overview of three machine learning contests held at the ICML 2013 Workshop on Challenges in Representation Learning. It discusses the datasets, contest designs, and results, offering insights into the effectiveness of various algorithms and suggestions for future challenges.",
+    "file_id": "1307.0414v1",
+    "source_type": "cleaned",
+    "text_length": 7870,
+    "generation_time": "2025-07-31 21:10:19"
+  },
+  "1307.1275v1": {
+    "document_type": "academic_paper",
+    "title": "Constructing Hierarchical Image-tags Bimodal Representations for Word Tags Alternative Choice",
+    "authors": [
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Multi-modal learning, bimodal data representations, image-tags",
+    "research_problem": "Developing a predictive system for word tags using bimodal data: images and texts",
+    "methodology": "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+    "key_innovations": [
+      "Three-level representations in three stages",
+      "Bimodal auto-encoder for level-3 representations",
+      "Data-specific strategy for choosing correct tag words"
+    ],
+    "experimental_results": "Average accuracy of 100% on the private test set, AUC of 0.87533 for the general strategy, and 100% for the data-specific strategy",
+    "conclusions": "The strategy for choosing alternatives is crucial and that moderate representations are sufficient for accurate choices",
+    "keywords": [
+      "Multi-modal learning",
+      "Bimodal representations",
+      "Image-tags",
+      "Word tags",
+      "Restricted Boltzmann Machines",
+      "Siamese network"
+    ],
+    "application_domains": [
+      "Predictive systems for word tags"
+    ],
+    "technical_concepts": [
+      "MPEG-7",
+      "gist descriptors",
+      "Restricted Boltzmann Machines",
+      "Siamese network",
+      "auto-encoder",
+      "Contrastive Divergence"
+    ],
+    "performance_metrics": "Average accuracy of 100%, AUC scores",
+    "summary": "This paper presents a multi-modal learning approach for constructing hierarchical bimodal representations of image-tags for word tags alternative choice. The method involves three stages of representation learning and a data-specific strategy, achieving high accuracy on the private test set and demonstrating the importance of the choice strategy for moderate representations.",
+    "file_id": "1307.1275v1",
+    "source_type": "cleaned",
+    "text_length": 7538,
+    "generation_time": "2025-07-31 21:10:36"
+  },
+  "1911.09359v1": {
+    "document_type": "academic_paper",
+    "title": "Multi-Scale RCNN Model for Financial Time-series Classification",
+    "authors": [
+      "Liu Guang",
+      "Wang Xiaojie",
+      "Li Ruifan"
+    ],
+    "main_topic": "Financial time-series classification",
+    "research_problem": "Existing studies often focus on the Multi-Scale (MS) property or Temporal Dependency (TD) within financial time-series but rarely combine them effectively.",
+    "methodology": "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+    "key_innovations": [
+      "A novel method combining both MS and TD properties in financial time-series",
+      "MS feature extraction with convolutional units without predefined parameters",
+      "Fusion of different scale features using a Recurrent Neural Network to capture temporal dependencies"
+    ],
+    "experimental_results": "Our MSTD-RCNN model is compared with six baseline models on three datasets, showing superior performance in accuracy and F1. It also achieves the highest profit in simulated trading on all three datasets.",
+    "conclusions": "MSTD-RCNN effectively combines Multi-Scale and Temporal Dependency features, resulting in a powerful end-to-end classifier. The profitability of our model is confirmed through a simulated trading algorithm, with extensive experimental results demonstrating state-of-the-art performance.",
+    "keywords": [
+      "Financial time-series classification",
+      "Multi-Scale",
+      "Temporal Dependency",
+      "Recurrent Convolutional Neural Network",
+      "Simulated trading"
+    ],
+    "application_domains": [
+      "Investment management",
+      "Chinese stock market"
+    ],
+    "technical_concepts": [
+      "Multi-Scale Temporal Dependent Recurrent Convolutional Neural Network (MSTD-RCNN)",
+      "convolutional units",
+      "Gated Recurrent Unit (GRU)",
+      "backpropagation"
+    ],
+    "performance_metrics": "Accuracy, F1 score, and profitability in simulated trading",
+    "summary": "This paper introduces MSTD-RCNN, a novel approach for financial time-series classification that effectively integrates multi-scale and temporal dependency features. The model demonstrates state-of-the-art performance in both classification and simulated trading on Chinese stock market datasets.",
+    "file_id": "1911.09359v1",
+    "source_type": "cleaned",
+    "text_length": 19761,
+    "generation_time": "2025-07-31 21:10:55"
+  },
+  "2021.acl_long.494": {
+    "document_type": "academic_paper",
+    "title": "Dual Graph Convolutional Networks for Aspect-based Sentiment Analysis",
+    "authors": [
+      "Ruifan Li",
+      "Hao Chen",
+      "Fangxiang Feng",
+      "Zhanyu Ma",
+      "Xiaojie Wang",
+      "Eduard Hovy"
+    ],
+    "main_topic": "Aspect-based sentiment analysis",
+    "research_problem": "Traditional methods struggle with dependency parsing errors and the complexity of online reviews",
+    "methodology": "DualGCN model",
+    "key_innovations": [
+      "DualGCN architecture",
+      "SynGCN and SemGCN modules",
+      "orthogonal and differential regularizers"
+    ],
+    "experimental_results": "Performance comparison on Restaurant, Laptop, and Twitter datasets",
+    "conclusions": "The DualGCN model effectively integrates syntactic knowledge and semantic information, fitting various review styles and demonstrating superiority on benchmark datasets",
+    "keywords": [
+      "aspect-based sentiment analysis",
+      "dual graph convolutional networks",
+      "dependency parsing",
+      "semantic correlations",
+      "regularizers"
+    ],
+    "application_domains": [
+      "Natural language processing",
+      "Sentiment analysis"
+    ],
+    "technical_concepts": [
+      "Graph Convolutional Networks",
+      "BiLSTM",
+      "BERT",
+      "dependency probability matrix",
+      "self-attention mechanism"
+    ],
+    "performance_metrics": "Accuracy and macro-averaged F1-score",
+    "summary": "This paper proposes a Dual Graph Convolutional Networks (DualGCN) model for aspect-based sentiment analysis. The model integrates syntactic knowledge and semantic information through SynGCN and SemGCN modules, using orthogonal and differential regularizers to enhance the capture of semantic associations. Experimental results on three datasets show the DualGCN model's effectiveness and superiority over attention-based and syntax-based methods.",
+    "file_id": "2021.acl_long.494",
+    "source_type": "cleaned",
+    "text_length": 15277,
+    "generation_time": "2025-07-31 21:11:12"
+  },
+  "2022.acl_long.212": {
+    "document_type": "academic_paper",
+    "title": "Enhanced Multi-Channel Graph Convolutional Network for Aspect Sentiment Triplet Extraction",
+    "authors": [
+      "Hao Chen",
+      "Zepeng Zhai",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+    "research_problem": "Existing studies neglect word relations and linguistic features in Aspect Sentiment Triplet Extraction (ASTE)",
+    "methodology": "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+    "key_innovations": [
+      "Proposed EMC-GCN to exploit word relations",
+      "Defined ten relation types",
+      "Incorporated linguistic features",
+      "Developed refining strategy for improved triplet extraction"
+    ],
+    "experimental_results": "EMC-GCN outperforms all pipeline, end-to-end, and MRC-based methods on two ABSA datasets",
+    "conclusions": "EMC-GCN effectively extracts aspect sentiment triplets by leveraging word relations and linguistic knowledge",
+    "keywords": [
+      "Aspect Sentiment Triplet Extraction",
+      "Graph Convolutional Network",
+      "Linguistic Features",
+      "Refining Strategy"
+    ],
+    "application_domains": [
+      "Sentiment analysis",
+      "Natural language processing"
+    ],
+    "technical_concepts": [
+      "EMC-GCN",
+      "Aspect-based Sentiment Analysis",
+      "Graph Convolutional Operations",
+      "Linguistic Features",
+      "Biaffine Attention Module"
+    ],
+    "performance_metrics": "Average of five runs with different random seeds, F1 metric",
+    "summary": "This paper introduces an Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN) for Aspect Sentiment Triplet Extraction (ASTE). The EMC-GCN model defines ten relation types, incorporates linguistic features, and employs a refining strategy to improve triplet extraction. Experimental results show the model's effectiveness and robustness in ABSA tasks.",
+    "file_id": "2022.acl_long.212",
+    "source_type": "cleaned",
+    "text_length": 17424,
+    "generation_time": "2025-07-31 21:11:31"
+  },
+  "2022.coling_1.234": {
+    "document_type": "academic_paper",
+    "title": "A Simple Model for Distantly Supervised Relation Extraction",
+    "authors": [
+      "Ziqin Rao",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Distantly supervised relation extraction",
+    "research_problem": "Noisy training data in distant supervision relation extraction",
+    "methodology": "BERT-based Graph Convolutional network Model (BGM)",
+    "key_innovations": [
+      "Combining a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN)",
+      "Using GCN to directly learn bag representations over instances"
+    ],
+    "experimental_results": "Significant improvements on benchmark datasets NYT10 and GDS1 in terms of P@N, AUC, and Micro-F1 score",
+    "conclusions": "The proposed BGM model is simple yet effective for DS-RE, representing each instance with a BERT-based PLM and using GCN to capture correlations within a bag",
+    "keywords": [
+      "Distant supervision",
+      "Relation extraction",
+      "BERT",
+      "Graph Convolutional Network",
+      "Cross-entropy loss"
+    ],
+    "application_domains": [
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "BERT-based PLM",
+      "Graph Convolutional Network (GCN)",
+      "Bag representation",
+      "Cross-entropy loss",
+      "Gradient descent optimization"
+    ],
+    "performance_metrics": "P@N, AUC, and Micro-F1 score",
+    "summary": "This paper introduces BERT-based Graph Convolutional network Model (BGM) for distantly supervised relation extraction. BGM combines a Pretrained Language Model and a Graph Convolutional Network to learn instance correlations for bag representations, achieving significant improvements on benchmark datasets NYT10 and GDS1 in terms of P@N, AUC, and Micro-F1 score.",
+    "file_id": "2022.coling_1.234",
+    "source_type": "cleaned",
+    "text_length": 8126,
+    "generation_time": "2025-07-31 21:11:49"
+  },
+  "2022.emnlp_main.212": {
+    "document_type": "academic_paper",
+    "title": "COM-MRC: A Context-Masked Machine Reading Comprehension Framework for Aspect Sentiment Triplet Extraction",
+    "authors": [
+      "Feifan Fan",
+      "Yansong Feng",
+      "Dongyan Zhao",
+      "Zepeng Zhai",
+      "Hao Chen",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+    "research_problem": "Existing MRC-based methods for ASTE may fail due to interference from multiple aspect terms.",
+    "methodology": "COntext-Masked MRC (COM-MRC) framework",
+    "key_innovations": [
+      "Context augmentation strategy",
+      "Discriminative model",
+      "Two-stage inference method"
+    ],
+    "experimental_results": "The COM-MRC framework outperforms other baselines in terms of Precision, Recall, and F1 scores on benchmark datasets D1 and D2.",
+    "conclusions": "The COM-MRC framework effectively alleviates interference in ASTE tasks and demonstrates its effectiveness on benchmark datasets.",
+    "keywords": [
+      "Aspect Sentiment Triplet Extraction",
+      "Machine Reading Comprehension",
+      "Context Masking",
+      "Sentiment Analysis"
+    ],
+    "application_domains": [
+      "Aspect-based Sentiment Analysis",
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "COntext-Masked MRC",
+      "Aspect Extraction",
+      "Opinion Extraction",
+      "Sentiment Classification",
+      "Aspect Detection"
+    ],
+    "performance_metrics": "COM-MRC achieves F1 scores of 75.46, 68.91, 72.01, 62.35, 58.16, 60.17, 68.35, 61.24, 64.53, 71.55, 71.59, 71.57 on different metrics.",
+    "summary": "This paper proposes a COM-MRC framework to address interference in Aspect Sentiment Triplet Extraction tasks. The framework includes a context augmentation strategy, a discriminative model, and a two-stage inference method. Experimental results show the effectiveness of the COM-MRC framework, which outperforms existing methods on benchmark datasets.",
+    "file_id": "2022.emnlp_main.212",
+    "source_type": "cleaned",
+    "text_length": 22704,
+    "generation_time": "2025-07-31 21:12:11"
+  },
+  "2022.findings_emnlp.6": {
+    "document_type": "academic_paper",
+    "title": "KE-GCL: Knowledge Enhanced Graph Contrastive Learning for Commonsense Question Answering",
+    "authors": [
+      "Lihui Zhang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Commonsense question answering, Knowledge Enhanced Graph Contrastive Learning, Graph reasoning",
+    "research_problem": "Noise within Knowledge Graphs hinders effective representation learning in Commonsense Question Answering",
+    "methodology": "KE-GCL model, Graph Contrastive Learning, Adaptive sampling, Hard negative graph pairs",
+    "key_innovations": [
+      "Incorporates entity contextual descriptions into KGs",
+      "Adaptive graph augmentation",
+      "Selects hard negatives from incorrect answers"
+    ],
+    "experimental_results": "Consistent performance improvements over strong baselines on CommonsenseQA and OpenBookQA datasets",
+    "conclusions": "KE-GCL effectively reduces KG noise in CQA tasks and shows potential for application in few-shot or unsupervised scenarios",
+    "keywords": [
+      "Commonsense Question Answering",
+      "Graph Contrastive Learning",
+      "Knowledge Enhancement",
+      "KE-GCL"
+    ],
+    "application_domains": [
+      "Natural language understanding",
+      "Question Answering"
+    ],
+    "technical_concepts": [
+      "Knowledge Graphs",
+      "Graph Attention Networks",
+      "Contrastive Learning",
+      "InfoNCE Loss"
+    ],
+    "performance_metrics": "Average accuracy improvement of 1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA",
+    "summary": "This paper introduces KE-GCL, a model that enhances Knowledge Graphs with contextual descriptions and employs Graph Contrastive Learning to improve Commonsense Question Answering. It consistently outperforms previous methods on two benchmark datasets and explores the impact of various model components.",
+    "file_id": "2022.findings_emnlp.6",
+    "source_type": "cleaned",
+    "text_length": 16697,
+    "generation_time": "2025-07-31 21:12:32"
+  },
+  "2023.acl_long.802": {
+    "document_type": "academic_paper",
+    "title": "USSA: A Unified Table Filling Scheme for Structured Sentiment Analysis",
+    "authors": [
+      "Zepeng Zhai",
+      "Hao Chen",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Structured Sentiment Analysis",
+    "research_problem": "Existing methods fail to effectively address overlap and discontinuity in SSA.",
+    "methodology": "USSA, a unified 2D table-filling scheme that utilizes 13 relation types and a bi-axial attention module",
+    "key_innovations": [
+      "Unified 2D table-filling scheme",
+      "Bi-axial attention module",
+      "Addressing overlap and discontinuity in SSA"
+    ],
+    "experimental_results": "USSA outperforms state-of-the-art methods on five benchmark datasets in terms of Span F1, NSF1, and SF1 metrics.",
+    "conclusions": "The proposed USSA framework effectively addresses overlapping and discontinuous issues in SSA and inspires other tasks involving tuple extraction with similar challenges.",
+    "keywords": [
+      "Structured Sentiment Analysis",
+      "USSA",
+      "Bi-axial attention",
+      "Overlap",
+      "Discontinuity"
+    ],
+    "application_domains": [
+      "Opinion analysis",
+      "Sentiment classification",
+      "Natural language processing"
+    ],
+    "technical_concepts": [
+      "Structured Sentiment Analysis",
+      "2D table-filling scheme",
+      "Bi-axial attention module",
+      "Bi-lexical dependency parsing"
+    ],
+    "performance_metrics": "Average improvements of 3.48 NSF1 and 3.14% SF1 over TGLS, 7.2% F1 score increase for target extraction on MPQA, and a 5.4% F1 score increase for holder extraction on NoReCFine.",
+    "summary": "This paper introduces USSA, a 2D table-filling scheme for Structured Sentiment Analysis that overcomes issues of overlap and discontinuity. The proposed method, which includes a bi-axial attention module, outperforms existing techniques on multiple benchmark datasets and offers insights for tuple extraction tasks with similar challenges.",
+    "file_id": "2023.acl_long.802",
+    "source_type": "cleaned",
+    "text_length": 14066,
+    "generation_time": "2025-07-31 21:12:53"
+  },
+  "2025.coling_main.22": {
+    "document_type": "academic_paper",
+    "title": "Multimodal Aspect-Based Sentiment Analysis under Conditional Relation",
+    "authors": [
+      "Xinjing Liu",
+      "Ruifan Li",
+      "Shuqin Ye",
+      "Guangwei Zhang",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Multimodal Aspect-Based Sentiment Analysis (MABSA)",
+    "research_problem": "Existing methods assume images always contain referred objects, which is not always true, especially in social media.",
+    "methodology": "COnditional Relation based Sentiment Analysis framework (CORSA), including a conditional relation detector (CRD) and a visual object localizer (VOL)",
+    "key_innovations": [
+      "Proposed CORSA framework",
+      "Conditional Relation Detector (CRD)",
+      "Visual Object Localizer (VOL)"
+    ],
+    "experimental_results": "CORSA model outperforms state-of-the-art multimodal methods on all metrics on Twitter-15 and Twitter-17 datasets.",
+    "conclusions": "The CORSA framework effectively considers conditional multimodal relations between images and texts, improving MABSA performance, but there is room for improvement in annotation methods.",
+    "keywords": [
+      "Multimodal Aspect-Based Sentiment Analysis",
+      "Conditional Relation",
+      "CORSA framework",
+      "Visual Object Localizer"
+    ],
+    "application_domains": [
+      "Social media sentiment analysis"
+    ],
+    "technical_concepts": [
+      "Multimodal Aspect Term Extraction",
+      "Multimodal Aspect-oriented Sentiment Classification",
+      "Joint Multimodal Aspects of Sentiment Analysis",
+      "UNINEXT",
+      "YOLOv8"
+    ],
+    "performance_metrics": "F1 scores, Accuracy, and other metrics on Twitter-15 and Twitter-17 datasets",
+    "summary": "This paper introduces the CORSA framework for MABSA, which includes a Conditional Relation Detector and a Visual Object Localizer. The framework addresses the issue of irrelevant visual information in social media sentiment analysis and demonstrates superior performance on benchmark datasets.",
+    "file_id": "2025.coling_main.22",
+    "source_type": "cleaned",
+    "text_length": 12438,
+    "generation_time": "2025-07-31 21:13:12"
+  },
+  "2408.03632v3": {
+    "document_type": "academic_paper",
+    "title": "Concept Conductor: Orchestrating Multiple Personalized Concepts in Text-to-Image Synthesis",
+    "authors": [
+      "Zebin Yao",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Text-to-image synthesis with multi-concept customization",
+    "research_problem": "Generating multiple personalized concepts in text-to-image models with issues of attribute leakage and layout confusion",
+    "methodology": "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+    "key_innovations": [
+      "Training-free framework",
+      "Isolates sampling processes",
+      "Self-attention-based spatial guidance",
+      "Shape-aware masks for concept injection"
+    ],
+    "experimental_results": "Quantitative comparisons in challenging scenarios show improved concept fidelity and alignment with textual semantics",
+    "conclusions": "Concept Conductor addresses attribute leakage and layout confusion in multi-concept personalization using multipath sampling, layout alignment, and concept injection",
+    "keywords": [
+      "Text-to-image synthesis",
+      "Personalization",
+      "Concept Conductor",
+      "Attribute leakage",
+      "Layout confusion"
+    ],
+    "application_domains": [
+      "Image generation",
+      "AI art",
+      "Virtual reality"
+    ],
+    "technical_concepts": [
+      "Text-to-image diffusion models",
+      "Multipath sampling",
+      "Layout alignment",
+      "Concept injection",
+      "VAE"
+    ],
+    "performance_metrics": "Evaluation metrics include text alignment using CLIP and ImageReward, and a new metric called Segmentation Similarity (SegSim) for image alignment",
+    "summary": "This paper introduces Concept Conductor, a training-free framework that ensures visual fidelity and correct layout in multi-concept customization for text-to-image synthesis. It prevents attribute leakage and layout confusion, demonstrating superior performance in preserving visual details and handling complex layouts.",
+    "file_id": "2408.03632v3",
+    "source_type": "cleaned",
+    "text_length": 16342,
+    "generation_time": "2025-07-31 21:13:29"
+  },
+  "2504.15958v2": {
+    "document_type": "academic_paper",
+    "title": "FreeGraftor: Training-Free Cross-Image Feature Grafting for Subject-Driven Text-to-Image Generation",
+    "authors": [
+      "Zebin Yao",
+      "Lei Ren",
+      "Huixing Jiang",
+      "Chen Wei",
+      "Xiaojie Wang",
+      "Ruifan Li",
+      "Fangxiang Feng"
+    ],
+    "main_topic": "Text-to-image generation, subject-driven image generation, training-free framework",
+    "research_problem": "Existing methods face a trade-off between fidelity and efficiency in subject-driven image generation",
+    "methodology": "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+    "key_innovations": [
+      "Training-free cross-image feature grafting",
+      "Semantic matching",
+      "Position-constrained attention fusion",
+      "Noise initialization strategy for geometry priors"
+    ],
+    "experimental_results": "Quantitative results show that FreeGraftor outperforms other methods in both image and text alignment",
+    "conclusions": "FreeGraftor achieves pixel-level detail preservation and flexible text guidance without training or test-time optimization, and extends to multi-subject generation",
+    "keywords": [
+      "Text-to-image generation",
+      "Subject-driven image generation",
+      "Cross-image feature grafting",
+      "Semantic matching",
+      "Efficiency",
+      "Multi-subject generation"
+    ],
+    "application_domains": [
+      "Personalized content creation",
+      "Image synthesis"
+    ],
+    "technical_concepts": [
+      "FreeGraftor",
+      "Semantic-Aware Feature Grafting",
+      "Structure-Consistent Initialization",
+      "Multimodal-Diffusion Transformer",
+      "U-Net",
+      "Transformer",
+      "Stable Diffusion",
+      "FLUX.1"
+    ],
+    "performance_metrics": "Quantitative evaluation using CLIP and DINOv2 metrics; significant improvements over DiptychPrompting in time and memory efficiency",
+    "summary": "This paper introduces FreeGraftor, a training-free framework for subject-driven image generation that leverages cross-image feature grafting and semantic matching. It demonstrates competitive efficiency and fidelity, preserving subject identity and allowing flexible text guidance without fine-tuning or additional training.",
+    "file_id": "2504.15958v2",
+    "source_type": "cleaned",
+    "text_length": 23250,
+    "generation_time": "2025-07-31 21:13:52"
+  },
+  "2647868.2654902": {
+    "document_type": "academic_paper",
+    "title": "Cross-modal Retrieval with Correspondence Autoencoder",
+    "authors": [
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Cross-modal retrieval",
+    "research_problem": "The problem of cross-modal retrieval, such as using a text query to search for images and vice versa",
+    "methodology": "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+    "key_innovations": [
+      "Integrates representation and correlation learning into a single process",
+      "Proposes a novel loss function",
+      "Extends the Corr-AE to two other correspondence models"
+    ],
+    "experimental_results": "Evaluated on three real-world datasets: Wikipedia, Pascal, and NUS-WIDE-10k, demonstrating significantly better performance than CCA-based models and multi-modal deep models",
+    "conclusions": "The proposed correspondence autoencoders significantly outperform other models on both retrieval tasks across different datasets, showing the effectiveness of combining representation and correlation learning",
+    "keywords": [
+      "Cross-modal retrieval",
+      "Correspondence autoencoder",
+      "Representation learning",
+      "Correlation learning"
+    ],
+    "application_domains": [
+      "Web image database",
+      "Information retrieval"
+    ],
+    "technical_concepts": [
+      "Autoencoders",
+      "Correlation measure",
+      "Loss function",
+      "Deep architecture",
+      "Canonical correlation analysis"
+    ],
+    "performance_metrics": "mAP scores and top 20% performance",
+    "summary": "This paper addresses the problem of cross-modal retrieval by proposing a novel model called correspondence autoencoder (Corr-AE) and its extensions. The model integrates representation and correlation learning, and experimental results on three datasets show its superiority over existing methods.",
+    "file_id": "2647868.2654902",
+    "source_type": "cleaned",
+    "text_length": 16428,
+    "generation_time": "2025-07-31 21:14:09"
+  },
+  "2808205": {
+    "document_type": "academic_paper",
+    "title": "Correspondence Autoencoders for Cross-Modal Retrieval",
+    "authors": [
+      "FANGXIANG FENG",
+      "XIAOJIE WANG",
+      "RUIFAN LI",
+      "IBRAR AHMAD"
+    ],
+    "main_topic": "Cross-modal retrieval, deep learning, autoencoder",
+    "research_problem": "The shared layer learned jointly from different modalities may not fit the needs of cross-modal retrieval, and a shared representation that learns both common and modality-specific information may not be suitable.",
+    "methodology": "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process",
+    "key_innovations": [
+      "Proposed the Corr-AE",
+      "Integrates representation and correlation learning",
+      "Two correspondence models: Corr-Cross-AE and Corr-Full-AE"
+    ],
+    "experimental_results": "Evaluated on three real-world datasets, the Corr-AEs significantly outperform other models on both text and image retrieval tasks.",
+    "conclusions": "The combination of representation and correlation learning is more effective than the two-stage method.",
+    "keywords": [
+      "Cross-modal",
+      "retrieval",
+      "image and text",
+      "deep learning",
+      "autoencoder"
+    ],
+    "application_domains": [
+      "Multimodal data retrieval"
+    ],
+    "technical_concepts": [
+      "Autoencoders",
+      "Correlation learning",
+      "Multimodal reconstruction",
+      "CCA"
+    ],
+    "performance_metrics": "mAP scores and top 20% results for cross-modal retrieval tasks",
+    "summary": "This paper introduces the Correspondence Autoencoder (Corr-AE) for cross-modal retrieval, which integrates representation and correlation learning. The authors propose two correspondence models and experimentally demonstrate their effectiveness on three datasets, showing improved performance over other models and the two-stage method.",
+    "file_id": "2808205",
+    "source_type": "cleaned",
+    "text_length": 22080,
+    "generation_time": "2025-07-31 21:14:33"
+  },
+  "2820400": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "Yelin Kim",
+      "Emily Mower-Provost",
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+    "research_problem": "Improving facial emotion recognition during speech and enhancing cross-modal retrieval",
+    "methodology": "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "Experimental results demonstrate improvements over existing literature",
+    "conclusions": "The extended papers may potentially start new trends in future conferences",
+    "keywords": [
+      "Multimedia",
+      "Deep Learning",
+      "Emotion Recognition",
+      "Speech",
+      "Correspondence Autoencoders",
+      "Cross-Modal Retrieval"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "Facial emotion recognition",
+      "Correspondence autoencoders",
+      "Cross-modal retrieval"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "This document is a special issue inviting extended papers from ACM Multimedia 2014, focusing on deep learning for multimedia and emotional and social signals. It includes two papers that significantly extend their conference versions, one on facial emotion recognition during speech and the other on cross-modal retrieval using correspondence autoencoders. The papers have undergone rigorous review and show experimental improvements over existing literature. The authors have made their code publicly available to facilitate further research, and these papers may set new trends in future conferences.",
+    "file_id": "2820400",
+    "source_type": "cleaned",
+    "text_length": 1368,
+    "generation_time": "2025-07-31 21:14:48"
+  },
+  "3191835.3191989": {
+    "document_type": "academic_paper",
+    "title": "Sentiment Analysis of Microblog Combining Dictionary and Rules",
+    "authors": [
+      "Ding Yuan",
+      "Yanquan Zhou",
+      "Ruifan Li",
+      "Peng Lu"
+    ],
+    "main_topic": "Microblogging emotional classification based on User-Generated Content (UGC)",
+    "research_problem": "The challenge of detecting emotional tendencies in microblog content due to its brief and diverse nature",
+    "methodology": "A system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM), integrating dictionary and rule-based approaches for feature extraction and weight computation",
+    "key_innovations": [
+      "Integration of dictionary and rule-based methods for feature extraction and weight calculation",
+      "Modified CHI algorithm (MCHI) for feature word selection",
+      "Modified TF-IDF (MTF-IDF) algorithm for weight calculation"
+    ],
+    "experimental_results": "The proposed method demonstrates effectiveness, especially on simpler corpuses with a single topic, but indicates room for improvement on complex, multi-topic corpuses and three-classification problems",
+    "conclusions": "The method is effective for emotional polarity analysis of Chinese microblogs and suggests future research directions, including incorporating semantic features and adapting to multi-topic models",
+    "keywords": [
+      "emotional classification",
+      "feature extraction",
+      "weight computing",
+      "support vector machine"
+    ],
+    "application_domains": [
+      "User-Generated Content (UGC) analysis",
+      "Microblog sentiment analysis"
+    ],
+    "technical_concepts": [
+      "Support Vector Machine (SVM)",
+      "dictionary-based method",
+      "rule-based method",
+      "vector space model",
+      "jieba segmentation tool",
+      "Modified CHI algorithm (MCHI)",
+      "Modified TF-IDF (MTF-IDF) algorithm"
+    ],
+    "performance_metrics": "The optimal number of features for highest accuracy is around 4700",
+    "summary": "This paper presents a sentiment classification method for Chinese microblogs, integrating dictionary and rule-based approaches with machine learning techniques. The method shows effectiveness in emotional polarity analysis and suggests directions for further research to enhance performance on complex corpuses and multi-classification problems.",
+    "file_id": "3191835.3191989",
+    "source_type": "cleaned",
+    "text_length": 7288,
+    "generation_time": "2025-07-31 21:15:07"
+  },
+  "3394171.3416296": {
+    "document_type": "academic_paper",
+    "title": "Learning Visual Features from Product Title for Image Retrieval",
+    "authors": [
+      "Fangxiang Feng",
+      "Tianrui Niu",
+      "Ruifan Li",
+      "Xiaojie Wang",
+      "Huixing Jiang"
+    ],
+    "main_topic": "Visual feature learning for image retrieval in e-commerce",
+    "research_problem": "Existing methods may not effectively extract features for product images using pre-trained models on large-scale datasets like ImageNet.",
+    "methodology": "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+    "key_innovations": [
+      "Using product titles to guide the learning of visual features",
+      "Conversion of product titles into discrete labels for supervised learning",
+      "Bag of n-grams approach"
+    ],
+    "experimental_results": "The method achieved the fourth position in the 2020 ACM Multimedia AI Meets Beauty Grand Challenge using a single ResNet-50 model.",
+    "conclusions": "Deep CNNs pre-trained and fine-tuned on a dataset built from product images and title information can enhance feature effectiveness for product image retrieval.",
+    "keywords": [
+      "Visual feature learning",
+      "Bag of n-grams",
+      "Image retrieval",
+      "CNN",
+      "MAC"
+    ],
+    "application_domains": [
+      "E-commerce",
+      "Content-based image retrieval"
+    ],
+    "technical_concepts": [
+      "Image representations",
+      "Visual content-based indexing and retrieval",
+      "CNN",
+      "MAC",
+      "SPoC",
+      "RMAC",
+      "RAMAC",
+      "MS-RMAC",
+      "GRMAC"
+    ],
+    "performance_metrics": "MAP@7 of 0.402402 on the private test set",
+    "summary": "This paper proposes a method for learning visual features from product titles for image retrieval in e-commerce. By constructing an image classification dataset from product titles and fine-tuning a pre-trained CNN model, the authors demonstrate improved retrieval performance in the ACM Multimedia AI Meets Beauty Grand Challenge.",
+    "file_id": "3394171.3416296",
+    "source_type": "cleaned",
+    "text_length": 8300,
+    "generation_time": "2025-07-31 21:15:27"
+  },
+  "3469877.3490585": {
+    "document_type": "academic_paper",
+    "title": "S2TD: A Tree-Structured Decoder for Image Paragraph Captioning",
+    "authors": [
+      "Yihui Shi",
+      "Yun Liu",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Zhanyu Ma",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Image paragraph captioning",
+    "research_problem": "Previous methods struggle with holistic organization and capturing structural nature in image paragraph captioning.",
+    "methodology": "Splitting to Tree Decoder (S2TD)",
+    "key_innovations": [
+      "Tree-structured decoder",
+      "Top-down binary tree expansion",
+      "Split module",
+      "Score module",
+      "Tree structure loss"
+    ],
+    "experimental_results": "Performance evaluation on the Stanford benchmark dataset shows the effectiveness of S2TD.",
+    "conclusions": "S2TD demonstrates promising performance in generating diverse and coherent paragraphs for image paragraph captioning.",
+    "keywords": [
+      "image captioning",
+      "paragraph generation",
+      "tree-structured decoder",
+      "vision and language"
+    ],
+    "application_domains": [
+      "Computer vision tasks"
+    ],
+    "technical_concepts": [
+      "Computer vision tasks",
+      "Split module",
+      "Score module",
+      "Word-level RNN",
+      "Tree structure loss",
+      "Cosine similarity",
+      "LSTM",
+      "Highway Network",
+      "Sentence-BERT"
+    ],
+    "performance_metrics": "BLEU-1, BLEU-4, CIDEr, METEOR",
+    "summary": "This paper introduces a novel tree-structured decoder, S2TD, for image paragraph captioning. It addresses the research problem of holistic organization and structural nature capturing in previous methods. S2TD includes a split module, a score module, and a word-level RNN, and uses a tree structure loss for end-to-end learning. Experimental results on the Stanford benchmark dataset show the effectiveness of S2TD in generating diverse and coherent paragraphs.",
+    "file_id": "3469877.3490585",
+    "source_type": "cleaned",
+    "text_length": 14823,
+    "generation_time": "2025-07-31 21:15:47"
+  },
+  "3483207.3483233": {
+    "document_type": "academic_paper",
+    "title": "Maintenance Decision Generator for Electrical Equipment Based on Reinforcement Learning",
+    "authors": [
+      "Ruifan Li",
+      "Zeyuan Wang",
+      "Yifan Du",
+      "Zepeng Zhai",
+      "Yongping Xiong",
+      "Ziqun Liu"
+    ],
+    "main_topic": "Electric equipment maintenance using reinforcement learning",
+    "research_problem": "Traditional methods for electrical equipment maintenance lack generalization and are inefficient",
+    "methodology": "Reinforcement learning with dynamic programming, Markov hypothesis, and cut set of the power grid",
+    "key_innovations": [
+      "Dynamic policy generator",
+      "Equipment weight modeling",
+      "State communication through cut sets"
+    ],
+    "experimental_results": "Improved decision-making effectiveness in power grid scenarios",
+    "conclusions": "The paper demonstrates the effectiveness of reinforcement learning in developing equipment maintenance strategies",
+    "keywords": [
+      "Electric equipment maintenance",
+      "Reinforcement learning",
+      "Dynamic decision making"
+    ],
+    "application_domains": [
+      "Electrical equipment maintenance",
+      "Power grid management"
+    ],
+    "technical_concepts": [
+      "Markov hypothesis",
+      "Dynamic programming",
+      "Multi-Agent Reinforcement Learning",
+      "Cut set"
+    ],
+    "performance_metrics": "Comparison of reinforcement learning-based policy with template policies and dynamic programming methods",
+    "summary": "This paper presents a reinforcement learning-based maintenance decision model for electrical equipment, incorporating the power grid's cut set to enhance dynamic programming solutions. The model demonstrates improved decision-making and strategy optimization in various power grid scenarios, without the need for extensive empirical experience.",
+    "file_id": "3483207.3483233",
+    "source_type": "cleaned",
+    "text_length": 14263,
+    "generation_time": "2025-07-31 21:16:03"
+  },
+  "3548636.3548646": {
+    "document_type": "academic_paper",
+    "title": "EP-BERTGCN: A Simple but Effective Power Equipment Fault Recognition Method",
+    "authors": [
+      "Mingcong Lu",
+      "Yusong Zhang",
+      "Qu-An Zheng",
+      "Zhenyuan Ma",
+      "Liqing Liu",
+      "Yongping Xiong",
+      "Ruifan Li"
+    ],
+    "main_topic": "Text-based power equipment fault recognition",
+    "research_problem": "The lack of models pre-trained on large-scale electric power corpora for text-based fault recognition in power equipment",
+    "methodology": "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)",
+    "key_innovations": [
+      "Introduction of the BERT module into C-TextGCN",
+      "Domain adaption of the BERT model"
+    ],
+    "experimental_results": "Table 1 presents Experimental Results on the CPTF Dataset with various models, including EP-BERTGCN and EP-Adaptation",
+    "conclusions": "EP-BERTGCN shows improved performance in extensive experiments, contributing to the field of power equipment fault recognition",
+    "keywords": [
+      "power equipment fault recognition",
+      "BERT",
+      "GCN",
+      "domain adaptation"
+    ],
+    "application_domains": [
+      "power equipment maintenance",
+      "China’s State Grid"
+    ],
+    "technical_concepts": [
+      "BERT",
+      "Graph Convolutional Network",
+      "domain adaptation",
+      "text classification",
+      "PMI",
+      "TF-IDF"
+    ],
+    "performance_metrics": "Accuracy, Macro-F1, Weighted Macro-F1 scores for different models",
+    "summary": "This paper introduces EP-BERTGCN, a method that combines pre-trained BERT and GCN for text-based power equipment fault recognition. It addresses the domain gap between electric power and general NLP and demonstrates superior performance over previous baselines. The method also includes domain adaptation of BERT for enhanced performance in the power field.",
+    "file_id": "3548636.3548646",
+    "source_type": "cleaned",
+    "text_length": 11873,
+    "generation_time": "2025-07-31 21:16:23"
+  },
+  "3664647.3680897": {
+    "document_type": "academic_paper",
+    "title": "Advancing visual grounding with scene knowledge: Benchmark and method",
+    "authors": [
+      "Yibing Song",
+      "Ruifei Zhang",
+      "Zhihong Chen",
+      "Xiang Wan",
+      "Guanbin Li"
+    ],
+    "main_topic": "Phrase Grounding under weak supervision",
+    "research_problem": "PG under weak supervision struggles with limited seen categories during training and zero-shot PG addresses this by leveraging semantic information across categories",
+    "methodology": "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)",
+    "key_innovations": [
+      "Triple alignment strategies for zero-shot Phrase Grounding under Weak Supervision",
+      "CLIP-based heatmap generation",
+      "Region-category relations consideration"
+    ],
+    "experimental_results": "Evaluation on unseen phrase classes using Flickr-Split and VG-Split test splits, with IoU thresholds set at 0.3 and 0.5",
+    "conclusions": "The proposed PG framework exceeds previous methods and will explore interpretable solutions for grounding-related tasks",
+    "keywords": [
+      "Phrase Grounding",
+      "weak supervision",
+      "zero-shot learning",
+      "alignment strategies",
+      "CLIP"
+    ],
+    "application_domains": [
+      "Multimedia and multimodal retrieval"
+    ],
+    "technical_concepts": [
+      "Region-Text Alignment",
+      "Domain Alignment",
+      "Category Alignment",
+      "Contrastive Language-Image Pre-Training (CLIP)",
+      "heatmap generation"
+    ],
+    "performance_metrics": "IoU threshold 0.5 performance, bounding box accuracy, recognition accuracy",
+    "summary": "This paper presents a framework for zero-shot Phrase Grounding under Weak Supervision using triple alignment strategies. It introduces a CLIP-based heatmap generation and considers region-category relations, demonstrating improved performance over previous methods on unseen phrase classes.",
+    "file_id": "3664647.3680897",
+    "source_type": "cleaned",
+    "text_length": 22082,
+    "generation_time": "2025-07-31 21:16:42"
+  },
+  "3664647.3681466": {
+    "document_type": "academic_paper",
+    "title": "DiffHarmony++: Enhancing Image Harmonization with Harmony-VAE and Inverse Harmonization Model",
+    "authors": [
+      "Pengfei Zhou",
+      "Fangxiang Feng",
+      "Guang Liu",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Computer vision tasks, image harmonization",
+    "research_problem": "Image distortion introduced by the VAE component in latent diffusion models hinders the effectiveness of image harmonization.",
+    "methodology": "Harmony-VAE, inverse harmonization diffusion model",
+    "key_innovations": [
+      "Harmony-VAE to enhance decoded image quality",
+      "Inverse harmonization model for data augmentation",
+      "Introduction of the Human Harmony dataset"
+    ],
+    "experimental_results": "Experiments demonstrate the effectiveness of Harmony-VAE and inverse harmonization model on iHarmony4 and Human Harmony datasets.",
+    "conclusions": "Harmony-VAE improves LDM-based harmonization models, and the inverse harmonization model can significantly expand training data for harmonization datasets.",
+    "keywords": [
+      "image harmonization",
+      "latent diffusion model",
+      "VAE",
+      "data augmentation",
+      "inverse harmonization",
+      "stable diffusion"
+    ],
+    "application_domains": [
+      "Digital editing",
+      "Image generation and editing tasks"
+    ],
+    "technical_concepts": [
+      "Latent diffusion models",
+      "Harmony-VAE",
+      "Inverse harmonization model",
+      "Denoising Diffusion Probabilistic Models (DDPMs)",
+      "Stable Diffusion"
+    ],
+    "performance_metrics": "PSNR, MSE, fMSE",
+    "summary": "This paper introduces Harmony-VAE and an inverse harmonization model to enhance image harmonization. Harmony-VAE integrates composite images into the VAE decoding process, while the inverse harmonization model generates synthetic composite images for data augmentation. The proposed methods are evaluated on iHarmony4 and Human Harmony datasets, demonstrating improved performance in image harmonization tasks.",
+    "file_id": "3664647.3681466",
+    "source_type": "cleaned",
+    "text_length": 23272,
+    "generation_time": "2025-07-31 21:17:01"
+  },
+  "4930_Article_Text_7995_1_10_20190709": {
+    "document_type": "academic_paper",
+    "title": "Differential Networks for Visual Question Answering",
+    "authors": [
+      "Chenfei Wu",
+      "Jinlai Liu",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Visual Question Answering (VQA)",
+    "research_problem": "Existing VQA models directly fuse image and question feature elements, ignoring their potential difference in space and the reduction of observation noise.",
+    "methodology": "Differential Networks (DN) and DN-based Fusion (DF)",
+    "key_innovations": [
+      "Propose Differential Networks (DN) module",
+      "Introduce DN-based Fusion (DF) model for VQA"
+    ],
+    "experimental_results": "State-of-the-art results on four datasets: VQA 1.0, VQA 2.0, COCO-QA, and TDIUC.",
+    "conclusions": "DN and DF effectively improve attention accuracy and confidence in VQA tasks.",
+    "keywords": [
+      "Visual Question Answering",
+      "Differential Networks",
+      "DN-based Fusion",
+      "attention distribution"
+    ],
+    "application_domains": [
+      "Human-computer interaction",
+      "Image and text understanding"
+    ],
+    "technical_concepts": [
+      "Differential Networks (DN)",
+      "DN-based Fusion (DF)",
+      "pair-wise feature elements",
+      "attention-based models"
+    ],
+    "performance_metrics": "Accuracy metrics for VQA tasks, including Acc(ans), WUPS0.9, WUPS0.0, and Overall Accuracy.",
+    "summary": "This paper introduces a novel module called Differential Networks (DN) and a DN-based Fusion (DF) model for Visual Question Answering (VQA). The proposed methods compute differences between pair-wise feature elements and achieve state-of-the-art results on four public datasets, demonstrating improved attention accuracy and confidence in VQA tasks.",
+    "file_id": "4930_Article_Text_7995_1_10_20190709",
+    "source_type": "cleaned",
+    "text_length": 8155,
+    "generation_time": "2025-07-31 21:17:19"
+  },
+  "978_3_642_23223_7_60": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "He Chuan",
+      "Li Ruifan",
+      "Zhong Yixin"
+    ],
+    "main_topic": "Educational data mining",
+    "research_problem": "Predicting student performance in algebraic problem-solving based on historical data",
+    "methodology": "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction",
+    "key_innovations": [
+      "Classifiers combination",
+      "Feature engineering",
+      "Regularized logistic regression model"
+    ],
+    "experimental_results": "KNN: RMSE=0.3257; SVD: RMSE=0.446277; Logistic Regression: RMSE=0.2895; Combination: RMSE=0.2820",
+    "conclusions": "The combined classifier outperforms single classifiers, logistic regression shows the best performance due to its exploitation of detailed feature vectors",
+    "keywords": [
+      "data mining",
+      "logistic regression",
+      "k-nearest neighbor",
+      "singular value decomposition",
+      "classifiers combination"
+    ],
+    "application_domains": [
+      "Educational data mining"
+    ],
+    "technical_concepts": [
+      "KNN",
+      "SVD",
+      "Logistic Regression",
+      "Classifiers combination",
+      "Feature engineering"
+    ],
+    "performance_metrics": "Root mean squared error (RMSE)",
+    "summary": "This paper presents an approach to educational data mining using various classification algorithms and a combination strategy for predicting student performance in algebraic problem-solving. The method achieves competitive results in the KDD Cup 2010, with logistic regression showing the best performance among the individual classifiers.",
+    "file_id": "978_3_642_23223_7_60",
+    "source_type": "cleaned",
+    "text_length": 3728,
+    "generation_time": "2025-07-31 21:17:34"
+  },
+  "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "学术论文的清洗工作",
+    "research_problem": "如何去除学术论文中的非学术内容，保留核心学术内容",
+    "methodology": "去除页眉、页脚、页码等非学术内容，修正重复信息和乱码，纠正PDF解析错误，去除多余的符号和格式问题",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "学术论文的清洗工作旨在去除噪音，保留核心学术内容，为读者提供清晰、准确的学术信息",
+    "keywords": [
+      "学术论文清洗",
+      "技术术语",
+      "数据",
+      "逻辑结构",
+      "公式",
+      "图表说明"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "未在原文中明确提及"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文讨论了学术论文清洗工作的重点和方法，强调了去除非学术内容，保留技术术语、数据和核心学术内容的重要性，以提供清晰、准确的学术信息。",
+    "file_id": "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words",
+    "source_type": "cleaned",
+    "text_length": 6591,
+    "generation_time": "2025-07-31 21:17:49"
+  },
+  "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction": {
+    "document_type": "academic_paper",
+    "title": "A Noisy Context Optimization Approach for Chinese Spelling Correction",
+    "authors": [
+      "Guangwei Zhang",
+      "Yongping Xiong",
+      "Ruifan Li"
+    ],
+    "main_topic": "Chinese Spelling Correction (CSC)",
+    "research_problem": "BERT-based models face performance challenges with noisy contexts",
+    "methodology": "NCO-Spell, multi-character masking strategy, iterative inference algorithm",
+    "key_innovations": [
+      "multi-character masking strategy",
+      "dynamic confusion set",
+      "iterative inference method"
+    ],
+    "experimental_results": "NCO-Spell outperforms compared baseline models on benchmark datasets",
+    "conclusions": "NCO-Spell for CSC task in noisy contexts is effective and future work includes exploring large language models",
+    "keywords": [
+      "Chinese Spelling Correction",
+      "BERT",
+      "NCO-Spell",
+      "noisy contexts",
+      "iterative inference"
+    ],
+    "application_domains": [
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "BERT",
+      "NCO-Spell",
+      "masking strategy",
+      "confusion sets",
+      "iterative inference"
+    ],
+    "performance_metrics": "Character-level and sentence-level evaluation metrics such as precision, recall, and F1 scores",
+    "summary": "This paper proposes NCO-Spell, a method for Chinese Spelling Correction that includes a multi-character masking strategy and iterative inference algorithm to improve performance in noisy contexts. Experiments show that NCO-Spell outperforms existing models and the authors suggest exploring its application with large language models in the future.",
+    "file_id": "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+    "source_type": "cleaned",
+    "text_length": 8237,
+    "generation_time": "2025-07-31 21:18:04"
+  },
+  "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining": {
+    "document_type": "academic_paper",
+    "title": "A Weighted Cross-entropy Loss for Mitigating LLM Hallucinations in Cross-lingual Continual Pretraining",
+    "authors": [
+      "Yuantao Fan",
+      "Ruifan Li",
+      "Guangwei Zhang",
+      "Chuan Shi",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Cross-lingual Learning, Pointwise Mutual Information (PMI), Hallucination, Large Language Models (LLMs)",
+    "research_problem": "Hallucinations in cross-lingual learning caused by noisy tokens in the dataset",
+    "methodology": "InfoLoss, a novel loss function for continual pretraining",
+    "key_innovations": [
+      "Proposal of InfoLoss for continually pretraining LLMs",
+      "Mitigation of hallucinations in cross-lingual transfer setting"
+    ],
+    "experimental_results": "Experiments on 12 benchmarks, including multi-task Chinese understanding, LLM hallucination evaluation, and multi-task English understanding",
+    "conclusions": "InfoLoss effectively mitigates hallucinations during cross-lingual transfer learning and enhances model's cross-lingual transfer ability",
+    "keywords": [
+      "Cross-lingual Learning",
+      "Pointwise Mutual Information (PMI)",
+      "Hallucination",
+      "Large Language Models (LLMs)"
+    ],
+    "application_domains": [
+      "Cross-lingual transfer learning",
+      "Language model pretraining"
+    ],
+    "technical_concepts": [
+      "InfoLoss",
+      "Cross-entropy loss",
+      "Pointwise Mutual Information (PMI)",
+      "Hallucinations",
+      "Large Language Models (LLMs)"
+    ],
+    "performance_metrics": "Accuracy (%) on multi-task English understanding benchmarks",
+    "summary": "This paper proposes InfoLoss, a weighted cross-entropy loss function, to mitigate hallucinations in cross-lingual continual pretraining. The method considers the co-occurrence of noisy and normal tokens using PMI and enhances the model's ability to adapt to language distributions. Experiments on various benchmarks demonstrate the effectiveness of InfoLoss in reducing hallucinations and improving cross-lingual transfer performance.",
+    "file_id": "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+    "source_type": "cleaned",
+    "text_length": 12140,
+    "generation_time": "2025-07-31 21:18:25"
+  },
+  "Designing_a_Japanese_idiom_education_support_system_for_overseas_students": {
+    "document_type": "academic_paper",
+    "title": "Designing a Japanese Idiom Education Support System for Overseas’ Students",
+    "authors": [
+      "KONISHI Yusuke",
+      "Ruifan LI",
+      "Fuji REN"
+    ],
+    "main_topic": "Japanese Idiom Education Support System",
+    "research_problem": "The Japanese idioms pose a challenge for language learners and there is a shortage of teachers and a need for improved learning methods that emphasize understanding of culture and manners.",
+    "methodology": "The system includes modules, a knowledge base, and a database. It incorporates functions like idiom retrieval, idiom teaching, and uses MS Agent for operational assistance.",
+    "key_innovations": [
+      "Idiom retrieval and teaching functions",
+      "Use of MS Agent",
+      "Animation in teaching idioms",
+      "Super Function for input sentence analysis"
+    ],
+    "experimental_results": "Questionnaire results indicating a high demand for a Japanese language educational support system and the importance of animation and dictionary functions.",
+    "conclusions": "The paper discussed the design of the Japanese Idiom Education Support System and the need for further verification of the effectiveness of Super Function. Future work involves expanding the Super Function Database and animation content.",
+    "keywords": [
+      "Japanese idioms",
+      "education support system",
+      "language learners",
+      "animation",
+      "Super Function"
+    ],
+    "application_domains": [
+      "Japanese language education"
+    ],
+    "technical_concepts": [
+      "Idiom retrieval module",
+      "Idiom reverse resolution module",
+      "Super Function Database",
+      "MS Agent",
+      "TVML"
+    ],
+    "performance_metrics": "Performance metrics are not explicitly mentioned in the text.",
+    "summary": "This paper presents a Japanese Idiom Education Support System that aims to help overseas students learn Japanese idioms effectively. The system includes innovative features like idiom retrieval, teaching functions, and the use of MS Agent. Animation is used to maintain learner interest. The questionnaire results highlight the system's potential and the need for further development.",
+    "file_id": "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+    "source_type": "cleaned",
+    "text_length": 9382,
+    "generation_time": "2025-07-31 21:18:43"
+  },
+  "Dimensionality_reduction_for_text_using_LLE": {
+    "document_type": "academic_paper",
+    "title": "Dimensionality Reduction for Text Using LLE",
+    "authors": [
+      "Chuan HE",
+      "Zhe DONG",
+      "Ruifan LI",
+      "Yixin ZHONG"
+    ],
+    "main_topic": "Dimensionality reduction in text processing",
+    "research_problem": "The curse of dimensionality in textual data",
+    "methodology": "Locally Linear Embedding (LLE)",
+    "key_innovations": [
+      "Application of LLE to text processing",
+      "Comparison of LLE with latent semantic indexing (LSI) within the graph embedding framework"
+    ],
+    "experimental_results": "Experiments on Reuters21578 and TDT2 datasets show higher precisions in LLE-transformed space with significantly lower dimensionalities",
+    "conclusions": "LLE significantly outperforms other methods in terms of classification precision for text dimensionality reduction",
+    "keywords": [
+      "Dimensionality reduction",
+      "Locally Linear Embedding",
+      "Text processing",
+      "Manifold learning",
+      "LSI",
+      "Graph embedding"
+    ],
+    "application_domains": [
+      "Pattern recognition",
+      "Text processing",
+      "Data visualization"
+    ],
+    "technical_concepts": [
+      "Locally Linear Embedding (LLE)",
+      "Manifold learning",
+      "Latent Semantic Indexing (LSI)",
+      "Graph embedding",
+      "K-Nearest-Neighbor classification"
+    ],
+    "performance_metrics": "Precisions and dimensions for LLE, LSI, and baseline methods on Reuters21578 and TDT2 datasets",
+    "summary": "This paper explores the application of Locally Linear Embedding (LLE) to text dimensionality reduction, comparing it with Latent Semantic Indexing (LSI) within the graph embedding framework. Experimental results on Reuters21578 and TDT2 datasets demonstrate LLE's effectiveness in reducing dimensionality while maintaining high classification precision.",
+    "file_id": "Dimensionality_reduction_for_text_using_LLE",
+    "source_type": "cleaned",
+    "text_length": 10467,
+    "generation_time": "2025-07-31 21:19:01"
+  },
+  "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": {
+    "document_type": "academic_paper",
+    "title": "DualGCN: Exploring Syntactic and Semantic Information for Aspect-Based Sentiment Analysis",
+    "authors": [
+      "Ruifan Li",
+      "Hao Chen",
+      "Fangxiang Feng",
+      "Zhanyu Ma",
+      "Xiaojie Wang",
+      "Eduard Hovy"
+    ],
+    "main_topic": "Aspect-Based Sentiment Analysis",
+    "research_problem": "Performance of ABSA tasks is affected by inaccurate dependency parsing results and informal expressions in online reviews.",
+    "methodology": "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+    "key_innovations": [
+      "DualGCN model",
+      "SynGCN",
+      "SemGCN",
+      "Mutual BiAffine module",
+      "orthogonal and differential regularizers"
+    ],
+    "experimental_results": "Experiments on Restaurant14, Laptop14, Twitter, Restaurant15, and Restaurant16 datasets show the effectiveness of the DualGCN model.",
+    "conclusions": "The DualGCN model outperforms baselines and could be further improved with a trainable dependency parser module and application to aspect–opinion–sentiment triplet extraction tasks.",
+    "keywords": [
+      "Aspect-Based Sentiment Analysis",
+      "DualGCN",
+      "graph convolutional networks",
+      "dependency parsing",
+      "semantic information"
+    ],
+    "application_domains": [
+      "sentiment analysis",
+      "recommendation",
+      "advertisement computation"
+    ],
+    "technical_concepts": [
+      "graph neural networks",
+      "GCNs",
+      "GATs",
+      "syntax structures",
+      "semantic correlations",
+      "dependency trees"
+    ],
+    "performance_metrics": "Quantitative comparison results on two groups of datasets and qualitative results based on the first group.",
+    "summary": "This paper proposes DualGCN, a model that integrates syntactic knowledge through SynGCN and semantic information through SemGCN for Aspect-Based Sentiment Analysis. The model is shown to effectively handle complex and informal sentences, outperforming attention-based and syntax-based methods on multiple datasets.",
+    "file_id": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+    "source_type": "cleaned",
+    "text_length": 30061,
+    "generation_time": "2025-07-31 21:19:20"
+  },
+  "electronics_12_03521_v2": {
+    "document_type": "academic_paper",
+    "title": "Visually Enhanced NeUral Encoder (VENUE) for Multimodal Synset Induction",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "Multimodal Synset Induction",
+    "research_problem": "Existing methods focus on textual information, neglecting the visual aspects, and lack scalability.",
+    "methodology": "Visually Enhanced NeUral Encoder (VENUE)",
+    "key_innovations": [
+      "Incorporates modules for visual interaction",
+      "Multi-granularity textual representations",
+      "Masking module to filter out weakly relevant visual information",
+      "Gating module to adaptively regulate contributions of different modalities"
+    ],
+    "experimental_results": "Shows superior performance over strong baselines on various evaluation metrics on the MMAI-Synset dataset.",
+    "conclusions": "VENUE encoder outperforms strong baselines and future work may explore fine-grained multimodal representation and reinforcement learning.",
+    "keywords": [
+      "Multimodal Synset Induction",
+      "VENUE",
+      "Visual Interaction",
+      "Multi-granularity Embedding",
+      "Triplet Loss"
+    ],
+    "application_domains": [
+      "未在原文中明确提到"
+    ],
+    "technical_concepts": [
+      "Neural Encoder",
+      "Multimodal Representations",
+      "Clustering Algorithms",
+      "Triplet Loss",
+      "RAdam Optimizer"
+    ],
+    "performance_metrics": "Entropy-based (h, c, v), membership overlap-based (p, r, f), external evaluation methods (FMI, ARI, NMI)",
+    "summary": "This paper introduces VENUE, a multimodal neural encoder that captures visual and textual interactions for synset induction. It demonstrates state-of-the-art performance on a new multimodal dataset, MMAI-Synset, and highlights the importance of filtering weakly relevant visual information and adaptively regulating modal contributions.",
+    "file_id": "electronics_12_03521_v2",
+    "source_type": "cleaned",
+    "text_length": 27553,
+    "generation_time": "2025-07-31 21:19:39"
+  },
+  "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method": {
+    "document_type": "academic_paper",
+    "title": "增强提示学习的少样本文本分类方法",
+    "authors": [
+      "李睿凡",
+      "魏志宇",
+      "范元涛",
+      "叶书勤",
+      "张光卫"
+    ],
+    "main_topic": "少样本文本分类",
+    "research_problem": "少样本学习场景下的文本分类准确性问题",
+    "methodology": "EPL4FTC算法",
+    "key_innovations": [
+      "提示学习",
+      "三元组损失优化",
+      "自然语言推理"
+    ],
+    "experimental_results": "在中文和英文数据集上，EPL4FTC算法的准确度明显优于对比基线方法",
+    "conclusions": "EPL4FTC算法能有效提升少样本文本分类的准确性",
+    "keywords": [
+      "预训练语言模型",
+      "少样本学习",
+      "文本分类",
+      "提示学习",
+      "三元组损失"
+    ],
+    "application_domains": [
+      "文本分类任务"
+    ],
+    "technical_concepts": [
+      "自然语言推理",
+      "掩码语言模型",
+      "三元组损失",
+      "度量优化"
+    ],
+    "performance_metrics": "表6中展示了自然语言推理词和非自然语言推理词在不同数据集上的性能比较",
+    "summary": "本文针对少样本学习中的文本分类问题，提出了一种基于提示学习和三元组损失优化的EPL4FTC算法。通过将文本分类任务转换为自然语言推理形式，并引入三元组损失进行优化，实验结果表明，该方法在少样本场景下能有效提升文本分类的准确性。",
+    "file_id": "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method",
+    "source_type": "cleaned",
+    "text_length": 1834,
+    "generation_time": "2025-07-31 21:19:54"
+  },
+  "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning": {
+    "document_type": "academic_paper",
+    "title": "Entailment Method Based on Template Selection for Chinese Text Few-shot Learning",
+    "authors": [
+      "Zeyuan Wang",
+      "Zhiyu Wei",
+      "Lihui Zhang",
+      "Ruifan Li",
+      "Zhanyu Ma"
+    ],
+    "main_topic": "Few-shot learning in NLP",
+    "research_problem": "The scarcity of labeled data hinders progress in numerous text-related tasks and the performance is sensitive to manually selected templates.",
+    "methodology": "Template selection mechanism using a masked language model",
+    "key_innovations": [
+      "Using a template selection mechanism to assess candidate templates",
+      "Applying the method on FewCLUE shared tasks"
+    ],
+    "experimental_results": "Experiments conducted on a range of datasets show the performance of different methods on test datasets.",
+    "conclusions": "The EFL method with automatic template selection outperforms other methods and is more effective on sentence-pair tasks.",
+    "keywords": [
+      "Few-shot learning",
+      "textual entailment",
+      "template selection",
+      "MacBERT",
+      "FewCLUE"
+    ],
+    "application_domains": [
+      "NLP tasks",
+      "Chinese text classification",
+      "textual entailment tasks"
+    ],
+    "technical_concepts": [
+      "Entailment-based Few-shot Learning (EFL)",
+      "Masked Language Model (MLM)",
+      "MacBERT",
+      "PyTorch",
+      "HuggingFace toolkit"
+    ],
+    "performance_metrics": "The results show the performance of different methods on test datasets and the relationship between the masked language loss and template accuracy.",
+    "summary": "This paper introduces a template selection mechanism using a masked language model to improve few-shot learning in Chinese text classification. The method is evaluated on FewCLUE shared tasks and demonstrates effectiveness, especially on sentence-pair tasks, by reducing the dependency on manually selected templates.",
+    "file_id": "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+    "source_type": "cleaned",
+    "text_length": 10337,
+    "generation_time": "2025-07-31 21:20:11"
+  },
+  "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "Text-to-image synthesis",
+    "research_problem": "Current approaches face training difficulties due to the sparsity of global representations and lack fine-grained information in the generated images.",
+    "methodology": "Cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN)",
+    "key_innovations": [
+      "Integrating local linguistic representations into GANs",
+      "Cross-modal correlations in discriminator"
+    ],
+    "experimental_results": "Experiments show that incorporating fine-grained local linguistic information and cross-modal correlation significantly enhances text-to-image synthesis performance.",
+    "conclusions": "Incorporating both global and local linguistic representations significantly improves the performance of models generating high-resolution images.",
+    "keywords": [
+      "Text-to-image synthesis",
+      "generative adversarial network (GAN)",
+      "linguistic representation",
+      "cross-modal"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "GANs",
+      "CGL-GAN",
+      "cross-modal projection block",
+      "Inception score",
+      "FID"
+    ],
+    "performance_metrics": "The model achieves higher Inception scores on the CUB dataset and exhibits a 27.43% improvement over GAN-INT-CLS.",
+    "summary": "This paper proposes CGL-GAN, a GAN model that incorporates both global and local linguistic representations for text-to-image synthesis. It demonstrates improved performance in generating high-resolution images with fine-grained details by establishing cross-modal correlations. Experiments on CUB and MS-COCO datasets validate the effectiveness of the proposed method.",
+    "file_id": "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis",
+    "source_type": "cleaned",
+    "text_length": 19725,
+    "generation_time": "2025-07-31 21:20:28"
+  },
+  "FAIA_372_FAIA230600": {
+    "document_type": "academic_paper",
+    "title": "Enhanced Machine Reading Comprehension Method for Aspect Sentiment Quadruplet Extraction",
+    "authors": [
+      "Shuqin Ye",
+      "Zepeng Zhang",
+      "Ruifan Li"
+    ],
+    "main_topic": "Aspect-Based Sentiment Analysis (ABSA), Aspect Sentiment Quadruplet Extraction (ASQE)",
+    "research_problem": "Existing studies have neglected certain characteristics of ASQE, leading to unsatisfactory results",
+    "methodology": "Enhanced Machine Reading Comprehension (EMRC)",
+    "key_innovations": [
+      "A novel EMRC model",
+      "Hierarchical category classification strategy",
+      "Bi-directional attention mechanism"
+    ],
+    "experimental_results": "The proposed EMRC model outperforms all baselines in overall performance, achieving the highest precision scores on both datasets",
+    "conclusions": "The EMRC model enhances dependencies and facilitates information flow among subtasks, outperforms existing baselines",
+    "keywords": [
+      "ABSA",
+      "ASQE",
+      "EMRC",
+      "bi-directional attention",
+      "hierarchical category classification"
+    ],
+    "application_domains": [
+      "Aspect-Based Sentiment Analysis"
+    ],
+    "technical_concepts": [
+      "Machine Reading Comprehension (MRC)",
+      "BERT",
+      "bi-directional attention mechanism",
+      "category classification",
+      "quadruplet extraction"
+    ],
+    "performance_metrics": "Precision, Recall, F1-score",
+    "summary": "This paper introduces an Enhanced Machine Reading Comprehension (EMRC) method for Aspect Sentiment Quadruplet Extraction (ASQE). The EMRC model incorporates a hierarchical category classification strategy and a bi-directional attention mechanism, outperforming existing baselines in ABSA tasks.",
+    "file_id": "FAIA_372_FAIA230600",
+    "source_type": "cleaned",
+    "text_length": 16456,
+    "generation_time": "2025-07-31 21:20:46"
+  },
+  "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding": {
+    "document_type": "academic_paper",
+    "title": "Image Captioning Based on An Improved Transformer with IoU Position Encoding",
+    "authors": [
+      "Yazhou Li",
+      "Yihui Shi",
+      "Yun Liu",
+      "Ruifan Li",
+      "Zhanyu Ma"
+    ],
+    "main_topic": "Image captioning",
+    "research_problem": "Vanishing query vectors and the lack of spatial information in the decoding process",
+    "methodology": "Improved Transformer with IoU Position encoding model (TIP)",
+    "key_innovations": [
+      "Intra-modal attention mechanism",
+      "IoU spatial position encoding method"
+    ],
+    "experimental_results": "Experiments on MS-COCO datasets demonstrate the model's effectiveness",
+    "conclusions": "TIP effectively identifies object relationships, resulting in generated sentences closer to the annotated ones",
+    "keywords": [
+      "Image Captioning",
+      "Transformer",
+      "IoU Position Encoding",
+      "Intra-modal Attention"
+    ],
+    "application_domains": [
+      "Computer Vision",
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "CNNs",
+      "RNNs",
+      "Attention Mechanisms",
+      "Transformer Structure",
+      "IoU Spatial Position Encoding"
+    ],
+    "performance_metrics": "CIDEr, BLEU, METEOR, ROUGE, SPICE",
+    "summary": "This paper proposes an improved Transformer with IoU Position Encoding (TIP) for image captioning, addressing issues of vanishing query vectors and spatial information representation. TIP introduces an intra-modal attention module and IoU-based spatial encoding, demonstrating effectiveness through experiments on the MS-COCO dataset.",
+    "file_id": "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+    "source_type": "cleaned",
+    "text_length": 9331,
+    "generation_time": "2025-07-31 21:21:01"
+  },
+  "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol": {
+    "document_type": "academic_paper",
+    "title": "Improved Eavesdropping Detection Strategy Based on Extended Three-particle Greenberger-Horne-Zeilinger State in Two-step Quantum Direct Communication Protocol",
+    "authors": [
+      "LI Jian",
+      "YE Xinxin",
+      "LI Ruifan",
+      "ZOU Yongzhong",
+      "LU Xiaofeng"
+    ],
+    "main_topic": "Quantum information security, quantum direct communication",
+    "research_problem": "Enhance the efficiency of eavesdropping detection in two-step quantum direct communication protocol",
+    "methodology": "Extended three-particle GHZ state, entropy theory",
+    "key_innovations": [
+      "Improved eavesdropping detection strategy using extended three-particle GHZ state"
+    ],
+    "experimental_results": "The proposed strategy detects eavesdroppers with a rate of 59%, compared to 50% in the original protocol",
+    "conclusions": "The TSET protocol securely transmits messages without leakage to potential eavesdroppers, improving upon the TSE protocol",
+    "keywords": [
+      "Quantum key distribution (QKD)",
+      "Dense coding",
+      "Extended three-particle GHZ state",
+      "Eavesdropping detection",
+      "Entropy"
+    ],
+    "application_domains": [
+      "Quantum secure direct communication (QSDC)"
+    ],
+    "technical_concepts": [
+      "Bell states",
+      "EPR pair block",
+      "Quantum teleportation",
+      "Quantum secret sharing",
+      "TSET protocol",
+      "TSE protocol"
+    ],
+    "performance_metrics": "Eavesdropping detection rate of 59% in the proposed strategy",
+    "summary": "This paper proposes an improved eavesdropping detection strategy in a two-step quantum direct communication protocol using an extended three-particle GHZ state. The strategy enhances the detection rate to 59% and is shown to be more secure through entropy analysis, providing a higher probability of detecting eavesdroppers and ensuring secure message transmission.",
+    "file_id": "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol",
+    "source_type": "cleaned",
+    "text_length": 5477,
+    "generation_time": "2025-07-31 21:21:19"
+  },
+  "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "Clothing image recognition and retrieval",
+    "research_problem": "Handling variations in clothing appearance, multiple categories and attributes, and the prevalence of erroneous or incomplete labels from retailers, as well as the imbalance among image categories",
+    "methodology": "Multi-task deep learning framework and multi-weight convolutional neural networks",
+    "key_innovations": [
+      "Multi-weight CNNs for imbalance learning",
+      "Category-relevant parameters to regularize learning process"
+    ],
+    "experimental_results": "Experiments demonstrate improved performance in clothing image retrieval on the e-Clothing1.4M dataset",
+    "conclusions": "The proposed multi-weight CNN effectively learns robust representations and handles label errors and data imbalance",
+    "keywords": [
+      "Clothing Image recognition",
+      "Convolutional neural network",
+      "Multi-task",
+      "Multi-weight"
+    ],
+    "application_domains": [
+      "E-commerce platforms",
+      "Multimedia processing",
+      "Computer vision"
+    ],
+    "technical_concepts": [
+      "CNNs",
+      "Multi-task learning",
+      "Deep learning",
+      "Imbalance learning",
+      "e-Clothing1.4M dataset"
+    ],
+    "performance_metrics": "mAP scores for multi-label, multi-task, and multi-weight CNNs on the e-Clothing1.4M dataset",
+    "summary": "This paper introduces a multi-task deep learning framework and multi-weight convolutional neural networks to address the challenges of recognizing and retrieving clothing images on e-commerce platforms. The proposed method demonstrates effectiveness in dealing with label errors and data imbalance, achieving improved performance on a large-scale dataset.",
+    "file_id": "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image",
+    "source_type": "cleaned",
+    "text_length": 14789,
+    "generation_time": "2025-07-31 21:21:37"
+  },
+  "Improving_Image_Paragraph_Captioning_with_Dual_Relations": {
+    "document_type": "academic_paper",
+    "title": "IMPROVING IMAGE PARAGRAPH CAPTIONING WITH DUAL RELATIONS",
+    "authors": [
+      "Yun Liu",
+      "Yihui Shi",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Zhanyu Ma",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Image paragraph captioning",
+    "research_problem": "Existing methods do not explicitly model object relations, leading to suboptimal performance",
+    "methodology": "DualRel model",
+    "key_innovations": [
+      "Captures spatial and semantic relations among objects",
+      "Weakly supervised multi-label classifier",
+      "Relation-aware attention",
+      "Fusion Gates"
+    ],
+    "experimental_results": "DualRel achieves significant improvements on the Stanford benchmark dataset",
+    "conclusions": "DualRel, a model for image paragraph captioning that captures semantic and spatial relations, outperforms strong baselines on the Stanford benchmark dataset",
+    "keywords": [
+      "Image paragraph captioning",
+      "Dual Relations",
+      "Spatial Relation",
+      "Semantic Relation",
+      "Weakly Supervised",
+      "Relation-aware Attention"
+    ],
+    "application_domains": [
+      "Beijing Academy of Artificial Intelligence",
+      "Computer Vision",
+      "Natural Language Processing"
+    ],
+    "technical_concepts": [
+      "DualRel model",
+      "Faster R-CNN",
+      "Relation Embedding Module",
+      "Relation-aware Interaction Module",
+      "Self-critical sequence training"
+    ],
+    "performance_metrics": "BLEU@{1, 2, 3, 4}, METEOR, CIDEr, BERTScore F metrics",
+    "summary": "This paper introduces DualRel, a model for image paragraph captioning that captures spatial and semantic relations. It includes a relation embedding module and a relation-aware interaction module, outperforming strong baselines on the Stanford benchmark dataset. The model utilizes Faster R-CNN for object detection and employs weakly supervised learning for semantic relation classification. The experimental results show significant improvements in various evaluation metrics.",
+    "file_id": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+    "source_type": "cleaned",
+    "text_length": 11060,
+    "generation_time": "2025-07-31 21:21:56"
+  },
+  "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension": {
+    "document_type": "academic_paper",
+    "title": "Language Guided Reasoning Network for Referring Expression Comprehension",
+    "authors": [
+      "Anderson",
+      "Hong",
+      "Zhu",
+      "Zhang",
+      "Li",
+      "Khattak",
+      "Rezatofighi",
+      "Kazemzadeh",
+      "Plummer",
+      "Liao",
+      "Ye",
+      "Huang",
+      "Zhao",
+      "Ho",
+      "Zhu",
+      "Deng",
+      "Shi",
+      "Krishna",
+      "Wang",
+      "Plummer",
+      "Yu",
+      "Mu",
+      "Lu",
+      "Chen",
+      "Chen",
+      "He"
+    ],
+    "main_topic": "Vision and Language tasks, Referring Expression Comprehension",
+    "research_problem": "Current transformer-based methods treat visual and textual features equally without fully leveraging the guidance of the referring expression.",
+    "methodology": "Language Guided Reasoning Network (LGR-NET), Textual Feature Extender (TFE), coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), cross-modal loss",
+    "key_innovations": [
+      "LGR-NET framework",
+      "TFE for REC tasks",
+      "Coordinate Embedding",
+      "Text-guided Cross-modal Alignment and Fusion",
+      "Cross-modal Loss"
+    ],
+    "experimental_results": "State-of-the-art results on five benchmark datasets, improvements on RefCOCO, RefCOCO+, RefCOCOg, ReferItGame, and Flickr30K Entities",
+    "conclusions": "LGR-NET's emphasis on textual feature guidance for cross-modal reasoning shows effectiveness in REC tasks.",
+    "keywords": [
+      "Referring Expression Comprehension",
+      "cross-modal reasoning",
+      "Language Guided Reasoning",
+      "benchmark datasets",
+      "transformer-based methods"
+    ],
+    "application_domains": [
+      "image captioning",
+      "visual question answering",
+      "visual navigation"
+    ],
+    "technical_concepts": [
+      "LGR-NET",
+      "TFE",
+      "Coordinate Embedding",
+      "TCA",
+      "TCF",
+      "Cross-modal Loss",
+      "transformers",
+      "feature extractors"
+    ],
+    "performance_metrics": "Absolute improvements up to 3.70%, 8.08%, and 6.50% on RefCOCO, RefCOCO+, and RefCOCOg, respectively",
+    "summary": "This paper introduces the Language Guided Reasoning Network (LGR-NET) for Referring Expression Comprehension, which prioritizes linguistic guidance for improved localization. It reports state-of-the-art performance on multiple benchmark datasets and outlines the effectiveness of various innovations like the Textual Feature Extender and a novel cross-modal loss.",
+    "file_id": "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+    "source_type": "cleaned",
+    "text_length": 30309,
+    "generation_time": "2025-07-31 21:22:20"
+  },
+  "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text": {
+    "document_type": "academic_paper",
+    "title": "Line and Ligature Segmentation of Urdu Nastaleeq Text",
+    "authors": [
+      "I. Ahmad",
+      "S. A. Husain"
+    ],
+    "main_topic": "Optical Character Recognition (OCR) for Urdu Nastaleeq text",
+    "research_problem": "The recognition accuracy of ligature-based Urdu OCR systems is highly dependent on the segmentation accuracy of text into lines and ligatures",
+    "methodology": "Curved Line Split (CLS) algorithm for line segmentation and a ligature segmentation algorithm",
+    "key_innovations": [
+      "Enhanced classical horizontal projection-based segmentation",
+      "Curved-line-split algorithm",
+      "Quantitative information-based ligature segmentation"
+    ],
+    "experimental_results": "99.17% accuracy for line segmentation and 99.80% for ligature segmentation",
+    "conclusions": "The proposed algorithms for line and ligature segmentation of Urdu Nastaleeq text images outperform existing methods and can be extended to other Nastaleeq-based languages",
+    "keywords": [
+      "Urdu Nastaleeq",
+      "OCR",
+      "Line segmentation",
+      "Ligature segmentation",
+      "Curved Line Split"
+    ],
+    "application_domains": [
+      "Urdu text recognition",
+      "Nastaleeq script-based languages"
+    ],
+    "technical_concepts": [
+      "Horizontal projection",
+      "Connected components",
+      "Primary and secondary classes",
+      "Baseline information",
+      "Ligature segmentation algorithm"
+    ],
+    "performance_metrics": "Accuracy rates of 99.17% for line segmentation and 99.80% for ligature segmentation",
+    "summary": "This paper introduces algorithms for accurate line and ligature segmentation in Urdu Nastaleeq text, enhancing the classical horizontal projection method with a curved-line-split algorithm and achieving high segmentation accuracy rates. The research provides a significant improvement for OCR systems dealing with the complex nature of Nastaleeq scripts.",
+    "file_id": "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text",
+    "source_type": "cleaned",
+    "text_length": 19049,
+    "generation_time": "2025-07-31 21:22:37"
+  },
+  "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": {
+    "document_type": "academic_paper",
+    "title": "Obtaining Cross Modal Similarity Metric with Deep Neural Architecture",
+    "authors": [
+      "Ruifan Li",
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Peng Lu",
+      "Bohan Li"
+    ],
+    "main_topic": "Multimodal data analysis using deep neural learning",
+    "research_problem": "Addressing the issue of modeling the relationship between different modalities",
+    "methodology": "Bimodal Deep Architecture (BDA)",
+    "key_innovations": [
+      "Three interconnected components",
+      "Stacked restricted Boltzmann machines",
+      "Variant autoencoder with predefined loss function"
+    ],
+    "experimental_results": "88.96% accuracy in image annotation selection",
+    "conclusions": "The BDA demonstrates effectiveness in classifying image tags and can be extended to other modalities",
+    "keywords": [
+      "Multimodal data",
+      "Deep neural learning",
+      "Similarity metric",
+      "Bimodal deep architecture"
+    ],
+    "application_domains": [
+      "Image and text analysis",
+      "Complex systems"
+    ],
+    "technical_concepts": [
+      "Multimodal data",
+      "Deep neural networks",
+      "Restricted Boltzmann machines",
+      "Autoencoder",
+      "Similarity measure"
+    ],
+    "performance_metrics": "Accuracy of 88.96% achieved by the BDA method",
+    "summary": "This paper introduces a Bimodal Deep Architecture (BDA) for measuring similarity across image and text modalities. The BDA, which includes stacked RBMs and a variant autoencoder, achieves 88.96% accuracy in image annotation selection. It is flexible and can be extended to other modalities within complex systems.",
+    "file_id": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+    "source_type": "cleaned",
+    "text_length": 19030,
+    "generation_time": "2025-07-31 21:22:54"
+  },
+  "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis": {
+    "document_type": "academic_paper",
+    "title": "Modality Disentangled Discriminator for Text-to-Image Synthesis",
+    "authors": [
+      "Fangxiang Feng",
+      "Tianrui Niu",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning",
+    "research_problem": "Existing discriminators do not differentiate between content and style parts of an image, limiting effectiveness in generating content and manipulating style",
+    "methodology": "Modality disentangled discriminator, AttnGAN, DM-GAN",
+    "key_innovations": [
+      "Proposed modality disentangled discriminator",
+      "Separate classification of content and style",
+      "Enhanced text-image correlation",
+      "Style transfer"
+    ],
+    "experimental_results": "Superior performance on CUB, Oxford-102, and COCO datasets, improvements in Inception Score (IS), Fréchet Inception Distance (FID), and R-Precision results",
+    "conclusions": "The modality disentangled discriminator enhances performance on image generation quality and text-image correlation measures, facilitating style transfer tasks",
+    "keywords": [
+      "text-to-image synthesis",
+      "generative adversarial networks",
+      "multi-modal disentangled representation learning"
+    ],
+    "application_domains": [
+      "Interactive art",
+      "Computer-aided drawing"
+    ],
+    "technical_concepts": [
+      "Generative Adversarial Networks (GANs)",
+      "AttnGAN",
+      "DM-GAN",
+      "Inception Score (IS)",
+      "Fréchet Inception Distance (FID)",
+      "Modality disentangled representation"
+    ],
+    "performance_metrics": "Inception Score (IS), Fréchet Inception Distance (FID), R-Precision",
+    "summary": "This paper introduces a modality disentangled discriminator for text-to-image synthesis, enhancing the ability to capture text-image correlation and manipulate image style. The proposed approach demonstrates improved performance on various datasets and offers a novel strategy for disentangled representation learning in GANs.",
+    "file_id": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+    "source_type": "cleaned",
+    "text_length": 20254,
+    "generation_time": "2025-07-31 21:23:13"
+  },
+  "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification": {
+    "document_type": "academic_paper",
+    "title": "Multi-level fusion with deep neural networks for multimodal sentiment classification",
+    "authors": [
+      "Zhang Guangwei",
+      "Zhao Bing",
+      "Li Ruifan"
+    ],
+    "main_topic": "Multimodal sentiment classification",
+    "research_problem": "Most sentiment analysis research focuses on a single modality, lacking effective feature fusion for joint textual and visual information.",
+    "methodology": "Multi-level fusion classification (MFC) model",
+    "key_innovations": [
+      "Propose a multi-level fusion classification model",
+      "Uses CNNs and Bi-GRU for feature extraction and fusion",
+      "Introduces a rectified conflict detection mechanism"
+    ],
+    "experimental_results": "Performance comparisons on Flickr dataset show the MFC method achieves competitive performance with strong baseline methods.",
+    "conclusions": "The proposed MFC effectively integrates different levels of features from multiple branches in image and text CNNs and achieves competitive performance in multimodal sentiment analysis.",
+    "keywords": [
+      "multimodal fusion",
+      "sentiment analysis",
+      "deep learning"
+    ],
+    "application_domains": [
+      "Social network posts sentiment analysis"
+    ],
+    "technical_concepts": [
+      "CNN",
+      "RNN",
+      "Bi-GRU",
+      "feature fusion",
+      "sentiment classification",
+      "conflict detection"
+    ],
+    "performance_metrics": "Accuracy, Recall, F1 score",
+    "summary": "This paper introduces a multi-level fusion classification model for joint vision and text sentiment analysis. The model uses CNNs and Bi-GRU to extract and fuse features from different levels, addressing the lack of effective feature fusion in existing sentiment analysis methods. Experimental results on the Flickr dataset show the model's competitive performance.",
+    "file_id": "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+    "source_type": "cleaned",
+    "text_length": 12333,
+    "generation_time": "2025-07-31 21:23:29"
+  },
+  "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "云计算和智能系统在现代技术中的重要性",
+    "research_problem": "云计算和智能系统面临的挑战和限制，包括安全性问题、数据隐私和先进基础设施的需求",
+    "methodology": "未在原文中明确提及",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "未在原文中明确提及",
+    "keywords": [
+      "云计算",
+      "智能系统",
+      "效率",
+      "可扩展性",
+      "灵活性"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "未在原文中明确提及"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文讨论了云计算和智能系统在现代技术中的重要性，强调了这些技术带来的效率、可扩展性和灵活性等好处，同时探讨了相关的安全、隐私和基础设施挑战。文中还展示了该领域的研究进展和创新应用案例，为理解云计算和智能系统的当前状态和未来前景提供了全面概述。",
+    "file_id": "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding",
+    "source_type": "cleaned",
+    "text_length": 6327,
+    "generation_time": "2025-07-31 21:23:43"
+  },
+  "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition": {
+    "document_type": "academic_paper",
+    "title": "Clothing Image Recognition Based on Multiple Features and Extreme Learning Machines",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "Clothing image recognition",
+    "research_problem": "The variations in clothing images and complex formation conditions pose challenges for traditional convolutional neural networks (CNNs), which do not always provide a satisfactory balance between training time and recognition performance.",
+    "methodology": "A recognition framework based on multiple features (CNN features, Histograms of Oriented Gradients, and color histograms) and Extreme Learning Machines (ELMs)",
+    "key_innovations": [
+      "Proposed recognition framework",
+      "Feature-level fusion with Autoencoder-ELMs",
+      "Decision-level fusion with ensemble of adaptive ELMs (Ada-ELMs)"
+    ],
+    "experimental_results": "Experiments on the DeepFashion dataset demonstrate the competitiveness and efficiency of the proposed framework, with accuracy reaching 82.0% in the test set.",
+    "conclusions": "The paper introduces a flexible and competitive clothing recognition framework based on multiple features and ELMs, which is especially effective for balancing time and recognition accuracy.",
+    "keywords": [
+      "Clothing image recognition",
+      "extreme learning machines",
+      "feature fusion",
+      "autoencoder ELM",
+      "ensemble learning"
+    ],
+    "application_domains": [
+      "E-commercial platforms",
+      "personal media management"
+    ],
+    "technical_concepts": [
+      "CNNs",
+      "HOG",
+      "color histograms",
+      "ELMs",
+      "Autoencoder-ELMs",
+      "Ada-ELMs",
+      "DeepFashion dataset"
+    ],
+    "performance_metrics": "Accuracy of up to 82.0% in the test set, with training times for ELM and AE-ELM being less than ten seconds, and Ada-ELMs taking approximately 238 seconds.",
+    "summary": "This paper presents a clothing image recognition framework using multiple features and extreme learning machines. The framework demonstrates competitive performance on the DeepFashion dataset, balancing training time and accuracy, with potential for future research in recognizing clothing images with imbalanced categories and fine-grained differences.",
+    "file_id": "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition",
+    "source_type": "cleaned",
+    "text_length": 21566,
+    "generation_time": "2025-07-31 21:24:02"
+  },
+  "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension": {
+    "document_type": "academic_paper",
+    "title": "Revisiting Counterfactual Problems in Referring Expression Comprehension",
+    "authors": [
+      "Zhihan Yu",
+      "Ruifan Li"
+    ],
+    "main_topic": "Counterfactual Referring Expression Comprehension (C-REC)",
+    "research_problem": "The counterfactual scenario in referring expression comprehension is overlooked, particularly for fine-grained attributes.",
+    "methodology": "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+    "key_innovations": [
+      "Dual-branch attentive fusion module",
+      "Counterfactual sample generation method",
+      "Contrastive learning for counterfactual perception"
+    ],
+    "experimental_results": "Performance metrics on RefCOCO/+/g and C-RefCOCO/+/g datasets, including Acc-Box, Acc-Cls, and Acc-Cf.",
+    "conclusions": "The proposed C-REC framework shows promising results on both traditional REC tasks and counterfactual scenarios, with the inclusion of a DAF module and contrastive learning.",
+    "keywords": [
+      "Counterfactual Referring Expression Comprehension",
+      "Fine-grained Attributes",
+      "Dual-branch Attentive Fusion",
+      "Contrastive Learning"
+    ],
+    "application_domains": [
+      "Vision-Language Tasks",
+      "Image-Text Matching"
+    ],
+    "technical_concepts": [
+      "Counterfactual Sample Generation",
+      "Dual-branch Attentive Fusion",
+      "Contrastive Loss",
+      "IoU",
+      "Cross-Entropy Loss"
+    ],
+    "performance_metrics": "Acc-Box (IoU@0.5), Acc-Cls, and Acc-Cf on various datasets.",
+    "summary": "This paper addresses the counterfactual referring expression comprehension problem, introducing a method for generating fine-grained counterfactual samples and a framework that enhances cross-modal feature learning with dual-branch attentive fusion and contrastive learning. The proposed approach demonstrates strong performance on public REC datasets and constructed C-REC datasets, contributing to the field of vision-language tasks.",
+    "file_id": "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+    "source_type": "cleaned",
+    "text_length": 19809,
+    "generation_time": "2025-07-31 21:24:24"
+  },
+  "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding": {
+    "document_type": "academic_paper",
+    "title": "Visual Prompt Tuning for Weakly Supervised Phrase Grounding",
+    "authors": [
+      "Pengyue Lin",
+      "Zhihan Yu",
+      "Mingcong Lu",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "main_topic": "Weakly supervised phrase grounding",
+    "research_problem": "WSG methods are limited by the category coverage of object detectors",
+    "methodology": "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+    "key_innovations": [
+      "Use of similarity tokens for spatial information capture",
+      "Detector-free network fine-tuning"
+    ],
+    "experimental_results": "Performance improvements on WSG tasks on Flickr30K and ReferIt datasets",
+    "conclusions": "The method effectively mitigates the task-gap effect between CLIP and the grounding model, enhancing its grounding task performance",
+    "keywords": [
+      "Weakly supervised phrase grounding",
+      "Visual prompt tuning",
+      "CLIP",
+      "Detector-free"
+    ],
+    "application_domains": [
+      "Image-text alignment",
+      "Multimodal information processing"
+    ],
+    "technical_concepts": [
+      "CLIP",
+      "Grounding model",
+      "Similarity tokens",
+      "Cosine similarity",
+      "VGG16"
+    ],
+    "performance_metrics": "Pointing game accuracy, Bounding box accuracy",
+    "summary": "This paper proposes a refinement-based approach for weakly supervised phrase grounding that uses a detector-free model fine-tuned with a visual prompt. The method improves performance on WSG tasks and demonstrates the potential of multimodal information processing techniques in dual-encoder embedding spaces.",
+    "file_id": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+    "source_type": "cleaned",
+    "text_length": 8347,
+    "generation_time": "2025-07-31 21:24:41"
+  },
+  "全卷积神经结构的段落式图像描述算法": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "段落式图像描述算法",
+    "research_problem": "RNN解码器在长时记忆和梯度消失问题上存在局限，导致生成段落的连贯性不佳",
+    "methodology": "全卷积神经结构的段落式图像描述算法",
+    "key_innovations": [
+      "全卷积神经网络结构",
+      "层次性深度卷积解码器",
+      "门控机制"
+    ],
+    "experimental_results": "实验结果表明所提方法在CIDEr等评价指标上优于基线方法，提升了17.8%的解码性能",
+    "conclusions": "所提模型通过卷积网络获取图像表示，构建层次性深度卷积解码器，引入门控机制，生成更具连贯性的段落式图像描述，实验证明在评测指标上取得了较好结果",
+    "keywords": [
+      "卷积神经网络",
+      "段落式图像描述",
+      "全卷积结构",
+      "门控机制",
+      "CIDEr"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "卷积神经网络(CNN)",
+      "循环神经网络(RNN)",
+      "全卷积神经结构",
+      "句子CNN解码器",
+      "词CNN解码器",
+      "门控机制",
+      "目标检测器",
+      "束搜索"
+    ],
+    "performance_metrics": "CIDEr等评价指标，提升了17.8%的解码性能",
+    "summary": "本文针对现有段落式图像描述算法中RNN解码器存在的问题，提出了一种基于全卷积神经网络结构的算法。该算法通过句子CNN解码器和词CNN解码器捕捉图像特征并生成连贯的文本描述，引入门控机制增强记忆能力，实验证明在多项评价指标上优于传统方法，提高了生成段落的品质。",
+    "file_id": "全卷积神经结构的段落式图像描述算法",
+    "source_type": "cleaned",
+    "text_length": 3158,
+    "generation_time": "2025-07-31 21:24:59"
+  },
+  "基于统计和加权的提高击键认证识别方法(英文)": {
+    "document_type": "academic_paper",
+    "title": "Improved Keystroke Authentication Accuracy Based on Statistics and Weight",
+    "authors": [
+      "Li Jian",
+      "Guo Xiaojing",
+      "Li Meiyun",
+      "Li Ruifan"
+    ],
+    "main_topic": "Keystroke Dynamics-Based Authentication",
+    "research_problem": "Enhance login-password recognition accuracy using biometric characteristics",
+    "methodology": "TOP10 detector",
+    "key_innovations": [
+      "Filtering outlier data",
+      "Calculating probabilities of each input key",
+      "Selecting less informative features",
+      "Assigning weights"
+    ],
+    "experimental_results": "The proposed detector is more accurate than others, with the smallest sum of FAR and FRR",
+    "conclusions": "The paper presents a methodology that utilizes typing biometrics to enhance login-password authentication",
+    "keywords": [
+      "Keystroke Dynamics",
+      "Authentication",
+      "Feature Extraction",
+      "Probability",
+      "Weight"
+    ],
+    "application_domains": [
+      "Quantum Security Communication"
+    ],
+    "technical_concepts": [
+      "Keystroke eigenvalues",
+      "Normal distribution",
+      "CDF",
+      "Probability vector",
+      "Weight vector"
+    ],
+    "performance_metrics": "FRR, FAR, EER, and the sum of FAR and FRR",
+    "summary": "This paper introduces a methodology for improving the accuracy of keystroke authentication by filtering outliers, calculating probabilities, and assigning weights to features. The proposed TOP10 detector shows better performance than other methods, as evidenced by experimental results using a third-party dataset.",
+    "file_id": "基于统计和加权的提高击键认证识别方法(英文)",
+    "source_type": "cleaned",
+    "text_length": 8405,
+    "generation_time": "2025-07-31 21:25:15"
+  },
+  "一种使用深层结构获取双模态相似性测度的方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种使用深层结构获取双模态相似性测度的方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "多模态数据挖掘和检索",
+    "technical_problem": "双模态数据相似性计算的问题",
+    "technical_solution": "使用深度学习框架，通过堆叠的两层受限波尔兹曼机和自动编码器进行双模态相似性测度计算",
+    "key_innovations": [
+      "使用受限波尔兹曼机和自动编码器进行双模态相似性测度计算",
+      "提出损失函数平衡重构损失和兼容性损失"
+    ],
+    "implementation_method": "包括特征提取、中级表达转换、高级表达编码、相似性测度计算和参数优化步骤",
+    "technical_effects": "实现了双模态数据相似性的计算，提高了多模态数据挖掘和检索的匹配程度",
+    "keywords": [
+      "双模态相似性测度",
+      "深度学习",
+      "受限波尔兹曼机",
+      "自动编码器",
+      "L1范数"
+    ],
+    "application_scenarios": [
+      "多模态数据挖掘",
+      "多模态数据检索"
+    ],
+    "technical_concepts": [
+      "双模态数据",
+      "相似性测度",
+      "受限波尔兹曼机",
+      "自动编码器",
+      "L1范数",
+      "损失函数"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明提出了一种基于深度学习框架的双模态相似性测度计算方法，通过受限波尔兹曼机和自动编码器处理双模态数据，并引入损失函数优化参数，以适用于多模态数据挖掘和检索等领域，提高了数据匹配的准确性。",
+    "file_id": "一种使用深层结构获取双模态相似性测度的方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1190,
+    "generation_time": "2025-07-31 21:25:32"
+  },
+  "一种图像检索方法_鲁鹏": {
+    "document_type": "patent",
+    "title": "一种图像检索方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像检索",
+    "technical_problem": "计算图像数据库中图像的相关度值，并进行有效检索的问题",
+    "technical_solution": "计算图像间的内点数和直接与间接相关度值，构建赋权邻接矩阵，进行衰减计算和迭代调整",
+    "key_innovations": [
+      "引入间接相关度衰减因子αB",
+      "赋权邻接矩阵A",
+      "迭代计算间接相关度T"
+    ],
+    "implementation_method": "计算步骤包括赋权邻接矩阵A的计算、初始间接相关度矩阵D的生成、迭代计算间接相关度T等",
+    "technical_effects": "提高计算效率，降低存储开销，得到与查询目标高度相关的图像",
+    "keywords": [
+      "图像检索",
+      "内点数",
+      "相关度值",
+      "赋权邻接矩阵",
+      "间接相关度衰减因子"
+    ],
+    "application_scenarios": [
+      "图像数据库检索"
+    ],
+    "technical_concepts": [
+      "内点数计算",
+      "相关度计算",
+      "赋权邻接矩阵",
+      "迭代计算"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明涉及一种图像检索方法，通过计算图像间的直接和间接相关度，并引入衰减因子和赋权邻接矩阵，提高检索效率，减少存储需求，适用于图像数据库的快速检索。",
+    "file_id": "一种图像检索方法_鲁鹏",
+    "source_type": "cleaned",
+    "text_length": 590,
+    "generation_time": "2025-07-31 21:25:46"
+  },
+  "一种图像的文本描述方法及装置_李睿凡": {
+    "document_type": "patent",
+    "title": "一种图像的文本描述方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像处理、自然语言处理",
+    "technical_problem": "现有基于循环神经网络的图像文本描述方案计算复杂度高",
+    "technical_solution": "采用句子级子网络和词汇级子网络的分层结构进行图像文本描述",
+    "key_innovations": [
+      "句子级子网络和词汇级子网络的分层结构",
+      "降低了训练过程的计算复杂度"
+    ],
+    "implementation_method": "获取图像特征，通过句子级子网络和词汇级子网络生成描述文本",
+    "technical_effects": "提高了生成的文本段落中句子之间的连贯性，降低了计算复杂度",
+    "keywords": [
+      "图像文本描述",
+      "句子级子网络",
+      "词汇级子网络",
+      "神经网络"
+    ],
+    "application_scenarios": [
+      "电子设备"
+    ],
+    "technical_concepts": [
+      "CNN",
+      "句子嵌入层",
+      "门控卷积层",
+      "区域感知层",
+      "词汇嵌入层",
+      "单词分布预测"
+    ],
+    "claims_summary": "图像的文本描述方法、装置、电子设备以及计算机可读存储介质",
+    "summary": "本发明提供了一种图像的文本描述方法及装置，通过句子级子网络和词汇级子网络的分层结构，提高了文本描述的连贯性并降低了计算复杂度。该方法包括获取图像特征，使用预先训练的神经网络生成描述文本，适用于电子设备等领域。",
+    "file_id": "一种图像的文本描述方法及装置_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1104,
+    "generation_time": "2025-07-31 21:26:00"
+  },
+  "一种图像色彩和谐程度的评估方法及装置_鲁鹏": {
+    "document_type": "patent",
+    "title": "一种图像色彩和谐程度的评估方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像色彩和谐程度的评估",
+    "technical_problem": "现有技术中图像美学评估准确度不高，色彩和谐模型不适用于颜色复杂度高的照片的色彩评估",
+    "technical_solution": "提出一种基于条件随机场的色彩和谐模型，利用神经网络确定关联势函数和交互势函数，实现图像色彩和谐程度的自动评估",
+    "key_innovations": [
+      "基于条件随机场的色彩和谐模型",
+      "利用神经网络计算关联势函数和交互势函数",
+      "简化图像特征提取",
+      "提高图像美学评估的准确性"
+    ],
+    "implementation_method": "包括通过无向图建立条件随机场、样本图像块训练神经网络、确定关联势函数和交互势函数、对待评估图像进行色彩和谐评估等步骤",
+    "technical_effects": "提高图像美学评估的准确性，实现自动对图像的色彩和谐程度进行评估",
+    "keywords": [
+      "图像色彩和谐度",
+      "条件随机场",
+      "神经网络",
+      "美学评估"
+    ],
+    "application_scenarios": [
+      "计算机",
+      "电子设备",
+      "图像处理终端"
+    ],
+    "technical_concepts": [
+      "条件随机场",
+      "残差神经网络",
+      "孪生神经网络",
+      "RGB色彩值",
+      "无向图"
+    ],
+    "claims_summary": "一种图像色彩和谐程度的评估方法、装置、电子设备及计算机可读存储介质，涉及建立条件随机场、神经网络训练、色彩和谐评估等",
+    "summary": "本发明提供一种基于条件随机场和神经网络的图像色彩和谐程度评估方法及装置，旨在简化图像特征提取过程，提高图像美学评估的准确性，适用于多种图像处理终端。",
+    "file_id": "一种图像色彩和谐程度的评估方法及装置_鲁鹏",
+    "source_type": "cleaned",
+    "text_length": 3038,
+    "generation_time": "2025-07-31 21:26:17"
+  },
+  "一种基于人工智能挖掘的网络内容风控管理系统_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于人工智能挖掘的网络内容风控管理系统",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "网络内容风控管理",
+    "technical_problem": "对网络内容进行及时、准确的风控管理",
+    "technical_solution": "包括新业务内容检测模块、网站内容监管模块、企业内容安全治理模块和UGC内容审核模块的基于人工智能挖掘的系统",
+    "key_innovations": [
+      "新业务内容检测模块",
+      "网站内容监管模块",
+      "企业内容安全治理模块",
+      "UGC内容审核模块"
+    ],
+    "implementation_method": "通过硬件、软件模块或其组合实现，包括自动获取内容，基于人工智能挖掘的审核、分类，以及多种内容识别技术",
+    "technical_effects": "实现对网络内容的及时、准确处理",
+    "keywords": [
+      "人工智能挖掘",
+      "网络内容风控",
+      "内容审核",
+      "新业务内容检测",
+      "网站内容监管",
+      "企业内容安全治理",
+      "UGC审核"
+    ],
+    "application_scenarios": [
+      "视频直播",
+      "婚恋交友",
+      "社区论坛",
+      "电商网站",
+      "在线教育"
+    ],
+    "technical_concepts": [
+      "内容采集技术",
+      "文本识别",
+      "图像识别",
+      "视频识别",
+      "音频识别",
+      "人工智能模型"
+    ],
+    "claims_summary": "涉及系统的各个模块及其功能，以及实现方式",
+    "summary": "本专利介绍了一种基于人工智能挖掘的网络内容风控管理系统，包括多个模块，用于自动获取和审核网络内容，旨在提高网络内容管理的及时性和准确性，可应用于多种网络平台和场景。",
+    "file_id": "一种基于人工智能挖掘的网络内容风控管理系统_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1065,
+    "generation_time": "2025-07-31 21:26:32"
+  },
+  "一种基于人工智能的数据安全风险监测追溯系统_黄永军": {
+    "document_type": "patent",
+    "title": "一种基于人工智能的数据安全风险监测追溯系统",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "工业互联网数据安全，工业企业数字化转型",
+    "technical_problem": "实现对数据安全风险的实时监测、主动识别、精准定位和自动溯源",
+    "technical_solution": "包括数据采集模块、数据流转与分布监测模块、数据安全事件分析模块和数据安全事件溯源模块",
+    "key_innovations": [
+      "数据识别特征库",
+      "数据资产清单",
+      "数据安全风险监测策略库",
+      "实时安全事件溯源分析"
+    ],
+    "implementation_method": "详细介绍了每个模块的具体实现方式及技术细节",
+    "technical_effects": "保障工业互联网数据安全，助力工业企业数字化转型",
+    "keywords": [
+      "数据安全风险监测",
+      "人工智能",
+      "数据流转",
+      "安全事件溯源"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "数据采集模块",
+      "数据流转与分布监测模块",
+      "数据安全事件分析模块",
+      "数据安全事件溯源模块",
+      "数据识别特征库",
+      "数据资产清单",
+      "风险传导预警模型"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "该专利提出一种基于人工智能的数据安全风险监测追溯系统，通过数据采集、流转监测、安全事件分析和溯源模块，实现对数据安全风险的实时监测与自动溯源，旨在保障工业互联网数据安全，支持工业企业的数字化转型。",
+    "file_id": "一种基于人工智能的数据安全风险监测追溯系统_黄永军",
+    "source_type": "cleaned",
+    "text_length": 916,
+    "generation_time": "2025-07-31 21:26:47"
+  },
+  "一种基于关系编码和层次注意力机制的图像段落描述方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于关系编码和层次注意力机制的图像段落描述方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像段落描述",
+    "technical_problem": "现有方法在图像段落描述领域的性能不佳",
+    "technical_solution": "关系编码过程和层次注意力解码过程，包括空间关系编码器和语义关系编码器，以及使用两个LSTM和一个层次注意力动态融合关系信息和物体区域信息",
+    "key_innovations": [
+      "关系编码",
+      "层次注意力机制",
+      "关系门和视觉门的设计"
+    ],
+    "implementation_method": "空间关系编码器通过拼接视觉特征和相对位置坐标嵌入表示获取空间关系编码特征向量；语义关系分类使用了多标签分类；层次注意解码模块以Top-Down注意力网络为原型",
+    "technical_effects": "在本领域的多个评价指标上显著优于现有的方法",
+    "keywords": [
+      "关系编码",
+      "层次注意力",
+      "图像段落描述",
+      "语义关系编码",
+      "空间关系编码"
+    ],
+    "application_scenarios": [
+      "斯坦福段落描述数据集"
+    ],
+    "technical_concepts": [
+      "LSTM",
+      "层次注意力",
+      "空间关系编码器",
+      "语义关系编码器",
+      "多标签分类"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "该专利提出了一种新的图像段落描述方法，通过关系编码和层次注意力机制，结合空间和语义关系信息，提高了图像段落描述的准确性，并在斯坦福数据集上验证了其有效性。",
+    "file_id": "一种基于关系编码和层次注意力机制的图像段落描述方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 540,
+    "generation_time": "2025-07-31 21:27:02"
+  },
+  "一种基于图卷积神经网络的方面级情感分析方法及装置_冯方向": {
+    "document_type": "patent",
+    "title": "基于图卷积神经网络的方面级情感分析方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "情感分析",
+    "technical_problem": "现有技术不能精确识别出用户对于一个具体方面的情感态度",
+    "technical_solution": "使用双重图卷积神经网络对待进行方面情感分析的句子中方面词进行情感分析",
+    "key_innovations": [
+      "双重图卷积神经网络",
+      "句法图卷积子神经网络",
+      "基于自注意力机制的语义图卷积子神经网络"
+    ],
+    "implementation_method": "包括获取句子及其中的方面词，进行预处理，输入双重图卷积神经网络，提取句法特征和语义特征等步骤",
+    "technical_effects": "能够更加精确地识别出用户对于一个具体方面的情感态度，提高情感分析结果的准确性",
+    "keywords": [
+      "图卷积神经网络",
+      "方面级情感分析",
+      "句法加权图",
+      "自注意力机制",
+      "BiLSTM",
+      "池化层",
+      "softmax分类器"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "图卷积神经网络",
+      "句法图卷积子神经网络",
+      "语义图卷积子神经网络",
+      "双向长短期记忆网络BiLSTM",
+      "双仿射模块",
+      "池化层",
+      "全连接层"
+    ],
+    "claims_summary": "提供了一种基于图卷积神经网络的方面级情感分析方法及其双重图卷积神经网络的训练方法",
+    "summary": "本发明涉及一种基于图卷积神经网络的方面级情感分析方法，通过双重图卷积神经网络，包括句法图卷积子神经网络和基于自注意力机制的语义图卷积子神经网络，提取句子的句法特征和语义特征，实现对方面词的情感分析，提高情感分析的准确性。",
+    "file_id": "一种基于图卷积神经网络的方面级情感分析方法及装置_冯方向",
+    "source_type": "cleaned",
+    "text_length": 2851,
+    "generation_time": "2025-07-31 21:27:19"
+  },
+  "一种基于图卷积神经网络的方面级情感分析方法及装置_李睿凡": {
+    "document_type": "patent",
+    "title": "基于图卷积神经网络的方面级情感分析方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "情感分析",
+    "technical_problem": "现有技术在进行方面级情感分析时，对句法不敏感的句子提取句法特征不准确，导致情感分析结果不准确",
+    "technical_solution": "提供了一种基于图卷积神经网络的方面级情感分析方法，包括获取模块、预处理模块和情感分析模块，使用双重图卷积神经网络提取句子的句法相关特征和语义相关特征",
+    "key_innovations": [
+      "双重图卷积神经网络",
+      "句法图卷积子神经网络",
+      "基于自注意力机制的语义图卷积子神经网络"
+    ],
+    "implementation_method": "获取待分析句子及其中的方面词，进行预处理得到输入向量序列和句法加权图，输入双重图卷积神经网络进行情感分析",
+    "technical_effects": "提高了情感分析结果的准确性",
+    "keywords": [
+      "图卷积神经网络",
+      "方面级情感分析",
+      "句法特征",
+      "语义特征"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "句法图卷积子神经网络",
+      "自注意力机制",
+      "语义图卷积子神经网络",
+      "双重图卷积神经网络"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明涉及一种基于图卷积神经网络的方面级情感分析方法，通过双重图卷积神经网络同时提取句子的句法相关特征和语义相关特征，解决了传统方法在句法特征提取上的不足，提高了情感分析的准确性。",
+    "file_id": "一种基于图卷积神经网络的方面级情感分析方法及装置_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1779,
+    "generation_time": "2025-07-31 21:27:37"
+  },
+  "一种基于多层次图卷积网络的电力设备故障溯源方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于多层次图卷积网络的电力设备故障溯源方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "电力设备故障溯源",
+    "technical_problem": "确定电力设备故障位置",
+    "technical_solution": "使用多层次图卷积网络对电力设备的故障文本信息进行识别",
+    "key_innovations": [
+      "基于多层次图卷积网络",
+      "电力工单图G(V,E)",
+      "TF-IDF指标和PMI指标"
+    ],
+    "implementation_method": "包括步骤1-4，具体涉及TF-IDF和PMI的计算，图卷积网络的构建和训练等",
+    "technical_effects": "提高电力设备故障位置的识别效率",
+    "keywords": [
+      "多层次图卷积网络",
+      "电力设备故障",
+      "TF-IDF",
+      "PMI",
+      "电力工单图"
+    ],
+    "application_scenarios": [
+      "电力工单系统"
+    ],
+    "technical_concepts": [
+      "图卷积网络",
+      "ReLU激活函数",
+      "交叉熵函数",
+      "拉普拉斯矩阵"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "该专利提出了一种基于多层次图卷积网络的电力设备故障溯源方法，通过收集故障文本信息并计算TF-IDF和PMI指标，构建电力工单图，进而训练多层次图卷积网络以识别故障位置，旨在提高电力设备故障识别的效率。",
+    "file_id": "一种基于多层次图卷积网络的电力设备故障溯源方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 875,
+    "generation_time": "2025-07-31 21:27:51"
+  },
+  "一种基于对应的深层信念网络的跨模态检索方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于对应的深层信念网络的跨模态检索方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "跨模态检索",
+    "technical_problem": "不同模态数据检索匹配的准确性问题",
+    "technical_solution": "使用对应的深层信念网络Corr-DBN进行高级向量提取和距离计算",
+    "key_innovations": [
+      "Corr-DBN",
+      "双受限波尔兹曼机RBM结构",
+      "相关性约束的Corr-RBM"
+    ],
+    "implementation_method": "特征提取，使用双RBM模型获得中级向量，通过Corr-RBM模型获得高级向量，计算欧氏距离并排序输出",
+    "technical_effects": "提高检索效率，获取更准确的检索结果",
+    "keywords": [
+      "跨模态检索",
+      "深层信念网络",
+      "Corr-DBN",
+      "双RBM模型",
+      "欧氏距离"
+    ],
+    "application_scenarios": [
+      "图像、文本或语音检索"
+    ],
+    "technical_concepts": [
+      "深层信念网络",
+      "双受限波尔兹曼机",
+      "Corr-RBM",
+      "特征提取",
+      "欧氏距离计算"
+    ],
+    "claims_summary": "利用Corr-DBN进行跨模态检索的方法及其步骤",
+    "summary": "本发明涉及一种基于对应的深层信念网络Corr-DBN的跨模态检索方法，通过双受限波尔兹曼机RBM结构提取高级向量，并使用欧氏距离计算进行检索，有效提高检索效率与准确性，适用于图像、文本或语音等多种模态数据的检索。",
+    "file_id": "一种基于对应的深层信念网络的跨模态检索方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1139,
+    "generation_time": "2025-07-31 21:28:08"
+  },
+  "一种基于强化学习的电力设备检修决策生成方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于强化学习的电力设备检修决策生成方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "电力设备检修",
+    "technical_problem": "如何最小化电网整体运行损失",
+    "technical_solution": "将电力设备检修决策生成问题建模为一个马尔可夫决策过程，应用强化学习方法求解最优策略和价值矩阵",
+    "key_innovations": [
+      "割集方法计算设备重要性",
+      "动态权重加权电网运行损失",
+      "强化学习动态规划求解多设备电力检修策略"
+    ],
+    "implementation_method": "包括计算割集，定义设备运行状态，计算状态转移矩阵，使用动态权重进行强化学习动态规划求解等步骤",
+    "technical_effects": "降低应用门槛，实现设备间通信，通过仿真验证方法有效性",
+    "keywords": [
+      "强化学习",
+      "电力设备检修",
+      "割集",
+      "动态权重",
+      "马尔可夫决策过程"
+    ],
+    "application_scenarios": [
+      "多电力设备问题",
+      "电网设备检修决策生成"
+    ],
+    "technical_concepts": [
+      "割集",
+      "强化学习",
+      "动态规划",
+      "马尔可夫决策过程",
+      "价值矩阵",
+      "状态转移矩阵"
+    ],
+    "claims_summary": "提出一种基于割集和强化学习的电力设备检修决策生成方法，通过动态权重优化策略，以最小化电网整体运行损失",
+    "summary": "本专利提出一种基于割集和强化学习的电力设备检修决策生成方法，通过计算设备引起的电网运行损失权重，并利用动态权重进行优化，以最小化电网整体运行损失。该方法适用于多电力设备问题，能够实现设备间通信，降低应用门槛，并通过仿真验证了其有效性。",
+    "file_id": "一种基于强化学习的电力设备检修决策生成方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1151,
+    "generation_time": "2025-07-31 21:28:23"
+  },
+  "一种基于深层模型的跨模态检索方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于深层模型的跨模态检索方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "跨模态检索",
+    "technical_problem": "不同模态数据检索的匹配问题",
+    "technical_solution": "利用受限波尔兹曼机Corr-RBMs深层模型处理低级表达向量，计算高级表达向量间的距离，确定匹配对象",
+    "key_innovations": [
+      "Corr-RBMs深层模型",
+      "跨模态检索的高级表达向量计算"
+    ],
+    "implementation_method": "步骤包括：1. 特征提取；2. 利用Corr-RBMs深层模型处理；3. 计算欧氏距离；4. 确定匹配对象",
+    "technical_effects": "提高跨模态检索的效率和准确性",
+    "keywords": [
+      "跨模态检索",
+      "Corr-RBMs",
+      "受限波尔兹曼机",
+      "低级表达向量",
+      "高级表达向量",
+      "欧氏距离"
+    ],
+    "application_scenarios": [
+      "图像、文本或语音模态检索"
+    ],
+    "technical_concepts": [
+      "Corr-RBMs深层模型",
+      "特征提取",
+      "欧氏距离计算"
+    ],
+    "claims_summary": "提出的方法涉及使用Corr-RBMs深层模型进行跨模态检索，包括特征提取、高级表达计算和距离排序等步骤",
+    "summary": "本专利提出了一种基于受限波尔兹曼机Corr-RBMs深层模型的跨模态检索方法，通过处理不同模态数据的低级表达向量，计算高级表达向量间的欧氏距离，以实现高效的跨模态检索，可应用于图像、文本或语音模态的检索场景。",
+    "file_id": "一种基于深层模型的跨模态检索方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1099,
+    "generation_time": "2025-07-31 21:28:39"
+  },
+  "一种基于自动编码器的视频分类方法及装置_李睿凡": {
+    "document_type": "patent",
+    "title": "基于自动编码器的视频分类方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "视频分类",
+    "technical_problem": "提高视频分类的准确性",
+    "technical_solution": "结合视频的三种模态数据，通过自动编码器和有监督分类模型进行分类",
+    "key_innovations": [
+      "使用堆叠自动编码器组获得高级表示内容",
+      "双模态和三模态融合器的应用",
+      "基于Softmax分类器的有监督学习方式"
+    ],
+    "implementation_method": "包括获取低级表示内容、输入堆叠自动编码器、双模态和三模态融合、有监督分类模型训练等步骤",
+    "technical_effects": "确保分类准确性",
+    "keywords": [
+      "自动编码器",
+      "视频分类",
+      "双模态融合",
+      "三模态融合",
+      "Softmax分类器"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "低级表示内容",
+      "高级表示内容",
+      "双模态公共表示内容",
+      "三模态公共表示内容",
+      "有监督分类模型"
+    ],
+    "claims_summary": "一种基于自动编码器的视频分类方法及装置，包括模态数据处理、融合和分类步骤",
+    "summary": "本发明涉及一种视频分类方法及装置，通过自动编码器处理图像、音频和文本模态数据，并采用双模态和三模态融合技术，结合有监督分类模型，提高视频分类的准确性。技术方案包括模态数据低级表示内容的获取、高级表示内容的处理、融合器的应用以及分类模型的训练等步骤。",
+    "file_id": "一种基于自动编码器的视频分类方法及装置_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1487,
+    "generation_time": "2025-07-31 21:28:56"
+  },
+  "一种多特征多通道图卷积网络模型训练方法及属性情感三元组抽取方法_李睿凡": {
+    "document_type": "patent",
+    "title": "多特征多通道图卷积网络模型训练方法及属性情感三元组抽取方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "自然语言处理",
+    "technical_problem": "提高属性情感三元组抽取的准确度",
+    "technical_solution": "利用多特征多通道图卷积网络模型训练，通过多通道邻接张量构建和图卷积操作，结合词法和句法信息，抽取属性情感三元组",
+    "key_innovations": [
+      "多特征多通道图卷积网络模型",
+      "双仿射注意力机制",
+      "属性情感三元组抽取方法"
+    ],
+    "implementation_method": "包括词向量编码、邻接张量生成、图卷积和池化、概率分布张量计算、损失函数优化等步骤",
+    "technical_effects": "可以学习到关系意识的节点表示，提高属性情感三元组抽取的准确度",
+    "keywords": [
+      "图卷积网络",
+      "属性情感三元组",
+      "多通道",
+      "注意力机制"
+    ],
+    "application_scenarios": [
+      "属性情感分析",
+      "文本挖掘",
+      "自然语言理解"
+    ],
+    "technical_concepts": [
+      "邻接张量",
+      "图卷积",
+      "多层感知机",
+      "注意力计算"
+    ],
+    "claims_summary": "涉及一种多特征多通道图卷积网络模型训练方法，以及使用该方法进行属性情感三元组抽取的技术方案",
+    "summary": "本发明提出了一种基于多特征多通道图卷积网络模型的方法，用于抽取文本中的属性情感三元组。通过引入双仿射注意力机制和多种邻接张量，模型能够有效提高属性情感分析的准确度，适用于自然语言处理中的情感分析、文本挖掘等领域。",
+    "file_id": "一种多特征多通道图卷积网络模型训练方法及属性情感三元组抽取方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 3232,
+    "generation_time": "2025-07-31 21:29:13"
+  },
+  "一种方面级情感分析方法、装置、电子设备及存储介质_李睿凡": {
+    "document_type": "patent",
+    "title": "方面级情感分析方法、装置、电子设备及存储介质",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "情感分析",
+    "technical_problem": "提高情感分析结果的准确性",
+    "technical_solution": "基于相似结构数据集进行聚合特征处理，利用双向长短期记忆网络进行特征转换，对目标句子及方面词进行预处理得到依赖关系图和位置编码特征，输入图卷积神经网络得到情感分析结果",
+    "key_innovations": [
+      "方面级情感分析方法",
+      "双向长短期记忆网络",
+      "图卷积神经网络"
+    ],
+    "implementation_method": "聚合特征模块、特征转换模块、位置编码模块和情感分析模块的具体步骤",
+    "technical_effects": "提高情感分析的准确性",
+    "keywords": [
+      "方面级情感分析",
+      "双向长短期记忆网络",
+      "图卷积神经网络",
+      "聚合特征处理",
+      "位置编码"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "聚合特征模块",
+      "特征转换模块",
+      "位置编码模块",
+      "情感分析模块",
+      "图卷积神经网络",
+      "依赖关系图"
+    ],
+    "claims_summary": "涉及一种方面级情感分析方法、装置、电子设备及存储介质的专利权利要求",
+    "summary": "本专利提出了一种方面级情感分析方法，通过对待分析的目标句子及其中的方面词进行聚合特征处理、特征转换和位置编码，利用图卷积神经网络进行情感分析，旨在提高情感分析的准确性。专利描述了相关的装置和电子设备，以及一种图卷积神经网络的训练方法。",
+    "file_id": "一种方面级情感分析方法、装置、电子设备及存储介质_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1950,
+    "generation_time": "2025-07-31 21:29:31"
+  },
+  "人脸重定向模型、模型训练方法及装置_张航": {
+    "document_type": "patent",
+    "title": "人脸重定向模型、模型训练方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "提高视线估计算法的样本集质量",
+    "technical_problem": "提高样本集质量",
+    "technical_solution": "人脸重定向模型包括编码器、无关属性分解模块、交叉属性分离模块和解码器，通过特征交换和角度旋转实现人脸图像的重定向",
+    "key_innovations": [
+      "特征交换",
+      "角度旋转",
+      "正交损失函数"
+    ],
+    "implementation_method": "包括特征提取、特征交换、图像生成和参数更新等步骤",
+    "technical_effects": "通过交换视线特征和/或头部特征，解耦两者并保持其他特征不变，从而生成新的人脸图像，用于数据增广，提高样本集质量",
+    "keywords": [
+      "人脸重定向模型",
+      "特征交换",
+      "视线特征",
+      "头部特征",
+      "正交损失函数"
+    ],
+    "application_scenarios": [
+      "视线估计",
+      "数据增广"
+    ],
+    "technical_concepts": [
+      "编码器",
+      "无关属性分解模块",
+      "交叉属性分离模块",
+      "解码器",
+      "特征提取",
+      "参数更新"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本专利提供了一种人脸重定向模型及其训练方法和装置，通过特征交换和角度旋转技术，实现不同人脸图像间的视线特征和头部特征的互换，旨在提高视线估计算法的样本集质量，从而优化模型性能。",
+    "file_id": "人脸重定向模型、模型训练方法及装置_张航",
+    "source_type": "cleaned",
+    "text_length": 1577,
+    "generation_time": "2025-07-31 21:29:49"
+  },
+  "图像生成模型的训练方法和设备以及图像生成方法_杨博": {
+    "document_type": "patent",
+    "title": "一种图像生成模型的训练方法和设备以及图像生成方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像生成",
+    "technical_problem": "保证生成图像与文本的一致性",
+    "technical_solution": "获取样本数据，基于图像描述文本进行句子级别和词级别编码，使用无条件对抗子网络和条件对抗子网络生成图像，并计算对抗损失函数值以更新图像生成模型参数",
+    "key_innovations": [
+      "采用句子级别和词级别编码",
+      "无条件对抗子网络和条件对抗子网络的使用",
+      "加权计算损失函数值以增强图文一致性"
+    ],
+    "implementation_method": "包括获取样本数据，编码，生成图像，计算损失函数，更新参数等步骤",
+    "technical_effects": "可保证生成图像与文本的一致性",
+    "keywords": [
+      "图像生成模型",
+      "样本数据",
+      "句子级别编码",
+      "词级别编码",
+      "对抗子网络",
+      "条件对抗损失函数"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "句子向量",
+      "词向量",
+      "高斯噪声",
+      "对抗损失函数",
+      "文本编码器",
+      "注意力机制",
+      "动态内存方法",
+      "残差层",
+      "上采样层",
+      "交叉熵损失"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明提供了一种图像生成模型的训练方法和设备，通过结合句子级别和词级别的编码以及对抗子网络，确保生成图像与文本描述的一致性。方法涉及使用高斯噪声作为输入，通过多个步骤的图像生成和损失函数计算，不断更新模型参数，提高生成图像的质量。",
+    "file_id": "图像生成模型的训练方法和设备以及图像生成方法_杨博",
+    "source_type": "cleaned",
+    "text_length": 1290,
+    "generation_time": "2025-07-31 21:30:07"
+  },
+  "基于多层神经网络的电力实体识别方法、存储介质和设备_刘子全": {
+    "document_type": "patent",
+    "title": "一种基于多层神经网络的电力实体识别方法、存储介质和设备",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "电力领域",
+    "technical_problem": "中文命名实体识别的精度问题",
+    "technical_solution": "使用BERT电力实体识别模型，通过哈夫曼编码映射得到实体标签",
+    "key_innovations": [
+      "使用BERT语言模型进行预训练",
+      "构建电力实体标签的哈夫曼编码",
+      "增加分类层构成BERT电力实体识别模型"
+    ],
+    "implementation_method": "包括伪标注语料构建、哈夫曼编码构建、BERT电力实体识别模型训练等步骤",
+    "technical_effects": "提高了电力领域中文命名实体识别的精度",
+    "keywords": [
+      "多层神经网络",
+      "电力实体识别",
+      "BERT",
+      "哈夫曼编码"
+    ],
+    "application_scenarios": [
+      "电力语料实体识别"
+    ],
+    "technical_concepts": [
+      "BERT电力实体识别模型",
+      "哈夫曼树编码",
+      "伪标注语料"
+    ],
+    "claims_summary": "基于多层神经网络的电力实体识别方法、存储介质和设备的技术方案和效果",
+    "summary": "本发明涉及一种基于多层神经网络的电力实体识别方法，通过使用BERT语言模型和哈夫曼编码技术，提高了电力领域中文命名实体识别的精度。该方法包括构建伪标注语料、构建哈夫曼编码、训练BERT电力实体识别模型等步骤，并可用于计算机可读存储介质和计算设备中。",
+    "file_id": "基于多层神经网络的电力实体识别方法、存储介质和设备_刘子全",
+    "source_type": "cleaned",
+    "text_length": 996,
+    "generation_time": "2025-07-31 21:30:21"
+  },
+  "基于掩码上下文机器阅读理解的方面情感三元组抽取方法_李睿凡": {
+    "document_type": "patent",
+    "title": "一种基于掩码上下文机器阅读理解的方面情感三元组抽取方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "方面情感分析任务",
+    "technical_problem": "方面情感分析任务中包含多个方面词句子的干扰问题",
+    "technical_solution": "使用BERT作为句子的编码器，通过掩码上下文进行方面词和意见词的抽取，以及情感分类",
+    "key_innovations": [
+      "基于掩码上下文机器阅读理解(COM-MRC)的方面情感三元组抽取方法",
+      "上下文数据增强方法",
+      "适应推理算法的有效模型架构"
+    ],
+    "implementation_method": "方面词推理算法、上下文数据增强方法、模型架构包括方面词提取、意见词提取、情感分类和方面词存在探测四个模块",
+    "technical_effects": "有效解决了传统MRC方法面临的方面词干扰问题",
+    "keywords": [
+      "掩码上下文",
+      "机器阅读理解",
+      "方面情感三元组",
+      "BERT",
+      "数据增强"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "方面词推理算法",
+      "上下文数据增强方法",
+      "COM-MRC框架",
+      "注意力矩阵",
+      "损失函数"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明提出了一种基于掩码上下文机器阅读理解(COM-MRC)的方法，用于解决方面情感分析中的方面词干扰问题。该方法使用BERT模型，通过掩码上下文抽取方面词和意见词，并进行情感分类，实现了方面情感三元组的抽取，提高了模型在多方面词句子的处理能力。",
+    "file_id": "基于掩码上下文机器阅读理解的方面情感三元组抽取方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 781,
+    "generation_time": "2025-07-31 21:30:38"
+  },
+  "基于文本生成图像的模型训练方法、设备和图像生成方法_冯方向": {
+    "document_type": "patent",
+    "title": "一种基于文本生成图像的模型训练方法、设备和图像生成方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "基于文本生成图像",
+    "technical_problem": "提高模型学习效率和图像生成效果",
+    "technical_solution": "通过模态解纠缠提取真实度参数的模型训练方法",
+    "key_innovations": [
+      "模态解纠缠方式提取真实度参数",
+      "内容损失函数采用排序目标函数的三元组损失函数",
+      "各损失函数线性组合构成总体损失函数"
+    ],
+    "implementation_method": "包括训练样本处理、损失函数计算、模型参数调整等步骤",
+    "technical_effects": "提高了模型学习效率和图像生成效果",
+    "keywords": [
+      "文本生成图像",
+      "模态解纠缠",
+      "损失函数",
+      "模型训练"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "图像生成模型",
+      "真实度参数",
+      "子损失函数",
+      "总体损失函数",
+      "内容损失函数",
+      "风格损失函数",
+      "生成器损失函数",
+      "判别器损失函数"
+    ],
+    "claims_summary": "提供了一种基于文本生成图像的方法、模型训练设备和存储介质，涉及模型训练的步骤和参数调整方法",
+    "summary": "本发明涉及一种基于文本生成图像的模型训练方法，通过模态解纠缠提取真实度参数，使用多种损失函数计算并调整模型参数，从而提高模型学习效率和图像生成效果。专利还包括了相关设备和存储介质。",
+    "file_id": "基于文本生成图像的模型训练方法、设备和图像生成方法_冯方向",
+    "source_type": "cleaned",
+    "text_length": 881,
+    "generation_time": "2025-07-31 21:30:52"
+  },
+  "基于特征分布迁移的小样本图像特征学习方法及装置_李晓旭": {
+    "document_type": "patent",
+    "title": "一种基于特征分布迁移的小样本图像特征学习方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "小样本图像分类",
+    "technical_problem": "小样本图像分类中的原型偏差问题",
+    "technical_solution": "通过特征分布迁移的方法减少原型偏差",
+    "key_innovations": [
+      "特征分布迁移",
+      "小样本图像特征学习",
+      "分布学习模块",
+      "嵌入模块"
+    ],
+    "implementation_method": "包括数据预处理、预训练嵌入模块、分布学习、分布原型计算等步骤",
+    "technical_effects": "提高小样本图像分类效果",
+    "keywords": [
+      "特征分布迁移",
+      "小样本",
+      "图像特征学习",
+      "分布学习模块",
+      "嵌入模块"
+    ],
+    "application_scenarios": [
+      "C-way K-shot分类任务"
+    ],
+    "technical_concepts": [
+      "嵌入模块fθ",
+      "分布学习模块gφ",
+      "分布原型",
+      "类别概率计算"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本专利提出了一种基于特征分布迁移的小样本图像特征学习方法及装置，通过优化分布学习模块和嵌入模块，减少小样本图像分类中的原型偏差，从而提高分类效果。该方法适用于C-way K-shot分类任务，包含数据预处理、特征提取、分布学习和预测等步骤。",
+    "file_id": "基于特征分布迁移的小样本图像特征学习方法及装置_李晓旭",
+    "source_type": "cleaned",
+    "text_length": 1132,
+    "generation_time": "2025-07-31 21:31:06"
+  },
+  "基于自训练的小样本图像集成分类方法及装置_李晓旭": {
+    "document_type": "patent",
+    "title": "一种基于自训练的小样本图像集成分类方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "小样本图像集成分类",
+    "technical_problem": "现有小样本分类方法中基学习器的多样性问题",
+    "technical_solution": "通过迁移基类数据的卷积特征提取，使用查询样本进行基分类器的自训练，运用模型平均得到集成分类器",
+    "key_innovations": [
+      "基于查询样本自训练和模型平均的集成分类方法",
+      "解决基分类器多样性问题"
+    ],
+    "implementation_method": "使用Baseline++网络结构，在支持集上训练得到基分类器，通过迭代更新分类器、集成分类器和伪标签预测集",
+    "technical_effects": "显著提升了图像分类效果，具有很高的使用价值",
+    "keywords": [
+      "自训练",
+      "小样本图像分类",
+      "集成分类器",
+      "Baseline++网络结构",
+      "模型平均"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "卷积特征提取",
+      "支持集",
+      "查询集",
+      "伪标签预测集",
+      "模型平均",
+      "集成分类"
+    ],
+    "claims_summary": "提供了一种基于自训练的小样本图像集成分类装置，包括预训练模块、自训练模块和集成分类模块",
+    "summary": "本发明涉及一种基于自训练的小样本图像集成分类方法及装置，通过基分类器的自训练和模型平均，解决了基分类器多样性问题，提高了图像分类效果，适用于小样本图像分类领域。",
+    "file_id": "基于自训练的小样本图像集成分类方法及装置_李晓旭",
+    "source_type": "cleaned",
+    "text_length": 1361,
+    "generation_time": "2025-07-31 21:31:23"
+  },
+  "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡": {
+    "document_type": "patent",
+    "title": "基于语言引导的指称表达理解推理网络系统及推理方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "REC任务",
+    "technical_problem": "如何充分利用指称表达式的指导作用，提高模型性能",
+    "technical_solution": "采用LGR-NET模型，包括文本特征提取器、图像特征提取器、文本特征扩展器(TFE)、跨模态对齐模块(TCA)和跨模态融合模块(TCF)",
+    "key_innovations": [
+      "语言引导推理网络模型(LGR-NET)",
+      "文本特征扩展模块(TFE)",
+      "新颖的跨模态损失"
+    ],
+    "implementation_method": "多模态特征提取、文本特征扩展、文本引导的跨模态对齐、跨模态融合和预测头步骤",
+    "technical_effects": "提高了模型性能，通过文本特征的多角度引导，增强了跨模态对齐",
+    "keywords": [
+      "指称表达式理解",
+      "跨模态推理",
+      "LGR-NET",
+      "TFE",
+      "TCA",
+      "TCF"
+    ],
+    "application_scenarios": [
+      "REC任务"
+    ],
+    "technical_concepts": [
+      "Swin Transformer",
+      "BERT",
+      "FFN",
+      "注意力机制",
+      "多头自注意力机制",
+      "跨模态注意力机制"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本专利提出了一种基于语言引导的指称表达理解推理网络系统及推理方法，通过LGR-NET模型及文本特征扩展等模块，有效提高了跨模态推理性能，应用于REC任务，展现出良好的技术效果。",
+    "file_id": "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 2125,
+    "generation_time": "2025-07-31 21:31:42"
+  },
+  "融入类别自适应度量学习的小样本图像分类方法及装置_李晓旭": {
+    "document_type": "patent",
+    "title": "融入类别自适应度量学习的小样本图像分类方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "小样本图像分类",
+    "technical_problem": "解决小样本图像分类中基于类内共性特征的度量学习问题",
+    "technical_solution": "为每个类别构建一个度量模块，通过对类内共性特征的学习，建立基于类内共性特征的度量",
+    "key_innovations": [
+      "融入类别自适应度量学习"
+    ],
+    "implementation_method": "数据预处理模块、构建网络模型模块、训练模型参数模块和测试模型性能模块",
+    "technical_effects": "提高小样本图像分类的性能，对于图像的分类效果十分明显，在实践中体现出极大价值",
+    "keywords": [
+      "类别自适应度量学习",
+      "小样本图像分类",
+      "度量模块",
+      "嵌入模块",
+      "均方误差损失函数"
+    ],
+    "application_scenarios": [
+      "C-way K-shot分类任务"
+    ],
+    "technical_concepts": [
+      "数据预处理模块",
+      "网络模型构建模块",
+      "模型参数训练模块",
+      "模型性能测试模块",
+      "嵌入模块fθ",
+      "类相关自适应度量模块"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明涉及一种小样本图像分类方法及装置，通过构建每个类别的度量模块，实现对类内共性特征的学习，并利用预训练的嵌入模块和类相关自适应度量模块，提高小样本图像分类的性能，具有明显的分类效果和应用价值。",
+    "file_id": "融入类别自适应度量学习的小样本图像分类方法及装置_李晓旭",
+    "source_type": "cleaned",
+    "text_length": 986,
+    "generation_time": "2025-07-31 21:31:59"
+  },
+  "负例训练样本采集方法、装置及模型训练方法、装置_李睿凡": {
+    "document_type": "patent",
+    "title": "负例训练样本采集方法及模型训练方法",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "图像检索",
+    "technical_problem": "在图像检索模型训练过程中，负例训练样本的采集和难度水平的确定问题",
+    "technical_solution": "通过对样本集合中各个表示向量的聚类，确定每个候选聚类的目标概率，基于此概率确定负例训练样本的第二聚类，兼顾不同难度水平的负例训练样本",
+    "key_innovations": [
+      "负例训练样本采集方法",
+      "基于概率的聚类抽取操作",
+      "模型训练过程中聚类结果的动态调整"
+    ],
+    "implementation_method": "包括样本集合构建、表示向量聚类、目标概率确定、第二聚类抽取、负例训练样本获取以及模型训练等步骤",
+    "technical_effects": "提高图像检索模型的检索准确率",
+    "keywords": [
+      "负例训练样本",
+      "图像检索",
+      "聚类",
+      "概率",
+      "模型训练"
+    ],
+    "application_scenarios": [
+      "图像识别",
+      "图像搜索",
+      "机器学习"
+    ],
+    "technical_concepts": [
+      "表示向量",
+      "聚类中心",
+      "目标概率",
+      "第二聚类",
+      "模型训练"
+    ],
+    "claims_summary": "涉及一种负例训练样本采集方法和模型训练方法，以及相应的装置",
+    "summary": "本发明提供了一种在图像检索领域中的负例训练样本采集方法和模型训练方法，通过聚类和概率确定，优化负例样本的选择，提高模型训练的准确率，适用于图像识别等多个应用场景。",
+    "file_id": "负例训练样本采集方法、装置及模型训练方法、装置_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 2527,
+    "generation_time": "2025-07-31 21:32:14"
+  },
+  "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭": {
+    "document_type": "patent",
+    "title": "面向小样本图像分类的任务相关度量学习方法及装置",
+    "inventors": [
+      "未在原文中明确提及"
+    ],
+    "patent_number": "未在原文中明确提及",
+    "application_domain": "小样本图像分类",
+    "technical_problem": "小样本图像分类中存在的自适应度量学习问题",
+    "technical_solution": "引入注意力机制和自适应度量学习，构建面向小样本图像分类的任务相关度量学习模型",
+    "key_innovations": [
+      "引入注意力机制",
+      "任务自适应度量学习",
+      "任务相关空间映射学习"
+    ],
+    "implementation_method": "数据预处理阶段、构建网络模型阶段、训练模型参数阶段和测试模型性能阶段",
+    "technical_effects": "提高在小样本条件下目标任务分类的准确性，改善图像的分类效果",
+    "keywords": [
+      "小样本图像分类",
+      "任务相关度量学习",
+      "注意力机制",
+      "自适应度量学习"
+    ],
+    "application_scenarios": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "卷积块",
+      "注意力模块",
+      "余弦度量模块",
+      "Adam优化算法"
+    ],
+    "claims_summary": "未在原文中明确提及",
+    "summary": "本发明针对小样本图像分类中的自适应度量学习问题，提出了一种引入注意力机制和任务自适应度量学习的模型及装置，包含数据预处理、网络模型构建、参数训练和性能测试等阶段，旨在提高分类准确性，具有改善图像分类效果的技术优势。",
+    "file_id": "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭",
+    "source_type": "cleaned",
+    "text_length": 713,
+    "generation_time": "2025-07-31 21:32:29"
+  },
+  "C语言实例对比_从抽象概念到代码直观": {
+    "document_type": "academic_paper",
+    "title": "C语言实例对比：从抽象概念到代码直观",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "C语言教学中的抽象概念",
+    "research_problem": "将程序思想转化为C语言代码，以及理解C语言的复杂特性，如指针；编码风格、程序设计的健壮性和可读性在教学中易被忽视",
+    "methodology": "实例对比法",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "通过实例代码，指导学生理解、运用C语言，培养良好的编程习惯",
+    "keywords": [
+      "比较法",
+      "C语言",
+      "可读性",
+      "健壮性",
+      "编码风格"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "程序版式",
+      "可读性",
+      "命名规则",
+      "健壮性",
+      "程序设计思路"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文探讨C语言教学中的抽象概念，采用实例对比法，从程序设计、可读性、健壮性等方面指导学生理解、运用C语言，培养良好的编程习惯，提高编程能力。",
+    "file_id": "C语言实例对比_从抽象概念到代码直观",
+    "source_type": "cleaned",
+    "text_length": 897,
+    "generation_time": "2025-07-31 21:32:42"
+  },
+  "人工生命中分布智能研究的一种可行方法": {
+    "document_type": "academic_paper",
+    "title": "人工生命中分布智能研究的一种可行方法",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "人工生命，分布智能",
+    "research_problem": "如何在人工生命这一新兴领域进行科学研究",
+    "methodology": "从理论生物学中选择研究起点的策略，利用现有模型",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "人工生命研究的方法学与其研究本身具有同样意义，理论生物学为人工生命提供了大量研究主题",
+    "keywords": [
+      "人工生命",
+      "分布智能",
+      "蚁群算法",
+      "粒子群优化"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "蚁群算法",
+      "粒子群算法",
+      "理论生物学",
+      "自组织",
+      "涌现式行为"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文分析了蚁群算法和粒子群算法的提出过程，提出了一种基于理论生物学选择研究起点的分布智能研究方法，并探讨了从自然生命到人工生命模型的拓展方法，强调了方法在人工生命研究中的重要性。",
+    "file_id": "人工生命中分布智能研究的一种可行方法",
+    "source_type": "cleaned",
+    "text_length": 874,
+    "generation_time": "2025-07-31 21:32:54"
+  },
+  "使用LDC码的BI_STCM_ID系统中的星座映射分析": {
+    "document_type": "academic_paper",
+    "title": "使用LDC码的BI-STCM-ID系统中的星座映射分析",
+    "authors": [
+      "赵传钢",
+      "李睿凡"
+    ],
+    "main_topic": "空时编码调制；星座映射；LDC码",
+    "research_problem": "BI-STCM-ID系统中的星座映射问题",
+    "methodology": "基于最大化编码增益的高维星座映射设计优化问题；基于最大化欧式距离调和均值的一维星座映射设计优化问题",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "证明了使用LDC码的BI-STCM-ID系统中星座映射的优化问题等价性，并提出其他空时编码方案的研究是下一步的课题",
+    "keywords": [
+      "空时编码调制",
+      "星座映射",
+      "LDC码"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "BI-STCM-ID系统",
+      "LDC码",
+      "空时编码器",
+      "MIMO信道模型",
+      "渐进性能",
+      "星座设计",
+      "调和均值准则"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文研究了BI-STCM-ID系统中采用LDC码的星座映射问题，通过分析证明了高维星座映射设计优化问题与一维星座映射设计优化问题的等价性，并提出了进一步的研究方向。",
+    "file_id": "使用LDC码的BI_STCM_ID系统中的星座映射分析",
+    "source_type": "cleaned",
+    "text_length": 959,
+    "generation_time": "2025-07-31 21:33:09"
+  },
+  "全卷积神经结构的段落式图像描述算法_李睿凡": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "段落式图像描述，跨模态智能",
+    "research_problem": "RNN解码器在长时记忆和连贯性方面存在局限",
+    "methodology": "基于全卷积结构的图像段落描述算法",
+    "key_innovations": [
+      "层次性的深度卷积解码器",
+      "门控机制嵌入卷积解码器网络"
+    ],
+    "experimental_results": "新算法在BLEU和CIDEr评测指标上取得较好结果，与现有方法相比有显著提升",
+    "conclusions": "所提方法生成的描述段落具有更强的上下文连贯性和语言逻辑性，减少了信息重复表达",
+    "keywords": [
+      "卷积神经网络",
+      "循环神经网络",
+      "全卷积结构",
+      "门控机制",
+      "段落式图像描述"
+    ],
+    "application_domains": [
+      "盲人导航",
+      "幼儿早期教育"
+    ],
+    "technical_concepts": [
+      "CNN",
+      "RNN",
+      "全卷积解码器",
+      "门控机制",
+      "BLEU",
+      "CIDEr"
+    ],
+    "performance_metrics": "BLEU得分，CIDEr得分，不同束大小参数的评测结果",
+    "summary": "本文针对现有段落式图像描述算法中RNN解码器的局限性，提出了一种基于全卷积结构的图像段落描述算法。该算法通过层次性深度卷积解码器和门控机制提升连贯性和记忆能力，实验结果表明，新算法在连贯性和语言逻辑性方面优于现有方法，适用于盲人导航和幼儿教育等领域。",
+    "file_id": "全卷积神经结构的段落式图像描述算法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 1693,
+    "generation_time": "2025-07-31 21:33:25"
+  },
+  "基于KFD_Isomap的人脸识别": {
+    "document_type": "academic_paper",
+    "title": "基于KFD-l somap的人脸识别",
+    "authors": [
+      "李睿凡",
+      "郝红卫",
+      "涂序彦",
+      "王枞"
+    ],
+    "main_topic": "人脸识别",
+    "research_problem": "Isomap流形学习方法在模式分类上并非最优",
+    "methodology": "KFD—Isomap算法",
+    "key_innovations": [
+      "用核Fisher判别替代Isomap中的经典多维尺度分析"
+    ],
+    "experimental_results": "使用KFD-isomap、Isomap、Ext-Isomap、特征脸、Fisher脸等进行人脸识别实验，KFD-Isomap表现出最好的性能",
+    "conclusions": "提出的方法性能优于实验采用的其他方法",
+    "keywords": [
+      "人脸识别",
+      "流形",
+      "Isomap",
+      "核Fisher判别"
+    ],
+    "application_domains": [
+      "人脸识别"
+    ],
+    "technical_concepts": [
+      "KFD-Isomap",
+      "Isomap",
+      "核Fisher判别",
+      "多维尺度分析"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文针对Isomap在模式分类上的不足，提出了一种基于核Fisher判别的改进算法KFD-Isomap，并将其应用于人脸识别。实验结果表明，KFD-Isomap在ORL和Yale两个人脸数据库上的表现优于其他方法。",
+    "file_id": "基于KFD_Isomap的人脸识别",
+    "source_type": "cleaned",
+    "text_length": 700,
+    "generation_time": "2025-07-31 21:33:39"
+  },
+  "增强提示学习的少样本文本分类方法_李睿凡": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "少样本文本分类任务",
+    "research_problem": "少样本学习场景中数据量有限，导致模型泛化能力不足和灾难性遗忘问题",
+    "methodology": "EPL4FTC提示学习增强分类算法",
+    "key_innovations": [
+      "将文本分类任务转换为基于自然语言推理的提示学习形式",
+      "引入三元组损失联合优化",
+      "使用掩码语言模型任务作为正则项"
+    ],
+    "experimental_results": "在多个中英文文本分类数据集上进行了实验评估，EPL4FTC方法在准确度性能上明显优于对比的基线方法",
+    "conclusions": "EPL4FTC算法在少样本学习场景中具有有效性，尤其在中文文本分类任务的平均准确率性能上取得了最高的成绩",
+    "keywords": [
+      "少样本学习",
+      "文本分类",
+      "自然语言推理",
+      "三元组损失",
+      "掩码语言模型"
+    ],
+    "application_domains": [
+      "文本分类",
+      "自然语言处理"
+    ],
+    "technical_concepts": [
+      "EPL4FTC算法",
+      "自然语言推理",
+      "三元组损失",
+      "掩码语言模型",
+      "提示学习"
+    ],
+    "performance_metrics": "准确率(Accuracy)",
+    "summary": "本文针对少样本文本分类任务提出EPL4FTC算法，通过自然语言推理和三元组损失优化等方法提升模型泛化能力，实验证明在多种数据集上具有优越性能。",
+    "file_id": "增强提示学习的少样本文本分类方法_李睿凡",
+    "source_type": "cleaned",
+    "text_length": 4267,
+    "generation_time": "2025-07-31 21:33:55"
+  },
+  "引入深度学习的人工智能类课程": {
+    "document_type": "academic_paper",
+    "title": "引入深度学习的人工智能类课程",
+    "authors": [
+      "李睿凡",
+      "王小捷",
+      "钟义信"
+    ],
+    "main_topic": "在人工智能类课程中引入深度学习的初步内容和实施建议",
+    "research_problem": "未在原文中明确提及",
+    "methodology": "未在原文中明确提及",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "建议将深度学习引入人工智能类课程，共同推进教学工作。",
+    "keywords": [
+      "人工智能",
+      "深度学习",
+      "教学建议"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "深度学习",
+      "层次训练的基本算法",
+      "波尔兹曼机",
+      "深层信念网络"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文分析了在人工智能类课程中引入深度学习的必要性和可行性，并提出了相应的实施建议，包括教学内容和课件的安排，以推进教学工作的发展。",
+    "file_id": "引入深度学习的人工智能类课程",
+    "source_type": "cleaned",
+    "text_length": 1528,
+    "generation_time": "2025-07-31 21:34:07"
+  },
+  "探索神经网络深度学习的教学": {
+    "document_type": "academic_paper",
+    "title": "探索神经网络深度学习的教学",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "深度学习教学",
+    "research_problem": "如何在本科生与研究生课程中有效开展深度学习教学",
+    "methodology": "未在原文中明确提及",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "期望本研究能引起同行共鸣，共同推进深度学习教学工作",
+    "keywords": [
+      "智能科学与技术",
+      "深度学习",
+      "教学建议"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "多层感知器",
+      "经典后传算法",
+      "自编码器",
+      "无监督的特征学习",
+      "深度神经网络基础"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文讨论了在本科生和研究生课程中有效开展深度学习教学的方法，包括教学内容和建议，以使学生能掌握深度学习的核心内容，理解其研究动机，并应用于实际问题，旨在提升学生对智能科学与技术的兴趣和创新意识。",
+    "file_id": "探索神经网络深度学习的教学",
+    "source_type": "cleaned",
+    "text_length": 519,
+    "generation_time": "2025-07-31 21:34:18"
+  },
+  "智能科学与技术专业本科生导师制的研究与实践": {
+    "document_type": "academic_paper",
+    "title": "智能科学与技术专业本科生导师制研究",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "智能科学与技术专业本科生导师制的实施方法及质量评价",
+    "research_problem": "在智能科学与技术专业教育中存在的教育模式问题",
+    "methodology": "基于北京邮电大学智能科学技术中心实践探索适合2、3年级学生的导师制工作办法",
+    "key_innovations": [
+      "提出适合智能科学与技术专业的导师制工作形式和办法",
+      "给出导师制与其他教育模式的结合建议",
+      "提出相关质量评价方法"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "导师制在智能科学与技术专业2、3年级学生中实施能有效提升教育质量和学生能力",
+    "keywords": [
+      "智能科学与技术",
+      "本科生导师制",
+      "工作形式和办法",
+      "质量评价方法"
+    ],
+    "application_domains": [
+      "智能科学与技术专业教育"
+    ],
+    "technical_concepts": [
+      "导师制",
+      "教育模式",
+      "质量评价方法"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文研究了智能科学与技术专业本科生导师制的实施方法，结合实践提出了适合2、3年级学生的导师制工作办法，并探讨了与其他教育模式的结合及质量评价方法，旨在提升专业教育质量和学生的专业认知能力。",
+    "file_id": "智能科学与技术专业本科生导师制的研究与实践",
+    "source_type": "cleaned",
+    "text_length": 7246,
+    "generation_time": "2025-07-31 21:34:35"
+  },
+  "智能科学技术导论教学目的及策略": {
+    "document_type": "academic_paper",
+    "title": "智能科学技术导论教学目的及策略",
+    "authors": [
+      "周延泉",
+      "李睿凡",
+      "焦晨晨"
+    ],
+    "main_topic": "智能科学技术导论的教学目的、策略和改进思考",
+    "research_problem": "智能科学技术导论课程教学存在的问题",
+    "methodology": "未在原文中明确提及",
+    "key_innovations": [
+      "改革教学模式",
+      "课堂与实验室结合教学",
+      "多样化、全方位的考评模式"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "通过改革教学模式、结合实验室教学和多样化考评，可以提高智能科学技术导论课程的教学效果，激发学生学习兴趣，为后续学习打下坚实基础",
+    "keywords": [
+      "智能科学技术导论",
+      "教学目标",
+      "教学策略"
+    ],
+    "application_domains": "未在原文中明确提及",
+    "technical_concepts": "未在原文中明确提及",
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文针对智能科学技术导论的教学现状，探讨了课程结构设置及教学策略，提出了包括改革教学模式、实验室教学和多样化考评等在内的改进措施，旨在提升课程教学效果和学生的学习兴趣，为培养具有基本理论知识、技能和创新能力的复合型人才奠定基础。",
+    "file_id": "智能科学技术导论教学目的及策略",
+    "source_type": "cleaned",
+    "text_length": 599,
+    "generation_time": "2025-07-31 21:34:48"
+  },
+  "深度学习中卷积神经网络的教学探讨": {
+    "document_type": "academic_paper",
+    "title": "深度学习中卷积神经网络的教学探讨",
+    "authors": [
+      "李睿凡",
+      "陈佳洁",
+      "周延泉",
+      "王小捷",
+      "钟义信"
+    ],
+    "main_topic": "深度学习中的卷积神经网络的教学工作",
+    "research_problem": "如何将深度学习的最新成果介绍给学生，提升学习兴趣，激发创新动力",
+    "methodology": "教学内容安排和教学内容之外的考虑",
+    "key_innovations": [
+      "未在原文中明确提及"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "卷积神经网络是深度学习中备受瞩目的研究主题，需要更深入的研究，内容仍然不够成熟，给教学工作者提出了更高的要求",
+    "keywords": [
+      "智能科学与技术",
+      "深度学习",
+      "卷积神经网络",
+      "教学建议"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "人工神经网络",
+      "深度学习",
+      "卷积神经网络",
+      "机器学习",
+      "Hopfield神经网络",
+      "多层前向神经网络",
+      "反向传播算法"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文探讨了深度学习中卷积神经网络的教学方法，包括教学内容和额外考虑因素，旨在让学生接触前沿技术，提高学习兴趣和创新动力。文中介绍了教学内容的三个部分，并强调了实际应用和激发学生兴趣的重要性。",
+    "file_id": "深度学习中卷积神经网络的教学探讨",
+    "source_type": "cleaned",
+    "text_length": 1097,
+    "generation_time": "2025-07-31 21:35:01"
+  },
+  "计算机游戏中的智能技术": {
+    "document_type": "academic_paper",
+    "title": "智能信息处理 计算机游戏中的智能技术",
+    "authors": [
+      "李睿凡",
+      "左申正",
+      "李卫"
+    ],
+    "main_topic": "计算机游戏中的智能技术",
+    "research_problem": "如何将学术人工智能技术应用于游戏产业，推动游戏产业的发展",
+    "methodology": "讨论游戏设计元素与人工智能之间的关系，介绍A*算法、有限状态机、群体寻径等技术，讨论适应与学习等游戏开发者关注的问题",
+    "key_innovations": [
+      "提出游戏AI设计的目标和实现方法",
+      "探讨不同学习方法在游戏AI中的应用"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "学术人工智能技术将为游戏产业的发展注入新的活力",
+    "keywords": [
+      "人工智能",
+      "有限状态机",
+      "群体智能",
+      "神经网络",
+      "遗传算法"
+    ],
+    "application_domains": [
+      "计算机游戏"
+    ],
+    "technical_concepts": [
+      "A*算法",
+      "有限状态机",
+      "群体寻径",
+      "N-gram模型",
+      "遗传算法",
+      "神经网络",
+      "粒子群优化"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文探讨了计算机游戏中智能技术的应用，分析了游戏设计元素与人工智能之间的关系，并介绍了A*算法、有限状态机等成熟技术以及N-gram模型等学习方法在游戏AI中的应用，指出学术人工智能技术对游戏产业的潜在推动力。",
+    "file_id": "计算机游戏中的智能技术",
+    "source_type": "cleaned",
+    "text_length": 4775,
+    "generation_time": "2025-07-31 21:35:16"
+  },
+  "面向_智能科学与技术_专业的C语言教学探讨": {
+    "document_type": "academic_paper",
+    "title": "面向‘智能科学与技术’专业的C语言教学探讨",
+    "authors": [
+      "李睿凡",
+      "李蕾"
+    ],
+    "main_topic": "智能科学与技术专业的C语言教学变革",
+    "research_problem": "新专业要求和学时压缩的问题",
+    "methodology": "教学内容和方法改变的具体措施，将课程分为语言学习和项目实践两大部分",
+    "key_innovations": [
+      "引入机器智能前沿问题作为实践项目"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "为相关教学提供参考",
+    "keywords": [
+      "C语言",
+      "智能科学与技术",
+      "教学"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "C语言程序设计",
+      "机器智能前沿问题",
+      "教学进程影响因素"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文针对智能科学与技术专业特点，探讨C语言教学内容整合设计、前沿研究导向的项目实践，并对教学相关因素进行讨论，旨在解决新专业要求和学时压缩问题，培养学生的专业兴趣和能力，为相关教学提供参考。",
+    "file_id": "面向_智能科学与技术_专业的C语言教学探讨",
+    "source_type": "cleaned",
+    "text_length": 1518,
+    "generation_time": "2025-07-31 21:35:29"
+  },
+  "鲁棒局部保持投影的表情识别": {
+    "document_type": "academic_paper",
+    "title": "鲁棒局部保持投影的表情识别",
+    "authors": [
+      "李睿凡",
+      "朱强生",
+      "郭燕慧",
+      "刘海涛"
+    ],
+    "main_topic": "表情识别",
+    "research_problem": "局部保持投影的流形学习算法对于噪声与异常值的敏感性",
+    "methodology": "鲁棒局部保持投影算法",
+    "key_innovations": [
+      "提出了一种鲁棒的局部保持投影算法",
+      "在样本数据集X上执行局部鲁棒主成分分析"
+    ],
+    "experimental_results": "对JAFFE表情数据库进行了实验，结果表明，该方法有效",
+    "conclusions": "鲁棒改进算法的有效性",
+    "keywords": [
+      "局部保持投影",
+      "鲁棒性",
+      "表情识别"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "局部保持投影算法",
+      "Laplace Beltrami算子",
+      "鲁棒主成分分析",
+      "Gabor小波特征提取",
+      "最近邻分类器"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文针对现有局部保持投影算法对噪声和异常值敏感的问题，提出了一种鲁棒局部保持投影算法。通过对JAFFE表情数据库的实验，验证了该方法在表情识别中的有效性。",
+    "file_id": "鲁棒局部保持投影的表情识别",
+    "source_type": "cleaned",
+    "text_length": 2327,
+    "generation_time": "2025-07-31 21:35:43"
+  },
+  "低郁密度条件下果园轮式机器人行间运行控制方法研究_韩奕非": {
+    "document_type": "academic_paper",
+    "title": "低郁密度条件下果园轮式机器人行间运行控制方法研究",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "果园环境下轮式差速转向机器人的控制及行间自主运行问题",
+    "research_problem": "在户外环境下，受天气变化和路面起伏影响，如何实现自主运行并保持控制精度",
+    "methodology": "垂直载荷实时估计方法、轮胎驱动力实时估计与优化分配算法、基于激光雷达传感器的户外自主导航方法",
+    "key_innovations": [
+      "非铺装路面滑动转向轮式机器人轮胎垂直载荷实时估计方法",
+      "轮胎驱动力实时估计与优化分配算法",
+      "基于激光雷达传感器的户外自主导航方法"
+    ],
+    "experimental_results": "垂直载荷估计精度达90%以上，侧向力实时估计准确率92%以上，优化后的轮胎利用率从96.25%降至93.75%",
+    "conclusions": "模糊控制器在果园环境下表现出最优适应性",
+    "keywords": [
+      "户外机器人",
+      "差速转向",
+      "轮胎动力学",
+      "参数估计",
+      "轨迹跟踪"
+    ],
+    "application_domains": [
+      "农业自动化"
+    ],
+    "technical_concepts": [
+      "滑动轮式转向机器人",
+      "垂直载荷估计",
+      "驱动力优化分配",
+      "激光雷达传感器",
+      "自主导航"
+    ],
+    "performance_metrics": "垂直载荷估计精度达90%以上，侧向力实时估计准确率92%以上，优化后的轮胎利用率从96.25%降至93.75%",
+    "summary": "本文针对果园环境下的轮式差速转向机器人，提出了垂直载荷实时估计、驱动力优化分配和基于激光雷达的自主导航方法，并通过实验验证了方法的有效性，为果园机器人的自主运行提供了技术支持。",
+    "file_id": "低郁密度条件下果园轮式机器人行间运行控制方法研究_韩奕非",
+    "source_type": "cleaned",
+    "text_length": 34590,
+    "generation_time": "2025-07-31 21:36:11"
+  },
+  "基于优先级的时间敏感网络流量调度算法研究_李红硕": {
+    "document_type": "academic_paper",
+    "title": "时间敏感网络中的调度与路由优化算法研究",
+    "authors": [
+      "Yu Q",
+      "等人"
+    ],
+    "main_topic": "时间敏感网络，调度与路由优化",
+    "research_problem": "现有调度方法计算复杂度高和路由规划问题",
+    "methodology": "完全集中式配置模型，软件定义网络（SDN），整数线性规划（ILP）调度方法，基于绝对优先级的实时调度路由算法",
+    "key_innovations": [
+      "提出基于时间窗口的ILP调度方法",
+      "引入时间窗口偏移量优化方法",
+      "基于绝对优先级的实时调度路由算法"
+    ],
+    "experimental_results": "仿真实验验证了调度与路由优化算法的有效性，ILP调度方法求解时间减少了41%，但总时延提高了7%",
+    "conclusions": "本文提出的调度与路由优化算法在满足时间触发流的流量特性基础上有效降低了计算复杂度，提高了实时调度场景下TT流的可调度性",
+    "keywords": [
+      "时间敏感网络",
+      "软件定义网络",
+      "流量调度",
+      "整数线性规划",
+      "路由优化",
+      "绝对优先级"
+    ],
+    "application_domains": [
+      "工业自动化",
+      "通信网络"
+    ],
+    "technical_concepts": [
+      "TSN",
+      "SDN",
+      "ILP",
+      "绝对优先级调度",
+      "时间窗口",
+      "路由优化"
+    ],
+    "performance_metrics": "ILP调度方法求解时间减少41%，总时延提高7%",
+    "summary": "本研究针对时间敏感网络中的调度与路由问题，提出了一系列优化算法，并通过仿真实验验证了其有效性。研究主要贡献包括基于时间窗口的ILP调度方法和基于绝对优先级的实时调度路由算法，这些方法在降低计算复杂度和提高流量可调度性方面表现出色。",
+    "file_id": "基于优先级的时间敏感网络流量调度算法研究_李红硕",
+    "source_type": "cleaned",
+    "text_length": 12770,
+    "generation_time": "2025-07-31 21:36:33"
+  },
+  "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦": {
+    "document_type": "academic_paper",
+    "title": "远程监督关系抽取演示系统设计与实现",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "自然语言处理中的关系抽取",
+    "research_problem": "传统关系抽取方法需要大量人工标注数据，限制了其应用范围",
+    "methodology": "远程监督方法，L2G-GCN模型",
+    "key_innovations": [
+      "提出L2G-GCN模型框架",
+      "采用互信息最大化MIM作为正则化器",
+      "实现包级关系抽取演示系统"
+    ],
+    "experimental_results": "在NYT-10基准数据集上进行了实验，结果表明L2G-GCN模型和层级训练策略有效",
+    "conclusions": "L2G-GCN模型在远程监督关系抽取中具有优越性能，能有效处理噪声和长尾问题",
+    "keywords": [
+      "远程监督",
+      "关系抽取",
+      "L2G-GCN",
+      "互信息最大化",
+      "长尾问题"
+    ],
+    "application_domains": [
+      "知识图谱构建",
+      "问答系统完善"
+    ],
+    "technical_concepts": [
+      "远程监督",
+      "关系抽取",
+      "图卷积神经网络GCN",
+      "互信息最大化MIM",
+      "包级关系抽取"
+    ],
+    "performance_metrics": "P@N值，AUC值，PR曲线，Hits@K",
+    "summary": "本文针对自然语言处理中的关系抽取问题，提出了一种基于远程监督的L2G-GCN模型，并通过实验验证了其优越性能。模型通过互信息最大化正则化器提高鲁棒性，实现了包级关系抽取演示系统，有助于知识图谱构建和问答系统完善。",
+    "file_id": "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
+    "source_type": "cleaned",
+    "text_length": 23026,
+    "generation_time": "2025-07-31 21:36:54"
+  },
+  "基于实体的概念指导的少样本关系抽取研究与应用_王泽元": {
+    "document_type": "academic_paper",
+    "title": "少样本关系抽取任务下的知识融入与领域迁移问题研究",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "少样本关系抽取任务",
+    "research_problem": "少样本关系抽取任务中知识融入和领域迁移问题",
+    "methodology": "利用实体概念作为融入知识，设计了结合语义门控机制和距离打分器的知识融合模块，以及领域导向的元训练方法",
+    "key_innovations": [
+      "利用实体概念作为融入知识",
+      "设计了结合语义门控机制和距离打分器的知识融合模块",
+      "领域导向的元训练方法"
+    ],
+    "experimental_results": "在公开数据集FewRel上进行实验，验证了实体概念知识在少样本关系抽取上的有效性，并对比了不同知识融入方法的性能",
+    "conclusions": "实体概念知识在少样本关系抽取任务中能有效提升模型性能，所设计的知识融合模块和元学习增强模块具有一定的泛化能力和稳定性",
+    "keywords": [
+      "关系抽取",
+      "少样本学习",
+      "领域迁移",
+      "知识库"
+    ],
+    "application_domains": [
+      "自然语言处理",
+      "知识图谱构建"
+    ],
+    "technical_concepts": [
+      "CBOW模型",
+      "ELMO模型",
+      "BERT模型",
+      "少样本学习",
+      "元学习",
+      "度量学习",
+      "孪生网络",
+      "原型网络",
+      "Prompt方法",
+      "PET方法",
+      "EFLL"
+    ],
+    "performance_metrics": "具体性能数字和指标未在原文中明确提及",
+    "summary": "本文针对少样本关系抽取任务中的知识融入和领域迁移问题进行研究，提出利用实体概念知识增强模型，并通过实验验证了方法的有效性。",
+    "file_id": "基于实体的概念指导的少样本关系抽取研究与应用_王泽元",
+    "source_type": "cleaned",
+    "text_length": 9513,
+    "generation_time": "2025-07-31 21:37:14"
+  },
+  "基于常识知识的多选式问答研究_张力翚": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "常识问答任务（Commonsense Question Answering，CQA）",
+    "research_problem": "CQA任务存在知识覆盖不足及知识噪声问题，无监督场景下缺乏易迁移的自适应方法",
+    "methodology": "知识增强型图对比学习（KE-GCL）和提示型知识生成网络（PKGN）",
+    "key_innovations": [
+      "提出自适应采样原始图的边和节点特征",
+      "利用问答对的实体描述性文本作为补充节点信息",
+      "无监督对比学习策略对问题语义进行继续预训练",
+      "设计的提示模版生成问题相关的知识描述"
+    ],
+    "experimental_results": "在CommonsenseQA、OpenbookQA、SociallQA等数据集上进行了定量和定性实验分析，提出的模型在性能上优于当前基线方法",
+    "conclusions": "提出的KE-GCL和PKGN模型在常识问答任务的有监督和无监督场景下均具有较好的性能和鲁棒性",
+    "keywords": [
+      "常识问答",
+      "知识增强",
+      "图对比学习",
+      "无监督学习",
+      "提示型知识生成"
+    ],
+    "application_domains": [
+      "问答系统",
+      "自然语言处理"
+    ],
+    "technical_concepts": [
+      "知识子图",
+      "节点嵌入",
+      "注意力机制",
+      "对比学习",
+      "预训练语言模型"
+    ],
+    "performance_metrics": "在三个基准数据集上的性能指标均优于当前基线方法，具体性能数字和指标未在原文中给出",
+    "summary": "本文针对常识问答任务在监督和无监督场景下的挑战，提出了知识增强型图对比学习和提示型知识生成网络两种方法，并通过实验验证了其有效性和鲁棒性。",
+    "file_id": "基于常识知识的多选式问答研究_张力翚",
+    "source_type": "cleaned",
+    "text_length": 27086,
+    "generation_time": "2025-07-31 21:37:34"
+  },
+  "基于提示学习的少样本文本分类研究与应用_魏志宇": {
+    "document_type": "academic_paper",
+    "title": "基于提示学习的少样本文本分类研究与应用",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "自然语言处理，少样本学习，提示学习，文本分类",
+    "research_problem": "少样本学习任务中，如何利用提示学习有效提高文本分类性能",
+    "methodology": "基于提示学习和三元组损失的少样本文本分类算法",
+    "key_innovations": [
+      "提出基于提示学习和三元组损失的少样本文本分类算法",
+      "设计了相应的智能标注工具"
+    ],
+    "experimental_results": "在中文和英文数据集上进行了性能对比实验，结果显示提出的方法在少样本场景下取得了优异的性能",
+    "conclusions": "本文提出的方法在少样本文本分类任务中具有强大的潜力",
+    "keywords": [
+      "预训练语言模型",
+      "少样本学习",
+      "提示学习",
+      "文本分类"
+    ],
+    "application_domains": [
+      "文本分类任务",
+      "少样本学习场景"
+    ],
+    "technical_concepts": [
+      "提示学习",
+      "三元组损失",
+      "自然语言推理",
+      "智能标注工具"
+    ],
+    "performance_metrics": "具体性能数字和指标未在原文中明确提及",
+    "summary": "本文针对少样本学习中的文本分类问题，提出了一种基于提示学习和三元组损失的算法，并通过实验验证了其有效性。同时，设计实现了相应的智能标注工具，为文本分类任务提供了一种新的解决方案。",
+    "file_id": "基于提示学习的少样本文本分类研究与应用_魏志宇",
+    "source_type": "cleaned",
+    "text_length": 15338,
+    "generation_time": "2025-07-31 21:37:55"
+  },
+  "基于树结构的图像段落描述研究_石祎晖": {
+    "document_type": "academic_paper",
+    "title": "基于树结构的图像段落描述研究",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "多模态人工智能",
+    "research_problem": "图像段落描述任务相比传统的单句描述任务更具挑战性",
+    "methodology": "利用树结构显式建模段落结构以及图像区域关系，并将树结构引入图像段落描述模型中",
+    "key_innovations": [
+      "提出利用树结构进行图文模态的建模，并结合建模后的树结构进行模型改进",
+      "提出了新颖的树结构段落解码框架以及对应的段落句子树层次建模方法",
+      "提出了树结构增强的编码器组件以及对应的图像区域树启发式构建方法"
+    ],
+    "experimental_results": "在图像段落描述基准数据集上开展了实验。通过定量分析和定性对比，验证了所提方法的可行性与有效性",
+    "conclusions": "通过在编码端引入区域树结构信息，模型能够有效提升描述段落的准确性和丰富程度",
+    "keywords": [
+      "多模态人工智能",
+      "深度学习",
+      "图像段落描述",
+      "树结构"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "树结构段落解码框架S2TD",
+      "树结构增强的编码器网络TEE",
+      "图像区域树结构建模方法"
+    ],
+    "performance_metrics": "在BLEU和CIDER指标上均得到了提升，与未引入树结构的基线模型相比提升了约4.6%",
+    "summary": "本文提出了一种基于树结构的图像段落描述方法，通过显式建模段落结构和图像区域关系，提高了描述的准确性和丰富程度。实验结果表明，该方法在多个指标上优于基线模型，并具有与最先进方法可比的性能。",
+    "file_id": "基于树结构的图像段落描述研究_石祎晖",
+    "source_type": "cleaned",
+    "text_length": 34047,
+    "generation_time": "2025-07-31 21:38:22"
+  },
+  "基于深度卷积结构的图像段落描述研究_梁昊雨": {
+    "document_type": "academic_paper",
+    "title": "基于深度卷积结构的图像段落描述研究",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "段落式图像描述任务，连接计算机视觉和自然语言处理两个关键领域",
+    "research_problem": "当前段落式图像描述研究存在生成段落连贯性不足、图像信息损失和算法时间复杂度高等问题",
+    "methodology": "提出了基于全卷积神经结构的段落式图像描述方法，包括全卷积解码器和融合区域注意力的段落式图像描述模型Dual-CNN",
+    "key_innovations": [
+      "全卷积解码器具有更大的长时记忆能力",
+      "Dual-CNN模型融合区域提议网络和区域注意力模块",
+      "提出衡量段落连贯性和句子多样度的指标"
+    ],
+    "experimental_results": "实验表明，所提方法在连贯性、详细度和多样度等方面优于基线方法，且具有更低的训练时间复杂度",
+    "conclusions": "所提出的全卷积段落解码器和Dual-CNN模型在段落式图像描述任务上具有显著优势，提升了生成段落的质质量",
+    "keywords": [
+      "深度学习",
+      "卷积神经网络",
+      "段落式图像描述",
+      "连贯性"
+    ],
+    "application_domains": [
+      "未在原文中明确提到"
+    ],
+    "technical_concepts": [
+      "全卷积神经结构",
+      "层次性RNN解码器",
+      "区域注意力机制",
+      "Dual-CNN模型"
+    ],
+    "performance_metrics": "评测指标得分、连贯性指标得分、时间复杂度等",
+    "summary": "本文针对当前段落式图像描述研究中存在的问题，提出了一种基于全卷积神经结构的新方法。通过实验验证，该方法在生成段落的连贯性、详细度和多样度方面取得了显著成效，为跨媒体智能领域的研究提供了重要进展。",
+    "file_id": "基于深度卷积结构的图像段落描述研究_梁昊雨",
+    "source_type": "cleaned",
+    "text_length": 15854,
+    "generation_time": "2025-07-31 21:38:43"
+  },
+  "基于知识增强的方面级情感分析研究及应用_杜一帆": {
+    "document_type": "academic_paper",
+    "title": "基于知识增强的方面级情感分析研究及应用",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "方面级情感分析",
+    "research_problem": "方面词情感分析和方面类别情感分析任务中对外部知识利用不充分，对句中概念词与方面类别关系构造不合理，以及对句法结构和语义关系互补性的建模缺失",
+    "methodology": "情感感知的双通道图卷积神经网络模型",
+    "key_innovations": [
+      "提出一种情感感知的双通道图卷积神经网络模型，其中双通道分别为语法通道和语义通道",
+      "提出一种知识增强的多通道图卷积神经网络模型，其中多通道分别为知识通道、语法通道和语义通道"
+    ],
+    "experimental_results": "在Restaurant-14、Laptop-15和MAMS数据集上进行了实验，SADC-GCN模型取得了较好的效果",
+    "conclusions": "提出的模型SADC-GCN在方面词情感分析任务上的有效性",
+    "keywords": [
+      "方面级情感分析",
+      "方面词情感分析",
+      "方面类别情感分析",
+      "图卷积神经网络",
+      "知识增强"
+    ],
+    "application_domains": [
+      "自然语言处理"
+    ],
+    "technical_concepts": [
+      "依存句法分析",
+      "SenticNet",
+      "ConceptNet",
+      "WordNet",
+      "LSTM",
+      "GCN",
+      "Attention",
+      "BERT",
+      "Transformer"
+    ],
+    "performance_metrics": "准确率和F1值",
+    "summary": "本文针对方面级情感分析任务，提出了一种基于知识增强的双通道图卷积神经网络模型SADC-GCN，通过语法通道和语义通道分别建模句法结构和语义关系，引入外部知识库进行知识增强，并在方面词情感分析和方面类别情感分析任务上取得了较好的效果。",
+    "file_id": "基于知识增强的方面级情感分析研究及应用_杜一帆",
+    "source_type": "cleaned",
+    "text_length": 17638,
+    "generation_time": "2025-07-31 21:39:10"
+  },
+  "基于非自回归方法的图像描述研究及应用_张煜松": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "图像描述（Image Captioning）",
+    "research_problem": "提升非自回归图像描述方法的效率和效果",
+    "methodology": "结合人类编辑操作的非自回归图像描述方法",
+    "key_innovations": [
+      "编辑器和两阶段图像描述训练策略",
+      "统一编辑器",
+      "多路径交叉熵训练方法",
+      "阈值采样的强化学习训练方法"
+    ],
+    "experimental_results": "UniCap方法实现了8倍的速度提升，并在非自回归图像描述中达到了最先进的效果",
+    "conclusions": "UniCap在质量和速度之间实现了良好的平衡",
+    "keywords": [
+      "图像描述",
+      "非自回归",
+      "编辑操作",
+      "交叉熵",
+      "强化学习"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "Transformer",
+      "编解码器结构",
+      "视觉特征编码",
+      "目标检测"
+    ],
+    "performance_metrics": "CIDEr分数",
+    "summary": "本文提出了一种结合人类编辑操作的非自回归图像描述方法，包括编辑器和两阶段图像描述训练策略。实验结果表明该方法在非自回归图像描述中达到了最先进的效果，并在质量和速度之间实现了良好的平衡。",
+    "file_id": "基于非自回归方法的图像描述研究及应用_张煜松",
+    "source_type": "cleaned",
+    "text_length": 28784,
+    "generation_time": "2025-07-31 21:39:33"
+  },
+  "多元组细粒度情感分析研究及应用_翟泽鹏": {
+    "document_type": "academic_paper",
+    "title": "基于掩码上下文机器阅读理解框架的方面级三元组抽取方法研究",
+    "authors": [
+      "未在原文中明确提及"
+    ],
+    "main_topic": "方面级三元组抽取和结构化情感分析",
+    "research_problem": "多方面词干扰问题",
+    "methodology": "掩码上下文机器阅读理解框架",
+    "key_innovations": [
+      "掩码式数据增强",
+      "交互式判别模型",
+      "阶段式推理方法"
+    ],
+    "experimental_results": "在基准数据集上取得了先进的性能",
+    "conclusions": "COM-MRC框架有效地缓解了多方面词的干扰问题",
+    "keywords": [
+      "深度学习",
+      "方面级情感分析",
+      "结构化情感分析",
+      "注意力机制"
+    ],
+    "application_domains": [
+      "未在原文中明确提及"
+    ],
+    "technical_concepts": [
+      "掩码上下文机器阅读理解",
+      "交互式判别模型",
+      "阶段式推理方法",
+      "双词汇依赖解析",
+      "USSA机制",
+      "双轴注意力模块"
+    ],
+    "performance_metrics": "F1指标提升3.59%和4.18%",
+    "summary": "本文提出了一种基于掩码上下文的机器阅读理解框架，用于方面级三元组抽取和结构化情感分析。通过掩码式数据增强、交互式判别模型和阶段式推理方法，实验证明该框架有效地缓解了多方面词的干扰问题，并在基准数据集上取得了先进的性能。",
+    "file_id": "多元组细粒度情感分析研究及应用_翟泽鹏",
+    "source_type": "cleaned",
+    "text_length": 28374,
+    "generation_time": "2025-07-31 21:40:01"
+  },
+  "户外种植园行间可通行区域识别与路径生成方法研究_王远航": {
+    "document_type": "academic_paper",
+    "title": "户外种植园行间可通行区域识别与路径生成方法研究",
+    "authors": [
+      "王远航"
+    ],
+    "main_topic": "轮式移动机器人在户外种植园行间的自主行驶技术",
+    "research_problem": "实现行间地形的可通行区域识别",
+    "methodology": "理论分析和地面地形检测方法",
+    "key_innovations": [
+      "设计适用于户外种植园行间场景的道路通行性评价指标",
+      "基于图像分割的行间道路区域分割方法",
+      "生成可通行区域约束下的导航路径"
+    ],
+    "experimental_results": "完成了户外种植园行间地面分割模型的训练，测试结果表明所设计的模型具有良好的道路识别能力，并根据移动机器人行驶方向生成可通行路径",
+    "conclusions": "本文系统设计最终达到的预期效果及评价，指出目前研究中存在的不足，并对这些不足的解决方法研究进行了展望",
+    "keywords": [
+      "户外种植园行间",
+      "轮式移动机器人平台",
+      "车辆通过性检测",
+      "地形可通行区域识别",
+      "图像语义分割与路径生成"
+    ],
+    "application_domains": [
+      "农业"
+    ],
+    "technical_concepts": [
+      "深度学习",
+      "图像分割",
+      "路径生成",
+      "车辆通过性检测",
+      "地形感知"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本研究围绕轮式移动机器人在户外种植园行间的自主行驶技术，通过理论分析和地面地形检测方法，实现了行间地形的可通行区域识别。主要工作包括：分析轮式移动机器人不可通行路面的特点及参数，获得可通行地面的边界条件；设计适用于户外种植园行间场景的道路通行性评价指标和基于图像分割的行间道路区域分割方法；生成可通行区域约束下的导航路径。测试结果表明所设计的模型具有良好的道路识别能力，并根据移动机器人行驶方向生成可通行路径。",
+    "file_id": "户外种植园行间可通行区域识别与路径生成方法研究_王远航",
+    "source_type": "cleaned",
+    "text_length": 13031,
+    "generation_time": "2025-07-31 21:40:28"
+  },
+  "果园行间自主导航关键技术研究_王宇豪": {
+    "document_type": "academic_paper",
+    "title": "果园行间自主导航关键技术研究",
+    "authors": [
+      "毕松",
+      "王宇豪"
+    ],
+    "main_topic": "果园行间自主导航技术",
+    "research_problem": "果园行间自主导航技术的研究",
+    "methodology": "基于激光雷达和单目视觉的导航方法",
+    "key_innovations": [
+      "自适应半径滤波方法",
+      "基于交叉像素的可通行区域提取方法",
+      "基于单目视觉的位姿估计和果树定位方法"
+    ],
+    "experimental_results": "实验结果表明，所提方法具有较高的实用性、稳定性和准确性",
+    "conclusions": "本文研究了基于激光雷达和单目视觉的导航方法，激光雷达导航方法在去噪和可通行区域提取方面表现出较强能力，而单目视觉导航方法在场景语义信息提取和位姿估算方面准确度高",
+    "keywords": [
+      "自主导航",
+      "位姿测量",
+      "相机模型",
+      "深度神经网络",
+      "自适应半径滤波"
+    ],
+    "application_domains": [
+      "农业机械装备"
+    ],
+    "technical_concepts": [
+      "自适应半径滤波",
+      "交叉像素",
+      "单目视觉",
+      "Mask R-CNN",
+      "道路几何成像模型"
+    ],
+    "performance_metrics": "偏航角平均误差2.91%，横向偏移平均误差4.82%，道路宽度平均误差4.89%，横向位置平均误差3.80%，纵向位置平均误差2.65%",
+    "summary": "本文研究了基于激光雷达和单目视觉的果园行间自主导航关键技术，提出了自适应半径滤波、基于交叉像素的导航和基于单目视觉的位姿估计等方法，实验结果表明方法具有较高的准确性和稳定性，为农业机械装备的智能化提供了理论基础。",
+    "file_id": "果园行间自主导航关键技术研究_王宇豪",
+    "source_type": "cleaned",
+    "text_length": 19705,
+    "generation_time": "2025-07-31 21:40:56"
+  },
+  "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻": {
+    "document_type": "academic_paper",
+    "title": "草莓自动采摘系统中目标识别与定位方法的研究",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "草莓自动采摘系统",
+    "research_problem": "如何准确识别和定位草莓目标，以实现自动采摘",
+    "methodology": "卷积神经网络、全卷积神经网络、目标识别、定位、点云处理",
+    "key_innovations": [
+      "提出了一种结合传统图像方法和卷积神经网络的草莓识别与定位方法",
+      "使用全卷积神经网络进行草莓目标的精细分割",
+      "基于几何模型进行草莓位姿估计和采摘点计算",
+      "利用遗传算法进行采摘序列路径最短规划"
+    ],
+    "experimental_results": "实验结果表明，设计的草莓目标识别与定位系统能够在复杂环境下准确识别和定位草莓目标，实现高效、精确的草莓自动采摘",
+    "conclusions": "本研究提出的方法在草莓自动采摘场景中具有可行性，通过综合应用多种技术手段，能够实现高效、精确的草莓识别和自动采摘",
+    "keywords": [
+      "草莓自动采摘",
+      "目标识别",
+      "定位",
+      "卷积神经网络",
+      "全卷积神经网络",
+      "遗传算法"
+    ],
+    "application_domains": [
+      "农业自动化",
+      "机器视觉",
+      "机器人技术"
+    ],
+    "technical_concepts": [
+      "卷积神经网络",
+      "全卷积神经网络",
+      "目标识别",
+      "定位",
+      "点云处理",
+      "遗传算法",
+      "HSV色彩空间",
+      "Yolo网络",
+      "Anchor Boxes",
+      "非极大值抑制",
+      "Adadelta优化方法"
+    ],
+    "performance_metrics": "未在原文中明确提及具体的性能数字和指标",
+    "summary": "本文研究了草莓自动采摘系统中的目标识别与定位方法，提出了一种结合传统图像方法和卷积神经网络的方法，通过全卷积神经网络进行精细分割，利用几何模型进行位姿估计和采摘点计算，并通过遗传算法优化采摘路径。实验结果表明，该方法能够准确识别和定位草莓目标，有效实现自动采摘。",
+    "file_id": "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻",
+    "source_type": "cleaned",
+    "text_length": 25383,
+    "generation_time": "2025-07-31 21:41:18"
+  },
+  "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷": {
+    "document_type": "academic_paper",
+    "title": "未在原文中明确提及",
+    "authors": [
+      "未在原文中明确列出"
+    ],
+    "main_topic": "电力运检领域的知识抽取算法及应用",
+    "research_problem": "电力运检领域缺乏针对知识抽取的算法模型和公开可用的标注语料",
+    "methodology": "层次编码、BERT预训练模型、依存句法分析",
+    "key_innovations": [
+      "提出基于层次编码的数据类别平衡方法",
+      "使用BERT模型进行实体识别和关系抽取",
+      "结合依存句法分析进行电力运检关系抽取"
+    ],
+    "experimental_results": "实验对比了不同编码方法在电力运检实体识别和关系抽取任务上的性能，结果表明层次编码方法能有效缓解数据类别不平衡问题，提高模型性能",
+    "conclusions": "本文提出的电力运检知识抽取算法能有效解决数据类别不平衡问题，为电力运检领域提供了一种有效的知识抽取方法",
+    "keywords": [
+      "电力运检",
+      "知识抽取",
+      "层次编码",
+      "BERT模型",
+      "依存句法分析"
+    ],
+    "application_domains": [
+      "电力运检领域"
+    ],
+    "technical_concepts": [
+      "层次编码",
+      "BERT模型",
+      "自注意力机制",
+      "依存句法分析"
+    ],
+    "performance_metrics": "未在原文中明确提及具体性能数字和指标",
+    "summary": "本文针对电力运检领域的知识抽取问题，提出了一种基于层次编码和BERT预训练模型的方法，并通过实验验证了其在实体识别和关系抽取任务上的有效性。",
+    "file_id": "电力运检领域知识图谱的知识抽取算法设计及应用_朱婷婷",
+    "source_type": "cleaned",
+    "text_length": 21741,
+    "generation_time": "2025-07-31 21:41:42"
+  },
+  "网络化多智能体系统的主动容错预测控制方法研究_王时通": {
+    "document_type": "academic_paper",
+    "title": "网络化多智能体系统的主动容错预测控制方法研究",
+    "authors": [
+      "Pang Z H",
+      "Zhao X Y",
+      "Sun J",
+      "et al."
+    ],
+    "main_topic": "网络化多智能体系统的输出跟踪控制问题",
+    "research_problem": "解决具有执行器故障、传感器故障和双通道随机通信约束的网络化多智能体系统的输出跟踪控制问题",
+    "methodology": "基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法、基于云的主动容错预测控制方法",
+    "key_innovations": [
+      "提出主动容错预测控制方法",
+      "设计了观测器、云节点中的容错预测控制器和时延补偿器",
+      "实现了系统的输出跟踪控制"
+    ],
+    "experimental_results": "通过MATLAB仿真软件对控制方法进行了数值仿真验证",
+    "conclusions": "设计了不同情况下的控制方法，并通过仿真证明了有效性",
+    "keywords": [
+      "网络化多智能体系统",
+      "主动容错预测控制",
+      "执行器故障",
+      "传感器故障",
+      "随机通信约束"
+    ],
+    "application_domains": [
+      "控制领域"
+    ],
+    "technical_concepts": [
+      "状态观测器",
+      "容错预测控制器",
+      "时延补偿器",
+      "闭环系统稳定性"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文针对网络化多智能体系统中的输出跟踪控制问题，提出基于状态观测器的主动容错控制方法、网络化主动容错预测控制方法和基于云的主动容错预测控制方法，并通过仿真验证了这些方法在解决执行器故障、传感器故障和随机通信约束问题上的有效性。",
+    "file_id": "网络化多智能体系统的主动容错预测控制方法研究_王时通",
+    "source_type": "cleaned",
+    "text_length": 19837,
+    "generation_time": "2025-07-31 21:42:04"
+  },
+  "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然": {
+    "document_type": "academic_paper",
+    "title": "采用音质特征和VLAD编码的新冠肺炎检测算法",
+    "authors": [
+      "张昊然",
+      "韩易辰",
+      "谭咏梅",
+      "李雅"
+    ],
+    "main_topic": "COVID-19自动检测；语音切分；语音质量特征；局部聚合描述子向量；情感识别",
+    "research_problem": "寻找感染COVID-19的语音信号特征，提供可靠快速的COVID-19检测方法",
+    "methodology": "使用语音端点检测进行数据增广，引入语音质量特征，对基线提取的低水平特征进行VLAD编码",
+    "key_innovations": [
+      "使用语音端点检测技术增广数据集",
+      "加入语音质量特征",
+      "引入局部聚合描述子向量（VLAD）"
+    ],
+    "experimental_results": "在两个子任务验证集上UAＲ分别达到73.9%和77.2%",
+    "conclusions": "语音质量特征在COVID-19自动语音检测任务上有效，VLAD编码在小字典规模下有效提升了系统分类性能",
+    "keywords": [
+      "COVID-19自动检测",
+      "语音切分",
+      "语音质量特征",
+      "局部聚合描述子向量",
+      "情感识别"
+    ],
+    "application_domains": [
+      "新冠肺炎检测"
+    ],
+    "technical_concepts": [
+      "音质特征",
+      "VLAD编码",
+      "线性SVM分类器",
+      "数据增广"
+    ],
+    "performance_metrics": "UAＲ达到73.9%和77.2%",
+    "summary": "本文提出了一种基于音质特征和VLAD编码的新冠肺炎自动识别方法，通过语音端点检测技术对数据增广，并在INTEＲSPEECH 2021 ComParE竞赛数据集上验证了该方法的有效性，实现了在小数据集上分类性能的提升。",
+    "file_id": "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然",
+    "source_type": "cleaned",
+    "text_length": 5878,
+    "generation_time": "2025-07-31 21:42:23"
+  },
+  "面向复杂文本的指称表达理解研究_陆明聪": {
+    "document_type": "academic_paper",
+    "title": "Language-Guided Referring Expression Comprehension with Scene Knowledge",
+    "authors": [
+      "Yao Liao",
+      "Shuang Liu",
+      "Guangtao Li",
+      "et al."
+    ],
+    "main_topic": "Cross-modal reasoning, referring expression comprehension, scene knowledge",
+    "research_problem": "Text information is often overwhelmed by visual information in cross-modal reasoning, and current methods are not effective in handling complex scene knowledge.",
+    "methodology": "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning.",
+    "key_innovations": [
+      "Language-guided cross-modal reasoning",
+      "Simplified scene knowledge approach",
+      "SKRN model for scene knowledge reasoning"
+    ],
+    "experimental_results": "The paper presents experimental results on multiple datasets, showing that LG-R-NET outperforms previous methods, especially on complex referring expressions. SKRN also demonstrates superior performance on scene knowledge reasoning tasks.",
+    "conclusions": "The proposed methods show promising results in improving referring expression comprehension and scene knowledge reasoning, providing a valuable contribution to the field of cross-modal understanding.",
+    "keywords": [
+      "Cross-modal reasoning",
+      "Referring expression comprehension",
+      "Scene knowledge",
+      "LG-R-NET",
+      "SKRN"
+    ],
+    "application_domains": [
+      "Virtual reality",
+      "Robot navigation",
+      "Assistive technology for the visually impaired"
+    ],
+    "technical_concepts": [
+      "Cross-attention mechanism",
+      "Scene knowledge simplification",
+      "Transformer architecture",
+      "Swin Transformer"
+    ],
+    "performance_metrics": "The paper provides performance metrics such as accuracy, GIoU loss, and L1 loss, comparing the proposed methods with baseline models.",
+    "summary": "This paper addresses the issue of text information being overwhelmed in cross-modal reasoning and the challenge of handling complex scene knowledge in referring expression comprehension. It introduces LG-R-NET and SKRN, which demonstrate improved performance in experimental evaluations. The work has implications for virtual reality, robot navigation, and assistive technology.",
+    "file_id": "面向复杂文本的指称表达理解研究_陆明聪",
+    "source_type": "cleaned",
+    "text_length": 26858,
+    "generation_time": "2025-07-31 21:42:50"
+  },
+  "多视图有监督的LDA模型": {
+    "document_type": "academic_paper",
+    "title": "多视图有监督的LDA模型",
+    "authors": [
+      "李晓旭",
+      "李睿凡",
+      "冯方向",
+      "曹洁",
+      "王小捷"
+    ],
+    "main_topic": "多视图数据的分类问题",
+    "research_problem": "如何同时学习多视图数据的分类规则和预测性语义特征",
+    "methodology": "多视图有监督的LDA模型",
+    "key_innovations": [
+      "将集成学习思想引入主题模型中",
+      "结合概率主题模型LDA模型和集成分类方法Softmax混合模型"
+    ],
+    "experimental_results": "在两个真实图像数据集上的实验结果表明提出模型有较好的分类性能",
+    "conclusions": "提出模型充分利用了多视图信息，下一步工作将考虑如何确定主题数目，以及如何确定特征的视图分组等问题",
+    "keywords": [
+      "多视图分类",
+      "概率主题模型",
+      "变分期望最大化"
+    ],
+    "application_domains": [
+      "计算机视觉",
+      "机器学习"
+    ],
+    "technical_concepts": [
+      "LDA模型",
+      "Softmax模型",
+      "变分EM算法"
+    ],
+    "performance_metrics": "在LabelMe数据集上准确率为92.2%，在UIUC-Sport数据集上准确率为99.0%",
+    "summary": "本文提出了一种多视图有监督的LDA模型，通过结合LDA模型和Softmax模型，实现了同时学习多视图数据的分类规则和预测性语义特征。在两个真实图像数据集上的实验结果表明，该模型具有较好的分类性能。下一步工作将考虑如何确定主题数目和特征视图分组等问题。",
+    "file_id": "多视图有监督的LDA模型",
+    "source_type": "basic_extracted",
+    "text_length": 10909,
+    "generation_time": "2025-07-31 22:19:28"
+  },
+  "考虑合成灰数灰度性质的改进区间灰数预测模型": {
+    "document_type": "academic_paper",
+    "title": "考虑合成灰数灰度性质的改进区间灰数预测模型",
+    "authors": [
+      "王大鹏",
+      "汪秉文",
+      "李睿凡"
+    ],
+    "main_topic": "区间灰数预测模型",
+    "research_problem": "现有基于核和灰度的区间灰数预测模型中灰度预测值确定方法存在不足，且不支持误差分析",
+    "methodology": "合成灰数灰度的定义及其性质分析，建立灰度序列的GM(1,1)模型实现灰度预测",
+    "key_innovations": [
+      "提出合成灰数灰度的定义及其性质",
+      "建立灰度序列的GM(1,1)模型实现灰度预测"
+    ],
+    "experimental_results": "算例表明改进模型的有效性和可用性",
+    "conclusions": "改进模型从核和灰度两个方面同时发掘区间灰数序列的内蕴信息与发展趋势，克服了原有模型存在的不足，且支持误差分析和精度检验",
+    "keywords": [
+      "区间灰数",
+      "预测模型",
+      "合成灰数",
+      "灰度"
+    ],
+    "application_domains": [
+      "系统工程",
+      "电子技术"
+    ],
+    "technical_concepts": [
+      "GM(1,1)模型",
+      "合成灰数",
+      "灰度"
+    ],
+    "performance_metrics": "平均模拟相对误差小于0.01，精度为1级",
+    "summary": "本文提出合成灰数灰度的定义及性质，据此分析了基于核和灰度的区间灰数预测模型中灰度预测值确定方法存在的不足，并通过分别建立核序列和灰度序列的GM(1,1)模型，从“核”和“灰度”两个方面同时发掘区间灰数序列的内蕴信息和发展趋势，实现了对原有区间灰数预测模型的改进和完善，较好地克服了原有模型存在的不足，同时实现了模型的误差分析和精度检验。算例表明了该改进模型的有效性。",
+    "file_id": "考虑合成灰数灰度性质的改进区间灰数预测模型",
+    "source_type": "basic_extracted",
+    "text_length": 11546,
+    "generation_time": "2025-07-31 22:19:58"
+  },
+  "基于词性和位置的特征关键词提取方法_芦效峰": {
+    "document_type": "patent",
+    "title": "基于词性和位置的特征关键词提取方法",
+    "inventors": [
+      "芦效峰",
+      "王文婷",
+      "李睿凡"
+    ],
+    "patent_number": "202110184849.9",
+    "application_domain": "文本挖掘领域",
+    "technical_problem": "TF-IDF方法经常挑选词频很高但实际意义却很小的词作为关键词，且不考虑词在文章中的位置和词性",
+    "technical_solution": "本发明提供了一种基于词性和位置的特征关键词提取方法，包括文本预处理，去除特定词性的候选关键词，计算加权词频，计算增量逆文档频率，计算权重，排序并选择权重最大的词作为关键词",
+    "key_innovations": [
+      "考虑词性和词位置计算加权词频",
+      "计算文本中关键候选词的增量逆文档频率",
+      "动态调整逆文档频率以适应动态变化的数据集"
+    ],
+    "implementation_method": "包括分词、去除停用词和标点符号、去除特定词性的词、计算加权词频、计算增量逆文档频率、计算权重、排序选择关键词等步骤",
+    "technical_effects": "提高了关键词提取的正确率，适用于动态变化的数据集",
+    "keywords": [
+      "词性和位置",
+      "特征关键词",
+      "提取方法",
+      "加权词频",
+      "增量逆文档频率"
+    ],
+    "application_scenarios": [
+      "实时网络话题检测",
+      "文本特征提取"
+    ],
+    "technical_concepts": [
+      "TF-IDF",
+      "词频",
+      "逆文档频率",
+      "加权词频",
+      "增量逆文档频率"
+    ],
+    "claims_summary": "权利要求书涉及基于词性和位置的特征关键词提取方法，包括预处理、去除特定词性、计算加权词频、计算增量逆文档频率、计算权重、排序选择关键词等步骤",
+    "summary": "本专利提出了一种改进的特征关键词提取方法，通过考虑词性和词在文本中的位置，以及动态调整逆文档频率，提高了关键词提取的正确率，适用于动态变化的数据集，可应用于实时网络话题检测和文本特征提取等领域。",
+    "file_id": "基于词性和位置的特征关键词提取方法_芦效峰",
+    "source_type": "basic_extracted",
+    "text_length": 4098,
+    "generation_time": "2025-07-31 22:20:52"
+  },
+  "基于采集搜索引擎数据的隐私信息评级方法_芦效峰": {
+    "document_type": "patent",
+    "title": "基于采集搜索引擎数据的隐私信息评级方法",
+    "inventors": [
+      "芦效峰",
+      "鲁鹏",
+      "李睿凡",
+      "李蕾",
+      "袁彩霞",
+      "刘咏彬",
+      "曲昭伟",
+      "李晖"
+    ],
+    "patent_number": "201410441434.5",
+    "application_domain": "信息评级，隐私保护",
+    "technical_problem": "现有隐私保护技术存在的问题是对各种隐私保护技术的研究是相互独立的，都是针对单独某个隐私内容的保护",
+    "technical_solution": "本发明提供一种基于采集搜索引擎数据的隐私信息评级方法，包括确定每个隐私信息的普遍性分值U，敏感性分值S，根据U×S计算结果确定隐私信息的安全等级",
+    "key_innovations": [
+      "使用搜索引擎采集数据确定隐私信息的普遍性和敏感性分值",
+      "根据普遍性和敏感性分值计算隐私信息的安全等级"
+    ],
+    "implementation_method": "包括从搜索引擎采集数据确定每个隐私信息的普遍性分值U和敏感性分值S，然后根据U×S计算结果确定隐私信息的安全等级",
+    "technical_effects": "评级结果具有公正性；不针对特定的隐私内容，既可以评定全体隐私信息，也可用于评定应用系统中有限数量的隐私信息",
+    "keywords": [
+      "隐私信息评级",
+      "搜索引擎数据",
+      "普遍性分值",
+      "敏感性分值",
+      "安全等级"
+    ],
+    "application_scenarios": [
+      "评定隐私信息的安全等级",
+      "在成本和技术受限条件下优先保护重要的隐私"
+    ],
+    "technical_concepts": [
+      "普遍性分值U",
+      "敏感性分值S",
+      "隐私信息的安全等级"
+    ],
+    "claims_summary": "基于采集搜索引擎数据的隐私信息评级方法，包括确定隐私信息的普遍性分值、敏感性分值，以及根据两者计算出的安全等级",
+    "summary": "本发明涉及一种基于搜索引擎数据采集的隐私信息评级方法，旨在提供一种系统性地比较隐私信息安全等级的方法。该方法通过确定隐私信息的普遍性分值和敏感性分值，进而计算安全等级，以实现公正、有效的隐私保护。",
+    "file_id": "基于采集搜索引擎数据的隐私信息评级方法_芦效峰",
+    "source_type": "basic_extracted",
+    "text_length": 4494,
+    "generation_time": "2025-07-31 22:21:12"
+  },
+  "使用TAST码的BI_STCM_ID系统中的星座映射分析": {
+    "document_type": "academic_paper",
+    "title": "使用TAST码的BI-STCM-ID系统中的星座映射分析",
+    "authors": [
+      "赵传钢",
+      "李睿凡"
+    ],
+    "main_topic": "移动通信、编码理论、人工智能",
+    "research_problem": "BI-STCM-ID系统中的星座映射问题",
+    "methodology": "使用TAST空时编码方案的星座映射设计优化问题",
+    "key_innovations": [
+      "证明了在使用TAST码的BI-STCM-ID系统中，高维星座映射设计的最大化编码增益准则与一维星座设计的最大化欧氏距调和均值准则的等价性"
+    ],
+    "experimental_results": "未在原文中明确提及",
+    "conclusions": "本文讨论了BI-STCM-ID系统中的星座设计问题，特别是空时编码方案采用TAST编码方案的情形。定理1的结论使得在使用TAST码的BI-STCM-ID系统中高维星座映射设计问题得以简化，对BI-STCM-ID系统中的高维星座映射设计有较好理论意义。",
+    "keywords": [
+      "空时编码调制",
+      "星座映射",
+      "TAST码"
+    ],
+    "application_domains": [
+      "移动通信系统"
+    ],
+    "technical_concepts": [
+      "BI-STCM-ID系统",
+      "TAST码",
+      "星座映射设计",
+      "编码增益",
+      "欧氏距调和均值"
+    ],
+    "performance_metrics": "未在原文中明确提及",
+    "summary": "本文研究了BI-STCM-ID系统中的星座映射问题，特别是使用TAST空时编码方案的情况。证明了高维星座映射设计的优化问题与一维星座映射设计优化问题等价，简化了星座映射设计，对于移动通信系统的高维星座映射设计具有理论指导意义。",
+    "file_id": "使用TAST码的BI_STCM_ID系统中的星座映射分析",
+    "source_type": "basic_extracted",
+    "text_length": 7913,
+    "generation_time": "2025-07-31 22:21:30"
+  }
+}

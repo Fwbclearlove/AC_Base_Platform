@@ -1,0 +1,328 @@
+基于包结构的图神经网络远程监督关系抽取研究及应用
+
+摘要
+
+信息技术的快速发展带来了互联网文本资源的爆炸式增长。信息抽取技术能够从冗余的信息中获取关键信息。关系抽取旨在从自然语言文本中获取实体对之间的关系，是信息抽取领域的一个重要课题，也是知识图谱构建的重要步骤。传统的有监督关系抽取任务需要大量且高质量的人工标注数据，而远程监督关系抽取能够通过启发式对齐非结构化文本和知识库获取大量的训练数据。本文提出了基于包结构的层级图神经网络框架，进一步提升远程监督关系抽取的性能。
+
+具体研究内容和贡献如下：
+
+1) 在远程监督的关系抽取领域，提出了一种从局部到全局进行学习的层级图卷积神经网络框架(L2G-GCN)。该框架在文本编码过程中先通过局部地学习单个实例中的句法知识，然后整体地聚合包结构内实例的语义关联信息，进而提升远程监督关系抽取的性能。
+
+2) 提出了一种基于预训练模型的异质图卷积神经网络模型(BH-GCN)。为了加强实体信息对关系抽取任务的指导作用，在L2G-GCN框架的基础上增加对实体信息的处理，设计了BH-GCN。
+
+3) 设计并实现了远程监督关系抽取演示系统。该系统涵盖了用户管理模块、数据管理模块、关系抽取模块、前端展示模块。支持用户自定义输入文本，进行包级别的关系抽取，并对相关结果可视化。
+
+关系抽取在自然语言处理中具有重要意义，它旨在识别文本中实体对之间的关系，并将这些关系以结构化形式存储，以便于知识图谱构建、问答系统完善等应用。然而，传统的关系抽取方法需要大量人工标注数据，限制了其应用范围。远程监督方法通过将大规模知识库与非结构化文本进行对齐，快速生成训练数据，有效缓解了数据匮乏问题。近年来，深度学习方法在关系抽取中取得了显著进展，如卷积神经网络、循环神经网络、注意力机制等。远程监督关系抽取也受到关注，研究者提出了多种基于深度学习的远程监督关系抽取模型，如分段式卷积神经网络、图神经网络等。本文旨在研究基于远程监督的关系抽取，以有效处理远程监督带来的噪声和长尾问题，实现基于远程监督的包级关系抽取演示系统。
+
+论文分为七个章节，组织结构如下：
+
+第一章：介绍研究主题背景和意义，国内外研究现状，以及本文主要研究内容。
+
+第二章：详细介绍关系抽取和远程监督领域相关术语和背景知识，包括任务定义、远程监督原理和流程、任务定义和形式，以及远程监督关系抽取的优势。
+
+第三章：介绍引入实体信息的异质图神经网络结构，包括预训练语言模型介绍、如何引入预训练语言模型、层级图神经网络结构改进，以及如何构建异质图神经网络。
+
+第四章：主要介绍实验内容，包括数据集统计和特点、评测指标、实验环境和实现细节、实验结果对比，以及对实验结果的具体分析。
+
+第五章：主要阐述远程监督关系抽取系统设计与实现，包括系统框架设计、模块设计，以及系统实现结果展示。
+
+第六章：总结本文主要研究内容和创新点，指出工作不完善之处，提出进一步研究方案。
+
+第二章背景知识与相关技术：介绍关系抽取任务，引出远程监督关系抽取涉及的基础知识，任务定义以及相关技术。
+
+长短期记忆网络结构
+LSTM的核心思想是通过门控机制来决定保留或者忘记细胞状态中的信息。三个门控机制的介绍如下：
+1. 遗忘门的作用是选择性遗忘细胞状态中保留的信息，如公式2-1所示：
+   ft = σ(Wf[ht-1] + Xt) + bf
+   其中σ代表激活函数Sigmoid，输出一个在0到1之间的数值来决定保留或忘记细胞状态Ct-1中的信息。1表示“完全保留”，0表示“完全丢弃”。
+2. 输入门，将新的信息选择性的记录到细胞状态中，具体如下：
+   it = σ(Wi[ht-1] + Xt) + bi
+   Ct~ = tanh(Wc[ht-1] + Xt) + bc
+   Ct = Ct-1 + it * Ct~
+   其中输入门可分为两个部分，it为在0到1之间的数值来决定更新什么数值，计算如公式2-2，Ct~为候选细胞状态，根据公式2-3计算，用来加入到新的细胞状态中，最后根据公式2-4更新细胞状态为新的细胞状态Ct。
+3. 输出层过Sigmoid函数来确定细胞状态的哪个部分将输出，如公式2-5所示。最后根据公式2-6来确定最后隐藏状态输出的部分。
+
+预训练语言模型
+近年来，预训练语言模型(PLMs)在多项NLP任务中频频刷新多项纪录。因此也成为NLP领域中深度学习范畴内的中流砥柱。语言模型(LM)根据上下文的文本信息来预测目标词的向量表示，生成相应文本的概率分布。这个过程为无监督的学习过程，无需人工标注数据，因此便于模型从大规模的数据中学习语言特征。预训练语言模型即依据特定的语言任务对语言模型进行训练，然后获得该语料上的语言特征，学习到的参数可以作为模型的初始化。最后使用预训练好的语言模型，当作最基本的编码模型来对接不同的模型，以处理不同的NLP任务。
+
+图神经网络
+深度学习在图像视频处理、语音识别、自然语言理解等任务已经大展拳脚。通常这些任务中所处理的数据在欧几里得空间中可以表示。CNN等神经网络结构可以有效的处理这种规则化的矩阵结构数据，即每个节点的周围节点个数是确定的。然而，对于不规则的或非欧几里德空间上的数据，如知识图谱、基因数据、论文引用、社交网络等，传统的神经网络结构如CNN、RNN等都难以处理。这类数据常常可以使用图(Graph)的形式来表示，从而更好地描述其中富含对象之间的复杂关系。图在计算机科学中是一种数据结构，其由顶点和边两部分组成，可以用G={V,E}表示。其中V表示图中节点的集合，E表示图中边的集合，表示了图中从节点i到节点的边。图中节点的连接关系可以用一个矩阵进行量化表示，称为邻接矩阵。对于此类型数据，如果使用图表示学习，可以同时编码图中的节点特征以及图中所含有的结构信息。图神经网络(GNN)是一种可以直接作用在图数据结构上的神经网络模型结构。图卷积神经网络(GCN)是其中的一种。
+
+本文提出了一个简洁的L2G-GCN模型框架，用于学习具有鲁棒性的包表示，以缓解基于远程监督的关系抽取中的噪声问题。模型中，词级别GCN用于编码句子的局部句法信息，句子级GCN用于更好地利用句子间的相关性，将句子间有关实体关系的全局结构信息聚合到一个包表示中。整个自底向上的模型结构采用两级分层的方式进行训练，生成具有多粒度信息的包表示。此外，本文将互信息最大化MIM引入模型，作为正则化器，以提高模型的鲁棒性。在Riedel提出的NYT-10基准数据集上进行了大量实验，结果表明本文提出的分层L2G-GCN模型和层级训练策略是有效的。本文的L2G-GCN实现了卓越的性能。
+
+清洗后的内容如下：
+
+---
+
+征，互信息的计算公式如下：
+
+I(X;Y) = H(Y) - H(Y|X)
+
+其中F为模型预测的结果，A为模型的输入特征。
+
+相应的正则化函数定义如下：
+
+L = E_y[log p(y)] - E_x p(y|x) log p(y|x)
+
+其中，p(f)表示预测的分布，p_0(y|x)表示预测输出的概率。最大化互信息，根据公式3-5可以看作两部分，即最大化H(Y)和最小化H(Y|X)。通过该方案，最大化H(Y)，提升Y的信息熵，即不确定度，预测的不确定性越高，预测的分布越均衡，以此来防止模型倾向于某些类别。最小化H(Y|X)，最小化条件熵，维持模型预测的平衡性，同时也提升了模型在预测时的置信度。受Li等人[61]启发，本文将p(y)作为p(y|x)平均值的近似值。
+
+3.5两阶段层级的训练方式
+
+受到人类由局部到整体的认知方式的启发，本文将模型训练分为两个阶段的层级方式。第一阶段，本文先训练词级别的图神经网络直至收敛，从而先获得个良好的局部结构信息。依据公式3-3获得实例的隐藏状态表示后，将个实例向量平均，映射到输出向量即包表不。而后本文通过函数，定义了包正确分类到第k个关系的条件概率：
+
+P(B|0) = 1 if c=i else 0
+
+第二阶段，本文训练完整的模型结构(包含词级别和语句级别的图神经网络结构)直至收敛。具体而言，通过语句级图神经网络结构得到增强的句子表示后，仍用公式3-7得到第二阶段的包表示。而后的分类过程同公式3-8，3-9。该阶段中，模型以端到端的训练方式利用已经学习过的局部结构信息来更好地聚合包内全局的结构信息。整体训练流程图如图3-6所示，损失函数如下所示：
+
+Lc = -ΣB∈D log P(B|0)
+
+Lmi = E_y[log p(y)] - E_x p(y|x) log p(y|x)
+
+L = Lc + λLmi
+
+其中|D|表示训练数据中包的个数，B表示包的标签，θ表示模型所有的参数。最终，本文的模型通过随机选取mini-batch来在训练数据集上训练直至拟合，采用随机梯度下降(SGD)优化算法来最小化损失函数。
+
+---
+
+以上内容为清洗后的片段。
+
+第四章基于预训练模型的异质图神经网络远程监督关系抽取模型
+
+本章主要介绍了一种基于预训练模型的异质图神经网络远程监督关系抽取模型。该模型主要是在第三章的层级图神经网络结构上进行改进，包括验证预训练模型在远程监督关系抽取任务上的有效性，引入实体信息以更有效地进行关系分类，以及设计信息融合门控机制以更好地融合不同来源得到的信息。模型整体训练流程如算法4所示。
+
+第五章实验设置与结果分析
+
+本章主要介绍本文实验的实验环境、实验数据集、评估指标，以及L2G-GCN模型和BH-GCN模型的实验结果和分析。本文设计了多组不同的对比实验来验证设计模型的有效性。实验环境包括服务器配置、操作系统、编程语言等。实验数据集采用了NYT-10和GDS两个公开数据集。评估指标包括PR曲线、AUC值、Precision@N和Hits@K。实验细节包括模型参数设置、数据预处理等。
+
+清洗后的内容如下：
+
+为了防止过度拟合，本文对单词嵌入应用dropout=0.1，对Word-GCN和-GCN模块应用dropout=0.3，对所有线性层应用dropout=0.5。本文使用PyTorch框架构建L2G-GCN模型。所有模型参数均采用统一的分布U[0,1]进行初始化。L2G-GCN模型在批大小为128的100个epochs内分两个阶段进行训练。本文采用经典的SGD优化器对L2G-GCN模型进行优化，学习率为0.3。本文将互信息最大化正则化添加到总损失中，系数为0.01。此外，对于异质图模型框架BH-GCN，其采用AdamW优化器进行优化训练，其BERT模型和异质图网络等参数设置如表5-6所示。
+
+5.5实验结果分析
+
+5.5.1对比模型
+
+本文将所设计的模型与之前研究工作提出的基线方法进行比较，包括前三个非神经网络模型方法和其他神经网络方法。以下简要说明了这些方法：
+
+1) Mintz等人首次将远程监督应用于关系抽取。这是一种新的关系抽取范式，不需要标注语料，并且适用于任何大小的语料库。他们使用了多类别的逻辑回归模型处理远程监督关系抽取，完成了一项开创性的工作。
+
+2) MultiR: Hofinan等人采用了概率图模型来处理远程监督关系抽取中的关系重叠问题。MultiR模型不仅可以用于包级关系抽取，还可以很好地处理句子级抽取和语料库级抽取。
+
+3) MIMLR: Surdeanu等人使用了一个结合MEL和多标签学习的模型。一种使用隐藏变量联合建模一个实体对和多个标签的方法。
+
+此处介绍的前三种方法为非神经网络方法。
+
+4) PCNN: Zeng等人采用了基于CNN的模型，设计了分段式的最大池化来向量化实例，并在一个包里选择最有可能符合该关系标签的实例。PCNN方法首次将MIL框架融入了针对远程监督关系抽取的深度学习研究中，并且没有使用复杂的人工设计特征。这对远程监督关系抽取来说是一项开创性的工作。
+
+5) PCNN+ATT: Lin等人设计了PCNN模型的一个变体，该模型在包内多个实例上使用选择性注意力机制来加权实例表示获取包的表示。通过采用句子级别的注意力模型，该研究期望减少噪声实例在训练中的权重，从而减少噪音数据对模型分类的影响。
+
+6) PCNN+HATT: Han等人没有孤立地处理某个关系类型，而是更好地利用了关系的层级信息。在关系间关联信息的基础上，提出了一种新的层级的注意力机制以识别包内的有效实例。
+
+7) RESIDE: Vashishth等人使用额外的知识信息，包括实体类型和知识库中关系标签的别名，用于对关系预测施加约束。此外，该方法在远程监督关系抽取中首次使用了GCN对文本进行编码。
+
+8) PCNN+KATT: Zhang等人融入了从图嵌入表示中获取的关系信息。此外，利用GCN对显性的知识进行建模。同时，它采用了从粗粒度到细粒度的知识感知的注意力机制来表示包。
+
+9) DISTRE: Alt等人观察到之前的模型倾向于预测数据量多的关系类别。为了解决这个问题，他们通过使用生成式预训练语言模型来引入语义、句法、语用知识。这些特征被认为是识别一些不同关系类别的关键。
+
+10) DOPEN: Gou等人利用实体类型与关系类型之间的的联系，构建了个具有动态生成参数能力的神经网络。此外，还提出了种关系感知的注意力机制来聚合实体类型信息。
+
+11) DCRE: Shang等人应用了一个无监督的深度聚类方法来检测包内的噪声实例，并且为这些噪声实例生成一个置信度较高的标签。
+
+12) PA-TRP: Cao等人构造了一个共现图来学习文本嵌入，并且从未标记的数据中学习关系原型。该模型通过迁移富含有效训练实例的关系类别知识到长尾数据上，以此提高长尾关系提取的性能。
+
+13) PSAN: Shang等人设计了一种模式感知的自注意力网络结构来识别不同种类的短关系模版。然后将这些模版信息输入预训练模型，来辅助预训练模型捕捉局部的依赖关系和短语结构。
+
+5.5.2结果分析
+
+在这节中本文依照上述指标依次报告主要的实验结果，并且同时分析所提出模型的性能。此外，通过将实验结果与基线方法进行比较，更深入地分析本文的工作和实验结果。
+
+1) PR曲线
+
+在图5-1中，本文将提出的L2G-GCN模型框架的PR曲线与上述基线方法的PR曲线进行比较，并得到以下观察结果：(1)所有非神经网络基线模型，包括Mintz、MultiR和MIMLR都逊于基于神经网络的基线模型。主要原因是非神经网络方法不能准确地捕捉句子的语义信息，并且实验结果很大程度上取决于人工设计的机器学习特征，这些特征会导致错误传播的问题。(2)从PR曲线看，本论文设计的L2G-GCN模型相比其他基线方法有着更好的性能。特别是当召回率超过0.15时，本文设计的方法都在一定程度上领先于其他方法，这说明本文设计的模型在不同种类的关系类别的预测上有一定的优势。(3)此外，与基于GCN的方法相比，本文的模型不仅利用GCN建模句子中词与词之间的依赖信息，还利用GCN建模了句子之间的相关性来获取句子之间全局的结构信息，因此可以获得一个鲁棒性更强的包表示，以避免噪声的影响。
+
+2) P@N评价
+
+本文使用包中所有的实例进行模型评估，P@N的实验结果如表5-7所示。观察发现，本文设计的L2G-GCN模型在大部分指标上显著优于所有基线方法。总体而言，本文此处列举了L2G-GCN模型在Top 100、200、300、500、1000和2000的精度表现以及以上六个值平均的精度值，其在P@100、300、500、1000上分别提高了2.4%、1.3%、4.7%和3.8%的模型效果。结果表明本文的模型在整个分布上有着惊人的表现。此外，本论文模型与所有的基线模型相比，在六个指标项的平均值P@MEAN上最高，对比所有基于选择性注意的方法和基于先验知识的方法，其提升了3.7%。结果表明，该模型结合句子中的局部信息和全局结构信息来处理含噪实例时具有较强的鲁棒性。
+
+3) AUC值
+
+本文将L2G-GCN模型与其余基线方法在AUC值上进行比较，如表5-8所示。本文注意到AUC值与上述两个指标PR曲线和P@N值保持趋势一致，即L2G-GCN模型实现了最佳性能，AUC值达到了最高，其提高了2.3%的性能。通过观察PR曲线和P@N表格，可以发现虽然基于选择性的注意力的方法，例如PCNN+HATT，在低召回水平下产生了更高的结果，基于先验知识的方法，如DISTRE在高召回水平下实现了高置信度，但是它们在AUC度量下都具有相似的结果。结果表明，这些方法在数据集的总体分布上具有相似的性能。与上述方法相比，本文的模型通过整合局部结构信息和全局的结构信息以及互信息最大化正则器突破了瓶颈。
+
+4) Hits@K
+
+为进一步证明本文模型的优势，并验证该模型在长尾关系类别的性能，本文报告了Hits@K宏观平均值(MacroAverage)，如表5-9所示。本文从NYT-10中提一个测试数据集的子集，均为训练实例数据数量少于100/200的关系类别数据。每个实体对，本文选择模型给出的前K个候选关系并和正确的关系类别比较。K从{10,15,20}中选择。从表5-8中，本文有以下观察结果。(1)从Hits@K指标而言，之前使用最广泛的方法PCNN+ATT性能相对较差。尤其是在Hits@10指标，只有不到5%的长尾类别实例会进入前10名推荐候选关系。这表明长尾问题仍然是远程监督关系抽取面临的严重问题。(2)先验知识的引入可以提高长尾关系抽取的性能。基于先验知识的方法，如受益于知识图谱中实体描述信息、实体类型信息和关系原型的模型方法如PCNN+KATT、DOPEN、PA-TRP通常比基于注意力的模式更好。这一改进表明，引入外部知识是一个重要而有效的方法来缓解长尾问题。(3)从总体上看，本文的模型表现出了惊人的性能，在很大程度上改善了模型在长尾数据上的性能。具体来说，对于少于100个训练实例的长尾类别而言，本文的模型比之前最好的模型的性能在Hits@15高出了2.7%，而在Hits@20高出了23.1%。而且本文的模型性能在少于200个训练实例的长尾类别一致的有效性，在Hits@10、Hits@15和Hits@20上都有大幅度增长，即4.5%、6.9%和23.2%。从效果来看，无论是基于注意力的模型还是基于先验知识的方法，本文的模型都优于这些以往的模型，这证明了互信息最大化正则器的有效性。增加了信息最大化后，该模型倾向于预测关系的多样性分布，不会偏向于某些特定的关系标签。换句话说，本文的模型将以更高的概率预测尾部关系类别。此外，本文的模型探索了层次结构中句子的局部信息和句子之间全局关系的有效性，其增强了DSRE的包表示。实验结果验证了模型的鲁棒性。
+
+为了展示L2G-GCN模型中有关模块的有效性，以及验证第四章提出的异构图网络结构，即BH-GCN的有效性，本文进行了如下对比实验。具体而言，本文移除了L2G-GCN中的一些模块，从而产生了四种变体3PL2G-GCNw/oWord-GCN、L2G-GCNw/oSen-GCN、L2G-GCNw/oHierarchical-training和L2G-GCNw/oMIM。同时，在预训练语言模型BERT的基础上，增加了BERT,+SenGCN,-GCN和BH-GCN四种模型的对比实验。具体地，PR曲线如图5-2所示，P@N值的对比情况如表5-9所示，AUC值的对比情况如表5-10。
+
+L2G-GCNw/oSen-GCN表示移除了Sen-GCN模块。该模型Word-GCN对实例中的局部语法信息进行编码。本文观察到，在这种情况下，模型的性能在P@MEAN和AUC下降了3.8%和5.2%。这表明Sen-GCN模块能更加关注包中实例之间的全局语义关联信息，全局信息确实增强了模型的能力。此外，与另一种基于GCN的方法RESIDE相比，可以观察到本文的L2G-GCN模型在没有Sen-GCN模块时，仍具有可比较的性能。换而言之，本文的模型在没有先验知识的情况下性能略好于RESIDE模型。
+
+L2G-GCNw/oWord-GCN表示移除Word-GCN模块。其中Sen-GCN模块从一开始就伴随模型训练。本文观察到在这种情况下，P@MEAN和AUC性能下降了4.1%和6.9%。这表明应该首先使用Word-GCN模块编码单实例信息，即在本设计的框架中，从局部到全局的编码是一个必要的过程。此外，还可以观察到L2G-GCNw/oWord-GCN的性能略好于L2G-GCNw/oSen-GCN。它表明，Sen-GCN模块通过捕获与噪声问题更直接相关的包结构中的全局信息，为本文的框架提供了更多帮助。
+
+L2G-GCNw/oHierarchical-training表示从L2G-GCN模型中移除分层训练策略。换言之，直接以端到端的方式训练整个模型。与L2G-GCNw/oWord-GCN和L2G-GCNw/oSen-GCN相比，性能有所下降。这表明，两个模块的简单组合不能很好地训练模型，得到较好的效果。Sen-GCN模块可能会干扰Word-GCN模块的学习，导致Word-GCN模块不能很好地编码语法信息。也就证明了从局部到全局的逐步编码过程有利于模型更好地表示包，验证了本文学习策略的有效性。
+
+L2G-GCNw/oMIM表示移除了MIM正则化器。其结果显示，模型在P@MEAN还有AUC指标分别下降了2.9%和4.7%。这验证了模型与MIM正则化器相结合可以获得比较好的性能。因此本文采用MIM正则化器来缓解长尾问题。如表5-9所示，在这个指标Hits@K中本文的模型性能大幅提升，尤其是在Hits@20指标下。这表明MIM正则化器通过鼓励模型预测长尾关系类别，对于缓解长尾问题是有效的。此外，AUC值的度量结果表明，完整的层次结构的性能略优于其他变体，充分证明了本文的分层图神经网络结构的有效性。
+
+BERT模型表示使用预训练模型编码文本后，直接使用分类器分类。实验结果可以看出引入预训练语言模型，对远程监督关系抽取任务确实有改善作用。相比词级图神经网络结构，BERT所包含的语义语法知识更丰富，有更强的编码效果。
+
+模型+Sen-GCN表示组合BERT和第三章所述的句级图神经网络模块。模型+Hete-GCN表示增加了异质图网络结构，但仅仅使用加和平均的方法融合实体和实例的信息表示。从以上实验结果可以看出增加了Sen-GCN模块后，模型因为学习到实例之间的相关性，效果有了一定的提升。在使用Hete-GCN模块后，因为增强了实体信息对关系抽取的指导作用，实验效果得到了进一步提升。
+
+模型+Hete-GCN表示第四章所述的基于预训练模型的异质图神经网络远程监督关系抽取模型。从以上实验结果可以看出，BH-GCN模型在P@N,AUC值，以及PR曲线三个指标上，对比L2G-GCN模型、+Sen-GCN、+Hete-GCN均有所提升。相比于+Sen-GCN模型，BH-GCN在P@MEAN上提升了4.7%,AUC值提升了3.2%。实验结果表明，异质图结构增强的实体指导作用，有效的改善了模型的效果。同时相比于+Hete-GCN模型，完整的BH-GCN模型进一步改善了实验效果，这表明相比于简单直接的融合实例和实体的信息表示，通过异质信息融合模块建模后的实例、实体表达更加完备。
+
+在本章中，主要介绍了实验的主要环境、实验所使用的数据集、评估指标，并总结了本论文相关的基线模型方法，与本论文设计的模型实验结果进行比较，对本文模型实验结果进行了展示和分析。同时，本论文做了相关的对比实验，对模型的几种变体进行相关分析，对两个图卷积模块的层数对模型的影响进行分析，最后选取了数据集中的案例进行可视化分析。总体而言，实验结果体现了本文提出的两个模型L2GCN和BH-GCN均能有效提升远程监督关系抽取的性能。
+
+第六章远程监督关系抽取平台设计与实现
+
+本论文基于上述远程监督关系抽取的研究，结合上文第三章提出的引入互信信息的最大化层级图神经网络结构和第四章提出的异质图网络结构，搭建了基于包级别的关系抽取演示平台。本章将详细介绍搭建的演示系统的实现原理和相关技术，并对系统的组成模块进行介绍。针对本论文的主要研究内容，系统需要完成的模块主要有：数据管理模块，用户管理模块，关系抽取模块，前端展示模块。
+
+6.1系统需求分析
+
+根据研究内容，远程监督关系抽取系统主要需要以下四个功能模块，功能需求分析如下，用户用例图如图6-1：
+
+1)用户管理模块：该系统面向众多用户群体，为了区分用户数据，需要提供用户管理服务，保证拥有访问权限的用户才能进入系统。该模块具体包括用户注册、登录、登出功能。系统根据某一ID确定用户，用数据库记录用户的相关信息。
+
+2)数据管理模块：用户与系统的交互时刻伴随着数据，对数据进行记录并一个系统必不可少的服务。对于用户来说，系统需要对用户的相关信息记录到数据库中，此外本系统支持用户上传文件，进行批量分析，并下载分析结果。
+
+3)关系抽取模块：本系统基于本论文提出的两个算法模型，进行包级别的关系抽取系统。用户可根据需求指定模型，根据需求输入自定数量的语句，对文本进行关系抽取。
+
+4)前端展示模块：本系统根据用户的需求，用户可自定义输入实例数量，根据抽取结果，实时展现抽取三元组，并对抽取结果进行知识图谱可视化。此外，本系统还同时考虑了系统非功能性需求。
+
+6.2系统总体设计框架
+
+针对以上所述功能需求，本工作构建的演示平台整体框架如图6-2所示。为了方便用户交互，维修方便，本工作基于浏览器和服务器结构进行系统搭建，前端负责与用户交互，以可视化的方式展示关系抽取结果；后端进行数据处理，模型管理，关系预测。在该关系抽取系统中，用户通过浏览器输入或上传文本数据，向服务器发送请求，服务器接受用户数据和请求，并完成相应的操作，将抽取出关系三元组以及相关信息返回浏览器，并做出相应的可视化展示。
+
+6.3系统详细功能设计与实现
+
+6.3.1用户管理模块
+
+当新用户使用本系统时，需要先填写图6-4中的相关信息来注册账号。本系统以用户id作为数据库主键，即唯一ID。
+
+6.3.2关系抽取模块
+
+关系抽取模块是本系统的核心模块。主要实现了模型切换、实体指定、数据输入、模型加载，抽取结果，结果可视化功能。用户通过指定实体，输入文本信息，通过配置关系抽取模型，便可对数据打包，进行包级关系抽取。
+
+6.3.3数据管理模块
+
+数据管理模块主要负责数据的存储、读取、预处理等功能。本系统主要使用SQLite进行用户信息的存储，数据表设计如下表6-1：
+
+6.4系统测试
+
+6.4.1功能测试
+
+测试模块 测试功能 测试内容 测试结果 结论
+
+输入非法格式的提示相应信息格 校验功能正常 测试数据式错误 注册
+
+注册功能有有效 正常注册 注册功能正常
+
+输入错误密码 无法登录 校验功能正常 登录
+
+登录功能有效性 正常进入系统 登录功能正常
+
+注销账户 正常退出系统 登出功能正常
+
+多种格式上传成 数据上传 文件上传 文件上传正常
+
+数据管理模块 数据下载 预测结果下载 下载成功 数据下载正常
+
+完成系统开发后，对系统含有功能逐一测试，保证系统的正常运行。系统的测试结果如表6-2所示。
+
+6.5本章小结
+
+本章主要介绍了基于远程监督的关系抽取演示系统的设计与实现。首先介绍了系统的功能需求，明确了系统功能。接着介绍了系统的整体框架，本文使用B/S结构搭建系统，使用Bootstrap和Flask的框架组合，结合Python编程语言进行系统开发。然后依次介绍了系统各个模块的实现方法，并演示了相应功能模块的使用。
+
+6.6参考文献
+
+[1] Veyseh A P B, Van Nguuyen M, Trung N N, et al. Modeling Document-Level Context for Event Detection via Important Context Selection [A]. // Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing [C]. 2021: 5403-5413.
+
+[2] Ding H, Luo X. AttentionRank: Unsupervised Keyword Extraction using Self-and Cross Attentions [A]. // Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing [C]. 2021: 1919-1928.
+
+[3] 孙茂松，李莉，刘知远. 面向中英平行专利的双语术语自动抽取 [J]. 清华大学学报(自然科学版)，2014，54(10): 1339-1343.
+
+[4] Agichtein E, Gravano L. Snowball: Extracting Relations from Large Plain-Text Collections [A]. // Proceedings of the fifth ACM conference on Digital libraries [C]. 2000: 85-94.
+
+[5] Mintz M, Bills S, Snow R, et al. Distant supervision for relation extraction without labeled data [A]. // Proceedings of the Joint Conference of the 47th Annual Meeting of the ACL and the 4th International Joint Conference on Natural Language Processing of the AFNLP [C]. 2009: 1003-1011.
+
+[6] Liu C, Sun W, Chao W, et al. Convolutional neural network for relation extraction [A]. // International conference on advanced data mining and applications [C]. Springer, 2013: 231-242.
+
+[7] Zeng D, Liu K, Lai S, et al. Relation classification via convolutional deep neural network [A]. // Proceedings of COLING 2014, the 25th international conference on computational linguistics: technical papers [C]. 2014: 2335-2344.
+
+[8] Zhang D, Wang D. Relation classification via recurrent neural network [J]. arXiv preprint arXiv:150801006, 2015.
+
+[9] Bahdanau D, Cho K, Bengio Y. Neural Machine Translation by Jointly Learning to Align and Translate [J]. Computer Science, 2014.
+
+[10] Zhou P, Shi W, Tian J, et al. Attention-Based Bidirectional Long Short-Term Memory Networks for Relation Classification [A]. // Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers) [C]. 2016.
+
+[11] Hochreiter S, Schmidhuber J. Long short-term memory [J]. Neural computation, 1997, 9(8): 1735-1780.
+
+[12] Kipf T N, Wellinger M. Semi-supervised classification with graph convolutional networks [J]. arXiv preprint arXiv:1609029707, 2016.
+
+[13] Guo Z, Zhang Y, Lu W. Attention guided graph convolutional networks for relation extraction [J]. arXiv preprint arXiv:190607510, 2019.
+
+[14] Wei Z, Su J, Wang Y, et al. A novel hierarchical binary tagging framework for joint extraction of entities and relations [J]. arXiv preprint arXiv:190903227, 2019.
+
+[15] Zheng H, Wen R, Chen X, et al. PRGC: Potential Relation and Global Correspondence Based Joint Relation Triples Extraction [A]. // Online: Association for Computational Linguistics. 2021: 6225-6235.
+
+[16] Riedel S, Yao L, McCallum A. Modeling relations and their mentions without labeled text [A]. // Joint European Conference on Machine Learning and Knowledge Discovery in Databases [C]. Springer, 2010: 148, 163.
+
+[17] Dietterich T G, Lathrop R H, Lozano-Pérez T. Solving the multiple instance problem with axis-parallel rectangles [J]. Artificial intelligence, 1997, 89(1-2): 31-.
+
+[18] Zeng D, Liu K, Chen Y, et al. Distant supervision for relation extraction via piecewise convolutional neural networks [A]. // Proceedings of the 2015 conference on empirical methods in natural language processing [C]. 2015: 1753-1762.
+
+[19] Lin Y, Shen S, Liu Z, et al. Neural relation extraction with selective attention over instances [A]. // Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) [C]. 2016: 2124-2133.
+
+[20] Vashishth S, JoshI R, Pray E S, et al. Reside: Improving distantly supervised neural relation extraction using side information [J]. arXiv preprint arXiv:181204361, 2018.
+
+[21] Cho K, Van Merrienboer B, Gulcehre C, et al. Learning phrase representations using RNN encoder-decoder for statistical machine translation [J]. arXiv preprint arXiv:14061078, 2014.
+
+[22] Ye Z, Ling Z. Distant supervision relation extraction with intra-and inter-bag attentions [J]. arXiv preprint arXiv:1904000143, 2019.
+
+[23] Xing R, Luo J. Distant supervised relation extraction with separate head-tail CNN [A]. // Proceedings of the 5th Workshop on Noisy User-Generated Text (W-NUT) [C]. 2019: 249-258.
+
+[24] Shang Y, Huang H, Sun X, et al. A pattern-aware self-attention network for distant supervised relation extraction [J]. Information Sciences, 2022, 584: 269-279.
+
+[25] Jiang X, Wang Q, Li P, et al. Relation extraction with multi-instance multi-label convolutional neural networks [A]. // Proceedings of COLING 2016, the 26th International Conference on Computational Linguistics: Technical Papers [C]. 2016: 1471-1480.
+
+[26] Liu T, Wang K, Chang B, et al. A soft-label method for noise-tolerant distant supervised relation extraction [A]. // Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing [C]. 2017: 1790-1795.
+
+[27] Huang Y, Wang W. Deep residual learning for weakly supervised relation extraction [J].
+
+参考文献：
+
+1. Fenng X, Guo J, Qin B, et al. Effective Deep Memory Networks for Distance Supervised Relation Extraction [C]//IJCAI, 2017.
+2. Fenng J, Huang M, Zhao L, et al. Reinforcement learning for relation classification from noisy data [C]//Proceedings of the AAAI Conference on Artificial Intelligence, 2018.
+3. Qin P, Xu W, Wang W, et al. Robust distant supervision relation extraction via deep reinforcement learning [J]. arXiv preprint arXiv:1805099927, 2018.
+4. Zeng D, Dai Y, Li F, et al. Adversarial learning for distant supervised relation extraction [J]. Computers, Materials & Continua, 2018, 55(1):121-136.
+5. Goodfellow I. Nips 2016 tutorial: Generative adversarial networks [J]. arXiv preprint arXiv:170100160, 2016.
+6. Qin P, Xu W, Wang W, et al. DSGAN: Generative adversarial training for distant supervision relation extraction [J]. arXiv preprint arXiv:1805099927, 2018.
+7. Ji G, Liu K, He S, et al. Distance supervision for relation extraction with sentence level attention and entity descriptions [C]//Proceedings of the AAAI Conference on Artificial Intelligence, 2017.
+8. Bordes A, Usunier N, Garcia-Duran A, et al. Translating embeddings for modeling multi-relational data [J]. Advances in neural information processing systems, 2013, 26: 1-9.
+9. Han X, Yu P, Liu Z, et al. Hierarchical relation extraction with coarse-grained attention [C]//Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, 2018: 2236-2245.
+10. Zhang N, Deng S, Sun Z, et al. Long-tail relation extraction via knowledge graph embeddings and graph convolutional networks [J]. arXiv preprint arXiv:190301306, 2019.
+11. Alt C, Hieber M, Henning L. Fine-tuning pretrained transformer language models to distantly supervised relation extraction [J]. arXiv preprint arXiv:190608646, 2019.
+12. Gou Y, Lei Y, Liu L, et al. A dynamic parameter enhanced network for distant supervised relation extraction [J]. Knowledge-Based Systems, 2020, 197:105912.
+13. Cao Y, Kuang J, Gao M, et al. Learning relation prototype from unlabeled texts for long-tail relation extraction [J]. IEEE Transactions on Knowledge and Data Engineering, 2021.
+14. Distiawan B, Weikum G, Qi J, et al. Neural relation extraction for knowledge base enrichment [C]//Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics, 2019: 229-240.
+15. Fan T, Wang H. Research of Chinese intangible cultural heritage knowledge graph construction and attribute value extraction with graph attention network [J]. Information Processing & Management, 2022, 59(1):102753.
+16. Shin S, Jin X, Jung J, et al. Predictive constraints based question answering over knowledge graph [J]. Information Processing & Management, 2019, 56(3):445-462.
+17. Krallinger M, Rodriguez-Penagos C, Tendulkar A, et al. PLAN2L: a web tool for integrated text mining and literature-based bioentity relation extraction [J]. Nucleic Acids Research, 2009, 37(suppl 2):W160-W165.
+18. Zelenko D, Aone C, Richardella A. Kernel methods for relation extraction [J]. Journal of Machine Learning Research, 2003, 3(Feb):1083-1106.
+19. Kambhatla N. Combining lexical, syntactic, and semantic features with maximum entropy models for information extraction [C]//Proceedings of the ACL Interactive Poster and Demonstration Sessions, 2004:178-181.
+20. Bunescu R C, Mooney R J. A shortest path dependency kernel for relation extraction [C]//Proceedings of the conference on Human Language Technology and Empirical Methods in Natural Language Processing, 2005:724-731.
+21. Tang H, Sun X, Jin B, et al. Improving Document Representations by Generating Pseudo Query Embeddings for Dense Retrieval [J]. arXiv preprint arXiv:210503599, 2021.
+22. Wang Y, Sun C, Wu Y, et al. UniRE: A Unified Label Space for Entity Relation Extraction [J]. arXiv preprint arXiv:210704292, 2021.
+23. Li Z, Zou Y, Zhang C, et al. Learning Implicit Sentiment in Aspect-based Sentiment Analysis with Supervised Contrastive Pre-training [J]. arXiv preprint arXiv:2111102194, 2021.
+24. Devlin J, Chang M-W, Lee K, et al. Bert: Pre-training of deep bidirectional transformers for language understanding [J]. arXiv preprint arXiv:1810048205, 2018.
+25. Radford A, Narasimhan K, Salimans T, et al. Improving language understanding by generative pre-training [J]. 2018.
+26. Yang Z, Dai Z, Yang Y, et al. Xlnet: Generalized autoregressive pre-training for language understanding [J]. Advances in Neural Information Processing Systems, 2019, 32: 5-24.
+27. Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need [J]. Advances in Neural Information Processing Systems, 2017, 30: 5998-6008.
+28. Shang Y, Huang H-Y, Mao X-L, et al. Are noisy sentences useless for distant supervised relation extraction? [C]//Proceedings of the AAAI Conference on Artificial Intelligence, 2020:8799-8806.
+29. Li Y, Long G, Shen T, et al. Self-attention enhanced selective gate with entity aware embedding for distantly supervised relation extraction [C]//Proceedings of the AAAI Conference on Artificial Intelligence, 2020:8269-8276.
+30. Deng X, Sun H. Leveraging 2-hop distant supervision from table entity pairs for relation extraction [J]. arXiv preprint arXiv:1909060007, 2019.
+31. Yuan Y, Liu L, Tang S, et al. Cross-relation cross-bag attention for distantly supervised relation extraction [C]//Proceedings of the AAAI Conference on Artificial Intelligence, 2019:419-426.
+32. 黄兆玮，常亮，宾辰忠，等. 基于GRU和注意力机制的远程监督关系抽取 [J]. 计算机应用研究，2019，36(10):2930-2933.
+33. Mrini K, Demoncourt F, Buys T, et al. Rethinking self-attention: An interpretable self-attentive encoder-decoder parser [J]. 2019.
+34. Li B, Wang Y, Che T, et al. Rethinking distributional matching based domain adaptation [J]. arXiv preprint arXiv:200613352, 2020.
+35. Jat S, Khandelwal S, Talukdar P. Improving distantly supervised relation extraction using word and entity based attention [J]. arXiv preprint arXiv:180406987, 2018.
+36. Paszke A, Gross S, Massa F, et al. Pytorch: An imperative style, high-performance deep learning library [J]. Advances in Neural Information Processing Systems, 2019, 32: 8024-8035.
+37. Hof &inann R, Zhang C, Ling X, et al. Knowledge-based weak supervision for information extraction of overlapping relations [C]//Proceedings of the 49th annual meeting of the association for computational linguistics: Human language technologies, 2011:541-550.
+38. Surdeanu M, Tibshirani J, Nallapati R, et al. Multi-instance multi-label learning for relation extraction [C]//Proceedings of the die 2012 joint conference on empirical methods in natural language processing and computational natural language learning, 2012:455-465.

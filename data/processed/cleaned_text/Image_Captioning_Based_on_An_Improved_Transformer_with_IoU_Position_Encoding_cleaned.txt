@@ -1,0 +1,95 @@
+Image Captioning Based on An Improved Transformer with IoU Position Encoding
+
+Yazhou Li, Yihui Shi, Yun Liu, Ruifan Li, and Zhanyu Ma
+School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China
+
+Abstract: The image captioning task involves generating descriptive sentences for images. We propose an improved Transformer with IoU Position encoding model (TIP) to address the issues of vanishing query vectors and the lack of spatial information in the decoding process. TIP introduces an intra-modal attention mechanism and an Intersection-over-Union (IoU) spatial position encoding method. Experiments on MS-COCO datasets demonstrate the model's effectiveness.
+
+I. INTRODUCTION
+Image captioning combines computer vision and natural language processing to describe image content in sentences. Traditional models use CNNs to extract features and RNNs for caption generation, often enhanced by attention mechanisms. However, these models have limitations in long-term memory and spatial information representation. We introduce TIP, which incorporates an intra-modal attention module and IoU-based spatial encoding to address these issues.
+
+II. RELATED WORKS
+---
+
+In recent years, deep learning image captioning models inspired by the encoder-decoder framework for machine translation have been proposed. The Neural Image Captioning (NIC) model uses a convolutional neural network to extract image features and an LSTM to translate these into sentences. Jia et al. improved this by inputting image features at each decoding moment. Karpathy et al. extended this by using R-CNN to extract features from different image regions. Xu et al. introduced an attention mechanism to dynamically focus on different regions, which effectively improved model performance. However, this attention mechanism primarily focused on visual information, neglecting language aspects. Lu et al. addressed this with an adaptive attention mechanism.
+
+All these models use an RNN-based encoder, which has limited long-term memory capabilities. To address this, we adopt the transformer structure as the decoder. For better applicability to image captioning, we propose an intra-modal attention module. Additionally, we recognize the importance of spatial information in the decoding process. Hu et al. used object coordinates as auxiliary information, but did not fully utilize the spatial relationships between objects. To enhance our TIP model's use of spatial relationships, we introduce an IoU spatial position encoding module.
+
+Our TIP model consists of three main components: an image encoder, an IoU position module, and a caption decoder. The decoder uses a self-attention network to overcome the long-term dependency issue. We propose the intra-modal attention module to preserve image and text information, using a gate mechanism to selectively retain information. For position encoding, we fuse spatial and visual features by computing IoU between object bounding boxes and mapping the results to a consistent dimension with the object feature map, summing this with visual features for decoder input.
+
+IV. EXPERIMENTAL SETTINGS
+A. Datasets and metrics
+Our TIP model's effectiveness is examined through experiments on the MS-COCO dataset [22], which includes 82,783 training, 40,504 validation, and 40,775 test images. We follow the dataset division method of [2] for consistent comparison with other baseline methods. The offline dataset contains 113,287 images with five annotated sentences each. Both validation and testing sets consist of 5000 unique images. We evaluate our method using CIDEr [23], BLEU [24], METEOR [25], ROUGE [26], and SPICE [27].
+
+B. Implementation details
+The region detector identifies 36 regions of interest. Region features have a dimension of 2048, and the word embedding vector is set to 512. The network structure includes 6 layers for both the encoder and decoder and 8 multi-head attention mechanisms. The maximum sentence length is 16, the batch size is 10, and we use the Adam method [28] for parameter updates with a learning rate of 4 × 10−4, warmed up over 2000 steps. We train for 15 epochs using cross-entropy loss.
+
+V. RESULTS AND ANALYSIS
+A. Result Comparison
+Table I shows that TIP achieves the highest scores in CIDEr and METEOR metrics among different models.
+
+B. On Spatial Encoding
+Table III presents the performance of different position encoding methods. The CoordNorm(hw) model shows improvements over the Coord(hw) and Coord models, indicating the effectiveness of normalization. The IoUc and IoU+ models further enhance performance by incorporating IoU information, which captures object relationships and aligns spatial information with image features.
+
+C. On Beam Size
+Table IV demonstrates the impact of beam size on results. Larger beam sizes increase the search space for word sampling, improving performance metrics.
+
+---
+
+Standard: A man riding a snowboard down a snow-covered slope.
+Ours: Two people riding snowboards on a snowy slope.
+GT1: Two men riding snowboards in snow down a slope.
+GT2: Two people are snowboarding down a hill fast.
+GT3: Two men are riding snowboards in a snow slope.
+
+Standard: A couple of boats sitting in the water.
+Ours: A boat sitting on top of a lake next to a shore.
+GT1: A boat full of Asian people sailed through reeds and bushes.
+GT2: A large boat filled with people navigate through a still lake.
+GT3: Around 15 people on a boat on a river going somewhere.
+
+Standard: A black cow standing in a field of tall grass.
+P: A cow standing in a grassy field next to a house.
+GT1: Two cows grazing on grass in a field by a house.
+GT2: A white-faced cow stands in the tall grass.
+GT3: A cow stands in the grassy area of a yard.
+
+B: A man riding a skateboard down a sidewalk.
+P: A man riding a skateboard next to another man.
+GT1: Two men on skateboards on the pavement.
+GT2: Two young skateboarders skating near each other.
+GT3: Two men riding on their skateboards.
+
+Fig. 3: Qualitative results of our TIP model.
+
+Information is lost and many better sentences are missed. When the beam search size is increased to 2 and 3, the search space of words increases, achieving the highest metric scores and optimal performance. At a beam size of 4, the model generates shorter sentences. High similarity between generated words and lack of diversity slightly decrease metrics. Beam size increase leads to higher memory usage and slower sentence generation.
+
+D. On Number of Network Layers
+
+We conduct experiments on the number of network layers in the transformer. Table V presents results for different encoder (EN) and decoder (DN) layer combinations. Deeper networks improve image captioning metric scores, with decoder layer increases providing larger improvements in BLEU-1, BLEU-2, BLEU-3, BLEU-4, and CIDEr metrics.
+
+E. Qualitative Results and Visualization
+
+Qualitative analysis on randomly selected images (Fig. 3) shows that our TIP model generates sentences with richer semantic information. For instance, the model correctly identifies two people snowboarding where the standard model only recognizes one. The IoU position encoding method effectively identifies object relationships, resulting in generated sentences closer to the annotated ones.
+
+VI. CONCLUSION
+
+We propose an improved transformer with IoU position encoding, TIP, which incorporates an intra-modal attention module and fuses visual and spatial features. Extensive experiments validate the effectiveness of these methods.
+
+---
+
+TABLE V PERFORMANCE COMPARISON USING DIFFERENT NUMBER OF LAYERS.
+
+EN DN B-1 B-2 B-3 B-4 R S C
+6 6 76.0 56.0 46.1 35.2 56.0 21.0 112.9
+8 6 75.8 59.4 45.6 34.7 55.9 20.8 112.8
+6 8 76.1 59.7 45.9 34.9 56.2 21.1 112.9
+8 8 76.1 59.7 45.8 34.9 56.0 21.2 113.2
+
+---
+
+Karpathy and Fei-Fei [2015] introduced deep visual-semantic alignments for generating image descriptions. Girshick et al. [2014] presented rich feature hierarchies for accurate object detection and semantic segmentation. Vaswani et al. [2017] proposed the attention mechanism as a sufficient neural network component. Hu et al. [2018] introduced relation networks for object detection. He et al. [2016] developed deep residual learning for image recognition. Ba et al. [2016] introduced layer normalization.
+
+Lin et al. [2014] presented the Microsoft COCO dataset, which contains common objects in context. Vedantam et al. [2015] introduced CIDER, a consensus-based image description evaluation metric. Papineni et al. [2002] proposed BLEU, an automatic evaluation method for machine translation. Banerjee and Lavie [2005] introduced METEOR, an automatic metric for translation evaluation with improved correlation with human judgments. Lin [2004] developed ROUGE, a package for automatic evaluation of summaries. Anderson et al. [2016] proposed SPICE, a semantic propositional image caption evaluation metric.
+
+Kingma and Ba [2014] presented Adam, a method for stochastic optimization. Yang et al. [2016] introduced review networks for caption generation. Liu et al. [2017] improved image captioning via policy gradient optimization. Rennie et al. [2017] proposed self-critical sequence training for image captioning. Yao et al. [2017] boosted image captioning with attributes. Jiang et al. [2018] introduced a recurrent fusion network for image captioning.

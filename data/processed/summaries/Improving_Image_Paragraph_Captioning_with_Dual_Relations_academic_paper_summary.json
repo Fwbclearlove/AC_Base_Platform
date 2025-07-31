@@ -1,0 +1,49 @@
+{
+  "document_type": "academic_paper",
+  "title": "IMPROVING IMAGE PARAGRAPH CAPTIONING WITH DUAL RELATIONS",
+  "authors": [
+    "Yun Liu",
+    "Yihui Shi",
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Zhanyu Ma",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Image paragraph captioning",
+  "research_problem": "Existing methods do not explicitly model object relations, leading to suboptimal performance",
+  "methodology": "DualRel model",
+  "key_innovations": [
+    "Captures spatial and semantic relations among objects",
+    "Weakly supervised multi-label classifier",
+    "Relation-aware attention",
+    "Fusion Gates"
+  ],
+  "experimental_results": "DualRel achieves significant improvements on the Stanford benchmark dataset",
+  "conclusions": "DualRel, a model for image paragraph captioning that captures semantic and spatial relations, outperforms strong baselines on the Stanford benchmark dataset",
+  "keywords": [
+    "Image paragraph captioning",
+    "Dual Relations",
+    "Spatial Relation",
+    "Semantic Relation",
+    "Weakly Supervised",
+    "Relation-aware Attention"
+  ],
+  "application_domains": [
+    "Beijing Academy of Artificial Intelligence",
+    "Computer Vision",
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "DualRel model",
+    "Faster R-CNN",
+    "Relation Embedding Module",
+    "Relation-aware Interaction Module",
+    "Self-critical sequence training"
+  ],
+  "performance_metrics": "BLEU@{1, 2, 3, 4}, METEOR, CIDEr, BERTScore F metrics",
+  "summary": "This paper introduces DualRel, a model for image paragraph captioning that captures spatial and semantic relations. It includes a relation embedding module and a relation-aware interaction module, outperforming strong baselines on the Stanford benchmark dataset. The model utilizes Faster R-CNN for object detection and employs weakly supervised learning for semantic relation classification. The experimental results show significant improvements in various evaluation metrics.",
+  "file_id": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+  "source_type": "cleaned",
+  "text_length": 11060,
+  "generation_time": "2025-07-31 21:21:56"
+}

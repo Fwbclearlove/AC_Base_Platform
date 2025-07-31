@@ -1,0 +1,190 @@
+---
+
+Clothing image recognition has recently gained attention for its commercial and social applications. The variations in clothing images and complex formation conditions pose challenges. Traditional convolutional neural networks (CNNs) do not always provide a satisfactory balance between training time and recognition performance. We propose a recognition framework based on multiple features and extreme learning machines (ELMs). Our framework extracts three types of features: CNN features with pre-trained networks, histograms of oriented gradients, and color histograms. These low-level features are concatenated and input to an autoencoder version of ELM for deep feature-level fusion. We further introduce an ensemble of adaptive ELMs for decision-level fusion. Experiments on a large-scale clothing image dataset demonstrate the competitiveness and efficiency of our framework.
+
+INDEX TERMS Clothing image recognition, extreme learning machines, feature fusion, autoencoder ELM, ensemble learning.
+
+I. INTRODUCTION
+Clothing image recognition is essential for e-commercial platforms and personal media management. It is a challenging task due to the variations in clothing appearance, non-rigid nature, and diverse formation conditions. Existing approaches can be categorized into hand-crafted features and deep learning methods. While deep learning offers high accuracy, it can be time-consuming and parameter tuning is difficult. We explore multiple features and propose a framework based on ELMs. This framework extracts features, fuses them using an Autoencoder variant of ELM, and classifies images with an ensemble strategy called Ada-ELMs. Our method is evaluated on the DeepFashion dataset, showing competitive performance in clothing image recognition.
+
+II. RELATED WORK
+Automatic clothing image analysis is valuable for the fashion industry. Attribute learning provides a fine-grained description but faces challenges due to the lack of well-labeled data and the need for domain-specific attributes.
+
+---
+
+---
+
+To overcome the challenge of attribute learning in large-scale clothing images, various methods have been proposed. Berg et al. [11] mined descriptive text from the Internet, while Chen et al. [1] focused on upper-body clothing attributes. Shankar et al. [13] used deep neural networks for attribute discovery in weakly supervised scenarios. These methods often treat attribute learning as a separate task, although attributes are closely related to clothing categories.
+
+Research in clothing image analysis has also explored pose estimation and person detection methods [17]–[21]. Liu et al. [17] addressed cross-scenario retrieval, Kalantidis et al. [19] used pose estimation for clothing parsing, and Yamaguchi et al. [20] proposed an unconstrained approach. These methods rely on accurate pose estimation and human parts detection.
+
+Deep learning, introduced in 2006, has been applied to various computer vision tasks due to its ability to learn hierarchical and effective representations. Methods such as supervised CNNs, unsupervised autoencoders, restricted Boltzmann machines, and generative adversarial networks have shown success in image classification, multi-modal information processing, and object detection. Deep learning's advantage in multi-task learning makes it suitable for large-scale clothing image analysis.
+
+Our proposed framework for clothing image recognition involves Extreme Learning Machines (ELMs) and Autoencoder-ELMs. ELMs are single hidden layer feedforward networks that differ from traditional MLPs in their activation function and learning process. An ELM solves an optimization objective to find the output weights β, offering better generalization performance and faster learning speed.
+
+---
+
+Please note that the content provided here is a cleaned-up version of the fragment you provided, with noise removed and the core academic content retained. If you need further cleaning or have specific instructions, please let me know.
+
+B. AUTOENCODER EXTREME LEARNING MACHINES (AE-ELMs)
+The autoencoder is a variant of the multi-layer perceptron that learns a compact or sparse representation of data in an unsupervised manner. AE-ELMs modify the traditional ELM by setting output neurons to match input neurons and choosing orthogonal hidden neuron weights and biases. The hidden layer representation is given by:
+
+h(x) = g(aT x + b)
+
+Weights and biases are constrained such that aT a = I and bT b = 1, ensuring orthogonal random vectors. AE-ELMs are universal approximators and their output weights β, mapping from representation space to input space, can be determined analytically.
+
+C. FEATURE EXTRACTION
+1) CNN FEATURE EXTRACTION
+   - A CNN with ten layers is used for feature extraction.
+   - Input images undergo two convolutional layers with 3×3 kernels and 64/128 kernels, followed by max-pooling.
+   - Two fully connected layers with 512 units and a dropout rate of 0.5 precede the softmax output.
+   - The output of the eighth layer serves as the feature vector with a dimensionality of 512.
+
+2) HOG FEATURE EXTRACTION
+   - HOG descriptors capture the distribution of intensity gradients within an image.
+   - Images are divided into cells, and gradient direction histograms are computed for each cell.
+   - Concatenated histograms form the HOG descriptor, which is invariant to photometric and geometric transformations.
+   - Parameters for HOG extraction are set to cell size 6×6, block size 3×3, and eight orientation classes, resulting in a 628-dimensional descriptor.
+
+3) COLOR HISTOGRAM EXTRACTION
+   - Color histogram represents the distribution of colors in an image.
+   - Grayscale conversion using v = 0.3r + 0.59g + 0.11b yields a 256-dimensional histogram.
+
+D. ADA-ELMs
+The proposed framework processes input images by:
+   - Cropping the clothing part using dataset annotations.
+   - Extracting CNN, HOG, and color histogram features in parallel.
+   - Concatenating these features for naive feature-level fusion.
+   - Employing AE-ELM for deep fusion with unsupervised learning.
+   - Feeding the fusion representation to an ensemble classifier, Ada-ELMs.
+   - Classifying the image category.
+
+In this section, we describe our ensemble model, Ada-ELMs, which fuses decision results from multiple ELM classifiers. The Ada-ELMs algorithm adaptively assigns decision weights to trained ELM classifiers, leveraging their high-speed learning. This ensemble decision-making can enhance the accuracy of the final decision. Ada-ELMs consists of K independent ELMs with identical numbers of hidden neurons and activation functions, ensuring an optimal hyper-plane for the training set.
+
+The learning algorithm of Ada-ELMs is as follows:
+- Initialize counter k = 1.
+- Repeat until k > K:
+  - Initialize the kth ELM.
+  - Collect training samples for the kth ELM.
+  - Train the kth ELM.
+  - Update sample weights based on classification errors.
+  - Compute the decision weight F(k)w for the kth ELM.
+  - Update counter k = k + 1.
+
+During the test phase, the ensemble Ada-ELM makes the final decision by selecting the category with the highest score:
+
+arg max c Σ F(k)w O(k)c
+
+For our experiments, we used the DeepFashion dataset, which contains 300,000 clothing images across fifty categories. We selected eight categories for our experiments: 'Dress', 'Jeans', 'Joggers', 'Shorts', 'Skirts', 'Sweaters', 'Tank', and 'Tee'. Each category had an average of 20,167 images, with 16,948 for training and 3,219 for testing.
+
+Our methods involved feature extraction using CNNs combined with a multi-layer perceptron (MLP) as the baseline. The categorial cross-entropy function served as the loss function.
+
+For training, we set the parameters as follows: learning rate of 0.01, momentum of 0.95, learning rate decay of 0.00018, and batch size of 50, using the Nesterov method for momentum. After 40 epochs of training on the DeepFashion dataset, the loss decreased to 0.644 and the accuracy reached 76.5%. The training curves for loss and accuracy are shown in sub-figures 3a and 3b, respectively.
+
+We compare four groups of methods:
+
+1. The first group uses the original three features with two neural classifiers, MLP and ELM, with varying hidden neurons.
+2. The second group involves naive fusion of the three features with an MLP classifier, also with different hidden neurons.
+3. The third group uses fusion of the three features via AE-ELM with MLP and ELM classifiers, again with different hidden neurons.
+4. The fourth group uses fusion based on AE-ELM with the Ada-ELMs classifier, evaluating different numbers of ELMs in the ensemble.
+
+For the ELM-related algorithms, we utilize the High Performance toolbox for Extreme Learning Machines provided by Akusok et al. [47].
+
+In our results and analysis, the best performance with the ELM classifier is achieved using CNN features with 4,096 hidden neurons, reaching an accuracy of 80.6% in the test set. For HOG features, the best performance is with 8,192 hidden neurons, achieving 71.8% accuracy. For color histograms, the best performance is with 4,096 hidden neurons, at an accuracy of 41.6%. With the MLP classifier, the best performance is with CNN features and 2,048 hidden neurons, at an accuracy of 80.8%. The fusion of two feature types shows better performance than using a single type, with the best accuracy of 81.8% with 256 hidden neurons. However, the fusion of three features does not improve results.
+
+AE-ELM is used for deep fusion, aiming to capture the intrinsic nature of inputs. The reconstruction errors of AE-ELMs with different neurons are presented in Table 5. We set a threshold of 0.10 and choose the AE-ELM with 1,024 hidden neurons. Using the AE-ELM based on CNN and HOG features with an MLP classifier and 2,048 hidden neurons achieves the best performance, with an accuracy of 82.0% in the test set.
+
+For the fusion of CNN and Hist features, the best accuracy in the test set is 74.4%, and with CNN and HOG features, the best accuracy is 80.6%. The accuracy increases to 82.0% with the AE-ELM based fusion, compared to 80.8% with CNN features alone. The fusion using the AE-ELM model with random projection enhances generalization capability. Experiments using AE-ELM fusion and an ELM classifier report the best test accuracy of 80.7% with CNN and HOG features. However, this is lower than the accuracy using AE-ELM with an MLP classifier. The fusion of CNN and HOG features outperforms their individual use, as does the fusion of HOG and Hist features.
+
+In ensemble learning with Ada-ELMs, the number of ELMs and their performance with different features is evaluated. The best accuracy with Ada-ELMs is 80.9% using the CNN feature. Using AE-ELM with fusion of CNN and HOG features in ensemble learning slightly improves performance. The confusion matrix analysis shows that Dress is the easiest to classify and Skirt the hardest, with misclassifications primarily between similar clothing items.
+
+The training time required for the methods is presented, with the AE-ELM and Ada-ELMs being the main contributors to time consumption. Training an MLP takes an average of 2,289 seconds, while ELM and AE-ELM training times are less than ten seconds. For Ada-ELMs with ten primitive ELMs, the training time is approximately 238 seconds, which is significantly less than the MLP.
+
+In conclusion, the paper introduces a clothing recognition framework based on multiple features and variants of ELMs. The proposed framework is flexible and competitive, especially for balancing time and recognition accuracy. Future research will explore recognizing clothing images with imbalanced categories and fine-grained differences, as well as other types of ELMs.
+
+Russakovsky and L. Fei-Fei, "Attribute learning in large-scale datasets," in Proc. Int. Workshop Parts Attributes Eur. Conf. Comput. Vis. (ECCV), Crete, Greece, Sep. 2010, pp. 1–14.
+
+Kumar, A. Berg, P. N. Belhumeur, and S. Nayar, "Describable visual attributes for face verification and image search," IEEE Trans. Pattern Anal. Mach. Intell., vol. 33, no. 10, pp. 1962–1977, Oct. 2011.
+
+T. L. Berg, A. C. Berg, and J. Shih, "Automatic attribute discovery and characterization from noisy Web data," in Proc. Eur. Conf. Comput. Vis. (ECCV), 2010, pp. 663–676.
+
+W. Di, C. Wah, A. Bhardwaj, R. Piramuthu, and N. Sundaresan, "Style finder: Fine-grained clothing style detection and retrieval," in Proc. Comput. Vis. Pattern Recognit. Workshops, Jun. 2013, pp. 8–13.
+
+S. Shankar, V. K. Garg, and R. Cipolla, "Deep-carving: Discovering visual attributes by carving deep neural nets," in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2015, pp. 3403–3412.
+
+J. Huang, R. Feris, Q. Chen, and S. Yan, "Cross-domain image retrieval with a dual attribute-aware ranking network," in Proc. IEEE Int. Conf. Comput. Vis., 2015, pp. 1062–1070.
+
+K. Lin, H.-F. Yang, K.-H. Liu, J.-H. Hsiao, and C.-S. Chen, "Rapid clothing retrieval via deep learning of binary codes and hierarchical search," in Proc. ACM Int. Conf. Multimedia Retr., 2015, pp. 499–502.
+
+Q. Dong, S. Gong, and X. Zhu, "Multi-task curriculum transfer deep learning of clothing attributes," in Proc. IEEE Winter Conf. Appl. Comput. Vis. (WACV), Mar. 2017, pp. 520–529.
+
+S. Liu, Z. Song, G. Liu, C. Xu, H. Lu, and S. Yan, "Street-to-shop: Cross-scenario clothing retrieval via parts alignment and auxiliary set," in Proc. IEEE Conf. Comput. Vis. Pattern Recognit., Jun. 2012, pp. 3330–3337.
+
+K. Yamaguchi, M. H. Kiapour, L. E. Ortiz, and T. L. Berg, "Parsing clothing in fashion photographs," in Proc. Comput. Vis. Pattern Recognit., Jun. 2012, pp. 3570–3577.
+
+Y. Kalantidis, L. Kennedy, and L.-J. Li, "Getting the look: Clothing recognition and segmentation for automatic product suggestions in everyday photos," in Proc. 3rd ACM Conf. Int. Conf. Multimedia Retr. (ICMR), New York, NY, USA, 2013, pp. 105–112.
+
+K. Yamaguchi, M. H. Kiapour, L. E. Ortiz, and T. L. Berg, "Retrieving similar styles to parse clothing," IEEE Trans. Pattern Anal. Mach. Intell., vol. 37, no. 5, pp. 1028–1040, May 2015.
+
+P. Tangseng, Z. Wu, and K. Yamaguchi, "Looking at outfit to parse clothing," 2017.
+
+Y. Bengio, A. Courville, and P. Vincent, "Representation learning: A review and new perspectives," IEEE Trans. Pattern Anal. Mach. Intell., vol. 35, no. 8, pp. 1798–1828, Aug. 2013.
+
+Y. LeCun, Y. Bengio, and G. Hinton, "Deep learning," Nature, vol. 521, pp. 436–444, May 2015.
+
+K. Simonyan and A. Zisserman, "Very deep convolutional networks for large-scale image recognition," 2015.
+
+K. He, X. Zhang, S. Ren, and J. Sun, "Deep residual learning for image recognition," in Proc. IEEE Conf. Comput. Vis. Pattern Recognit., Jun. 2016, pp. 770–778.
+
+A. Creswell, T. White, V. Dumoulin, K. Arulkumaran, B. Sengupta, and A. A. Bharath, "Generative adversarial networks: An overview," IEEE Signal Process. Mag., vol. 35, no. 1, pp. 53–65, Jan. 2018.
+
+Y. LeCun et al., "Backpropagation applied to handwritten zip code recognition," Neural Comput., vol. 1, no. 4, pp. 541–551, 1989.
+
+Li, S., Liu, Z.-Q., & Chan, A. B. (2015). Heterogeneous multi-task learning for human pose estimation with deep convolutional neural network. International Journal of Computer Vision, 113(1), 19–36. https://doi.org/10.1007/s11263-014-0767-8
+
+Feng, F., Li, R., & Wang, X. (2015). Deep correspondence restricted Boltzmann machine for cross-modal retrieval. Neurocomputing, 154, 50–60. https://doi.org/10.1016/j.neucom.2014.12.020
+
+Lynch, C., Aryafar, K., & Attenberg, J. (2016). Images don’t lie: Transferring deep visual semantic features to large-scale multimodal learning to rank. In Proceedings of the ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 541–548). https://doi.org/10.1145/2939672.2939728
+
+Cheng, Y., Zhao, X., Cai, R., Li, Z., Huang, K., & Rui, Y. (2016). Semi-supervised multimodal deep learning for RGB-D object recognition. In Proceedings of the International Joint Conference on Artificial Intelligence (pp. 3345–3351). http://www.ijcai.org/Proceedings/16/Papers/473.pdf
+
+Yoo, D., Kim, N., Park, S., Paek, A. S., & Kweon, I. S. (2016). Pixel-level domain transfer. In Proceedings of the European Conference on Computer Vision (pp. 517–532). Cham, Switzerland: Springer. https://doi.org/10.1007/978-3-319-46484-8_31
+
+Girshick, R. B., Donahue, J., Darrell, T., & Malik, J. (2016). Region-based convolutional networks for accurate object detection and segmentation. IEEE Transactions on Pattern Analysis and Machine Intelligence, 38(1), 142–158. https://doi.org/10.1109/TPAMI.2015.2437384
+
+Zhang, N., Paluri, M., Ranzato, M., Darrell, T., & Bourdev, L. D. (2014). PANDA: Pose aligned networks for deep attribute modeling. In Proceedings of the International Conference on Computer Vision and Pattern Recognition (CVPR) (pp. 1637–1644). https://doi.org/10.1109/CVPR.2014.212
+
+Bai, Y., Yang, K., Yu, W., Ma, W.-Y., & Zhao, T. (2013). Learning high-level image representation for image retrieval via multi-task DNN using clickthrough data. CoRR, abs/1312.4740. http://arxiv.org/abs/1312.4740
+
+Wang, D., Gao, X., Wang, X., He, L., & Yuan, B. (2016). Multimodal discriminative binary embedding for large-scale cross-modal retrieval. IEEE Transactions on Image Processing, 25(10), 4540–4554. https://doi.org/10.1109/TIP.2016.2592800
+
+Simo-Serra, E., & Ishikawa, H. (2016). Fashion style in 128 floats: Joint ranking and classification using weak data for feature extraction. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (pp. 298–307). https://doi.org/10.1109/CVPR.2016.39
+
+Li, R., Feng, F., Ahmad, I., & Wang, X. (2017). Retrieving real world clothing images via multi-weight deep convolutional neural networks. Cluster Computing. Springer. https://doi.org/10.1007/s10586-017-1052-8
+
+Huang, G.-B., Zhou, H., Ding, X., & Zhang, R. (2012). Extreme learning machine for regression and multiclass classification. IEEE Transactions on Systems, Man, and Cybernetics, Part B: Cybernetics, 42(2), 513–529. https://doi.org/10.1109/TSMCB.2011.2168604
+
+Huang, G.-B. (2015). What are extreme learning machines? Filling the gap between Frank Rosenblatt's dream and John von Neumann's puzzle. Cognitive Computation, 7(3), 263–278. https://doi.org/10.1007/s12559-015-9333-0
+
+Liu, H., Yu, L., Wang, W., & Sun, F. (2016). Extreme learning machine for time sequence classification. Neurocomputing, 174, 322–330. https://doi.org/10.1016/j.neucom.2015.01.093
+
+Tang, J., Deng, C., & Huang, G.-B. (2016). Extreme learning machine for multilayer perceptron. IEEE Transactions on Neural Networks and Learning Systems, 27(4), 809–821. https://doi.org/10.1109/TNNLS.2015.2424995
+
+Lekamalage, C. L., et al. (2016). Dimension reduction with extreme learning machine. IEEE Transactions on Image Processing, 25(8), 3906–3918. https://doi.org/10.1109/TIP.2016.2570569
+
+Huang, Z., Yu, Y., Gu, J., & Liu, H. (2017). An efficient method for traffic sign recognition based on extreme learning machine. IEEE Transactions on Cybernetics, 47(4), 920–933. https://doi.org/10.1109/TCYB.2016.2533424
+
+Vincent, P., Larochelle, H., Lajoie, I., Bengio, Y., & Manzagol, P.-A. (2010). Stacked denoising autoencoders: Learning useful representations in a deep network with a local denoising criterion. Journal of Machine Learning Research, 11(12), 3371–3408.
+
+Kasun, L. L. C., Zhou, H., Huang, G.-B., & Vong, C. M. (2013). Representational learning with ELMs for big data. IEEE Intelligent Systems, 28(6), 31–34. https://doi.org/10.1109/MIS.2013.140
+
+Akusok, A., Björk, K.-M., Miche, Y., & Lendasse, A. (2015). High-performance extreme learning machines: A complete toolbox for big data applications. IEEE Access, 3, 1011–1025. https://doi.org/10.1109/ACCESS.2015.2450498
+
+R. Li et al.: Multiple Features with ELMs for Clothing Image Recognition
+
+Biographies:
+- RuiFan Li received the B.S. and M.S. degrees in control systems and circuits and systems from Huazhong University of Science and Technology, China, in 1998 and 2001, respectively, and the Ph.D. degree in signal and information processing from Beijing University of Posts and Telecommunications (BUPT), China, in 2006. He is currently an Assistant Professor with the School of Computer Science, BUPT, and affiliated with the Engineering Research Center of Information Networks, Ministry of Education. His research interests include multimedia information processing, neural information processing, and statistical machine learning.
+- Wencong Lu received the B.E. degree from Beijing University of Posts and Telecommunications, China, in 2017. His research interests include multimedia information processing and machine learning.
+- Haoyu Liang received the B.E. degree from South China University of Technology, China, in 2017. He is currently pursuing the master's degree with the School of Computer Science, Beijing University of Posts and Telecommunications. His research interests include multimedia information processing and machine learning.
+- Yuzhao Mao received the B.E. degree from Nanchang University, China, in 2010. He is currently pursuing the Ph.D. degree with the Beijing University of Posts and Telecommunications. His research interests include image caption generation and multi-modal representation learning.
+- Xiaojie Wang received the Ph.D. degree from Beihang University in 1996. He is currently a Professor and the Director of the Centre for Intelligence Science and Technology, Beijing University of Posts and Telecommunications. His research interests include natural language processing and multi-modal cognitive computing.

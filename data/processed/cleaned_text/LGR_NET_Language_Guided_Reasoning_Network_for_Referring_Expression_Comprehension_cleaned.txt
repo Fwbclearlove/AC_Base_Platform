@@ -1,0 +1,214 @@
+LGR-NET: Language Guided Reasoning Network for Referring Expression Comprehension
+
+Mingcong Lu, Ruifan Li, Fangxiang Feng, Zhanyu Ma, and Xiaojie Wang
+
+Abstract— Referring Expression Comprehension (REC) is a vision and language task that localizes an image region based on a natural language expression. Current transformer-based methods often treat image and text equally, lacking detailed consideration of textual features. We propose the Language Guided Reasoning Network (LGR-NET), which captures cross-modal features using a prediction token and extends textual features through a Textual Feature Extender (TFE). This includes a novel coordinate embedding, Text-guided Cross-modal Alignment (TCA), Fusion (TCF), and a cross-modal loss. LGR-NET achieves state-of-the-art results on five benchmark datasets.
+
+Index Terms— Vision and language, referring expression comprehension, transformer, cross-modal reasoning.
+
+I. INTRODUCTION
+Referring Expression Comprehension (REC) is a fundamental vision-language task, advancing applications like image captioning, visual question answering, and visual navigation. The key challenge in REC is accurate cross-modal reasoning. Existing methods are categorized into two-stage, one-stage, and transformer-based methods. Transformer-based methods, while more elegant, treat visual and textual features equally without fully leveraging the guidance of the referring expression. Our LGR-NET enhances cross-modal reasoning by prioritizing linguistic guidance for improved localization.
+
+We propose a Language Guided Reasoning Network (LGR-NET) to enhance target localization in referring expression comprehension. The LGR-NET addresses the issue of textual information being overwhelmed by visual information due to differences in sequence length between modalities. Our approach separates visual and textual modalities, utilizing a Textual Feature Extender (TFE) to guide cross-modal reasoning. The TFE extends textual features in three ways: generating a coordinate embedding, guiding cross-modal reasoning through TCA and TCF modules, and producing a sentence embedding for effective cross-modal loss. Our LGR-NET consists of visual and textual extractors, TCA, and TCF modules, and a learnable prediction token for bounding box prediction. 
+
+Related work includes two-stage and one-stage REC methods, which rely on region proposals and multi-modal fusion, respectively. Transformer-based REC methods have also emerged, using transformers for feature extraction and interaction. Additionally, recent works involve vision-language pre-training, leveraging transformers for large-scale image-text tasks. 
+
+Our contributions are: 
+- A novel framework LGR-NET with TFE for REC tasks.
+- A coordinate embedding to enhance spatial representation.
+- Alternating text-guided cross-modal alignment and fusion.
+- A novel loss for improved cross-modal alignment.
+- Experimental results demonstrating state-of-the-art performance on benchmark datasets.
+
+---
+
+pairs to improve multi-modal understanding and transfer to downstream tasks like REC and VQA. Models such as CLIP, OFA, MaPLe, BLIP2, and MiniGPT4 have integrated large-scale image-text pair datasets with contrastive learning and language model general abilities to enhance performance in multi-modal settings.
+
+III. METHODOLOGY
+
+Our method, LGR-NET, is detailed in this section. As shown in Fig. 2, given an image and a referring expression, we extract visual and textual features using dedicated feature extractors. We introduce a prediction token to capture cross-modal features for object localization. The Textual Feature Extender (TFE) enhances original textual features with coordinate, word, and sentence embeddings for cross-modal reasoning. The TCA and TCF modules align and fuse these features, respectively, with the prediction token being refined at each stage.
+
+A. Visual and Textual Feature Extractors
+
+Our multi-modal feature extractor comprises two independent extractors for vision and language. The visual extractor uses a Swin Transformer backbone to process RGB images and generate multi-scale feature maps. The textual extractor uses BERT to obtain textual embeddings. Both sets of features are projected into a common vector space for subsequent processing.
+
+B. Textual Feature Extender (TFE)
+
+The TFE module extends textual features in three ways: coordinate embedding for spatial information, word embeddings for comprehensive features, and sentence embeddings for overall alignment. These are used for TCA, TCF, and cross-modal loss computation.
+
+C. Text-Guided Cross-Modal Alignment (TCA)
+
+In TCA, a learnable prediction token is added to the visual features. The module aligns visual features with textual features using attention mechanisms, enhanced by spatial information from the referring expression.
+
+D. Text-Guided Cross-Modal Fusion (TCF)
+
+TCF fuses textual and visual features using a cross-attention mechanism. The aligned visual features from TCA serve as queries, while the textual features from TFE serve as keys and values. This process is repeated N times to refine the prediction token with accurate representations of the referred object.
+
+---
+
+E. Prediction Head
+
+The bounding box is generated using a three-layer MLP with a Sigmoid activation function based on the N-th learned prediction token \( f_{N}^{p} \):
+
+\[(x, y, w, h) = \text{sigmoid}(FFN_{H}(f_{N}^{p}))\]
+
+Here, \( x \) and \( y \) denote the coordinates of the central point, while \( w \) and \( h \) represent the width and height of the box, respectively.
+
+F. Loss and Training
+
+Our LGR-NET is trained using a loss function with two terms: one for bounding box regression and the other for cross-modal alignment between the prediction token and the sentence embedding:
+
+\[L_{\text{total}} = \sum_{i=1}^{N} L_{\text{box}}^{i} + \lambda \sum_{i=1}^{N} L_{\text{align}}^{i}\]
+
+The former term aids in capturing the referred object's extremity features, while the latter promotes capturing the representative features corresponding to the referring expression. The hyperparameter \( \lambda \) balances these terms. The bounding box loss for the i-th layer is given by:
+
+\[L_{\text{box}}^{i} = LGIoU(b_{i}, \hat{b}) + LL1(b_{i}, \hat{b})\]
+
+The alignment loss is defined as:
+
+\[L_{\text{align}} = -\sum_{j=1}^{B} \log \left( \frac{\exp(f_{j}^{\text{obj}} \cdot f_{j}^{\text{sent}} / \tau)}{\sum_{k=1}^{B} \exp(f_{j}^{\text{obj}} \cdot f_{k}^{\text{sent}} / \tau)} \right)\]
+
+where \( B \) is the batch size and \( \tau \) is the learnable temperature parameter.
+
+IV. EXPERIMENTS
+
+A. Datasets
+
+Five benchmark datasets are used for evaluation: RefCOCO, RefCOCO+, RefCOCOg, ReferItGame, and Flickr30K Entities.
+
+B. Spatial Proportion Statistics
+
+The influence of the proposed Coordinate Embedding on different datasets is revealed by calculating the proportion of spatial words in the referring expressions.
+
+C. Evaluation Metrics
+
+We use Accuracy (Acc@0.5) as the evaluation metric, where a prediction bounding box is considered true if its Intersection over Union (IoU) with the ground truth box is greater than 0.5.
+
+D. Implementation Detail
+
+Details of the implementation are provided, including the image size, maximum length of referring expressions, data augmentation, training epochs, learning rates, and hardware used.
+
+V. RESULTS AND ANALYSIS
+
+The quantitative results on the five benchmark datasets are reported, followed by ablation studies and qualitative analysis. The main results are presented in Table III, showcasing the performance of our method on RefCOCO, RefCOCO+, and RefCOCOg datasets.
+
+---
+
+Our method demonstrates superior performance on the three datasets for all splits compared to the best two-stage method Ref-NMS and one-stage method LBYL-Net. The improvements on RefCOCO and RefCOCO+ datasets, particularly on the testB split, are notable, indicating better cross-modal alignment when referred objects are diverse. On the RefCOCOg dataset with more complex referring expressions, our method still outperforms LBYL-Net by 12.78% on val-g and Ref-NMS by 6.34% on val-u and test-u on average.
+
+In comparison to recently proposed transformer-based methods, our LGR-NET with resnet-101 achieves absolute improvements up to 3.70%, 8.08%, and 6.50% on RefCOCO, RefCOCO+, and RefCOCOg, respectively. When using a stronger backbone swin-s, our method surpasses VLTVG comprehensively, showcasing better adaptability to stronger backbones. Our LGR-NET also achieves competitive results against baselines with stronger visual backbones like ViT-B and CLIP-B, especially on RefCOCOg.
+
+Our model consistently outperforms two-stage and one-stage methods on ReferItGame and Flickr30K Entities, with improvements comparable to the best transformer-based method. However, the improvements on these two datasets are less significant than on RefCOCOg due to the simpler nature of the referring expressions.
+
+For pre-trained results, our model, which belongs to the first category of methods designed for REC tasks, achieves better performance with the same or less pre-trained data compared to RefTR and MDETR. While it shows lower performance than the second category of methods like ONE-PEACE or mPLUG, this highlights the higher upper limit of a generic cross-modal framework pre-trained on diverse datasets.
+
+In the ablation study on RefCOCOg, we analyze the effectiveness of Coordinate Embedding (CE) and find significant improvements on RefCOCO and RefCOCOg, especially on RefCOCO testB. Ablation experiments also reveal that the "add" operation is the most effective for incorporating CE. Additionally, the Cross-modal Loss (CL) benefits from a larger batch size, with significant improvements observed when increasing the batch size from 16 to 128.
+
+---
+
+Authorized licensed use limited to: BEIJING UNIVERSITY OF POST AND TELECOM. Downloaded on July 22, 2025 at 08:17:44 UTC from IEEE Xplore. Restrictions apply.
+
+7778 IEEE TRANSACTIONS ON CIRCUITS AND SYSTEMS FOR VIDEO TECHNOLOGY, VOL. 34, NO. 8, AUGUST 2024
+
+--- 
+
+(Note: The above statement is noise and has been removed from the cleaned content as per the instructions.)
+
+The results indicate that our Contrastive Learning (CL) yields more significant improvements with an enlarged batch size. Our CL is positioned between the [CLS] token and the prediction token, focusing on the visual feature of the referred object rather than the entire image. The Cross-Entropy (CE) is shown to be beneficial when the prediction token captures the referred object's visual feature. Ablation experiments confirm the complementary roles of CE and CL, with improvements rising from 0.31% and 0.07% without each other to 1.35% and 1.11% when combined on RefCOCOg val-u.
+
+Our TCA and TCF modules are akin to a standard transformer cross-attention block with a focus on input manner. An ablation study on QRNet demonstrates the importance of cross-modal alignment, with a significant performance decline when visual features are fixed. In contrast, repeatedly fusing textual features provides consistent improvements. The input manner of our LGR-NET is validated, with a performance drop when visual and textual modalities are exchanged, indicating the effectiveness of TCA and TCF.
+
+The number of layers in TCA and TCF modules was evaluated, with consistent accuracy increases from one to six layers. More layers yield inconsistent improvements, leading to the choice of six layers as optimal. The number of prediction tokens was also examined, with one token proving more effective for bounding box prediction.
+
+The impact of the cross-modal loss was investigated using different values of the weighting factor λ, with the best performance at λ = 2.0. All values of λ improved performance over the absence of the cross-modal loss.
+
+Visualization analysis reveals the effectiveness of LGR-NET in language guidance. Textual features accurately generate 2D coordinates of referred objects, and attention scores show the prediction token's focus on key visual features. The visualization also supports the role of CE in capturing visual features.
+
+---
+
+The attention scores reveal a strong correlation with the "5 o'clock position". Visualizations of attention weights between the prediction token and textual tokens highlight the importance of the key expression "5 o'clock". Further, visual attention maps from eight attention heads capture two types of features: regions inside the box and the referred object's extremities, corresponding to predicted box edges. This aligns with our designed loss.
+
+Coordinate Embedding (CE) on the query effectively captures spatial information. For instance, CE focuses on the spatial word "middle" and key expressions like "bottom right corner". This demonstrates CE's role in guiding the prediction token to attend to the correct object.
+
+In comparing our LGR-NET with QRNet, we observe that the decoupling of modalities in LGR-NET addresses the language information overload issue. LGR-NET's TCA and TCF mechanisms dynamically align visual features with textual features, as evidenced by attention maps that attend to referred objects across layers.
+
+Qualitative analysis on RefCOCOg shows that LGR-NET accurately reasons over complex expressions, such as "furtherest away from the wardrobe", and outperforms other models in certain cases. However, challenges remain in complex scenes with nested expressions or multiple referred objects.
+
+In conclusion, LGR-NET's emphasis on textual feature guidance for cross-modal reasoning shows effectiveness in REC tasks. Future work includes extending LGR-NET to different image domains and handling arbitrary queries, including those that refer to no object.
+
+---
+
+Authorized licensed use and download information, page numbers, and formatting have been removed as per the cleaning instructions. Technical content, data, and logical structure have been preserved.
+
+Vinyals, A. Toshev, S. Bengio, and D. Erhan, “Show and tell: A neural image caption generator,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2015, pp. 3156–3164. Anderson et al., “Bottom-up and top-down attention for image captioning and visual question answering,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2018, pp. 6077–6086. Nguyen, M. Suganuma, and T. Okatani, “GRIT: Faster and better image captioning transformer using dual visual features,” in Proc. 17th Eur. Conf. Comput. Vis. (ECCV), 2022, pp. 167–184. Gu, H. Wang, and R. Fan, “Coherent visual storytelling via parallel top-down visual and topic attention,” IEEE Trans. Circuits Syst. Video Technol., vol. 33, no. 1, pp. 257–268, Jan. 2023.
+
+Antol et al., “VQA: Visual question answering,” in Proc. IEEE Int. Conf. Comput. Vis. (ICCV), Santiago, Chile, Dec. 2015, pp. 2425–2433. Nguyen and T. Okatani, “Improved fusion of visual and language representations by dense symmetric co-attention for visual question answering,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2018, pp. 6087–6096. Karamcheti, R. Krishna, L. Fei-Fei, and C. Manning, “Mind your outliers! Investigating the negative impact of outliers on active learning for visual question answering,” in Proc. 59th Annu. Meeting Assoc. Comput. Linguistics, 11th Int. Joint Conf. Natural Lang. Process., 2021, pp. 7265–7281. Zhang, R. Wang, F. Zhou, and Y. Luo, “ERM: Energy-based refined-attention mechanism for video question answering,” IEEE Trans. Circuits Syst. Video Technol., vol. 33, no. 3, pp. 1454–1467, Mar. 2023.
+
+Anderson et al., “Vision-and-language navigation: Interpreting visually-grounded navigation instructions in real environments,” in Proc. CVPR, Salt Lake City, UT, USA, Jun. 2018, pp. 3674–3683. Hong, C. Rodriguez, Q. Wu, and S. Gould, “Sub-instruction aware vision-and-language navigation,” in Proc. Conf. Empirical Methods Natural Lang. Process. (EMNLP), 2020, pp. 3360–3376. Zhu et al., “Diagnosing vision-and-language navigation: What really matters,” in Proc. Conf. North Amer. Chapter Assoc. Comput. Linguist., Human Lang. Technol., 2022, pp. 5981–5993. Zhang, C. Ma, Q. Wu, and X. Yang, “Language-guided navigation via cross-modal grounding and alternate adversarial learning,” IEEE Trans. Circuits Syst. Video Technol., vol. 31, no. 9, pp. 3469–3481, Sep. 2021.
+
+Hu, M. Rohrbach, and T. Darrell, “Segmentation from natural language expressions,” in Proc. Comput. Vis.–ECCV 14th Eur. Conf., Amsterdam, The Netherlands, Oct. 2016, pp. 108–124. Li, M. Sun, J. Xiao, E. G. Lim, and Y. Zhao, “Fully and weakly supervised referring expression segmentation with end-to-end learning,” IEEE Trans. Circuits Syst. Video Technol., vol. 33, no. 10, pp. 5999–6012, Jun. 2023. Shang et al., “Cross-modal recurrent semantic comprehension for referring image segmentation,” IEEE Trans. Circuits Syst. Video Technol., vol. 33, no. 7, pp. 3229–3242, Dec. 2023. Nagaraja, V. I. Morariu, and L. S. Davis, “Modeling context between objects for referring expression understanding,” in Proc. Comput. Vis. ECCV 14th Eur. Conf., Amsterdam, The Netherlands, Oct. 2016, pp. 792–807. Yu et al., “MAttNet: Modular attention network for referring expression comprehension,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2018, pp. 1307–1315.
+
+Zhang, Y. Niu, and S.-F. Chang, “Grounding referring expressions in images by variational context,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit., Jun. 2018, pp. 4158–4166. Yang, G. Li, and Y. Yu, “Dynamic graph attention for referring expression comprehension,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), Seoul, South Korea, Oct. 2019, pp. 4643–4652. Liu, H. Zhang, Z. Zha, and F. Wu, “Learning to assemble neural module tree networks for visual grounding,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), Seoul, South Korea, Oct. 2019, pp. 4672–4681. Hong, D. Liu, X. Mo, X. He, and H. Zhang, “Learning to compose and reason with language tree structures for visual grounding,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 44, no. 2, pp. 684–696, Feb. 2022. Yang, B. Gong, L. Wang, W. Huang, D. Yu, and J. Luo, “A fast and accurate one-stage approach to visual grounding,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), Seoul, South Korea, Oct. 2019, pp. 4682–4692.
+
+Yang, T. Chen, L. Wang, and J. Luo, “Improving one-stage visual grounding by recursive sub-query construction,” in Proc. Comput. Vis. (ECCV) 16th Eur. Conf., Glasgow, U.K., 2020, pp. 387–404. Sun, W. Suo, P. Wang, Y. Zhang, and Q. Wu, “A proposal-free one-stage framework for referring expression comprehension and generation via dense cross-attention,” IEEE Trans. Multimedia, vol. 25, pp. 2446–2458, 2023. Ren, K. He, R. B. Girshick, and J. Sun, “Faster R-CNN: Towards real-time object detection with region proposal networks,” in Proc. Adv. Neural Inf. Process. Syst., 2015, pp. 91–99. Redmon and A. Farhadi, “YOLOv3: An incremental improvement,” 2018, arXiv:1804.02767. Deng, Z. Yang, T. Chen, W. Zhou, and H. Li, “TransVG: End-to-end visual grounding with transformers,” in Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV), Oct. 2021, pp. 1749–1759.
+
+Li M, Sigal L. Referring transformer: A one-step approach to multi-task visual grounding. In: Proc. Adv. Neural Inf. Process. Syst.; 2021. p. 19652–19664.
+Kamath A, Singh M, LeCun Y, Synnaeve G, Misra I, Carion N. MDETR–modulated detection for end-to-end multi-modal understanding. In: Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV); Oct. 2021. p. 1760–1770.
+Ye J, et al. Shifting more attention to visual backbone: Query-modulated refinement networks for end-to-end visual grounding. In: Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR); Jun. 2022. p. 15481–15491.
+Yang L, Xu Y, Yuan C, Liu W, Li B, Hu W. Improving visual grounding with visual-linguistic verification and iterative reasoning. In: Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR); Jun. 2022. p. 9489–9498.
+Uijlings JRR, van de Sande KEA, Gevers T, Smeulders AW. Selective search for object recognition. Int. J. Comput. Vis. 2013;104(2):154–171.
+Mao J, Huang J, Toshev A, Camburu O, Yuille A, Murphy K. Generation and comprehension of unambiguous object descriptions. In: Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR); 2016. p. 11–20.
+Chen L, Ma W, Xiao J, Zhang H, Chang S. Ref-NMS: Breaking proposal bottlenecks in two-stage referring expression grounding. In: Proc. AAAI Conf. Artif. Intell.; 2021. p. 1036–1044.
+Rohrbach A, Rohrbach M, Hu R, Darrell T, Schiele B. Grounding of textual phrases in images by reconstruction. In: Proc. Comput. Vis. (ECCV); 2016. p. 817–834.
+Sun M, Xiao J, Lim EG, Liu S, Goulermas JY. Discriminative triad matching and reconstruction for weakly referring expression grounding. IEEE Trans. Pattern Anal. Mach. Intell. 2021;43(11):4189–4195.
+Sun M, Xiao J, Lim EG, Zhao Y. Cycle-free weakly referring expression grounding with self-paced learning. IEEE Trans. Multime- dia. 2023;25:1611–1621.
+Sun M, Xiao J, Lim EG. Iterative shrinking for referring expression grounding using deep reinforcement learning. In: Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR); Jun. 2021. p. 14055–14064.
+Vaswani A, et al. Attention is all you need. In: Proc. Adv. Neural Inform. Process. Syst.; 2017. p. 5998–6008.
+Devlin J, Chang MW, Lee K, Toutanova K. BERT: Pre-training of deep bidirectional transformers for language understanding. In: Proc. Conf. North Amer. Chapter Assoc. Comput. Linguistics; 2019. p. 4171–4186.
+Dosovitskiy A, et al. An image is worth 16×16 words: Transformers for image recognition at scale. In: Proc. 9th Int. Conf. Learn. Represent. (ICLR); 2021.
+He L, et al. End-to-end video object detection with spatial–temporal transformers. 2021. arXiv:2105.10920.
+Liu Z, et al. Swin Transformer: Hierarchical vision transformer using shifted windows. In: Proc. IEEE/CVF Int. Conf. Comput. Vis. (ICCV); 2021. p. 9992–10002.
+Dai L, Liu H, Tang H, Wu Z, Song P. AO2-DETR: Arbitrary-oriented object detection transformer. IEEE Trans. Circuits Syst. Video Technol. 2023;33(5):2342–2356.
+Su W, et al. Language adaptive weight generation for multi-task visual grounding. In: Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR); Jun. 2023. p. 10857–10866.
+Wang P, et al. OFA: Unifying architectures, tasks, and modalities through a simple sequence-to-sequence learning framework. In: Proc. Int. Conf. Mach. Learn. (ICML); 2022. p. 23318–23340.
+Su W, et al. VL-BERT: Pre-training of generic visual-linguistic representations. In: Proc. 8th Int. Conf. Learn. Represent. (ICLR); 2020. p. 1–16.
+Li LH, Yatskar M, Yin D, Hsieh C, Chang K. VisualBERT: A simple and performant baseline for vision and language. 2019. arXiv:1908.03557.
+Radford A, et al. Learning transferable visual models from natural language supervision. In: Proc. 38th Int. Conf. Mach. Learn.; 2021. p. 8748–8763.
+
+[50] J. Li, D. Li, C. Xiong, and S. Hoi, “BLIP: Bootstrapping language-image pre-training for unified vision-language understanding and generation,” in Proc. Int. Conf. Mach. Learn., Baltimore, MD, USA, 2022, pp. 12888–12900.
+[51] J. Li, D. Li, S. Savarese, and S. C. H. Hoi, “BLIP-2: Bootstrapping language-image pre-training with frozen image encoders and large language models,” 2023, arXiv:2301.12597.
+[52] M. U. Khattak, H. Rasheed, M. Maaz, S. Khan, and F. S. Khan, “MaPLe: Multi-modal prompt learning,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2023, pp. 19113–19122.
+[53] D. Zhu, J. Chen, X. Shen, X. Li, and M. Elhoseiny, “MiniGPT-4: Enhancing vision-language understanding with advanced large language models,” 2023, arXiv:2304.10592.
+[54] S. Zhang et al., “OPT: Open pre-trained transformer language models,” 2022, arXiv:2205.01068.
+[55] L. Zheng, “Judging LLM-as-a-judge with MT-bench and chatbot arena,” 2023, arXiv:2306.05685.
+[56] H. Rezatofighi et al., “Generalized intersection over union: A metric and a loss for bounding box regression,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Long Beach, CA, USA, Jun. 2019, pp. 658–666.
+[57] S. Kazemzadeh, V. Ordonez, M. Matten, and T. Berg, “ReferItGame: Referring to objects in photographs of natural scenes,” in Proc. Conf. Empirical Methods Natural Lang. Process. (EMNLP), Doha, Qatar: Association for Computational Linguistics, 2014, pp. 787–798.
+[58] B. A. Plummer, L. Wang, C. M. Cervantes, J. C. Caicedo, J. Hockenmaier, and S. Lazebnik, “Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models,” in Proc. IEEE Int. Conf. Comput. Vis. (ICCV), Santiago, CL, USA, Dec. 2015, pp. 2641–2649.
+[59] T. Lin et al., “Microsoft COCO: Common objects in context,” in Proc. Comput. Vis. ECCV 13th Eur. Conf., Zurich, Switzerland, vol. 8693, Sep. 2014, pp. 740–755.
+[60] H. J. Escalante et al., “The segmented and annotated IAPR TC-12 benchmark,” Comput. Vis. Image Understand., vol. 114, no. 4, pp. 419–428, Apr. 2010.
+[61] P. Young, A. Lai, M. Hodosh, and J. Hockenmaier, “From image descriptions to visual denotations: New similarity metrics for semantic inference over event descriptions,” Trans. Assoc. Comput. Linguistics, vol. 2, pp. 67–78, Dec. 2014.
+[62] P. Wang, Q. Wu, J. Cao, C. Shen, L. Gao, and A. V. D. Hengel, “Neighbourhood watch: Referring expression comprehension via language-guided graph attention networks,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Long Beach, CA, USA, Jun. 2019, pp. 1960–1968.
+[63] Y. Liao et al., “A real-time cross-modality correlation filtering method for referring expression comprehension,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Seattle, WA, USA, Jun. 2020, pp. 10877–10886.
+[64] J. Ye, X. Lin, L. He, D. Li, and Q. Chen, “One-stage visual grounding via semantic-aware feature filter,” in Proc. 29th ACM Int. Conf. Multimedia, Oct. 2021, pp. 1702–1711.
+[65] B. Huang, D. Lian, W. Luo, and S. Gao, “Look before you leap: Learning landmark features for one-stage visual grounding,” in Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2021, pp. 16883–16892.
+[66] H. Zhao, J. T. Zhou, and Y.-S. Ong, “Word2Pix: Word to pixel cross-attention transformer in visual grounding,” IEEE Trans. Neural Netw. Learn. Syst., vol. 35, no. 2, pp. 1523–1533, Feb. 2022.
+[67] C. Ho, S. Appalaraju, B. Jasani, R. Manmatha, and N. Vasconcelos, “YORO—Lightweight end to end visual grounding,” 2022, arXiv:2211.07912.
+[68] C. Zhu et al., “SeqTR: A simple yet universal network for visual grounding,” in Proc. Eur. Conf. Comput. Vis., Cham, Switzerland: Springer, 2022, pp. 598–615.
+[69] J. Deng et al., “TransVG++: End-to-end visual grounding with language conditioned vision transformer,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 45, no. 11, pp. 13636–13652, Nov. 2023.
+[70] F. Shi, R. Gao, W. Huang, and L. Wang, “Dynamic MDETR: A dynamic multimodal transformer decoder for visual grounding,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 46, no. 2, pp. 1181–1198, Feb. 2024.
+[71] I. Loshchilov and F. Hutter, “Decoupled weight decay regularization,” in Proc. 7th Int. Conf. Learn. Represent., New Orleans, LA, USA, 2019, pp. 1–12.
+[72] R. Krishna et al., “Visual genome: Connecting language and vision using crowdsourced dense image annotations,” Int. J. Comput. Vis., vol. 123, no. 1, pp. 32–73, May 2017.
+[73] L. Wang, Y. Li, J. Huang, and S. Lazebnik, “Learning two-branch neural networks for image-text matching tasks,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 41, no. 2, pp. 394–407, Feb. 2019.
+[74] B. A. Plummer et al., “Conditional image-text embedding networks,” in Proc. Comput. Vis. ECCV 15th Eur. Conf., Munich, Germany, vol. 11216, Sep. 2018, pp. 258–274.
+[75] Z. Yu, J. Yu, C. Xiang, Z. Zhao, Q. Tian, and D. Tao, “Rethinking diversified and discriminative proposal generation for visual grounding,” in Proc. 27th Int. Joint Conf. Artif. Intell., Stockholm, Sweden, Jul. 2018, pp. 1114–1120.
+[76] Z. Mu, S. Tang, J. Tan, Q. Yu, and Y. Zhuang, “Disentangled motif-aware graph learning for phrase grounding,” in Proc. AAAI Conf. Artif. Intell., 2021, pp. 13587–13594.
+[77] J. Lu, D. Batra, D. Parikh, and S. Lee, “ViLBERT: Pretraining task-agnostic visiolinguistic representations for vision-and-language tasks,” in Proc. Adv. Neural Inf. Process. Syst., 2019, pp. 13–23.
+[78] Y. Chen et al., “UNITER: Universal image-text representation learning,” in Proc. Comput. Vis. (ECCV) 16th Eur. Conf., Glasgow, U.K., vol. 12375, Aug. 2020, pp. 104–120.
+[79] K. Chen, Z. Zhang, W. Zeng, R. Zhang, F. Zhu, and R. Zhao, “Shikra: Unleashing multimodal LLM’s referential dialogue magic,” 2023, arXiv:2306.15195.
+[80] C. Li et al., “mPLUG: Effective and efficient vision-language learning by cross-modal skip-connections,” in Proc. Conf. Empirical Methods Natural Lang. Process., 2022, pp. 7241–7259.
+[81] P. Wang et al., “ONE-PEACE: Exploring one general representation model toward unlimited modalities,” 2023, arXiv:2305.11172.
+[82] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR), Jun. 2016, pp. 770–778.
+
+Zhanyu Ma (Senior Member, IEEE) received his Ph.D. in electrical engineering from the KTH Royal Institute of Technology, Stockholm, Sweden, in 2011. He served as a Post-Doctoral Research Fellow at the School of Electrical Engineering, KTH Royal Institute of Technology from 2012 to 2013. From 2014 to 2019, he was an Associate Professor at Beijing University of Posts and Telecommunications (BUPT), Beijing, China. Since 2015, he has been an Adjunct Associate Professor at Aalborg University, Aalborg, Denmark. Currently, he is a Full Professor at BUPT. His research focuses on pattern recognition, machine learning fundamentals, and their applications in computer vision, multimedia signal processing, and data mining.
+
+Xiaojie Wang obtained his Ph.D. from Beihang University in 1996 and is now a Full Professor at Beijing University of Posts and Telecommunications. His research areas include natural language processing and multi-modal cognitive computing. He serves as an Executive Member of the Council of Chinese Association of Artificial Intelligence and as the Director of the Natural Language Processing Committee. Additionally, he is a member of the Council of Chinese Information Processing Society and the Chinese Processing Committee of China Computer Federation.

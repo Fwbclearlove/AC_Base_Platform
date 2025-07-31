@@ -1,0 +1,43 @@
+{
+  "document_type": "academic_paper",
+  "title": "基于知识增强的方面级情感分析研究及应用",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "方面级情感分析",
+  "research_problem": "方面词情感分析和方面类别情感分析任务中对外部知识利用不充分，对句中概念词与方面类别关系构造不合理，以及对句法结构和语义关系互补性的建模缺失",
+  "methodology": "情感感知的双通道图卷积神经网络模型",
+  "key_innovations": [
+    "提出一种情感感知的双通道图卷积神经网络模型，其中双通道分别为语法通道和语义通道",
+    "提出一种知识增强的多通道图卷积神经网络模型，其中多通道分别为知识通道、语法通道和语义通道"
+  ],
+  "experimental_results": "在Restaurant-14、Laptop-15和MAMS数据集上进行了实验，SADC-GCN模型取得了较好的效果",
+  "conclusions": "提出的模型SADC-GCN在方面词情感分析任务上的有效性",
+  "keywords": [
+    "方面级情感分析",
+    "方面词情感分析",
+    "方面类别情感分析",
+    "图卷积神经网络",
+    "知识增强"
+  ],
+  "application_domains": [
+    "自然语言处理"
+  ],
+  "technical_concepts": [
+    "依存句法分析",
+    "SenticNet",
+    "ConceptNet",
+    "WordNet",
+    "LSTM",
+    "GCN",
+    "Attention",
+    "BERT",
+    "Transformer"
+  ],
+  "performance_metrics": "准确率和F1值",
+  "summary": "本文针对方面级情感分析任务，提出了一种基于知识增强的双通道图卷积神经网络模型SADC-GCN，通过语法通道和语义通道分别建模句法结构和语义关系，引入外部知识库进行知识增强，并在方面词情感分析和方面类别情感分析任务上取得了较好的效果。",
+  "file_id": "基于知识增强的方面级情感分析研究及应用_杜一帆",
+  "source_type": "cleaned",
+  "text_length": 17638,
+  "generation_time": "2025-07-31 21:39:10"
+}

@@ -1,0 +1,58 @@
+---
+
+Sentiment Analysis of Microblog Combining Dictionary and Rules
+
+Ding Yuan, Yanquan Zhou, Ruifan Li, Peng Lu
+School of Computers, Beijing University of Posts and Telecommunications
+Engineering Research Center of Information Networks, Ministry of Education, Beijing, China
+{yuanding_bupt, zhouyanquan, rfli, lupeng}@bupt.edu.cn
+
+Abstract—Microblogging emotional classification is a key research area based on User-Generated Content (UGC). This paper focuses on distinguishing between positive and negative emotional tendencies in microblogs. We propose a system that removes noise from microblogs, extracts features, and classifies emotions using Support Vector Machine (SVM). We enhance feature extraction and weight computation algorithms by integrating dictionary and rule-based approaches. Experimental results demonstrate the effectiveness of our method.
+
+Keywords—emotional classification; feature extraction; weight computing; support vector machine
+
+I. INTRODUCTION
+
+The Internet's rapid development and the widespread use of microblogs have generated a vast amount of User-Generated Content (UGC). Analyzing user intent based on UGC, particularly through sentiment analysis, is crucial for various applications. Microblog sentiment analysis, which involves detecting emotional tendencies in text, is a significant challenge due to the brief and diverse nature of microblog content. This paper approaches sentiment analysis for Chinese microblogs as a binary classification problem and introduces improved algorithms for feature extraction and weight calculation, utilizing SVM for classification.
+
+II. RELATED WORK
+
+Sentiment analysis extracts subjective information to identify the author's attitude. Affective Computing, introduced by Picard in 1995, integrates computer science, psychology, and cognitive science to enable machines to recognize and respond to human emotions. Microblog sentiment analysis is generally treated as a two-polarity classification problem, where traditional machine learning methods like Naive Bayes, Maximum Entropy, K Nearest Neighbor, and SVM are used to build emotion classifiers. Pang and Lee demonstrated the effectiveness of supervised learning for sentiment classification, with SVM showing higher accuracy compared to other methods. Chinese text processing has also seen improvements with the application of machine learning techniques and various weight calculation algorithms, such as TF-IDF, in conjunction with SVM.
+
+---
+
+The sentiment analysis method based on dictionary relies on the judgment of reference words from expert dictionaries. English emotional vocabulary primarily comes from WordNet, which organizes nouns, verbs, adjectives, and adverbs into cognitive synonym sets. Each syn-set represents a semantic concept and connects with others through various relations, forming a synonym network. For Chinese text, HowNet serves as the dictionary source. This method compares semantic similarity between unknown words and reference words, sets thresholds to judge sentiment, and accumulates scores from positive and negative emotional words to determine text sentiment.
+
+In our experiment, we integrated dictionary-based and rule-based methods with machine learning. Feature word extraction through dictionaries and rules aids in more attentive weight calculation, making results more reasonable.
+
+Microblog sentiment analysis is treated as a classification problem in this paper. We utilized the vector space model to represent microblogs, abstracted their features, mapped them into N-dimensional feature vectors, and used SVM for classification. The main steps include data preprocessing, feature extraction, weight calculation, and classification. We improved feature extraction and weight calculation by integrating dictionaries and rules.
+
+The emotional dictionary from the Intelligence Science and Technology Center, Beijing University of Posts and Telecommunications, was used. It contains over 8500 commendatory and 7200 derogatory terms, and more than 200 degree adverbs or dynamic emotion words.
+
+Data preprocessing for microblogs includes cleaning, word segmentation, and stop words removal. We used the jieba segmentation tool and further screened the stop word dictionary. Feature extraction involved a modified CHI algorithm (MCHI) that uses emotional information to select feature words. The MCHI score calculation formula adjusts the standard CHI score based on whether a word is emotional.
+
+The standard CHI score between word w and class c is calculated as follows:
+
+2 2 ( ) , ) ( )( ) ( AD BC w c A B C D λ − = + +
+
+This helps emotional words to be more easily selected as feature words.
+
+This paper presents a sentiment classification method for Chinese microblogs, focusing on feature selection and weight calculation. The number of features is crucial, with an optimal number around 4700 for highest accuracy. A Modified TF-IDF (MTF-IDF) algorithm is proposed, incorporating emotional word power and the influence of adverbs of degree and special punctuation.
+
+The experiments conducted include a baseline comparison, efficiency on different corpuses, and a three-classification problem. Results show the proposed method's superiority, especially on simpler corpuses with a single topic. However, the method's performance on complex, multi-topic corpuses and three-classification problems indicates room for improvement.
+
+The conclusion highlights the effectiveness of the method for emotional polarity analysis of Chinese microblogs and suggests future research directions, including incorporating semantic features and adapting to multi-topic models.
+
+Pang B, Lee L, Vaithyanathan S. Sentiment classification using machine learning techniques. EMNLP '02. 2002: 79-86.
+Liu Zhiming, Liu Lu. Empirical study of sentiment classification for Chinese microblog based on machine learning. Computer Engineering and Applications, 2012, 48(1): 1-4.
+Zhu Yanlan, Min Jin, Zhou Yaqian, Huang Xuanjin, Wu Lide. Semantic Orientation Computing Based on HowNet. Journal of Chinese Information Processing, 2006, 20(1): 14-20.
+Yao Tianfang, Lou Decheng. Research on Semantic Orientation Distinction for Chinese Sentiment Words. The Seventh International Conference on Chinese Computing. Wuhang: ICCC 2007, 2007.
+Hu M, Liu B. Mining and summarizing customer reviews. KDD '04. 2004: 168-177.
+Turney P D. Thumbs Up or Thumbs Down? Semantic Orientation Applied to Unsupervised Classification of Reviews. ACL '02. 2002: 417-424.
+Liu Xiaojuan, You Bin, Zhang Aiyun. Review on the Data Used in Researches of Microblogs. Journal of Intelligence, 2013, 32(9): 39-45.
+Zhu Lina. Research of Feature Selection for Chinese Web Page Categorization. Beijing: China University of Petroleum, 2009.
+Ma Wenwen, Deng Yigui. New feature weight calculation method for short text. Journal of Computer Applications, 2013, 33(8): 2280-2282, 2292.
+Ma Ting, Geng Guohua, Zhou Mingquan. An effective approach to calculate the feature weights. J. of Zhengzhou Univ. (Nat. Sci. Ed.), 2008, 40(4): 48-51.
+Qin Shian, Li Fayun. Improved TF-IDF Method in Text Classification. New Technology of Library and Information Service, 2013, 238(10): 27-30.
+
+2014 IEEE/ACM International Conference on Advances in Social Networks Analysis and Mining (ASONAM 2014)

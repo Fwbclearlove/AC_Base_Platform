@@ -1,0 +1,261 @@
+Triple Alignment Strategies for Zero-shot Phrase Grounding under Weak Supervision
+
+Pengyue Lin, Ruifan Li, Yuzhe Ji, Zhihan Yu, Fangxiang Feng, Zhanyu Ma, Xiaojie Wang
+
+Abstract
+Phrase Grounding (PG) aims to locate objects referred by noun phrases. We propose a framework for zero-shot PG under weak supervision, based on triple alignment strategies. These include region-text alignment (RTA) to associate region-level attributes via CLIP, domain alignment (DomA) to minimize distribution differences between training and pre-training, and category alignment (CatA) considering category semantics and region-category relations. Our PG framework outperforms previous zero-shot and weakly-supervised methods.
+
+CCS Concepts
+• Information systems →Multimedia and multimodal retrieval.
+
+1 Introduction
+PG is crucial for various downstream tasks. PG under weak supervision reduces annotation costs but struggles with limited seen categories during training. Zero-shot PG addresses this by leveraging semantic information across categories. We introduce a framework that addresses challenges in both weak supervision and zero-shot settings, focusing on attribute association, knowledge transfer, and category similarity and difference measurement.
+
+Phrases can be utilized to categorize referred objects, with correct visual-textual relations aiding in distinguishing categories. Our approach employs a novel PG framework using triple alignment strategies under weak supervision: 1) Region-Text Alignment (RTA) to associate region-level attributes based on Contrastive Language-Image Pre-Training (CLIP). 2) Domain Alignment (DomA) transfers knowledge from seen classes by aligning grounding-related features in a domain-invariant space. 3) Category Alignment (CatA) distinguishes grounding-region categories, inspired by class activation methods.
+
+Related works in weakly-supervised PG include detector-based methods and auxiliary task designs. Zero-shot PG methods, on the other hand, aim to predict bounding boxes for unseen categories using limited seen category data. They struggle with unseen categories due to limited training data.
+
+Our methodology involves a CLIP-based module, pre-trained on a large dataset, which extracts region-level image semantics and fuses them with text embeddings to generate heatmaps. The grounding module consists of bi-modal encoders and a grounding decoder, utilizing the RTA, DomA, and CatA strategies for improved grounding performance in zero-shot settings under weak supervision.
+
+The grounding module consists of an image encoder E𝑖𝑚𝑔(·), a text encoder E𝑡𝑥𝑡(·), and a grounding decoder D𝑔𝑛𝑑(·), returning a heatmap 𝐻 as follows:
+
+𝐻 = D𝑔𝑛𝑑(E𝑖𝑚𝑔(𝐼), E𝑡𝑥𝑡(𝑇))
+
+The multimodal feature fusion calculates the similarity of textual and visual features, 𝐴𝑀 = E𝐼𝑚𝑔(𝐼) ⊗ E𝑇𝑥𝑡(𝑇), with attention 𝑅𝑀 = E𝑖𝑚𝑔(𝐼) ⊙ 𝐴𝑀. The decoder converts high-dimensional fusion features into grounding heatmaps 𝐻 using two up-sampling layers. We propose triple alignment strategies: Region-text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA).
+
+RTA strategy employs a fixed CLIP to generate region-level attribute associations. We process mask tokens in the CLIP image encoder to transfer semantic information to patch tokens, enhancing semantic transfer in the last layer. The CLIP-based heatmap 𝐴𝐶 is computed by the inner product of the text embedding and the final embedding vectors. Heatmap refinement involves patch-to-patch attention and gradient map computation.
+
+DomA strategy aims to minimize the difference in feature distributions between training and pretraining phases. We use contrastive learning and alignment loss to select positive and negative samples based on the CLIP-based heatmap 𝐴∗ 𝐶.
+
+CatA strategy is not detailed in the provided content but is mentioned as part of the triple alignment strategies.
+
+我们将短语接地（PG）视为短语-区域对齐问题。受类激活方法启发，我们使用短语嵌入E𝑡𝑥𝑡(𝑇)来区分接地相关的特征类别，并将其标准化为类别标签𝑦。为了构建区域-类别关系，我们基于短语嵌入和接地区域嵌入计算CLIP匹配分数。为确保每个训练类别能被预训练的CLIP看到，我们沿着边界框裁剪出接地区域。我们通过CLIP利用与短语相关的对象信息，将区域𝐵(𝐻)接地，然后将其重塑为𝐻，并通过CLIP映射到图像表示，即𝑣𝑂= E𝑖𝑚𝑔(𝐵(𝐻))。对象表示𝑣𝑂和短语表示E𝑡𝑥𝑡(𝑇)之间的余弦相似性用于损失计算：
+
+ℓ𝑂𝑃= − ∑︁𝑛 𝑦𝑛log𝑠𝑛，
+
+其中𝑠𝑛是余弦相似性。因此，在ℓ𝑂𝑃的监督下，热图𝐻逐渐接近与短语相关的对象。
+
+为了增加与短语无关区域与短语表示之间的距离，我们通过裁剪随机生成的𝐻大小的框𝐵𝑅来接地非对象区域。生成的框应与边界框𝐵(𝐻)的交叠尽量少。该框由CLIP图像编码器表示，即𝑣𝑅= E𝑖𝑚𝑔(𝐵𝑅)。框视觉表示𝑣𝑅和短语表示E𝑡𝑥𝑡(𝑇)之间的余弦相似性用于损失计算：
+
+ℓ𝑅𝑃= − ∑︁𝑛 𝑦𝑛log(1 −𝑠∗ 𝑛)，
+
+其中𝑠∗𝑛表示余弦相似性。因此，热图𝐻保留了较少的短语无关区域的对象部分。
+
+为了进一步排除热图中的不相关背景，我们通过以下损失函数限制热图区域大小：
+
+ℓ𝑅𝐸= 1/𝑛 ∑𝐻𝑛，
+
+我们的模型的总损失为：
+
+ℓ𝑇= ℓ1 + 𝜆1ℓ𝑂𝑃+ 𝜆2ℓ𝑅𝑃+ 𝜆3ℓ𝑅𝐸+ 𝜆4ℓ𝑐𝑜𝑛。
+
+基于接地模块，我们按以下方式生成边界框：首先，我们将低值像素设置为0，阈值为0.5。然后搜索轮廓并提取合适的边界框。我们根据热图𝐻的面积百分比计算边界框的分数。最后，应用非极大值抑制，𝐼𝑜𝑈= 0.3，过滤掉得分低于最大得分50%的框，完成定位。
+
+4.1 数据集
+
+我们在零样本PG设置下使用Flickr-Split-S0、Flickr-Split-S1、VG-Split-S2和VG-Split-S3评估我们的框架。此外，为了与先前的弱监督接地方法进行比较，我们使用了在MG中采用的设置，该设置分别使用MS-COCO或VG训练划分的多种工作。在这两种情况下，模型在Flickr30K、VG和ReferIt的测试划分上进行评估。
+
+4.2 基线与评价指标
+
+我们将我们的框架与各种SoTA基线进行了比较，这些基线可以分为以下三类：1) 监督零样本基线，即ZSGNet。2) 零样本基线，包括检测器+CLIP、GAE、Grad-CAM、AdaptingCLIP和MaskCLIP。3) 弱监督基线，包括MG、GbS、WWbl、SMST、BBR和VPT。我们使用了“指点游戏”准确性、边界框准确性和识别准确性三种评价指标。
+
+4.3 实现细节
+
+在我们的框架中，使用了VGG-16和CLIP RN50作为视觉编码器。模型接受224×224的图像大小，这是CLIP视觉分支VIT-B/32的输入大小，并生成相同大小的热图𝐻。我们使用SGD优化器（批量大小为64，初始学习率为0.0003）训练150个周期，其中优化器动量为0.9，权重衰减为0.0001。此外，层𝐿设置为11。当𝑙<11时，参数𝛼和𝛽设置为0.01和1；当𝑙=𝐿时，它们设置为1和10。所有方法都在NVIDIA RTX A6000上实现。在我们所有的实验中，根据方程式(11)中的损失权重设置为𝜆1 = 0.25，𝜆2 = 0.125，𝜆3 = 0.25，和𝜆4 = 1。
+
+4.4 主要结果
+---
+
+We present zero-shot evaluation results on unseen phrase classes using Flickr-Split and VG-Split test splits, with IoU thresholds set at 0.3 and 0.5 due to VG-Split’s textual noise. Our approach outperforms other methods at IoU threshold 0.5, indicating better coverage of unseen categories. While there is a gap compared to supervised methods, our approach significantly improves upon weakly supervised methods. The WWbl model's heatmap masking and external knowledge usage for similarity measurement introduce an incorrect accumulation of category judgment. Our results are close to supervised grounding SoTA on Flickr-Split-1, showcasing strong generalization on unseen phrase classes.
+
+In weakly supervised evaluation on seen classes, our PG framework demonstrates competitive performance against other methods on Flickr30K, VG, and ReferIt datasets. Our CLIP-based heatmap surpasses the pseudo label used by WWbl, explaining a 9% increase in bbox accuracy.
+
+Our ablation study shows the effects of alignment strategies on Flickr30K Entities, with the best performance achieved using all alignment strategies. Different loss functions were analyzed, with the addition of ℓ𝑐𝑜𝑛, ℓ𝑂𝑃, ℓ𝑅𝑃, and ℓ𝑅𝐸 improving IoU performance. We also compared our domain alignment strategy with a baseline using CLIP (RN50) as the image encoder, with our strategy achieving better domain adaptation between seen and unseen classes.
+
+Qualitative analysis illustrates the effectiveness of our alignment strategies, with our method successfully grounding referred objects and capturing less phrase-related background regions compared to VLP-based and weakly-supervised PG methods.
+
+---
+
+Table 5: Bounding box accuracy across unseen splits. For Flickr-Split-0&1, IoU threshold of 0.5 is used. For VG-Split-2&3, accuracy is reported with IoU thresholds of 0.3 and 0.5. "B" and "UB" indicate balanced and unbalanced sets in VG-Split.
+
+Phrase: clarinetto
+RTA + CatA
+
+Phrase: purple shirt
+Phrase: a beautiful bride
+Phrase: a handsome groom
+
+GT & Ours Image + DomA
+GT & Ours RTA + CatA + DomA
+
+Figure 7: Qualitative results are presented. Input Images are in the leftmost column. Columns #2-4 show generated heatmaps using RTA, RTA+DomA, and triple alignments, respectively. Columns #6-8 present results for another phrase. White boxes represent ground truth, and red indicates our results.
+
+Method Overall People Animals Vehicles Scene Other
+
+MaskCLIP 34.26 37.46 40.93 52.25 48.40 25.87
+AdaptingCLIP 29.47 29.23 40.15 45.00 41.86 24.92
+GAE 25.56 26.76 39.72 38.12 33.72 22.22
+CH 43.75 56.33 62.31 58.60 52.78 32.26
+Ours w/ GAE 36.35 43.58 48.22 52.72 55.94 26.44
+Ours w/ CH 45.46 56.44 59.95 57.68 70.04 32.53
+
+Table 6: Category-wise bounding box accuracy on Flickr30K.
+
+AdaptingCLIP GAE MaskCLIP Ours
+
+Caption: A man on a black mountain bike
+Caption: A guy wearing a white shirt
+Caption: A woman pointing to the subway station
+Caption: A man in a plaid shirt and blue jeans
+
+WWbl Ground Truth Image
+
+Figure 8: Qualitative results comparison.
+
+Our framework grounds more complete and compact regions, avoiding false grounding between the region of blue jeans and the woman or the mountain bike and the subway station.
+
+Caption: A new crew and a reporter in a blue coat make a film in the rain.
+Ground Truth
+Caption: The kid wears glasses and two kids are smiling.
+
+Figure 9: Failure cases of our proposed method.
+
+Failure cases are categorized into similar dense objects and in-context entities-related objects. Our framework highlights connected regions for dense objects, with imprecise determination of the number of bounding boxes. Additionally, it extracts only noun phrases without considering in-context phrases, leading to inaccurate location evaluation of referred objects.
+
+5 Conclusion and Future Work
+
+We propose a PG framework that designs alignment strategies to address three problems of zero-shot grounding under weak supervision. Our approach exceeds previous methods and will explore interpretable solutions for grounding-related tasks. Future work includes using multi-modal large language models to enhance zero-shot PG under weak supervision.
+
+Acknowledgment
+
+This work was supported by the Beijing Natural Science Foundation Project No. Z200002, the National Nature Science Foundation of China (Grants 62076032, 62225601, U23B2052), the Youth Innovative Research Team of BUPT No. 2023YQTD02, BUPT Excellent Ph.D. Students Foundation CX2023113, and High Performance Computing Platform of BUPT.
+
+References
+
+---
+
+---
+
+[1] Hassan Akbari et al. 2019. Multi-level multimodal common semantic space for image-phrase grounding. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 12476–12486.
+
+[2] Assaf Arbelle et al. 2021. Detector-free weakly supervised grounding by separation. In Proceedings of the IEEE/CVF International Conference on Computer Vision. 1801–1812.
+
+[3] Kai Uwe Barthel et al. 2019. Real-time visual navigation in huge image sets using similarity graphs. In Proceedings of the 27th ACM International Conference on Multimedia. 2202–2204.
+
+[4] Hila Chefer et al. 2021. Transformer interpretability beyond attention visualization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 782–791.
+
+[5] Kan Chen et al. 2017. Query-guided regression network with context policy for phrase grounding. In Proceedings of the IEEE International Conference on Computer Vision. 824–832.
+
+[6] Kang Chen et al. 2023. VTQA2023: ACM Multimedia 2023 Visual Text Question Answering Challenge. In Proceedings of the 31st ACM International Conference on Multimedia. 9646–9650.
+
+[7] Nenglun Chen et al. 2021. Distributed attention for grounded image captioning. In Proceedings of the 29th ACM International Conference on Multimedia. 1966–1975.
+
+[8] Samyak Datta et al. 2019. Align2ground: Weakly supervised phrase grounding guided by image-caption alignment. In Proceedings of the IEEE/CVF international conference on computer vision. 2601–2610.
+
+[9] Thomas Eiter et al. 2023. A Logic-based Approach to Contrastive Explainability for Neurosymbolic Visual Question Answering. In IJCAI. 3668–3676.
+
+[10] Hao Fang et al. 2015. From captions to visual concepts and back. In Proceedings of the IEEE conference on computer vision and pattern recognition. 1473–1482.
+
+[11] Eyal Gomel et al. 2023. Box-based Refinement for Weakly Supervised and Unsupervised Localization Tasks. In Proceedings of the IEEE/CVF International Conference on Computer Vision. 16044–16054.
+
+[12] Michael Grubinger et al. 2006. The iapr tc-12 benchmark: A new evaluation resource for visual information systems. In International workshop ontoImage. 13–23.
+
+[13] Tanmay Gupta et al. 2020. Contrastive learning for weakly supervised phrase grounding. In European Conference on Computer Vision. 752–768.
+
+[14] Kaiming He et al. 2020. Momentum contrast for unsupervised visual representation learning. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 9729–9738.
+
+[15] Yicong Hong et al. 2023. Learning navigational visual representations with semantic map supervision. In Proceedings of the IEEE/CVF International Conference on Computer Vision. 3055–3067.
+
+[16] Syed Ashar Javed et al. 2018. Learning unsupervised visual grounding through semantic self-supervision. CoRR abs/1803.06506.
+
+[17] Haojun Jiang et al. 2022. Pseudo-q: Generating pseudo language queries for visual grounding. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 15513–15523.
+
+[18] Huiju Kim et al. 2023. Examining Consistency of Visual Commonsense Reasoning based on Person Grounding. In Proceedings of the 13th International Joint Conference on Natural Language Processing.
+
+---
+
+Krishna, R., Zhu, Y., Groth, O., Johnson, J., Hata, K., Kravitz, J., Chen, S., Kalantidis, Y., Li, L-J., Shamma, D.A., et al. (2017). Visual genome: Connecting language and vision using crowdsourced dense image annotations. International Journal of Computer Vision, 123, 32–73.
+
+Li, J., Selvaraju, R., Gotmare, A., Joty, S., Xiong, C., & Hoi, S.C.H. (2021). Align before fuse: Vision and language representation learning with momentum distillation. Advances in Neural Information Processing Systems, 34, 9694–9705.
+
+Li, J., Shakhnarovich, G., & Yeh, R.A. (2022). Adapting CLIP for phrase localization without further training. CoRR, arXiv:2204.03647.
+
+Li, M., Wang, Z., Tuytelaars, T., & Moens, M.-F. (2023). Layout-aware Dreamer for embodied visual referring expression grounding. In Proceedings of the AAAI Conference on Artificial Intelligence, Vol. 37, 1386–1395.
+
+Li, W., Song, X., Bai, Y., Zhang, S., & Jiang, S. (2021). Ion: Instance-level object navigation. In Proceedings of the 29th ACM International Conference on Multimedia, 4343–4352.
+
+Lin, P., Yu, Z., Lu, M., Feng, F., Li, R., & Wang, X. (2024). Visual Prompt Tuning for Weakly Supervised Phrase Grounding. In ICASSP 2024 - 2024 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 7895–7899.
+
+Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C.L. (2014). Microsoft COCO: Common objects in context. In Computer Vision–ECCV 2014: 13th European Conference, 740–755.
+
+Lin, Y., Chen, M., Wang, W., Wu, B., Li, K., Lin, B., Liu, H., & He, X. (2023). Clip is also an efficient segmenter: A text-driven approach for weakly supervised semantic segmentation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 15305–15314.
+
+Liu, X., Li, L., Wang, S., Zha, Z.-J., Li, Z., Tian, Q., & Huang, Q. (2022). Entity-enhanced adaptive reconstruction network for weakly supervised referring expression grounding. IEEE Transactions on Pattern Analysis and Machine Intelligence, 45(3), 3003–3018.
+
+Liu, X., Li, L., Wang, S., Zha, Z.-J., Meng, D., & Huang, Q. (2019). Adaptive reconstruction network for weakly supervised referring expression grounding. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 2611–2620.
+
+Liu, X., Li, L., Wang, S., Zha, Z.-J., Su, L., & Huang, Q. (2019). Knowledge-guided pairwise reconstruction network for weakly supervised referring expression grounding. In Proceedings of the 27th ACM International Conference on Multimedia, 539–547.
+
+Liu, Y., Shi, Y., Feng, F., Li, R., Ma, Z., & Wang, X. (2022). Improving Image Paragraph Captioning with Dual Relations. In 2022 IEEE International Conference on Multimedia and Expo (ICME), 1–6.
+
+Liu, Y., Wan, B., Ma, L., & He, X. (2021). Relation-aware instance refinement for weakly supervised visual grounding. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 5612–5621.
+
+Liu, Y., Zhang, J., Chen, Q., & Peng, Y. (2023). Confidence-aware Pseudo-label Learning for Weakly Supervised Visual Grounding. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 2828–2838.
+
+Lu, J., Goswami, V., Rohrbach, M., Parikh, D., & Lee, S. (2020). 12-in-1: Multi-task vision and language representation learning. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 10437–10446.
+
+Lu, M., Li, R., Feng, F., Ma, Z., & Wang, X. (2024). LGR-NET: Language Guided Reasoning Network for Referring Expression Comprehension. IEEE Transactions on Circuits and Systems for Video Technology, 1–1. https://doi.org/10.1109/TCSVT.2024.3374786
+
+Plummer, B.A., Wang, L., Cervantes, C.M., Caicedo, J.C., Hockenmaier, J., & Lazebnik, S. (2015). Flickr30k entities: Collecting region-to-phrase correspondences for richer image-to-sentence models. In Proceedings of the IEEE international conference on computer vision, 2641–2649.
+
+Qin, L., Chen, Q., Zhou, Y., Chen, Z., Li, Y., Liao, L., Li, M., Che, W., & Yu, P.S. (2024). Multilingual Large Language Model: A Survey of Resources, Taxonomy and Frontiers. arXiv:2404.04925 [cs.CL].
+
+Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., et al. (2021). Learning transferable visual models from natural language supervision. In International conference on machine learning, 8748–8763.
+
+Raghu, M., Unterthiner, T., Kornblith, S., Zhang, C., & Dosovitskiy, A. (2021). Do vision transformers see like convolutional neural networks? Advances in Neural Information Processing Systems, 34, 12116–12128.
+
+---
+
+Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. 2015. Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks. Advances in Neural Information Processing Systems, Vol. 28.
+
+Arka Sadhu, Kan Chen, and Ram Nevatia. 2019. Zero-shot grounding of objects from natural language queries. Proceedings of the IEEE/CVF International Conference on Computer Vision, 4694–4703.
+
+Tal Shaharabany, Yoad Tewel, and Lior Wolf. 2022. What is where by looking: Weakly-supervised open-world phrase-grounding without text inputs. Advances in Neural Information Processing Systems 35, 28222–28237.
+
+Tal Shaharabany and Lior Wolf. 2023. Similarity Maps for Self-Training Weakly-Supervised Phrase Grounding. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 6925–6934.
+
+Haozhan Shen, Tiancheng Zhao, Mingwei Zhu, and Jianwei Yin. 2024. Ground-VLP: Harnessing Zero-Shot Visual Grounding from Vision-Language Pre-training and Open-Vocabulary Object Detection. AAAI Conference on Artificial Intelligence, Vol. 38, 4766–4775.
+
+Yibing Song, Ruifei Zhang, Zhihong Chen, Xiang Wan, and Guanbin Li. 2023. Advancing visual grounding with scene knowledge: Benchmark and method. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 15039–15049.
+
+Sanjay Subramanian, William Merrill, Trevor Darrell, Matt Gardner, Sameer Singh, and Anna Rohrbach. 2022. ReCLIP: A Strong Zero-Shot Baseline for Referring Expression Comprehension. 60th Annual Meeting of the Association for Computational Linguistics, 5198–5215.
+
+Satoshi Suzuki et al. 1985. Topological structural analysis of digitized binary images by border following. Computer vision, graphics, and image processing 30, 1, 32–46.
+
+Feng Wang, Jieru Mei, and Alan Yuille. 2024. SCLIP: Rethinking Self-Attention for Dense Vision-Language Inference. arXiv:2312.01597 [cs.CV]
+
+Mingzhe Wang, Mahmoud Azab, Noriyuki Kojima, Rada Mihalcea, and Jia Deng. 2016. Structured matching for phrase localization. Computer Vision–ECCV 2016, 696–711.
+
+Qinxin Wang, Hao Tan, Sheng Shen, Michael Mahoney, and Zhewei Yao. 2020. MAF: Multimodal Alignment Framework for Weakly-Supervised Phrase Grounding. Conference on Empirical Methods in Natural Language Processing (EMNLP), 2030–2038.
+
+Haoning Wu, Erli Zhang, Liang Liao, Chaofeng Chen, Jingwen Hou, Annan Wang, Wenxiu Sun, Qiong Yan, and Weisi Lin. 2023. Towards explainable in-the-wild video quality assessment: a database and a language-prompted approach. 31st ACM International Conference on Multimedia, 1045–1054.
+
+Siying Wu, Xueyang Fu, Feng Wu, and Zheng-Jun Zha. 2022. Cross-modal semantic alignment pre-training for vision-and-language navigation. 30th ACM International Conference on Multimedia, 4233–4241.
+
+Yuechen Wu, Zhenhuan Rao, Wei Zhang, Shijian Lu, Weizhi Lu, and Zheng-Jun Zha. 2019. Exploring the Task Cooperation in Multi-goal Visual Navigation. IJCAI, 609–615.
+
+Lian Xu, Wanli Ouyang, Mohammed Bennamoun, Farid Boussaid, and Dan Xu. 2022. Multi-class token transformer for weakly supervised semantic segmentation. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 4310–4319.
+
+Dizhan Xue, Shengsheng Qian, and Changsheng Xu. 2023. Variational Causal Inference Network for Explanatory Visual Question Answering. IEEE/CVF International Conference on Computer Vision, 2515–2525.
+
+Zhihan Yu and Ruifan Li. 2024. Revisiting Counterfactual Problems in Referring Expression Comprehension. Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 13438–13448.
+
+Jianming Zhang, Sarah Adel Bargal, Zhe Lin, Jonathan Brandt, Xiaohui Shen, and Stan Sclaroff. 2018. Top-down neural attention by excitation backprop. International Journal of Computer Vision, 126, 10, 1084–1102.
+
+Wenqiao Zhang, Xin Eric Wang, Siliang Tang, Haizhou Shi, Haochen Shi, Jun Xiao, Yueting Zhuang, and William Yang Wang. 2020. Relational graph learning for grounded video description generation. 28th ACM International Conference on Multimedia, 3807–3828.
+
+Zicheng Zhang, Bonan Li, Xuecheng Nie, Congying Han, Tiande Guo, and Luoqi Liu. 2023. Towards Consistent Video Editing with Text-to-Image Diffusion Models. Advances in Neural Information Processing Systems, Vol. 36.
+
+Chong Zhou, Chen Change Loy, and Bo Dai. 2022. Extract free dense labels from clip. European Conference on Computer Vision, Springer, 696–712.
+
+---

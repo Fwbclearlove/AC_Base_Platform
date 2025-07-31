@@ -1,0 +1,38 @@
+{
+  "document_type": "patent",
+  "title": "一种基于多层神经网络的电力实体识别方法、存储介质和设备",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "电力领域",
+  "technical_problem": "中文命名实体识别的精度问题",
+  "technical_solution": "使用BERT电力实体识别模型，通过哈夫曼编码映射得到实体标签",
+  "key_innovations": [
+    "使用BERT语言模型进行预训练",
+    "构建电力实体标签的哈夫曼编码",
+    "增加分类层构成BERT电力实体识别模型"
+  ],
+  "implementation_method": "包括伪标注语料构建、哈夫曼编码构建、BERT电力实体识别模型训练等步骤",
+  "technical_effects": "提高了电力领域中文命名实体识别的精度",
+  "keywords": [
+    "多层神经网络",
+    "电力实体识别",
+    "BERT",
+    "哈夫曼编码"
+  ],
+  "application_scenarios": [
+    "电力语料实体识别"
+  ],
+  "technical_concepts": [
+    "BERT电力实体识别模型",
+    "哈夫曼树编码",
+    "伪标注语料"
+  ],
+  "claims_summary": "基于多层神经网络的电力实体识别方法、存储介质和设备的技术方案和效果",
+  "summary": "本发明涉及一种基于多层神经网络的电力实体识别方法，通过使用BERT语言模型和哈夫曼编码技术，提高了电力领域中文命名实体识别的精度。该方法包括构建伪标注语料、构建哈夫曼编码、训练BERT电力实体识别模型等步骤，并可用于计算机可读存储介质和计算设备中。",
+  "file_id": "基于多层神经网络的电力实体识别方法、存储介质和设备_刘子全",
+  "source_type": "cleaned",
+  "text_length": 996,
+  "generation_time": "2025-07-31 21:30:21"
+}

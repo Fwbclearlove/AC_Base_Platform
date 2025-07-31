@@ -1,0 +1,37 @@
+{
+  "document_type": "academic_paper",
+  "title": "人工生命中分布智能研究的一种可行方法",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "人工生命，分布智能",
+  "research_problem": "如何在人工生命这一新兴领域进行科学研究",
+  "methodology": "从理论生物学中选择研究起点的策略，利用现有模型",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "人工生命研究的方法学与其研究本身具有同样意义，理论生物学为人工生命提供了大量研究主题",
+  "keywords": [
+    "人工生命",
+    "分布智能",
+    "蚁群算法",
+    "粒子群优化"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "蚁群算法",
+    "粒子群算法",
+    "理论生物学",
+    "自组织",
+    "涌现式行为"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文分析了蚁群算法和粒子群算法的提出过程，提出了一种基于理论生物学选择研究起点的分布智能研究方法，并探讨了从自然生命到人工生命模型的拓展方法，强调了方法在人工生命研究中的重要性。",
+  "file_id": "人工生命中分布智能研究的一种可行方法",
+  "source_type": "cleaned",
+  "text_length": 874,
+  "generation_time": "2025-07-31 21:32:54"
+}

@@ -1,0 +1,38 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "Text-to-image synthesis",
+  "research_problem": "Current approaches face training difficulties due to the sparsity of global representations and lack fine-grained information in the generated images.",
+  "methodology": "Cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN)",
+  "key_innovations": [
+    "Integrating local linguistic representations into GANs",
+    "Cross-modal correlations in discriminator"
+  ],
+  "experimental_results": "Experiments show that incorporating fine-grained local linguistic information and cross-modal correlation significantly enhances text-to-image synthesis performance.",
+  "conclusions": "Incorporating both global and local linguistic representations significantly improves the performance of models generating high-resolution images.",
+  "keywords": [
+    "Text-to-image synthesis",
+    "generative adversarial network (GAN)",
+    "linguistic representation",
+    "cross-modal"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "GANs",
+    "CGL-GAN",
+    "cross-modal projection block",
+    "Inception score",
+    "FID"
+  ],
+  "performance_metrics": "The model achieves higher Inception scores on the CUB dataset and exhibits a 27.43% improvement over GAN-INT-CLS.",
+  "summary": "This paper proposes CGL-GAN, a GAN model that incorporates both global and local linguistic representations for text-to-image synthesis. It demonstrates improved performance in generating high-resolution images with fine-grained details by establishing cross-modal correlations. Experiments on CUB and MS-COCO datasets validate the effectiveness of the proposed method.",
+  "file_id": "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis",
+  "source_type": "cleaned",
+  "text_length": 19725,
+  "generation_time": "2025-07-31 21:20:28"
+}

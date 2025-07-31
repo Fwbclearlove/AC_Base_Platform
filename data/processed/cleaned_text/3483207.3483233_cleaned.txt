@@ -1,0 +1,123 @@
+Maintenance Decision Generator for Electrical Equipment Based on Reinforcement Learning
+
+Ruifan Li∗, Zeyuan Wang, Yifan Du, Zepeng Zhai, Yongping Xiong, Ziqun Liu
+
+Beijing University of Posts and Telecommunications, 100876, Beijing, China
+
+State Grid Jiangsu Electric Power Co., Ltd. Research Institute, 211103, Nanjing, China
+
+ABSTRACT
+The paper proposes a maintenance decision model for electrical equipment using the Markov hypothesis and reinforcement learning. It incorporates the cut set of the power grid to calculate equipment weights and enhance the dynamic programming solution for decision-making. The method recalculates action rewards based on the current cut set, facilitating communication between action sequences. Experimental results show improved decision-making effectiveness.
+
+CCS CONCEPTS
+• Computing methodologies → Planning for deterministic actions.
+
+KEYWORDS
+Electric equipment maintenance, Reinforcement learning, Dynamic decision making.
+
+1 INTRODUCTION
+Electrical equipment maintenance decisions aim to prevent damage and grid instability. Traditional methods rely on manual decisions and rule-based strategies, which lack generalization. Reinforcement learning, particularly with dynamic programming, is explored for optimal maintenance timing. The paper addresses the varying importance of equipment and the influence of maintenance decisions on each other within a multi-equipment context.
+
+2 RELATED WORK
+2.1 Multi-Agent Reinforcement Learning
+Multi-agent reinforcement learning is applied in various fields and enables the development of strategies beyond human capabilities.
+
+2.2 Electric Equipment Maintenance
+---
+
+[Please note that the section "2 RELATED WORK" seems to be cut off and continues beyond the provided text. Also, the figure and its description have been omitted as per the instructions to avoid adding non-existent sections or content.]
+
+---
+
+At present, the strategy of power equipment maintenance often relies on manual decision-making. Existing methods, such as [9], mainly depend on online and offline detection, as well as periodic disassembly detection. While [6] analyzes the irrationality of power maintenance and proposes strategies, these strategies require technicians with substantial experience and are inefficient with poor generalization. A deep recursive q-network Multi-Agent Reinforcement Learning model is applied to power equipment maintenance, demonstrating improved optimization, decision-making abilities, and reduced maintenance costs.
+
+3 METHOD
+
+In this section, we describe our proposed maintenance decision model for electric equipment. We introduce the Markov hypothesis and reward function in Section 3.1, followed by the maintenance decision model for single equipment in Section 3.2 and multiple equipment in Section 3.3.
+
+3.1 Markov Hypothesis and Reward
+
+3.1.1 The equipment condition transitions through multiple states to the fault state. We define four states, S1, S2, S3, and S4, representing the equipment's condition from good to damaged. The transition probability matrix P and the probability of transitioning to the damaged state λi are defined.
+
+3.1.2 The entire risk of the power network is divided into maintenance risk RM and grid failure risk RF. The risk can be expressed as Rsum = RM,1 + RM,2 + RF,1(t) + RF,2(t), where NT is the number of operation days. Reinforcement learning aims to minimize this overall loss.
+
+3.2 Maintenance Decision Method for Single Equipment
+
+3.2.1 The state and action for single equipment in reinforcement learning are defined by time and the equipment's running state. The action set is [fix, nofix], with constraints on actions in certain states.
+
+3.2.2 The dynamic programming solution involves strategy evaluation and improvement. The Bellman equation is used with the state transition probability to evaluate the value of each state and optimize the strategy.
+
+3.3 Multi-equipment Maintenance Decision Generator
+
+3.3.1 For multiple equipment, the state in reinforcement learning includes equipment index, time, and running state.
+
+3.3.2 Cut sets are introduced to represent the minimum combination of equipment that can cause a power failure. They help model the importance of equipment to the power grid's operating state.
+
+3.3.3 Weighted Dynamic Programming Solution applies cut set weights to reinforcement learning rewards, focusing on the importance of different equipment. The weight of the equipment Wdevicei (cut) is calculated based on the cut set composition.
+
+---
+
+---
+
+The awareness of grid connections by equipment can be integrated into decision-making through the application of equipment weight in dynamic programming.
+
+The dynamic policy generator considers changes in the cut set due to equipment maintenance. For instance, in grid 1, when equipment B is in maintenance, the maintenance of equipment C may lead to increased grid failures.
+
+Policy evaluation incorporates the weight of equipment, as depicted in Fig. (a). The decision-making process of the dynamic policy generator is presented in Fig. (b), where maintenance actions affect the cut set of the power grid. Subsequent state calculations require adjusting equipment weights based on the current cut set. State management refers to the sequential maintenance decisions for equipment in states S2 and S3. The dynamic strategy generation module calculates the new reward for each action using the value matrix and equipment weight:
+
+π(a | sdevicei) = arg max a [Ra(sdevicei)(cut) + γ Σ s′∈S Pa(ss′)vk(s′)]
+
+The value matrix is derived from a dynamic programming solution, considering the cut-set state with the equipment node in maintenance mode as an open circuit. The action with the highest reward is selected as the strategy for the current state. This approach allows for indirect communication between multiple equipment through cut set changes integrated into the decision-making process.
+
+In the experiment, simulation parameters include operating power curves, equipment connection states, equipment state transition probabilities, and maintenance costs. We used various operational power curves and two grid connection modes for multiple equipment. The unit price of grid power is 1053 Yuan/Mkw, and transition probabilities are defined for equipment states. The dataset includes six types of grid power curves, with a simulation time interval of fifty days.
+
+The experimental setup involves comparing different methods for single and multiple equipment scenarios. For single equipment, we compare template-based policies and strategies obtained from reinforcement learning. For multiple equipment, we compare dynamic programming methods with and without the dynamic policy generator, using average and cut set-weighted approaches.
+
+The results show that the reinforcement learning-based policy significantly improves upon template policies for single equipment and that the dynamic policy generator generally outperforms other methods for multiple equipment. The weighted dynamic routing approach is generally more effective than the average weighted method, indicating the feasibility of equipment weight modeling and state communication through cut sets.
+
+Further analysis explores the relationship between learned policies and grid power, as well as grid connection. For instance, in state1, where grid power increases linearly, the reinforcement learning strategy adapts to changes in operational power, reflecting a shift from fix to nofix strategies as power and potential maintenance costs increase. This aligns with the goal of minimizing overall loss and demonstrates the efficiency of reinforcement learning in deriving strategies that match human understanding without extensive empirical experience.
+
+4.4.2 Policy and the Grid Connection
+The policy learned with the weighted DP solution method in grid 1 is presented in Fig. 6 (b). The strategy varies for different equipment. Equipment A is more inclined towards the nofix strategy, as its maintenance could lead to power grid failure, whereas the simultaneous maintenance of equipment B and C would result in failure loss. The learned strategy supports the rationality of weighted reward by cut set. Table 3 demonstrates that the dynamic strategy method enhances the strategy's awareness of power grid state.
+
+5 CONCLUSION
+This paper applies reinforcement learning to develop equipment maintenance strategies. For single equipment, dynamic programming is used, while for multiple equipment, the importance of devices is calculated using the power grid cut set and integrated into the dynamic programming solution. The interplay between maintenance decisions is reflected through the cut set changes due to maintenance actions. Simulation data validates the strategy, confirming the effectiveness of our method across various power grid scenarios.
+
+ACKNOWLEDGMENTS
+This work is supported by the Science and Technology Program of the Headquarters of State Grid Corporation of China under Grant No. 5200-201918255A-0-0-00.
+
+REFERENCES
+[1] Christopher Berner et al. 2019. Dota 2 with Large Scale Deep Reinforcement Learning. CoRR abs/1912.06680.
+[2] Sushrut Bhalla et al. 2020. Deep Multi Agent Reinforcement Learning for Autonomous Driving. In Advances in Artificial Intelligence.
+[3] Omar Bouhamed et al. 2019. Q-learning based Routing Scheduling For a Multi-Task Autonomous Agent.
+[4] Dongyan Chen and Kishor S Trivedi. 2005. Optimization for condition-based maintenance with semi-Markov decision process.
+[5] J. Endrenyi et al. 2001. The present status of maintenance strategies and the impact of maintenance on reliability.
+[6] Ding Feng et al. 2018. Optimization Method With Prediction-Based Maintenance Strategy for Traction Power Supply Equipment Based on Risk Quantification.
+
+---
+
+[7] Fang Gao, Si Chen, Mingqiang Li, and Bincheng Huang. 2019. MaCA: a Multi-agent Reinforcement Learning Platform for Collective Intelligence. In 2019 IEEE 10th International Conference on Software Engineering and Service Science (ICSESS). 108–111. https://doi.org/10.1109/ICSESS47205.2019.9040781
+
+[8] Qi Gao, You-Wei Li, Yang Ge, and Bing Hao. 2011. Availability model of equipment based on three-levels maintenance system. In 2011 International Conference on Quality, Reliability, Risk, Maintenance, and Safety Engineering. 637–641. https://doi.org/10.1109/ICQR2MSE.2011.5976692
+
+[9] Chenxi Guo, Ming Dong, Xiaoxi Yang, and Wensen Wang. 2019. A Review of On-line Condition Monitoring in Power System. In 2019 IEEE 8th International Conference on Advanced Power System Automation and Protection (APAP). 634–637. https://doi.org/10.1109/APAP47170.2019.9225022
+
+[10] Yiying Li, Wei Zhou, Huaimin Wang, Bo Ding, and Kele Xu. 2019. Improving Fast Adaptation for Newcomers in Multi-Robot Reinforcement Learning System. In 2019 IEEE SmartWorld, Ubiquitous Intelligence Computing, Advanced Trusted Computing, Scalable Computing Communications, Cloud Big Data Computing, Internet of People and Smart City Innovation. 753–760. https://doi.org/10.1109/SmartWorld-UIC-ATC-SCALCOM-IOP-SCI.2019.00162
+
+[11] Hang Liu, Youyuan Wang, Liwei Zhou, Yufeng Chen, and Xiuming Du. 2016. An optimization method of maintenance strategy for power equipment. In 2016 International Conference on Condition Monitoring and Diagnosis (CMD). 940–943. https://doi.org/10.1109/CMD.2016.7757979
+
+[12] Sergio Rozada, Dimitra Apostolopoulou, and Eduardo Alonso. 2020. Load Frequency Control: A Deep Multi-Agent Reinforcement Learning Approach. In 2020 IEEE Power Energy Society General Meeting (PESGM). 1–5. https://doi.org/10.1109/PESGM41954.2020.9281614
+
+[13] John Seiffertt, Suman Sanyal, and Donald C. Wunsch. 2008. Hamilton–Jacobi–Bellman Equations and Approximate Dynamic Programming on Time Scales. IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics) 38, 4 (2008), 918–923. https://doi.org/10.1109/TSMCB.2008.923532
+
+[14] Alvaro Serra-Gómez, Bruno Brito, Hai Zhu, Jen Jen Chung, and Javier Alonso-Mora. 2020. With whom to communicate: learning efficient communication for multi-robot collision avoidance. In 2020 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS). 11770–11776.
+
+[15] Oriol Vinyals, Igor Babuschkin, Wojciech M. Czarnecki, Michaël Mathieu, Andrew Dudzik, Junyoung Chung, David H. Choi, Richard Powell, Timo Ewalds, Petko Georgiev, Junhyuk Oh, Dan Horgan, Manuel Kroiss, Ivo Danihelka, Aja Huang, Laurent Sifre, Trevor Cai, John P. Agapiou, Max Jaderberg, Alexander S. Vezhnevets, Rémi Leblond, Tobias Pohlen, Valentin Dalibard, David Budden, Yury Sulsky, James Molloy, Tom L. Paine, Caglar Gulcehre, Ziyu Wang, Tobias Pfaff, Yuhuai Wu, Roman Ring, Dani Yogatama, Dario Wünsch, Katrina McKinney, Oliver Smith, Tom Schaul, Timothy Lillicrap, Koray Kavukcuoglu, Demis Hassabis, Chris Apps, and David Silver. 2019. Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature 575, 7782 (01 Nov 2019), 350–354. https://doi.org/10.1038/s41586-019-1724-z
+
+[16] Wei Wu, Geng Haifei, and Jiang An. 2009. A Multi-agent Traffic Signal Control System Using Reinforcement Learning. In 2009 Fifth International Conference on Natural Computation, Vol. 4. 553–557. https://doi.org/10.1109/ICNC.2009.66
+
+[17] Di Zhou, Zizhan Wang, You Zhou, Yurong Mao, and Minqi Zhou. 2020. Research on Automatic Test Technology for Field Operation and Maintenance of Intelligent Substation. In 2020 5th Asia Conference on Power and Electrical Engineering (ACPEE). 11–15. https://doi.org/10.1109/ACPEE48638.2020.9136373
+
+[18] Ming Zhou, Jun Luo, Julian Villela, Yaodong Yang, David Rusu, Jiayu Miao, Weinan Zhang, Montgomery Alban, Iman Fadakar, Zheng Chen, Aurora Chongxi Huang, Ying Wen, Kimia Hassanzadeh, Daniel Graves, Dong Chen, Zhengbang Zhu, Nhat M. Nguyen, Mohamed Elsayed, Kun Shao, Sanjeevan Ahilan, Baokuan Zhang, Jiannan Wu, Zhengang Fu, Kasra Rezaee, Peyman Yadmellat, Mohsen Rohani, Nicolas Perez Nieves, Yihan Ni, Seyedershad Banijamali, Alexander Imani Cowen-Rivers, Zheng Tian, Daniel Palenicek, Haitham Bou-Ammar, Hongbo Zhang, Wulong Liu, Jianye Hao, and Jun Wang. 2020. SMARTS: Scalable Multi-Agent Reinforcement Learning Training School for Autonomous Driving. CoRR abs/2010.09776 (2020). arXiv:2010.09776 https://arxiv.org/abs/2010.09776
+
+---

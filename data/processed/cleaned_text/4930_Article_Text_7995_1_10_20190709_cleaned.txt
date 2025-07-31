@@ -1,0 +1,193 @@
+Differential Networks for Visual Question Answering
+
+Chenfei Wu, Jinlai Liu, Xiaojie Wang, Ruifan Li
+Center for Intelligence Science and Technology, Beijing University of Posts and Telecommunications
+{wuchenfei, liujinlai, xjwang, rfli}@bupt.edu.cn
+
+Abstract:
+The Visual Question Answering (VQA) task requires efficient fusion of image and question feature elements. Existing models directly fuse these elements, ignoring their potential difference in space and the reduction of observation noise. We propose Differential Networks (DN), a novel module that computes differences between pair-wise feature elements. Utilizing DN, we introduce DN-based Fusion (DF) for VQA, achieving state-of-the-art results on four datasets. Ablation studies verify the effectiveness of difference operations in DF.
+
+1 Introduction:
+VQA is a challenging task that enhances human-computer interaction and has diverse applications. Existing VQA models typically include encoding, fusion, and classification stages, with fusion being crucial. We argue that fusing differences between feature elements is more reasonable, as it can address differences in modality and reduce observation noise. This paper introduces DN and the DF model, which differ image and text feature elements before fusion.
+
+2 Related Work:
+We review current VQA models, focusing on attention-based models and fusion strategies. Attention-based models have shown significant performance, and we employ this framework to validate DN's effectiveness.
+
+2.3 注意力机制的融合
+
+注意力机制需要融合来计算注意力分布。因此，融合程度对注意力机制的质量有很大影响。现有关注融合的注意力模型可以分为线性模型和双线性模型两类。最初，线性模型用于融合图像和问题特征元素。Yang等人（2016）和Lu等人（2016）使用元素逐点求和来融合图像和问题特征元素，而Li和Jia（2016）以及Nam、Ha和Kim（2017）使用元素逐点乘法。最近，双线性模型用于更精细地融合图像特征和问题特征元素。Fukui等人（2016）使用外积，但导致维度爆炸问题。为解决此问题，Kim等人（2017）在图像和问题特征的低秩投影后使用元素逐点乘法。为更近似双线性，Yu等人（2017）和Ben-younes等人（2017）分别使用k计算总和和窗口k的池化来增加模型容量。本文首先提出差异网络（DN）模块，显式地建模特征元素对之间的差异。然后提出差异融合（DF）模型来融合差异表示。
+
+3 差分网络
+
+3.1 定义与推导
+
+设x = (x1, x2, ..., xm)T为一个特征向量。我们对特征元素进行完全成对差分，将x映射到新向量y = (y1, y2, ..., yn)T。y中的每个元素按式(1)计算：
+
+yk = Σi,j (xi − xj)w(k)ij, (1)
+
+其中w(k)ij ∈ R是可学习参数，i, j ∈ [1, m]，k ∈ [1, n]。式(1)可以写成矩阵形式，如式(2)所示：
+
+yk = xTW(k)1 - xT(W(k))T1, (2)
+
+其中W(k) ∈ Rm×m是可学习参数，1 ∈ Rm是全1向量。不幸的是，W ∈ Rm×m×n是三阶张量，这使得参数规模大且难以训练。
+
+3.2 DN与FCN的比较
+
+本节比较差分网络（DN）和全连接网络（FCN），后者也常用于将x映射到y。为方便比较，我们将DN重写为式(7)，也可在图2左上部分表示。FCN可以写成式(8)，在图2右上部分表示。
+
+y[DN]k = Σi,j (xi − xj)w(k)ij = Σi,j xi(w(k)ij − w(k)ji), (7)
+
+y[FCN]k = Σi xiwik = Σi xiw(k)ii, (8)
+
+其中在式(8)中，我们将全连接网络的m×n大小参数矩阵视为n个m×m大小的对角矩阵。通过比较图2上部分的DN和FCN的说明，可以看出DN和FCN最大的区别在于DN中间的差异层（浅绿色）。通过特征元素的全差异，差异层能有效减少输入信息的噪声。
+
+4 针对VQA的差异融合模型
+
+基于DN的融合（DF）模型如图3所示。模型包括三部分：数据嵌入、差分融合和决策制定。
+
+4.1 数据嵌入
+
+使用Faster-RCNN（Ren等，2015）编码图像，提供由bottom-up-attention（Anderson等，2018）的静态特征，使用GRU（Cho等，2014）编码文本，参数初始化为skip-thoughts（Kiros等，2015），如式(9)所示：
+
+V = RCNN(image), Q = GRU(question), (9)
+
+其中V ∈ Rl×dv表示前l个检测框的视觉特征，Q ∈ Rdq表示问题嵌入。
+
+4.2 基于DN的差分融合
+
+根据第3节，我们提出差分融合，如式(11)所示：
+
+r=1 DN r(V f) ⊙ DN r(Qf), (11)
+
+其中⊙是逐元素操作，R是超参数，DN r表示具有不同可学习参数的第r个DN。H ∈ Rl×dh是融合的结果。然后，在式(12)中计算多瞥注意力分布：
+
+α = softmax(HWh), (12)
+
+其中Wh ∈ Rdh×g是可学习参数，g是注意力瞥视的数量。注意，这里的softmax是在矩阵HWh ∈ Rl×g的第一维上执行的。α ∈ Rl×g是表示g个注意力分布的矩阵。
+
+4.3 决策制定
+
+在决策制定过程中，使用带有softmax激活函数的线性层预测候选答案的分数，如式(15)：
+
+ˆa = softmax(FWf), (15)
+
+其中Wf ∈ Rdf ×|D|是可学习参数，ˆa ∈ R|D|是预测答案，D是答案字典，|D|是候选答案的数量。
+
+4.4 训练
+
+首先按式(16)计算地面真实答案分布：
+
+PN j=1 1{uj = i} - PN j=1 1{uj ∉ D}, (16)
+
+其中a ∈ R|D|是地面真实答案分布，ui是第i个标注者给出的答案。N是标注者数量。具体来说，在VQA 1.0和VQA 2.0数据集中N是10；在COCO-QA和TDIUC数据集中N是1。最后，我们使用式(17)中a和ˆa之间的KL散度作为损失函数：
+
+L(ˆa, a) = Σi ai log(ai/ˆa_i). (17)
+
+5 实验
+
+5.1 数据集和评估指标
+
+我们在四个公共数据集上评估我们的模型：VQA 1.0（Antol等，2015）、VQA 2.0（Goyal等，2017）、COCO-QA（Ren、Kiros和Zemel，2015）和TDIUC（Kaﬂe和Kanan，2017a）。VQA
+
+---
+
+VQA 1.0 Test-dev and Test-std
+
+Method All Y/N Num. Other All
+HighOrderAtt (Schwartz, Schwing, and Hazan 2017) - - - - 69.4
+MLB(7) (Kim et al. 2017) 66.77 84.54 39.21 57.81
+Mutan(5) (Ben-younes et al. 2017) 67.42 85.14 39.81 58.52
+DualMFA (Lu et al. 2018) 66.01 83.59 40.18 56.84 70.04
+ReasonNet (Ilievski and Feng 2017) - - - - -
+DF (36boxes) (ours) 68.62 86.08 43.52 59.38 73.31
+
+VQA 2.0 Test-dev and Test-std
+
+Method All Y/N Num. Other All Y/N Num. Other
+MF-SIG-VG (Zhu et al. 2017) 64.73 81.29 42.99 55.55 -
+Up-Down (36 boxes) (Teney et al. 2018) 65.32 81.82 44.21 56.05 65.67 82.20 43.90 56.26
+LC Baseline (100 boxes) (Zhang, Hare, and Pr¨ugel-Bennett 2018) 67.50 82.98 46.88 58.99 67.78 83.21 46.60 59.20
+LC Counting (100 boxes) (Zhang, Hare, and Pr¨ugel-Bennett 2018) 68.09 83.14 51.62 58.97 68.41 83.56 51.39 59.11
+DF (36 boxes) (ours) 67.73 83.91 46.7 58.7 67.86 84.1 46.15 58.7
+DF (100 boxes) (ours) 68.31 84.33 48.2 59.22 68.59 84.56 47.1 59.61
+
+COCO-QA dataset
+
+Method All Obj. Num. Color Loc. WUPS0.9 WUPS0.0
+QRU (Li and Jia 2016) 62.50 65.06 46.90 60.50 56.99 72.58 91.62
+HieCoAtt (Lu et al. 2016) 65.4 68.0 51.0 62.9 58.8 75.1 92.0
+Dual-MFA (Lu et al. 2018) 66.49 68.86 51.32 65.89 58.92 76.15 92.29
+DF (36 boxes) (ours) 69.36 70.53 54.92 73.67 61.22 78.25 92.99
+
+TDIUC dataset
+
+Question Type MCB-A RAU CATL-QTA-W DF (36 boxes)
+Screen Recognition 93.06 93.96 93.80 94.47
+Sport Recognition 92.77 93.47 95.55 95.90
+Color Attributes 68.54 66.86 60.16 74.47
+Other Attributes 56.72 56.49 54.36 60.82
+Activity Recognition 52.35 51.60 60.10 62.01
+Positional Reasoning 35.40 35.26 34.71 40.76
+Sub. Object Recognition 85.54 86.11 86.98 88.71
+Absurd 84.82 96.08 100.00 94.56
+Utility and Affordances 35.09 31.58 31.48 41.52
+Object Presence 93.64 94.38 94.55 95.58
+Counting 51.01 48.43 53.25 58.37
+Sentiment Understanding 66.25 60.09 64.38 68.77
+Overall(Arithmetric MPT) 67.90 67.81 69.11 72.97
+Overall(Harmonic MPT) 60.47 59.00 60.08 65.79
+Overall Accuracy 81.86 84.26 85.03 86.73
+
+Evaluation Metrics:
+
+For VQA 1.0 and VQA 2.0 datasets:
+Acc(ans) = min(#{humans that said ans}, 1)
+
+For COCO-QA and TDIUC datasets:
+Acc(ans) = 1{ans = ground truth}
+
+Implementation Details:
+
+Image features mapped to 36 × 2048 and text features to 2400.
+DF hidden layer: 510, hyperparameters S=1, R=5, attention hidden unit: 620.
+Nonlinear layers: relu activation, dropout.
+Training: Pytorch, Adam optimizer, learning rate 10^-4, batch size 128.
+
+Ablation Study:
+
+Method Validation
+MLB 62.91
+Mutan 63.61
+DF with PR r=1 VfW r vf ⊙DN r(Qf) 64.46
+DF with PR r=1 DN r(Vf) ⊙QfW r qf 64.58
+DF without dropout 61.05
+DF with tanh 64.78
+DF 64.89
+
+---
+
+Example for Ablation Study:
+Question: How many zebras?
+Ground-truth: 4
+
+---
+
+---
+
+4. Qualitative Evaluation
+
+In this section, we visualize results of the DF model and its comparative models in Figure 4. Four examples are provided, including three success cases and one failure case of the DF model. Each example compares the attention visualizations of four models: Mutan, DF-Q, DF-V, and DF. The attention probability value is shown in the upper left box of each bounding box. For instance, in Example 1, although both DF and DF-Q answered correctly, the DF model's bounding box is more accurate with a higher attention probability of 0.62. From Examples 1 to 3, even if DF-Q or DF-V are incorrect, or both are wrong, DF still answers correctly, indicating the importance of the difference operation. In Example 4, all four models answered incorrectly, showing that counting remains a challenge for attention-based models. However, the DF model still boxes all frames on the wall with a high attention probability of 0.72, demonstrating that by reducing input feature noise and mapping both the image and question to the same differential space, DF effectively improves attention accuracy and confidence.
+
+6. Conclusion
+
+We propose a general DN module and a new DF model for the VQA task, achieving state-of-the-art results on four public datasets. We plan to apply DN to other tasks and validate its generality and effectiveness.
+
+7. Acknowledgments
+
+We thank the anonymous reviewers for their valuable comments. This work is supported by NSFC (No. 61273365), NSSFC (2016ZDA055), 111 Project (No. B08004), Beijing Advanced Innovation Center for Imaging Technology, and Engineering Research Center of Information Networks of MOE, China. Correspondence author is Xiaojie Wang.
+
+References
+
+[References listed in the original content are not included in this cleaned fragment, as per the instructions.]
+
+---

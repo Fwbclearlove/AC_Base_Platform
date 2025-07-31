@@ -1,0 +1,53 @@
+{
+  "document_type": "academic_paper",
+  "title": "Multi-scale Two-way Deep Neural Network for Stock Trend Prediction",
+  "authors": [
+    "Guang Liu",
+    "Yuzhao Mao",
+    "Qi Sun",
+    "Hailong Huang",
+    "Weiguo Gao",
+    "Xuan Li",
+    "JianPing Shen",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Stock Trend Prediction in Artificial Intelligence",
+  "research_problem": "The lack of multi-scale analysis in stock trend prediction",
+  "methodology": "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+  "key_innovations": [
+    "Two-way end-to-end model",
+    "Wavelet-based and downsampling-based scale information",
+    "Enhancing stock trend prediction with multi-scale information"
+  ],
+  "experimental_results": "State-of-the-art performance on FI-2010 and CSI-2016 datasets, with F1 score and accuracy metrics",
+  "conclusions": "The MTDNN model effectively utilizes multi-scale information in stock data, achieving state-of-the-art performance",
+  "keywords": [
+    "Stock Trend Prediction",
+    "Multi-scale Analysis",
+    "Deep Neural Network",
+    "Wavelet Transform",
+    "Downsampling",
+    "XGBoost",
+    "RCNN"
+  ],
+  "application_domains": [
+    "Intelligent Investment",
+    "Financial Time Series Analysis"
+  ],
+  "technical_concepts": [
+    "Neural Networks",
+    "Support Vector Machine",
+    "Random Forest",
+    "DWT",
+    "CNN",
+    "GRU",
+    "Cross-entropy Loss"
+  ],
+  "performance_metrics": "81.05% F1 score and 81.12% accuracy on FI-2010; 63.07% accuracy and 61.65% F1 score on CSI-2016",
+  "summary": "This paper introduces a Multi-scale Two-way Deep Neural Network (MTDNN) for stock trend prediction, which incorporates wavelet-based and downsampling-based scale information to enhance prediction accuracy. The proposed model achieves state-of-the-art performance on the FI-2010 and CSI-2016 datasets, demonstrating the value of multi-scale information in stock trend prediction.",
+  "file_id": "0628",
+  "source_type": "cleaned",
+  "text_length": 8174,
+  "generation_time": "2025-07-31 21:09:38"
+}

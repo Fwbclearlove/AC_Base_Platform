@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "Advancing visual grounding with scene knowledge: Benchmark and method",
+  "authors": [
+    "Yibing Song",
+    "Ruifei Zhang",
+    "Zhihong Chen",
+    "Xiang Wan",
+    "Guanbin Li"
+  ],
+  "main_topic": "Phrase Grounding under weak supervision",
+  "research_problem": "PG under weak supervision struggles with limited seen categories during training and zero-shot PG addresses this by leveraging semantic information across categories",
+  "methodology": "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)",
+  "key_innovations": [
+    "Triple alignment strategies for zero-shot Phrase Grounding under Weak Supervision",
+    "CLIP-based heatmap generation",
+    "Region-category relations consideration"
+  ],
+  "experimental_results": "Evaluation on unseen phrase classes using Flickr-Split and VG-Split test splits, with IoU thresholds set at 0.3 and 0.5",
+  "conclusions": "The proposed PG framework exceeds previous methods and will explore interpretable solutions for grounding-related tasks",
+  "keywords": [
+    "Phrase Grounding",
+    "weak supervision",
+    "zero-shot learning",
+    "alignment strategies",
+    "CLIP"
+  ],
+  "application_domains": [
+    "Multimedia and multimodal retrieval"
+  ],
+  "technical_concepts": [
+    "Region-Text Alignment",
+    "Domain Alignment",
+    "Category Alignment",
+    "Contrastive Language-Image Pre-Training (CLIP)",
+    "heatmap generation"
+  ],
+  "performance_metrics": "IoU threshold 0.5 performance, bounding box accuracy, recognition accuracy",
+  "summary": "This paper presents a framework for zero-shot Phrase Grounding under Weak Supervision using triple alignment strategies. It introduces a CLIP-based heatmap generation and considers region-category relations, demonstrating improved performance over previous methods on unseen phrase classes.",
+  "file_id": "3664647.3680897",
+  "source_type": "cleaned",
+  "text_length": 22082,
+  "generation_time": "2025-07-31 21:16:42"
+}

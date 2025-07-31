@@ -1,0 +1,156 @@
+USSA: A Unified Table Filling Scheme for Structured Sentiment Analysis
+
+Zepeng Zhai, Hao Chen, Ruifan Li, Xiaojie Wang
+
+Abstract
+
+Most studies on Structured Sentiment Analysis (SSA) treat it as a bi-lexical dependency parsing problem, failing to address overlap and discontinuity. We propose USSA, a unified 2D table-filling scheme that utilizes 13 relation types. Our approach incorporates a bi-axial attention module to capture correlations within the table. Experimental results demonstrate the effectiveness of our framework, consistently outperforming state-of-the-art methods.
+
+1 Introduction
+
+SSA identifies opinion tuples (h, t, e, p) within sentences. It is more challenging than related tasks due to the need to identify all four elements, which may overlap or be discontinuous. Existing methods, such as bi-lexical dependency parsing, are lossy and unable to handle these issues effectively. We construct a novel bi-lexical dependency parsing graph that addresses overlap and discontinuity, converting it into the USSA scheme. This scheme resolves the core challenges of SSA by distinguishing between overlapping entities and identifying discontinuous ones.
+
+Dataset Overlap Discontinuity # % # %
+NoReCFine 2178 19.6 1080 9.7
+MultiBEU 0 0 164 7.1
+MultiBCA 3 0.1 113 4.1
+MPQA 403 1.4 0 0
+DSUnis 18 1.7 102 9.9
+
+Our method comprises Relation Prediction (RP) and Token Extraction (TE) edges. RP handles entity boundary identification and relation prediction, solving the overlap problem. TE identifies tokens within boundaries, resolving discontinuity. The dependency parsing graph is converted to a 2D table, with x and y-coordinates representing the start and end positions of edges, and the edge type as the relationship label. The table is divided into lower and upper triangular regions for RP and TE, respectively.
+
+We propose a model for Structured Sentiment Analysis (SSA) that utilizes multilingual BERT and bi-directional LSTM (BiLSTM) to provide contextualized word representations. These representations are used to construct a 2-Dimensional (2D) table for word pairs, capturing strong correlations in both axes. A bi-axial attention module is introduced to effectively capture these correlations, followed by a predictor to determine the relations between word pairs. Our model demonstrates state-of-the-art performance on five benchmark datasets, including NoReCFine, MultiBEU, MultiBCA, MPQA, and DSUnis. Our contributions include: a bi-lexical dependency parsing graph converted to a unified 2D table filling scheme (USSA), addressing overlap and discontinuity in SSA; an effective model that collaborates with USSA, utilizing the bi-axial attention module; and extensive experimental validation on benchmark datasets.
+
+In related work, SSA is divided into sub-tasks such as entity extraction, relationship determination, and sentiment assignment. Previous studies have explored various methods, including BiLSTM-CRF, BERT-based models, transition-based approaches, and span-based models, yet often ignore sentiment polarity classification. In Aspect-Based Sentiment Analysis (ABSA), multiple subtasks have been unified, with methods categorized into pipeline, end-to-end, and MRC-based approaches. However, these methods primarily focus on flat entities and overlook holder extraction. To overcome these limitations, we propose a novel dependency parsing method that can handle overlapping and discontinuous entities, converting the parsing graph to a 2D table filling scheme.
+
+The USSA scheme uses 13 types of relations for word pairs, with the table divided into lower and upper triangular regions for relation prediction and token extraction, respectively. This approach aims to extract opinion tuples from USSA tagging results, addressing the challenges of discontinuous entities, overlapping counterparts, and null holders or targets. The decoding algorithm identifies entity boundaries in the lower triangle and specific tokens in the upper triangle, ensuring accurate opinion tuple extraction.
+
+---
+
+We identify boundary words of holders and targets corresponding to sentiment expressions using {H-S, H-E, H-SE} and {T-S, T-E, T-SE} respectively. The specific tokens of holder, target, and expression are extracted according to {E-NW, H-NW, T-NW} and entity boundaries, forming sentiment tuples (h,t,e,p). Figure 3 illustrates decoding cases from simple to complex, including flat, overlapping, discontinuous, and complex cases, demonstrating the effectiveness of relation types in handling various issues.
+
+Our model, as depicted in Figure 4, is designed to integrate the USSA scheme and comprises four components: the encoder layer, word-pair representation layer, refining strategy, and prediction layer.
+
+The encoder layer uses BiLSTM to output hidden representation sequence H, enhanced with pretrained contextualized embeddings from multilingual BERT. The word-pair representation layer models asymmetric relations using Conditional Layer Normalization (CLN). The refining strategy employs a bi-axial attention module to capture the correlation of relations and includes a distance feature to improve representation. The prediction layer uses FFN and biaffine predictors to obtain label probability distribution. The loss function is a cross-entropy loss for minimizing errors.
+
+Table 3 presents dataset statistics, including the number of sentences, holders, targets, and expressions, along with entity overlaps and discontinuities and polarity distribution.
+
+---
+
+---
+
+In this section, we present the experimental setup and results for our proposed USSA method.
+
+5.1 Datasets and Configuration
+We conduct experiments on five benchmark datasets across four languages. The datasets include NoReCFine, MultiBEU, MultiBCA, MPQA, and DSUnis, with statistics detailed in Table 3.
+
+5.2 Baseline Methods
+Our method is compared with five state-of-the-art baselines: RACL-BERT, Head-first, Head-final, Frozen PERIN, and TGLS.
+
+5.3 Evaluation Metrics
+We primarily use Sentiment Graph F1 (SF1) as our evaluation metric, along with Holder F1, Target F1, Exp. F1, and Nonpolarity Sentiment Graph F1 (NSF1).
+
+5.4 Main Results
+Table 4 shows that USSA generally outperforms other baselines in terms of Span F1. It achieves significant improvements, including a 7.2% F1 score increase for target extraction on MPQA and a 5.4% F1 score increase for holder extraction on NoReCFine. USSA consistently surpasses other methods in NSF1 and SF1 metrics, with average improvements of 3.48 NSF1 and 3.14% SF1 over TGLS.
+
+6 Discussion
+6.1 Model Component Validity
+Ablation experiments in Table 5 reveal that the bi-axial attention module is crucial, with its removal leading to a performance decline. The FFN predictor and biaffine predictor are also found to be effective, with the ∗-NW relations being significant, particularly for datasets with a higher proportion of discontinuous entities.
+
+6.2 Effectiveness of Bi-axial Attention Module
+The bi-axial attention module is shown to be effective, as evidenced by the performance drop when replaced with a CNN, as illustrated in Figure 5. Figure 6 visualizes the bi-axial attention scores applied to the E-POS cell.
+
+---
+
+Previous research has demonstrated the effectiveness of convolutional neural networks (CNNs) in table filling methods (Li et al., 2022; Yan et al., 2022). However, when the table is large, CNNs may struggle to capture global information quickly (Peng et al., 2021). Our direct comparison with the CNN method of (Li et al., 2022), as shown in Figure 5, indicates that CNN performance decreases across all five datasets. This is likely due to the prevalence of long sentences in SSA tasks. We also visualize bi-axial attention scores applied to the E-POS cell in Figure 6, which shows attention on related relations such as T-S and T-E. In summary, the bi-axial attention mechanism effectively identifies relations in the table.
+
+In this paper, we propose a novel bi-lexical dependency parsing graph and convert it into a unified 2D table-filling scheme, USSA, to address overlapping and discontinuous issues simultaneously. Our model includes a bi-axial attention module to refine word-pair representations. This framework may inspire other tasks involving tuple extraction with overlap and discontinuity challenges.
+
+Limitations include the increased training time and memory usage associated with the table filling method, due to the 2D table representation of word-pair relations. In comparison, a sequence representation could be more efficient. Our approach also faces computational challenges.
+
+This work was supported in part by the National Natural Science Foundation of China under Grant 62076032. We appreciate feedback from anonymous reviewers.
+
+References
+[References section remains unchanged]
+
+Huang et al. (2019) introduced Ccnet for semantic segmentation. Katiyar and Cardie (2016) investigated LSTMs for joint extraction of opinion entities and relations. Li et al. (2022) proposed a unified named entity recognition approach as word-word relation classification. Li et al. (2021a) presented MRN, a network for document-level relation extraction. Li et al. (2021b) employed dual graph convolutional networks for aspect-based sentiment analysis. Li et al. (2019a) and (2019b) explored models for opinion target extraction and target sentiment prediction, as well as the use of BERT for aspect-based sentiment analysis. Ma et al. (2018) conducted joint learning for targeted sentiment analysis.
+
+Mao et al. (2021) introduced a joint training dual-MRC framework for aspect-based sentiment analysis. Øvrelid et al. (2020) presented a fine-grained sentiment dataset for Norwegian. Peng et al. (2020) provided a comprehensive solution for aspect-based sentiment analysis. Peng et al. (2021) proposed Conformer, a method coupling local features with global representations for visual recognition. Pontiki et al. (2016, 2015, 2014) organized SemEval tasks on aspect-based sentiment analysis. Quan et al. (2019) performed end-to-end joint opinion role labeling with BERT.
+
+Samuel et al. (2022) worked on direct parsing to sentiment graphs, and Samuel and Straka (2020) focused on permutation-invariant semantic parsing. Shi et al. (2022) developed an effective token graph modeling strategy for structured sentiment analysis. Toprak et al. (2010) annotated opinions at the sentence and expression level in user-generated discourse. Wang et al. (2020a) introduced Axial-Deeplab for panoptic segmentation. Wang and Pan (2019) proposed a transferable interactive memory network for domain adaptation in fine-grained opinion extraction. Wang et al. (2016, 2017) employed recursive neural conditional random fields and coupled multi-layer attentions for aspect-based sentiment analysis. Wang et al. (2020b) presented TPLinker, a method for joint extraction of entities and relations through token pair linking.
+
+---
+
+Yucheng Wang, Bowen Yu, Hongsong Zhu, Tingwen Liu, Nan Yu, and Limin Sun. 2021. Discontinuous named entity recognition as maximal clique discovery.
+
+Janyce Wiebe, Theresa Wilson, and Claire Cardie. 2005. Annotating expressions of opinions and emotions in language.
+
+Zhen Wu, Chengcan Ying, Fei Zhao, Zhifang Fan, Xinyu Dai, and Rui Xia. 2020. Grid tagging scheme for aspect-oriented fine-grained opinion extraction.
+
+Qingrong Xia, Bo Zhang, Rui Wang, Zhenghua Li, Yue Zhang, Fei Huang, Luo Si, and Min Zhang. 2021. A unified span-based approach for opinion mining with syntactic constituents.
+
+Lu Xu, Yew Ken Chia, and Lidong Bing. 2021. Learning span-level interactions for aspect sentiment triplet extraction.
+
+Lu Xu, Hao Li, Wei Lu, and Lidong Bing. 2020. Position-aware tagging for aspect sentiment triplet extraction.
+
+Hang Yan, Junqi Dai, Tuo Ji, Xipeng Qiu, and Zheng Zhang. 2021. A unified generative framework for aspect-based sentiment analysis.
+
+Hang Yan, Yu Sun, Xiaonan Li, and Xipeng Qiu. 2022. An embarrassingly easy but strong baseline for nested named entity recognition.
+
+Bowen Yu, Zhenyu Zhang, Jiawei Sheng, Tingwen Liu, Yubin Wang, Yucheng Wang, and Bin Wang. 2021. Semi-open information extraction.
+
+Zepeng Zhai, Hao Chen, Fangxiang Feng, Ruifan Li, and Xiaojie Wang. 2022. COM-MRC: A COntext-masked machine reading comprehension framework for aspect sentiment triplet extraction.
+
+Bo Zhang, Yue Zhang, Rui Wang, Zhenghua Li, and Min Zhang. 2020. Syntax-aware opinion role labeling with dependency graph convolutional networks.
+
+Chen Zhang, Qiuchi Li, Dawei Song, and Benyou Wang. 2020. A multi-task learning framework for opinion triplet extraction.
+
+Hyperparameter Settings
+
+Global Hyper-parameter Settings
+- Contextualized Embedding: mBERT Embeddings
+- Trainable: False
+- Num of Epochs: 60
+- Batch Size: 16
+- Hidden LSTM Dim: 768
+- Distance Feature Dim: 100
+- Gradient Accumulation Step: 2
+
+Local Hyper-parameter Settings
+- Dataset: MaxTokenLen, LearningRate α
+  - NoReCFine: 150, 2e-3, 0.650
+  - MultiBEU: 150, 2e-3, 0.500
+  - MultiBCA: 386, 1e-3, 0.650
+  - MPQA: 210, 2e-3, 0.725
+  - DSUnis: 386, 1e-3, 0.650
+
+ACL 2023 Responsible NLP Checklist
+
+A. For every submission:
+- A1: Limitations described on Page 9
+- A2: Not applicable
+- A3: Abstract and introduction summarize main claims
+- A4: Left blank
+
+B. Use or creation of scientific artifacts
+- B1: Cite artifact creators in Section 5.1
+- B2: Not applicable
+- B3: Not applicable
+- B4: Not applicable
+- B5: Not applicable
+- B6: Report relevant statistics in Section 5.1
+
+C. Computational experiments
+- C1: Report model parameters, computational budget, and infrastructure in Section 5.1
+- C2: Discuss experimental setup and hyperparameter values in Section 5.1 and Appendix A
+- C3: Report descriptive statistics of results in Section 5.1
+- C4: Left blank
+
+D. Use of human annotators or participants
+- D1: Not applicable
+- D2: Not applicable
+- D3: Not applicable
+
+---
+
+The data collection protocol was not applicable and thus not submitted for ethics review. Similarly, reporting demographic and geographic characteristics of the annotator population was not applicable and left blank.

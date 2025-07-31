@@ -1,0 +1,196 @@
+基于深度卷积结构的图像段落描述研究
+
+摘要：
+段落式图像描述任务旨在为给定图像生成描述性的自然语言段落，连接着计算机视觉和自然语言处理两个关键领域，是跨媒体智能的重要研究方向，其研究进展对于打破图像和文本间的语义鸿沟至关重要。近年来，随着深度学习的发展，基于层次性RNN的解码器已被广泛采用于段落式图像描述任务上。然而，RNN结构上的限制使得这类方法存在如下问题。首先，由于捕获长时信息的能力有限，RNN生成段落这类长文本存在困难，生成的段落连贯性不足。此外，RNN的串行结构导致其训练时间复杂度较高，效率低下。受启发于卷积神经网络(CNN)的特点，本文展开以下工作。提出了基于全卷积神经结构的段落解码器。将门控结构融入层次性的CNN解码器中，该解码器具有更强的长时记忆能力，并拥有并行化训练的能力。提出了一种衡量段落连贯性的指标。经在斯坦福像-段落数据集上进行评估指标、连贯性指标、时间复杂度以及主观分析，证明所提解码器提升了生成段落的质质量。提出了融合区域注意力的段落式图像描述模型Dual-CNN，增强了图像理解能力，提升了段落内句子描述的详细度和多样度。提出了一种衡量段落内句子多样度的指标。经评估指标、多样性指标、区域注意力分析、主观分析，Dual-CNN显著提升了段落式图像描述任务性能。
+
+关键词：深度学习，卷积神经网络，段落式图像描述，连贯性
+
+信息容量限制，单句式图像描述着重于生成概括性的整体描述，其在视觉侧仅需较粗颗粒度的检测和识别。而段落式图像描述需较完整地对图像信息进行理解，以便能够生成详细的段落，实现图像和段落的较高度语义对应。在语言推理侧，段落式图像描述不仅要将图像内容进行细颗粒度的表达，更要考虑语言层面上的逻辑性和上下文相关性，以生成较为连贯的段落。区别于单句描述仅需保证一句话的流畅性，段落描述更需建模段落内句子间的逻辑性。以下分别介绍单句式图像描述方法和段落式图像描述的研宂进展，并提出目前段落式图像描述方法仍存在的问题。
+
+1.2.1 单句式图像描述
+
+在2015年之前，单句式图像描述方法大多为基于模板的方法（Template-based）和基于检索的方法（Retrieval-based）。基于模板的方法首先检测出图像中的视觉概念，并使用预定义的句子模板和这些概念结合，得到输出句子。基于检索的方法把图像描述任务转换为检索问题，通过将待描述图像和文本映射到同一语义空间上，试图为待描述的图像检索寻找语义最接近的句子，作为输出句子。随着大数据时代的到来和深度学习方法的兴起，数据驱动的深度神经网络方法逐渐成为求解图像描述问题的主流方法。受端到端的编码器-解码器（Encoder-Decoder）结构在机器翻译任务上成功应用的启发，Vinyals等人[6]在2015年介绍了建立在编码器-解码器架构上的单句式图像描述模型NIC（Neural Image Captioning），其中CNN作为编码器首先将输入图像表示为视觉向量，随后基于RNN的解码器将视觉向量解码为自然语言文本。由于该模型的端到端训练特性以及其表现出的明显性能优势，之后的图像描述研究大多根据CNN+RNN进行扩展和改进。
+
+1.2.2 段落式图像描述方法
+
+Krause等人在2017年公布了斯坦福图像-段落数据集（Stanford-Paragraph Dataset），数据集中的每个样本包含一幅图像和一段描述该图像的段落。基于该数据集，并根据自然语言中段落、句子及词语的层次性，他们提出一种段落式图像描述模型Hierarchical-RNN，如图1-3所示。该解码器由句子RNN和词RNN组成，句子RNN建模段落内句子间逻辑关系，并生成句子主题，词RNN建模句内关系并根据句子主题生成句子内的所有单词。在图像理解侧，他们釆用了RPN网络结合VGG网络[31]作为图像编码器检测图像中的区域并生成区域特征，然后将所有区域特征做最大池化操作得到全局图像特征。然而，解码器仅以全局特征作为输入，造成了图像信息的损失，生成的段落丢失了图像中的许多信息，解码器输入特征的单一也造成段落内大量重复句子的出现。并且，Hierarchical-RNN对句间逻辑性的监督也较弱，生成的段落连贯性有待提高。
+
+1.2.3 研究现状的总结与分析
+
+前文介绍了解决单句式和段落式图像描述任务的一些方法。简言之，单句式图像描述己在CNN+RNN的编码器-解码器框架下取得了瞩目的阶段性进展，生成句子有较好的准确性、连贯性。从具体方法上来讲，RNN系列网络以其所独有的时间序列结构和隐藏状态（Hidden State）带来的“记忆能力”，被广泛采用为图像描述解码器的基本结构。而段落式图像描述的研究仍处于起步状态，生成段落在准确性、详细程度、连贯性仍有欠缺。段落式图像描述方法也延伸于RNN及其变体网络长短时记忆网络（LSTM，-short Term Memory）、门控循环单元（GRU，Gated Recurrent Units）段落解码器的框架之下，无法避免RNN的若干固有问题。其一，RNN无法记忆长时信息，这限制了其建模语言的性能。尽管LSTM被提出用来捕捉长时信息，但当建模诸如段落的长文本时，随着时间序列的向后推移，隐藏信息的衰减极大地削弱了解码器关注的视野大小，由此带来的长时记忆能力不足同样造成生成段落连贯性的下降。其二，RNN的时间序列特性使得这些段落解码器运行所需的时间复杂度较高、时间消耗大，也无法使用GPU对其进行并行化加速，这给训练和推理过程带来了极大的时间消耗。
+
+综合本节研宄现状分析，当前段落式图像描述研宄存在以下问题亟待解决：(1)在语言生成侧，增强生成段落的连贯性。(2)在图像理解侧，减少图像信息的损失。(3)对于模型而言，降低模型和算法的时间复杂度。本文针对以上若干问题，开展对段落式图像描述的研宄。
+
+1.3 本文的研究工作
+
+针对问题(1)和(3)，本文第一个研究内容为：基于全卷积神经结构的段落式图像描述方法。第一个研究内容的成果是提出了适合于段落式图像描述任务的全卷积解码器。全卷积解码器由双层的门控卷积神经网络构成，其中的门控结构赋予CNN记忆能力。该解码器包括句子CNN解码器和词CNN解码器，句子CNN解码器捕捉段落内的句子之间关系以加强句子间的连贯性，词CNN解码器负责生成段落内的单词。通过将层次结构、卷积结构、门控结构结合，相对于RNN解码器，全卷积解码器具有更大的“视野”，拥有更强的长时记忆能力。我们提出了一种衡量段落连贯性的指标，并在斯坦福图像-段落数据集上经过评测指标、运行时间、段落连贯性指标、主观评价等多种评价方法的验证，证明了所提方法的有效性。
+
+针对问题(2)，本文第二个研究内容为：融合区域注意力的段落式图像描述模型。第二个研究内容的成果是通过区域提议网络和区域注意力模块结合，实现对图像的高度语义理解，并将区域注意力模块融合到全卷积解码器中，提出了一种新模型Dual-CNN。区域注意力模块加强了图像和段落的语义对齐，生成段落描述更加详细。通过评测指标、段落多样度指标、区域注意力分析、主观评价等多种评价方法的验证，Dual-CNN提升了段落式图像描述任务上的性能。
+
+1.4 本文的组织结构
+
+本论文总共包含五章，每章的重点内容归纳如下，结构示意图如图1-5。
+
+第一章，绪论。首先介绍了段落式图像描述的相关研究背景及意义，并对研究现状进行综述，对目前段落式图像描述方法存在的问题进行了分析，最后概述了本文主要的研宄工作和成果。
+
+第二章，基础知识。介绍了本文涉及到的基础知识。首先介绍了几种深度学习基本模型，接下来介绍图像描述任务的基础编码器-解码器结构和注意力机制，最后概述了段落式图像描述数据集以及评价指标。
+
+第三章，基于全卷积神经结构的段落式图像描述方法。详细介绍了所提出的全卷积解码器，并提出了一种评价段落连贯性的指标。实验表明，全卷积解码器的训练时间复杂度小于传统方法，所生成的段落具有更好的连贯性。
+
+第四章，融合区域注意力的段落式图像描述模型。为提高图像理解能力，将区域提议网络、区域注意力机制融合到全卷积段落解码器中，提出了Dual-CNN。
+
+第五章，总结。对全文的主要研究内容进行了总结，并对未来研究方向进行了展望。
+
+第二章 基础知识
+
+2.1 深度神经网络模型
+
+2.1.1 卷积神经网络
+
+卷积神经网络(CNN)是一种特殊的前馈神经网络(Feedforward Neural Network, FNN)，因其在计算中使用了数学上的卷积操作而得名。CNN广泛应用于图像分类、图像分割、人脸识别等领域，是当今深度学习应用的前沿。典型的CNN通常由卷积层、池化层和激活层构成。卷积层通过卷积核在图像上以一定的步长滑动实施卷积操作，且卷积层的权重共享减少了计算量。池化层可降低数据的维度，使用广泛的池化方法有最大池化(Maximum Pooling)和平均池化(Mean Pooling)。激活层使用非线性激活函数增强网络的非线性特性，使用广泛的非线性激活函数包括Sigmoid函数、Tanh函数和线性整流单元(ReLU)。
+
+2.1.2 循环神经网络
+
+循环神经网络(RNN)代表了一系列带有信息自传递功能的神经网络家族，能够对时间序列类结构建模，例如文本、语音、信号等。RNN通过隐藏信息的传递进行信息记忆，但其难以捕捉长时信息，且训练存在梯度消失和爆炸问题。在此基础上提出了包含长时记忆单元的LSTM，LSTM能在一定程度上解决梯度消失和爆炸问题，并拥有一定的长时记忆能力。RNN的成功应用有编码器-解码器结构等。
+
+2.2 编码器-解码器结构
+
+2.2.1 概述
+
+近几年，无论是单句式图像描述研究，还是段落式图像描述研究，都围绕着端到端的编码器-解码器结构展开。该思路受启发于机器翻译任务的最新模型。这些模型利用RNN处理可变长度的待翻译文本，将其编码为固定维度的向量，再将该向量用RNN解码为翻译文本输出。而图像描述任务，可理解为将输入图像翻译为文本。因此在给定图像的情况下，很自然地使用类似的方法，利用CNN将图像编码为特征向量，再将该向量解码为文本。NIC是较开创性、有代表性的单句式图像描述模型，接下来根据该模型来介绍图像描述模型的基本框架。
+
+2.2.2 模型详述
+
+2.2.3 单词采样方法
+
+2.3 注意力机制
+
+2.4 数据集及评价指标
+
+2.4.1 段落式图像描述任务数据集
+
+本文介绍了段落式图像描述模型的基础知识，包括CNN、RNN和LSTM，以及基于CNN和RNN的图像描述基本结构。文章还介绍了注意力机制在图像描述任务中的实现细节，以及段落式图像描述的相关数据集和评价指标。
+
+在第三章中，文章提出了一种全卷积神经结构的CNN段落解码器，并详细描述了该解码器的结构。与传统的基于RNN的解码器相比，全卷积解码器具有更大的长时视野和记忆能力，更适合生成长文本。文章通过对比实验验证了所提模型的有效性。
+
+总体而言，本文对段落式图像描述模型的基础知识和关键技术进行了全面介绍，并提出了新的全卷积解码器结构，为该领域的研究提供了有益的参考。
+
+清洗后的内容如下：
+
+---
+
+道数量，输出通道数量为2*F，因此输出的向量维度为1X2F，该向量可视作两个维度为五的向量h和f的拼接，用公式表示如下：
+
+hf = Wa * lt + ba (3-6)
+
+t = Wb * lt + bb (3-7)
+
+其中，Wa、Wb为可学习的卷积核权重参数，ba、bb为可学习的卷积核偏置参数，符号*表示一维卷积操作符。
+
+此时值得注意的有两点。第一点，为确保卷积层只关注上文信息，需采用掩码机制(Mask Mechanism)，使卷积核中与下文信息进行计算的后半部分权重置为零。第二点，当卷积层深度为1时，卷积核的大小应不小于句子长度，以确保t时刻的视野大小等于t-I。但当I较大时，可采用堆叠多层卷积层的做法，通过卷积层的深度和卷积核的大小综合控制感受野的大小。
+
+接下来，在卷积层之后执行门控操作，得到门控卷积层的输出向量0t
+
+ot = σc(h*t) (3-8)
+
+其中，符号c表示Sigmoid激活函数，即σ(a) = 1/(1+e^-a)，符号⊙表示按位乘法操作符。向量if蕴含上文信息lt中的语义信息，起门控的作用，有选择地记住hf中的信息。
+
+然后，预测层将ot映射为词表上的概率分布wp
+
+wp = softmax(Mp * ot) (3-9)
+
+其中，Mp为可学习的全连接层权重参数。
+
+最后，根据wp在词表上进行采样，可选择的采样方式有最大概率采样和束搜索两种方法，得到t时刻的单词输出。当生成的单词为句子结束符时，停止生成，将所有生成的单词组合得到解码生成的句子。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息和乱码，保留了核心学术内容、技术术语和数据、原有的逻辑结构、公式和图表说明。
+
+本节介绍了实验的硬件和软件环境。硬件环境为GeForce GTX 1080Ti显卡。软件环境为采用Python编程语言的开源框架PyTorch。PyTorch是由Facebook公司开发的开源机器学习库，其计算可使用GPU进行加速，且带有自动微分系统，因此广受深度学习研究者青睐。一些参数设置如下。区域检测器所检测的区域个数L设定为50。区域特征向量初始维度U为4096，经全连接层压缩后的区域特征维度D为1024。词嵌入向量的维度E同样设定为1024。通过对比实验，采用集束搜索方法生成段落。其中束的大小设置为2。段落中最大句子数目设定为6，每句话的最大单词数设定为30。通过对卷积核大小的实验，句子CNN解码器中采用一层卷积，即深度为1，卷积核大小为6；词CNN解码器中采用7层卷积，即深度为7，每层的卷积核大小为5。损失函数中的两个系数；1-和4分别设置为5.0和1.0。整个模型使用Adam优化算法进行训练，学习率参数设置为1e-4。实验中依据算法在验证集上的表现确定超参数。
+
+表 3-3 平均Antecedent、平均Anaphora和平均Anaphora率对比
+
+| 模型 | 平均Antecedent | 平均Anaphora | 平均Anaphora率(%) |
+| --- | --- | --- | --- |
+| Hierarchical-RNN | 0.89 | 0.09 | 6.3 |
+| 全卷积解码器 | 0.92 | 0.13 | 8.4 |
+| 人类 | 0.90 | 0.18 | 11.4 |
+
+最后在整个数据集的段落上求平均，得到两种模型在数据集上的平均Antecedent、平均Anaphora和平均Anaphora率，同时计算了数据集的标签段落的这三个统计量，作为人类表现。结果如表 3-3所示。
+
+由表 3-3可看出，在人类和两种机器模型的平均Antecedent相差不大的前提下，人类的平均Anaphora和平均Anaphora率都要大于两种机器模型，这说明平均Anaphora和平均Anaphora率能够一定程度上反映出段落的连贯性。
+
+全卷积解码器的平均Anaphora比Hierarchical-RNN高出44.44%，平均Anaphora率高出33.33%，这在一定程度上可说明该解码器生成的段落具有更强的连贯性。
+
+3.3.5 时间复杂度对比与分析
+
+本章所提出的全卷积解码器的一大优势是它的两个组成部分：句子CNN解码器和词CNN解码器都能够被并行训练。相比之下，传统的层次-RNN解码器Hierarchical-RNN逐个生成段落中的单词，无法并行化。本小节首先分析训练这两种段落解码器的时间复杂度，再通过实际实验的训练时间对比来证实我们复杂度的分析。
+
+虽然不同段落是非等长的，但为分析方便起见，假设段落由m个句子组成，每个句子有n个单词，特征维度均为d。对Hierarchical-RNN而言，句子RNN和词RNN每层的复杂度分别为O(md^2)和O(mn^2d^2)。对全卷积段落解码器，假设句子CNN解码器和词CNN解码器的卷积核大小均为fc，r是词CNN中卷积层的个数。则句子CNN和词CNN的每层复杂度分别为O(fc^2md^2)和O(fc^2mnd^2)。传统的RNN解码器一次只能生成一个单词或句子的主题，因此句子RNN和词RNN分别需要O(m)和O(mn)的顺序操作。与此相比，全卷积段落解码器中，句子CNN和词CNN分别只需O(1)和O(r)的顺序操作。
+
+结合每层的复杂度和顺序操作复杂度，句子RNN的总时间复杂度为O(m^2d^2)，词RNN的总时间复杂度为O(m^2n^2d^2，那么Hierarchical-RNN的总时间复杂度也为O(m^2n^2d^2)。句子CNN的总时间复杂度为O(fc^2md^2)，词CNN的总时间复杂度为O(fc^2rmd^2)，那么全卷积段落解码器的总时间复杂度为O(fc^2rmd^2)。由于fc*r<m*n，因此与Hierarchical-RNN相比，我们提出的全卷积段落解码器具有更低的训练时间复杂度。
+
+为进一步验证我们模型的训练效率，首先对比两种模型训练一个轮次所分别花费的时间，然后对比两种模型的收敛时间。表 3-4展示了两种模型训练一个轮次花费的时间。所提模型比Hierarchical-RNN需要更少的轮次训练时间，仅为Hierarchical-RNN所需时间的34.20%。并且，所提模型具有更大规模的参数，为Hierarchical-RNN的4.14倍，这意味着全卷积段落解码器具有更强的学习能力。所提模型和Hierarchical-RNN每单位参数需要的训练时间分别为25.57s和2.00s。
+
+图3-8记录了两个模型的CIDEr得分与训练时间的关系，并以CIDEr值的收敛作为训练达到收敛的标准。由图可看出，所提模型训练收敛大约需要800秒，而Hierarchical-RNN大约需要3600秒。
+
+综上可以得出结论，相较于传统方法，所提出的全卷积段落解码器在具有更大参数的同时，训练的理论时间复杂度和实际时间消耗都更少。
+
+3.3.6 生成段落定性分析
+
+我们随机挑选测试集中的若干张图片，并将标签段落和两种模型生成的段落进行对比，如图3-9所示。
+
+表 3-4 参数规模和单Epoch训练时间对比
+
+| 模型 | 参数量(M) | 训练时间(s) | 每单位参数训练时间(s/M) |
+| --- | --- | --- | --- |
+| Hierarchical-RNN | 7 | 179 | 25.57 |
+| 全卷积解码器 | 29 | 58 | 2.00 |
+
+图3-8 CIDEr值随训练时间和轮次的变化
+
+3.3.7 卷积层参数探究
+
+卷积层的深度、卷积核大小的设置决定了CNN的感受野，对全卷积段落解码器的性能至关重要。本小节探宄词CNN中卷积层的深度和卷积核大小对指标得分的影响。
+
+当卷积层深度为1时，卷积核大小取5,10,15,20,25,30,35。由于句子的最大单词数为30，因此当卷积核大小大于30时，解码器的视野大小才可覆盖整个句子。在卷积核为15时，CIDEr值达到最高，之后随着卷积核的增加，CIDEr得分下降。卷积层深度过小，卷积核大小过大造成性能的下降。总体上，卷积层深度为1时，模型效果较为一般。当卷积层深度为3时，卷积核大小取7时CIDEr值最高，和深度取1时类似，此时解码器视野大小仍不足以覆盖整个句子。
+
+当卷积层深度为5、7、9时，模型分别在卷积核大小取7、5、3时达到最佳效果，此时解码器视野大小均在30左右。这说明当取适中的卷积层深度时，通过调整卷积核大小使得解码器视野覆盖整个句子是较合适的选择。
+
+当卷积层深度为1、3、5、7、9时，模型的最高CIDEr得分如表3-5所示。当深度取7，卷积核的大小取5时，CNN的性能最好。
+
+表3-5 CIDEr随卷积层深度变化的最佳值
+
+卷积层深度  CIDEr值
+1  14.8
+3  15.5
+5  15.7
+7  15.9
+9  15.7
+
+对于图像描述任务，束大小的设置对实验结果有重要的影响，本小节探究不同的束大小设置对全卷积段落解码器的评测指标得分影响。表3-6展示了束大小为1、2、3和4时，生成段落的评测结果。可以看出，当束大小为1时，由于单词采样的搜索空间过小，丢失了大量解码信息，错过了许多较优解，因此生成的段落质量不佳，指标得分较低。当束大小增加到2时，单词的搜索空间增大，更容易获得较优解，指标得分最高。而当束大小继续增大到3和4时，搜索空间的一个段落内的句子之间相似度快速增加，段落的质量快速下降，导致评测得分降低。并且，过大的束大小会导致解码的时间复杂度显著上升。综上分析，束大小取2是平衡训练效率和段落质量的较好选择。
+
+表3-6 评价指标随束大小变化
+
+束大小  CIDEr  BLEU-1  BLEU-2  BLEU-3  BLEU-4
+1  14.8  40.9  23.1  13.6  7.7
+2  15.9  41.3  23.9  14.1  8.2
+3  15.1  41.5  23.7  14.0  7.8
+4  13.7  40.4  22.3  12.8  7.5
+
+本章详细介绍了针对段落式图像描述任务的全卷积段落解码器。首先通过CNN解码器和RNN解码器的对比，阐明了本文使用卷积结构的动机。接下来介绍了全卷积解码器的两个组成部分：句子CNN、词CNN的详细实现，以及该模型的训练与推理过程，最后总结出了一个使用全卷积解码器生成段落的段落生成算法。
+
+在实验验证部分，通过评测指标得分、连贯性指标得分、时间复杂度以及主观评价四个方面综合证明了全卷积段落解码器的优势，该解码器在四项上的表现都超越了基线方法。在实验部分的最后，选取了具有代表性的两种超参数：卷积层参数和束大小，通过对比实验确定了参数的设置。
+
+在本小节，我们提出了种衡量段落内句子间多样度的指标，来验证区域注意力机制的作用。一个段落，其多样度定义为每两个句子对之间的加权BLEU-n分数。使用BLEU的原因是，相对于CIDEr，BLEU-n直接计算n元语法的共现度，当两句话之间的BLEU得分高时，说明这两句话之间的n元词组重复度高，更直观反映出两句话的重复度较高。一个段落有w句话，则句子对数共有m(m-l)/2对。对于一个句子对，其多样度计算方式如下：Sd = Σl-1 ΣrA BLEU-n(rA)。其中，表示BLEU-n值，为对应的权重。权重满足以下基本条件：yn ≥ 0 (n=1,...,l) 且 Σn=1 yn = 1。此外，我们启发式地增加以下两个式子来进一步确定权重：V1 = V4, V2 = 2A。其中，V1=0.15, V2=0.20, V3=0.30, V4=0.35。对段落内所有句子对的Sd值做简单平均，得到该段落的句子多样度。在实验中，我们记录了在第20个至第40个轮次之间，由Dual-CNN和Hierarchical-RNN在测试集上生成的段落的平均多样度，由图4-4所示。经过40个轮次的训练后，Dual-CNN和Hierarchical-RNN分别取得了93.7和90.6的分数。与Hierarchical-RNN相比，Dual-CNN与人类表现之间的差异减少了7.38%。因此，我们得出的结论是，我们的模型能在段落中生成更多样的句子，表现也更接近人类水平。
+
+第10部分内容：
+
+本章将区域提议网络、区域注意力机制和全卷积段落解码器结合，提出了Dual-CNN模型。我们详细介绍了Dual-CNN的结构，主要包括区域提议网络、融合区域注意力的句子CNN。在实验验证部分，通过评测指标得分、多样度指标得分、区域注意力效果分析以及主观评价四个方面综合证明了Dual-CNN的优势。
+
+清洗后的内容如下：
+
+Linguistics. Association for Computational Linguistics, 2012: 747-756. [19] Yan Y, Teo CL, Daumé III H, et al. Corpus-guided sentence generation of natural images [C]//Proceedings of the Conference on Empirical Methods in Natural Language Processing. Association for Computational Linguistics, 2011: 444-454. [20] Farhad I, Hejrati M, Sadeghi MA, et al. Every picture tells a story: Generating sentences from images [C]//European conference on computer vision. Springer, Berlin, Heidelberg, 2010: 15-29. [21] Hodosh M, Young P, Hockenmaier J. Framing image description as a ranking task: Data, models and evaluation metrics [J]. Journal of Artificial Intelligence Research, 2013, 47: 853-899. [22] Socher R, Karpathy A, Le QV, et al. Grounded compositionality for finding and describing images with sentences [J]. Transactions of the Association for Computational Linguistics, 2014, 2: 207-218. [23] Gong Y, Wang L, Hodosh M, et al. Improving image-sentence embeddings using large weakly annotated photo collections [C]//European conference on computer vision. Springer, Cham, 2014: 529-545. [24] Ordonez V, Kulikarni G, Berg T, et al. Im2text: Describing images using 1 million captioned photographs [C]//Advances in neural information processing systems. 2011: 1143-1151. [25] Ren S, He K, Girshick R, et al. Faster R-CNN: Towards real-time object detection with region proposal networks [C]//Advances in neural information processing systems. 2015: 91-99. [26] Papineni K, Roukos S, Ward T, et al. BLEU: a method for automatic evaluation of machine translation [C]//Proceedings of the 40th annual meeting on association for computational linguistics. Association for Computational Linguistics, 2002: 311-318. [27] Denkowski M, Lavie A. Meteor universal: Language-specific translation evaluation for any target language [C]//Proceedings of the ninth workshop on statistical machine translation. 2014: 376-380. [28] Vedantam R, Lawrence Zitnick C, Parikh D. Cider: Consensus-based image description evaluation [C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 4566-4575. [29] Johnson J, Karpathy A, Fei-Fei L. Densecap: Fully convolutional localization networks for dense captioning [C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2016: 4565-4574. [30] Kruse J, Johnson J, Krishna R, et al. A hierarchical approach for generating descriptive image paragraphs [C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2017: 317-325. [31] Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image recognition [J]. arXiv preprint arXiv:1409.1556, 2014. [32] Li X, Hu Z, Zhang H, et al. Recurrent topic-transition for visual paragraph generation [C]//Proceedings of the IEEE international conference on computer vision. 2017: 3362-3371. [33] Goodfellow I, Pouget-Abadie J, Mirza M, et al. Generative adversarial nets [C]//Advances in neural information processing systems. 2014: 2672-2680. [34] Chatterjee M, Schwinghammer J. Diverse and coherent paragraph generation from images [C]//Proceedings of the European conference on computer vision (ECCV). 2018: 729-744. [35] Wang Z, Liao Y, Li Y, et al. Look deeper: Depth-aware image paragraph captioning [C]//Proceedings of the 26th ACM international conference on multimedia. 2018: 672-680. [36] Che W, Fan X, Xiong R, et al. Paragraph generation network with visual relationship detection [C]//Proceedings of the 26th ACM international conference on multimedia. 2018: 1435-1443. [37] Melas-Kyriazi L, Rush A, Han G. Training for diversity in image paragraph captioning [C]//Proceedings of the 2018 conference on empirical methods in natural language processing. 2018: 757-761. [38] Hochreiter S, Schmidhuber J. Long short-term memory [J]. Neural Computation, 1997, 9(8): 1735-1780. [39] Cho K, Van Merrienboer B, Gulcehre C, et al. Learning phrase representations using RNN encoder-decoder for statistical machine translation [J]. arXiv preprint arXiv:1406.1078, 2014. [40] LeCun Y, Bottou L, Bengio Y, et al. Gradient-based learning applied to document recognition [J]. Proceedings of the IEEE, 1998, 86(11): 2278-2324. [41] Krizhevsky A, Sutskever I, Hinton G. ImageNet classification with deep convolutional neural networks [C]//Advances in neural information processing systems. 2012: 1097-1105. [42] Szegedy C, Liu W, Jia Y, et al. Going deeper with convolutions [C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2015: 1-9. [43] Glorot X, Bordes A, Bengio Y. Deep sparse rectifier neural networks [C]//Proceedings of the fourteenth international conference on artificial intelligence and statistics. 2011: 315-323. [44] Bahdanau D, Cho K, Bengio Y. Neural machine translation by jointly learning to align and translate [J]. arXiv preprint arXiv:1409.0473, 2014. [45] Long MT, Pham H, Manning CD. Effective approaches to attention-based neural machine translation [J]. arXiv preprint arXiv:1508.04025, 2015. [46] Krishna R, Zhu Y, Groth O, et al. Visual genome: Connecting language and vision using crowd-sourced dense image annotations [J]. International Journal of Computer Vision, 2017, 123(1): 32-73. [47] Chen X, Fang H, Lin TY, et al. Microsoft coco captions: Data collection and evaluation server [J]. arXiv preprint arXiv:1504.00325, 2015. [48] Anjaria J, Deshpande A, Schwing A. G. Convolutional image captioning [C]//Proceedings of the IEEE conference on computer vision and pattern recognition. 2018: 561-5570. [49] Wang Q, Chan AB. Cnn + cnn: Convolutional decoders for image captioning [J]. arXiv preprint arXiv:1805.00909, 2018. [50] Dauphin YN, Fan A, Auli M, et al. Language modeling with gated convolutional networks [C]//Proceedings of the 34th International Conference on Machine Learning-Volume 70. JMLR. org, 2017: 939-948. [51] Paszke A, Gross S, Chintala S, et al. Automatic differentiation in PyTorch [J]. 2017.
+
+李睿凡，梁昊雨，冯方向，张光卫，王小捷．基于全卷积神经结构的段落式图像描述算法[J]．北京邮电大学学报，2019，42（6）：DOI: 10.13190/2019-057．

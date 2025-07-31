@@ -1,0 +1,74 @@
+Entailment Method Based on Template Selection for Chinese Text Few-shot Learning
+
+Zeyuan Wang, Zhiyu Wei, Lihui Zhang, Ruifan Li, Zhanyu Ma
+School of Artificial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China
+E-mail: {wangzeyuan, zydotwei, elliot_zlh, rfli, mazhanyu}@bupt.edu.cn
+
+Abstract—The scarcity of labeled data hinders progress in numerous text-related tasks. Few-shot learning based on pre-trained language models has shown promise, with Entailment-based Few-shot Learning (EFL) being an effective approach by converting text classification into textual entailment. However, the performance is sensitive to manually selected templates. We address this by introducing a template selection mechanism using a masked language model to assess candidate templates. Our method is evaluated on FewCLUE shared tasks, with extensive experiments demonstrating its effectiveness.
+
+I. Introduction
+Pre-training and fine-tuning have become a dominant paradigm for solving various NLP tasks. While this strategy is powerful, real-world applications require high-quality annotations for diverse domains and languages, which can be costly. Models like GPT-3 can perform well with limited samples, but they are difficult to fine-tune and deploy. Cloze-based approaches like PET and LM-BFF reuse the Masked Language Model (MLM) head but may face performance limitations when task distributions differ. We choose MacBERT, a pre-training model, as our backbone and apply EFL to fine-tune specific tasks, transforming them into textual entailment tasks.
+
+II. Related Work
+A. Meta-learning
+Meta-learning has shown success in few-shot learning scenarios, including text classification, machine translation, and text generation. It can be categorized into optimization-based and metric-based approaches.
+
+B. Pre-trained Language Model
+Pre-trained models are used in few-shot learning to align downstream tasks with pre-training tasks, improving performance with limited samples. Methods vary based on pre-training tasks, such as cloze tasks and sentence-pair tasks.
+
+III. Methodology
+A. Pre-trained Backbone
+Mainstream pre-trained models in NLP range from unidirectional to bidirectional language models. MacBERT, a model optimized for Chinese pre-training, replaces BERT's MLM task with a correction task to reduce pre-training and fine-tuning discrepancies.
+
+B. Entailment Framework
+EFL can enhance a small-scale language model's few-shot learning capabilities by reformulating NLP tasks as textual entailment tasks.
+
+The Entailment-based Reformulation approach uses MacBERT as the framework for few-shot learning, transforming text classifications into textual entailment tasks. The input consists of two sentences: the original text and a template for each label, with the output being the entailment relationship between them. For training and inference in few-shot classification, it is essential to construct entailment tasks. We use cross-entropy loss for model fitting, with each text joined with multiple templates in a multi-classification task.
+
+Intermediate training with an entailment dataset like CMNLI can bridge the semantic gap between pre-trained models and downstream tasks. All downstream tasks reuse the encoder parameters during intermediate training. Template selection is crucial, as different templates significantly impact performance. We calculate the Masked Language Model (MLM) loss of template tokens and use the average loss as the template score to select the most appropriate template.
+
+Our approach includes task-dependent adjustments for various downstream tasks, including single-sentence classification, sentence pair classification, and reading comprehension tasks. Adjustments involve selecting templates for single-sentence tasks and redefining tasks using corresponding templates for reading comprehension tasks.
+
+Experiments were conducted on a range of datasets, and the results show the performance of different methods on test datasets.
+
+---
+
+We evaluate nine Chinese few-shot datasets of Few-CLUE, encompassing sentiment analysis, short text classification, long text classification, natural language inference, sentence similarity, Chinese cloze, and co-reference resolution. Each task provides five different training sets and a combined training set. The CMNLI dataset is used for intermediate training.
+
+Our experiments are conducted using the PyTorch framework and HuggingFace toolkit. We employ MacBERT large as the pre-trained language model for all tasks. During fine-tuning, we use the AdamW optimizer with a learning rate of 2 × 10−5, batch size of 8, max epochs of 10, and a dropout rate of 0.1. We randomly select k = 8 negative samples for non-entailment during training and generate N × M input data for N samples and M label descriptions during inference.
+
+Our entailment-based method is compared with various baselines using pre-trained networks. The results on the testing datasets of the nine NLP tasks show that the EFL method with automatic template selection outperforms other methods. EFL is more effective on sentence-pair tasks, while PET is better for single sentence classification. MacBERT-large consistently outperforms MacBERT-base.
+
+To demonstrate the effectiveness of our template choosing method, we evaluate the relationship between the masked language loss and template accuracy. The results show that as the loss decreases, the accuracy of prediction increases.
+
+In conclusion, our method for FewCLUE shared tasks integrates techniques such as pre-trained MacBERT, entailment templates, and template selection with SimBERT. Future work will explore self-supervised contrastive learning and graph convolutional networks. This work was supported by the National Key R&D Program of China.
+
+---
+
+Please note that some of the technical terms and dataset names (e.g., Few-CLUE, CMNLI, EFL, PET, SimBERT) have been preserved as they are integral to the academic content.
+
+---
+
+[9] M. Moradshahi, G. Campagna, S. J. Semnani, S. Xu, and M. S. Lam, “Localizing open-ontology QA semantic parsers in a day using machine translation,” arXiv preprint arXiv:2010.05106, 2020. 
+[10] Z. Chen, H. Eavani, W. Chen, Y. Liu, and W. Y. Wang, “Few-shot NLG with pre-trained language model,” in Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pp. 183–190, 2020. 
+[11] A. Nichol and J. Schulman, “Reptile: a scalable metalearning algorithm,” arXiv preprint arXiv:1803.02999, 2018. 
+[12] Z. Li, F. Zhou, F. Chen, and H. Li, “Meta-SGD: Learning to learn quickly for few-shot learning,” arXiv preprint arXiv:1707.09835, 2017. 
+[13] F. Sung, Y. Yang, L. Zhang, T. Xiang, P. H. Torr, and T. M. Hospedales, “Learning to compare: Relation network for few-shot learning,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pp. 1199–1208, 2018. 
+[14] M. E. Peters, M. Neumann, M. Iyyer, M. Gardner, C. Clark, K. Lee, and L. Zettlemoyer, “Deep contextualized word representations,” in Proceedings of NAACL-HLT, pp. 2227–2237, 2018. 
+[15] A. Radford, K. Narasimhan, T. Salimans, and I. Sutskever, “Improving language understanding by generative pre-training,” 2018. 
+[16] A. Radford, J. Wu, R. Child, D. Luan, D. Amodei, and I. Sutskever, “Language models are unsupervised multi-task learners,” 2019. 
+[17] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, “Bert: Pre-training of deep bidirectional transformers for language understanding,” in Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), pp. 4171–4186, 2019. 
+[18] K. Clark, M.-T. Luong, Q. V. Le, and C. D. Manning, “Electra: Pre-training text encoders as discriminators rather than generators,” arXiv preprint arXiv:2003.10555, 2020. 
+[19] Y. Sun, S. Wang, Y. Li, S. Feng, H. Tian, H. Wu, and H. Wang, “Ernie 2.0: A continual pre-training framework for language understanding,” in Proceedings of the AAAI Conference on Artificial Intelligence, vol. 34, pp. 8968–8975, 2020. 
+[20] Y. Liu, M. Ott, N. Goyal, J. Du, M. Joshi, D. Chen, O. Levy, M. Lewis, L. Zettlemoyer, and V. Stoyanov, “Roberta: A robustly optimized BERT pretraining approach,” arXiv preprint arXiv:1907.11692, 2019. 
+[21] Z. Yang, Z. Dai, Y. Yang, J. Carbonell, R. Salakhutdinov, and Q. V. Le, “XLNet: generalized autoregressive pretraining for language understanding,” in Proceedings of the 33rd International Conference on Neural Information Processing Systems, pp. 5753–5763, 2019. 
+[22] A. Conneau, R. Rinott, G. Lample, A. Williams, S. Bowman, H. Schwenk, and V. Stoyanov, “XNLI: Evaluating cross-lingual sentence representations,” in Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, pp. 2475–2485, 2018. 
+[23] A. Williams, N. Nangia, and S. Bowman, “A broad-coverage challenge corpus for sentence understanding through inference,” in Proceedings of the 2018 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pp. 1112–1122, 2018. 
+[24] J. Su, “Simbert: Integrating retrieval and generation into BERT,” tech. rep., 2020. 
+[25] L. Xu, H. Hu, X. Zhang, L. Li, C. Cao, Y. Li, Y. Xu, K. Sun, D. Yu, C. Yu, et al., “CLUE: A Chinese language understanding evaluation benchmark,” In Proceedings of the 28th International Conference on Computational Linguistics, pages 4762–4772., 2020. 
+[26] T. Wolf, L. Debut, V. Sanh, J. Chaumond, C. Delangue, A. Moi, P. Cistac, T. Rault, R. Louf, M. Funtowicz, J. Davison, S. Shleifer, P. von Platen, C. Ma, Y. Jernite, J. Plu, C. Xu, et al., “Transformers: State-of-the-art natural language processing,” in Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, pp. 38–45, Association for Computational Linguistics, Oct. 2020. 
+[27] I. Loshchilov and F. Hutter, “Decoupled weight decay regularization,” in International Conference on Learning Representations, 2019. 
+[28] Y. Ouali, C. Hudelot, and M. Tami, “Spatial contrastive learning for few-shot classification,” arXiv preprint arXiv:2012.13831, 2020. 
+[29] T. N. Kipf and M. Welling, “Semi-supervised classification with graph convolutional networks,” arXiv preprint arXiv:1609.02907, 2016.
+
+---

@@ -1,0 +1,139 @@
+The task of text-to-image synthesis involves generating photographic images based on given textual descriptions. Most current approaches rely on generative adversarial network (GAN) models and utilize global linguistic representations. However, these models face training difficulties due to the sparsity of global representations and lack fine-grained information in the generated images. To overcome this, we propose cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN), integrating local linguistic representations into GANs. Our CGL-GAN includes a generator for image synthesis and a discriminator to assess the conformity of images with text descriptions. The discriminator establishes cross-modal correlations by projecting image representations onto global and local linguistic representations. We use a hinge loss function for training and evaluate our model on the CUB and MS-COCO datasets. Experiments show that incorporating fine-grained local linguistic information and cross-modal correlation significantly enhances text-to-image synthesis performance, even for high-resolution images.
+
+Index Terms—Text-to-image synthesis, generative adversarial network (GAN), linguistic representation, cross-modal.
+
+The work presented here was supported by various funding sources, including the National Key R&D Program of China, the National Natural Science Foundation of China, and the Science and Technology Program of the Headquarters of State Grid Corporation of China.
+
+The introduction section of the paper outlines the challenge of text-to-image synthesis and the limitations of existing approaches based on GANs that rely on global linguistic representations. It highlights the need for addressing the instability of training and the production of nonsensical results when generating high-resolution images.
+
+In this article, we propose cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN) for text-to-image synthesis. Our model incorporates a generator and discriminator, where the discriminator assesses the semantic consistency between generated images and textual descriptions. We utilize a hinge loss function for training the CGL-GAN model.
+
+Our approach is evaluated on the CUB and MS-COCO datasets, with extensive experiments on the use of global and local linguistic representations. The CGL-GAN model demonstrates comparable performance with fewer trainable parameters than state-of-the-art methods and outperforms single-GAN models. Variants of the cross-modal projection block are experimented with, highlighting the importance of appropriate correlation between visual and linguistic representations.
+
+The article is structured as follows: Section II reviews related works on GANs and text-to-image synthesis. In Section III, we detail our model, including the text encoder, generator, discriminator, and loss function. Section IV covers datasets and experimental results, while Section V concludes the article and suggests future directions.
+
+II. RELATED WORK
+
+A. Generative Adversarial Networks
+GANs, which have gained significant interest, are generative network models involving a minimax game between a generator and discriminator. The primary objective is to optimize the value function V for both players. The seminal work by Goodfellow et al. introduced GANs, with subsequent studies improving on the framework, including the use of supervised information, training stability, and methods to ensure Lipschitz continuity.
+
+B. Text-to-Image Synthesis
+---
+
+---
+
+Recently, text-to-image synthesis has gained attention. Unlike conventional image synthesis tasks that use label information with GANs, text-to-image synthesis relies on textual descriptions. Reed et al. introduced a conditional GAN-based network for this purpose. Two main challenges exist in this task: generating high-quality images and constructing plausible spatial relationships among objects.
+
+Zhang et al. addressed the first challenge by decomposing the task into manageable subproblems using a sketch-refinement process with multiple GANs. Subsequent works improved on this, with models like the end-to-end tree architecture and hierarchical-nested adversarial objectives. Attention-driven methods also enhanced fine-grained details in generated images.
+
+For the second challenge, incorporating additional information such as bounding boxes and location information has been explored. Techniques like semantic graphs and object-driven attention mechanisms have been introduced to improve the generation of complex images and object relationships.
+
+III. MODEL
+
+A. Overview
+Our proposed model, CGL-GAN, consists of three main components: a text encoder, a generator, and a discriminator. The text encoder converts textual descriptions into global and local linguistic representations. The generator takes global linguistic information and random Gaussian noise to produce images. The discriminator assesses whether images are real and match the textual descriptions, utilizing a cross-modal projection block. We use a hinge loss function for training.
+
+B. Text Encoder
+We use a bidirectional LSTM to capture dependencies between words in a sentence. Local representations are formed by combining hidden states of each word, while the global representation is the last hidden state. The text encoder is a pre-trained bidirectional LSTM, frozen during training.
+
+C. Generator
+Our generator uses up-sampling blocks and conditional normalization layers. Each up-sampling block includes ResNet-based convolutional layers and nearest-neighbor upsampling. Conditional normalization incorporates global linguistic information into the feature maps. Parameters for scaling and translating are obtained through a fully-connected layer using concatenated global linguistic representations and random noise.
+
+---
+
+To generate the pixel distribution of the target image, the generator decodes from a specific probability distribution. We input a set of random noise Z = {z0, z1, ..., zNG} with a standard multi-dimensional Gaussian distribution (zi ∼N(0, E)) into the generator. The random noise z0 is reshaped as the initial feature map and fed into the first up-sampling block u1. Subsequently, each remaining random noise {zi}NGi=1 is concatenated with the global linguistic representation yG and integrated into the corresponding up-sampling block ui through conditional normalization. A convolutional layer decodes high-dimensional feature maps from uNG into a three-dimensional RGB image. Spectral normalization is applied to all generator weights to regularize the Lipschitz constant.
+
+The discriminator serves two roles: distinguishing real from fake images and assessing semantic correlation between images and textual descriptions. It comprises down-sampling blocks based on ResNet and a cross-modal projection block (CPB). The CPB captures semantic correlations between visual and linguistic representations by projecting the last two layer feature maps onto the global and local linguistic representations, using matrix multiplication and element-wise multiplication, respectively.
+
+The cross-modal projection operations are defined by the following equations:
+
+P(vND−1, yL) = fa1(vND−1) × yL + fa2(vND−1),
+Q(vND, yG) = fb1(vND) ⊙ yG + fb2(vND),
+
+The discriminator output is expressed as:
+
+D(I, yL, yG) = 1/NP ΣiP + 1/NQ ΣjQ,
+
+where the CPB feeds both linguistic representations as conditional information into the GAN discriminator. Four variants of CPB forms are considered, with CGL-GAN-LG adopted in our model.
+
+For loss function, a hinge loss is designed to train our CGL-GAN, which has been shown to converge efficiently to a Nash equilibrium:
+
+L(G, D) = 
+- ΣD(IR, yG, yL), if D(IR, yG, yL) < 1
+- Σ[1 + D(G(z, yG), yG, yL)], if D(G(z, yG), yG, yL) < -1
+
+After training, the discriminator is discarded, and only the generator is used for image generation from textual descriptions.
+
+In Section IV, we evaluate our model on the text-to-image synthesis task using the CUB and MS-COCO datasets, describe the evaluation protocol, baseline methods, implementation details, report experimental results, and provide an analysis of the CPB module.
+
+---
+
+We evaluate our approach using two publicly available datasets: CUB [38] and MS-COCO [39]. The CUB dataset, Caltech-UCSD Birds-200-2011, consists of 11,788 bird images across 200 categories, partitioned into training and testing subsets of 8,855 and 2,933 images, respectively. Each image is accompanied by ten descriptive sentences based on the bird's colors and characteristics. We preprocess the images to ensure object-image size ratios exceed 0.75. MS-COCO, in contrast, contains images of multiple objects and diverse backgrounds, with 80,000 and 40,000 images in the training and testing sets, respectively, and each image annotated with five descriptive sentences.
+
+For evaluation, we use the Inception score [40] and Fréchet Inception Distance (FID) [41]. The Inception score assesses the clarity and diversity of generated images, using Kullback-Leibler divergence. The FID metric measures the quality of generated images by comparing their distribution to real images.
+
+Our baseline models for comparison include GAN-INT-CLS [1], GAWWN [2], StackGAN [3], StackGAN-V2 [4], HDGAN [5], AttnGAN [6], MirrorGAN [7], and Obj-GAN [8]. These models vary in their architecture, from single GAN frameworks to multiple GANs and attention mechanisms.
+
+In our CGL-GAN model, we use local linguistic representations as conditional information for a single GAN discriminator, without an attention mechanism. We provide implementation details and hyper-parameter settings for our model's training process.
+
+---
+
+We introduce the hyper-parameters for the text encoder, generator, and discriminator. For the CUB dataset, the text encoder's hyper-parameters are set to 18 words and a 256-dimensional word embedding. For the MS-COCO dataset, these parameters are set to 16 and 256, respectively. The generator's hyper-parameter, the number of up-sampling blocks NG, is set to 5 for both 256 × 256 and 128 × 128 image generations. Similarly, the discriminator's hyper-parameter, the number of down-sampling blocks ND, is set to 5 for 256 × 256 images and 4 for 128 × 128 images. We use a 3 × 3 convolutional kernel with a stride of 1 in both the generator and discriminator.
+
+For a fair comparison, we adopt the pre-trained bidirectional LSTM from the AttnGAN model for our text encoder. We train our models using the Adam optimizer with a learning rate of 0.0001 and coefficients β1 and β2 set to 0 and 0.9, respectively. The generator and discriminator are updated simultaneously. Our implementation is on the PyTorch platform with an NVIDIA GeForce GTX 1080Ti GPU. The source code is publicly available.
+
+In the quantitative evaluation, we compare Inception scores and FIDs of baseline models and our proposed CGL-GAN model on the CUB and MS-COCO datasets. Our CGL-GAN model achieves a performance comparable to baseline models, often surpassing those without an attention mechanism on the CUB dataset and significantly outperforming them on the MS-COCO dataset. The scale of trainable parameters in our model is generally one order of magnitude smaller than that of baseline models. We further demonstrate the effectiveness of our single-discriminator model by comparing Inception scores with modified multiple-discriminator models where all but one discriminator are removed.
+
+---
+
+As demonstrated in Table II, our model achieves higher Inception scores on the CUB dataset compared to state-of-the-art methods not utilizing multiple discriminators. Our proposed model exhibits a 27.43% improvement in Inception score over GAN-INT-CLS, increasing from 2.88 to 3.67. This indicates our model's effectiveness in generating high-resolution images based on text descriptions, showcasing the benefits of incorporating both local and global linguistic representations in GANs.
+
+In the qualitative evaluation, our models with different hyperparameter settings are assessed on the CUB and MS-COCO datasets. Examples illustrate that our CGL-GAN model generates more realistic images than GAN-INT-CLS, GAWWN, StackGAN, and StackGAN-V2. For the MS-COCO dataset, our model produces images that are closer to real images, capturing fine-grained details that StackGAN fails to represent.
+
+An interesting observation is the discrepancy between the higher Inception score of StackGAN and the more realistic images generated by our model. This could be attributed to the limitations of the Inception score as a metric and the insufficient diversity of images produced by our model. Diversity is crucial for Inception scores, and while our images are of high quality, they may lack the variety needed for higher scores.
+
+The training process progression is visualized in Fig. 6, showing increasingly clearer images with more iterations. Initially, the images are mere color blocks, but as training progresses, the generator learns to incorporate details from the textual descriptions.
+
+In the CPB analysis, we compare four variants of our CPB module on the CUB dataset. The results in Table III show that the variant combining global and local linguistic representations (CGL-GAN-LG) achieves the highest Inception score and the lowest FID, indicating the rationality of our CPB module design.
+
+---
+
+Fig. 6 illustrates the generation of image examples by our model across successive iterations. The top indicates the iteration numbers, followed by text descriptions and their corresponding synthesized images. This process demonstrates that the quality of generation improves with increasing iterations. The images have a resolution of 256 × 256.
+
+The performance of variants CGL-GAN-OG is barely recognizable, indicating that these variants cannot stably train their generators using the returned gradients. In contrast, variants conditioned on both global and local linguistic representations provide better gradients for training their generators. This experiment highlights the significant role of our proposed Control Population Block (CPB) in enhancing text-to-image synthesis models.
+
+We note that the Inception scores and FID of CGL-GAN-LG are slightly better than those of CGL-GAN-GL. The only difference between these models is the alignment of the granularity of text and image representations. CGL-GAN-LG aligns these representations with analogous granularity, which achieves better results.
+
+In the discriminator, we evaluate the alignment of the down-sampled feature map v4 with the local linguistic representation yL. Feature maps from earlier layers represent edges and angles, while those from later layers represent parts and objects. We consider the last two layers most likely to form semantic concepts used for aligning linguistic representations. Due to the larger size of feature maps from earlier layers, a fully-connected layer in a similar CPB would require more parameters and make GAN training stability difficult. Therefore, we align the local linguistic representation with the second-to-last feature map and the global linguistic representation with the last feature map, demonstrating that effective alignment of visual and linguistic representations can improve overall performance.
+
+In conclusion, our study explores the use of both global and local linguistic representations for text-to-image synthesis by proposing a high-resolution synthesis model. The extensive experiments show that incorporating these representations significantly improves the performance of models generating high-resolution images. Compared to leading models based on multiple GANs, our model achieves comparable Inception scores and FIDs with fewer trainable parameters.
+
+Future work includes stacking our GANs to generate higher-resolution images and incorporating mechanisms such as attention or spatial information to further improve model performance.
+
+---
+
+[21] J.J. Zhao, M. Mathieu, and Y. Lecun, “Energy-based generative adversarial networks,” in Proc. Int. Conf. Learn. Representations, 2017. [Online]. Available: https://openreview.net/forum?id=ryh9pmcee 
+[22] D. Berthelot, T. Schumm, and L. Metz, “BEGAN: Boundary equilibrium generative adversarial networks,” 2017. [Online]. Available: https://arxiv.org/abs/1703.10717 
+[23] A. Odena, C. Olah, and J. Shlens, “Conditional image synthesis with auxiliary classifier GANs,” in Proc. Int. Conf. Mach. Learn., 2017, pp. 2642–2651. 
+[24] J. Song et al., “Binary generative adversarial networks for image retrieval,” in Proc. 32nd AAAI Conf. Artif. Intell., 2018, pp. 394–401. 
+[25] T. Miyato and M. Koyama, “cGANs with projection discriminator,” in Proc. Int. Conf. Learn. Representations, 2018. [Online]. Available: https://openreview.net/forum?id=ByS1VpgRZ 
+[26] M. Arjovsky, S. Chintala, and L. Bottou, “Wasserstein GAN,” 2017. [Online]. Available: https://arxiv.org/abs/1701.07875 
+[27] I. Gulrajani, F. Ahmed, M. Arjovsky, V. Dumoulin, and A. C. Courville, “Improved training of Wasserstein GANs,” in Proc. Advances Neural Inf. Process. Syst., 2017, pp. 5767–5777. 
+[28] T. Miyato, T. Kataoka, M. Koyama, and Y. Yoshida, “Spectral normalization for generative adversarial networks,” in Proc. Int. Conf. Learn. Representations, 2018. [Online]. Available: https://openreview.net/forum?id=B1QRgziT 
+[29] S. Hong, D. Yang, J. Choi, and H. Lee, “Inferring semantic layout for hierarchical text-to-image synthesis,” in Proc. IEEE Conf. Comput. Vision Pattern Recognit., 2018, pp. 7986–7994. 
+[30] J. Johnson, A. Gupta, and L. Fei-Fei, “Image generation from scene graphs,” in Proc. IEEE Conf. Comput. Vision Pattern Recognit., 2018, pp. 1219–1228. 
+[31] W. Xu, S. Keshmiri, and G. R. Wang, “Adversarially approximated autoencoder for image generation and manipulation,” IEEE Trans. Multimedia, vol. 21, no. 9, pp. 2387–2396, Sep. 2019. 
+[32] Y. Guo et al., “Auto-embedding generative adversarial networks for high resolution image synthesis,” IEEE Trans. Multimedia, vol. 21, no. 11, pp. 2726–2737, Nov. 2019. 
+[33] A. Brock, J. Donahue, and K. Simonyan, “Large scale GAN training for high fidelity natural image synthesis,” in Proc. Int. Conf. Learn. Representations, 2019. [Online]. Available: https://openreview.net/forum?id=B1xsqj09Fm 
+[34] H. De Vries et al., “Modulating early visual processing by language,” in Proc. Advances Neural Inf. Process. Syst., 2017, pp. 6594–6604. 
+[35] K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” in Proc. IEEE Conf. Comput. Vision Pattern Recognit., 2016, pp. 770–778. 
+[36] J. H. Lim and J. C. Ye, “Geometric GAN,” 2017. [Online]. Available: https://arxiv.org/abs/1705.02894v1 
+[37] C. Wah, S. Branson, P. Welinder, P. Perona, and S. Belongie, “The caltech-UCSD birds-200-2011 dataset,” California Institute of Technology, Tech. Rep. CNS-TR-2011-001, 2011. [Online]. Available: http://www.vision.caltech.edu/visipedia/CUB-200-2011.html 
+[38] T.-Y. Lin et al., “Microsoft COCO: Common objects in context,” in Proc. Eur. Conf. Comput. Vision, 2014, pp. 740–755. 
+[39] T. Salimans et al., “Improved techniques for training GANs,” in Proc. Advances Neural Inf. Process. Syst., 2016, pp. 2234–2242. 
+[40] M. Heusel et al., “GANs trained by a two time-scale update rule converge to a Nash equilibrium,” in Proc. Advances Neural Inf. Process. Syst., 2017, pp. 6626–6637. 
+[41] D. P. Kingma and J. Ba, “Adam: A method for stochastic optimization,” in Proc. Int. Conf. Learn. Representations, 2015. [Online]. Available: https://iclr.cc/archive/www/doku.php?id=iclr2015:accepted-main.html 
+
+Ruifan Li, Ning Wang, Fangxiang Feng, Guangwei Zhang, Xiaojie Wang
+
+---

@@ -1,0 +1,358 @@
+基于知识增强的方面级情感分析研究及应用
+
+摘要
+
+方面级情感分析旨在预测文本中每个方面的情感极性，是自然语言处理领域的前沿研究之一。其中，方面词情感分析和方面类别情感分析是最重要的两个子任务，主要区别在于预测对象是否显式地存在于句子之中。近年来，图神经网络在方面级情感分析领域取得了较优效果。然而，大多数方法的性能提升有限，主要原因在于对外部知识利用不充分，对句中概念词与方面类别关系构造不合理，以及对句法结构和语义关系互补性的建模缺失。
+
+针对以上问题，本文开展了如下工作：
+
+1. 针对方面词情感分析任务，提出一种情感感知的双通道图卷积神经网络模型，其中双通道分别为语法通道和语义通道。在语法通道中，利用依存句法分析方法捕获句子的语法结构，得到原始的句法依存树矩阵，然后利用SenticNet中词的情感数值构建句子的情感值矩阵，以对原始矩阵增强情感知识，另外使用词性知识构建词性知识矩阵，对句法依存树矩阵进一步增强；在语义通道中，将基于ConceptNet知识库训练的词向量与经过BLSTM编码的隐向量融合，对词语进行知识语义增强。最终解决了语法、语义通道对外部知识利用不足的问题。
+
+2. 针方面类别情感分析任务，提出一种知识增强的多通道图卷积神经网络模型，其中多通道分别为知识通道、语法通道和语义通道。在知识通道中，利用基于WordNet的相似度函数计算方面类别与句子上下文之间的语义相似度，进而得到与方面类别相关的相似度矩阵，解决了方面类别与句中相关概念词关系的捕获和利用不合理的问题；在语法和语义通道中，分别使用句法依存分析和自注意力机制构建对应的邻接矩阵，设计基于注意力的特征融合模块，融合语法和语义通道的特征，解决了模型对句法结构和语义关系互补性的建模缺失问题。
+
+3. 设计并实现了面向评论的方面级情感分析系统，该系统由用户信息管理模块、模型管理模块和情感分析与可视化模块组成。该系统平台无关、用户友好，允许用户进行可视化参数配置、模型训练以及对文本进行方面级情感分析。
+
+关键词：方面级情感分析，方面词情感分析，方面类别情感分析，图卷积神经网络，知识增强
+
+5.4.4 情感分析与可视化模块实现
+5.5 系统测试
+5.5.1 功能件测试
+5.5.2 非功能性测试
+5.6 本章小结
+第六章 总结与展望
+6.1 工作总结
+6.2 工作展望
+参考文献
+
+第一章 绪论
+1.1 研究背景及其意义
+1.2 国内外研究现状
+1.2.1 文本情感分析
+1.2.2 文本方面级情感分析
+
+越来越多的研究发现，对于许多自然语言处理任务，仅依靠句子内部信息编码得到的特征无法解决特定问题。因此，一些研究开始利用外部知识库对特定任务，甚至预训练语言模型进行不同方式的知识增强。例如，Zhou等人将SenticNet作为常识知识库引入方面词情感分析任务中，通过图卷积神经网络同时融合语法与知识信息，对句法依存矩阵进行知识增强。Zhang等人将知识图谱的结构化信息引入预训练语言模型Bert，对模型进行知识实体层面的掩盖处理，使模型学到更多的语义知识。对于ATSA任务，Liang等人提出Sentic-GCN模型，在利用句法依存树的基础上引入了SenticNet，利用SenticNet中的情感信息对句法依存树做情感语义的增强。对于ACSA任务中方面类别不显式出现在句子中的情况，通过句子内部的结构和语义挖掘方面类别词和句中相关词之间的语义关系十分困难。Liang等人提出AA-GCN模型，利用外部知识库中先验Beta分布的统计特征来计算其句子中词语对方面类别的重要性，从而达到知识增强的目的。综上所述，对于方面词情感分析和方面类别情感分析两个任务而言，如何同时利用好语法和语义信息，更好地利用外部知识对语法和语义信息进行知识增强仍然面临挑战。
+
+长短期记忆网络(LSTM)是一种带有门控机制的循环神经网络，利用三个不同的门控机制，可以选择输入、存储以及输出的信息。LSTM的结构如图2-4所示。
+
+图2-4 LSTM模型结构
+
+设t时刻输入为xt，隐状态表示为ht，额外引入的细胞状态(Cell State)为Ct，LSTM的前向过程如下所示：
+
+1. ft = σ(Wfxt + Uhft-1 + bf)
+2. it = σ(Wixt + Uhit-1 + bi)
+3. Ct = tanh(Wcxt + Uht-1 + bc)
+4. Ct = ft * Ct-1 + it * Ct
+5. ht = ot * tanh(Ct)
+
+其中，W和U为可学习的参数矩阵，b为可学习的偏置向量，σ代表逐元素乘积。ft为遗忘门，it为输入门，ot为输出门。遗忘门为一个在0到1之间的数值，用于选择性遗忘细胞状态中保留的信息，决定保留或遗忘细胞状态中的信息。输入门为一个在0到1之间的数值，用于将新的信息选择性地记录到细胞状态中，决定更新什么数值。输出门为一个在0到1之间的数值，用于确定细胞状态的哪个部分将输出。
+
+图2-5 图卷积神经网络(GCN)
+
+图卷积神经网络(GCN)是将卷积操作迁移使用在图结构的数据上，通过卷积的方式获取每个节点的邻居节点的信息，即每个节点的空间特征，最终来更新图中每个节点或图的向量表示。
+
+在GCN学习过程中，不仅要为模型输入每个节点的特征向量表示，还要输入节点之间的连接关系，即邻接矩阵。如图2-5所示，对于堆叠多层的GCN模型，每层的映射关系表示如下：
+
+Hl+1 = f(Hl, A)
+
+其中，Wl为第l层神经网络的权重矩阵，f为非线性的激活函数。
+
+进一步地，通过加入节点度的对角矩阵，对上述模型中邻接矩阵A进行归一化操作，如下所示：
+
+D = diag(d1, d2, ..., dn)
+A' = D-1/2AD-1/2
+
+其中，D也称为图的拉普拉斯矩阵。
+
+注意力机制(Attention)机制，指对模型的各个输入项都有关注，即对各个输入项的权重设定在0到1之间。换句话说，该机制关注输入的全局信息，对某些部分关注的多，对某些部分关注的少。注意力机制通过注意力分布来加权求和融合各个输入向量，计算公式如下：
+
+αi = softmax(score(xi, q)) = exp(score(xi, q)) / Σj exp(score(xj, q))
+
+其中，score(xi, q)为打分函数，计算方式主要包括加性算法、点积算法、缩放点积算法和双线性算法。
+
+加性算法计算公式如下：
+
+score(x, q) = V^T tanh(Wx + Uq)
+
+点积算法计算公式如下：
+
+score(x, q) = x^T q
+
+缩放点积算法对注意力分布进行平滑处理，计算公式如下：
+
+score(x, q) = (x^T q) / √d
+
+双线性算法是一种泛化点积模型，在计算时引入了非对称性，计算公式如下：
+
+score(x, q) = (Ux) (Vq)
+
+在上述公式中，d是输入向量的维度，V、U和K是可学习的参数。
+
+自注意力(Self-Attention)机制通过计算输入项内部的相关性，经过输入项内部得到不同部分的不同重要程度，从而对模型的各个输入项赋予不同的注意力权重。在自注意力机制中，查询项可以由输入信息本身经过计算后得到。模型读到输入信息后，根据输入信息本身决定当前最重要的信息。
+
+如图2-6所示，自注意力机制往往采用查询项-值项(Quey-Value)的模式，且(x, y)为相同的输入特征，计算公式如下：
+
+Attention(Q, K, V) = softmax(score(Q, K))V
+
+其中，Q、K和V分别代表查询项、键项以及值项。L为序列长度，d为查询向量和键值向量的维度。自注意力机制在处理长序列输入时，具备并行计算的能力。
+
+预训练语言模型(PTMs)成为近年来人工智能以及自然语言处理领域技术发展史上的一个突破。训练语言模型的过程无需人工标注好的数据，是一个无监督的学习过程。预训练语言模型通过特定的语言任务对语言模型进行训练，可以有效地从大量的数据中获取知识，并将学习到的知识存储到大量的参数中。这些参数可以作为下游任务模型的初始化参数，然后在预训练好的大模型之上针对特定下游任务对初始化参数进行微调——这直接催生出了“预训练-微调”范式。
+
+Transformer由编码器和解码器两个部分组成。其中，编码器由6个相同的层构成，每层通过多头自注意力机制模块和全连接前向网络模块进行实现。此外，残差网络(Residual Connection)和层标准化(Layer Normalization)用于每一层。Transformer的编码器重要组件如下：
+
+1. 多头注意力机制(Multi-Head Attention)
+2. 位置编码(Positional Encoding)
+3. 前向神经网络(Feed Forward Network)
+
+解码器和编码器的结构类似，但在文本解码器中，多头注意力需要引入一个掩码矩阵(Mask)，引入掩码的多头注意力机制记为Masked Multi-Head Attention。
+
+BERT由多层双向Transformer编码器堆叠而成。其中，自注意力机制(Self-Attention)是整个编码器的核心部分，通过自注意力机制模型不仅可以捕获自身的信息，也可以关注并捕获到文本中其他词的信息。
+
+BERT在大量无标注文本上通过两个无监督语言任务完成对模型预训练。一个是掩码语言模型(Masked Language Model)，采用了类似完形填空的双向语言建模思想，即通过[MASK]周围的上下文语境词来预测[MASK]位置的单词。另一个是下一个句子预测(Next Sentence Prediction)任务。训练样本中有50%的正样本，它们来自自然文本中相邻的两个句子，构成“相关”关系；另外50%的数据为负样本，即将两个句子中的后句替换为语料库中任意一个其他句子，构成“不相关”关系。
+
+BERT同样采用了预训练-微调的训练范式。首先，在大量的无标注文本语料上进行预训练。接着，在具体的下游任务对预训练模型进行微调。
+
+第5部分内容：
+
+2.5.3 GPT
+
+GPT（Generative Pre-Training，GPT）是OpenAI在2018年提出的一种生成式预训练模型。如图2-10所示，GPT模型由12个Transformer中的解码器模块经修改后组成，代替了传统的LSTM网络。GPT在解码器端采用了Masked Multi-Head Attention的方式来避免预测当前词时会看见后面的词，是一个单向语言模型。GPT的整体结构如图所示：
+
+图2-10 GPT模型架构
+
+如图2-11所示，对于不同类型的下游任务，对输入给模型的数据进行适当的改造，就可以利用预训练阶段产出的初始化好的模型参数，实现快速的在下游任务中微调，大大提高了下游任务的训练效率。
+
+图2-11 下游任务数据改造
+
+GPT很适合完成生成式任务。
+
+2.6 知识表示技术
+
+目前，知识以三元组的形式存储在知识库中，其中h表示头实体，r表示联系，t表示尾实体。知识表示学习就是通过基于深度学习的表示学习方法，将知识图谱中的三元组知识编码为低维稠密的分布式表示。通过知识表示学习，知识以低维向量的形式分布在语义向量空间中，方便对知识进行度和语义相似度计算。两个向量在空间中的距离越近，则这两个知识在语义上越相似。
+
+一个知识三元组的可信度有两类方法：平移距离和语义匹配。基于此，衍生出基于平移距离和语义匹配两种打分函数。基于这两种打分函数，知识表示学习方法包括了基于平移的方法和基于语义的方法。常用模型包括TransE、TransH等等都输基于平移的方法。这种方法从三元组的结构出发学习知识图谱中实体和联系，而RESCAL、DistMult等方法是基于语义的方法，该方法利用文本语义来学习知识图谱中的实体和联系。
+
+2.7 本章小节
+
+本章节介绍了方面词情感分析任务和方面类别情感分析任务涉及到的背景知识及相关技术。详细介绍了词向量表示技术、循环神经网络、图神经网络、注意力机制、预训练语言模型和知识表示技术在内的基础理论和关键技术。
+
+本文提出了一种基于词性的矩阵增强方法，用于对带有情感语义信息的语法依存树进行语义增强。首先，根据上文所述，模型需要关注可能含有情感含义的词，即形容词、副词和动词。本文预先设置了一个需要关注的词性表N=[形容词、副词、动词]。对于任意词对<Wi,Wj>，如果Wi和Wj的词性在词性表中，则S(i,j)=1；否则S(i,j)=0。基于情感知识和词性知识增强后的邻接矩阵如图3-4所示，具体按照算法2进行构建，计算表达式如下：Aij=Di,j * (SentiNet(Wi) + SentiNet(Wj) + Py + 1)。其中，Di,j是原始的依存矩阵，SentiNet(Wi)和SentiNet(Wj)是Wi和Wj的情感语义信息，Py是词性增强信息。本文通过算法2将经过知识增强的矩阵转化为图结构，表示为邻接矩阵。知识增强的语法图卷积神经网络将基于邻接矩阵作为图结构，将经过Bi-LSTM编码过的隐藏状态作为图中节点的初始化表示，通过KSyn-GCN对节点表示进行更新，得到基于知识增强的语法感知通道的最终表示。
+
+第三章 情感感知的双通道图卷积神经网络的方面词情感分析研究
+
+3.6.5 结果分析
+
+表3-2展示了相关模型方法在不同数据集的性能结果。实验主要结果如表3-2所示，除了使用Bert进行编码的模型Bisyn-GAT，SADC-GCN在三个数据集上准确率和F1值指标超过了其他非Bert的方法，取得了较好的效果。基于Bert编码的SADC-GCN+Bert在三个数据集上取得了与现有最新方法可比较的性能。
+
+3.6.6 消融实验与分析
+
+SADC-GCN模型主要包括语义通道，语法通道。为了进一步分析SADC-GCN模型的各个组件的有效性，本文进行了以下消融实验分析。消融实验结果如表3-3所示，对比方法如下：
+
+1) SADC-GCN w/o KSyn-GCN表示完整模型中不含Syn-GCN模块。
+
+2) SADC-GCN w/o KSem-GCN表示完整模型中不含Sem-GCN模块。
+
+3) SADC-GCN w/o sentic&ps表示完整模型中不含情感增强方法和词性增强方法。
+
+4) SADC-GCN w/o sentic表示完整模型中不含情感增强方法。
+
+5) SADC-GCN w/o ps表示完整模型中不含词性增强方法。
+
+6) SADC-GCN w/o we表示完整模型中不含词向量增强方法。
+
+3.6.7 图卷积层数影响
+
+为进一步研究SADC-GCN模型中GCN层数的影响，本文在Restaurant-14数据集上评估了本文提出的SADC-GCN模型，并且将GCN层数设置在{1,2,3,4,5,6,7}层的范围内。实验结果表明，2层的KSyn-GCN和2层的KSem-GCN是最佳的参数组合。
+
+3.6.8 案例分析
+
+表3-4展示了3个从测试集中挑选的例子，positive、negative分别表示正向、负向情感极性。从表中可以看出，本文提出的模型SADC-GCN能很好地对句子中方面词的情感极性做出准确的预测。
+
+3.7 本章小结
+
+本章对ATSA任务及当前模型存在的问题进行了研究，提出一种情感感知的双通道图卷积神经网络模型框架SADC-GCN。随后详细介绍了该模型的核心模块：基于知识增强的语法通道模块、基于知识增强的语义通道模块。实验结果表明，本文提出的模型SADC-GCN在方面词情感分析任务上的有效性。
+
+概念节点在本体中的距离越近，它们之间的相似度越高。基于1C的计算方法通过概念节点自身涵盖的语义信息来计算相似度。1C的大小代表了信息量的多少，每个单词的信息量通过语料库计算得到，单词在语料库中出现的频率越低，则信息量越大。基于特征的方法通过概念之间共享信息，比如两个概念在WordNet中的释义的覆盖率，来计算语义相似度。
+
+4.3编码器
+4.3.1输入层
+在输入层通过词向量模块，将文本中每个单词映射为一个dw维度的分布式词向量。然后，使用双向长短期记忆神经网络(Bi-LSTM)对每个词向量x进行编码，得到隐状态表示。具体而言，输入单词通过前向网络计算得到前向向量hf，通过后向网络计算得到后向向量h。将两者进行拼接，得到隐状态表示。
+
+4.3.2基于依存句法分析的语法图通道
+针对长文本而言，软注意力机制可以高效地捕捉到词与词之间的关系，并对这种关系进行建模。然而单纯的软注意力机制往往会关注到句子中的每个词，这不可避免地会引入噪声，即将与当前词不太相关的单词特征聚合到当前词表示。特别地，对于方面级情感分析任务而言，会把不相关的情感表达词聚合到方面词，从而造成错误的情感分析。当句子中的方面类别的下位词与情感表达词在句子中相距较远时，本文通过句法依存树分析得到的句子结构帮助建立起方面部分与情感部的直接联系，从而缩短它们之间的距离，降低方面类别相关词与情感词之间冗余长文本对情感极性分类的影响。
+
+4.3.3基于自注意力机制的语义图通道
+依存句法解析特别适合符合句法结构的文本，通过依存句法解析工具可以获得较为准确的解析结果。然而，部分网络评论数据是没有严谨语法结构的短文本，使用依存句法分析反而可能会产生错误的解析结果，从而影响后续情感分析结果。为解决上述问题，本文使用通过自注意力机制捕捉不含语法结构的短句中词与词之间的语义关系，如果两个单词表达的语义相关，则这两个单词语义相似度更高，通过自注意力机制得到的分值更高。相反，弱相关的词汇之间注意力分值低。注意力分值在0到1之间，由模型在训练中学习得到。
+
+4.3.4基于知识增强的知识图通道
+在ACSA任务中，预先定义好的方面类别可能不会显式地出现在句子之中。本文引入了Lin相似度来计算与度量方面类别与句中相关词在概念层面上的内在相似性与语义相似度。Lin相似度认为，每个概念既有共性信息，也有自己单独的信息容量，可以通过概念之间的信息共性与信息总量的比值来计算两个概念的相似性。为了更好地利用WordNet建模方面类别与句中词的关系，本文通过Lin相似度根据算法4构建出方面类别相似度矩阵。基于知识增强的知识通道的最终输出如下：
+
+4.4多通道融合模块
+语法特征通道将句法结构信息融入到语句的编码信息中，生成了包含句法信息的特征向量。语义特征通道将句法结构信息融入到语句的编码信息中，生成了包含语义信息的特征向量。多通道特征融合模块需要将两种来自不同通道的句子表示进行融合，得到最终的多个通道特征的句子表示。本文利用采用注意力机制来设计多通道特征融合模块，来学习每个通道的权重，对多通道的特征进行融合。
+
+4.5分类与损失函数
+基于外部知识的Knowledge-GCN将外部常识库中的知识信息融入到语句的编码信息中，生成了包含知识语义信息的特征向量。该特征蕴含着了方面类别的信息，具有外部先验知识信息。本文使用注意力机制，根据式(4-10)将该通道的特征向量表示为并作为query，与另外两个通道的融合后的特征向量进行计算，得到能够感知方面类别情感特征的最终表示。情感分析任务的目标是通过最小化预测值和真实值之间的交叉熵损失来训练情感分类器。
+
+4.6实验设计与分析
+4.6.1实验数据
+实验数据集主要由三个基准数据集组成，分别是Restaurant-15、Laptop-15和MAMS。所有的数据集包含三种情感极性：正向、中性和负向。数据集中的每条句子都被标注出了属性词和相应的情感极性。
+
+4.6.2评价指标介绍
+本文选用准确率Accuracy和F1值作为本模型性能的评价指标。
+
+4.6.3实验参数及设置
+为了验证KE-MC-GCN模型的有效性，本文采用深度学习框架PyTorch开发和训练模型并在基准数据集上进行了定性和定量实验。文本输入阶段，釆用GloVe词向量来初始化句子中的单词，维度为300维。紧接着，使用BiLSTM作为句子特征编码器，隐状态表示维数为300维。各个通道的GCN层数为2，隐状态表示维数为300维。为了防止过拟合，本文把dropout设置为0.3。模型所有的权重初始化服从均匀分布。在监督训练阶段，采用Adam优化器，学习率为0.001，数据批量大大小为16。对于基于Bert的模型而言，本文使用bert-base-uncased，维数为768维，学习率为0.0002。
+
+4.6.4对比模型
+本节选取了近年的针对ACSA任务的细粒度情感分析模型进行定量的性能对比，包括TC-LSTM模型、ATAE-LSTM模型、GCAE模型、CapsNet模型、AS-Capsules模型、GNN模型、MIMLNN模型、AAGCN模型。
+
+第9部分内容：
+
+2. ATAELSTMW模型：该模型是对TC-LSTM模型的改进，将Aspect的表示和隐状态表示拼接作为输入。同时，该模型最早将注意力机制引入方面级情感分析模型，使用注意力机制对句中不同重要程度的单词给予不同的权重，最后将LSTM的输出与注意力计算得到与给定方面相关的句子加权表示。
+
+3. GCAE模型：该模型基于CNN，并行处理速度较快，通过卷积层不同大小的卷积核捕捉句子的n-gram特征。模型上层接了一个门控机制用于保留与方面类别有关的信息。
+
+4. CapsNet模型：该模型提出了MAMS(Multi-AspectMulti-Sentiment)数据集，以及一种基于胶囊网络的模型来学习方面类别和上下文之间的复杂关系。一个情感类别先验知识矩阵指导路由权重的调整。
+
+5. AS-Capsules模型：该模型使用胶囊网络同时进行方面识别和情感分类两个任务，不同的胶囊对应不同的方面类别。该模型在低层采用共享的_对两个任务进行联合学习。
+
+6. MIMLLN模型：该模型提出了一种多实例多标记学习的网络框架，将句子作为包，单词作为包中实例。具体地，将句子中表示方面类别的单词作为指不方面类别的关键实例，并利用方面类别检测(AspectCategoryDetection)任务辅助训练。该模型首先找到文本里指示方面类别的词，然后对指示词进行情感分类，最终聚合指示词的情感得到方面类别的情感。
+
+7. AAGCN-TW模型：该模型利用外部知识库检索获取与方面类别高度相关的扩展词，并利用统计得到的Beta分布概率来计算对方面类别的重要性，从而构建出句子中词对的邻接矩阵，结合图卷积神经网络来聚合更新节点的特征。
+
+8. SRGN模型：该模型利用基于本体相似度的方法NPMI计算方面类别与句子中词语的语义相似度，构建出相似度单词和方面类别的异质图邻接矩阵，结合边控图卷积神经网络来聚合更新节点的特征。同时，该模型利用ACD任务辅助训练。
+
+4.6.5结果分析
+
+表4-2展示了相关模型方法在不同数据集的性能结果。需要说明的是，由于大部分研究工作模型设计复杂且缺少有效的开源代码，因此，难以在与KEMC-GCN相似的实验环境下重复相关实验并评测，故表中的性能结果均沿用相关研究论文中的指标或其他论文中复现的指标进行汇报展示。
+
+为了评估本文提的KEMC-GCN模型，本文使用Accuracy(Acc.)和F1-score(F1)作为主要评估指标。实验主要结果如表4-2所示，KEMC-GCN在三个数据集上准确率和F1值指标超过了其他的方法，取得了较好的效果。
+
+具体分析来看，1)与基于句法依存树和图卷积神经网络的模型相比，如AAGCN，KEMC-GCN取得了更好的结果，这说明了基于自注意力机制的语义通道模型有效地融合了语义信息，能够很好地捕获到不符合语法结构短文本的语义信息。2)与基于注意力的方法相比，如TC-LSTM、ATAE-LSTM，KEMC-GCN模型利用了句法结构建立了词与词之间的直接关系，可以缩短方面类别相关词与情感表达词的距离，避免其他词带来的噪声。这进一步说明，基于句法依存树的语法通道模型有效地融合了句法结构信息。从整体来看，基于多通道特征的KEMC-GCN模型可以学习到语义通道和语法通道的互补信息，取得更好的结果。3)与基于外部知识的模型相比，比如AAGCN和SRGN，KEMC-GCN模型通过外部知识库，引入基于概念的相似度函数，来更高效地建立方面类别与句子中相关词的关系，取得了更好的效果。4)与多实例框架和胶囊网络模型相比，本模型的结果同样更具有竞争力。
+
+总的来说，通过引入语法通道特征、语义通道特征和知识通道特征，本文所提出的模型与方法取得了更优的指标性能，具有一定的优势和竞争力。
+
+用户评论是分析用户行为、构建用户画像的关键数据，同时也是构建个性化推荐的基础。对于接入本地生活的商户而言，其用户范围从实体门店的一隅之地变为一个城市。每家商户都面临着机遇与挑战，他们的经营范围变大的同时必然面临着市场相互重叠。要从众多商户激烈的竞争中脱颖而出，必须时刻根据用户的反馈做出策略调整。用户反馈的评论数据蕴含着用户的情感喜恶，具有十分重要的应用价值。对这些数据的分析，可以帮助商家更容易地从菜品、服务、到环境等方方面面进行改善，从而提高顾客黏性，实现长期的销售数据增长。
+
+本系统的目标是设计和实现一个面向评论的方面级情感分析系统，该系统可以同时供模型训练管理员和运营人员使用。
+
+功能性需求：
+1. 用户管理模块：包括注册功能、登录功能、个人信息管理功能。
+2. 模型管理模块：包括数据管理功能、数据预处理功能、模型可视化参数配置与训练功能。
+3. 情感分析与可视化模块：包括数据输入功能、情感分析功能、评论结果可视化功能。
+
+非功能性需求：
+1. 易用性需求：保证用户可以获得最佳的体验效果。
+2. 可扩展性需求：考虑后期数据库服务器、逻辑服务器硬件的扩展。
+3. 兼容性需求：前端页面需要适配各种主流浏览器。
+4. 安全性需求：用户信息需要加密存储，用户操作前需要验证身份信息。
+
+系统概要设计：
+1. 总体功能设计：系统分为用户管理、模型管理和情感分析与可视化三大部分。
+2. 系统架构设计：应用层、模型层和数据层。
+
+系统详细设计：
+1. 用户管理模块：包括用户注册、登录等功能。
+2. 模型训练模块：面向系统管理员，提供可视化配置和模型训练功能。
+3. 情感分析与可视化模块：面向运营人员，提供情感分析和结果可视化功能。
+4. 数据库设计：包括用户信息表、训练任务表、情感分析任务表等。
+
+系统实现：
+1. 系统实现环境：前端使用Vue，后端使用Flask，数据库使用SQLite，算法部分使用PyTorch。
+2. 用户管理模块实现：包括注册和登录页面。
+3. 模型训练模块实现：提供数据上传和模型训练页面。
+4. 情感分析与可视化模块实现：提供文本输入和结果展示页面。
+
+系统测试：
+1. 功能性测试：对系统的功能、性能及界面等进行冒烟测试、黑盒与白盒测试。
+
+第六章 总结与展望
+
+6.1 工作总结
+
+方面级情感分析旨在以方面粒度为分析单位，预测出文本中各个方面的情感倾向，具有重要的学术价值和广泛的应用价值，在自然语言处理领域方兴未艾。本文主要围绕方面词情感分析(ATS)和方面类别情感分析(ACSA)这两个任务展开，分别针对两个任务及当前遇到的问题进行研宄，具体研究工作如下：
+
+1. 针对方面词情感分析任务，提出一种情感感知的双通道图卷积神经网络模型，其中双通道分别为语法通道和语义通道。在语法通道中，本文首先利用依存句法分析方法捕获句子的语法结构，得到原始的句法依存树矩阵，然后利用SenticNet中词的情感数值构建句子的情感值矩阵，以对原始矩阵增强情感知识，另外使用词性知识构建词性知识矩阵，对句法依存树矩阵进一步增强；在语义通道中，本文将基于ConceptNet知识库训练的词向量与经过模型编码的隐向量融合，对词语进行知识语义增强。最终解决了语法、语义通道对外部知识利用不足的问题。
+
+2. 针对方面类别情感分析任务，提出一种知识增强的多通道图卷积神经网络模型，其中多通道分别为知识通道、语法通道和语义通道。在知识通道中，本文利用基于WordNet的相似度函数计算方面类别与句子上下文之间的语义相似度，进而得到与方面类别相关的相似度矩阵，解决了方面类别与句中相关概念词关系的捕获和利用不合理的问题；在语法和语义通道中，本文分别使用句法依存分析和自注意力机制构建对应的邻接矩阵，设计基于注意力的特征融合模块，融合语法和语义通道的特征，解决了模型对句法结构和语义关系互补性的建模缺失问题。
+
+3. 根据对方面词情感分析和方面类别情感分析任务的研宄，本工作设计并实现一套面向用户评论的方面级情感分析系统。该系统的搭建过程包括需求分析、功能设计、功能实现等阶段。主要功能包括用户管理功能、模型管理功能以及情感分析及可视化功能。该系统不仅可以用于可视化模型训练，同时也可以用于模型推理和预测，即使用训练好的模型对文本进行方面级情感分析，并对分析结果进行可视化展示。
+
+6.2 工作展望
+
+本文对方面词情感分析和方面类别情感分析两个任务及当前遇到的问题进行了研宄，提出了相应的SADC-GCN和KEMC-GCN模型，取得了一些进展，但依然存在探索和改进的空间。具体如下：
+
+1) 探索更有效的建立方面类别与句中相关词关系的方法。本文引入外部知识库，利用基于知识库的相似度函数来建模方面类别与句中相关词关系，同时结合多通道特征图捕获句子的语法和语义特征。这种基于外部知识库的单一相似度函数并不能充分地表达方面类别与句中相关词的关系。未来，可以考虑多种相似度函数融合的方法，对单一相似度函数的结果进行完善。
+
+2) 探索隐式情感数据的情感预测方法。评论数据中存在少量的隐式情感样本，即样本中没有出现明显的情感观点词，本文提出的模型不能准确地预测此类样本的情感极性，从而在性能指标上有局限性。未来，可以探索使用预训练模型在针对含有隐式情感表达的数据集上，构造无监督对比学习或其他相关任务，进行领域自适应的预训练，帮助大模型学习到更多包含隐式情感的句子表达方式。然后，使用大模型更高效地进行情感分析。
+
+清洗后的内容如下：
+
+27. Zhou J, Huang JX, Hu QV, et al. Sk-gcn: Modeling syntax and knowledge via graph convolutional network for aspect-level sentiment classification [J]. Knowledge-Based Systems, 2020, 205:106292.
+
+28. Zhang Z, Han X, Liu Z, et al. ERNIE: Enhanced Language Representation with Informative Entities [J]. 2019.
+
+29. Liang B, Su H, Gu L, et al. Aspect-based sentiment analysis via effective knowledge enhanced graph convolutional networks [J]. Knowledge-Based Systems, 2022, 235:107643.
+
+30. Liang B, Su H, Yin RS, et al. Beta Distribution Guided Aspect-Aware Graph for Aspect Category Sentiment Analysis with Effective Knowledge [C]. Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing.
+
+31. Mikolov T, Chen K, Corrado G, et al. Efficient estimation of word representations in vector space [J]. 2013.
+
+32. Pennington J, Socher R, Manning CD. GloVe: Global vectors for word representation [C]. Proceedings of the 2014 conference on empirical methods in natural language processing.
+
+33. Peters ME, Neumann M, Iyyer M, et al. Deep contextualized word representations [J]. 2018.
+
+34. Elman JL. Finding structure in time [J]. Cognitive Science, 1990, 14(2):211-281.
+
+35. Graves A. Long short-term memory [J]. 2012.
+
+36. Bahdanau D, Cho K, Bengio Y. Neural machine translation by jointly learning to align and translate [J]. arXiv preprint arXiv:1409.0473, 2014.
+
+37. Vaswani A, Shazeer N, Parmar N, et al. Attention is all you need [J]. Advances in neural information processing systems, 2017, 30.
+
+38. Radford A, Narasimhan K, Salimans T, et al. Improving language understanding by generative pre-training [J]. 2018.
+
+39. Devlin J, Chang MW, Lee K, et al. Bert: Pre-training of deep bidirectional transformers for language understanding [J]. arXiv preprint arXiv:1810.04805, 2018.
+
+40. Liu Y, Ott M, Goyal N, et al. RoBERTa: A robustly optimized BERT pretraining approach [J]. arXiv preprint arXiv:1907.11692, 2019.
+
+41. Sun Y, Wang S, Li Y, et al. ERNIE: Enhanced representation through knowledge integration [J]. arXiv preprint arXiv:1904.09223, 2019.
+
+42. Ji S, Pan S, Cambria E, et al. A survey on knowledge graphs: Representation, acquisition, and applications [J]. IEEE Transactions on Neural Networks and Learning Systems, 2021, 33(2):494-514.
+
+43. Bordes A, Usunier N, Garcia-Duran A, et al. Translating embeddings for modeling multi-relational data [J]. Advances in Neural Information Processing Systems, 2013, 26.
+
+44. Wang Z, Zhang J5, Feng J. Knowledge graph embedding by translating on hyperplanes [C]. Proceedings of the AAAI conference on artificial intelligence. 2014, 28(1).
+
+45. Nickel M, Tresp V, Kriegel HP. A three-way model for collective learning on multi-relational data [C]. IJCAI. 2011, 11(10.5555):3104482-3104584.
+
+46. Yang B, Yih W, He X, et al. Embedding Entities and Relations for Learning and Inference in Knowledge Bases [J]. 2015.
+
+47. Speer R, Chin J, Havasi C. ConceptNet 5.5: An open multilingual graph of general knowledge [C]. Thirty-first AAAI conference on artificial intelligence. 2017.
+
+48. Cambria E, Poria S, Hazarika D, et al. SenticNet 5: Discovering Conceptual Primitives for Sentiment Analysis by Means of Context Embeddings [J]. Proceedings of the AAAI Conference on Artificial Intelligence. 2018.
+
+49. SenticNet 6: Ensemble Application of Symbolic and Subsymbolic Al for Sentiment Analysis | Proceedings of the 29th ACM International Conference on Information & Knowledge Management [EB/OL]. https://dl.acm.org/doi/abs/10.1145/3340531.34112003.
+
+50. Graves A, Schmidhuber J. Frame-based phoneme classification with bidirectional LSTM networks [C]. Proceedings of the IEEE International Joint Conference on Neural Networks. 2005.
+
+51. Nivre J. An efficient algorithm for projective dependency parsing [C]. Proceedings of the eighth international conference on parsing technologies. 2003.
+
+52. Jiang Q, Chen L, Xu R, et al. A Challenge Dataset and Effective Models for Aspect-Based Sentiment Analysis [C]. Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP).
+
+53. Miller GA. WordNet: A lexical database for English [J]. Communications of the ACM, 1995, 38(11):39-41.
+
+54. Zhao FQ. 基于词嵌入和WordNet的词汇相似度计算模型 [J]. 2021.
+
+55. Liu HZ, Xu D. 基于本体的语义相似度和相关度计算研究综述 [J]. 计算机科学, 2012, 39(2):1-13.
+
+56. Lin D. An information-theoretic definition of similarity [C]. IJCAI. 1998, 98(1998):304-313.
+
+57. Wang X, Zhu M, Bo D, et al. Am-gen: Adaptive multi-channel graph convolutional networks [C]. Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery & Data Mining. 2020.
+
+58. Kingma DP, Ba J. Adam: A method for stochastic optimization [J]. arXiv preprint arXiv:1412.6980, 2014.
+
+59. Tang DS, Qin B, Feng X5, et al. Effective LSTMs for target-dependent sentiment classification [J]. arXiv preprint arXiv:1512.01100; 2015.
+
+60. Wang Y, Sun A, Huang M, et al. Aspect level sentiment analysis using as-capsules [C]. The world wide web conference. 2019.
+
+61. Zhou T, Law KY. Semantic Relatedness Enhanced Graph Network for Aspect Category Sentiment Analysis [J]. Expert Systems with Applications. 2022, 195:116560.

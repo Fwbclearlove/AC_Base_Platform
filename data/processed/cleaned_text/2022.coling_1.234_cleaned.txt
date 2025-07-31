@@ -1,0 +1,64 @@
+A Simple Model for Distantly Supervised Relation Extraction
+
+Ziqin Rao, Fangxiang Feng, Ruifan Li, Xiaojie Wang
+School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China
+
+Abstract
+Distantly supervised relation extraction is challenging due to data noise. We propose BERT-based Graph Convolutional network Model (BGM), which includes an instance embedding module and a bag representation module. BGM achieves significant improvements on benchmark datasets NYT10 and GDS1.
+
+1 Introduction
+In the distant supervision relation extraction (DS-RE) setting, noisy training data poses a significant challenge. Existing methods address this by using deep neural networks and complex de-noising schemes. We introduce BGM, a model that combines a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN) to learn instance correlations for bag representations.
+
+2 Related Work
+DS-RE methods can be categorized into PCNN-based and PLMs-based approaches. PCNN-based methods use various techniques to acquire effective bag representations, while PLMs-based methods have shown remarkable performance by incorporating linguistic and semantic information. BGM is the first to use GCN to directly learn bag representations over instances.
+
+3 Method
+Our BGM model consists of an embedding layer and a bag representation layer. The embedding layer uses a BERT-based PLM to represent instances, with special tokens for entity representation. The bag representation layer constructs a bag graph and applies convolutional operations to obtain the bag representation.
+
+3.1 Embedding Layer
+Each instance is represented by a token sequence including [CLS], entities, and [SEP], processed by the BERT encoder to obtain hidden states for the instance and entities.
+
+3.2 Bag Representation Layer
+---
+
+We construct the bag graph G = {V, A} using the embedding layer, where nodes V are initialized by concatenating the representations of instance and two entities, resulting in a node dimension of 3d. The adjacency matrix A is generated using a softmax function and trainable parameters WQ and WK. Our Graph Convolutional Network (GCN) is updated classically, with an added self-connection to maintain the instance’s original semantics.
+
+For relation prediction, we apply average pooling to the bag representation and use a linear layer followed by a softmax layer. The model is trained with a cross-entropy loss using gradient descent optimization.
+
+Our experiments utilize the BERT-base-uncased model, with a maximum input sequence length of 120 and a hidden size of 768. The GCN has two layers, and we apply dropout rates of 0.3 to GCN and 0.5 to all linear layers. We compare our BGM with multiple baseline methods and report better performance on the NYT10 and GDS datasets in terms of P@N, AUC, and Micro-F1 score.
+
+In the ablation study, we find that removing GCN or entity connections results in a performance drop, indicating their importance. We also explore the impact of various PLMs in our BGM and find that different PLMs lead to competitive performance, with Roberta-large achieving the best results.
+
+We conducted a case study using two bags from NYT10, as shown in Table 5, applying three methods: BGM, BGM without GCN, and BGM without EntCon. For the first bag, BGM correctly identifies the relation /location/country/administrative_divisions, while the other variants incorrectly predict /location/location/contains. This is because BGM without EntCon cannot utilize the key phrase "in the state of" in S3, and BGM without GCN fails to effectively share captured information across instances. In the second bag, the relation is /people/person/place_of_birth. BGM without EntCon误 predicts /people/person/place_lived, whereas BGM and BGM without GCN correctly identify the golden truth by capturing the contextual information of entities with "was born in".
+
+In our approach, BGM operates on the entire graph, using a self-attention mechanism within the GCN layer. Unlike other attention-based methods, BGM does not selectively attend to the bag's target relation. Instead, it captures correlations among instances as graph nodes. This combination of GCN with self-attention proves effective for DS-RE.
+
+Our conclusion is that the proposed BGM model, based on PLMs and GCN, is simple yet effective for DS-RE. It represents each instance with a BERT-based pre-trained language model and uses GCN to capture correlations within a bag. A cross-entropy loss is applied for relation prediction. The model demonstrates superior performance on two benchmark datasets. Future work will delve into the underlying theory for better explainability and consider extending BGM to handle single-instance bags.
+
+This work was supported by the National Key Research and Development Program of China under Grants 2019YFF0303300 and 2019YFF0303302, and the National Natural Science Foundation of China under Grant 62076032. The authors appreciate the valuable comments from the editor and anonymous reviewers.
+
+(References section remains unchanged.)
+
+Liu, T., Wang, K., Chang, B., & Sui, Z. (2017). A soft-label method for noise-tolerant distantly supervised relation extraction. In Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing, 1790–1795.
+
+Mintz, M., Bills, S., Snow, R., & Jurafsky, D. (2009). Distant supervision for relation extraction without labeled data. In Proceedings of the Joint Conference of the 47th Annual Meeting of the ACL and the 4th International Joint Conference on Natural Language Processing of the AFNLP, 1003–1011.
+
+Qin, P., Xu, W., & Wang, W. Y. (2018). DSGAN: Generative adversarial training for distant supervision relation extraction. In Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 496–505.
+
+Riedel, S., Yao, L., & McCallum, A. (2010). Modeling relations and their mentions without labeled text. In Joint European Conference on Machine Learning and Knowledge Discovery in Databases, 148–163.
+
+Shang, Y.-M., Huang, H., Sun, X., Wei, W., & Mao, X.-L. (2022). A pattern-aware self-attention network for distant supervised relation extraction. Information Sciences, 584, 269–279.
+
+Surdeanu, M., Tibshirani, J., Nallapati, R., & Manning, C. D. (2012). Multi-instance multi-label learning for relation extraction. In Proceedings of the 2012 Joint Conference on Empirical Methods in Natural Language Processing and Computational Natural Language Learning, 455–465.
+
+Tang, H., Sun, X., Jin, B., Wang, J., Zhang, F., & Wu, W. (2021). Improving document representations by generating pseudo query embeddings for dense retrieval. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing, 5054–5064.
+
+Vashishth, S., Joshi, R., Prayaga, S. S., Bhattacharyya, C., & Talukdar, P. (2018). RESIDE: Improving distantly-supervised neural relation extraction using side information. In Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing, 1257–1266.
+
+Wang, Y., Sun, C., Wu, Y., Zhou, H., Li, L., & Yan, J. (2021). UniRE: A unified label space for entity relation extraction. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics.
+
+Ye, Z.-X., & Ling, Z.-H. (2019). Distant supervision relation extraction with intra-bag and inter-bag attentions. In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, 2810–2819.
+
+Yu, E., Han, W., Tian, Y., & Chang, Y. (2020). ToHRE: A top-down classification strategy with hierarchical bag representation for distantly supervised relation extraction. In Proceedings of the 28th International Conference on Computational Linguistics, 1665–1676.
+
+Zeng, D., Liu, K., Chen, Y., & Zhao, J. (2015). Distant supervision for relation extraction via piecewise convolutional neural networks. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, 1753–1762.

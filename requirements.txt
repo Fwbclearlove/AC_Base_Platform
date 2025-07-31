@@ -1,0 +1,12 @@
+tqdm         # 进度条
+PyMuPDF      # PDF文本解析库
+langchain    # 用于文本分块 (Text Chunking)
+numpy        # 核心科学计算库
+torch         # PyTorch深度学习框架
+torchvision   # PyTorch的计算机视觉库
+torchaudio    # PyTorch的音频库
+faiss-cpu     # 高效的向量相似度搜索库
+sentence-transformers  # 用于加载和使用嵌入模型(Embedding Models)
+zhipuai      # 智谱AI官方SDK
+python-dotenv # 用于从.env文件加载环境变量 (管理API Key)
+tf-keras

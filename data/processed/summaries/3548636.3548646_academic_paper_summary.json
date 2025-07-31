@@ -1,0 +1,46 @@
+{
+  "document_type": "academic_paper",
+  "title": "EP-BERTGCN: A Simple but Effective Power Equipment Fault Recognition Method",
+  "authors": [
+    "Mingcong Lu",
+    "Yusong Zhang",
+    "Qu-An Zheng",
+    "Zhenyuan Ma",
+    "Liqing Liu",
+    "Yongping Xiong",
+    "Ruifan Li"
+  ],
+  "main_topic": "Text-based power equipment fault recognition",
+  "research_problem": "The lack of models pre-trained on large-scale electric power corpora for text-based fault recognition in power equipment",
+  "methodology": "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)",
+  "key_innovations": [
+    "Introduction of the BERT module into C-TextGCN",
+    "Domain adaption of the BERT model"
+  ],
+  "experimental_results": "Table 1 presents Experimental Results on the CPTF Dataset with various models, including EP-BERTGCN and EP-Adaptation",
+  "conclusions": "EP-BERTGCN shows improved performance in extensive experiments, contributing to the field of power equipment fault recognition",
+  "keywords": [
+    "power equipment fault recognition",
+    "BERT",
+    "GCN",
+    "domain adaptation"
+  ],
+  "application_domains": [
+    "power equipment maintenance",
+    "China’s State Grid"
+  ],
+  "technical_concepts": [
+    "BERT",
+    "Graph Convolutional Network",
+    "domain adaptation",
+    "text classification",
+    "PMI",
+    "TF-IDF"
+  ],
+  "performance_metrics": "Accuracy, Macro-F1, Weighted Macro-F1 scores for different models",
+  "summary": "This paper introduces EP-BERTGCN, a method that combines pre-trained BERT and GCN for text-based power equipment fault recognition. It addresses the domain gap between electric power and general NLP and demonstrates superior performance over previous baselines. The method also includes domain adaptation of BERT for enhanced performance in the power field.",
+  "file_id": "3548636.3548646",
+  "source_type": "cleaned",
+  "text_length": 11873,
+  "generation_time": "2025-07-31 21:16:23"
+}

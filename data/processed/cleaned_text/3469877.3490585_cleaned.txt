@@ -1,0 +1,128 @@
+S2TD: A Tree-Structured Decoder for Image Paragraph Captioning
+
+Yihui Shi, Yun Liu, Fangxiang Feng, Ruifan Li, Zhanyu Ma, Xiaojie Wang
+
+Image paragraph captioning requires organizing linguistic counterparts from abundant visual clues. Previous methods struggle with holistic organization and capturing structural nature. We propose Splitting to Tree Decoder (S2TD), a novel tree-structured decoder that models paragraph decoding as top-down binary tree expansion. S2TD includes a split module, a score module, and a word-level RNN. The split module gates visual representations, and the score module uses cosine similarity for node splitting. A tree structure loss enables end-to-end learning. The word-level RNN decodes leaf nodes into sentences. Experiments on the Stanford benchmark dataset demonstrate the effectiveness of S2TD.
+
+CCS CONCEPTS
+• Computing methodologies → Computer vision tasks
+
+KEYWORDS
+image captioning, paragraph generation, tree-structured decoder, vision and language
+
+1 INTRODUCTION
+
+Image paragraph captioning aims to generate a semantically rich and coherent paragraph description, integrating visual understanding and linguistic processing. While single sentence captioning has shown progress, paragraph generation remains challenging due to the need for detailed visual information and structural considerations among sentences. Existing approaches, such as hierarchical and non-hierarchical decoders, have limitations in managing visual observations and maintaining paragraph coherence.
+
+We propose a tree-structured visual paragraph decoder, S2TD, to address these issues. S2TD starts with the entire image and expands observations top-down, ensuring a holistic approach and effective structuring of topic-related sentences. The three-module architecture of S2TD includes a split module, a score module, and a word-level RNN. The tree structure loss aids in learning from pre-parsed ground truth paragraphs, enhancing interpretability. Our contributions are as follows: [list of contributions should follow but is not provided in the original text].
+
+---
+
+We introduce a tree-structured decoding approach for visual paragraph generation, which biases the model to capture structural relationships between sentences and connect visual observations to linguistic elements. Our novel tree structured decoder, S2TD, employs a topology prediction technique for image paragraph captioning, involving a node splitting mechanism and a unique tree structure loss.
+
+In the realm of image paragraph captioning, methods are categorized into hierarchical and non-hierarchical approaches. Hierarchical methods model paragraphs as sequences of sentences, focusing on topic representations and transitions, while non-hierarchical methods treat paragraphs as sequences of words, addressing long-distance dependencies and visual information utilization. However, both largely rely on sequential decoding and ignore linguistic structures within paragraphs.
+
+Recently, incorporating tree structures into visual decoders has gained attention. Our S2TD differs by requiring only leaf node labeling and aligning image observations with tree structures during decoding.
+
+Our approach to image paragraph captioning involves describing an image with a paragraph composed of multiple sentences. We extract region-level visual semantic representations and a global image representation. The S2TD decoder, depicted in Figure 2, collaborates with a split module, a score module, and a word-level RNN to generate a coherent paragraph.
+
+S2TD is a hierarchical decoder with a split module that preserves parent node information and models differences between child nodes. The score module predicts the tree topology by deciding whether to split nodes, using cosine similarity as a decision score.
+
+---
+
+[Figure 2 and its description have been omitted as per the instruction to avoid adding non-existent elements like figure descriptions outside of the provided content.]
+
+---
+
+We base the retention or discarding of proposals on the decision score sp, where sp ≤α indicates retention. The hyperparameter α ∈[0, 1] represents a constant threshold to avoid redundant descriptions from overly similar node representations. The binary tree expansion during inference is detailed in Algorithm 1. Following tree expansion, a word-level RNN generates sentences based on node representations. To produce the i-th sentence of a paragraph, a Highway Network transforms the corresponding leaf node representation vleaf i into a topic vector ti ∈RDe. We then employ LSTM to decode sentences, with the hidden state hi,j ∈RDe obtained recurrently. The weight We is a learnable word embedding matrix with a vocabulary size Dw. The hidden state is initialized as hi,0 = Highway1(ti), and the memory cell as zeros. The conditional distribution over output words is calculated by concatenating hidden states with the topic vector.
+
+For learning tree topology, we propose using hierarchical clustering to mine tree structures from ground-truth paragraphs. We encode sentences into dense vectors using a pre-trained language model and apply Ward’s minimum variance method, ensuring only nearby clusters merge. The obtained tree has leaf nodes corresponding to the sentences of the given paragraph. The learning criteria for each node’s decision score sp is designed to encourage less similarity for nodes to be split and to push the decision score over the threshold α for nodes to be stopped.
+
+The loss function for training S2TD combines a tree structure loss on decision scores and a cross-entropy loss on word-level distributions. Reinforcement learning with self-critical sequence training (SCST) further optimizes S2TD using non-differentiable metrics.
+
+Our experiments are conducted on the Stanford image paragraph benchmark dataset. We use Faster-RCNN for region detection and feature extraction, and a Highway Network to reduce feature dimensionality. Sentence-BERT encodes sentences for pre-parsed paragraph trees. S2TD uses a double-layer LSTM with an embedding and hidden size of De = 512. We set α to 0.3 and use greedy search for inference. For supervised learning, S2TD is trained with Adam, and for reinforcement learning, we adopt BLEU-4 and METEOR as reward functions.
+
+Performance evaluation compares S2TD with state-of-the-art sequential decoding methods, grouped into hierarchical and non-hierarchical methods. Experimental results show the effectiveness of S2TD.
+
+---
+
+DAM-ATT [27]: 35.02, 20.24, 11.68, 6.57, 13.91, 17.32
+SCST [18]: 32.78, 19.00, 11.40, 6.89, 13.66, 12.89, 29.67, 16.45, 9.74, 5.88, 13.63, 13.77
+SCST+RP [18]: 35.68, 22.40, 14.04, 8.70, 15.17, 22.68, 43.54, 27.44, 17.33, 10.58, 17.86, 30.63
+CRL [16]: - , - , - , - , - , - , 43.12, 27.03, 16.72, 9.95, 17.42, 31.47
+OR-ATT [31]: 34.97, 20.17, 12.21, 7.46, 13.58, 16.27, 32.84, 18.30, 10.67, 6.21, 13.44, 14.88
+OR-ATT+RP [31]: 37.50, 23.34, 14.63, 9.00, 15.43, 22.85, 43.76, 28.08, 17.88, 10.95, 17.82, 33.38
+
+Our S2TD: 44.32, 25.86, 14.80, 8.33, 16.89, 21.41, 43.70, 26.67, 16.30, 9.79, 17.32, 22.84
+Our S2TD+RP: 44.59, 26.06, 14.93, 8.35, 17.00, 21.92, 44.47, 27.38, 16.87, 10.17, 17.64, 24.33
+
+Table 2: Ablation study on S2TD under diverse variants.
+
+Model B1 B2 B3 B4 M C
+Split-H: 42.83, 24.46, 13.74, 7.58, 16.38, 19.00
+Split-G: 42.87, 24.99, 14.61, 8.46, 16.37, 19.50
+Score-C: 37.37, 21.21, 11.82, 6.44, 14.74, 16.27
+BFS-R: 44.30, 25.91, 14.80, 8.28, 16.83, 20.51
+DFS-L: 44.02, 25.57, 14.60, 8.19, 16.71, 20.82
+DFS-R: 43.34, 25.04, 14.42, 7.99, 16.45, 19.53
+Full S2TD: 44.32, 25.86, 14.80, 8.33, 16.89, 21.41
+
+Our S2TD achieves competitive performance, especially in terms of BLEU-1 and CIDEr. The effectiveness of tree-structured decoding is demonstrated. Under the RL setting, richer visual encoding and advanced reinforcement learning methods are crucial to high performance. Non-hierarchical methods benefit from the trial and error property of RL, while hierarchical methods like our S2TD are more robust with less performance drop when repetition penalty is applied.
+
+4.4 Ablation Study
+
+We evaluate variants on module design and diverse inference strategies. Split-H replaces the gate unit with two single-layer Highway networks, Split-G uses two independent gates, and Score-C adopts a binary classification variant of the score module. Our S2TD benefits more from the gating mechanism, showcasing the effectiveness of our split module. The tree structure loss is smoother than binary cross-entropy, optimizing relative similarity instead of specific targets.
+
+Figure 3: Comparison between S2TD and Score-C on the tree loss parameter α.
+
+Figure 4: Qualitative comparison on generated captions for images with SCST+RP and our S2TD.
+
+We compare our S2TD with Score-C to demonstrate the effectiveness of our tree loss. By varying the threshold of a trained model, we observe its impact on text generation, as shown in Figure 3. For a fair comparison, we retrain S2TD with α = 0.5. S2TD exhibits a smoother change in CIDEr scores as α increases from 0.1 to 0.5, indicating its ability to better evaluate different splittings with continuous scores, which supports the plausibility of our tree structure loss.
+
+Our inference strategy is presented in Algorithm 1. By replacing the queue with a stack or reversing the pushing order of child nodes, we can derive different strategies. Algorithm 1 can be denoted as BFS-L (Breadth-First Searching with left node first), and we can have BFS-R, DFS-L, and DFS-R. BFS strategies are found to outperform DFS, which aligns with expectations as BFS aims to capture broader topics, while DFS focuses on specific topics. Additionally, expanding left nodes first yields better metrics, possibly because the left subtree of the root mainly describes salient objects, while the right subtree focuses on the background.
+
+In Section 4.5, we provide qualitative analysis to showcase the model's capability by comparing the captioning results with those of the SCST+RP model. S2TD paragraphs are less redundant and more coherent. For instance, S2TD provides a compact description and smoother viewpoint transitions, with additional details. The sentence tree structure ensures that nodes represent topic-related aspects, and the splitting mechanism is semantically related to the image, resembling human cognitive processes.
+
+In conclusion, we propose a tree-structured decoder S2TD for image paragraph captioning, which demonstrates promising performance in generating diverse and coherent paragraphs. Future work includes extending our method with richer visual encoding and developing a corresponding RL method for tree structures.
+
+This work was supported by Grants 2019YFF0303300, 2019YFF0303302, 61802026, 61906018, the 111 Project under Grant B08004, and the Fundamental Research Funds for the Central Universities under Grant 2021RC36.
+
+---
+
+[19] Kishore Papineni, Salim Roukos, Todd Ward, and Wei-Jing Zhu. 2002. BLEU: a method for automatic evaluation of machine translation. In Annual Meeting of the Association for Computational Linguistics (ACL). 311–318.
+
+[20] Nils Reimers and Iryna Gurevych. 2019. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing (EMNLP-IJCNLP). 3982–3992.
+
+[21] Steven J Rennie, Etienne Marcheret, Youssef Mroueh, Jerret Ross, and Vaibhava Goel. 2017. Self-critical sequence training for image captioning. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). 7008–7024.
+
+[22] Zhan Shi, Xu Zhou, Xipeng Qiu, and Xiaodan Zhu. 2020. Improving Image Captioning with Better Use of Caption. In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics (ACL). 7454–7464.
+
+[23] Rupesh K Srivastava, Klaus Greff, and Jürgen Schmidhuber. 2015. Training very deep networks. Advances in Neural Information Processing Systems (NIPS) 28 (2015), 2377–2385.
+
+[24] Ramakrishna Vedantam, C Lawrence Zitnick, and Devi Parikh. 2015. Cider: Consensus-based image description evaluation. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). 4566–4575.
+
+[25] Hao Wang, Guosheng Lin, Steven CH Hoi, and Chunyan Miao. 2020. Structure-Aware Generation Network for Recipe Generation from Images. In Proceedings of the European Conference on Computer Vision (ECCV). 359–374.
+
+[26] Jing Wang, Yingwei Pan, Ting Yao, Jinhui Tang, and Tao Mei. 2019. Convolutional auto-encoding of sentence topics for image paragraph generation. In International Joint Conference on Artificial Intelligence (IJCAI). 940–946.
+
+[27] Ziwei Wang, Yadan Luo, Yang Li, Zi Huang, and Hongzhi Yin. 2018. Look deeper see richer: Depth-aware image paragraph captioning. In ACM Conference on Multimedia (MM). 672–680.
+
+[28] Joe H Ward Jr. 1963. Hierarchical grouping to optimize an objective function. J. Amer. Statist. Assoc. 58, 301 (1963), 236–244.
+
+[29] Siying Wu, Zheng-Jun Zha, Zilei Wang, Houqiang Li, and Feng Wu. 2019. Densely Supervised Hierarchical Policy-Value Network for Image Paragraph Generation. In International Joint Conference on Artificial Intelligence (IJCAI). 975–981.
+
+[30] Chunpu Xu, Yu Li, Chengming Li, Xiang Ao, Min Yang, and Jinwen Tian. 2020. Interactive Key-Value Memory-augmented Attention for Image Paragraph Captioning. In Proceedings of the 28th International Conference on Computational Linguistics (COLING). 3132–3142.
+
+[31] Li-Chuan Yang, Chih-Yuan Yang, and Jane Yung-jen Hsu. 2021. Object Relation Attention for Image Paragraph Captioning. In AAAI Conference on Artificial Intelligence (AAAI), Vol. 35. 3136–3144.
+
+[32] Xu Yang, Chongyang Gao, Hanwang Zhang, and Jianfei Cai. 2020. Hierarchical Scene Graph Encoder-Decoder for Image Paragraph Captioning. In ACM Conference on Multimedia (MM). 4181–4189.
+
+[33] Ting Yao, Yingwei Pan, Yehao Li, and Tao Mei. 2019. Hierarchy parsing for image captioning. In Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV). 2621–2629.
+
+[34] Jianshu Zhang, Jun Du, Yongxin Yang, Yi-Zhe Song, Si Wei, and Lirong Dai. 2020. A Tree-Structured Decoder for Image-to-Markup Generation. In International Conference on Machine Learning (ICML). 11076–11085.
+
+[35] Xuying Zhang, Xiaoshuai Sun, Yunpeng Luo, Jiayi Ji, Yiyi Zhou, Yongjian Wu, Feiyue Huang, and Rongrong Ji. 2021. RSTNet: Captioning With Adaptive Attention on Visual and Non-Visual Words. In IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR). 15465–15474.
+
+[36] Luowei Zhou, Hamid Palangi, Lei Zhang, Houdong Hu, Jason Corso, and Jianfeng Gao. 2020. Unified vision-language pre-training for image captioning and vqa. In Proceedings of the AAAI Conference on Artificial Intelligence (AAAI), Vol. 34. 13041–13049.
+
+---

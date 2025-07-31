@@ -1,0 +1,39 @@
+{
+  "document_type": "patent",
+  "title": "一种基于深层模型的跨模态检索方法",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "跨模态检索",
+  "technical_problem": "不同模态数据检索的匹配问题",
+  "technical_solution": "利用受限波尔兹曼机Corr-RBMs深层模型处理低级表达向量，计算高级表达向量间的距离，确定匹配对象",
+  "key_innovations": [
+    "Corr-RBMs深层模型",
+    "跨模态检索的高级表达向量计算"
+  ],
+  "implementation_method": "步骤包括：1. 特征提取；2. 利用Corr-RBMs深层模型处理；3. 计算欧氏距离；4. 确定匹配对象",
+  "technical_effects": "提高跨模态检索的效率和准确性",
+  "keywords": [
+    "跨模态检索",
+    "Corr-RBMs",
+    "受限波尔兹曼机",
+    "低级表达向量",
+    "高级表达向量",
+    "欧氏距离"
+  ],
+  "application_scenarios": [
+    "图像、文本或语音模态检索"
+  ],
+  "technical_concepts": [
+    "Corr-RBMs深层模型",
+    "特征提取",
+    "欧氏距离计算"
+  ],
+  "claims_summary": "提出的方法涉及使用Corr-RBMs深层模型进行跨模态检索，包括特征提取、高级表达计算和距离排序等步骤",
+  "summary": "本专利提出了一种基于受限波尔兹曼机Corr-RBMs深层模型的跨模态检索方法，通过处理不同模态数据的低级表达向量，计算高级表达向量间的欧氏距离，以实现高效的跨模态检索，可应用于图像、文本或语音模态的检索场景。",
+  "file_id": "一种基于深层模型的跨模态检索方法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 1099,
+  "generation_time": "2025-07-31 21:28:39"
+}

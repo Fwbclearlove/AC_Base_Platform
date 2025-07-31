@@ -1,0 +1,72 @@
+---
+
+Improved Keystroke Authentication Accuracy Based on Statistics and Weight
+
+Li Jian, Guo Xiaojing, Li Meiyun, Li Ruifan
+School of Computer, Beijing University of Posts and Telecommunications, Beijing 100876, P. R. China
+
+Abstract: This paper presents a methodology for improving the recognition accuracy of keystroke authentication through feature extraction of keystroke sequences. Outlier data is filtered, probabilities of each input key are calculated, and less informative features are selected. Weights are assigned, and a score for successful authentication is calculated. The use of a third-party dataset enhances objectivity and comparability. Experimental results show the proposed detector is more accurate than others.
+
+I. INTRODUCTION
+
+Many systems still use static password authentication due to its low cost and convenience. However, this is fragile when users are careless or passwords are weak. This paper aims to enhance login-password recognition accuracy using biometric characteristics, which are unique and cannot be stolen, lost, or forgotten. Various classifiers have been developed for Keystroke Dynamics-Based Authentication (KDA). This paper introduces the TOP10 detector and compares it with other methods.
+
+II. METHODOLOGY
+
+Section II describes the methodology to improve keystroke authentication recognition accuracy. Section III presents experiments and results, while Section IV discusses conclusions and further work.
+
+III. PROCEDURE OF TOP10
+
+3.1 Data collection
+Keystroke dynamics analyze typing rhythms to discriminate among users. The password of n bits generates (2n - 1) keystroke eigenvalues, including latency and duration, forming a (2n - 1)-dimensional feature space. A benchmark dataset from 51 subjects typing a strong 10-character password is used.
+
+3.2 Procedure
+Step 1: Keystroke sequences are divided into vectors A_mn(pp) and A_mn(pr) for press and release times, respectively.
+Step 2: Input data is assumed to follow a normal distribution. Outliers beyond three standard deviations are removed, and mean μ and standard deviation σ are calculated.
+Step 3: Probability p(tk) for each element in the vector t is calculated using Eq. (3).
+
+---
+
+[Eq. (3) should be included in the text, but due to the limitations of this platform, the mathematical expression is not cleaned in this response. Please ensure the equation is correctly formatted in the final document.]
+
+In the use of C++ programming with Microsoft Visual Studio 2005, it is convenient to obtain the probability at a specific point in the test vector using the cumulative distribution function from the C++ Boost library. The probability, p(tk), is given by p(tk) = 2 × CDF(μk - ABS(μk - t)) (4), which avoids the complex process of quadrature. The cumulative distribution function (CDF) calculates a variable's probability of being less than or equal to a given value x, which is the integration of the probability density function from negative infinity to x.
+
+We select the 10 minimum probability values from the previous step and denote them as (s1, s2, ..., s10), then weigh them in Step 5. The weighing process involves setting the weight factor as w = 1/n for a given vector (s1, s2, ..., sn), assuming the same occurrence probability in practice. The mean value and standard deviation of the vector are calculated using Eq. (5) and Eq. (6).
+
+The mean (s̄) and standard deviation (σs) determine a normal distribution N(s, σ^2s). A new vector (p1, p2, ..., pn) is obtained by standardizing the given vector (s1, s2, ..., sn) using the mean and standard deviation in Eq. (7). The probabilities of pi in the normal distribution N(s, σ^2s) are calculated using Eq. (8) and named as the probability vector (q1, q2, ..., qn).
+
+The weight vector (w1, w2, ..., wn) is obtained using the probabilities in Eq. (9). Finally, the score evaluating the user is obtained using Eq. (10), which depends on the input password score s for successful authentication.
+
+For comparing the four detectors, a benchmark data set for keystroke dynamics is used, ensuring objectivity and convincing results. The training phase of the detector is conducted on timing vectors from genuine users, and the test phase is conducted on timing vectors from both genuine users and impostors. FRR (False Rejection Rate) and FAR (False Acceptance Rate) are calculated using Eq. (11) and Eq. (12), respectively.
+
+The results of the four detectors, including EER (Equal Error Rate), FAR, FRR, and FAR + FRR, are presented in Table I. The performance of each detector is analyzed, with TOP10 showing the best improvement with an increase in the number of samples. The smallest sum of FAR and FRR is found for the detector proposed in this paper, indicating its efficiency compared to the other three detectors.
+
+This paper presents a methodology that utilizes typing biometrics to enhance login-password authentication. The objective is to propose a good methodology and use a third-party benchmark data set for testing keystroke dynamics. Future work will focus on improving the efficiency of feature template depiction and updating the template for better keystroke familiarity and recognition accuracy.
+
+This paper is part of the project "Key Technology Research of Eavesdropping Detection in the Quantum Security Communication," supported by the National Natural Science Foundation of China under Grant No. 61100205.
+
+References:
+
+[1] TEH P, TEOH A, ONG T, et al. Statistical Fusion Approach on Keystroke Dynamics. Proceedings of the IEEE Conference on Signal-Image Technologies and Internet-Based System, 2007: 918-923.
+[2] LI Jian, JIN Haifei, JING Bo. Improved Security Detection Strategy for Quantum "Ping-Pong" Protocol and Its Security Analysis. China Communications, 2011, 8(3): 170-179.
+[3] KANG P, PARK S, HWANG S, et al. Improvement of Keystroke Data Quality Through Artificial Rhythms and Cues. Computers and Security, 2008: 3-11.
+[4] AKILA M, SURESH K. Improving Feature Extraction in Keystroke Dynamics Using Optimization Techniques and Neural Network. Proceedings of the International Conference on Sustainable Energy and Intelligent Systems, 2011: 891-898.
+
+[5] BAZRAFSHAN F, JAVANBAKHT A, MOJALLALI H. Keystroke Identification with a Genetic Fuzzy Classifier. Proceedings of the 2nd International Conference on Computer Engineering and Technology, 2010: 136-140.
+[6] MARTONO W, ALI H, SALAMI M. Key-Stroke Pressure-Based Typing Biometrics Authentication System Using Support Vector Machines. Computational Science and Its Applications, 2007: 85-93.
+[7] SINGH S, ARYA K. Key Classification: A New Approach in Free Text Keystroke Authentication System. Proceedings of the 3rd Pacific-Asia Conference on Circuits, Communications and System, 2011: 1-5.
+[8] LI Jian, SONG Danjie, GUO Xiaojing, et al. ID Updating Based RFID Mutual Authentication Protocol for Low-Cost Tags. China Communications, 2011, 8(7): 122-127.
+[9] CHANG T, TSAI C, LIN J. A Graphical-Based Password Keystroke Dynamic Authentication System For Touch Screen Handheld Mobile Devices. Journal of Systems and Software, 2012, 85(5): 1157-1165.
+[10] QI Yong, YAO Qingsong, CHEN Ying, et al. Study on RFID Authentication Protocol Theory. China Communications, 2011, 8(1): 65-71.
+
+[...]
+
+Biographies:
+
+Li Jian, Ph.D., associate professor at Beijing University of Posts and Telecommunications. Research interests include quantum information, quantum computation, quantum communication security, electronic commerce, and artificial intelligence. Email: lijian@bupt.edu.cn
+
+Guo Xiaojing, M.S. student at the School of Computer, Beijing University of Posts and Telecommunications. Received B.S. in Network Engineer (Information Security) from Zhengzhou University of Light Industry. Research interests include keystroke authentication, quantum information, information security, and the security of the Internet of Things. Email: bunny-gxj@163.com
+
+Li Meiyun, undergraduate student at the School of Computer, Beijing University of Posts and Telecommunications. Research interests include quantum information, information security, and the security of the Internet of Things. Email: 1031765038@qq.com
+
+Li Ruifan, lecturer at Beijing University of Posts and Telecommunications. Research interests include quantum information, quantum computation, quantum communication security, information security, and artificial intelligence. Email: rfli@bupt.edu.cn

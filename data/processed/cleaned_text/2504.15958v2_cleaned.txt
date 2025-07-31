@@ -1,0 +1,246 @@
+FreeGraftor: Training-Free Cross-Image Feature Grafting for Subject-Driven Text-to-Image Generation
+
+Zebin Yao, Lei Ren, Huixing Jiang, Chen Wei, Xiaojie Wang, Ruifan Li, Fangxiang Feng
+
+Beijing University of Posts and Telecommunications, Li Auto Inc.
+
+Subject-driven image generation synthesizes novel scenes that preserve subject identity from reference images under textual guidance. Existing methods face a trade-off between fidelity and efficiency. We propose FreeGraftor, a training-free framework that uses cross-image feature grafting. FreeGraftor employs semantic matching and position-constrained attention fusion to transfer visual details and includes a noise initialization strategy for geometry priors. Our method demonstrates precise subject identity transfer and text-aligned scene synthesis without fine-tuning or additional training, outperforming zero-shot and training-free approaches. It also extends to multi-subject generation.
+
+Introduction
+
+Text-to-image generation has sparked interest in personalized content creation. Diffusion models can generate diverse imagery but struggle with preserving subject identity without costly optimization. Current solutions face a dilemma between fidelity and efficiency. Tuning-based methods are resource-intensive, while zero-shot methods lack fine visual details. Pre-trained text-to-image models have strong visual representation capabilities that are underutilized. We propose FreeGraftor, a training-free framework that taps into the base model's feature space for cross-image knowledge transfer. FreeGraftor resolves the fidelity-efficiency dilemma in subject-driven generation and maintains competitive efficiency. It preserves individual identities in multi-subject compositions without conflicts or confusion.
+
+---
+
+We present FreeGraftor, a framework for subject-driven image generation that maintains pixel-level detail and allows for flexible text guidance without fine-tuning or training. Our cross-image feature grafting technique transfers visual features from reference subjects to corresponding regions in the generated images through semantic matching and position-constrained attention fusion. We also introduce a noise initialization strategy that preserves the reference geometry for extending our method to multi-subject scenarios.
+
+2 Related Work
+
+2.1 Multimodal-Diffusion Transformer
+
+Text-to-image diffusion models, such as DALL-E 2, Imagen, GLIDE, and eDiff-I, have shown remarkable success. Open-source models like Stable Diffusion and SDXL use U-Net architecture with cross-attention. Diffusion Transformer (DiT) replaces U-Net with a Transformer, demonstrating better scalability and performance. Advanced models like Stable Diffusion 3 and FLUX.1 project text and image tokens into a unified space for joint attention, forming the Multimodal-Diffusion Transformer (MM-DiT). We build upon FLUX.1, where joint attention is computed as:
+
+𝑄= h 𝑄txt;𝑄imgi , 𝐾= h 𝐾txt;𝐾imgi , 𝑉= h 𝑉txt;𝑉imgi 
+
+˜𝑄= 𝑃𝐸⊙𝑄, ˜𝐾= 𝑃𝐸⊙𝐾 
+
+𝐴= softmax  ˜𝑄˜𝐾⊤
+
+ , 𝐻out = 𝐴𝑉 
+
+2.2 Subject-Driven Generation
+
+Subject-driven generation methods can be categorized into tuning-based and zero-shot. Tuning-based methods require per-subject fine-tuning or iterative learning of unique embeddings. Zero-shot methods introduce additional modules for integrating reference subject information but may sacrifice fine details. Training-free approaches like FreeCustom and DiptychPrompting aim for plug-and-play generation but have limitations such as visual distortion and memory overhead.
+
+2.3 Appearance Transfer
+
+Appearance transfer methods combine the appearance of one image with the structure of another. Techniques like Cross-Image, Dragon-diffusion, and DiffEditor inject key-value pairs, while DIFT and Eye-for-an-Eye identify semantic correspondences for feature transfer. However, these are primarily style transfer methods and may not preserve the geometric structure needed for subject-driven generation.
+
+3 Method
+
+3.1 Overview
+
+Our framework consists of three stages: collage construction, inversion, and generation. We construct a collage, invert it to obtain initialization noise, and extract reference features, which are then injected into the generation process.
+
+3.2 Semantic-Aware Feature Grafting
+
+We propose the Semantic-Aware Feature Grafting (SAFG) module, which establishes semantic correspondences and fuses features through position-constrained attention without additional training costs.
+
+---
+
+3.2.1 Semantic Matching
+Early appearance transfer methods directly concatenate keys and values of reference and generated images for cross-image attention. However, this does not guarantee semantic correspondences and may lead to structural distortions. We extend the DIFT approach, which uses cosine similarity-based semantic matching in U-Net-based diffusion models, to MM-DiT-based diffusion models. Given a reference image 𝐼ref and a binary mask 𝑀ref, we extract attention features using rectified flow inversion and match reference 𝐻ref and generated 𝐻gen features. We compute cosine similarity between reference patch 𝑖 and all generated patches 𝑗:
+
+𝑠𝑖𝑗= 𝐻img,ref 𝑖 · 𝐻img,gen 𝑗 / ∥𝐻img,ref 𝑖 ∥2∥𝐻img,gen 𝑗 ∥2
+
+Erase Segment & Paste
+...
+Figure 3: Overview of FreeGraftor...
+
+We apply two filtering strategies: Similarity Threshold Filtering and Cycle Consistency Filtering. This yields the final reference image mask:
+
+𝑀ref = 𝑀ref, pre ⊙𝑀ref, sim ⊙𝑀ref, consi
+
+3.2.2 Position-Constrained Attention Fusion
+After obtaining the filtered reference mask 𝑀ref, we transfer features by aligning position embeddings. We concatenate keys and values of the reference patch with those of the generated patch, along with the position embeddings:
+
+𝐾cat = [𝐾txt;𝐾img,gen;𝐾img,ref 𝑀 ],
+𝑉cat = [𝑉txt;𝑉img,gen;𝑉img,ref 𝑀 ]
+
+Figure 4: Illustration of the Proposed Semantic-aware Feature Grafting (SAFG) Module...
+
+For each retained reference patch, we form a new position embedding:
+
+𝑃𝐸cat = [𝑃𝐸txt; 𝑃𝐸img,gen; {𝑃𝐸img,gen 𝑚(𝑖) | 𝑀ref 𝑖 = 1}]
+
+The revised attention computation is:
+
+˜𝑄= 𝑃𝐸⊙𝑄, ˜𝐾cat = 𝑃𝐸cat ⊙𝐾cat
+
+𝐴+ = softmax  ˜𝑄( ˜𝐾cat)⊤
+ , 𝐻+ out = 𝐴+𝑉cat
+
+Our Semantic-Aware Feature Grafting module binds features between matching patches, facilitating cross-image feature grafting.
+
+3.3 Structure-Consistent Initialization
+To maintain structural integrity and enhance the robustness of semantic matching, we propose a structure-consistent approach.
+
+---
+
+Our initialization strategy creates a collage of the reference subject and employs an inversion technique to derive the initial noise for the generation phase. We use a base text-to-image model to generate a template image that represents the scene described in the text prompt. The reference subject is preserved by replacing the corresponding subject in the template image. This involves localizing the subject with Grounding DINO, segmenting it with SAM, and inpainting with LaMa. The collage becomes the new reference, and we invert it to obtain initial noise, recording the diffusion trajectory for feature grafting.
+
+To prevent overfitting to the reference subject's pose, we introduce a dynamic feature dropout strategy. We reduce feature injection in early diffusion steps while retaining late-step features, using a dropout probability 𝑝= 𝜔𝑡, with 𝜔 controlling the intensity.
+
+Our method is implemented on FLUX.1-dev and compared with previous subject-driven generation approaches. We use datasets from DreamBench, CustomConcept101, and Mix-of-Show for qualitative evaluation and generate 3,000 images for quantitative evaluation using CLIP and DINOv2 metrics.
+
+FreeGraftor, our method, demonstrates superior image and text alignment compared to prior methods. It effectively preserves the identity of reference subjects through structure-consistent initialization and feature grafting. The gentle attention fusion strategy minimizes perturbations to the attention computation.
+
+Quantitative results show that FreeGraftor outperforms other methods in both image and text alignment. Qualitative results for single-subject generation reveal pixel-accurate detail preservation, and ablation variants highlight the importance of each component of our method.
+
+---
+
+---
+
+4.3.2 Multi-Subject Generation
+We compare FreeGraftor with FreeCustom, MS-Diffusion, and OmniGen, as IP-Adapter and DiptychPrompting do not support multi-subject generation. FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects. FreeGraftor maintains all reference details and allows flexible text guidance.
+
+4.4 Ablation Study
+4.4.1 Component Ablation
+We validate the effectiveness of our method's components through several ablation variants. Removing structure-consistent initialization leads to appearance inheritance without structural consistency. The absence of feature grafting results in the lack of identifiable correspondence with the reference subjects. Omitting semantic matching causes rigid poses and artifacts. Replacing position-constrained attention fusion with direct feature replacement introduces incoherence and distortions. Table 2 quantitatively confirms the significance of structure-consistent initialization and feature grafting for image alignment.
+
+4.4.2 Hyperparameter Analysis
+Additional ablation experiments analyze the impact of similarity threshold (𝜏) and cycle consistency threshold (𝛿) on semantic matching. Proper thresholds alleviate mismatches, while overly strict ones discard critical details. Moderate dropout enhances pose flexibility while preserving subject identity, but excessive dropout intensities erode identity retention.
+
+5 Conclusion
+FreeGraftor is a training-free framework for subject-driven generation, utilizing Semantic-Aware Feature Grafting and Structure-Consistent Initialization. It achieves pixel-level detail preservation and flexible text guidance without training or test-time optimization, and extends to multi-subject generation, preserving all visual details.
+
+References
+
+---
+
+---
+
+Yuval Alaluf et al. (2024) introduced cross-image attention for zero-shot appearance transfer. Alaluf et al. (2023) also presented a neural space-time representation for text-to-image personalization. Moab Arar et al. (2023) proposed a domain-agnostic tuning-encoder for fast personalization of text-to-image models. Yogesh Balaji et al. (2022) presented ediff-i, a text-to-image diffusion model with an ensemble of expert denoisers. Yingying Deng et al. (2024) introduced FireFlow for fast inversion of rectified flow for image semantic editing.
+
+Ganggui Ding et al. (2024) proposed Freecustom, a tuning-free customized image generation method for multi-concept composition. Ziyi Dong et al. (2022) presented Dreamartist, towards controllable one-shot text-to-image generation via positive-negative prompt-tuning. Dave Epstein et al. (2023) introduced diffusion self-guidance for controllable image generation. Patrick Esser et al. (2024) scaled rectified flow transformers for high-resolution image synthesis.
+
+Rinon Gal et al. (2022) personalized text-to-image generation using textual inversion, and Gal et al. (2023) presented encoder-based domain tuning for fast personalization of text-to-image models. Sooyeon Go et al. (2024) proposed appearance transfer with semantic correspondence in diffusion models. Yuchao Gu et al. (2023) introduced Mix-of-show for decentralized low-rank adaptation for multi-concept customization of diffusion models.
+
+Miao Hua et al. (2023) presented Dream-Tuner, where a single image is enough for subject-driven generation. Xuhui Jia et al. (2023) proposed taming encoder for zero fine-tuning image customization with text-to-image diffusion models. Alexander Kirillov et al. (2023) introduced Segment Anything for segmenting objects in images.
+
+Nupur Kumari et al. (2023) presented multi-concept customization of text-to-image diffusion. Black Forest Labs (2024) released FLUX, a relevant software tool. Dongxu Li et al. (2023) introduced Blip-Diffusion, a pre-trained subject representation for controllable text-to-image generation and editing. Shilong Liu et al. (2024) grounded DINO for open-set object detection.
+
+Zhiheng Liu et al. (2023) presented Cones 2 for customizable image synthesis with multiple subjects. Chong Mou et al. (2023) introduced Dragondiffusion for enabling drag-style manipulation on diffusion models.
+
+---
+
+---
+
+[23] Mou, Chong; Wang, Xintao; Song, Jiechong; Shan, Ying; Zhang, Jian. 2024. Diffeditor: Boosting accuracy and flexibility on diffusion-based image editing. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 8488–8497.
+
+[24] Nam, Jisu; Kim, Heesu; Lee, DongJae; Jin, Siyoon; Kim, Seungryong; Chang, Seung-gyu. 2024. Dreammatcher: Appearance matching self-attention for semantically-consistent text-to-image personalization. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 8100–8110.
+
+[25] Nichol, Alex; Dhariwal, Prafulla; Ramesh, Aditya; Shyam, Pranav; Mishkin, Pamela; McGrew, Bob; Sutskever, Ilya; Chen, Mark. 2021. Glide: Towards photorealistic image generation and editing with text-guided diffusion models. arXiv preprint arXiv:2112.10741.
+
+[26] Oquab, Maxime; Darcet, Timothée; Moutakanni, Théo; Vo, Huy; Szafraniec, Marc; Khalidov, Vasil; Fernandez, Pierre; Haziza, Daniel; Massa, Francisco; El-Nouby, Alaaeldin et al. 2023. Dinov2: Learning robust visual features without supervision. arXiv preprint arXiv:2304.07193.
+
+[27] Peebles, William; Xie, Saining. 2023. Scalable diffusion models with transformers. In Proceedings of the IEEE/CVF international conference on computer vision. 4195–4205.
+
+[28] Podell, Dustin; English, Zion; Lacey, Kyle; Blattmann, Andreas; Dockhorn, Tim; Müller, Jonas; Penna, Joe; Rombach, Robin. 2023. Sdxl: Improving latent diffusion models for high-resolution image synthesis. arXiv preprint arXiv:2307.01952.
+
+[29] Radford, Alec; Kim, Jong Wook; Hallacy, Chris; Ramesh, Aditya; Goh, Gabriel; Agarwal, Sandhini; Sastry, Girish; Askell, Amanda; Mishkin, Pamela; Clark, Jack et al. 2021. Learning transferable visual models from natural language supervision. In International conference on machine learning. PMLR, 8748–8763.
+
+[30] Ramesh, Aditya; Dhariwal, Prafulla; Nichol, Alex; Chu, Casey; Chen, Mark. 2022. Hierarchical text-conditional image generation with clip latents. arXiv preprint arXiv:2204.06125.
+
+[31] Ren, Tianhe; Liu, Shilong; Zeng, Ailing; Lin, Jing; Li, Kunchang; Cao, He; Chen, Jiayu; Huang, Xinyu; Chen, Yukang; Yan, Feng et al. 2024. Grounded sam: Assembling open-world models for diverse visual tasks. arXiv preprint arXiv:2401.14159.
+
+[32] Rombach, Robin; Blattmann, Andreas; Lorenz, Dominik; Esser, Patrick; Ommer, Björn. 2022. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 10684–10695.
+
+[33] Ronneberger, Olaf; Fischer, Philipp; Brox, Thomas. 2015. U-net: Convolutional networks for biomedical image segmentation. In Medical image computing and computer-assisted intervention–MICCAI 2015. Springer, 234–241.
+
+[34] Rout, Litu; Chen, Yujia; Ruiz, Nataniel; Caramanis, Constantine; Shakkottai, Sanjay; Chu, Wen-Sheng. 2024. Semantic image inversion and editing using rectified stochastic differential equations. arXiv preprint arXiv:2410.10792.
+
+[35] Ruiz, Nataniel; Li, Yuanzhen; Jampani, Varun; Pritch, Yael; Rubinstein, Michael; Aberman, Kfir. 2023. Dreambooth: Fine tuning text-to-image diffusion models for subject-driven generation. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 22500–22510.
+
+[36] Ruiz, Nataniel; Li, Yuanzhen; Jampani, Varun; Wei, Wei; Hou, Tingbo; Pritch, Yael; Wadhwa, Neal; Rubinstein, Michael; Aberman, Kfir. 2024. Hyperdreambooth: Hypernetworks for fast personalization of text-to-image models. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 6527–6536.
+
+[37] Saharia, Chitwan; Chan, William; Saxena, Saurabh; Li, Lala; Whang, Jay; Denton, Emily L; Ghasemipour, Kamyar; Lopes, Raphael Gontijo; Ayan, Burcu Karagol; Salimans, Tim et al. 2022. Photorealistic text-to-image diffusion models with deep language understanding. Advances in neural information processing systems 35, 36479–36494.
+
+[38] Shi, Jing; Xiong, Wei; Lin, Zhe; Jung, Hyun Joon. 2024. Instantbooth: Personalized text-to-image generation without test-time finetuning. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 8543–8552.
+
+[39] Shin, Chaehun; Choi, Jooyoung; Kim, Heeseung; Yoon, Sungroh. 2024. Large-Scale Text-to-Image Model with Inpainting is a Zero-Shot Subject-Driven Image Generator. arXiv preprint arXiv:2411.15466.
+
+[40] Suvorov, Roman; Logacheva, Elizaveta; Mashikhin, Anton; Remizova, Anastasia; Ashukha, Arsenii; Silvestrov, Aleksei; Kong, Naejin; Goka, Harshith; Park, Kiwoong; Lempitsky, Victor. 2022. Resolution-robust large mask inpainting with fourier convolutions. In Proceedings of the IEEE/CVF winter conference on applications of computer vision. 2149–2159.
+
+[41] Tang, Luming; Jia, Menglin; Wang, Qianqian; Phoo, Cheng Perng; Hariharan, Bharath. 2023. Emergent correspondence from image diffusion. Advances in Neural Information Processing Systems 36, 1363–1389.
+
+[42] Vaswani, Ashish; Shazeer, Noam; Parmar, Niki; Uszkoreit, Jakob; Jones, Llion; Gomez, Aidan N; Kaiser, Łukasz; Polosukhin, Illia. 2017. Attention is all you need. Advances in neural information processing systems 30.
+
+[43] Voynov, Andrey; Chu, Qinghao; Cohen-Or, Daniel; Aberman, Kfir. 2023. p+: Extended textual conditioning in text-to-image generation. arXiv preprint arXiv:2303.09522.
+
+[44] Wang, Jiangshan; Pu, Junfu; Qi, Zhongang; Guo, Jiayi; Ma, Yue; Huang, Nisha; Chen, Yuxin; Li, Xiu; Shan, Ying. 2024. Taming rectified flow for inversion and editing. arXiv preprint arXiv:2411.04746.
+
+[45] Wang, Xierui; Fu, Siming; Huang, Qihan; He, Wanggui; Jiang, Hao. 2024. Ms-diffusion: Multi-subject zero-shot image personalization with layout guidance. arXiv preprint arXiv:2406.07209.
+
+[46] Wei, Yuxiang; Zhang, Yabo; Ji, Zhilong; Bai, Jinfeng; Zhang, Lei; Zuo, Wangmeng. 2023. Elite: Encoding visual concepts into textual embeddings for customized text-to-image generation. In Proceedings of the IEEE/CVF International Conference on Computer Vision. 15943–15953.
+
+[47] Xiao, Shitao; Wang, Yueze; Zhou, Junjie; Yuan, Huaying; Xing, Xingrun; Yan, Ruiran; Li, Chaofan; Wang, Shuting; Huang, Tiejun; Liu, Zheng. 2024. Omnigen: Unified image generation. arXiv preprint arXiv:2409.11340.
+
+[48] Xu, Jiazheng; Liu, Xiao; Wu, Yuchen; Tong, Yuxuan; Li, Qinkai; Ding, Ming; Tang, Jie; Dong, Yuxiao. 2024. Imagereward: Learning and evaluating human preferences for text-to-image generation. Advances in Neural Information Processing Systems 36.
+
+[49] Ye, Hu; Zhang, Jun; Liu, Sibo; Han, Xiao; Yang, Wei. 2023. Ip-adapter: Text compatible image prompt adapter for text-to-image diffusion models. arXiv preprint arXiv:2308.06721.
+
+Algorithm 1: FreeGraftor Pipeline
+
+Input: Reference image 𝐼ref, text prompt 𝑃
+Output: Generated image 𝐼gen
+
+Stage 1: Collage Construction
+1. Template Generation 𝐼tmp ← T2I(𝑃)
+2. Template Subject Processing 𝐵tmp ← GroundingDINO(𝐼tmp, 𝑃), 𝑀tmp ← SAM(𝐼tmp, 𝐵tmp), 𝐼erase ← LaMa(𝐼tmp, 𝑀tmp)
+3. Reference Subject Extraction 𝐵ref ← GroundingDINO(𝐼ref, "subject"), 𝑀ref ← SAM(𝐼ref, 𝐵ref), 𝐼crop ← CropWithMask(𝐼ref, 𝑀ref)
+4. Collage Assembly 𝐼collage ← ResizeAndPaste(𝐼erase, 𝐼crop, 𝐵tmp)
+
+Stage 2: Inversion
+5. 𝜖init, Fref ← FireFlow(𝐼collage)
+
+Stage 3: Generation
+6. 𝐼gen ← SAFG(𝜖init, Fref, 𝑃)
+
+B Baselines
+In both qualitative and quantitative comparisons, we only compared our FreeGraftor with training-free approaches and publicly available zero-shot models.
+
+---
+
+---
+
+IP-Adapter introduces a lightweight module that projects visual features from an image encoder into the cross-attention layers of a pre-trained text-to-image diffusion model, integrating image prompts with textual conditions without fine-tuning. MS-Diffusion addresses multi-subject personalization by using layout guidance and grounding tokens to preserve each subject's details in defined regions, minimizing subject conflicts with a specialized cross-attention mechanism. OmniGen unifies diverse image generation tasks within a single diffusion framework based on VAE and transformer, transferring knowledge across tasks and domains without additional encoders. FreeCustom provides a tuning-free approach for generating multi-concept images using a multi-reference self-attention mechanism.
+
+Algorithm 2 outlines the Semantic-Aware Feature Grafting process, which involves semantic matching, filtering, concatenating keys/values, binding positional embeddings, and computing revised attention for modified attention features.
+
+In efficiency analysis, FreeGraftor shows significant improvements over DiptychPrompting in both time and memory efficiency, with a balance between generation quality and computational efficiency. MS-Diffusion achieves the fastest inference speed while OmniGen has the lowest memory footprint among evaluated methods.
+
+The user study reveals that our method is preferred for its higher ratings in text and image alignment. Additional qualitative results demonstrate the method's effectiveness in generating text-aligned novel scenes while maintaining subject fidelity and preserving pixel-level details.
+
+Limitations of FreeGraftor include dependency on external models for reliable results and the significant GPU memory requirement of the FLUX.1 base model, which could be addressed by adapting to lighter models or exploring model distillation and quantization techniques.
+
+---
+
+The FreeGraftor framework has the potential to democratize personalized content creation by enabling users to synthesize high-fidelity images of specific subjects without extensive training. This could empower creators in digital art, advertising, and education to rapidly prototype visual concepts while maintaining intricate details. However, the ease of transferring visual identities raises concerns about misuse, such as creating deceptive imagery for disinformation or unauthorized replication of copyrighted subjects. Despite avoiding the computational costs of per-subject fine-tuning, the use of large pre-trained diffusion models still requires significant energy during inference, necessitating further research into efficient deployment strategies. We propose ethical guidelines to balance creative freedom with safeguards against malicious applications.
+
+Figure 10: Qualitative comparisons
+
+- A backpack on a cobblestone street.
+- A bowl on top of a dirt road.
+- A sneaker on top of a wooden floor.
+- A dog on top of pink fabric.
+- A robot toy in the jungle.
+- A sloth plushie with a tree and autumn leaves in the background.
+
+Figure 11: Single-subject generation results
+
+- A dog with angel wings.
+- A dog playing with a ball, eating a banana, wearing a birthday hat.
+- A dog in a box, getting a haircut, wearing headphones, pink glasses.
+- A purple dog on the floor, in the rain, in a doghouse, wearing a rainbow scarf.
+- A dog riding a skateboard, in a bucket, wearing sunglasses, a yellow shirt.

@@ -1,0 +1,41 @@
+{
+  "document_type": "academic_paper",
+  "title": "未在原文中明确提及",
+  "authors": [
+    "Yelin Kim",
+    "Emily Mower-Provost",
+    "Fangxiang Feng",
+    "Xiaojie Wang",
+    "Ruifan Li"
+  ],
+  "main_topic": "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+  "research_problem": "Improving facial emotion recognition during speech and enhancing cross-modal retrieval",
+  "methodology": "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "Experimental results demonstrate improvements over existing literature",
+  "conclusions": "The extended papers may potentially start new trends in future conferences",
+  "keywords": [
+    "Multimedia",
+    "Deep Learning",
+    "Emotion Recognition",
+    "Speech",
+    "Correspondence Autoencoders",
+    "Cross-Modal Retrieval"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "Facial emotion recognition",
+    "Correspondence autoencoders",
+    "Cross-modal retrieval"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "This document is a special issue inviting extended papers from ACM Multimedia 2014, focusing on deep learning for multimedia and emotional and social signals. It includes two papers that significantly extend their conference versions, one on facial emotion recognition during speech and the other on cross-modal retrieval using correspondence autoencoders. The papers have undergone rigorous review and show experimental improvements over existing literature. The authors have made their code publicly available to facilitate further research, and these papers may set new trends in future conferences.",
+  "file_id": "2820400",
+  "source_type": "cleaned",
+  "text_length": 1368,
+  "generation_time": "2025-07-31 21:14:48"
+}

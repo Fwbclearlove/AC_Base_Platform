@@ -1,0 +1,453 @@
+第28卷 2008年6月
+
+Computer Applications
+
+V01．28
+
+June 2008
+
+文章编号：100l一9081(2008)s1-0104一03
+
+使用TAST码的BI．STCM．ID系统中的星座映射分析
+
+赵传钢1，李睿凡2
+
+(1．北京林业大学信息学院，北京100083；2．北京邮电大学信息工程学院，北京100876)
+
+(chgzha02006@126．corn)
+
+摘要：研究了BI-哪M-ID系统中的星座映射问题。证明了在使用TAST空时编码方案的BI．STCM．ID系统中，基
+
+于最大化编码增益的高维星座映射设计优化问题等价于基于最大化欧式距调和均值的一维星座映射设计优化问题。
+
+关键词：空时编码调制；星座映射；TAST码
+
+中图分类号：TN911．22 文献标志码：A
+
+Analysis of constellation labeling for
+
+bit-interleaved space time coded modulation with TAST code
+
+ZHAO Chuan．gan91，LI Rui．fan2
+
+(1．CoU,ge ofInformation Science and Technology,aeijing Fores打y University,Bering 100083，Ch／na；
+
+2．College of Information E,,ai,,∞rlng,BelOng Univers矗y of Posts and Telecommunications，＆咖曙100876，Ch／na)
+
+Abstract：The problem of constellation mapping in BI-STCM—ID system is investigated．It is proved that，in bit-
+
+interleaved space—time coded modulation systems wit}l iterative decoding，when threaded algebraic space-time code is used，
+
+the problem of optimization of multi-dimensional constellation based on the criterion of maximization of coding gain Call be
+
+reduced to that of optimization of one dimensional constellation based on the criterion of maximization of harmonic mean of
+
+Euclidean distance of constellation point．
+
+Key words：spsPA!一time coded modulation；constellation labeling；Threaded Algebraic Space-Time code(TAST)
+
+近来，空时编码由于能够提供较高的分集增益和频谱效
+
+率而成为研究的热点⋯。对传统的单天线上的比特交织编
+
+码调制系统的星座映射问题已有较多的研究旧J，得到了一些
+
+较好的结果。但是，这些好的星座映射方式对多天线系统
+
+(MIMO)来讲并不一定适用。文献[3]研究了MIMO瑞利块 衰落信道上使用迭代译码的比特交织空时编码问题，并给出
+
+了渐进误比特率的反馈无差错紧界。文献[4]考查了不同星
+
+座映射方式对使用迭代译码的比特交织空时编码调制系统
+
+(BI-STCM—ID)性能的影响，星座映射方式是用随机搜索方法 找到的。文献[5，10]研究了使用Alamouti空时编码方案的
+
+BI—STCM—ID系统的16QAM星座的映射方式。文献[1 1]研究
+
+了BICM-ID系统中8-PSK星座映射问题。文献[5]在最大化
+
+渐进编码增益设计准则下研究了使用正交空时块码
+
+(0STBC)调制的BI—STCM-ID系统中的星座映射方式，并证明
+
+在使用OSTBC码的BI—STCM—ID系统中，最大化编码增益设
+
+计准则与一维星座上最大化欧式距的调和均值设计准则的等
+
+价性。本文讨论了BI-STCM·ID系统在使用空时编码方案时
+
+的星座映射问题，并证明在TAST空时编码方案下，BI．STCM-
+
+ID系统高维星座映射设计的最大化编码增益准则与一维星
+
+座设计的最大化欧氏距调和均值准则是等价的。
+
+1 BI。STCM．ID系统模型
+
+1．1 BI．STCM．ID发端系统
+
+图1给出了BI-STCM—ID系统的结构。假设信息比特序
+
+列经卷积编码器编码后输出编码比特序列C。编码比特序列
+
+c经交织后每K=mQ个比特分为一组宙=[c1，⋯，c‘，⋯，
+
+c‘]=[雷1，⋯，口“，⋯，矿]，这里，c‘∈{0，1}，1≤k≤K且
+
+冒“=[C__1加“，⋯，c“]，1≤乃≤Q。每个比特序列口“按照某
+
+种映射规则p映射到星座z上的某个复信号点s“=p(啻“)，
+
+星座z上有2“个星座点。空时编码器将信息符号向量j=
+
+(s1，⋯，，)’作为输入，形成一个空时码字矩阵z=[膏f]，
+
+l≤i≤川，l≤z≤r。其中，互：表示第t个时刻第i个发送天
+
+线上的发送符号，r表示一个空时码字周期所占的符号周期
+
+数目，ⅣI表示发送天线数。
+
+一嚣卜屯因—岖叫嚣E
+
+(a)BI—sT口泓m发燃构
+
+(b)BI-STCM-ID迭代接收机结构
+
+图1 BI—STCM—ID系统发射机和接收机结构
+
+在本文中，用疋表示空时码字矩阵的集合，那么星座z上
+
+的映射规则弘与空时编码器两者一起定义了一个多维星座上
+
+的映射：M：{0，I}‘一z，V Z∈z。我们用M。(工)表示映射
+
+M的逆映射。如果用R。表示卷积编码的码率，R盯表示空时
+
+编码的码率，那么整个BI-STCM．ID系统的传信率为R=
+
+mR。R。，。为后面表示方便，令磁表示这样的空时码字矩阵疋
+
+的集合，码字工对应的比特映射M。1(工)的第k个位置上比
+
+收稿日期：2008一Ol一18；修回日期：2008-03—25。 基金项目：国家科技支撑项目(2006BADl0A03)。
+
+作者简介：赵传钢(1971一)，男，山东济宁人，讲师，博士，主要研究方向：移动通信、编码理论、人工智能；李睿凡(1976一)，男，江西南昌
+
+人，讲师，博士，主要研究方向：人工智能。
+
+6月 赵传钢等：使用TAST码的BI—STCM—ID系统中的星座映射分析 105
+
+特为6；而z：表示这样的星座信号，的集合，其比特映射
+
+p“(J)的第J}个位置上的比特为b。
+
+1．2 MIMO信道模型
+
+假设接收端有Ⅳ，个接收天线，接收符号可以用一个Ⅳr X
+
+丁的矩阵Y={一}表示，其中一(1≤_，≤Ⅳ，，1≤z≤r)表示
+
+第Z个时刻第J个天线上的接收符号。信道可以由一个
+
+川×Ⅳr的矩阵日={屯J}表示，其中ho(1≤i≤以，l-<Y≤
+
+Ⅳr)表示第i个发送天线至第_『个接收天线之间的衰落因子。
+
+h¨相互独立且服从均值为零、每个维度上的方差为0．5的高 斯分布。另外假设日在一个空时码字z内保持不变，但在不
+
+同的空时码字内独立变化。从而信道模型可以表示为：
+
+Y=上Ⅸ+形
+
+其中矽是一个Ⅳr×T的噪声矩阵，其每个元素均服从均值为
+
+0，每维方差为Ⅳo／2的复高斯分布。
+
+2 BI—STCM—ID星座映射分析
+
+2．1 BI．STCM．ID系统渐进性能
+
+在理想交织假设下，BI-STCM．ID系统的渐进误比特率性
+
+能可以表示为pJ：
+
+·弛一警【(研小(乱】+const
+
+其中西表示信道编码的最小汉明距离。而：
+
+移=【矛1刍r磊l善(幽i=1叮1“州
+
+这里，J】L；表示矩阵A=(工一z)’(工一Z)的非零特征值，
+
+·表示矩阵的共轭转置，r表示矩阵A的秩，K=mN,。Ⅳr。X表
+
+示发送的空时符号，z表示无差错反馈译码符号，即工和Z的
+
+比特映射仅在第k个位置上不同。尺表示码率。
+
+从方程(1)可以看出，对较大的信噪比Eb／N0值，误比特
+
+率曲线的斜率与分集阶数rⅣrd，成正比，且随编码增益
+
+(埘)。。平行移动。显然，为获得最好的误比特率性能，既要
+
+获得最大的分集增益，也要获得最大的编码增益。为获得最
+
+大的分集增益，需要设计取得最大分集增益的空时码字；而要
+
+获得最大的编码增益仃，需要对Ⅳt维星座上的比特映射方
+
+式M进行优化。在讨论具体的BI—STCM—ID系统星座映射以
+
+前，给出星座上关于星座点的欧式距调和均值概念。
+
+定义1欧式距调和均值。对任何星座爿和其上映射p
+
+而言，其P阶欧式距调和均值定义如下：
+
+．． m 1 ．一I 矿㈣，p)2【刍荟磊乏(h-；12)叩】’
+
+其中，和；对应的比特序列肛-1(s)和p_1(；)仅在第k个位置
+
+仃臼，M，Ⅳ，)=[去×
+
+2．2使用TAST码的BI．STCM．ID系统中的星座设计
+
+为了便于表述，首先回顾一下TAST码【60的某些概念。
+
+信息符号向量，首先分成L个不同的子向量毛(f=1，⋯，三)，
+
+其中每个子向量的长度为仉。每个子向量屯单独使用一个子
+
+编码器弘：，t—s≈(i=1，⋯，L)，进行独立编码，这里，Q= QI+Q2+⋯+仇，LT=五+疋+⋯+无。这￡个子编码器
+
+y。，讹，⋯，钆共同组成了一个空时编码器y，且生成的复合码
+
+字y(s)由此￡个子码组成。每个子码7i(J。)被分配到一个线
+
+程(Thread)ff上，此线程以外的所有元素都设置为零。
+
+TAST码的一种构造方法是使用DAST码【7 J。在每个线
+
+程t上，发送一个DAST码，即y；(s；)=纯尬毛在线程‘发
+
+送。这里M是一个Ⅳ‘XⅣ‘的实或复的旋转矩阵，且尬的选
+
+取应使得TAST码取得最大分集，纯的选取应使得TAST码
+
+获得最大分集和最大编码增益。如果一个TAST码使用了川
+
+个发送天线，有三个线程，每次使用信道发送尺个信息符号，
+
+且使用DAST码作为子码，记这种TAST码为，、．L．。。容易验
+
+证，在构造，k 。码时，如果使用的旋转矩阵是满速率的旋转
+
+矩阵哺o，那么，，肌 。的码率为每次使用信道工个信息符号，
+
+即构造出来的是，_“．。码，且有Q。=⋯=仇=L=⋯=
+
+瓦=川。当坂(n=1，⋯，工)中都不存在零元素时，有下面的
+
+定理1 TAST欧式距调和均值准则。对任何TAST码
+
+nⅢ(9。甄J。，⋯，钆峨屯)，如果满足坂(，l=1，⋯，己)
+
+中任何一个矩阵都不存在零元素，则有：
+
+m，axD2=K max∞2瓴,／x，ⅣI札) (4)
+
+K=【詈砉耋t 9。·一槲(I：IIllt I帆一)制r】．1／‘哪’(5)
+
+证明 考虑k=1，⋯，m的情况。对任何TAST码字
+
+FN, ‘(妒l M1 jl，⋯，吼帆屯)，由z和；的定义，可知z=
+
+FN, ￡(妒I M；l’．”，钆ML屯)，其中；l=(；1，s2，⋯，sNt)’。从
+
+而有x—Z=h ￡(9。M1(sl一；1)，⋯，0)。由线程的定
+
+义，可以得到：
+
+(石一Z)‘(石一Z)=I妒I I 2Diag(1肌I．I'l I 2·
+
+I s1一；ll 2，⋯，l ml川I
+
+2 s1一；1 2) (6)
+
+其中m叫．，表示眠的第湃亍第，列的元素。由于jl‘不含零元
+
+素，从而(Z—Z)+(工一Z)是一个满秩矩阵，其非零特征值为
+
+2 s1一；1 2，l≤i≤Ⅳ‘。对其他的l|}，可以得到类似的
+
+结论。从而有：
+
++ 嘶 以 S — S 吼 m
+
+以nⅢ ∑蟛
+
+∑．叫 以∑一
+
+仇 珥以ⅡⅢ 磊磊 磊。磊 ∑叫∑吒
+
+计算机应用 2008车
+
+[去×2(％¨m(‰
+
+札 (n l，，12可‘
+
+m1，uI)4以
+
+s一；I-2以坼+⋯+I妒￡
+
+c彝·％一，≈以薹毫毛I s-；I-2M：')]以“帆)=
+
+[(詈荟善‘州一(ⅡI
+
+Wtldd I)-2Nr)
+
+K∥Q，p，MⅣr)
+
+K=【詈荟L荟Art·州一(鱼I仇一)一珥】““啪)
+
+玛={蠡：((1—1)玎“也+(，一1)m+1)≤k≤
+
+(1—1)aN,+加}；1≤J≤以，1≤l≤L (9)
+
+所以，对编码增益∥在所有映射肘上的优化就转化为
+
+对∥(X，p，ⅣtⅣr)在所有映射p的优化。 证毕。
+
+例1 Tilted-QAM码。Tilted—QAM码是在文献[9]中针
+
+对2发2收的MIMO系统提出的，它能在分集增益和复用之
+
+间达到最优的折中。其构造如下：四个复信号％，i=1，2J=
+
+1，2，利用两个旋转变换将其编码到一个空时码字：
+
+【≯【：珈攀
+
+㈢2【；乙K】 ㈡2，
+
+f口=cos(O·5aretan(0·5)) (13) L6=sin(0．5aretan(0．5))
+
+r。=cos(0·5arctan(2)) (14) 【d=sin(0．5aretan(2))
+
+显然，Tilted—QAM码是一类TAST码，从而定理1成立。
+
+经过计算，我们知道：
+
+K=【业业鼍业产 (15)
+
+随着移动通信对数据业务需求的发展，未来的移动通信
+
+系统采用MIMO技术已成为必然。如何设计空时编码方案以
+
+期获得较好的误码率是MIMO系统研究的一个重点。空时编
+
+码方案的误码率，既与其分集增益有关，也与其编码增益有
+
+关。空时编码方案的编码增益又依赖于高维星座映射设计
+
+(维数为发端天线数)。在使用TAST码的MIMO系统中，由
+
+于定理1的结论，可以极大地降低寻找最优星座映射的复杂
+
+本文讨论了BI—STCM-ID系统中的星座设计问题，特别是
+
+空时编码方案采用TAST编码方案的情形。定理1的结论使
+
+j一；I。2肌以+
+
+Ⅳ‘ m小r、
+
+×(万1荟m砉乏t s-；I-2Ⅳ,N,)]-l／㈨’=
+
+得在使用TAST码的BI—STCM-ID系统中高位星座映射设计
+
+问题得以简化，对BI-STCM—ID系统中的高维星座映射设计有
+
+较好理论意义。对于其他空时编码方案是否有同样的结论，
+
+则是我们下一步研究的课题。
+
+【1】 CHINDAPOL A，RITCEY J A．D∞ign，analysis and perfo"mnee e—
+
+valuation for BICM一1D with square QAM constellations in Rayleigh
+
+fading channels[J]．IEEE Journal on Selected Areas in Communiea-
+
+tions，2001，19(5)：944—957．
+
+【2】 CAIRE G，TARICCO G，BIGLIERI E．Bit interleaved coded modu-
+
+lation[J】．IEEE Transaction On Information Theory。1998。44(5)：
+
+927—946．
+
+【3】HUANG Y。RITCEY J A．Tight BER bounds．for iteratively decoded
+
+bit-interleaved space-time coded modulation[J】．IEEE Communica-
+
+tiom Letter，2004，8(3)：153—155．
+
+【4】 ZHAO L．LAMPE L，HUBER J．Study of bit—inted∞ved coded
+
+space—time modulation with different labeling[C】／／Proceedings of
+
+IEEE Information theory Workshop．Washington：IEEE Pru：镕s，
+
+2003：199—202．
+
+【5】HUANG Y，RITCEY J A．Optimal constellation labeling for item-
+
+tively decoded bit-intell哪ed space—time coded modulation【J】．
+
+IEEE Transaction on Information Theory，2005，51(5)：1865—
+
+【6】 GAMAL H G，DAMEN M O．Universal space-time codes[J】．IEEE
+
+Transactions on Information Theory，2003，49(5)：1097—1119．
+
+[71 DAMEN M O，ABED-MERAIM K，BELFIORE J C．Diagonal alge—
+
+bmic space—time block codes[J】．IEEE Transactions on Information
+
+Theory，2002，48(3)：628—636．
+
+【8】 GIRAUD X。BOUTILLON E，BELFIORE J C．Algebraic tools to
+
+build modulation schemes for fading channels[J1．IEEE Transac—
+
+lions on Information Theory，1997，43(5)：938—952．
+
+[91 YAO H，WORNELL G W．Structured space-time block codes with
+
+optimal diversity multiplexing tradeoff and minimum dehy【C】／／
+
+IEEE Global Communication Conference．Washington：IEEE Pr∞8．
+
+2003：1941—1945．
+
+【101 MOHAMMED A S，HIDAYAT W，BOSSERT M．Multidimensional
+
+16·-QAM constellation labeling of BI—STCM··ID with the Mamonti
+
+scheme[c]／／IEEE wireless communications and networking confer-
+
+ence．Washington：IEEE Pre88，2007：1217—1220．
+
+【1 1】MOHAMMED A S，GONG YONG—XIANG，BOSSERT M．On Mul—
+
+tidimensional BICM-ID with 8-PSK constellation labeling【C】∥
+
+1EEE International Symposium on Personal，Indoor and Mobile Pat-
+
+dio Communications。Washington：IEEE Press，2007：1—5．
+
+∑础 。∑㈨ 。荟 以耳
+
+y≈ 。磊 。蔷

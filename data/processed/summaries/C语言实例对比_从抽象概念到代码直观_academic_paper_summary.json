@@ -1,0 +1,38 @@
+{
+  "document_type": "academic_paper",
+  "title": "C语言实例对比：从抽象概念到代码直观",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "C语言教学中的抽象概念",
+  "research_problem": "将程序思想转化为C语言代码，以及理解C语言的复杂特性，如指针；编码风格、程序设计的健壮性和可读性在教学中易被忽视",
+  "methodology": "实例对比法",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "通过实例代码，指导学生理解、运用C语言，培养良好的编程习惯",
+  "keywords": [
+    "比较法",
+    "C语言",
+    "可读性",
+    "健壮性",
+    "编码风格"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "程序版式",
+    "可读性",
+    "命名规则",
+    "健壮性",
+    "程序设计思路"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文探讨C语言教学中的抽象概念，采用实例对比法，从程序设计、可读性、健壮性等方面指导学生理解、运用C语言，培养良好的编程习惯，提高编程能力。",
+  "file_id": "C语言实例对比_从抽象概念到代码直观",
+  "source_type": "cleaned",
+  "text_length": 897,
+  "generation_time": "2025-07-31 21:32:42"
+}

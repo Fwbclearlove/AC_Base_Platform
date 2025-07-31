@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "Constructing Hierarchical Image-tags Bimodal Representations for Word Tags Alternative Choice",
+  "authors": [
+    "Fangxiang Feng",
+    "Ruifan Li",
+    "Xiaojie Wang"
+  ],
+  "main_topic": "Multi-modal learning, bimodal data representations, image-tags",
+  "research_problem": "Developing a predictive system for word tags using bimodal data: images and texts",
+  "methodology": "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+  "key_innovations": [
+    "Three-level representations in three stages",
+    "Bimodal auto-encoder for level-3 representations",
+    "Data-specific strategy for choosing correct tag words"
+  ],
+  "experimental_results": "Average accuracy of 100% on the private test set, AUC of 0.87533 for the general strategy, and 100% for the data-specific strategy",
+  "conclusions": "The strategy for choosing alternatives is crucial and that moderate representations are sufficient for accurate choices",
+  "keywords": [
+    "Multi-modal learning",
+    "Bimodal representations",
+    "Image-tags",
+    "Word tags",
+    "Restricted Boltzmann Machines",
+    "Siamese network"
+  ],
+  "application_domains": [
+    "Predictive systems for word tags"
+  ],
+  "technical_concepts": [
+    "MPEG-7",
+    "gist descriptors",
+    "Restricted Boltzmann Machines",
+    "Siamese network",
+    "auto-encoder",
+    "Contrastive Divergence"
+  ],
+  "performance_metrics": "Average accuracy of 100%, AUC scores",
+  "summary": "This paper presents a multi-modal learning approach for constructing hierarchical bimodal representations of image-tags for word tags alternative choice. The method involves three stages of representation learning and a data-specific strategy, achieving high accuracy on the private test set and demonstrating the importance of the choice strategy for moderate representations.",
+  "file_id": "1307.1275v1",
+  "source_type": "cleaned",
+  "text_length": 7538,
+  "generation_time": "2025-07-31 21:10:36"
+}

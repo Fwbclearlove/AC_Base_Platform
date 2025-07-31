@@ -1,0 +1,36 @@
+{
+  "document_type": "academic_paper",
+  "title": "探索神经网络深度学习的教学",
+  "authors": [
+    "未在原文中明确提及"
+  ],
+  "main_topic": "深度学习教学",
+  "research_problem": "如何在本科生与研究生课程中有效开展深度学习教学",
+  "methodology": "未在原文中明确提及",
+  "key_innovations": [
+    "未在原文中明确提及"
+  ],
+  "experimental_results": "未在原文中明确提及",
+  "conclusions": "期望本研究能引起同行共鸣，共同推进深度学习教学工作",
+  "keywords": [
+    "智能科学与技术",
+    "深度学习",
+    "教学建议"
+  ],
+  "application_domains": [
+    "未在原文中明确提及"
+  ],
+  "technical_concepts": [
+    "多层感知器",
+    "经典后传算法",
+    "自编码器",
+    "无监督的特征学习",
+    "深度神经网络基础"
+  ],
+  "performance_metrics": "未在原文中明确提及",
+  "summary": "本文讨论了在本科生和研究生课程中有效开展深度学习教学的方法，包括教学内容和建议，以使学生能掌握深度学习的核心内容，理解其研究动机，并应用于实际问题，旨在提升学生对智能科学与技术的兴趣和创新意识。",
+  "file_id": "探索神经网络深度学习的教学",
+  "source_type": "cleaned",
+  "text_length": 519,
+  "generation_time": "2025-07-31 21:34:18"
+}

@@ -1,0 +1,49 @@
+{
+  "document_type": "academic_paper",
+  "title": "Show and Tell More: Topic-Oriented Multi-Sentence Image Captioning",
+  "authors": [
+    "Yuzhao Mao",
+    "Chang Zhou",
+    "Xiaojie Wang",
+    "Ruifan Li"
+  ],
+  "main_topic": "Image captioning",
+  "research_problem": "Single-sentence image captioning often provides insufficient descriptions",
+  "methodology": "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+  "key_innovations": [
+    "Latent Dirichlet Allocation (LDA) for topic mining",
+    "Fusion Gate Unit (FGU) for sentence generation",
+    "Multi-label logistic regression and softmax for training"
+  ],
+  "experimental_results": "Evaluation on standard datasets like Flickr8k, Flickr30k, COCO, and a paragraph dataset from Krause et al. (2017) using metrics including BELU, METEOR, ROUGE L, CIDEr, and Instance Coverage (IC)",
+  "conclusions": "The TOMS model generates topic-oriented multi-sentence captions that capture image details better than single-sentence captions",
+  "keywords": [
+    "Image captioning",
+    "Topic-Oriented Multi-Sentence",
+    "Latent Dirichlet Allocation",
+    "Fusion Gate Unit",
+    "Instance Coverage"
+  ],
+  "application_domains": [
+    "Computer Vision",
+    "Natural Language Processing"
+  ],
+  "technical_concepts": [
+    "LSTM",
+    "FGU",
+    "LDA",
+    "Multi-label logistic regression",
+    "Softmax",
+    "BELU",
+    "METEOR",
+    "ROUGE L",
+    "CIDEr",
+    "Instance Coverage"
+  ],
+  "performance_metrics": "Improved performance in terms of IC and topical consistency",
+  "summary": "This paper introduces a Topic-Oriented Multi-Sentence (TOMS) image captioning model that uses Latent Dirichlet Allocation and a Fusion Gate Unit to generate multiple topic-oriented sentences. The model demonstrates effectiveness in providing complete and semantically rich descriptions of images, as evidenced by experimental evaluations on standard datasets.",
+  "file_id": "0592",
+  "source_type": "cleaned",
+  "text_length": 9105,
+  "generation_time": "2025-07-31 21:09:18"
+}

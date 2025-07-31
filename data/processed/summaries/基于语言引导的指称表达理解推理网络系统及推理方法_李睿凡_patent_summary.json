@@ -1,0 +1,43 @@
+{
+  "document_type": "patent",
+  "title": "基于语言引导的指称表达理解推理网络系统及推理方法",
+  "inventors": [
+    "未在原文中明确提及"
+  ],
+  "patent_number": "未在原文中明确提及",
+  "application_domain": "REC任务",
+  "technical_problem": "如何充分利用指称表达式的指导作用，提高模型性能",
+  "technical_solution": "采用LGR-NET模型，包括文本特征提取器、图像特征提取器、文本特征扩展器(TFE)、跨模态对齐模块(TCA)和跨模态融合模块(TCF)",
+  "key_innovations": [
+    "语言引导推理网络模型(LGR-NET)",
+    "文本特征扩展模块(TFE)",
+    "新颖的跨模态损失"
+  ],
+  "implementation_method": "多模态特征提取、文本特征扩展、文本引导的跨模态对齐、跨模态融合和预测头步骤",
+  "technical_effects": "提高了模型性能，通过文本特征的多角度引导，增强了跨模态对齐",
+  "keywords": [
+    "指称表达式理解",
+    "跨模态推理",
+    "LGR-NET",
+    "TFE",
+    "TCA",
+    "TCF"
+  ],
+  "application_scenarios": [
+    "REC任务"
+  ],
+  "technical_concepts": [
+    "Swin Transformer",
+    "BERT",
+    "FFN",
+    "注意力机制",
+    "多头自注意力机制",
+    "跨模态注意力机制"
+  ],
+  "claims_summary": "未在原文中明确提及",
+  "summary": "本专利提出了一种基于语言引导的指称表达理解推理网络系统及推理方法，通过LGR-NET模型及文本特征扩展等模块，有效提高了跨模态推理性能，应用于REC任务，展现出良好的技术效果。",
+  "file_id": "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡",
+  "source_type": "cleaned",
+  "text_length": 2125,
+  "generation_time": "2025-07-31 21:31:42"
+}

@@ -1,0 +1,70 @@
+EP-BERTGCN: A Simple but Effective Power Equipment Fault Recognition Method
+
+Mingcong Lu, Yusong Zhang, Qu-An Zheng, Zhenyuan Ma, Liqing Liu, Yongping Xiong, and Ruifan Li
+
+ABSTRACT
+Text-based power equipment fault recognition is crucial for power equipment maintenance in the advancement of China’s State Grid. We propose EP-BERTGCN, a method combining pre-trained BERT and Graph Convolutional Network (GCN), to bridge the domain gap between electric power and general natural language processing. EP-BERTGCN constructs a graph among documents and words using pre-trained BERT and combines softmax outputs from BERT and GCNs for classification. Experimental results demonstrate the superior performance of our method over previous baselines.
+
+1 INTRODUCTION
+The growing complexity of China’s State Grid necessitates efficient fault recognition methods for power equipment. Among these, Text-based Power equipment Fault Recognition (TPFR) uses textual fault information for fault detection, merging text classification with domain-specific knowledge. Despite the success of pre-trained models in NLP, there is a lack of models pre-trained on large-scale electric power corpora. We address this by proposing EP-BERTGCN, which enhances our previous C-TextGCN with BERT and domain adaption. EP-BERTGCN shows improved performance in extensive experiments, contributing to the following:
+
+- Introduction of the BERT module into C-TextGCN, forming EP-BERTGCN.
+- Comparative experiments on our collected dataset, demonstrating the method’s superior performance.
+- Domain adaption of the BERT model, further enhancing our method’s capabilities.
+
+2 RELATED WORKS
+Our work spans text-based power equipment fault recognition, graph neural networks, pre-trained BERT, and cross-domain BERT adaption. Previous research in power equipment fault recognition has largely focused on image modalities, with recent inroads into text-based models for TPFR. Graph Convolutional Neural Network (GCN) has been applied to text classification by constructing graphs based on textual relationships. This approach is extended with the integration of pre-trained BERT and domain-specific adaption in our EP-BERTGCN method.
+
+---
+
+TextGCN improves text classification by capturing the relationship between documents and words through graph convolution, utilizing TF-IDF and PMI for edge weighting. Pre-trained models like BERT have revolutionized NLP with the pretrain-finetune paradigm, which includes sub-tasks such as Masked Language Model (MLM) and Next Sentence Prediction (NSP). Improved pre-trained models like Roberta and ALBERT have been introduced. For cross-domain tasks like TPFR, integrating domain knowledge into pre-trained models for better performance is intuitive. Domain adaptation methods, such as those proposed by Ma et al. and Diao et al., aim to reduce the domain gap.
+
+In Section 3, we introduce the EP-BERTGCN framework for power equipment fault recognition. Section 3.1 details the construction of the document word graph, while Section 3.2 discusses the trade-off strategy between BERT and GCN.
+
+Our graph G = (V, E) is built using the complete dataset, with nodes V (|V| = n) and edges E. We use PMI and TF-IDF to determine word-word and word-document edges, respectively. The feature matrix X is initialized with document and word embeddings from a BERT-style model. The GCN model propagates node information iteratively, with each layer’s output given by L(i+1) = σ(˜A L(i) W_i). The loss function is cross-entropy, and the final classifier is a linear combination of the BERT and GCN outputs, balanced by the hyper-parameter λ.
+
+In Section 4, we describe the CPTF dataset, implementation details, baseline models, and report experimental results, including ablation studies. The CPTF dataset, after oversampling to address category imbalance, contains 1484 instances across 12 categories.
+
+---
+
+---
+
+TextRNN integrates RNN into the multi-learning framework, capturing semantic vector representations with task-specific and shared layers. TextRNN_Att employs neural attention with BiLSTM to capture the most important semantic information without using lexical resources or NLP systems. TextRCNN applies a recurrent structure to minimize noise in word representations. DPCNN enhances text region embedding with unsupervised embeddings for improved accuracy. FastText is a simple method for text classification, averaging word features for sentence representations, and is faster than deep learning-based methods. Transformer was initially proposed for sequence-to-sequence problems and has been effective in sentence-level tasks like classification.
+
+Table 1 presents Experimental Results on the CPTF Dataset:
+
+| Model       | Acc     | Macro-F1 | Weighted Macro-F1 |
+|-------------|---------|----------|-------------------|
+| TextRNN     | 0.4950  | 0.4217   | 0.4642            |
+| TextRNN_Att | 0.5538  | 0.5240   | 0.5412            |
+| TextRCNN    | 0.6126  | 0.5800   | 0.5932            |
+| DPCNN       | 0.5753  | 0.5515   | 0.5659            |
+| FastText    | 0.6098  | 0.5870   | 0.5978            |
+| Transformer  | 0.4570  | 0.4245   | 0.4594            |
+| C-TextGCN   | 0.6607  | 0.6324   | 0.6499            |
+| EP-BERTGCN  | 0.6700  | 0.6645   | 0.6633            |
+| EP-Adaptation| 0.6772  | 0.6668   | 0.6713            |
+
+C-TextGCN chooses Chinese character as the basic embedding unit, which is found better than word embedding for text classification using GCN.
+
+All experiments were conducted on the NVIDIA GeForce RTX 1080ti GPU using PyTorch 1.5. The layer of GCN was set to 2, and the feature embedding dimension to 300. Hyper-parameter settings are discussed in Section 4.5.
+
+Domain adaptation was applied to the BERT model, which improved model metrics as shown in Table 1.
+
+An ablation study evaluated the hyper-parameters λ and window size L. The best parameter combinations were λ = 0.4 and L = 5. For λ, the Weighted Macro-F1 Score increased with λ but decreased when λ exceeded 0.4. For the window size L, classification accuracy showed a similar trend, indicating the importance of balance between word co-occurrence information and graph edge relevance.
+
+The EP-BERTGCN model combines the prior knowledge of pre-trained language models and the robustness of GCN for effective text classification in the power field. Domain adaptation of BERT further improved model performance, with the comparison to baseline models demonstrating the effectiveness of our method.
+
+---
+
+ACKNOWLEDGMENTS
+
+Support for this work was provided by the Science and Technology Program of the Headquarters of State Grid Corporation of China. The authors thank anonymous reviewers for their valuable comments.
+
+REFERENCES
+
+[References listed in the original content have been omitted for brevity.]
+
+---
+
+Low-Resource Domain Adaptation. In Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics and the 11th International Joint Conference on Natural Language Processing (Volume 1: Long Papers). 3336–3349. [4] Bushra Jalil, Giuseppe Riccardo Leone, Massimo Martinelli, Davide Moroni, Maria Antonietta Pascali, and Andrea Berton. 2019. Fault Detection in Power Equipment via an Unmanned Aerial System Using Multi Modal Data. Sensors 19, 13 (2019). https://doi.org/10.3390/s19133014 [5] Rie Johnson and Tong Zhang. 2017. Deep pyramid convolutional neural networks for text categorization. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers). 562–570. [6] Armand Joulin, Edouard Grave, Piotr Bojanowski, and Tomas Mikolov. 2016. Bag of tricks for efficient text classification. arXiv preprint arXiv:1607.01759 (2016). [7] Thomas N Kipf and Max Welling. 2016. Semi-supervised classification with graph convolutional networks. arXiv preprint arXiv:1609.02907 (2016). [8] Kamran Kowsari, Kiana Jafari Meimandi, Mojtaba Heidarysafa, Sanjana Mendu, Laura Barnes, and Donald Brown. 2019. Text Classification Algorithms: A Survey. Information 10, 4 (2019). https://doi.org/10.3390/info10040150 [9] Siwei Lai, Liheng Xu, Kang Liu, and Jun Zhao. 2015. Recurrent convolutional neu- ral networks for text classification. In Twenty-ninth AAAI conference on artificial intelligence. [10] Zhenzhong Lan, Mingda Chen, Sebastian Goodman, Kevin Gimpel, Piyush Sharma, and Radu Soricut. 2020. ALBERT: A Lite BERT for Self-supervised Learning of Language Representations. In International Conference on Learning Representations. https://openreview.net/forum?id=H1eA7AEtvS [11] Pengfei Liu, Xipeng Qiu, and Xuanjing Huang. 2016. Recurrent neural network for text classification with multi-task learning. arXiv preprint arXiv:1605.05101 (2016). [12] Yinhan Liu, Myle Ott, Naman Goyal, Jingfei Du, Mandar Joshi, Danqi Chen, Omer Levy, Mike Lewis, Luke Zettlemoyer, and Veselin Stoyanov. 2019. RoBERTa: A Robustly Optimized BERT Pretraining Approach. [13] Xiaofei Ma, Peng Xu, Zhiguo Wang, Ramesh Nallapati, and Bing Xiang. 2019. Domain Adaptation with BERT-based Domain Classification and Data Selection. In Proceedings of the 2nd Workshop on Deep Learning Approaches for Low-Resource NLP (DeepLo 2019). Association for Computational Linguistics, Hong Kong, China, 76–83. https://doi.org/10.18653/v1/D19-6109 [14] Daniel Martinez, Humberto Henao, and Gerard-Andre Capolino. 2019. Overview of Condition Monitoring Systems for Power Distribution Grids. In 2019 IEEE 12th International Symposium on Diagnostics for Electrical Machines, Power Electronics and Drives (SDEMPED). 160–166. https://doi.org/10.1109/DEMPED.2019.8864872 [15] XiPeng Qiu, TianXiang Sun, YiGe Xu, YunFan Shao, Ning Dai, and XuanJing Huang. 2020. Pre-trained models for natural language processing: A survey. Science in China E: Technological Sciences 63, 10 (Oct. 2020), 1872–1897. https: //doi.org/10.1007/s11431-020-1647-3 arXiv:2003.08271 [cs.CL] [16] Juan Ramos. 2003. Using TF-IDF to determine word relevance in document queries. (01 2003). [17] Alexander Rietzler, Sebastian Stabinger, Paul Opitz, and Stefan Engl. 2019. Adapt or Get Left Behind: Domain Adaptation through BERT Language Model Finetun- ing for Aspect-Target Sentiment Classification. arXiv preprint arXiv:1908.11860 (2019). [18] Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. Attention is all you need. Advances in neural information processing systems 30 (2017). [19] Ziyue Xi, Xiaona Chen, Tanvir Almad, and Yinglong Ma. 2019. A Novel Ensemble Approach to Multi-label Classification for Electric Power Fault Diagnosis. In 2019 IEEE 7th International Conference on Computer Science and Network Technology (ICCSNT). 267–271. https://doi.org/10.1109/ICCSNT47585.2019.8962410 [20] Liang Yao, Chengsheng Mao, and Yuan Luo. 2019. Graph Convolutional Networks for Text Classification. In Proceedings of the Thirty-Third AAAI Conference on Ar- tificial Intelligence and Thirty-First Innovative Applications of Artificial Intelligence Conference and Ninth AAAI Symposium on Educational Advances in Artificial Intelligence (Honolulu, Hawaii, USA) (AAAI’19/IAAI’19/EAAI’19). AAAI Press, Article 905, 8 pages. https://doi.org/10.1609/aaai.v33i01.33017370 [21] Yusong Zhang, Mingcong Lu, Liqing Liu, Zhijian Li, Fei Jiao, Yongping Xiong, Qinghua Tang, and Ruifan Li. 2021. Chinese Electric Power Equipment Fault Recognition Based on Graph Convolutional Networks. In 2021 International Conference on High Performance Big Data and Intelligent Systems (HPBD&IS). IEEE, 125–129. [22] Peng Zhou, Wei Shi, Jun Tian, Zhenyu Qi, Bingchen Li, Hongwei Hao, and Bo Xu. 2016. Attention-based bidirectional long short-term memory networks for relation classification. In Proceedings of the 54th annual meeting of the association for computational linguistics (volume 2: Short papers). 207–212.

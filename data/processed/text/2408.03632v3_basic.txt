@@ -1,0 +1,563 @@
+Concept Conductor: Orchestrating Multiple Personalized Concepts in Text-to-Image Synthesis
+
+Zebin Yao, Fangxiang Feng, Ruifan Li, Xiaojie Wang
+
+Beijing University of Posts and Telecommunications {zebin.yao, fxfeng, rfli, xjwang}@bupt.edu.cn
+
+Abstract
+
+The customization of text-to-image models has seen signifi- cant advancements, yet generating multiple personalized con- cepts remains a challenging task. Current methods struggle with attribute leakage and layout confusion when handling multiple concepts, leading to reduced concept fidelity and semantic consistency. In this work, we introduce a novel training-free framework, Concept Conductor, designed to en- sure visual fidelity and correct layout in multi-concept cus- tomization. Concept Conductor isolates the sampling pro- cesses of multiple custom models to prevent attribute leak- age between different concepts and corrects erroneous lay- outs through self-attention-based spatial guidance. Addition- ally, we present a concept injection technique that employs shape-aware masks to specify the generation area for each concept. This technique injects the structure and appearance of personalized concepts through feature fusion in the at- tention layers, ensuring harmony in the final image. Exten- sive qualitative and quantitative experiments demonstrate that Concept Conductor can consistently generate composite im- ages with accurate layouts while preserving the visual details of each concept. Compared to existing baselines, Concept Conductor shows significant performance improvements. Our method supports the combination of any number of concepts and maintains high fidelity even when dealing with visu- ally similar concepts. The code and models are available at https://github.com/Nihukat/Concept-Conductor.
+
+Introduction Text-to-image diffusion models(Nichol et al. 2021; Saharia et al. 2022; Ramesh et al. 2022; Rombach et al. 2022; Podell et al. 2023) have achieved remarkable success in generat- ing realistic high-resolution images. Building on this foun- dation, techniques for personalizing these models have also advanced. Various methods for single-concept customiza- tion(Dong, Wei, and Lin 2022; Ruiz et al. 2023; Gal et al. 2022; Voynov et al. 2023; Alaluf et al. 2023) have been pro- posed, enabling the generation of images of the target con- cept in specified contexts based on user-provided visual con- ditions. These methods allow users to place real-world sub- jects into imagined scenes, greatly enriching the application scenarios of image generation. Despite the excellent performance of existing methods for single-concept customization, handling multiple concepts remains challenging. Current methods(Kumari et al. 2023;
+
+Target dog Target cat
+
+“A cat and a dog on the beach.”
+
+Attribute Leakage
+
+Concept Omission
+
+Subject Redundancy
+
+Appearance
+
+Truncation
+
+Prompt:
+
+Figure 1: Results from existing multi-concept customiza- tion methods (second row) and our method (top right). Our method aims to address attribute leakage and layout con- fusion (concept omission, subject redundancy, appearance truncation), producing visually faithful and text-aligned im- ages.
+
+Liu et al. 2023b; Gu et al. 2024) often mix the attributes of multiple concepts or fail to align well with the given text prompts, especially when the target concepts are visually similar (e.g., a cat and a dog). We categorize these failures as attribute leakage and layout confusion. Layout confusion can be further divided into concept omission, subject redun- dancy, and appearance truncation, as shown in Figure 1. At- tribute leakage denotes the application of one concept’s at- tributes to another (e.g., a cat acquiring the fur and eyes of a dog). Concept omission indicates one or more target con- cepts not appearing in the image (e.g., the absence of the target cat). Subject redundancy refers to the appearance of extra subjects similar to the target concept (e.g., an extra cat). Appearance truncation signifies the target concept’s appearance being observed only in a partial area of the sub- ject (e.g., the upper half of a dog and the lower half of a cat). To address these challenges, we introduce Concept Con- ductor, a novel inference framework for multi-concept cus- tomization. This framework aims to seamlessly integrate multiple personalized concepts with accurate attributes and
+
+arXiv:2408.03632v3 [cs.CV] 9 Sep 2024
+
+layout into a single image based on the given text prompts, as illustrated in Figure 2. Our method comprises three key components: multipath sampling, layout alignment, and concept injection. Multipath sampling allows the base model and different single-concept models to retain their in- dependent denoising processes, thereby preventing attribute leakage between concepts. Instead of training a model con- taining multiple concepts to directly generate the final im- age, we let each single-concept model first focus on gen- erating its corresponding concept. These generated subjects are then integrated into a single image, avoiding interference and conflict between concepts. Layout alignment ensures each model produces the correct layout, fundamentally ad- dressing layout confusion. Specifically, we borrow the lay- out from a normal image and align the intermediate repre- sentations produced by each model in the self-attention lay- ers with it. This reference image is flexible and easy to ob- tain. It can be a real photo, generated by advanced text-to- image models, or even a simple collage created by the user. Concept injection enables each concept to fully inject its visual features into the final generated image, ensuring har- mony. We use shape-aware masks to define the generation area for each concept and inject the visual details (including structure and appearance) of personalized concepts through feature fusion in the attention layers. At each step of the de- noising process, we first use layout alignment to correct the input latent space representation, and then use concept injec- tion to obtain the next representation. Multipath sampling is implemented in both layout alignment and concept injection to ensure the independence of each subject and coordination between different subjects. To evaluate the effectiveness of the proposed method, we create a new dataset containing 30 concepts, covering rep- resentative categories such as humans, animals, objects, and buildings. We also introduce a fine-grained metric specifi- cally designed for multi-concept customization to measure the visual consistency between the generated subjects and the given concepts. Extensive experiments demonstrate that our method can consistently generate composite images with correct layouts while fully preserving the attributes of each personalized concept, regardless of the number or similarity of the target concepts. Both qualitative and quantitative com- parisons highlight the advantages of our method in terms of concept fidelity and alignment with textual semantics. Our contributions can be summarized as follows:
+
+• We introduce Concept Conductor, a novel framework for multi-concept customization, preventing attribute leak- age and layout confusion through multipath sampling and self-attention-based spatial guidance. • We develop a concept injection technique, utilizing shape-aware masks and feature fusion to ensure harmony and visual fidelity in multi-concept image generation. • We construct a new dataset containing 30 personalized concepts across representative categories. Comprehen- sive experiments on this dataset demonstrate the superior concept fidelity and alignment with textual semantics of the proposed Concept Conductor, including for concepts that are visually similar.
+
+Related Work
+
+Text-to-Image Diffusion Models
+
+In recent years, text-to-image diffusion models have ex- celled in generating realistic and diverse images, becom- ing the mainstream approach in this field. Trained on large- scale datasets like LAION(Schuhmann et al. 2022), mod- els such as GLIDE(Nichol et al. 2021), DALL-E 2(Ramesh et al. 2022), Imagen(Saharia et al. 2022), and Stable Dif- fusion(Rombach et al. 2022) can produce high-quality and text-aligned outputs. However, these models struggle to un- derstand the relationships between multiple concepts, result- ing in generated content that fails to fully convey the original semantics. This issue is exacerbated when dealing with vi- sually similar concepts. In this work, we apply our method to the publicly available Stable Diffusion(Rombach et al. 2022), which is based on the Latent Diffusion Model (LDM) architecture. LDM operates in the latent space of a Varia- tional Autoencoder (VAE), iteratively denoising to recover the latent representation of an image from Gaussian noise. At each timestep, the noisy latents zt are fed into the denois- ing network ϵθ, which predicts the current noise ϵθ(zt, y, t) based on the encoded prompt y.
+
+Customization in T2I Diffusion Models
+
+Several works(Ruiz et al. 2023; Gal et al. 2022; Voynov et al. 2023; Alaluf et al. 2023) have customized text-to-image models to generate images of target concepts in new con- texts by learning new visual concepts from user-provided ex- ample images. For instance, DreamBooth(Ruiz et al. 2023) embeds specific visual concepts into a pre-trained model by fine-tuning its weights. Textual Inversion(Gal et al. 2022) represents new concepts by optimizing a text embedding, later improved by P+(Voynov et al. 2023) and NeTI(Alaluf et al. 2023). Custom Diffusion(Kumari et al. 2023) explores multi-concept customization through joint training, but it re- quires training a separate model for each combination and often faces severe attribute leakage. Recent works(Liu et al. 2023b; Gu et al. 2024) propose frameworks that combine multiple single-concept models and introduce manually de- fined layouts in attention maps to aid generation. For exam- ple, Cones 2(Liu et al. 2023b) proposes residual embedding- based concept representations for textual composition and emphasizes or de-emphasizes a concept at a specific loca- tion by editing cross-attention. Mix-of-show(Gu et al. 2024) merges multiple custom models into one using gradient fu- sion and restricts each concept’s appearance area through region-controlled sampling. These works cannot fully avoid interference between concepts, leading to low success rates when handling similar concepts or more than two con- cepts. Additionally, by only manipulating cross-attention and neglecting the impact of self-attention on image struc- ture, these methods often result in mismatched structures and appearances, causing layout control failures. In con- trast, our method prevents attribute leakage by isolating the sampling processes of different single-concept models and achieves stable layout control through self-attention-based spatial guidance.
+
+Spatial Control in T2I Diffusion Models
+
+Using text prompts alone is insufficient for precise control over image layout or structure. Some methods(Avrahami et al. 2023; Li et al. 2023; Zhang, Rao, and Agrawala 2023; Mou et al. 2024) introduce layout conditions by training ad- ditional modules to generate controllable images. For ex- ample, GLIGEN(Li et al. 2023) adds trainable gated self- attention layers to allow extra input conditions, such as bounding boxes. To achieve finer spatial control, Control- Net(Zhang, Rao, and Agrawala 2023) and T2I-Adapter(Mou et al. 2024) introduce image-based conditions like key- points, sketches, and depth maps by training U-Net encoder copies or adapters. These methods can stably control image structure but limit the target subjects’ poses, and these condi- tional images are difficult for users to create. Some training- free methods achieve spatial guidance by manipulating at- tention layers during sampling. Most works(Ma et al. 2024; Kim et al. 2023; He, Salakhutdinov, and Kolter 2023) at- tempt to alleviate attribute leakage and control layout by directly editing attention maps but have low success rates. Several gradient-based methods (Couairon et al. 2023; Xie et al. 2023; Phung, Ge, and Huang 2024) calculate the loss between attention and the given layout and introduce layout information into the latent space representation by optimiz- ing the loss gradients. These methods align the generated image layout with coarse visual conditions (e.g., bounding boxes and semantic segmentation maps), often resulting in high-frequency detail loss and image quality degradation, even with complex loss designs. In this work, we propose extracting layout information from an easily obtainable ref- erence image as a supervisory signal, which not only sta- bly controls the layout but also preserves the diversity of the generated subjects’ poses while avoiding image distortion.
+
+Method
+
+Preliminary: Attention Layers in LDM
+
+LDM employs a U-Net as the denoising network, consisting of a series of convolutional layers and transformer blocks. In each block, intermediate features produced by the convolu- tional layers are passed to a self-attention layer followed by a cross-attention layer. Given an input feature hin, the output feature in each attention layer is computed as hout = AV , where A = softmax(QKT ). Here, Q = fQ(hin), K = fK(c), and V = fV (c) are obtained through learned pro- jectors fQ, fK, and fV , with c = hin for self-attention and c = y for cross-attention. Self-attention enhances the quality of the generated image by capturing long-range dependen- cies in the image features, while cross-attention integrates textual information into the generation process, enabling the generated image to reflect the content of the text prompt. Furthermore, extensive researches (Liu et al. 2024; Patash- nik et al. 2023; Hertz et al. 2022) have shown that self- attention controls the structure of the image (e.g., shapes, ge- ometric relationships), whereas cross-attention controls the appearance of the image (e.g., colors, materials, textures).
+
+tz tz ′
+
+Layout Alignment
+
+Concept Injection
+
+tz −1 ... Tz ... z0
+
+Multipath Sampling
+
+“... in Times Square.”
+
+Output Input
+
+Figure 2: Overview of our proposed Concept Conductor. At each denoising step, the input latent vector zt is first cor- rected to zt′ by the Layout Alignment module. zt′ is then sent to the Concept Injection module for denoising, produc- ing the next latent vector zt−1. Both Layout Alignment and Concept Injection utilize the Multipath Sampling structure. After denoising, our method can generate images that align with the given text prompt and visual concepts.
+
+Preliminary: ED-LoRA
+
+ED-LoRA is a method for single-concept customization, pri- marily involving learnable hierarchical text embeddings and low-rank adaptation (LoRA) applied to pre-trained weights. To learn the representation of a concept within the pre- trained model’s domain, it creates layer-wise embeddings for the target concept’s token following P+(Voynov et al. 2023). Additionally, to capture out-of-domain visual details, it fine-tunes the pre-trained text encoder and U-Net using LoRA(Hu et al. 2021). In this paper, ED-LoRA is used as our single-concept model by default.
+
+Overview of Concept Conductor
+
+Our method comprises three components: multipath sam- pling, layout alignment, and concept injection, as illustrated in Figure 2. At each denoising step, we first correct the input latents zt through layout alignment, obtaining new latents zt′ that carry the layout information from the reference image. Then, we inject the personalized concepts from the custom models into the base model and denoise zt′ to obtain the next latents zt−1. Multipath sampling is implemented in both lay- out alignment and concept injection to ensure the indepen- dence of each concept and coordination between different subjects.
+
+Multipath Sampling
+
+Joint training or model fusion methods often lead to attribute leakage between different concepts (as shown in Figure 1) and require additional optimization steps for each combi- nation. To directly utilize multiple existing single-concept models for composite generation without attribute leakage, we propose a multipath sampling structure. This structure incorporates a base model ϵbase θ and multiple custom models ϵVi θ (implemented with ED-LoRA(Gu et al. 2024)) for per- sonalized concepts Vi, as illustrated in Figure 3. Given several custom models ϵVi θ and a text prompt p, at each timestep t, we maintain the independent denoising pro- cess for each model: ϵVi t = ϵVi θ (zt, t, p). When the prompt
+
+“A dog and a cat in Times Square.”
+
+“A V1 and a V1 in Times Square.”
+
+“A V2 and a V2 in Times Square.”
+
+Base Branch
+
+Custom Branches
+
+V t 2 
+
+V t 1 
+
+base t
+
+Base T2I Model
+
+ED-LoRA for V1
+
+ED-LoRA for V2
+
+V t F 1
+
+base t F
+
+V t F 2
+
+base th
+
+V th 1
+
+V th 2
+
+base θ
+
+V θ 1 
+
+V θ 2 
+
+Figure 3: Illustration of multipath sampling. custom mod- els ϵV1 θ and ϵV2 θ are created by adding ED-LoRA to the base model ϵbase θ . The base prompt and edited prompts are sent to the base model and custom models, respectively. Different models receive the same latent input zt and predict different noises. Self-attention features F base t , F V1 t , F V2 t , and the out- put feature maps of the attention layers hbase t , hV1 t , hV2 t are recorded during this process.
+
+contains similar concepts, models may struggle to distin- guish them, leading to attribute leakage. Therefore, we edit the input text prompt for each custom model to help them fo- cus on generating the corresponding single concept. Given a base prompt pbase, we replace tokens visually similar to the target concept Vi with tokens representing the target con- cept, creating a prompt variant pVi. For example, for the prompt “A dog and a cat on the beach” and concepts of a dog V1 and a cat V2, we edit the text to obtain two modified prompts: pV1 = “A < V1 > and a < V1 > on the beach” and pV2 = “A < V2 > and a < V2 > on the beach”. After editing the prompts, the denoising process for the custom models can be expressed as: ϵVi t = ϵVi θ (zt, t, pVi). Meanwhile, the base prompt is sent to the base model to retain global semantics: ϵbase t = ϵbase θ (zt, t, pbase). Through multipath sampling, each custom model receives only infor- mation relevant to its corresponding concept, fundamentally preventing attribute leakage between different concepts.
+
+Layout Alignment
+
+Existing multi-concept customization methods often suffer from layout confusion (as shown in Figure 1), especially when the target concepts are visually similar or numerous. To address these challenges, we introduce a reference im- age to correct the layout during the generation process. For example, to generate an image of a specific dog and cat in a specific context, we only need a reference image con- taining an ordinary cat and dog. One simple approach to achieve layout control is to convert the reference image into abstract visual conditions (e.g., keypoints or sketches) and then use ControlNet(Zhang, Rao, and Agrawala 2023) or T2I-Adapter(Mou et al. 2024) for spatial guidance, which limits variability and flexibility and may reduce the fidelity
+
+Layout Reference
+
+... ...
+
+ref t F
+
+base t F
+
+1 V t F
+
+2 V t F
+
+layout t Multipath Sampling
+
+layout
+
+t t t z t z z λ ′ = − ⋅∇
+
+ref tz ref z0
+
+ref Tz
+
+DDIM Inversion
+
+Figure 4: Illustration of layout alignment. The self-attention feature F ref t of the layout reference image is extracted through DDIM inversion, which is then used to compute the loss with F base t , F V1 t , and F V2 t , updating the input latent vec- tor zt. For simplicity, the conversion from pixel space to la- tent space is omitted.
+
+of the target concepts. Another approach is to directly inject the full self-attention of the reference image into the gen- eration process, transferring the overall structure of the im- age(Hertz et al. 2022; Kwon et al. 2024). This strictly limits the poses of the target subjects, reducing the diversity of the generated images. Additionally, it requires structural simi- larity between the reference image subjects and target con- cepts to avoid distortions caused by shape mismatches. To align the layout while preserving the structure of the target concepts, we propose a gradient-guided approach, as shown in Figure 4. Given a reference image, we perform DDIM inversion to obtain the latent space representation zref t and record the self-attention features F ref t at each timestep. Similarly, we record the self-attention features of the base model and each custom model during the generation pro- cess, denoted as F base t and F Vi t , respectively, as shown in Figure 2. An optimization objective is set to encourage the generated image’s layout to align with the given layout:
+
+Llayout t = ∥F base t −F ref t ∥2 + α 1
+
+i=1 ∥F Vi t −F ref t ∥2 (1)
+
+where α represents the weighting coefficient, and N denotes the number of personalized concepts. We use gradient de- scent to optimize this objective, obtaining the corrected la- tent space representation:
+
+zt′ = zt −λ · ∇ztLlayout t (2)
+
+where λ represents the gradient descent step size. Through layout alignment, we ensure that the generated image mim- ics the reference image’s layout without any confusion.
+
+Concept Injection After layout alignment, the original latents zt are replaced with the corrected latents zt′, and multipath sampling is used to generate the next latents zt−1. The goal is to inject the subjects generated by different custom branches into the
+
+base th
+
+1 V th
+
+2 V th
+
+base t M
+
+2 V t M V t M 1
+
+Multipath Sampling
+
+V tS 1 V tS 2 base tS
+
+,base V t M 1 ,base V t M 2 ,custom V t M 1 ,custom V t M 2
+
+2 V t M V t M 1 th
+
+Feature Fusion Mask Refinement
+
+replace
+
+Figure 5: Illustration of concept injection, consisting of two parts: (1) Feature Fusion. The output feature maps of the at- tention layers from different models are multiplied by their corresponding masks and summed to obtain the fused fea- ture map ht, which is used to replace the original feature map hbase t . (2) Mask Refinement. Segmentation maps are ob- tained by clustering on the self-attention, and the masks re- quired for feature fusion are extracted from these maps.
+
+base branch to create a composite image. A naive way is to spatially fuse the noise predicted by different models:
+
+ϵfuse t = ϵbase t ⊙M base +
+
+i=1 ϵVi t ⊙M Vi (3)
+
+where ϵbase t represents the noise predicted by the base model, ϵVi t represents the noise predicted by the custom model for concept Vi, and Mbase and MVi are predefined masks. This method ensures the fidelity of the target concepts but often results in disharmonious images. To address this issue, we propose an attention-based con- cept injection technique, including feature fusion and mask refinement, as shown in Figure 5. Spatial fusion is imple- mented on the output feature maps of all attention layers in the U-Net decoder, as self-attention controls the structure of the subjects and cross-attention controls their appearance, both crucial for reproducing the attributes of the target con- cepts. For each selected attention layer, the fused output fea- ture is computed as:
+
+ht = hbase t ⊙M base t +
+
+i=1 hVi t ⊙M Vi t (4)
+
+where M base t = 1 − NS
+
+i=1 M Vi t . Here, hbase t and hVi t represent
+
+the output features of the attention layers of the base model and the custom models, respectively, and M Vi t represents the binary mask of concept Vi at timestep t, specifying the dense generation area of the target concept. The fused feature ht is then sent back to the corresponding position in the base model to replace hbase t and complete the denoising process.
+
+Since the poses of the generated subjects are uncertain, predefined masks may not precisely match the shapes and contours of the target subjects, leading to incomplete ap- pearances. To address this, we use mask refinement to al- low the masks to adjust according to the shapes and poses of the target subjects during the generation process. Inspired by local-prompt-mixing(Patashnik et al. 2023), we use self- attention-based semantic segmentation to obtain the masks of the target subjects. For each target concept Vi, we clus- ter the self-attention AVi t of the custom model ϵVi to obtain a semantic segmentation map SVi t and extract the subject’s mask M Vi,custom t . We perform the same operation on the self-attention Abase t of the base model ϵbase, obtaining the se- mantic segmentation map Sbase t and several masks M Vi,base t , i ∈[1, N], each corresponding to a subject Vi. To recon- cile the shape differences between the subjects in the base model and the custom models, the corresponding masks are merged: M Vi t = M Vi,custom t ∪M Vi,base t . For initialization, we perform DDIM inversion on the ref- erence image and extract the original masks M Vi T from the self-attention layers in the same way. An alternative way is to use grounding models(e.g., Grounding DINO(Liu et al. 2023a)) and segmentation models(e.g., SAM(Kirillov et al. 2023)) to extract masks in the pixel space, which provides higher resolution masks but requires additional computation and storage overhead. Through concept injection, we en- sure the harmony of the image while fully preserving the attributes of the target concepts.
+
+Experiments Dataset We construct a dataset covering representative categories such as humans, animals, objects, and buildings, including 30 personalized concepts. Real and anime human images are collected from the Mix-of-show dataset(Gu et al. 2024), while other categories are sourced from the DreamBooth dataset(Ruiz et al. 2023) and CustomConcept101(Kumari et al. 2023), with 3-15 images per concept. For quantita- tive evaluation, we select 10 pairs of visually similar con- cepts and generate 5 text prompts for each pair using Chat- GPT(OpenAI 2023). We produce 8 samples for each text prompt using the same set of random seeds, resulting in a total of 10×5×8=400 images per method. More details about the dataset are provided in Appendix A.1.
+
+Implementation Details Our method is implemented on Stable Diffusion v1.5, us- ing images generated by SDXL(Podell et al. 2023) as lay- out references. In layout alignment, the key of the first self- attention layer in the U-Net decoder is used as the layout fea- ture Ft. For mask refinement, we cluster the attention proba- bilities in the sixth self-attention layer of the U-Net decoder to extract semantic segmentation maps and scale them to dif- ferent sizes for feature fusion in different attention layers. In all experiments, the weighting coefficient α is set to 1, and the gradient descent step size λ is set to 10. More implemen- tation details are provided in Appendix A.2.
+
+“… at a tea party”
+
+“… on a mountain top”
+
+“… in a shopping mall”
+
+“… in front of a pyramid”
+
+“… in a field of flowers” “… in the living room”
+
+Mix-of-Show Ours Cones 2 Custom Diffusion
+
+“… on a sunny windowsill”
+
+Figure 6: Qualitative comparison of multi-concept customization methods. The results show that our method ensures visual fidelity and correct layout, while other methods suffer from severe attribute confusion and layout disorder.
+
+Baselines We compare our method with three multi-concept cus- tomization methods: Custom Diffusion, Cones 2, and Mix- of-Show. For Custom Diffusion, we use the diffusers(von Platen et al. 2022) version implementation, while for the other methods, we use their official code implementations. All experimental settings follow the official recommenda- tions. For Cones 2 and Mix-of-Show, grounding models are used to extract bounding boxes of target subjects from the layout reference image to ensure consistent spatial condi- tions. To ensure a fair comparison, no additional control models like ControlNet or T2I-Adapter are used.
+
+Evaluation Metrics We evaluate multi-concept customization methods from two perspectives: text alignment and image alignment. For text alignment, we report results on CLIP(Radford et al. 2021) and ImageReward(Xu et al. 2024). For image alignment, we introduce a new metric called Segmentation Similarity (SegSim) to address the limitations of traditional image sim- ilarity methods, which cannot reflect attribute leakage and layout conflicts. SegSim evaluates fine-grained fidelity by using text-guided grounding models and segmentation mod- els to extract subject segments from generated and reference images, then calculating their similarity. Detailed informa- tion is in Appendix A.3. We use CLIP(Radford et al. 2021) and DINOv2(Oquab et al. 2023) to calculate segment simi- larity and report image alignment based on these models. To systematically evaluate omission and redundancy in multi- concept generation, grounding models are used to automat- ically count the number of target category subjects in each generated image.
+
+Ours Mix-of-Show
+
+“Three men on the mountain.” “A cat on the chair, two
+
+dogs on the floor.”
+
+Figure 7: Qualitative comparison in challenging scenarios. Mix-of-Show struggles to handle more than two similar con- cepts or complex layouts, whereas our method demonstrates robust performance even in these complex scenarios.
+
+Qualitative Comparison
+
+We evaluate our method and all baselines on various com- binations of similar concepts, as shown in Figure 6. Custom Diffusion and Cones 2 struggle to retain the visual details of target concepts (e.g., the cat’s fur pattern and the backpack’s design), exhibiting severe attribute leakage (e.g., two identi- cal boots) and layout confusion (e.g., missing or redundant teddy bears). Mix-of-Show demonstrates higher fidelity and
+
+Text-alignment Image-alignment Counting Method CLIP-T IR CLIP-I DINO n < 2 n > 2 CD 0.2939 0.0133 0.8333 0.6829 0.2750 0.1050 Cones2 0.2954 0.0973 0.8415 0.6928 0.3600 0.0650 MoS 0.2962 0.3944 0.8928 0.7961 0.3400 0.0400 Ours 0.3107 1.2542 0.9190 0.8569 0.0075 0.0350
+
+Table 1: Quantitative Comparison of Multi-Concept Cus- tomization Methods. IR stands for ImageReward, CD for Custom Diffusion, and MoS for Mix-of-Show. n < 2 in- dicates omission, while n > 2 indicates redundancy.
+
+mitigates attribute leakage but still faces significant concept omission (e.g., missing cartoon backpack) and appearance truncation (e.g., stitched teddy bear). In contrast, our Con- cept Conductor generates all target concepts with high fi- delity without leakage through multipath sampling and con- cept injection, ensuring correct layout through layout align- ment. Our method maintains stable performance across dif- ferent concept combinations, even when the target concepts are very similar, such as two teddy bears. We further explore more challenging scenarios and com- pare our method with Mix-of-Show, as shown in Figure 7. When handling three similar concepts, Mix-of-Show exhib- ites severe attribute leakage (e.g., both men wearing glasses) and concept omission (e.g., one person missing). Addition- ally, Mix-of-Show struggles with dense layouts, often result- ing in appearance truncation when faced with complex spa- tial relationships (e.g., the upper half of a cat and the lower half of a dog stitched together). In contrast, our method maintains the visual features of each concept without at- tribute leakage and faithfully reflects the layout described in the text, even in these complex scenarios.
+
+Quantitative Comparison
+
+As reported in Table 1, our Concept Conductor significantly outperforms previous methods in both image alignment and text alignment. The improvement in image alignment in- dicates that our method can preserve the visual details of each concept without attribute leakage, primarily due to our proposed multipath sampling framework and attention- based concept injection. The improvement in text align- ment is mainly because our method effectively avoids the layout confusion that leads to unfaithful or disharmonious images through layout alignment, thereby enhancing text- image consistency. The significant reduction in omission and redundancy rates also supports this.
+
+Ablation Study
+
+To verify the effectiveness of the proposed components, we conduct qualitative comparisons of various settings, as shown in Figure 8. In Figure 8(a), removing layout align- ment leads to incorrect layouts, including appearance trun- cation (e.g., two dogs incorrectly stitched together) and con- cept omission (e.g., missing turquoise cup). Figures 8(b) and 8(c) show that disabling either self-attention or cross- attention features during concept injection results in a de- cline in fidelity, indicating that both are crucial for preserv-
+
+Input (a) w/o LA (b) w/o SA (c) w/o CA (d) w/o MR (e) Ours
+
+“… on a farm”
+
+“… on a bar counter”
+
+Figure 8: Qualitative comparison of ablation variants. (a) Results without layout alignment (LA). (b) Results without self-attention (SA) features in concept injection. (c) Results without cross-attention (CA) features in concept injection. (d) Results without mask refinement (MR) in concept injec- tion. (e) Results of our complete model.
+
+Text-alignment Image-alignment Counting Method CLIP-T IR CLIP-I DINO n < 2 n > 2 w/o LA 0.3020 0.8926 0.9021 0.8258 0.0575 0.0625 w/o SA 0.3095 1.2224 0.8940 0.7820 0.0450 0.0475 w/o CA 0.3027 1.2059 0.9051 0.8194 0.0275 0.0550 w/o MR 0.3034 1.2140 0.9148 0.8478 0.0100 0.0375 Ours 0.3107 1.2542 0.9190 0.8569 0.0075 0.0350
+
+Table 2: Quantitative Comparison of Ablation Variants. Ab- lation is performed on four components: Layout Alignment (LA), Self-Attention (SA), Cross-Attention (CA), and Mask Refinement (MR).
+
+ing the visual details of the target concepts. Figure 8(d) demonstrates that ablating mask refinement can lead to a mismatch between the generated subject contours and the target concepts, resulting in incomplete appearances (e.g., chow chow’s fur, corgi’s ears, green cup’s handle). To avoid randomness, we conduct quantitative comparisons of vari- ous settings using the same data and evaluation metrics as in the previous section, with results reported in Table 2. As shown in Table 2, layout alignment effectively avoids omission and redundancy, significantly improving the align- ment of generated images with textual semantics. Feature fu- sion in both self-attention and cross-attention layers leads to higher image alignment, as both are crucial for reproducing the attributes of the target concepts. Mask refinement further improves text alignment and image alignment by optimizing the edge details of the generated subjects.
+
+Conclusion
+
+We introduce Concept Conductor, a novel inference frame- work designed to generate realistic images containing mul- tiple personalized concepts. By employing multipath sam- pling and layout alignment, we addressed the common is- sues of attribute leakage and layout confusion in multi- concept personalization. Additionally, concept injection is used to create harmonious composite images. Experimental results demonstrate that Concept Conductor can consistently generate composite images with correct layouts, fully pre- serving the attributes of each concept, even when the target concepts are highly similar or numerous.
+
+References Alaluf, Y.; Richardson, E.; Metzer, G.; and Cohen-Or, D. 2023. A neural space-time representation for text-to-image personalization. ACM Transactions on Graphics (TOG), 42(6): 1–10. Avrahami, O.; Hayes, T.; Gafni, O.; Gupta, S.; Taigman, Y.; Parikh, D.; Lischinski, D.; Fried, O.; and Yin, X. 2023. Spatext: Spatio-textual representation for controllable image generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 18370–18380. Couairon, G.; Careil, M.; Cord, M.; Lathuiliere, S.; and Ver- beek, J. 2023. Zero-shot spatial layout conditioning for text- to-image diffusion models. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 2174–2183. Dong, Z.; Wei, P.; and Lin, L. 2022. Dreamartist: Towards controllable one-shot text-to-image generation via positive- negative prompt-tuning. arXiv preprint arXiv:2211.11337. Gal, R.; Alaluf, Y.; Atzmon, Y.; Patashnik, O.; Bermano, A. H.; Chechik, G.; and Cohen-Or, D. 2022. An image is worth one word: Personalizing text-to-image generation us- ing textual inversion. arXiv preprint arXiv:2208.01618. Gu, Y.; Wang, X.; Wu, J. Z.; Shi, Y.; Chen, Y.; Fan, Z.; Xiao, W.; Zhao, R.; Chang, S.; Wu, W.; et al. 2024. Mix-of- show: Decentralized low-rank adaptation for multi-concept customization of diffusion models. Advances in Neural In- formation Processing Systems, 36. He, Y.; Salakhutdinov, R.; and Kolter, J. Z. 2023. Localized text-to-image generation for free via cross attention control. arXiv preprint arXiv:2306.14636. Hertz, A.; Mokady, R.; Tenenbaum, J.; Aberman, K.; Pritch, Y.; and Cohen-Or, D. 2022. Prompt-to-prompt im- age editing with cross attention control. arXiv preprint arXiv:2208.01626. Hu, E. J.; Shen, Y.; Wallis, P.; Allen-Zhu, Z.; Li, Y.; Wang, S.; Wang, L.; and Chen, W. 2021. Lora: Low-rank adaptation of large language models. arXiv preprint arXiv:2106.09685. Kim, Y.; Lee, J.; Kim, J.-H.; Ha, J.-W.; and Zhu, J.-Y. 2023. Dense text-to-image generation with attention modulation. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 7701–7711. Kirillov, A.; Mintun, E.; Ravi, N.; Mao, H.; Rolland, C.; Gustafson, L.; Xiao, T.; Whitehead, S.; Berg, A. C.; Lo, W.- Y.; et al. 2023. Segment anything. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 4015–4026. Kumari, N.; Zhang, B.; Zhang, R.; Shechtman, E.; and Zhu, J.-Y. 2023. Multi-concept customization of text-to-image diffusion. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 1931–1941. Kwon, G.; Jenni, S.; Li, D.; Lee, J.-Y.; Ye, J. C.; and Heilbron, F. C. 2024. Concept Weaver: Enabling Multi- Concept Fusion in Text-to-Image Models. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pat- tern Recognition, 8880–8889. Li, Y.; Liu, H.; Wu, Q.; Mu, F.; Yang, J.; Gao, J.; Li, C.; and Lee, Y. J. 2023. Gligen: Open-set grounded text-to-image
+
+generation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 22511–22521. Liu, B.; Wang, C.; Cao, T.; Jia, K.; and Huang, J. 2024. Towards Understanding Cross and Self-Attention in Stable Diffusion for Text-Guided Image Editing. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 7817–7826. Liu, S.; Zeng, Z.; Ren, T.; Li, F.; Zhang, H.; Yang, J.; Li, C.; Yang, J.; Su, H.; Zhu, J.; et al. 2023a. Grounding dino: Marrying dino with grounded pre-training for open-set ob- ject detection. arXiv preprint arXiv:2303.05499. Liu, Z.; Zhang, Y.; Shen, Y.; Zheng, K.; Zhu, K.; Feng, R.; Liu, Y.; Zhao, D.; Zhou, J.; and Cao, Y. 2023b. Cones 2: Customizable image synthesis with multiple subjects. In Proceedings of the 37th International Conference on Neu- ral Information Processing Systems, 57500–57519. Ma, W.-D. K.; Lahiri, A.; Lewis, J. P.; Leung, T.; and Kleijn, W. B. 2024. Directed diffusion: Direct control of object placement through attention guidance. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 38, 4098–4106. Mou, C.; Wang, X.; Xie, L.; Wu, Y.; Zhang, J.; Qi, Z.; and Shan, Y. 2024. T2i-adapter: Learning adapters to dig out more controllable ability for text-to-image diffusion mod- els. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 38, 4296–4304. Nichol, A.; Dhariwal, P.; Ramesh, A.; Shyam, P.; Mishkin, P.; McGrew, B.; Sutskever, I.; and Chen, M. 2021. Glide: To- wards photorealistic image generation and editing with text- guided diffusion models. arXiv preprint arXiv:2112.10741. OpenAI. 2023. ChatGPT. https://openai.com/chatgpt/. Oquab, M.; Darcet, T.; Moutakanni, T.; Vo, H.; Szafraniec, M.; Khalidov, V.; Fernandez, P.; Haziza, D.; Massa, F.; El- Nouby, A.; et al. 2023. Dinov2: Learning robust visual fea- tures without supervision. arXiv preprint arXiv:2304.07193. Patashnik, O.; Garibi, D.; Azuri, I.; Averbuch-Elor, H.; and Cohen-Or, D. 2023. Localizing object-level shape variations with text-to-image diffusion models. In Proceedings of the IEEE/CVF International Conference on Computer Vision, 23051–23061. Phung, Q.; Ge, S.; and Huang, J.-B. 2024. Grounded text-to- image synthesis with attention refocusing. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, 7932–7942. Podell, D.; English, Z.; Lacey, K.; Blattmann, A.; Dockhorn, T.; M¨uller, J.; Penna, J.; and Rombach, R. 2023. Sdxl: Im- proving latent diffusion models for high-resolution image synthesis. arXiv preprint arXiv:2307.01952. Radford, A.; Kim, J. W.; Hallacy, C.; Ramesh, A.; Goh, G.; Agarwal, S.; Sastry, G.; Askell, A.; Mishkin, P.; Clark, J.; et al. 2021. Learning transferable visual models from nat- ural language supervision. In International conference on machine learning, 8748–8763. PMLR. Ramesh, A.; Dhariwal, P.; Nichol, A.; Chu, C.; and Chen, M. 2022. Hierarchical text-conditional image generation with clip latents. arXiv preprint arXiv:2204.06125, 1(2): 3.
+
+Ren, T.; Liu, S.; Zeng, A.; Lin, J.; Li, K.; Cao, H.; Chen, J.; Huang, X.; Chen, Y.; Yan, F.; et al. 2024. Grounded sam: As- sembling open-world models for diverse visual tasks. arXiv preprint arXiv:2401.14159. Rombach, R.; Blattmann, A.; Lorenz, D.; Esser, P.; and Om- mer, B. 2022. High-resolution image synthesis with latent diffusion models. In Proceedings of the IEEE/CVF confer- ence on computer vision and pattern recognition, 10684– 10695. Ruiz, N.; Li, Y.; Jampani, V.; Pritch, Y.; Rubinstein, M.; and Aberman, K. 2023. Dreambooth: Fine tuning text-to-image diffusion models for subject-driven generation. In Proceed- ings of the IEEE/CVF conference on computer vision and pattern recognition, 22500–22510. Saharia, C.; Chan, W.; Saxena, S.; Li, L.; Whang, J.; Denton, E. L.; Ghasemipour, K.; Gontijo Lopes, R.; Karagol Ayan, B.; Salimans, T.; et al. 2022. Photorealistic text-to- image diffusion models with deep language understand- ing. Advances in neural information processing systems, 35: 36479–36494. Schuhmann, C.; Beaumont, R.; Vencu, R.; Gordon, C.; Wightman, R.; Cherti, M.; Coombes, T.; Katta, A.; Mullis, C.; Wortsman, M.; et al. 2022. Laion-5b: An open large- scale dataset for training next generation image-text mod- els. Advances in Neural Information Processing Systems, 35: 25278–25294. von Platen, P.; Patil, S.; Lozhkov, A.; Cuenca, P.; Lambert, N.; Rasul, K.; Davaadorj, M.; Nair, D.; Paul, S.; Berman, W.; Xu, Y.; Liu, S.; and Wolf, T. 2022. Diffusers: State-of-the-art diffusion models. https://github.com/huggingface/diffusers. Voynov, A.; Chu, Q.; Cohen-Or, D.; and Aberman, K. 2023. p+: Extended textual conditioning in text-to-image genera- tion. arXiv preprint arXiv:2303.09522. Xie, J.; Li, Y.; Huang, Y.; Liu, H.; Zhang, W.; Zheng, Y.; and Shou, M. Z. 2023. Boxdiff: Text-to-image synthesis with training-free box-constrained diffusion. In Proceedings of the IEEE/CVF International Conference on Computer Vi- sion, 7452–7461. Xu, J.; Liu, X.; Wu, Y.; Tong, Y.; Li, Q.; Ding, M.; Tang, J.; and Dong, Y. 2024. Imagereward: Learning and evaluating human preferences for text-to-image generation. Advances in Neural Information Processing Systems, 36. Zhang, L.; Rao, A.; and Agrawala, M. 2023. Adding condi- tional control to text-to-image diffusion models. In Proceed- ings of the IEEE/CVF International Conference on Com- puter Vision, 3836–3847.
+
+Appendix
+
+In this supplementary material, we provide additional details on our experimental procedures and analyses. In Appendix A, we describe the experimental settings in detail, including datasets, implementation details, and our proposed evalua- tion metric SegSim. In Appendix B, we present additional experimental results. In Appendix C, we analyze the limita- tions of our method. Finally, in Appendix D, we discuss the potential societal impacts of our approach.
+
+A Experimental Settings A.1 Datasets
+
+We select 30 personalized concepts from previous works(Ruiz et al. 2023; Kumari et al. 2023; Gu et al. 2024), including 6 real humans, 4 anime humans, 5 animals, 2 buildings, and 13 common objects. For quantitative eval- uation, we choose 10 pairs of visually similar concepts, as summarized in Figure 10. We use ChatGPT(OpenAI 2023) to generate 5 text prompts for each pair of concepts. Each prompt includes two subjects and a scene (e.g., “Two toys on a stage.”). The scenes vary across different combinations, covering both indoor and outdoor settings, as detailed in Figure 9.
+
+cat dog teddy bear toy backpack
+
+on a rug in a store on a park bench in a cave in a classroom
+
+on a sunny windowsill
+
+on a playground on a swing in a jungle on a mountain top in a store on a race track on a hotel bed on Mars on a beach
+
+on a table in a forest at a tea party on a stage on a city sidewalk in a sunflower field on a farm on a porch on a rainy street on a rooftop
+
+boot cup chair human(real) human(anime)
+
+in the grass on a desk in the living room
+
+in front of the Eiffel Tower
+
+at a birthday party
+
+in a desert on a chair on the balcony in front of a pyramid
+
+in a field of flowers in a shopping mall
+
+on a bar counter in a garden in front of a waterfall at a carnival
+
+on a wooden floor
+
+on a bathroom sink in the sand in front of an explosion
+
+on a busy street at night on a marble floor in a cafe by a fireplace in a basement at a theater
+
+Figure 9: Scenes used in the prompts in quantitative evalua- tion, covering both indoor and outdoor settings.
+
+In both qualitative and quantitative comparisons, the orig- inal prompts are adapted to fit different methods. For Cus- tom Diffusion, each concept is represented in the “mod- ifier+class” format (e.g., “<monster> toy”), resulting in prompts containing two concepts (e.g., “A <monster> toy and a <robot> toy on a stage.”). For Cones 2, each concept is represented by a two-word phrase (e.g., “monster toy”), leading to prompts with two concepts (e.g., “A monster toy and a robot toy on a stage.”). For Mix-of-Show, each con- cept is represented by two tokens (e.g., “<monster toy 1> <monster toy 2>”), with the original prompt used as the global prompt and two local prompts added (e.g., “A <monster toy 1> <monster toy 2> on a stage” and “A
+
+Paired Concepts Other Concepts
+
+(real)
+
+human (anime) chair toy cup
+
+cat dog teddybear backpack boot
+
+Figure 10: All personalized concepts used in this work. The left side shows paired concepts used in quantitative com- parisons, while the right side shows concepts used in other experiments.
+
+<robot toy 1> <robot toy 2> on a stage”). Our Concept Concept follows the Mix-of-Show representation method but utilizes a base prompt (same as the original prompt) and two prompt variants (e.g., “Two <monster toy 1> <monster toy 2> on a stage” and “Two <robot toy 1> <robot toy 2> on a stage”).
+
+A.2 Implemental Details Pretrained Models and Sampling. We use Stable Dif- fusion v1.5 as the base model, incorporating pre-trained weights from the community. Following Mix-of-show, we utilize Chilloutmix1 for generating real-world concept im- ages and Anything-v42 for anime concept images. Through- out all experiments detailed in this paper, we apply 200-step DDIM sampling to achieve optimal quality. The classifier- free guidance scale is maintained at 7.5. For quantitative evaluation, we generate 8 images per prompt, with random seeds fixed within the range [0, 7] to ensure reproducibility. All experiments were conducted on an RTX 3090.
+
+ED-LoRA. Following Mix-of-Show(Gu et al. 2024), we train LoRAs for all attention layers of both the U-Net and text encoder, utilizing Extended Textual Inversion(Voynov et al. 2023) to learn layer-wise embeddings. All training hy- perparameters remain consistent with those outlined in the original paper. During inference, the trained LoRA weights are integrated with the pre-trained model weights using a coefficient of 0.7.
+
+Layout Alignment. SDXL(Podell et al. 2023) is em- ployed to generate layout reference images according to the base prompt. We perform 1000 steps of DDIM inversion on each layout reference image, recording the self-attention keys at each step as supervision signals. To prevent excessive
+
+1https://civitai.com/models/6424/chilloutmix 2https://huggingface.co/xyn-ai/anything-v4.0
+
+Algorithm 1: Mask Refinement using Self-Attention Maps
+
+Input: Personalized concepts V = {V1, V2, . . . , Vn}, self-attention maps Abase t and AV t = {AV1 t , AV2 t , . . . , AVn t }, old masks M V t+1 = {M V1 t+1, M V2 t+1, . . . , M Vn t+1} at timestep t + 1 Output: Updated masks M V t = {M V1 t , M V2 t , . . . , M Vn t } at timestep t
+
+1 for each concept Vi ∈V do
+
+2 Apply clustering on AVi t using K-Means with cluster numbers from |V | to 2|V | ;
+
+3 Record all segmentations SVi,k t from each clustering k ;
+
+4 D(SVi,k t , M Vi t+1) = |SVi,k t ∩M Vi t+1|/|SVi,k t ∪M Vi t+1|; // Compute matching degree
+
+5 kmax = arg maxk D(SVi,k t , M Vi t+1); // Select the best matching segmentation
+
+6 M Vi,custom t = SVi,kmax t 7 Apply clustering on Abase t using K-Means with cluster numbers from |V | to 2|V |;
+
+8 Record all segmentations Sbase,k t from each clustering k;
+
+9 D(Sbase,k t , M Vi t+1) = |Sbase,k t ∩M Vi t+1|/|Sbase,k t ∪M Vi t+1|; // Compute matching degree
+
+10 kmax = arg maxk D(Sbase,k t , M Vi t+1); // Select the best matching segmentation
+
+11 M Vi,base t = Sbase,kmax t ;
+
+12 M Vi′ t = M Vi,base t ∪M Vi,custom t ; // Combine base and custom model masks
+
+13 M sum t = PN i=1 M Vi′ t ; // Sum all masks
+
+14 Ωt = 1 if M sum t > 1 0 otherwise ; // Binarize the result to get overlapping regions
+
+15 for each concept Vi ∈V do
+
+16 M Vi t = Ωt ⊙M Vi t+1 + (1 −Ωt) ⊙M Vi′ t ; // Replace overlapping regions with old masks
+
+17 return M V t = {M V1 t , M V2 t , . . . , M Vn t }
+
+Algorithm 2: Segmentation Similarity (SegSim) Input: Generated image G, Reference concepts C = {C1, C2, . . . , Cn}, Prompts P = {p1, p2, . . . , pm} Output: Image-alignment Score
+
+18 Gsegments = {} ; // Initialize an empty set for generated segments
+
+19 for each prompt pi ∈P do
+
+20 segments = extract segments(G, pi) ; // Extract segments from G using pi 21 Gsegments = Gsegments ∪segments ; // Union of segments
+
+22 concept similarities = [] ; // Initialize an empty list for concept similarities
+
+23 for each reference concept Ci ∈C do
+
+24 group similarities = [] ; // Initialize an empty list for group similarities
+
+25 for each reference image Rij ∈Ci do
+
+26 Rij segments = extract segments(Rij, pi) ; // Extract subject segments from Rij using a prompt
+
+27 max similarity = 0 ; // Initialize maximum similarity
+
+28 for each segment r ∈Rij segments do
+
+29 for each segment g ∈Gsegments do
+
+30 sim = calculate similarity(r, g) ; // Calculate similarity with pretrained models
+
+31 if sim > max similarity then
+
+32 max similarity = sim ; // Update maximum similarity
+
+33 Append max similarity to group similarities ; // Store maximum similarity
+
+34 group average = 1 |Ci| P|Ci| j=1 group similarities[j] ; // Calculate the average similarity
+
+35 Append group average to concept similarities ; // Store group average
+
+36 Score = 1 |C| P|C| i=1 concept similarities[i] ; // Calculate the average similarity
+
+37 return Score
+
+“a teddy bear”
+
+max( , ) max( , ) Score 2 + = c a d b
+
+Generated:
+
+Reference 1:
+
+Reference 2:
+
+segment
+
+“a teddy bear”
+
+segment
+
+“a teddy bear”
+
+segment
+
+Figure 11: Illustration of our SegSim. a, b, c, and d repre- sent the similarity between two images based on pre-trained scoring models.
+
+guidance that may compromise the target concept structure, layout alignment is implemented only from steps 0 to 60.
+
+Mask Refinement. Masks for feature fusion are dynami- cally adjusted based on the shapes in the self-attention maps. Given N concepts corresponding to N custom models, at time step t, clustering is applied to the self-attention maps of each model to extract segmentation maps. Using K-Means clustering with cluster numbers ranging from N to 2N, all segmentations for each concept are recorded, and the match- ing degree between each segmentation and the mask at time step t + 1 is computed. The segmentation with the highest matching degree, defined as the intersection over union of the two masks, is selected as the new mask for the concept in the custom model at time step t. Similar operations are performed on the base model to obtain new masks for the N concepts at time step t. The new masks from the base model and the corresponding custom models are then combined to form the mask for each concept. To avoid overlap be- tween masks of different concepts, overlapping regions are replaced with the corresponding mask at time step t+1. The mask refinement process is detailed in Algorithm 1. Mask refinement is performed every 5 steps from steps 50 to 80, after which the masks for each concept remain unchanged.
+
+A.3 Segmentation Similarity We propose an evaluation metric, Segmentation Similarity (SegSim), to assess the visual consistency between gener- ated images and multiple personalized concepts by calcu- lating image similarity on subject segments. Specifically, Grounded-SAM(Ren et al. 2024) is used to extract seg- ments of each subject from the generated image using brief prompts (e.g., “a dog” and “a cat”). The same operation is performed on reference images for each target concept. The image similarity between the subject segments of the refer-
+
+ence images and that of the generated image is calculated, taking the maximum value as the similarity for that concept. If there are multiple reference images, these results are av- eraged. Finally, the similarities of all target concepts with the generated image are averaged to obtain the final image alignment score. The overall process of SegSim is illustrated in Figure 11 and detailed in Algorithm 2.
+
+B Additional Experiments B.1 Visualizations Visualization of Layout Alignment To illustrate our lay- out alignment process, we visualize the attention probabil- ities during sampling. For self-attention, we cluster the at- tention scores of the 6th self-attention layer of the U-Net decoder using K-Means, with different clusters marked in distinct colors. As shown in Figure 12, the shapes of the self- attention regions corresponding to different subjects gradu- ally refine during the denoising process. In early steps, the contours of the self-attention regions are relatively smooth, reflecting the general layout of the image. In later steps, the regions become increasingly complex and irregular, captur- ing the structural details of the subjects. Consequently, lay- out alignment is applied only during the first 60 steps to learn the correct layout from the reference image while preserving the structural features of the target concept. By the 60th step, the generated subjects have adopted the shapes of those in the reference image. After ceasing layout alignment, the tar- get subjects gradually revert to their original shapes, while the learned layout is retained. For cross-attention, we visualize the 5th cross-attention layer of the U-Net decoder by averaging the attention scores of all tokens representing foreground objects. As shown in Figure 12, layout alignment encourages the cross-attention of foreground objects to activate in multiple locations, pre- venting concept omission or merging. Initially, the attention activation regions are concentrated in the center of the im- age. During layout alignment, these regions gradually split horizontally into two parts, corresponding to the two target subjects. Layout alignment corrects both self-attention and cross-attention, thus avoiding layout confusion caused by chaotic attention.
+
+Visualization of Mask Refinement We visualize the masks used for feature fusion, as shown in Figure 13. The subject masks are initialized with segmentations extracted from the reference image and remain unchanged during the first 50 steps. Between steps 50 and 80, these masks un- dergo refinement every 5 steps, after which they remain un- changed. Shortly after refinement begins, the masks’ shapes transition from predefined forms to those of the target con- cepts. As refinement progresses, the masks make minor ad- justments to better fit the contours of the generated subjects. Mask refinement dynamically locates each subject’s area on the attention map, ensuring the visual features of the target concepts are fully injected into the generated image.
+
+B.2 Applications Collage-to-Image Generation. We recommend using real photos or generated images as layout references to achieve
+
+Ours w/o LA
+
+Generated:
+
+w/o LA
+
+0 10 20 40 60 80 140 200 steps
+
+Prompt: A dog and a cat on the beach.
+
+dog cat layout Ours w/o LA
+
+Figure 12: Attention visualization of our method and its variant without layout alignment (LA). Rows 1 and 2 show self- attention visualization. Rows 3 and 4 show cross-attention visualization. The last row displays the input prompt, concepts, layout reference, and generated images.
+
+dog cat
+
+0-49 55 65 75 steps
+
+Generated:
+
+layout Ours w/o MR
+
+Figure 13: Visualization of masks used for feature fusion. The first row shows masks for the dog, while the second row shows masks for the cat. The last row displays the layout reference, and the images generated by our method and its variant without mask refinement (MR).
+
+Input Collage Generated
+
+Prompt: “Two backpacks on the beach.”
+
+Figure 14: Collage-to-Image Generation. Our method can also utilize a user-created collage as a layout reference and generate images following the given layout.
+
+reasonable layouts for creating harmonious and natural im- ages. However, existing image layouts may not always align with user preferences. To address the need for uncommon or complex layouts, our method allows users to create a col- lage as a reference image, precisely describing their desired layout. This collage can be easily created with the assistance of powerful segmentation models (e.g., SAM(Kirillov et al. 2023)). As shown in Figure 14, our method generates har- monious images based on the layouts of the collages, pre- serving the visual details of custom concepts even if the lay- outs are unconventional.
+
+Object Placement. Our method can be combined with in- painting techniques3 to replace objects in a given image or add new ones. At each denoising step, DDIM inversion con- verts the image to be edited into a latent space representa-
+
+3https://huggingface.co/docs/diffusers/using-diffusers/inpaint
+
+Concepts
+
+Generated
+
+Input Scene
+
+Prompt: “A cup, a can and three glasses of beverage on the ground.”
+
+Figure 15: Object Placement. Our method can replace ob- jects in a given scene or add new objects to it.
+
+tion. Spatial fusion is then performed between the inverted latent vectors and those generated by our Concept Conduc- tor, based on a user-defined mask. For object replacement, the image to be edited serves as the layout reference. For ob- ject addition, the segmentation of the target concept is pasted onto the original image as the layout reference. As illustrated in Figure 15, our method seamlessly places multiple custom concepts in the target locations of a given scene.
+
+B.3 User Study
+
+Method Text-alignment Image-alignment Custom Diffusion 1.7600 1.5725 Cones 2 2.3899 1.3474 Mix-of-Show 2.1950 2.3200 Ours 4.7400 4.3750
+
+Table 3: User Preference Study. Our method is the most fa- vored by users, receiving the highest ratings for both text alignment and image alignment.
+
+We conduct a user study to further evaluate our method. We assess human preferences for generated images in two aspects: (1) Text Alignment. Participants are shown images generated by different methods along with the correspond- ing text prompts. They rate how well the generated images match the text descriptions on a scale from 1 (not at all) to 5 (completely), representing text alignment. (2) Image Alignment. Participants are shown the generated images and reference images for multiple target concepts. They rate the similarity between the generated images and each target concept on a scale from 1 (not at all) to 5 (very similar). The average similarity scores for different concepts are used as image alignment. If a concept is absent in the generated image, participants are asked to give the lowest score. We
+
+“… on a rug”
+
+“… on a race track”
+
+“… on a porch”
+
+“… on a rooftop”
+
+“… in a desert”
+
+“… in a cafe”
+
+“… on a stage”
+
+“… on the balcony”
+
+“… in a basement”
+
+“… in a theater”
+
+Input Custom Diffusion Cones 2 Mix-of-Show Ours
+
+Figure 16: More qualitative comparisons on multi-concept customization. Our method significantly outperforms all baselines in attribute preservation and layout control.
+
+Concepts Ours Mix-of-Show
+
+Figure 17: Qualitative comparison on more than two concepts. Our method maintains excellent performance even when han- dling up to five concepts.
+
+collected feedback from 20 users, each evaluating 40 gener- ated images. As shown in Table 3, our method significantly outperforms the baselines in both text and image alignment, consistent with the results of automatic evaluations.
+
+B.4 More Qualitative Comparisons
+
+Figure 16 presents additional qualitative results comparing our method with the baselines. Our method ensures cor- rect attributes and layouts across various scenarios, while the baselines suffer from severe attribute leakage and lay- out confusion. Furthermore, we compare the performance of Mix-of-Show(Gu et al. 2024) and our method when han- dling more than two concepts, as shown in Figure 17. As the number of concepts increases, Mix-of-Show encounters sig- nificant issues with missing or mixed subjects. In contrast, our method accurately generates all concepts without confu- sion, demonstrating its effectiveness in attribute preservation and layout control.
+
+C Limitations
+
+Firstly, our method encounters quality issues when generat- ing small subjects. For instance, generated small faces may become distorted and deformed. This issue, also observed in Mix-of-Show(Gu et al. 2024), is primarily due to the VAE losing visual details of the target subjects when compressing the image information. Replacing the base model, increasing image resolution, or changing the layout may help address this problem. Secondly, our method incurs considerable computational
+
+overhead. To avoid high memory usage from parallel sam- pling of multiple custom models, we alternately load dif- ferent concepts’ ED-LoRA weights at each timestep, which reduces inference efficiency. Additionally, performing back- propagation during sampling to update latent representations further increases latency.
+
+D Social Impacts Our Concept Conductor demonstrates significant innova- tion and potential in text-to-image generation, particularly in multi-concept customization. Our method generates images with correct layouts that include all target concepts while preserving each concept’s original characteristics and visual features, avoiding layout confusion and attribute leakage. This technology can provide users with more efficient cre- ative tools, inspiring artistic exploration and innovation, and potentially impacting fields such as advertising, entertain- ment, and education. However, this powerful image genera- tion capability could also be misused for unethical activities, including image forgery, digital impersonation, and privacy invasion. Therefore, it is recommended to incorporate ap- propriate ethical reviews and safeguards to prevent potential misuse and harm to the public. Future research should con- tinue to address these ethical and security issues to ensure the technology’s proper and responsible use.

@@ -1,0 +1,446 @@
+图像描述（Image Captioning）旨在为给定图片生成人类可理解的描述性文本，具有丰富的应用价值。目前最先进的图像描述模型大多基于自回归的文本生成方法，每次推理基于先前生成的单词一个单词，在效率上存在不足。近年来一些非自回归图像描述工作试图改善图像描述的效率，但是在效果上相比现有的自回归基线仍存在差距。本文聚焦于非自回归的图像描述以提升图像描述的效率和效果，并在此基础上进一步研究了具有现实意义的可控图像描述任务。
+
+本文的主要研究工作如下：
+
+1）为了提升非自回归图像描述方法的效率和效果，本文提出了一种结合人类编辑操作的非自回归图像描述方法。包括一个编辑器和适用于编辑操作的两阶段图像描述训练策略。统一编辑器通过一种创新的位置预测操作同时执行多种编辑任务，提高了基于编辑操作生成图像描述的效率。两阶段训练策略优化了图像描述方法中传统的交叉熵和强化学习训练阶段以更好地适应编辑操作。实验结果表明本文提出的方法取得了先进的速度-性能平衡，验证了方法的有效性。
+
+2）在可控图像描述任务中，现有的大部分方法都局限于初步地引入控制信号。对可控图像描述的推理速度和数据集的关注相对较少。首先，本文基于非自回归图像描述方法引入控制信号，提出了一种高速的可控非自回归图像描述方法。其次，本文提出了一种基于大语言模型的风格化数据生成方法，可以缓解目前工作中存在的数据集限制。实验结果表明本文提出的可控非自回归图像描述方法可以高效地完成可控图像描述任务，验证了方法的有效性。
+
+3）基于对非自回归图像描述的研究，本文设计并实现了一个非自回归图像描述系统，该系统支持用户的注册和登录以及图像描述的在线生成，有助于图像描述的社区传播。
+
+自回归方法与非自回归方法生成文本的对比：
+
+自回归方法生成五个单词的句子共需要六步（包括终止符），而非自回归方法生成的步数与句子的长度无关。非自回归方法与自回归方法的主要区别在于，自回归方法每次根据先前已经生成的句子生成一个单词，而非自回归方法并行地处理整个句子，与句子的长度无关，因此可以达到O(1)的时间复杂度。因此，非自回归的生成方法相比自回归生成在速度方面有着巨大的优势。
+
+图像描述中存在的模式崩溃、风格单一的问题的例子：
+
+生成的可控性问题来自生成式任务中广泛存在的“模式崩溃”问题。作为生成式模型，目前最先进的图像描述模型普遍面临不同程度的模式崩溃问题，即在很大的模式空间中，模型收敛到了某几个固定的简单模式。在图像描述中，这个问题体现为生成收敛在某几个固定的句式中，如图1-3所示，生成的结果明显地局限在了几个简单的“there are _ in _”句式中。
+
+自回归图像描述：
+
+图像描述的研究由来已久，早期的图像描述方法主要基于模板或检索生成。最早的基于神经网络的图像描述模型Neural Image Captioning generator（NIC）由Vinyals等人于2014年提出，采用了编解码器架构，以卷积神经网络（CNN）作为图像编码器，长短期记忆网络（LSTM）作为文本解码器，取得了当时最好的表现。随后，随着对模型各方面能力的不断探索，更多的基于神经网络的图像描述模型被提出。以编解码器模型的角度来看图像描述模型，可以将其拆解为三个部分：图像编码器、文本解码器（本节中将专注于自回归的文本解码器）和整体训练策略。本小节中，本文将从这三个部分出发，简述近年来自回归图像描述的相关工作。
+
+非自回归图像描述：
+
+近年来，图像描述工作开始转向纯Transformer结构，其强大的学习能力大大提高了图像描述模型的表现。这些工作在训练时通过上三角掩码实现了并行的语言模型训练，而解码时，这些模型仍然使用了串行自回归的解码方式，即每个时间步只预测一个词，虽然这样做得到了很好的效果，但无疑是对并行一种浪费，在效率上有很大的优化空间，因此非自回归的Transformer解码器被提出用于并行解码。非自回归是与自回归相对的概念，表示生成文本方式的改变，自回归生成在每一个时间步都只能利用前t-1步生成的文本生成第t个单词，即串行生成，非自回归生成方法致力于通过不同方式向生成中引入了一定程度的并行性，在图像描述中，目前被提出的非自回归模型可以被分为三类：单步非自回归图像描述、迭代细化（多步）非自回归图像描述、半自回归图像描述。
+
+本文主要研究了基于编辑的非自回归图像描述方法和可控非自回归图像描述方法。
+
+在基于编辑的非自回归图像描述方面，提出了Unified Edit-based Non-autoregressive Image Captioning (UniCap)方法，该方法利用统一的编辑任务简化了编辑操作，并提出了冲突消解算法解决无效输出问题。为了适应编辑操作，提出了多路径训练方法和阈值采样方法。
+
+在可控非自回归图像描述方面，提出了Controllable Unified Edit-based Non-autoregressive Image Captioning (ConUniCap)方法，通过引入可学习的张量提示词作为控制信号，并利用大语言模型生成风格化数据。同时，提出了大语言模型数据校验机制以保证数据质量。
+
+在MSCOCO数据集上进行了实验，结果表明UniCap方法实现了8倍的速度提升，并在非自回归图像描述中达到了最先进的效果。ConUniCap方法也验证了控制图像描述风格的能力，并可以简单地拓展到其他风格。
+
+第二章 相关技术
+
+2.1 深度学习技术
+
+2.1.1 Transformer技术
+
+Transformer技术由Vaswani等人在2017年提出，深刻地改变了深度学习领域的方方面面。先前的循环神经网络在计算过程中需依赖上一时刻的输出，无法实现计算的并行处理，导致训练效率低下。如LSTM等循环神经网络架构仍面临梯度消失或爆炸的问题。针对这些问题，Transformer通过多头注意力机制来捕获序列之间的上下文依赖，有效降低了训练的复杂度，实现了训练过程的并行化，近年来逐步成为了深度学习领域的基础模型。
+
+2.1.2 编解码器结构
+
+编解码器架构是一种通用的神经网络架构，由编码器与解码器两大部分组成。编码器主要负责把输入数据转换成一种中间表示形式，而解码器则将此中间表示解码，以产生最终的输出结果。编解码器架构通过更改输入和输出的定义可以拓展出多种多样的功能，例如在自然语言处理领域，编码器-解码器架构可以用于机器翻译，其中编码器一种语言的文本输入转换为中间表示，而解码器则将该表示转换成另一种语言的文本输出。这种架构也被广泛应用于语音识别和文本生成等任务中，如生成式对话系统和文本摘要生成。在图像处理领域，编码器-解码器架构可以用于图像分割任务中，编码器负责提取图像的特征信息，而解码器则基于这些特征生成图像的每个像素所属的类别。这种方法不仅适用于静态图像，也可以扩展到视频内容的处理，如视频分割和动作识别。此外，广泛应用的Transformer架构和在变分自编码器(VAE)也遵循编码器-解码器架构。
+
+2.2 视觉特征编码
+
+视觉特征编码器的目标是提取图像中的特征到一系列向量中，根据提取的特征的种类不同，可以分为初步的全局视觉特征和更细粒度的目标检测视觉特征。根据网络架构不同，近年来主要使用卷积神经网络或者Transformer网络提取图像特征。本节将从这两个角度分类对视觉特征的编码进行讨论。
+
+2.2.1 全局视觉特征
+
+2.2.1.1 基于卷积神经网络的视觉特征编码
+
+卷积神经网络是最具代表性的神经网络模型，主要代表工作包括ResNet，GoogLeNet等，在提取图像特征方面有极大的优势。一个卷积神经网络通常由卷积层、池化层、归一化层和其它部件叠加组成。其中主要发挥特征提取作用的是卷积层和池化层。卷积层通过滑动具有预定步长的卷积核模板对特征图进行分析，以提取新的特征图。这种操作处理的特征图是三维张量，最初来源于经过预处理的图像像素，其中三维分别代表图像的长度、宽度及RGB颜色通道。卷积核的参数共享机制相较于全连接层的矩阵运算，既降低了计算量，使得对更高分辨率图像的处理成为可能，又增强了模型对图像平移不变性特征的捕捉能力，从而提升了模型的泛化性。以二维图像为例，当应用二维时，卷积计算可以形式化为：
+
+S(i,j) = (l * K)(i,j) = Σm,n l(m,n)K(i+m,j+n)
+
+其中，l代表输入特征图，K代表卷积核，S代表输出特征图。
+
+池化层也可以称为下采样操作，通过采集临近特征图区域的统计数据作为样本，旨在从经卷积处理的特征图中筛选信息并进行过滤。此过程的一个显著属性是导致特征图维度，即长度和宽度的减少。类似于卷积过程，池化要求预设其作用域及步进长度。主要的池化技术包括最大池化和平均池化。最大池化一个邻近区域(如2X2)内的最大值来更新特征图的相应位置，而平均池化通过计算邻近区域内的平均值来进行更新。
+
+归一化由Sergey等人提出，广泛应用于卷积神经网络中，批归一化的原理是将卷积神经网络中每一层输出的方差和均值归一化。批归一化的目的是减少训练过程中网络层输入分布的变化。通过对每一批数据进行归一化处理，可以使网络更加稳定，加快训练速度，并有助于减轻过拟合。具体来说，批归一化在每个训练批次中，对于给定的特征，在批次的维度上计算均值和方差，然后使用这些统计量来归一化该批次的数据，使其均值接近0且方差接近1。此外，批归一化还引入了两个可训练参数，以恢复在某些情况下可能需要的网络表达能力。归一化层通常置于卷积层(或全连接层)的输出和激活函数的输入之间。这种做法可以有效减少训练过程中梯度消失或梯度爆炸的问题，从而允许使用更高的学习率，加速网络的收敛。
+
+2.2.1.2 基于Transformer的视觉特征编码
+
+Transformer架构首先在纯文本领域被提出，由于其强大的建模能力迅速被拓展到其它场景，比如图片的特征抽取，早期被提出的纯Transformer图像特征编码器是Dosovitskiy等人提出的ViT模型，ViT虽然不是第一篇将Transformer应用在视觉任务的论文，但是因为其模型简单且效果好，可扩展性强，被广泛应用于各种视觉任务中。
+
+ViT将输入图片分为多个块(16x16)，再将每个块投影为固定长度的向量送入模型，后续编码器的操作和原始Transformer中完全相同。在对这些块的处理中，采用了与处理文本类似的方法，这一点也体现了Transformer架构的通用性和灵活性。
+
+在将图像分割成块之后，ViT会将这些图像块展平(即将二维像素矩阵转一维向量)，并通过一个线性层或简单的全连接层将其映射成一个固定长度的向量。这一过程可以看作是对每个图像块进行特征提取。然后，为了使模型能够理解这些图像块之间的相对位置，ViT还会向每个块的特征向量中添加位置编码。这与Transformer在处理文本数据时添加位置编码的做法是一致的，目的是提供序列中不同元素的位置信息。
+
+ViT是Transformer思想在视觉领域的直接应用，直接对全部的块应用注意力。然而，图像天然具有局部性，卷积神经网络中的卷积操作也天然蕴含了局部性质。因此，兼容局部特征处理的视觉Transformer在研究中被提出，目前最流行的是Liu等人提出的Swin Transformer。Swin Transformer使用了类似卷积神经网络中的多尺度特征，即特征图包括对图像下采样4倍、8倍及16倍的特征。而且Swin Transformer首次提出了窗口多头自注意力(Windows Multi-Head Self-Attention)机制，使得自注意力的范围局限在窗口中，减少了计算量，额外地，为了保证全局的特征传递，作者还提出了移位窗口自注意力(Shifted Windows Multi-Head Self-Attention)的概念，通过应用移位窗口自注意力，可以在得到窗口局部化的优势的同时保留全局特征流动的能力。
+
+2.2.2 目标检测视觉特征
+
+全局的图像特征是粗粒度的，然而真实图像中往往存在复杂、多层次多尺度的细粒度信息，目标检测任务就是对这种信息的一种捕捉过程，为了在图像描述和其它跨模态任务中应用细粒度的信息，目标检测模型经常被用于各种交叉领域任务中以提取细粒度的区域特征。与全局特征同样，目标检测视觉特征也可以通过卷积神经网络或者Transformer网络实现。
+
+2.2.2.1 基于卷积神经网络的目标检测
+
+Girshick等人提出的R-CNN是最早引入卷积神经网络的目标检测算法，整体的网络结构如图2-2所示，R-CNN由三个模块组成，包括候选框生成，特征提取和分类模块，候选框生成模块首先在图片中找到很多的候选框(Proposal)，然后特征提取模块基于CNN提取每个候选框的图像特征，分类模块则将每个框的图像特征通过全连接层后执行分类任务，判断是否是待检测的目标，后续的大部分基于卷积神经网络的目标检测模型都沿用了R-CNN的架构。
+
+R-CNN中存在很多的不足，其中仍然存在很多传统的机器学习算法，如通过选择性搜索(Selective Search)获得候选区域，选择性搜索是一种在传统图像处理领域中采用的图像层次分割技术，先在图像中创建初始区域，然后基于颜色、纹理等特征将这些区域合并，从而实现图像区域的最终分割。分类任务也是通过传统的支持向量机进行。其次，通过选择性搜索获得的候选区域数量级往往很大，带来了巨大的成本问题。
+
+为了解决R-CNN的不足，Girshick等人提出了Fast R-CNN，一种端到端的目标检测方法，相比R-CNN，Fast R-CNN首先计算一次全局的卷积特征，然后直接映射到选择性搜索的候选框中，避免重复计算，同时在候选框集合上应用了非极大值抑制(Non-Maximum Suppression)算法以压缩候选框的数量，提升了R-CNN推理的速度。最后，Fast R-CNN还将R-CNN中应用的支持向量机替换为基于神经网络的分类器。实现了端到端的训练。
+
+Fast R-CNN实现了端到端的训练和推理，但候选框的提取仍然采用的是选择性搜索，非常耗时，为了支持目标检测的实时应用，替换选择性搜索是必须的，因此Ren等人提出了Faster R-CNN，在其中首次应用了区域提案网络(Region Proposal Network)以基于卷积神经网络生成候选框，为了整体结构的轻量化，区域提案网络的权重是与特征提取使用的卷积神经网络共享的。
+
+目前图像描述领域最常用的目标检测特征均基于Faster R-CNN，如Anderson等人提出了一个用于图像描述的版本，使用在ImageNet上分类预训练的ResNet。
+
+清洗后的内容如下：
+
+1. 使用101作为初始化权重，在Visual Genome数据集上进行训练，加入额外预测属性类别的训练输出，帮助目标检测模型学习更好的特征表达。
+
+2. 近年来，目标检测领域取得巨大进展，其中之一是以加等人提出的Transformer目标检测器DETR。DETR使用完全不同的编码器-解码器架构实现目标检测任务，不需要传统的候选框机制。
+
+3. DETR的基本流程包括输入图像，通过卷积神经网络获取下采样后的特征图，加入位置编码后展平为一维特征图。后续过程与正常的Transformer编码器-解码器架构基本相同，不同之处在于解码器的输入是一系列可学习的向量，称作查询。
+
+4. DETR将解码器每个位置的输出都通过预测头翻译为框和对象类别，完成目标检测的任务。由于查询的数量往往超过图中对象的数量，使用二部图匹配算法计算损失。
+
+5. DETR的训练通过基于匈牙利算法的匹配和传统目标检测的框回归损失、目标分类损失，保证了无需候选框的高效推理，在推理速度上远高于传统的Faster R-CNN。
+
+6. 在自然语言处理领域，评价两个句子相似度的常见指标包括BLEU、CIDEr、ROUGE、METEOR等。这些评价方法主要通过n元语法分析文本，依据n的大小，把连续的ri个单词视作一个单位，进而把文本理解为由这些ri元词组单元构成的序列。
+
+7. BLEU在2002年由Papineni等人提出，首次被应用于评估机器翻译模型的性能。该指标因与人类评价之间的高度相关性、低计算成本以及易用性而广泛用于评价各种文本生成任务。
+
+8. ROUGE算法通过比较机器生成的摘要一组人工编写的参考摘要，并计算两者之间重叠的基本单元(n元语法、词序列、词对)的数量给出得分。ROUGE实际上测量的是生成文本的召回率，更全面地评价了文本的质量。
+
+9. METEOR由Banerjee等人提出，旨在对BLEU指标进行改良。与BLEU不同，后者只基于准确度评估并要求严格的n-gram匹配，未涉及语义相近词汇的匹配。METEOR指标在评估过程中同时兼顾了精确率和召回率，并对召回率赋予较高的权重。
+
+10. CIDEr指标由Vedantam等人提出，专为图像描述领域的自动评估而设计。CIDEr通过应用TF-IDF加权机制，对词汇进行差异化权重分配。这意味着，在图像描述中频繁出现的词，由于其较低的视觉信息贡献，会被赋予较低的权重。因此，CIDEr在评价图像描述文本时，能更加贴近人类的评价标准，相较于BLEU和METEOR指标，实现了更高的一致性。
+
+本文提出了一种基于编辑的非自回归图像描述方法，主要内容包括：
+
+1. 提出了统一编辑器，将删除、插入、换位等编辑操作统一到一个解码器中，提高了模型效率。
+
+2. 解决了统一编辑器中的预测冲突问题，提出了矩阵版本的冲突消解算法。
+
+3. 提出了多路径交叉熵训练方法，通过加噪生成编辑训练数据，并设计了基于队列的统一编辑标签生成算法。
+
+4. 提出了阈值采样的强化学习训练方法，用于直接优化不可微分评估指标。
+
+5. 通过两阶段训练方法，即交叉熵训练和强化学习训练，有效训练了基于编辑的非自回归图像描述模型。
+
+清洗后的内容如下：
+
+---
+
+强化学习的目标是使J(θ)最大化，因此使用∇θJ(θ)的梯度进行梯度上升。也就是说，损失函数是-L(θ)，即：
+
+L(θ) = -E[logP(a_t|s_t)R(t)]
+
+其中，P(a_t|s_t)是每一步通过网络计算出的概率，而R(t)表示奖励越大，梯度越大。通过策略梯度算法，可以根据评估指标得到一个对梯度的估计，从而一定程度上解决了不能通过评估指标得到梯度的问题。在图像描述应用中，由于生成空间很大，根据策略梯度算法计算全部的T是不可能的，因此结合了蒙特卡洛采样的REINFORCE算法被提出并用于解决策略梯度的实际计算问题。REINFORCE算法是策略梯度算法的一种变形，将公式中的期望改写成了采样均值形式。REINFORCE算法利用了蒙特卡洛采样的思路。根据蒙特卡洛采样的理论，可以证明，在采样次数足够大时，REINFORCE算法和策略梯度算法拥有同样的期望。REINFORCE算法还额外地引入了一个基线b以降低强化学习训练中由于采样存在的高方差问题。本文提出了阈值采样强化学习策略，即在训练时过滤掉置信单词，只对非置信单词对应位置的结果应用策略梯度算法，计算梯度。提升训练的效率。
+
+---
+
+以上内容已去除页眉、页脚、页码、重复信息和乱码，保留了核心学术内容。
+
+表3-1报告了在Karpthy测试集上的离线评估结果，从表中可以看到，与自回归方法相比，本文提出的UniCap在保持可比较的性能的同时，实现了高达8倍的显著加速。UniCap的质量表现甚至好于一些近年来的自回归图像描述方法，如LSTNet。
+
+与非自回归方法相比，UniCap也实现了良好的推理速度，并在大多数指标上优于所有的非自回归基线。为了更直观地展示UniCap在速度-性能平衡上的优势，本文绘制了UniCap的CIDEi分数和加速率SpeedUp的二维可视化图以直观地展示整体性能。可以看出，UniCap在质量和速度之间实现了良好的平衡。
+
+3.3A2在线结果
+
+-2在线测试结果，表示在MSCOCO在线测试集上的性能比较。所有结果均在强化学习阶段后报告。符号t表示预训练方法。此外，c5和c40分别表示使用5个和40个参考字幕。
+
+非自回归图像描述方法用灰色背景表示。
+
+Model   B-3   B-4   METEOR   ROUGE_L   CIDEr   SpeedUp
+
+Transformer   81.6   96.0   66.4   90.8   51.8   82.7   39.7   72.8   29.4   39.0   59.2   74.8   129.3   132.1
+
+CMAL   79.5   94.3   63.8   87.2   48.8   77.2   36.8   66.1   27.9   36.4   57.6   72.0   119.3   121.2
+
+X Transformer   81.9   95.7   66.9   90.5   52.4   82.5   40.3   72.4   29.6   39.2   59.6   75.0   131.1   133.5
+
+tVinVL   81.9   96.9   66.9   92.4   52.6   84.7   40.4   74.9   30.6   40.8   60.4   76.8   134.7   138.7
+
+DICT   82.4   96.6   67.4   91.7   52.8   83.8   40.6   74.0   29.8   39.6   59.8   75.3   133.4   135.4
+
+PureT   82.8   96.5   68.1   91.8   53.6   83.9   41.4   74.1   30.1   39.9   60.4   75.9   136.0   138.3
+
+PTSN   84.0   97.5   69.2   93.2   64.5   85.7   42.1   76.1   30.5   40.2   60.4   75.6   141.4   143.9
+
+DccCap   80.5   95.1   65.2   89.1   50.3   80.0   38.1   69.5   28.0   37.0   58.4   73.5   121.4   124.4
+
+tGIT   84.3   98.1   70.0   94.4   55.7   87.6   43.2   78.3   31.9   42.1   62.0   78.4   146.4   149.8
+
+tOFA   84.5   98.1   70.1   94.4   55.9   87.8   43.6   78.7   32.1   42.7   62.5   79.0   147.2   149.6
+
+UAJC   81.9   96.3   66.5   91.1   51.8   83.0   39.6   72.9   29.2   38.9   59.2   74.7   129.0   132.8
+
+LSTNet   82.6   96.7   67.8   92.0   53.3   84.3   41.1   74.7   29.9   39.6   60.0   75.4   134.0   136.3
+
+-Nei   80.2   95.1   64.9   89.3   50.1   80.1   38.1   69.4   29.0   38.2   58.5   73.5   126.2   129.0
+
+UniCap   84.0   97.2   67.8   91.5   52.6   82.7   40.1   72.2   29.4   38.6   59.6   74.4   131.9   134.1
+
+为了更公平地对比，本文也在MSCOCO的测试服务器上提交了在线测试结果，在线测试是在COCO未开放答案的数据集上运行的，可以更直观地反映出模型的性能。在线测试结果如表3-2所示，从中可以看出，UniCap在在线测试上的性能也优于大部分的自回归图像描述模型和全部的非自回归图像描述模型。由于在线服务器测评，无法衡量推理速度，因此推理速度并未在在线测试中报告。
+
+3.3.5消融分析
+
+为进一步检验提出的各种组件的有效性，本节将基于MSCOCO数据集对UniCap进行进一步的消融实验。
+
+3.3.5.1统一编辑操作
+
+为验证统一编辑操作的有效性，本文实现了先前的朴素编辑操作，包括位置的插入、删除以及词的预测三个解码器。并遵循同样设置进行了训练，结果如图3-9所示。根据分析，本文提出的UniCap相比朴素方法，使用两个解码器完成图像描述任务，速度上的收益在理论上应为朴素方法的33%。而根据实验结果，UniCap的加速率为8.02x，朴素方法的加速率为5.62x，则速度的收益约为29.84%，考虑到UniCap需要做一些冲突消解的操作，这个速度收益符合本文的预期。
+
+3.3.5.2训练策略
+
+在本节，本文对提出的两阶段训练策略的改进分别地和统一地进行了实验。
+
+表3-3展示了交叉熵阶段多路径组合实验结果。
+
+在交叉熵阶段，用不同的路径组合训练模型，结果如表3-3所示，可以观察到的结论包括：
+
+(1) 路径2显著地提升了模型的表现，这表明通过掩码预测器MP为模型生成更难的样本有助于提升模型的生成性能。
+
+(2) 路径3提升了模型的加速率，这表明通过加入一个专门的路径让模型学习减少不必要的操作是有效的。
+
+在强化学习阶段，本文进行了各种设置的实验，包括无强化学习(w/o RL)、强化学习(w/ common RL)和带有阈值采样的RL(w/ Threshold RL)。结果如表3-4所示。从设置4、5和6中，可以观察到阈值采样方法与多路径交叉熵训练方法结合在一起取得了最佳性能(相比无强化学习CIDEr+2.2，相比强化学习CIDEr+1.4)。从设置1、2和3中，可以观察到即使没有多路径交叉熵训练方法，本文提出的阈值采样方法在三个RL设置中仍然表现更好(相比无强化学习CIDEr+1.9，相比强化学习CIDEr+1.7)。
+
+表3-4展示了训练策略综合实验结果。
+
+同时，表3-4中展示的两阶段训练所有训练方法组合的结果表明，本文提出的两种方法的组合取得了最佳的表现。
+
+3.3.6案例分析
+
+图3-10展示了本文从MSCOCO数据集抽样了一些图片并用UniCap推理，将推理过程、目标图像描述和自回归模型给出的结果展示。可以观察到，与自回归方法相比，本文提出的UniCap生成的图像描述质量更好，并且可以动态地修改已经输出的错误单词。例如，在案例1中，“dog”一词是不正确的。在案例2中，两个“street”单词重复。在案例3中，“blue train”和“white train”重复，且“white train”是不正确的。此外，在案例4中，“three group”一词与给定的图片不匹配。
+
+本章介绍了基于编辑的非自回归图像描述模型UniCap，由跨模态特征抽取器和两个文本解码器组成。训练策略包括交叉熵和强化学习阶段。在MSCOCO数据集上进行了大量实验，验证了UniCap的可行性和有效性。
+
+第四章提出了基于视觉提示词的可控非自回归图像描述方法ConUniCap，使用可学习的提示词控制图像风格。模型框架包括图像编码层、提示词机制和数据风格判别器。数据风格判别器包括描述详细度判别器、基于情感词典的正负情感判别器和基于预训练BERT的正负情感判别器。还提出了基于大语言模型和提示词生成可控图像描述数据的策略。
+
+模型时被填入模板内组成最终的提示词。对于图像描述数据集，每一个图片都对应有五个描述，在每次填入模板时对五个描述进行抽样，随机选择一个。
+
+4.2.4.1 数据标注样例
+
+为了直观理解本文基于大语言模型提示词的数据标注策略，提供数个标注样例如表4-1和表4-2所示。
+
+表4-1 大语言模型自动数据标注样例 - 正面
+
+| 大语言模型交互过程 |
+|------------------|
+| Q: Edit the sentence to make it positive without adding any additional objects or details not present in the original sentence: 'Two kids with helmets on sitting in the snow.' |
+| A: Two kids joyfully sitting on the snow with skis next to them. |
+
+表4-2 大语言模型自动数据标注样例 - 负面
+
+| 大语言模型交互过程 |
+|------------------|
+| Q: Edit the sentence to make it sad without adding any additional objects or details not present in the original sentence: 'A man in a baseball uniform throwing a ball.' |
+| A: A lonely man in a tattered baseball uniform, desperately throwing a ball. |
+
+4.2.4.2 数据验证策略
+
+在利用大语言模型生成图像描述后，由于大语言模型存在指令遵循失败或幻觉等现象，因此适当的验证是必须的。本文通过多种方式对大语言模型的输出进行了验证。验证主要包含幻觉验证和风格验证，整体的验证流程如图4-3所示。
+
+4.3 实验对比和分析
+
+4.3.1 实验配置
+
+对于ConUniCap，本文采用与第三章相同的MSCOCO数据集作为评估数据集，同样遵循了Karpthy等人对于COCO数据集划分的训练-验证集以保证成果的可复现性。硬件环境为Ubuntu22.04操作系统、NVIDIA A6000显卡、PyTorch深度学习框架、Python3.8版本。本文采取Dropout机制以缓解模型的过拟合问题，词嵌入层的丢弃率设置为0.9，Transformer块的丢弃率设置为0.7。所有的模型权重在初始化时遵循均匀分布，词嵌入的维度设置为512维，中间层的向量维度设置为512维。采用AdamW作为模型的优化器。学习率设置均与第三章中讨论的UniCap一致。
+
+4.3.2 基线方法
+
+为了对比生成的质量，本实验选取了近年的可控图像描述方法作为基线，这些方法简介如下：
+
+(1) LaBERT提出通过计算文本详略嵌入的方式控制生成文本的详细与否，并提出了基于双向语言模型的迭代细化非自回归图像描述方法，支持对详略程度的控制。
+
+(2) ConCap在自回归方法中首先提出了基于提示词的可控图像描述方法，利用提示词对不同风格的图像进行训练，最终得到可以控制图像描述风格的提示词。
+
+4.3.3 实验结果
+
+如表4-3所示，本实验在Karpthy划分的测试集上评估ConUniCap的性能，对比了任务相似的LaBERT和ConCap两个可控图像描述模型，其中，LaBERT是基于嵌入的，ConCap和ConUniCap是基于提示词的。需要注意的ConCap是基于大规模多模态预训练模型BLIP2的，因此指标相对较高。通过性能的对比，可以得出ConUniCap在生成各种风格的描述时的表现部分好于先前的最先进可控模型LaBERT，与基于大规模预训练模型的ConCap相比达到了可比较的表现。同时，在速度的比较上，由于LaBERT模型是非自回归的，但是论文中没有给出具体的推理速度，为了大致地比较推理速度，本文从迭代步数估算了ConUniCap相对于LaBERT的速度优势：由于ConUniCap和LaBERT使用了相似的Transformer结构，这里首先假设执行一次前向的时间是相同的，设为t。LaBERT每步只执行一次前向传播，ConUniCap则每步执行两次(UE和MP分别需要一次前向传播，详见第三章对UniCap的生成策略的描述)。LaBERT设置了固定25步的迭代步数，因此共耗时25t，ConUniCap实现了生成时的动态退出机制，并设置了4步的步数上限，通过实验统计，平均步数约为2.5，因此ConUniCap的平均耗时约为5t，相比LaBERT可以达到五倍的加速。同时，由于在UniCap基础上实现的提示词机制并未对模型的结构进行改变，因此在整体的推理速度上，ConUniCap保持了UniCap的高效性。
+
+4.3.4 实验分析
+
+4.3.4.1 控制能力分析
+
+为了研究ConUniCap的控制能力，本文对ConUniCap进行风格控制的成功率进行了分析。ConUniCap共实现了5种风格，对于所有的测试集图片，利用ConUniCap的五种不同风格分别生成描述，并通过数据风格判别器判断输出描述的风格是否与输入的风格一致性通过精度衡量，即一致数量/总数。各个风格对应的精度如表4-4所示。
+
+表4-4 ConUniCap控制能力分析表
+
+| 风格 | 精度 |
+|------|------|
+| 短长度 | 99.66 |
+| 中等长度 | 95.16 |
+| 高长度 | 39.10 |
+| 正面情感 | 70.30 |
+| 负面情感 | 68.46 |
+
+4.3.4.2 生成式风格化数据消融分析
+
+为了证明生成的风格化数据的有效性，本文执行了生成式风格数据的消融实验。训练了一个没有加入额外风格化数据的ConUniCap，并与原始模型进行比较。结果如表4-5所示。实验结果表示额外的风格化数据提升了模型输出情感图像描述时的生成质量。由于成本问题，本文标注的数据仅为小规模的情感风格化数据，因此提升幅度有限，但是本文所提出的生成数据方法完全可以拓展到大规模数据集上，以获得更显著的提升效果。
+
+第11部分内容：
+
+4.3.5 案例分析
+本节提供了ConUniCap的一些生成案例，以建立对ConUniCap生成的优势和不足的直观认识。如图4-5所示。首先从详细度进行分析，在第一张图片中，三个不同详细度的描述以不同的详细度描述了图片，短长度的描述仅包括女人坐在卫生间；中等长度的描述则包括了女人具体坐的位置：地板；高长度的描述进一步地注意到女人的坐姿信息，并给出了最详细的描述。在第二张图片中同样可以注意到类似的效果，中等长度的描述额外注意到了叉子，高长度的描述则注意到了更细节的信息，包括蛋糕的种类和奶油。在第三张图片中，中等长度的描述注意到了办公桌，而高长度的描述则注意到了办公桌上的书籍。从情感控制的角度分析，样例展示了ConUniCap具有的控制描述情感能力，ConUniCap可以通过改变用词以保持句子的语义的同时改变句子的风格，如使用sad, lonely, poor等使句子变得偏向消极，使用happily, delicious, neatly等词使句子变得偏向积极。
+
+4.4 本章小结
+本章在图像描述方向开展了可控非自回归图像描述模型的研究，在第三章提出的UniCap的基础上提出了ConUniCap。为了实现可控的图像描述模型，ConUniCap中引入了基于提示词的风格控制机制，由于有着UniCap强大的推理速度作为基础，ConUniCap可以满足现实可控图像描述应用中对于推理速度的要求。随后，本章介绍了一种基于大语言模型生成式地训练可控图像描述的方法，并提出了基于双向预训练语言模型的数据风格判别方法，加强了对大语言模型生成数据的校验。最后，本章在MSCOCO图像描述数据集上进行了大量的实验和消融实验，从模型的性能、消融实验、案例分析等方面充分验证了ConUniCap方法的可行性和有效性。
+
+5.1 系统需求分析
+经过对提出算法的分析，非自回归图像描述系统主要包含以下需求：(1) 用户管理功能：对于一个系统而言，用户管理功能至关重要。对普通用户而言，系统支持注册和登录操作；而对于管理员，则提供了展示用户信息列表的功能。此外，为了优化使用体验，系统还设计了游客模式，允许用户在不登录的情况下直接访问。(2) 图像描述功能：该功能包含无条件的基于编辑的非自回归图像描述和可控非自回归图像描述，并可以通过用户的选择切换功能。包括切换可控非自回归图像描述中图像描述的风格。(3) 数据管理：在本系统中，会产生各种各样的用户数据，如用户上传的图片和用户的账号密码，因此需要将各种各样的数据存到数据库中，方便查看。(4) 方便部署：对于深度学习系统而言，部署需要环境配置，因此整个系统需要以镜像的方式提供。
+
+5.2 系统整体设计
+基于系统的需求分析，本系统的整体架构如图5-1所示，后端包括模型层，框架层，部署层三层封装。模型层主要负责封装基础的模型前向推理过程，供后续流程调用。框架层则负责调用flask和sqlite等库编写业务逻辑代码，实现API。框架层和模型层实现了整个后端的功能。部署层中，首先使用gunicorn包装flask应用，gunicorn是一个实现了WSGI协议的服务，可以提供多进程支持，提升多核服务器的处理性能。然后将整个gunicorn部署的后端程序打包为docker，支持多端的分发，使得整个系统具有可拓展性和可移植性。前端则使用Vue.js框架实现，Vue框架是一种流行的JavaScript框架，用于构建用户界面和单页应用程序。它的设计目标是通过尽可能简单的API实现响应的数据绑定和组合的视图组件。Vue的核心库只关注视图层，易于学习且集成。本系统的前后端采用分离的设计，后端经过包装，提供调用方便的API，然后前后端系统遵循预先设计的通信方式完成用户的请求。
+
+5.3 前端设计
+本系统的注册登录界面如图5-2所示，当用户首次进入系统时，可以选择登录或者注册。登录选项涉及到对数据库的查询，以确认用户是否已注册：如果用户已注册且密码匹配，则允许登录；如果用户存在但密码不匹配，则登录尝试将被拒绝；若未找到用户信息，则系统将自动进行用户注册。注册过程同样需要验证数据库中用户的存在性，仅当用户未被记录时，注册才能完成。一开始见到的界面如图5-3所示，左侧是图片预览区，右侧是操作区，下边是结果展示区。用户将会被要求点击选择文件按钮，选择一张本地的图片上传并预览，预览无误后，用户需要点击描述风格选单，选择所需要的风格，额外的，描述风格中有”选项，对应无条件的图像描述生成(UniCap)。最后，点击“请求图像描述”按钮，上传图像到服务端，服务端将处理用户的请求。
+
+5.4 后端设计
+后端系统主要实现的是数据的处理，模型前向过程的封装，以及数据的返回。数据处理方面，后端接收到前端发送的POST请求后，会将其中的请求字段取出，拿到用户提交的图片，转换为模型能够识别的形式，用于后续调用模型。模型前向过程的封装主要体现在对模型的输入输出的封装，首先，本文实现了两个模型：UniCap和ConUniCap，因此需要根据用户的选择将调用不同的模型。其次，由于前端支持可视化非自回归模型迭代的每一步，因此需要对每一步的中间结果进行保存，体现在最后的输出结果里，在前端展示每一步的编辑过程。数据返回的过程主要体现在需要将模型的输出转换为对API的响应，具体来说，前端页面期望的响应是json格式的数据，因此，需要将模型的输出首先通过分词器转换为文本形式，再将保留的中间步骤信息堆叠成为列表，最后将这些数据都转化为json格式，返回给前端页面渲染。
+
+5.5 系统工作流程
+本系统的工作流程可以总结为图5-5。首先，用户通过注册和登录操作进入系统，在注册阶段，用户的数据会被存入数据库中。在登录阶段，用户的数据从数据库中被取出进行校验。用户登录进入系统后，可以在前端与后端进行交互，当用户确定需求，发一个图像描述请求后，后端将会根据前端所提供的请求参数确定用户的需求类型，并将用户的请求分配给两个不同的模型，在模型底层，需要对用户输入的实际数据进行处理，使其变成模型可以前向推理的格式，随后模型进行前向推理，推理的结果经过封装返回上级框架并返回给前端并展示。完成一次图像描述过程。
+
+最终模型学到的是我们希望学到的内容。
+
+在非自回归的可控图像描述中，目前的实现方法是在一次推理中，不同的步之间保持一个风格提示词，因此也只支持同时接收一个风格信号。然而，一个多步之间接受不同风格信号的可控非自回归图像描述方法在理论上是可行的，但是需要在数据的生成和处理上做进一步的努力。
+
+参考文献：
+
+[1] 沈佳敏，鲍秉坤．基于深度学习的广告布局图片美学属性评价[J]．计算机技术与发展，2021，31(3)：39-44．
+
+[2] 徐守坤，倪楚涵，吉晨晨，等．基于YOLOV3的施工场景安全帽佩戴的图像描述[J]．计算机科学，2020，47(8)：233-240．
+
+[3] 杨润霞，邵洁，罗岩，等．基于编解码器的电力施工场景可控图像字幕生成[J]．电网技术，2022，46(7)：2572-2581．
+
+[4] 陈悦，郭宇，谢圆琰，等．基于图像描述算法的离线盲人视觉辅助系统[J]．电信科学，2022，38(1)：61-72．
+
+[5] Bemardi R, Akici R, Elliot D, et al. Automatic description generation from images: a survey of models, datasets, and evaluation measures[J]. J Artif Intell Res, 2016, 55：409-442．
+
+[6] Xnyals O, Toshhev A, Bengio S, et al. Show and Tell: A neural image caption generator[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015：3156-3164．
+
+[7] Szegedy C, Wei Liu, Yangqing Jia, et al. Going deeper with convolutions[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015：1-9．
+
+[8] Krizhevsky A, Sutskever I, Hinton G E. ImageNet classification with deep convolutional neural networks[J]. Advances in Neural Information Processing Systems, 2012，25：1097-1105．
+
+[9] Simonyan K, Zisserman A. Very deep convolutional networks for large-scale image recognition[J]. arXiv preprint arXiv:1409.1556，2014．
+
+[10] He K, Zhang X, Ren S, et al. Deep residual learning for image recognition[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016：770-778．
+
+[11] Xu K, Ba J L, Kiro R, et al. Show, attend and tell: neural image caption generation with visual attention[C]//Proceedings of the 32nd International Conference on Machine Learning. 2015：2048-2057．
+
+[12] Sugano Y, Bulling A. Seeing with humans: gaze-assisted neural image captioning[J]. arXiv preprint arXiv:1608.05203，2016．
+
+[13] Anderson P, He X, Buehler C, et al. Bottom-up and top-down attention for image captioning and visual question answering[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018：6077-6086．
+
+[14] Yang X, Tang K, Zhang H, et al. Auto-encoding scene graphs for image captioning[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2019：10685-10694．
+
+[15] Yao T, Pan Y, Li Y, et al. Hierarchy Parsing for image captioning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019：2621-2629．
+
+[16] Lu J, Xiong C, Parikh D, et al. Knowing when to look: adaptive attention via a visual sentinel for image captioning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017：375-383．
+
+[17] Anel J, Deshpande A, Schwing A G. Convolutional image captioning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2018：5561-5570．
+
+[18] Vazwani A, Shazeer N, Parmar N, et al. Attention is all you need[J]. Advances in Neural Information Processing Systems, 2017，30：5998-6008．
+
+[19] Herdade S, Kappeler A, Booky K, et al. Image captioning: transforming object detection into words[J]. Advances in Neural Information Processing Systems, 2019，32：3231-3240．
+
+[20] Guo L, Liu J, Zhu X, et al. Normalized and geometry-aware self-attention network for image captioning[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020：10327-10336．
+
+[21] Comia M, Stefanini M, Baraldi L, et al. Meshed-Memory Transformer for image captioning[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2020：10578-10587．
+
+[22] Wang Z, Yu J, Yu A W, et al. SimvLM: Simple visual language model pretraining with weak supervision[J]. arXiv preprint arXiv:2108.10904，2021．
+
+[23] Wang J, Yang Z, Hu X, et al. Git: A generative image-to-text transformer for vision and language[J]. arXiv preprint arXiv:2205.14100，2022．
+
+[24] Li J, Li D, Savarese S, et al. BLIP: Bootstrapping language-image pre-training with frozen image encoders and large language models[C]//International Conference on Machine Learning. 2023：19730-19742．
+
+[25] Wang P, Yang A, Men R, et al. Ofa: Unifying architectures, tasks, and modalities through a simple sequence-to-sequence learning framework[C]//International Conference on Machine Learning. 2022：23318-23340．
+
+[26] Ranzato M, Chopra S, Auli M, et al. Sequence level training with recurrent neural networks[J]. arXiv preprint arXiv:1606.02361，2016．
+
+[27] Ren S J, Marcheret E, Mroueh Y, et al. Self-Critical Sequence Training for Image Captioning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2017：7008-7024．
+
+[28] Honda U, Watanabe %, Matsumoto Y. Switching to discriminative image captioning by releasing a bottleneck of reinforcement learning[C]//Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision. 2023：1124-1134．
+
+[29] Gu J, Bradbury J, Xiong C, et al. Non-autoregressive neural machine translation[C]//6th International Conference on Learning Representations. 2018．
+
+[30] Fei Z. Fast image caption generation with positional alignment[J]. arXiv preprint arXiv:1912.06365，2019．
+
+[31] Guo L, Liu J, Zhu X, et al. Non-Autoregressive Image Captioning with Counterfactuals - Critical Multi-Agent Learning[C]//Proceedings of the Twentieth International Joint Conference on Artificial Intelligence. 2021：767-773．
+
+[32] Gao J, Meng X, Wang S, et al. Masked non-autoregressive image captioning[J]. arXiv preprint arXiv:1906.00717，2019．
+
+[33] Fei Z. Iterative back modification for faster image captioning[C]//Proceedings of the 28th ACM International Conference on Multimedia. 2020：3182-3190．
+
+[34] Fei Z, Fan M, Zhu L, et al. Uncertainty-aware image captioning[C]//AAAI Conference on Artificial Intelligence. 2023，37(1)：614-622．
+
+[35] Ho J, Jain A, Abbeel P. Denoising diffusion probabilistic models[J]. Advances in Neural Information Processing Systems, 2020，33：6840-6851．
+
+[36] Li Y, Zhou K, Zhao W X, et al. Diffusion models for non-autoregressive text generation: a survey[J]. arXiv preprint arXiv:2303.06574，2023．
+
+[37] Chen T, Zhang R, Hinton G. Analog Bits: Generating discrete data using diffusion models with self-conditioning[C]//The Eleventh International Conference on Learning Representations. 2022．
+
+[38] Luoj J, Li Y, Pan Y, et al. Semantic-Conditional diffusion networks for image captioning[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2023：23359-23368．
+
+[39] Mathews A, Xie L, He X. Senticap: Generating image descriptions with sentiments[C]//Proceedings of the AAAI conference on artificial intelligence. 2016，30(1)．
+
+[40] Comia M, Baraldi L, Cucchiarra S. Show, Control and Tell: A framework for generating controllable and grounded captions[C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2016：1-10．
+
+Vision and Pattern Recognition. 2019: 8307-8316.
+
+[41] Deng C, Ding N, Tan M, et al. Length-controllable image capturing [C]//European Conference on Computer Vision. 2020: 712-729.
+
+[42] Wang N, Xie J, Wu J, et al. Controllable image capturing via prompting [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2023: 2617-2625.
+
+[43] Zhang W, Shi H, Guo J, et al. Magic: Multimodal relational graph adversarial inference for diverse and unpaired text-based image capturing [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2022: 3335-3343.
+
+[44] Hironaka Y, Nakashima Y, Garcia N. Model-agnostic gender debiased image capturing [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2023: 15191-15200.
+
+[45] Qiu H, Dou ZY, Wang T, et al. Gender biases in automatic evaluation metrics for image capturing [C]//The 2023 Conference on Empirical Methods in Natural Language Processing. 2023.
+
+[46] Zhao D, Wang A, Russakovsky O. Understanding and evaluating racial biases in image capturing [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021: 14830-14840.
+
+[47] Abdelrahman E, Sun P, Li LE, et al. ImageCap: Image capturing bias amplification assessment [C]//Proceedings of the AAAI Conference on Artificial Intelligence. 2024, 38(19): 20902-20911.
+
+[48] Gu J, Wang C, Zhao J. Levenshtein transformer [J]. Advances in Neural Information Processing Systems, 2019, 32.
+
+[49] Xu W, Carpuat M. Editor: An edit-based transformer with repositioning for neural machine translation with soft lexical constraints [J]. Transactions of the Association for Computational Linguistics, 2021, 9: 311-328.
+
+[50] Glorot X, Bordes A, Bengio Y. Deep sparse rectifier neural networks [C]//Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics. 2011.
+
+[51] LeCun Y, Bottou L, Bengio Y, et al. Gradient-based learning applied to document recognition [J]. Proceedings of the IEEE, 1998, 86(11): 2278-2324.
+
+[52] Ioffe S, Szegedy C. Batch normalization: Accelerating deep network training by reducing internal covariate shift [C]//International Conference on Machine Learning. 2015: 448-456.
+
+[53] Dosovitskiy A, Beyer L, Kolesnikov A, et al. An image is worth 16x16 words: Transformers for image recognition at scale [J]. arXiv preprint arXiv:2010.11929, 2020.
+
+[54] Liu Z, Lin Y, Cao Y, et al. Swin transformer: Hierarchical vision transformer using shifted windows [C]//Proceedings of the IEEE International Conference on Computer Vision. 2021: 10012-10022.
+
+[55] Girshick R, Donahue J, Darrell T, et al. Rich feature hierarchies for accurate object detection and semantic segmentation [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2014: 580-587.
+
+[56] Girshick R. Fast R-CNN [C]//Proceedings of the IEEE International Conference on Computer Vision. 2015: 1440-1448.
+
+[57] Ren S, He K, Girshick R, et al. Faster R-CNN: Towards real-time object detection with region proposal networks [J]. Advances in Neural Information Processing Systems, 2015, 28.
+
+[58] Krishna R, Zhu Y, Groth O, et al. Visual genome: Connecting language and vision using crowd-sourced dense image annotations [J]. International Journal of Computer Vision, 2017, 123: 32-73.
+
+[59] Carion N, Massa F, Synnaeve G, et al. End-to-end object detection with transformers [C]//European Conference on Computer Vision. 2020: 213-229.
+
+[60] Papineni K, Roukos S, Ward T, et al. BLEU: A method for automatic evaluation of machine translation [C]//Proceedings of the 40th annual meeting of the Association for Computational Linguistics. 2002: 311-318.
+
+[61] Lin CY. Rouge: A package for automatic evaluation of summaries [C]//Text Summarization Branches Out. 2004: 74-81.
+
+[62] Banerjee S, Lavie A. Meteor: An automatic metric for evaluation with improved correlation with human judgments [C]//Proceedings of the ACL Workshop on Intrinsic and Extrinsic Evaluation Measures for Machine Translation and/or Summarization. 2005: 65-72.
+
+[63] Vedantam R, Zitnick CL, Parikh D. CIDEr: Consensus-based image description evaluation [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 4566-4575.
+
+[64] Sutton RS, McAllister D, Singh S, et al. Policy gradient methods for reinforcement learning with function approximation [J]. Advances in Neural Information Processing Systems, 1999, 12.
+
+[65] Williams RJ. Simple statistical gradient-following algorithms for connectionist reinforcement learning [J]. Machine Learning, 1992, 8(3): 229-256.
+
+[66] Lin TY, Maire M, Belongie S, et al. Microsoft COCO: Common objects in context [C]//European Conference on Computer Vision. 2014: 740-755.
+
+[67] Karpathy A, Fei-Fei L. Deep visual-semantic alignments for generating image descriptions [C]//Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2015: 3128-3137.
+
+[68] Sumanuma M, Okatani T. GRI
+
+Image captioning [C] // CCF International Conference on Natural Language Processing and Chinese Computing. 2023: 469-481.
+
+[80] Devlin J, Chang MW, Lee K, et al. BERT: Pre-training of deep bidirectional transformers for language understanding [C] // Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics. 2019: 4171-4186.

@@ -1,0 +1,385 @@
+98 2008，44(17) Computer Engineering and Applications计算机工程与应用
+
+使用LDC码的BI—STCM—ID系统中的星座映射分析
+
+赵传钢1，李睿凡2 ZHAO Chuan-gan91，LI Rui-fan2
+
+1．北京林业大学信息学院，北京100083
+
+2．北京邮电大学信息工程学院，北京100876
+
+1．Department of Information Science and Technology，Beijing Forestry University，Beijing 100083，China
+
+2．Department of Information Engineering，Beijing University Posts and Telecommunications，Beijing 100876，China
+
+E-mail：chgzha02006@126．corn
+
+ZHAO Chuan-gang。LI Mu-fan．Analysis of constellation labeling for bit-interleaved space time coded modulation with
+
+linear dispersion code．Computer Engineering and Applications。2008。44(17)：98-100．
+
+Abstract：耽e problem of constellation mapping in BI-STCM—ID system is investigated．It is proved that．in bit-interleaved
+
+space-time coded modulation systems with iterative decoding，when linear dispersion code is used，the problem of optimization of
+
+multi-dimensional constellation based on the criterion of maximization of coding gain can be reduced to that of optimization of O
+
+n．e dimensional constellation based on the criterion of maximization of harmonic mean of Euclidean distance of constellation point．
+
+★■‘ ”Key words：space-time coded modulation；constellation labeling；Linear Dispersion Code
+
+摘要：研究了BI-STCM—ID系统中的星座映射问题。证明了在使用LDC(Linear Dispersion Code)空时编码方案的BI—STCM—ID
+
+系统中，基于最大化编码增益的高维星座映射设计优化问题等价于基于最大化欧式距调和均值的一维星座映射设计优化问题。
+
+关键词：空时编码调制；星座映射；LDC码
+
+DOI：10．3778／j．issn．1002—8331．2008．17．029 文章编号：1002-8331(2008)17-0098-03 文献标识码：A 中图分类号：TN911．22
+
+近来，空时编码由于能够提供较高的分集增益和频谱效率
+
+而成为研究的热点⋯。对传统的单天线上的比特交织编码调制
+
+系统的星座映射问题已有较多的研究[21，得到了一些较好的结
+
+果。但是，这些好的星座映射方式对多天线系统(MIMO)来讲并
+
+不一定适用。文f3】中研究了MIMO瑞利块衰落信道上使用迭代
+
+译码的比特交织空时编码问题，并给出了渐进误比特率的反馈
+
+无差错紧界。文【4】考察了不同星座映射方式对使用迭代译码的
+
+比特交织空时编码调制系统(BI—STCM—ID)性能的影响，星座
+
+映射方式是用随机搜索方法找到的。文[5】研究了使用Alamouti
+
+空时编码方案的BI—STCM—ID系统的16QAM星座的映射方
+
+式，最优的星座映射方式通过解二次型分配(QAP)问题得到。
+
+文【5】在最大化渐进编码增益设计准则下研究了使用正交空时 块码(OSTBC)调制的BI—STcM—ID系统中的星座映射方式，并
+
+证明在使用OSTBC码的BI—STCM—ID系统中，最大化编码增
+
+益设计准则与一维星座上最大化欧式距的调和均值设计准则
+
+本文讨论BI-STCM—ID系统在使用空时编码方案时的星
+
+座映射问题，并证明在LDC空时编码方案下，BI—STeM—ID系
+
+统高维星座映射设计的最大化编码增益准则与一维星座设计
+
+的最大化欧氏距调和均值准则是等价的。
+
+1 BI-STCM—ID系统模型
+
+1．1 BI—STCM—ID发端系统 图1给出了BI—STCM—ID系统的结构。假设信息比特序列
+
+经卷积编码器编码后输出编码比特序列c。编码比特序列C经
+
+交织后每K=mQ个比特分为一组。=【c‘，⋯，c‘，⋯c“】=∥⋯P“⋯
+
+y。】，这里，c‘∈{0，1l，1≤J|}≤K且，币忙1胁‘⋯⋯c“】，1≤乃≤口。
+
+每个比特序列p”按照某种映射规则p映射到星座疋上的某个
+
+(a)BI-STCM—ID发端结构
+
+(b)m—STeM—ID迭代接收机结构
+
+图1 BI-STCM一1D系统发射机和接收机结构
+
+基金项目：国家科技支撑项目(No．2006BADIOA03 o
+
+作者简介：赵传钢(1971一)，男，汉族，讲师。博士，主要研究领域为移动通信、计算机网络，人工智能；李睿凡(1975一)，男，博士，讲师，主要研究领域
+
+为智能信息处理。
+
+收稿日期：2008-01—21 修目日期：2008-03—31
+
+赵传钢，李睿凡：使用LDC码的BI—STCM—ID系统中的星座映射分析 2008．44(17) 99
+
+复信号点s4斗(，)，星座疋上有2“个星座点。空时编码器将信
+
+息符号向量．s=(s‘⋯|s。)1作为输入，形成一个空时码字矩阵j，-
+
+瞳】，1≤i≤M，l≤z≤凡其中，并：表示第￡个时刻第i个发送天
+
+线上的发送符号，7’表示—个空时码字周期所占的符号周期数
+
+目，Ⅳ表示发送天线数。
+
+在文中用z表示空时码字矩阵的集合，那么星座z上的映 射规则肛与空时编码器两者一起定义了一个多维星座上的映
+
+射：州：(0，1}‘-3(，VX∈疋。用吖。表示映射州的逆映射。如果
+
+用尺，表示卷积编码的码率，尺；，表示空时编码的码率，那么整
+
+个BI—STCM—ID系统的传信率为R=mR。R。，。为后面表示方
+
+便Z令表示这样的空时码字矩阵的x集合，码字x对应的比
+
+特映射朋1(x)的第后个位置上比特为b；而Z表示这样的星
+
+座信号s的集合，其比特映射p 1(s)的第k个位置上的比特为
+
+1．2 MIMO信道模型
+
+假设接收端有M个接收天线，接收符号可以用—个以×r
+
+的矩阵y=饥tl表示，其中Z，lq≤N，l≤z≤T表示第f个时刻
+
+第j个天线上的接收符号。信道可以由—个Ⅳf×"的矩阵日=娩。}
+
+表示，其中垃i，l≤i≤Ⅳ，l句≤Nr表示第i个发送天线至第J个
+
+接收天线之间的衰落因子。h；i相互独立且服从均值为零、每个
+
+维度上的方羞为O．5的高斯分布。另外假没日在一个空时码字
+
+x内保持不变，但在不同的空时码字内独立变化。从而使用的
+
+信道模型可以表示为
+
+Y=Hx+w
+
+其中w是一个M×r的噪声矩阵，其每个元素均服从均值为
+
+0、每维方差为Ⅳ0，2的复高斯分布。
+
+2 BI—STCM—ID星座映射分析
+
+2．1 BI—STCM—m系统渐进性能
+
+在理想交织假设下，BI—STCM一1D系统的渐进误比特率性
+
+能可以表示为阁：
+
+慨一警((Rfl2)dB+㈤。卜
+
+其中，d，表示信道编码的最小汉明距离，而
+
+， ，撕1-ll{rN,) 疗=【古；荟磊吼)J
+
+这里，Aj表示矩阵A=(X-Z)’(x-z)的非零特征值，·表示矩阵
+
+的共轭转置，r表示矩阵A的秩，K=mN,M。x表示发送的空时
+
+符号，z表示无差错反馈译码符号，即x和z的比特映射仅在
+
+第k个位置上不同。尺表示码率。
+
+从方程(1)可以看出，对较大的信噪比值Eb／NO，误比特率
+
+曲线的斜率与分集阶数rN 4成正比，且随编码增益(尺Q‘)。。平
+
+行移动。显然，为获得最好的误比特率性能，既要获得最大的分
+
+集增益，也要获得最大的编码增益。为获得最大的分集增益，需
+
+要设计取得最大分集增益的空时码字；而要获得最大的编码增
+
+益Q‘，需要对Ⅳ维星座上的比特映射方式朋进行优化。在讨
+
+论具体的BI—STCM—ID系统星座映射以前，给出星座上关于星
+
+座点的欧式距调和均值概念。
+
+定义(欧式距调和均值)：对任何星座z和其上映射p而
+
+言，其P阶欧式距调和均值定义如下：
+
+∥咖叫去∑k=l∑=4)X∑eX?㈦扪1
+
+其中，s和；对应的比特序列，1(s)和，‘(；)仅在第晟个位置上
+
+不同。 2．2使用LDC码的BI-STCM-ID系统中的星座设计
+
+LDC(Linear Dispersion Code)可以分为实LDC码与复
+
+LDC码。—个复LDC码通常由一组基本矩阵{D。}i来定义，如对
+
+应于—个符号向量峨疗的复LDC空时码可以由下列方程给出髑：
+
+三。 妊乞s E
+
+此码字x的第k行第m列上的元素fb以sI'．一，s。)k．。将
+
+在第k个发送天线的第m个符号间隔内发送。LDC码的性能
+
+将由基本码字矩阵p。}i决定。下面将讨论使用一类重要的LDC
+
+码的BI—STCM—ID系统中的星座映射的调和均值准则。
+
+定理1(LDC码欧式距调和均值准则)：假设x是由基本码
+
+字矩阵p。}?构造的LDC码，即x：∑s‘D；，如果满足如下条
+
+{t{Z：rank(D1)=⋯=rank(D9)=r，那么有：In笋Q‘《。max∞。(x，
+
+D ．一I／(rNr) p，ⅣI_)，其中，K=(寺蓦p：舯) 。这里，P。表椭乘积巧
+
+口，i=l，⋯，Q的非零特征值的乘积。
+
+证明：仿照前面的定理的证明，考虑k=l，⋯，m的情况。对
+
+LDC码字屉∑s'Di，回忆一下z和；的定义，有z=；D。+∑s‘·
+
+D，从而量-z=(s．一；)Dl，fl(x-z)‘(x-z)=IsI-；12D：DI。又因
+
+为rank(D。)-，，因而rank(D．D。)=r，即(x-z)”(j，-z)有r个非
+
+零特征值。对其他的k。可以有同样的结论。从而有：
+
+盯钾，朋，M)=
+
+∑∑∑(p。(bt一玎)7)叫+
+
+I￡一6：D zet
+
+∑∑∑(P2(讧；212)7)叫+ E《6卸x EZ
+
+∑∑∑(p。(tso-。q2 r)叫
+
+6=o x et
+
+—I F×2‘删“
+
+(p。)“∑∑∑b一；严+
+
+k=l 60，et
+
+m (p：)“∑∑∑Is一；严+
+
+b‘6二o，Et ⋯J·
+
+m I (％)“∑∑∑b一；严
+
+100 2008，44(17) Computer E,,s,i,"ering and Applications计算机工程与应用
+
+这样，对编码增益Q2在所有映射埘上的优化就转化为对
+
+∞2钾，州，川，■)在所有映射p的优化。证明完毕。
+
+例3(B：空时码)：文【7】中表明，B：空时码在收端天线数目
+
+大于2时其性能优于Alamouti码。其具有下列结构：
+
+噩=去(：；：轰：h0(u 21+U22’)
+
+上述的B2空时码方案可以很容易写成下面的形式：
+
+B。-J，-厅L-(嘶。(j?)+
+
+％(吉2)鹄。(三8)也。(与劬0))
+
+显然，B：空时码是一类特殊的LDC码，从而定理1对B：
+
+空时码空时码成立：由计算可知，
+
+K=(}(1+l纠埘))(“眇I撕))以
+
+本文讨论了BI—STCM—ID系统中的星座设计问题，特别是 空时编码方案采用LDC编码方案的情形。定理1的结论使得 在使用LDC码的BI—STCM—ID系统中高位星座映射设计问题
+
+得以简化，对BI—STCM—ID系统中的高维星座映射设计有较好
+
+理论意义。对于其他空时编码方案是否有同样的结论，则是下
+
+一步研究的课题。
+
+【l】Chindapol A，Ritcey J A．Design，analysis，and performance evalua-
+
+tion for BICM—ID with square QAM constellations in Rayleish
+
+fading channels[J]．IEEE Journal Oil Selected Areas in Communica-
+
+tions，2001，19(5)：944—957．
+
+【2】Caire G，Tarieco G，Biglieri E．Bit interleaved coded modulationIll．
+
+IEEE Transaction on Information Theory，1998。44(5)：927-946．
+
+【3】3 Huang Y，Ritcey J A．Tight BER bounds for iteratively decoded
+
+bit—interleaved space—time coded modulation们．IEEE Communica-
+
+tions Letter。2004．8(3)：153—155．
+
+[41 Zhao L，Lampe L，Huber J．Study of bit-interleaved coded space-
+
+time modulation with different labeling[C]／／Proceediog IEEE Inform
+
+Theory Workshop。Paris，France，2003：199—202．
+
+【5】Huang Y。Ritcey J A．Optimal constellation labeling for iteratively decoded bit—interleaved space—time coded modulation【J】．IEEE
+
+Trans on Information Theory，2005。51(5)：1865-1870．
+
+[61 Hassibi B．Hochwald B．Optimal training in space—time systems[C]／／
+
+Conference Record of the Thirty-Fourth Asilomar Conference on
+
+Signals，Systems and Computers，2000。l：743-747． 【刀Damen M O，Tewilk A，Belfiore J C．A construction 0f a spacetime code based on number theory【J】．IEEE Trans Inform Theory，2002，
+
+48：753-760．
+
+(上接66页)
+
+其他电阻都选为10 kQ，而Rl、R2、R3、R4、R7、R9分别对应系
+
+统(1)中的a,b、C、k，且有——对应关系。
+
+图3超混沌电路
+
+图4为实验中在示波器上观察到的超混沌吸引子：其中
+
+R1=R2=R3=30Q，，对应a=35；R4=700n，对应c=14；R7=3 kIl，
+
+对应b=3；R9=5 kfl，对应k=2，其他电路参数如上所述。
+
+本文是在Lorenz系统中引入一个状态反馈控制器的方法
+
+构造了—个超混沌系统，系统的超混沌性通过Lyapunov指数计
+
+算得到了验证。系统具有一个平衡点，对此新系统的动力学行
+
+为进行了分析，得到了系统丰富的动力学行为，系统可以处于
+
+超混沌或混沌或周期或拟周期，并指出了不同的动力学行为对
+
+(Ii Jj一“ (P J；一“ (f)J一“
+
+图4实验中观察到的系统(1)的超混沌吸引子相图
+
+应的参数取值范围。为了验证系统的超混沌行为，还设计了一
+
+个模拟电子电路并进行了实验，实验结果与计算机仿真结果完
+
+【11雷跃荣．一个新的超混沌电路及其电路实现【月．重庆邮电大学学报：
+
+自然科学版，2007，19(2)：242—244．
+
+【2】王光义，郑艳，刘敬彪．一个超混沌Lorenz吸引子及其电路实现叨．
+
+物理学报，2007，56(6)：3308—3313．
+
+【3】黄润生．混沌及其应用【M】．武汉：武汉大学出版社，1999．
+
+【4】周平。罗小华，陈海燕．一个新的混沌系统及其电路实验结果叫．物
+
+理学报，2005，54(11)：5048—5052．
+
+15】Li Yuxia，Chen Guangrong，Tang W K．Controlling a Unified Chaot-
+
+ic System to Hyperchaotie[J]．IEEE Tram On Cite Sys(1I)"．EXPRESS
+
+BRIEFS，2005，52(4)：204--207．
+
+【6】CHEN Ai-min，LU Jun-an，La Jin-hu，et a1．Generating hyperehaotie 1．a
+
+attractor via state feedback control[J]．Physica A，2006．364：．103-llQ
+
+∑“ 。∑油 。∑㈦ 七砣
+
+．如 o∑州 ●一Q

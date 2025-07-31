@@ -1,0 +1,44 @@
+{
+  "document_type": "academic_paper",
+  "title": "Language-Guided Referring Expression Comprehension with Scene Knowledge",
+  "authors": [
+    "Yao Liao",
+    "Shuang Liu",
+    "Guangtao Li",
+    "et al."
+  ],
+  "main_topic": "Cross-modal reasoning, referring expression comprehension, scene knowledge",
+  "research_problem": "Text information is often overwhelmed by visual information in cross-modal reasoning, and current methods are not effective in handling complex scene knowledge.",
+  "methodology": "The paper proposes LG-R-NET, a language-guided referring expression comprehension network that separates text and image modalities and introduces a cross-attention mechanism to avoid text information being overwhelmed. It also proposes a simplified scene knowledge method and the SKRN model for scene knowledge reasoning.",
+  "key_innovations": [
+    "Language-guided cross-modal reasoning",
+    "Simplified scene knowledge approach",
+    "SKRN model for scene knowledge reasoning"
+  ],
+  "experimental_results": "The paper presents experimental results on multiple datasets, showing that LG-R-NET outperforms previous methods, especially on complex referring expressions. SKRN also demonstrates superior performance on scene knowledge reasoning tasks.",
+  "conclusions": "The proposed methods show promising results in improving referring expression comprehension and scene knowledge reasoning, providing a valuable contribution to the field of cross-modal understanding.",
+  "keywords": [
+    "Cross-modal reasoning",
+    "Referring expression comprehension",
+    "Scene knowledge",
+    "LG-R-NET",
+    "SKRN"
+  ],
+  "application_domains": [
+    "Virtual reality",
+    "Robot navigation",
+    "Assistive technology for the visually impaired"
+  ],
+  "technical_concepts": [
+    "Cross-attention mechanism",
+    "Scene knowledge simplification",
+    "Transformer architecture",
+    "Swin Transformer"
+  ],
+  "performance_metrics": "The paper provides performance metrics such as accuracy, GIoU loss, and L1 loss, comparing the proposed methods with baseline models.",
+  "summary": "This paper addresses the issue of text information being overwhelmed in cross-modal reasoning and the challenge of handling complex scene knowledge in referring expression comprehension. It introduces LG-R-NET and SKRN, which demonstrate improved performance in experimental evaluations. The work has implications for virtual reality, robot navigation, and assistive technology.",
+  "file_id": "面向复杂文本的指称表达理解研究_陆明聪",
+  "source_type": "cleaned",
+  "text_length": 26858,
+  "generation_time": "2025-07-31 21:42:50"
+}
