@@ -1,0 +1,96 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [],
+    "institutions": [],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "编码器与解码器组合的端到端结构",
+        "relationship_type": "基于",
+        "evidence_text": "当前，段落式图像描述算法主要采用编码器与解码器组合的端到端结构。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "基于RNN的传统方法",
+        "comparison_result": "该算法相比基于RNN的传统方法，能生成更连贯的段落式文本描述。",
+        "evidence_text": "实验结果表明，该算法相比基于RNN的传统方法，能生成更连贯的段落式文本描述。"
+      },
+      {
+        "method_name": "Hierarchical-RNN方法",
+        "comparison_result": "在层次性结构有效性方面优于Hierarchical-RNN方法，提升了17.8%的解码性能。",
+        "evidence_text": "本文提出的基于全卷积神经网络结构的段落式图像描述生成模型，在层次性结构有效性方面优于Hierarchical-RNN方法，提升了17.8%的解码性能。"
+      },
+      {
+        "method_name": "Sentence-Concat、Image-Flat和Hierarchical-RNN方法",
+        "comparison_result": "在CIDEr指标上，相比Sentence-Concat、Image-Flat和Hierarchical-RNN方法，取得了更优的评测结果。",
+        "evidence_text": "所提方法在CIDEr指标上，相比Sentence-Concat、Image-Flat和Hierarchical-RNN方法，取得了更优的评测结果，有效提高了生成段落的品质，弥补了传统方法在描述能力上的不足。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "斯坦福大学最新建立的图像段落描述公开数据集",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "实验采用斯坦福大学最新建立的图像段落描述公开数据集进行验证，结果表明所提方法在CIDEr等评价指标上优于基线方法，验证了其有效性。"
+      }
+    ],
+    "evaluation_metrics": [
+      "CIDEr"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "CIDEr",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "斯坦福大学最新建立的图像段落描述公开数据集",
+        "evidence_text": "实验结果表明所提方法在CIDEr等评价指标上优于基线方法，验证了其有效性。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种全卷积神经结构的段落式图像描述算法"
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "生成更具连贯性的段落式图像描述"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "RNN解码器在长时记忆和梯度消失问题上存在局限"
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "全卷积神经结构的段落式图像描述算法",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:32:12",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: 在CIDEr指标上，相比Sentence-Concat、Image-Flat和Hierarchical-RNN方法，取得了更优的评测结果。"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 3158,
+    "processed_text_length": 3158
+  }
+}

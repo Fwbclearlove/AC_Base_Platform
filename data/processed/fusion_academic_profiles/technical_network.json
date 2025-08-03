@@ -1,0 +1,126 @@
+{
+  "method_influence_ranking": [
+    {
+      "method": "Enhanced Machine Reading Comprehension (EMRC)",
+      "influence_score": 0,
+      "comparison_count": 8,
+      "total_mentions": 8
+    },
+    {
+      "method": "EP-BERTGCN, combining pre-trained BERT and Graph Convolutional Network (GCN)",
+      "influence_score": 0,
+      "comparison_count": 7,
+      "total_mentions": 7
+    },
+    {
+      "method": "EPL4FTC提示学习增强分类算法",
+      "influence_score": 0,
+      "comparison_count": 6,
+      "total_mentions": 6
+    },
+    {
+      "method": "多视图有监督的LDA模型",
+      "influence_score": 0,
+      "comparison_count": 6,
+      "total_mentions": 6
+    },
+    {
+      "method": "Topic-Oriented Multi-Sentence (TOMS) captioning model",
+      "influence_score": 0,
+      "comparison_count": 5,
+      "total_mentions": 5
+    },
+    {
+      "method": "Differential Networks (DN) and DN-based Fusion (DF)",
+      "influence_score": 0,
+      "comparison_count": 5,
+      "total_mentions": 5
+    },
+    {
+      "method": "A recognition framework based on multiple features (CNN features, Histograms of Oriented Gradients, and color histograms) and Extreme Learning Machines (ELMs)",
+      "influence_score": 0,
+      "comparison_count": 5,
+      "total_mentions": 5
+    },
+    {
+      "method": "Multi-scale Two-way Deep Neural Network (MTDNN), using eXtreme Gradient Boosting and Recurrent Convolutional Neural Network",
+      "influence_score": 0,
+      "comparison_count": 4,
+      "total_mentions": 4
+    },
+    {
+      "method": "BERT-based Graph Convolutional network Model (BGM)",
+      "influence_score": 1,
+      "comparison_count": 3,
+      "total_mentions": 4
+    },
+    {
+      "method": "Employ various classification algorithms, including KNN, SVD, and logistic regression, to combine their results for the final prediction",
+      "influence_score": 0,
+      "comparison_count": 4,
+      "total_mentions": 4
+    },
+    {
+      "method": "利用实体概念作为融入知识，设计了结合语义门控机制和距离打分器的知识融合模块，以及领域导向的元训练方法",
+      "influence_score": 0,
+      "comparison_count": 4,
+      "total_mentions": 4
+    },
+    {
+      "method": "KFD—Isomap算法",
+      "influence_score": 0,
+      "comparison_count": 4,
+      "total_mentions": 4
+    },
+    {
+      "method": "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "BERT",
+      "influence_score": 3,
+      "comparison_count": 0,
+      "total_mentions": 3
+    },
+    {
+      "method": "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "Visually Enhanced NeUral Encoder (VENUE)",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "Cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN)",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "Multi-level fusion classification (MFC) model",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    },
+    {
+      "method": "A method to generate fine-grained counterfactual samples and a C-REC framework with dual-branch attentive fusion and contrastive learning.",
+      "influence_score": 0,
+      "comparison_count": 3,
+      "total_mentions": 3
+    }
+  ],
+  "method_comparison_patterns": [],
+  "technical_evolution_paths": []
+}

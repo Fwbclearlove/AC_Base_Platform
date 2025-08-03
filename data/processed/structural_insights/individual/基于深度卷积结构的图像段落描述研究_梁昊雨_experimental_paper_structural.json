@@ -1,0 +1,121 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "基于深度卷积结构的图像段落描述研究",
+    "authors": [
+      "原文无此信息"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Hierarchical-RNN",
+        "relationship_type": "改进",
+        "evidence_text": "本文针对以上若干问题，开展对段落式图像描述的研宄。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Hierarchical-RNN",
+        "comparison_result": "全卷积解码器生成的段落具有更强的连贯性",
+        "evidence_text": "全卷积解码器的平均Anaphora比Hierarchical-RNN高出44.44%，平均Anaphora率高出33.33%，这在一定程度上可说明该解码器生成的段落具有更强的连贯性。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "斯坦福图像-段落数据集",
+        "dataset_description": "数据集中的每个样本包含一幅图像和一段描述该图像的段落",
+        "evidence_text": "Krause等人在2017年公布了斯坦福图像-段落数据集（Stanford-Paragraph Dataset），数据集中的每个样本包含一幅图像和一段描述该图像的段落。"
+      }
+    ],
+    "evaluation_metrics": [
+      "CIDEr",
+      "BLEU-n",
+      "Antecedent",
+      "Anaphora",
+      "Anaphora率"
+    ],
+    "baseline_methods": [
+      "Hierarchical-RNN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "CIDEr",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "斯坦福图像-段落数据集",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "metric_name": "Antecedent",
+        "our_result": "0.92",
+        "baseline_result": "0.89",
+        "dataset": "斯坦福图像-段落数据集",
+        "evidence_text": "全卷积解码器的平均Antecedent比Hierarchical-RNN高出44.44%，平均Anaphora率高出33.33%，这在一定程度上可说明该解码器生成的段落具有更强的连贯性。"
+      },
+      {
+        "metric_name": "Anaphora",
+        "our_result": "0.13",
+        "baseline_result": "0.09",
+        "dataset": "斯坦福图像-段落数据集",
+        "evidence_text": "全卷积解码器的平均Anaphora比Hierarchical-RNN高出44.44%，平均Anaphora率高出33.33%，这在一定程度上可说明该解码器生成的段落具有更强的连贯性。"
+      },
+      {
+        "metric_name": "Anaphora率(%)",
+        "our_result": "8.4",
+        "baseline_result": "6.3",
+        "dataset": "斯坦福图像-段落数据集",
+        "evidence_text": "全卷积解码器的平均Anaphora比Hierarchical-RNN高出44.44%，平均Anaphora率高出33.33%，这在一定程度上可说明该解码器生成的段落具有更强的连贯性。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出全卷积神经结构的段落解码器",
+      "提出衡量段落连贯性的指标",
+      "提出融合区域注意力的段落式图像描述模型Dual-CNN",
+      "提出衡量段落内句子多样度的指标"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "生成的段落具有更好的连贯性",
+      "训练时间复杂度更低",
+      "生成的段落描述更详细",
+      "生成的段落内句子更丰富多样"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于深度卷积结构的图像段落描述研究_梁昊雨",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:31:18",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: 全卷积解码器生成的段落具有更强的连贯性"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 15854,
+    "processed_text_length": 14839
+  }
+}

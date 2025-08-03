@@ -1,0 +1,50 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "引入深度学习的人工智能类课程",
+    "authors_or_creators": [
+      "李睿凡",
+      "王小捷",
+      "钟义信"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提出在人工智能类课程中引入深度学习的初步内容和实施建议，分析其必要性和可行性",
+    "key_concepts": [
+      "人工智能",
+      "深度学习",
+      "教学建议"
+    ],
+    "main_methods": [
+      "原文未明确提及"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "[1] 觚l I，Rose D C，Kamowsl【i TP．Deep machine Learning：a new frontier in artificial intelligence research[J]．IEEE Compumfional Intelligence Magazine，2010，5(4)：13-18．",
+      "[2] Dalai G E，Sainath T N，Hinton G E．Improving deep neural networks for LVCSR using rectified linear units and dropout[C]／／2013IEEE Imemafional conference on acoustic speech and signal processing，2013．",
+      "[3] Krizhevsky A，Sutskever I，Hinton G．ImageNet classification with deep convolutional neural networks[J]．Advances in Neural Information Processing Systems，2012(25)：1 106-1 114．",
+      "[4] Hinton G，Salaldautdinov 1L Reducing the dimensionality of data丽tll neural networks[J]．Science，2006，5786(3 13)：504—507．",
+      "[5] Haykin．Neural networks and learning machines[M]．New York：Prentice Hall，2008．",
+      "[6] 钟义信．高等人工智能：人工智能理论的新阶段[J]．计算机教育，2012(9)：6．11．",
+      "[7] Bengio YLearning de印architecturesfor AJ[J]．Foundations and Trendsin Machine Learning，2009，2(1)，1-127．"
+    ],
+    "builds_on": [
+      "原文未明确提及"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "引入深度学习的人工智能类课程",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:15:30",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 1528,
+    "processed_text_length": 1528
+  }
+}

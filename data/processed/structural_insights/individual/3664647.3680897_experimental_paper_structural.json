@@ -1,0 +1,137 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Triple Alignment Strategies for Zero-shot Phrase Grounding under Weak Supervision",
+    "authors": [
+      "Pengyue Lin",
+      "Ruifan Li",
+      "Yuzhe Ji",
+      "Zhihan Yu",
+      "Fangxiang Feng",
+      "Zhanyu Ma",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "Beijing Natural Science Foundation",
+      "National Nature Science Foundation of China",
+      "BUPT",
+      "High Performance Computing Platform of BUPT"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "CLIP",
+        "relationship_type": "基于",
+        "evidence_text": "Our framework uses a novel PG framework using triple alignment strategies under weak supervision: 1) Region-Text Alignment (RTA) to associate region-level attributes based on Contrastive Language-Image Pre-Training (CLIP)."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "WWbl",
+        "comparison_result": "Our CLIP-based heatmap surpasses the pseudo label used by WWbl, explaining a 9% increase in bbox accuracy.",
+        "evidence_text": "Our CLIP-based heatmap surpasses the pseudo label used by WWbl, explaining a 9% increase in bbox accuracy."
+      },
+      {
+        "method_name": "ZSGNet",
+        "comparison_result": "Our approach exceeds previous methods and will explore interpretable solutions for grounding-related tasks.",
+        "evidence_text": "Our approach exceeds previous methods and will explore interpretable solutions for grounding-related tasks."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Flickr-Split-S0",
+        "dataset_description": "零样本PG设置下的数据集",
+        "evidence_text": "我们在零样本PG设置下使用Flickr-Split-S0、Flickr-Split-S1、VG-Split-S2和VG-Split-S3评估我们的框架。"
+      },
+      {
+        "dataset_name": "Flickr-Split-S1",
+        "dataset_description": "零样本PG设置下的数据集",
+        "evidence_text": "我们在零样本PG设置下使用Flickr-Split-S0、Flickr-Split-S1、VG-Split-S2和VG-Split-S3评估我们的框架。"
+      },
+      {
+        "dataset_name": "VG-Split-S2",
+        "dataset_description": "零样本PG设置下的数据集",
+        "evidence_text": "我们在零样本PG设置下使用Flickr-Split-S0、Flickr-Split-S1、VG-Split-S2和VG-Split-S3评估我们的框架。"
+      },
+      {
+        "dataset_name": "VG-Split-S3",
+        "dataset_description": "零样本PG设置下的数据集",
+        "evidence_text": "我们在零样本PG设置下使用Flickr-Split-S0、Flickr-Split-S1、VG-Split-S2和VG-Split-S3评估我们的框架。"
+      }
+    ],
+    "evaluation_metrics": [
+      "IoU",
+      "bbox accuracy",
+      "recognition accuracy"
+    ],
+    "baseline_methods": [
+      "ZSGNet",
+      "WWbl",
+      "SMST",
+      "BBR",
+      "VPT"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "IoU",
+        "our_result": "0.5",
+        "baseline_result": "原文无此信息",
+        "dataset": "Flickr-Split-0&1",
+        "evidence_text": "For Flickr-Split-0&1, IoU threshold of 0.5 is used."
+      },
+      {
+        "metric_name": "bbox accuracy",
+        "our_result": "52.25",
+        "baseline_result": "34.26",
+        "dataset": "Flickr30K",
+        "evidence_text": "MaskCLIP 34.26 37.46 40.93 52.25 48.40 25.87"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种零样本短语接地的新框架",
+      "引入了三重对齐策略"
+    ],
+    "stated_novelty": [
+      "在弱监督下实现零样本接地",
+      "使用CLIP进行区域文本对齐"
+    ],
+    "stated_advantages": [
+      "优于其他弱监督和零样本接地方法",
+      "能够泛化到未见过的短语类别"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "对于密集物体的接地判断不够精确",
+      "没有考虑上下文短语"
+    ],
+    "failure_cases": [
+      "相似密集物体的接地",
+      "上下文相关实体的接地"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "3664647.3680897",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:03:55",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: Our framework uses a novel PG framework using triple alignment strategies under weak supervision: 1) Region-Text Alignment (RTA) to associate region-level attributes based on Contrastive Language-Image Pre-Training (CLIP)."
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 22082,
+    "processed_text_length": 14881
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "contribution_landscape": {
+    "total_unique_contributions": 114,
+    "top_contribution_types": [
+      {
+        "contribution": "a novel topic-oriented captioning model",
+        "frequency": 1
+      },
+      {
+        "contribution": "the FGU design",
+        "frequency": 1
+      },
+      {
+        "contribution": "extensive experimental evaluation",
+        "frequency": 1
+      },
+      {
+        "contribution": "Proposing a Multi-scale Two-way Deep Neural Network (MTDNN) for stock trend prediction",
+        "frequency": 1
+      },
+      {
+        "contribution": "A novel method combining both MS and TD properties in financial time-series.",
+        "frequency": 1
+      },
+      {
+        "contribution": "MS feature extraction with convolutional units without predefined parameters.",
+        "frequency": 1
+      },
+      {
+        "contribution": "Fusion of different scale features using a Recurrent Neural Network to capture temporal dependencies.",
+        "frequency": 1
+      },
+      {
+        "contribution": "提出了一种结合语法和语义特征的DualGCN模型",
+        "frequency": 1
+      },
+      {
+        "contribution": "设计了正交和微分正则化器以增强模型捕获语义关联的能力",
+        "frequency": 1
+      },
+      {
+        "contribution": "a novel EMC-GCN model",
+        "frequency": 1
+      },
+      {
+        "contribution": "a comprehensive exploitation of linguistic features",
+        "frequency": 1
+      },
+      {
+        "contribution": "an effective refining strategy",
+        "frequency": 1
+      },
+      {
+        "contribution": "提出了一种结合预训练语言模型和图卷积网络的简单模型",
+        "frequency": 1
+      },
+      {
+        "contribution": "propose a COntext-Masked MRC (COM-MRC) framework for ASTE tasks",
+        "frequency": 1
+      },
+      {
+        "contribution": "alleviate interference in ASTE tasks",
+        "frequency": 1
+      }
+    ]
+  },
+  "novelty_landscape": {
+    "total_novelty_claims": 43,
+    "top_novelty_areas": [
+      {
+        "area": "Our TOMS model differs by generating sentences from topics of interest, capturing linguistic distinctions in image descriptions.",
+        "frequency": 1
+      },
+      {
+        "area": "The Fusion Gate Unit (FGU) fuses three sources of representations: image, context, and topic.",
+        "frequency": 1
+      },
+      {
+        "area": "Using wavelet-based and downsampling-based scale information",
+        "frequency": 1
+      },
+      {
+        "area": "Achieving state-of-the-art performance on FI-2010 and CSI-2016 datasets",
+        "frequency": 1
+      },
+      {
+        "area": "DualGCN模型的结构设计",
+        "frequency": 1
+      },
+      {
+        "area": "正交和微分正则化器的应用",
+        "frequency": 1
+      },
+      {
+        "area": "Our proposed framework is EMC-GCN, which addresses Aspect and Opinion Term Co-Extraction (AOTE) and Aspect-Sentiment Pair Extraction (ASPE)",
+        "frequency": 1
+      },
+      {
+        "area": "We define ten types of relations between words for the ASTE task",
+        "frequency": 1
+      },
+      {
+        "area": "首次使用GCN直接学习实例之间的包表示",
+        "frequency": 1
+      },
+      {
+        "area": "COM-MRC’s components work collaboratively",
+        "frequency": 1
+      },
+      {
+        "area": "the two-stage inference method reduces interference from other aspects",
+        "frequency": 1
+      },
+      {
+        "area": "using product titles to guide the learning of visual features",
+        "frequency": 1
+      },
+      {
+        "area": "conversion of product titles into discrete labels for supervised learning",
+        "frequency": 1
+      },
+      {
+        "area": "We propose Splitting to Tree Decoder (S2TD), a novel tree-structured decoder that models paragraph decoding as top-down binary tree expansion.",
+        "frequency": 1
+      },
+      {
+        "area": "原文未明确声明",
+        "frequency": 1
+      }
+    ]
+  },
+  "limitation_awareness": {
+    "total_limitation_types": 34,
+    "common_limitations": [
+      {
+        "limitation": "原文明确承认的局限性，如无则为空数组",
+        "frequency": 5
+      },
+      {
+        "limitation": "需要进一步研究背后的理论以提供更好的解释性",
+        "frequency": 1
+      },
+      {
+        "limitation": "Our context augmentation strategy may increase training time, preventing COM-MRC from being applied to large-scale data scenarios",
+        "frequency": 1
+      },
+      {
+        "limitation": "原文明确承认的局限性",
+        "frequency": 1
+      },
+      {
+        "limitation": "讨论了未来工作，包括在少样本或无监督场景中应用GCL",
+        "frequency": 1
+      },
+      {
+        "limitation": "increased training time and memory usage associated with the table filling method",
+        "frequency": 1
+      },
+      {
+        "limitation": "comparative inefficiency in handling long sentences",
+        "frequency": 1
+      },
+      {
+        "limitation": "computational challenges",
+        "frequency": 1
+      },
+      {
+        "limitation": "use of a pre-trained model (UNINEXT) for automatic data annotation",
+        "frequency": 1
+      },
+      {
+        "limitation": "introduces inaccuracies",
+        "frequency": 1
+      }
+    ]
+  },
+  "experimental_ecosystem": {
+    "popular_datasets": [
+      {
+        "dataset": "COCO",
+        "usage_count": 3
+      },
+      {
+        "dataset": "GDS",
+        "usage_count": 2
+      },
+      {
+        "dataset": "CommonsenseQA",
+        "usage_count": 2
+      },
+      {
+        "dataset": "OpenbookQA",
+        "usage_count": 2
+      },
+      {
+        "dataset": "CustomConcept101",
+        "usage_count": 2
+      },
+      {
+        "dataset": "CUB",
+        "usage_count": 2
+      },
+      {
+        "dataset": "MS-COCO",
+        "usage_count": 2
+      },
+      {
+        "dataset": "Flickr8k",
+        "usage_count": 1
+      },
+      {
+        "dataset": "Flickr30k",
+        "usage_count": 1
+      },
+      {
+        "dataset": "paragraph dataset from Krause et al. (2017)",
+        "usage_count": 1
+      }
+    ],
+    "common_metrics": [
+      {
+        "metric": "CIDEr",
+        "usage_count": 6
+      },
+      {
+        "metric": "accuracy",
+        "usage_count": 5
+      },
+      {
+        "metric": "METEOR",
+        "usage_count": 4
+      },
+      {
+        "metric": "F1 score",
+        "usage_count": 3
+      },
+      {
+        "metric": "Precision",
+        "usage_count": 3
+      },
+      {
+        "metric": "Recall",
+        "usage_count": 3
+      },
+      {
+        "metric": "Accuracy",
+        "usage_count": 3
+      },
+      {
+        "metric": "F1 scores",
+        "usage_count": 2
+      },
+      {
+        "metric": "CLIP",
+        "usage_count": 2
+      },
+      {
+        "metric": "mean average precision (mAP)",
+        "usage_count": 2
+      }
+    ],
+    "baseline_methods": [
+      {
+        "method": "RTT-GAN",
+        "usage_count": 2
+      },
+      {
+        "method": "Regions-Hierarchical",
+        "usage_count": 2
+      },
+      {
+        "method": "SCST",
+        "usage_count": 2
+      },
+      {
+        "method": "CRL",
+        "usage_count": 2
+      },
+      {
+        "method": "OR-ATT",
+        "usage_count": 2
+      },
+      {
+        "method": "WWbl",
+        "usage_count": 2
+      },
+      {
+        "method": "AttnGAN",
+        "usage_count": 2
+      },
+      {
+        "method": "NIC",
+        "usage_count": 1
+      },
+      {
+        "method": "ATT-FCN",
+        "usage_count": 1
+      },
+      {
+        "method": "Sentence-Concat",
+        "usage_count": 1
+      }
+    ]
+  }
+}

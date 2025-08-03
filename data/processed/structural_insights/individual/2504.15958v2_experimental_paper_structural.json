@@ -1,0 +1,126 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "FreeGraftor: Training-Free Cross-Image Feature Grafting for Subject-Driven Text-to-Image Generation",
+    "authors": [
+      "Zebin Yao",
+      "Lei Ren",
+      "Huixing Jiang",
+      "Chen Wei",
+      "Xiaojie Wang",
+      "Ruifan Li",
+      "Fangxiang Feng"
+    ],
+    "institutions": [
+      "Beijing University of Posts and Telecommunications",
+      "Li Auto Inc."
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "FLUX.1",
+        "relationship_type": "基于",
+        "evidence_text": "We build upon FLUX.1, where joint attention is computed as:"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "FreeCustom",
+        "comparison_result": "FreeCustom suffers from severe attribute confusion",
+        "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+      },
+      {
+        "method_name": "MS-Diffusion",
+        "comparison_result": "MS-Diffusion and OmniGen lack visual faithfulness for small objects",
+        "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+      },
+      {
+        "method_name": "OmniGen",
+        "comparison_result": "OmniGen lacks visual faithfulness for small objects",
+        "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "DreamBench",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We use datasets from DreamBench, CustomConcept101, and Mix-of-Show for qualitative evaluation"
+      },
+      {
+        "dataset_name": "CustomConcept101",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We use datasets from DreamBench, CustomConcept101, and Mix-of-Show for qualitative evaluation"
+      },
+      {
+        "dataset_name": "Mix-of-Show",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We use datasets from DreamBench, CustomConcept101, and Mix-of-Show for qualitative evaluation"
+      }
+    ],
+    "evaluation_metrics": [
+      "CLIP",
+      "DINOv2"
+    ],
+    "baseline_methods": [
+      "FreeCustom",
+      "MS-Diffusion",
+      "OmniGen"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "Quantitative results show that FreeGraftor outperforms other methods in both image and text alignment."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "training-free framework",
+      "cross-image feature grafting",
+      "structure-consistent initialization"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "preserves subject identity",
+      "pixel-level detail",
+      "flexible text guidance",
+      "without training or test-time optimization"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "dependency on external models",
+      "significant GPU memory requirement"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2504.15958v2",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:54:12",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: OmniGen lacks visual faithfulness for small objects"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 23250,
+    "processed_text_length": 14880
+  }
+}

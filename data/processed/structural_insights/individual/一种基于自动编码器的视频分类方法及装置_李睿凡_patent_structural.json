@@ -1,0 +1,57 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "原文无此信息",
+    "inventors": [],
+    "applicant": "原文无此信息",
+    "patent_number": "原文无此信息"
+  },
+  "technical_solution": {
+    "technical_problem": "原文无此信息",
+    "solution_overview": "本发明提供了一种基于自动编码器的视频分类方法及装置，通过获取目标视频的图像、音频和文本三种模态数据的低级表示内容，并利用堆叠自动编码器组、双模态融合器和三模态融合器进行高级表示内容的处理，最后使用有监督分类模型进行视频分类。",
+    "key_technical_features": [
+      "使用自动编码器进行模态数据的高级表示处理",
+      "双模态融合器和三模态融合器的应用",
+      "有监督分类模型的运用"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "获取目标视频的图像、音频和文本模态数据的低级表示内容",
+      "使用堆叠自动编码器组获得高级表示内容",
+      "通过双模态融合器和三模态融合器处理数据",
+      "利用有监督学习方式训练分类模型"
+    ],
+    "technical_effects": [
+      "提高了视频分类的准确性"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "视频分类"
+    ],
+    "use_scenarios": [
+      "原文未明确提及"
+    ]
+  },
+  "claims_info": {
+    "main_claims": [
+      "一种基于自动编码器的视频分类方法及装置"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "一种基于自动编码器的视频分类方法及装置_李睿凡",
+    "detected_doc_type": "patent",
+    "extraction_time": "2025-08-02 15:12:11",
+    "validation": {
+      "warnings": [
+        "可疑document_type: patent"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1487,
+    "processed_text_length": 1487
+  }
+}

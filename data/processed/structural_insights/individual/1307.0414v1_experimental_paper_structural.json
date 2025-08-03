@@ -1,0 +1,115 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Challenges in Representation Learning: A report on three machine learning contests",
+    "authors": [
+      "Ian J. Goodfellow",
+      "et al."
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "sparse filtering",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "The top-performing teams used convolutional neural networks, with the winner employing an SVM primal objective as the loss function."
+      },
+      {
+        "method_name": "entropy regularization",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "Other top performers used methods such as sparse filtering, entropy regularization, and ensemble voting techniques with denoising autoencoders and maxout networks."
+      },
+      {
+        "method_name": "ensemble voting techniques with denoising autoencoders and maxout networks",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "Other top performers used methods such as sparse filtering, entropy regularization, and ensemble voting techniques with denoising autoencoders and maxout networks."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "null model (convolutional network with no feature learning)",
+        "comparison_result": "the best 'null' model achieved an accuracy of 60%",
+        "evidence_text": "The contest utilized the Facial Expression Recognition 2013 (FER-2013) dataset... Human performance on a similar dataset was estimated at 68±5%, while the best 'null' model... achieved an accuracy of 60%."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "BBL-2013",
+        "dataset_description": "an obfuscated subset of the Street View House Numbers dataset",
+        "evidence_text": "The black box learning challenge had two objectives... The BBL-2013 dataset, created by Dumitru Erhan, was an obfuscated subset of the Street View House Numbers dataset."
+      },
+      {
+        "dataset_name": "Facial Expression Recognition 2013 (FER-2013)",
+        "dataset_description": "nearly 36,000 images categorized into seven emotions",
+        "evidence_text": "In the facial expression recognition challenge... the contest utilized the Facial Expression Recognition 2013 (FER-2013) dataset, compiled by Pierre Luc Carrier and Aaron Courville."
+      }
+    ],
+    "evaluation_metrics": [
+      "accuracy"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy",
+        "our_result": "70.22%",
+        "baseline_result": "原文无此信息",
+        "dataset": "BBL-2013",
+        "evidence_text": "David Thaler won with an accuracy of 70.22% using a blend of models."
+      },
+      {
+        "metric_name": "accuracy",
+        "our_result": "60%",
+        "baseline_result": "68±5%",
+        "dataset": "Facial Expression Recognition 2013 (FER-2013)",
+        "evidence_text": "Human performance on a similar dataset was estimated at 68±5%, while the best 'null' model... achieved an accuracy of 60%."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "原文无此信息"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "1307.0414v1",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:38:51",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: null model (convolutional network with no feature learning)",
+        "可疑技术关系comparison_result: the best 'null' model achieved an accuracy of 60%",
+        "可疑技术关系evidence_text: The contest utilized the Facial Expression Recognition 2013 (FER-2013) dataset... Human performance on a similar dataset was estimated at 68±5%, while the best 'null' model... achieved an accuracy of 60%."
+      ],
+      "suspicious_count": 4,
+      "validation_score": 20,
+      "quality_level": "low"
+    },
+    "text_length": 7870,
+    "processed_text_length": 7870
+  }
+}

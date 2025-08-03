@@ -1,0 +1,149 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Multi-scale Two-way Deep Neural Network for Stock Trend Prediction",
+    "authors": [
+      "Guang Liu",
+      "Yuzhao Mao",
+      "Qi Sun",
+      "Hailong Huang",
+      "Weiguo Gao",
+      "Xuan Li",
+      "JianPing Shen",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Support Vector Machine and Neural Networks",
+        "relationship_type": "基于",
+        "evidence_text": "STP is a classification task traditionally tackled by Support Vector Machine and Neural Networks."
+      },
+      {
+        "method_name": "Ensemble-based methods like Random Forest and deep learning models",
+        "relationship_type": "基于",
+        "evidence_text": "Ensemble-based methods like Random Forest and deep learning models have also been explored."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "XGBoost",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "The data is treated as a non-stationary discrete signal and decomposed using DWT to obtain transformed multi-scale components. These are concatenated and input to an XGBoost model to ensemble multi-scale information and output category scores."
+      },
+      {
+        "method_name": "CNN",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "A key operation concatenates these features, and a GRU unit temporally cascades the information to output categories."
+      },
+      {
+        "method_name": "RNN",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "A key operation concatenates these features, and a GRU unit temporally cascades the information to output categories."
+      },
+      {
+        "method_name": "RCNN",
+        "comparison_result": "RCNN shows the best performance on most indices",
+        "evidence_text": "In the multi-scale rows, variations are fed with DWT-based, downsampling-based, and CNN multi-kernel size scale-information. RCNN shows the best performance on most indices, while XGBoost is less effective."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "FI-2010",
+        "dataset_description": "The first publicly available benchmark dataset of high-frequency Limit Order Book (LOB) data",
+        "evidence_text": "For FI-2010, the experimental settings are:"
+      },
+      {
+        "dataset_name": "CSI-2016",
+        "dataset_description": "A dataset we collected from three one-minute stock index data",
+        "evidence_text": "For CSI-2016, the experimental settings are:"
+      }
+    ],
+    "evaluation_metrics": [
+      "F1 score",
+      "accuracy"
+    ],
+    "baseline_methods": [
+      "Support Vector Machine",
+      "Neural Networks",
+      "Random Forest",
+      "deep learning models"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "F1 score",
+        "our_result": "81.05%",
+        "baseline_result": "原文无此信息",
+        "dataset": "FI-2010",
+        "evidence_text": "The results on FI-2010 show that our two-way model achieves state-of-the-art (SOTA) performance with 81.05% F1 score"
+      },
+      {
+        "metric_name": "accuracy",
+        "our_result": "81.12%",
+        "baseline_result": "原文无此信息",
+        "dataset": "FI-2010",
+        "evidence_text": "The results on FI-2010 show that our two-way model achieves state-of-the-art (SOTA) performance with 81.12% accuracy"
+      },
+      {
+        "metric_name": "accuracy",
+        "our_result": "63.07%",
+        "baseline_result": "原文无此信息",
+        "dataset": "CSI-2016",
+        "evidence_text": "On CSI-2016, our MTDNN model achieves the highest accuracy of 63.07%"
+      },
+      {
+        "metric_name": "F1 score",
+        "our_result": "61.65%",
+        "baseline_result": "原文无此信息",
+        "dataset": "CSI-2016",
+        "evidence_text": "On CSI-2016, our MTDNN model achieves the highest F1 score of 61.65%"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "Proposing a Multi-scale Two-way Deep Neural Network (MTDNN) for stock trend prediction"
+    ],
+    "stated_novelty": [
+      "Using wavelet-based and downsampling-based scale information",
+      "Achieving state-of-the-art performance on FI-2010 and CSI-2016 datasets"
+    ],
+    "stated_advantages": [
+      "Effectively utilizes multi-scale information in stock data"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "0628",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:36:06",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: In the multi-scale rows, variations are fed with DWT-based, downsampling-based, and CNN multi-kernel size scale-information. RCNN shows the best performance on most indices, while XGBoost is less effective."
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 8174,
+    "processed_text_length": 8174
+  }
+}

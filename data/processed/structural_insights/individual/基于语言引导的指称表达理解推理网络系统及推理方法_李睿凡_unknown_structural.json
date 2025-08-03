@@ -1,0 +1,66 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "基于语言引导的指称表达理解推理网络系统及推理方法",
+    "authors_or_creators": [
+      "原文未明确提及"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "本发明提供一种基于语言引导的指称表达理解推理网络系统及推理方法",
+    "key_concepts": [
+      "语言引导",
+      "指称表达式",
+      "推理网络系统",
+      "跨模态特征",
+      "文本特征提取器",
+      "图像特征提取器",
+      "文本特征扩展器(TFE)",
+      "跨模态对齐模块(TCA)",
+      "跨模态融合模块(TCF)",
+      "LGR-NET"
+    ],
+    "main_methods": [
+      "多模态特征提取",
+      "文本特征扩展",
+      "文本引导的跨模态对齐",
+      "文本引导的跨模态融合",
+      "预测头",
+      "损失和训练"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "原文未明确提及"
+    ],
+    "builds_on": [
+      "Swin Transformer",
+      "BERT",
+      "注意力机制",
+      "多头自注意力机制",
+      "残差链接",
+      "层归一化",
+      "FFN",
+      "sigmoid激活函数",
+      "GIoU损失",
+      "L1损失",
+      "REC任务"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:13:45",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 2125,
+    "processed_text_length": 2125
+  }
+}

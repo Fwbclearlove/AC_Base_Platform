@@ -1,0 +1,97 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "增强提示学习的少样本文本分类方法",
+    "authors": [
+      "李睿凡",
+      "魏志宇",
+      "范元涛",
+      "叶书勤",
+      "张光卫"
+    ],
+    "institutions": [
+      "北京邮电大学人工智能学院",
+      "教育部信息网络工程研究中心",
+      "交互技术与体验系统文化和旅游部重点实验室",
+      "北京邮电大学计算机学院"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "基于度量学习的方法和基于提示学习的方法",
+        "relationship_type": "基于",
+        "evidence_text": "本文提出的方法与基于度量学习的方法和基于提示学习的方法密切相关。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "对比基线方法",
+        "comparison_result": "EPL4FTC方法的准确度明显优于对比基线方法",
+        "evidence_text": "实验评估表明EPL4FTC方法的准确度明显优于对比基线方法。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "中文数据集和英文数据集",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "实验结果显示，该算法在中文和英文数据集上均优于基线方法"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "对比基线方法"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "准确度",
+        "our_result": "59.8（中文数据集平均值）, 54.1（英文数据集平均值）",
+        "baseline_result": "原文无此信息",
+        "dataset": "中文数据集和英文数据集",
+        "evidence_text": "表6 中文数据集和英文数据集上推理词形式性能比较"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出基于提示学习和三元组损失优化的少样本文本分类EPL4FTC算法"
+    ],
+    "stated_novelty": [
+      "将文本分类任务转换为基于自然语言推理的提示学习形式，并引入三元组损失"
+    ],
+    "stated_advantages": [
+      "在少样本场景下，准确度明显优于对比基线方法"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Enhanced_Prompt_Learning_for_Few_shot_Text_Classification_Method",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:12:50",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑性能数据our_result: 59.8（中文数据集平均值）, 54.1（英文数据集平均值）"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 1834,
+    "processed_text_length": 1834
+  }
+}

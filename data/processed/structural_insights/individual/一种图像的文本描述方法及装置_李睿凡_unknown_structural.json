@@ -1,0 +1,48 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "提供一种图像的文本描述方法及装置，通过分层结构提高生成的文本段落中句子之间的连贯性，并降低训练过程的计算复杂度",
+    "key_concepts": [
+      "图像的文本描述方法",
+      "区域特征",
+      "全局特征",
+      "句子级子网络",
+      "词汇子网络",
+      "连贯性",
+      "计算复杂度"
+    ],
+    "main_methods": [
+      "获取待描述图像",
+      "提取区域特征和全局特征",
+      "输入句子级子网络",
+      "输入词汇级子网络",
+      "训练神经网络"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": [
+      "现有的基于循环神经网络的方案"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种图像的文本描述方法及装置_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:33:00",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1104,
+    "processed_text_length": 1104
+  }
+}

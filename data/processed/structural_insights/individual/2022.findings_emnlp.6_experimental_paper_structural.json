@@ -1,0 +1,114 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "KE-GCL: Knowledge Enhanced Graph Contrastive Learning for Commonsense Question Answering",
+    "authors": [
+      "Lihui Zhang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications",
+      "Engineering Research Center of Information Networks, Ministry of Education"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Graph Contrastive Learning",
+        "relationship_type": "扩展",
+        "evidence_text": "Graph contrastive learning extends contrastive learning to graph-structured data, with works focusing on unsupervised representation learning."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "RoBERTa-Large (w/o KG)",
+        "comparison_result": "KE-GCL consistently outperforms previous methods",
+        "evidence_text": "Our KE-GCL model consistently outperforms other baselines on CommonsenseQA and OpenBookQA datasets."
+      },
+      {
+        "method_name": "Relation Network (RN), RGCN, GconAttn, KagNet, MHGRN, QA-GNN",
+        "comparison_result": "KE-GCL consistently outperforms previous methods",
+        "evidence_text": "We compare our KE-GCL with state-of-the-art baselines: RoBERTa-Large (w/o KG), Relation Network (RN), RGCN, GconAttn, KagNet, MHGRN, and QA-GNN."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "CommonsenseQA",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our model on CommonsenseQA and OpenbookQA datasets using Accuracy (Acc) as the metric."
+      },
+      {
+        "dataset_name": "OpenbookQA",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our model on CommonsenseQA and OpenbookQA datasets using Accuracy (Acc) as the metric."
+      }
+    ],
+    "evaluation_metrics": [
+      "Accuracy (Acc)"
+    ],
+    "baseline_methods": [
+      "RoBERTa-Large (w/o KG)",
+      "Relation Network (RN)",
+      "RGCN",
+      "GconAttn",
+      "KagNet",
+      "MHGRN",
+      "QA-GNN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Accuracy",
+        "our_result": "平均准确度提升1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA",
+        "baseline_result": "原文无此信息",
+        "dataset": "CommonsenseQA and OpenBookQA",
+        "evidence_text": "Our KE-GCL model consistently outperforms other baselines on CommonsenseQA and OpenBookQA datasets. It achieves an average accuracy improvement of 1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种新的KE-GCL模型",
+      "在CQA任务中整合了GCL",
+      "通过自适应图增强和选择错误的答案来增强图表示学习"
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "减少了KG噪声",
+      "在两个基准数据集上性能一致提升"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性",
+      "讨论了未来工作，包括在少样本或无监督场景中应用GCL"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例",
+      "分析了正确和错误预测的细微差别"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2022.findings_emnlp.6",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:50:37",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: Relation Network (RN), RGCN, GconAttn, KagNet, MHGRN, QA-GNN",
+        "可疑性能数据our_result: 平均准确度提升1.08% on CommonsenseQA and 0.83% and 0.64% on OpenBookQA"
+      ],
+      "suspicious_count": 3,
+      "validation_score": 40,
+      "quality_level": "low"
+    },
+    "text_length": 16697,
+    "processed_text_length": 14875
+  }
+}

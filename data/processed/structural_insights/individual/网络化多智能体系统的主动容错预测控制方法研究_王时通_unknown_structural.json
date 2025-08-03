@@ -1,0 +1,55 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "网络化多智能体系统的主动容错预测控制方法研究",
+    "authors_or_creators": [
+      "原文无此信息"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "研究网络化多智能体系统的主动容错预测控制方法，包括对执行器故障和传感器故障的主动补偿，以及在不同通信约束下的系统稳定性分析。",
+    "key_concepts": [
+      "网络化多智能体系统",
+      "主动容错预测控制",
+      "执行器故障",
+      "传感器故障",
+      "随机通信约束"
+    ],
+    "main_methods": [
+      "基于状态观测器的主动容错控制方法",
+      "网络化主动容错预测控制方法",
+      "云主动容错预测控制方法"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Pang Z H, Zhao X Y, Sun J, et al. Comparison of three data-driven networked predictive control methods for a class of nonlinear systems. IEEE/CAA Journal of Automatica Sinica, 2022, 9(9): 1714-1716.",
+      "Li Y, Hua C, Guan X. Distributed output feedback leader-following control for high-order nonlinear multiagent system using dynamic gain method [J]. IEEE Transactions on Cybernetics, 2020, 50(2): 640-649.",
+      "Yu Z, Zhang Y, Jiang B, et al. Decentralized fractional-order backstepping fault-tolerant control of multi-UAVs against actuator faults and wind effects. Aerospace Science and Technology, 2020, 104: 105939.",
+      "Yan D H, Zhang W G, Chen H, et al. Robust control strategy for multi-UAVs system using MPC combined with Kalman-consensus filter and disturbance observer. ISA Transactions, 2023, 135: 35-51.",
+      "Pang Z H, Xia C G, Sun J, et al. Active fault-tolerant predictive control of networked systems subject to actuator faults and random communication constraints. International Journal of Control, 2022, 95(9): 2357-2363.",
+      "Liu G P. Networked predictive control for nonlinear information physical systems with time-varying communication constraints. Control Theory and Application, 2022, 39(1): 145-153.",
+      "Pang Z H, Luo W C. Networked multi-agent predictive control based on observers. Control and Decision, 2021, 36(9): 2290-2296.",
+      "Yan Y M, Chen Z Y. Cooperative output regulation of linear discrete-time time-delay multi-agent systems by adaptive distributed observers. Neurocomputing, 2019, 331: 33-39.",
+      "Wang H, You Y, Li W Q. Distributed output-feedback tracking for stochastic nonlinear multi-agent systems with time-varying delays. IEEE Access, 2022, 10: 69323-69332.",
+      "Guo S, You R, Ahn C K. Adaptive consensus for multi-agent systems with switched nonlinear dynamics and switching directed topologies. IEEE Transactions on Control Systems Technology, 2023, 111: 1285-1299."
+    ],
+    "builds_on": [
+      "原文未明确提及"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "网络化多智能体系统的主动容错预测控制方法研究_王时通",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:37:50",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 19837,
+    "processed_text_length": 14947
+  }
+}

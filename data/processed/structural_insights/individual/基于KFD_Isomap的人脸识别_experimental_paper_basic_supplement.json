@@ -1,0 +1,101 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "基于KFD-l somap的人脸识别",
+    "authors": [
+      "李睿凡",
+      "郝红卫",
+      "涂序彦",
+      "王枞"
+    ],
+    "institutions": [
+      "北京邮电大学信息工程学院",
+      "北京科技大学信息工程学院"
+    ]
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Isomap",
+        "relationship_type": "改进"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Isomap",
+        "comparison_result": "KFD-Isomap在识别率上有较大提高"
+      },
+      {
+        "method_name": "Ext.Isomap",
+        "comparison_result": "KFD-Isomap方法中判别分析的引入使得识别率提高"
+      },
+      {
+        "method_name": "特征脸",
+        "comparison_result": "具有类似的识别效果"
+      },
+      {
+        "method_name": "Fisher脸",
+        "comparison_result": "KFD-Isomap方法性能优于Fisher脸算法"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "ORL人脸数据库",
+        "dataset_description": "包含36位男性和4位女性，每人10幅图像，共400幅面部图像，每幅图像为112×92象素，256灰度级"
+      },
+      {
+        "dataset_name": "Yale人脸数据库",
+        "dataset_description": "包括15个人，大小为320×243的165幅人脸图像"
+      }
+    ],
+    "evaluation_metrics": [
+      "错误率(％)"
+    ],
+    "baseline_methods": [
+      "Eigenface",
+      "Fisherface",
+      "Isomap",
+      "Ext-Isomap"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "错误率(％)",
+        "our_result": "0.75",
+        "baseline_result": "3.50"
+      },
+      {
+        "metric_name": "错误率(％)",
+        "our_result": "8.48",
+        "baseline_result": "26.06"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种用核Fisher判别函数改进的Isomap算法",
+      "该方法用测地线距离矩阵的列向量作为特征，并用核Fisher判别替代多维尺度分析建立最佳投影方向"
+    ],
+    "stated_novelty": [
+      "在人脸识别实验中，该方法性能优于实验采用的其它方法"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "实际模式分类应用中数据的稀疏性",
+      "Isomap方法在模式分类问题上的数据处理方式并非最优"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于KFD_Isomap的人脸识别",
+    "detected_doc_type": "experimental_paper",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:55:13",
+    "text_length": 6609,
+    "processed_text_length": 6609,
+    "extraction_method": "supplement_script"
+  }
+}

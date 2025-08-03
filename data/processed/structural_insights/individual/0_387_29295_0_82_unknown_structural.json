@@ -1,0 +1,69 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "SKFD-ISOMAP FOR FACE RECOGNITION",
+    "authors_or_creators": [
+      "Ruifan Li",
+      "Cong Wang",
+      "Xuyan Tu"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提出SKFD-Isomap方法，利用类别信息和核Fisher判别（KFD）进行非线性嵌入，以改善人脸识别中的模式分类。",
+    "key_concepts": [
+      "人脸识别",
+      "流形",
+      "Isomap",
+      "KFD"
+    ],
+    "main_methods": [
+      "SKFD-Isomap",
+      "核Fisher判别",
+      "多维标度",
+      "最近邻分类器"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Zhao et al. (2003)",
+      "Turk and Pentland (1991)",
+      "Belhumeur et al. (1997)",
+      "Martinez and Kak (2001)",
+      "He et al. (2003)",
+      "Yang (2002)",
+      "Liu et al. (2002)",
+      "Seung and Lee (2000)",
+      "Silva et al. (2000)",
+      "Roweis and Saul (2000)",
+      "Belkin and Niyogi (2001)",
+      "Mika et al. (1999)",
+      "Scholkopf et al. (1998)",
+      "Specht (1991)"
+    ],
+    "builds_on": [
+      "Eigenfaces",
+      "Fisherfaces",
+      "kernel Eigenfaces",
+      "kernel Fisherfaces",
+      "Isomap",
+      "kernel-based nonlinear discriminant analysis",
+      "Laplacian eigenmaps",
+      "Fisher discriminant analysis with kernels",
+      "nonlinear component analysis as a kernel eigenvalue problem"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "0_387_29295_0_82",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 12:33:53",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 5058,
+    "processed_text_length": 5058
+  }
+}

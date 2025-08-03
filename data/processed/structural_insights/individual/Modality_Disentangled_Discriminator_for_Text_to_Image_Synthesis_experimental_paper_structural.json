@@ -1,0 +1,153 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Modality Disentangled Discriminator for Text-to-Image Synthesis",
+    "authors": [
+      "Fangxiang Feng",
+      "Tianrui Niu",
+      "Ruifan Li",
+      "Member, IEEE",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "AttnGAN",
+        "relationship_type": "改进",
+        "evidence_text": "The modality disentangled discriminator is integrated into two models: AttnGAN and DM-GAN."
+      },
+      {
+        "method_name": "DM-GAN",
+        "relationship_type": "改进",
+        "evidence_text": "The modality disentangled discriminator is integrated into two models: AttnGAN and DM-GAN."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "GAN-INT-CLS",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "In terms of style manipulation experiments on the CUB dataset, two types of experiments are conducted. The first involves style transfer, where the model uses modality-specific features for direct style transfer, achieving more accurate style reconstruction compared to GAN-INT-CLS."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "CUB",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "These models are evaluated on the CUB, Oxford-102, and COCO datasets."
+      },
+      {
+        "dataset_name": "Oxford-102",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "These models are evaluated on the CUB, Oxford-102, and COCO datasets."
+      },
+      {
+        "dataset_name": "COCO",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "These models are evaluated on the CUB, Oxford-102, and COCO datasets."
+      }
+    ],
+    "evaluation_metrics": [
+      "Inception Score (IS)",
+      "Fréchet Inception Distance (FID)",
+      "R-Precision"
+    ],
+    "baseline_methods": [
+      "AttnGAN",
+      "DM-GAN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Inception Score (IS)",
+        "our_result": "4.86",
+        "baseline_result": "4.75",
+        "dataset": "CUB",
+        "evidence_text": "On the CUB dataset, it increases the Inception Score (IS) from 4.75 to 4.86"
+      },
+      {
+        "metric_name": "Fréchet Inception Distance (FID)",
+        "our_result": "15.76",
+        "baseline_result": "16.09",
+        "dataset": "CUB",
+        "evidence_text": "On the CUB dataset, it decreases the Fréchet Inception Distance (FID) from 16.09 to 15.76"
+      },
+      {
+        "metric_name": "R-Precision",
+        "our_result": "69.88%",
+        "baseline_result": "67.82%",
+        "dataset": "CUB",
+        "evidence_text": "AttnGAN-MDD increasing the R-precision rate from 67.82% to 69.88% on CUB"
+      },
+      {
+        "metric_name": "Inception Score (IS)",
+        "our_result": "4.23",
+        "baseline_result": "4.18",
+        "dataset": "Oxford-102",
+        "evidence_text": "On the Oxford-102 dataset, the IS is enhanced from 4.18 to 4.23"
+      },
+      {
+        "metric_name": "Fréchet Inception Distance (FID)",
+        "our_result": "40.18",
+        "baseline_result": "41.35",
+        "dataset": "Oxford-102",
+        "evidence_text": "On the Oxford-102 dataset, the FID reduced from 41.35 to 40.18"
+      },
+      {
+        "metric_name": "Inception Score (IS)",
+        "our_result": "34.46",
+        "baseline_result": "30.49",
+        "dataset": "COCO",
+        "evidence_text": "On the COCO dataset, the IS jumps from 30.49 to 34.46"
+      },
+      {
+        "metric_name": "Fréchet Inception Distance (FID)",
+        "our_result": "24.30",
+        "baseline_result": "32.64",
+        "dataset": "COCO",
+        "evidence_text": "On the COCO dataset, the FID plummets from 32.64 to 24.30"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "The proposed discriminator is the first to learn modality disentangled representation for text-to-image synthesis, enhancing discrimination of image-text correlation and facilitating image synthesis manipulation."
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "our GAN-MDDs offer similar model size and training/testing time but with improved performance and capabilities"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "For instance, the orientation of the birds in all generated images is reversed."
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:25:16",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 20254,
+    "processed_text_length": 14897
+  }
+}

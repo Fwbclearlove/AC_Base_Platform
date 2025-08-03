@@ -1,0 +1,94 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "鲁棒局部保持投影的表情识别",
+    "authors": [
+      "李睿凡",
+      "朱强生",
+      "郭燕慧",
+      "刘海涛"
+    ],
+    "institutions": [
+      "北京邮电大学信息工程学院",
+      "中国民航大学通信工程系"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "局部保持投影",
+        "relationship_type": "改进",
+        "evidence_text": "针对局部保持投影的流形学习算法对于噪声与异常值的敏感性，提出了一种鲁棒的局部保持投影算法。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Gabor小波特征提取方法",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "以Gabor小波为基准测试了算法性能。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "JAFFE数据库",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "JAFFE数据库的表情识别实验中"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "最近邻分类器"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "JAFFE数据库",
+        "evidence_text": "实验结果表明鲁棒改进算法的有效性。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种鲁棒的局部保持投影算法"
+    ],
+    "stated_novelty": [
+      "利用了带权值的主成分分析算法",
+      "在样本数据集X上执行局部鲁棒主成分分析"
+    ],
+    "stated_advantages": [
+      "有效提高了表情识别的鲁棒性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "鲁棒局部保持投影的表情识别",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:16:59",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 2327,
+    "processed_text_length": 2327
+  }
+}

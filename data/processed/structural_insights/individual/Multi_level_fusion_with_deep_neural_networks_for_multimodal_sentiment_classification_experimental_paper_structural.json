@@ -1,0 +1,118 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Multi-level fusion with deep neural networks for multimodal sentiment classification",
+    "authors": [
+      "Zhang Guangwei",
+      "Zhao Bing",
+      "Li Ruifan"
+    ],
+    "institutions": [
+      "School of Computer Sciences, Beijing University of Posts and Communications, Beijing 100876, China",
+      "School of Science, Yanshan University, Qinhuangdao 066004, China",
+      "School of Artificial Intelligence, Beijing University of Posts and Communications, Beijing 100876, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "CNNs and RNNs",
+        "relationship_type": "基于",
+        "evidence_text": "Previous work utilized high-level features for fusion, such as the last outputs of different modal model layers."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Image CNN",
+        "comparison_result": "R-MFC shows improved performance",
+        "evidence_text": "The MFC model shows improved performance over several baseline methods, with the ITIGNN method achieving the best results."
+      },
+      {
+        "method_name": "Text CNN",
+        "comparison_result": "R-MFC shows improved performance",
+        "evidence_text": "The MFC model shows improved performance over several baseline methods, with the ITIGNN method achieving the best results."
+      },
+      {
+        "method_name": "ITIGNN",
+        "comparison_result": "MFC method employing fewer parameters outperforms ITIGNN",
+        "evidence_text": "We propose that our MFC method, employing fewer parameters, outperforms ITIGNN, which uses a pretrained CNN combined with graph neural networks for textual and visual analysis."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Flickr dataset",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Experiments on the Flickr dataset show the MFC method achieves comparable performance with strong baseline methods."
+      }
+    ],
+    "evaluation_metrics": [
+      "Accuracy",
+      "Recall",
+      "F1 score"
+    ],
+    "baseline_methods": [
+      "Image CNN",
+      "Text CNN",
+      "ITIGNN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Accuracy",
+        "our_result": "0.884",
+        "baseline_result": "0.675",
+        "dataset": "Flickr dataset",
+        "evidence_text": "R-MFC        | 0.801    | 0.799  | 0.800    |"
+      },
+      {
+        "metric_name": "F1 score",
+        "our_result": "0.891",
+        "baseline_result": "原文无此信息",
+        "dataset": "Flickr dataset",
+        "evidence_text": "R-MFC        | ...      | ...    | 0.800    |"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "A multi-level fusion classification (MFC) model that fuses features from different levels by exploiting their dependencies.",
+      "An R-MFC module to address sentiment conflicts in social network posts."
+    ],
+    "stated_novelty": [
+      "The architecture uses convolutional neural networks (CNNs) to extract features in image and text modalities and a bi-directional (Bi) recurrent neural network (RNN) to integrate features from different CNN layers."
+    ],
+    "stated_advantages": [
+      "The proposed method effectively integrates different levels of features from multiple branches in image and text CNNs by exploiting their dependencies with the Bi-GRU approach."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文未明确提及"
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:26:56",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: R-MFC shows improved performance",
+        "可疑技术关系comparison_result: R-MFC shows improved performance",
+        "可疑技术关系comparison_result: MFC method employing fewer parameters outperforms ITIGNN"
+      ],
+      "suspicious_count": 4,
+      "validation_score": 20,
+      "quality_level": "low"
+    },
+    "text_length": 12333,
+    "processed_text_length": 12333
+  }
+}

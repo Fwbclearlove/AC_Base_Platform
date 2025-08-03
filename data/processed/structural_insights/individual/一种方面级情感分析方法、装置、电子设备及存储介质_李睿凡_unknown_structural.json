@@ -1,0 +1,48 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "一种方面级情感分析方法、装置、电子设备及存储介质",
+    "authors_or_creators": [
+      "原文无此信息"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提高情感分析结果的准确性",
+    "key_concepts": [
+      "方面级情感分析",
+      "聚合特征处理",
+      "双向长短期记忆网络",
+      "图卷积神经网络"
+    ],
+    "main_methods": [
+      "聚合特征模块",
+      "特征转换模块",
+      "位置编码模块",
+      "情感分析模块"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "原文无此信息"
+    ],
+    "builds_on": [
+      "相似结构数据集",
+      "双向长短期记忆网络",
+      "图卷积神经网络"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种方面级情感分析方法、装置、电子设备及存储介质_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:12:36",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 1950,
+    "processed_text_length": 1950
+  }
+}

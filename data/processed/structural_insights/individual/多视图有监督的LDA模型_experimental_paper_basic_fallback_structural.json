@@ -1,0 +1,150 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "多视图有监督的ＬＤＡ模型",
+    "authors": [
+      "李晓旭",
+      "李睿凡",
+      "冯方向",
+      "曹洁",
+      "王小捷"
+    ],
+    "institutions": [
+      "兰州理工大学计算机与通信学院",
+      "北京邮电大学计算机学院",
+      "教育部信息网络工程研究中心"
+    ],
+    "publication_venue": "电子学报"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "LDA",
+        "relationship_type": "结合",
+        "evidence_text": "本文建立在概率主题模型LDA和集成分类方法Softmax混合模型上"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "S-LDA",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "SBMLR",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "SVM-POL",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "SVM-RBF",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "Fu-L",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "MCa-sLDA",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "LabelMe",
+        "dataset_description": "带有标注的场景分类数据集",
+        "evidence_text": "一个是带有标注的场景分类数据集：LabelMe的子集"
+      },
+      {
+        "dataset_name": "UIUC-Sport",
+        "dataset_description": "带有标注的事件分类数据集",
+        "evidence_text": "另一个是带有标注的事件分类数据集：8类的UIUC-Sport数据集"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "S-LDA",
+      "SBMLR",
+      "SVM-POL",
+      "SVM-RBF",
+      "Fu-L",
+      "MCa-sLDA"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "准确率",
+        "our_result": "92.2%",
+        "baseline_result": "81.1%",
+        "dataset": "LabelMe",
+        "evidence_text": "提出模型在LabelMe数据上可达到92.2%准确率"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "99.0%",
+        "baseline_result": "原文无此信息",
+        "dataset": "UIUC-Sport",
+        "evidence_text": "提出模型在UIUC-Sport数据上可达到99.0%的准确率"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出一个多视图有监督的LDA模型"
+    ],
+    "stated_novelty": [
+      "将集成学习思想引入主题模型中"
+    ],
+    "stated_advantages": [
+      "充分利用多视图信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "多视图有监督的LDA模型",
+    "detected_doc_type": "experimental_paper",
+    "source_type": "basic_fallback",
+    "extraction_time": "2025-08-02 15:46:11",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: 本文建立在概率主题模型LDA和集成分类方法Softmax混合模型上",
+        "可疑技术关系method_name: S-LDA",
+        "可疑技术关系method_name: SBMLR",
+        "可疑技术关系method_name: SVM-POL",
+        "可疑技术关系method_name: SVM-RBF",
+        "可疑技术关系method_name: Fu-L",
+        "可疑技术关系method_name: MCa-sLDA",
+        "可疑数据集: LabelMe",
+        "可疑数据集: UIUC-Sport",
+        "可疑性能数据our_result: 92.2%",
+        "可疑性能数据baseline_result: 81.1%",
+        "可疑性能数据our_result: 99.0%"
+      ],
+      "suspicious_count": 13,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 10909,
+    "processed_text_length": 10909
+  }
+}

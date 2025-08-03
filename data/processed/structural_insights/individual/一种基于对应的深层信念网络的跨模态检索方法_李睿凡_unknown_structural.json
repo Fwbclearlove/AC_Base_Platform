@@ -1,0 +1,47 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "提出一种基于对应的深层信念网络的跨模态检索方法",
+    "key_concepts": [
+      "深层信念网络",
+      "跨模态检索",
+      "Corr-DBN",
+      "双受限波尔兹曼机RBM",
+      "Corr-RBM",
+      "相关性约束"
+    ],
+    "main_methods": [
+      "特征提取",
+      "双RBM模型",
+      "Corr-RBM模型",
+      "欧氏距离计算"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": [
+      "至少一层双受限波尔兹曼机RBM结构",
+      "对应的受限波尔兹曼机Corr-RBM结构"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种基于对应的深层信念网络的跨模态检索方法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:34:05",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1139,
+    "processed_text_length": 1139
+  }
+}

@@ -1,0 +1,1544 @@
+{
+  "raw_data": {
+    "basic_info": {
+      "standardized_name": "Feng Fangxiang",
+      "name_variations": [
+        "Fangxiang Feng"
+      ],
+      "total_papers": 19,
+      "document_types": {
+        "academic_paper": 19
+      },
+      "institutions": [
+        "Beijing University of Posts & Telecommunications",
+        "Engineering Research Center of Information Networks, Ministry of Education, Beijing 100876, China",
+        "Li Auto Inc.",
+        "School of Artificial Intelligence, Beijing University of Posts and Telecommunications",
+        "Beijing Academy of Artificial Intelligence, Beijing, China",
+        "Beijing Natural Science Foundation",
+        "Beijing University of Posts and Telecommunications, Beijing, China",
+        "Beijing Academy of Artificial Intelligence",
+        "Beijing University of Posts and Telecommunications",
+        "High Performance Computing Platform of BUPT",
+        "National Nature Science Foundation of China",
+        "Engineering Research Center of Information Networks, Ministry of Education, China",
+        "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China",
+        "BUPT",
+        "School of Computers, Beijing University of Posts and Telecommunications, Beijing 100876, China"
+      ],
+      "papers": [
+        "2504.15958v2",
+        "1307.1275v1",
+        "2022.acl_long.212",
+        "3664647.3681466",
+        "2408.03632v3",
+        "3394171.3416296",
+        "3664647.3680897",
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+        "2820400",
+        "2647868.2654902",
+        "2021.acl_long.494",
+        "2022.emnlp_main.212",
+        "2022.coling_1.234",
+        "2808205",
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+        "3469877.3490585",
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis"
+      ]
+    },
+    "research_content": {
+      "domains": [
+        "Text-to-image generation, subject-driven image generation, training-free framework",
+        "Personalized content creation",
+        "Image synthesis",
+        "Multi-modal learning, bimodal data representations, image-tags",
+        "Predictive systems for word tags",
+        "Aspect-based Sentiment Analysis (ABSA), Graph Convolutional Network",
+        "Sentiment analysis",
+        "Natural language processing",
+        "Computer vision tasks, image harmonization",
+        "Digital editing",
+        "Image generation and editing tasks",
+        "Text-to-image synthesis with multi-concept customization",
+        "Image generation",
+        "AI art",
+        "Virtual reality",
+        "Visual feature learning for image retrieval in e-commerce",
+        "E-commerce",
+        "Content-based image retrieval",
+        "Phrase Grounding under weak supervision",
+        "Multimedia and multimodal retrieval",
+        "Weakly supervised phrase grounding",
+        "Image-text alignment",
+        "Multimodal information processing",
+        "Deep Learning for Multimedia and Emotional and Social Signals in Multimedia",
+        "Cross-modal retrieval",
+        "Web image database",
+        "Information retrieval",
+        "Aspect-based sentiment analysis",
+        "Natural language processing",
+        "Sentiment analysis",
+        "Aspect Sentiment Triplet Extraction, Machine Reading Comprehension, Fine-grained Aspect-based Sentiment Analysis",
+        "Aspect-based Sentiment Analysis",
+        "Natural Language Processing",
+        "Distantly supervised relation extraction",
+        "Natural Language Processing",
+        "Cross-modal retrieval, deep learning, autoencoder",
+        "Multimodal data retrieval",
+        "Multimodal data analysis using deep neural learning",
+        "Image and text analysis",
+        "Complex systems",
+        "Image paragraph captioning",
+        "Computer vision tasks",
+        "Aspect-Based Sentiment Analysis",
+        "sentiment analysis",
+        "recommendation",
+        "advertisement computation",
+        "Image paragraph captioning",
+        "Beijing Academy of Artificial Intelligence",
+        "Computer Vision",
+        "Natural Language Processing",
+        "Text-to-image synthesis, Generative Adversarial Networks, Multi-modal disentangled representation learning",
+        "Interactive art",
+        "Computer-aided drawing"
+      ],
+      "methods": [
+        "FreeGraftor, a training-free framework that uses cross-image feature grafting",
+        "Hierarchical representations of bimodal data using MPEG-7, gist descriptors, RBMs, and a quasi-Siamese auto-encoder",
+        "Enhanced Multi-Channel Graph Convolutional Network (EMC-GCN)",
+        "Harmony-VAE, inverse harmonization diffusion model",
+        "Concept Conductor framework with multipath sampling, layout alignment, and concept injection",
+        "Utilizing product titles as supervised signals to learn image features, constructing an image classification dataset using n-grams from product titles, fine-tuning a pre-trained model, and extracting the basic max-pooling activation of convolutions (MAC) feature.",
+        "Triple alignment strategies: Region-Text Alignment (RTA), Domain Alignment (DomA), and Category Alignment (CatA)",
+        "Refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations",
+        "Facial emotion recognition during speech; Correspondence autoencoders for cross-modal retrieval",
+        "Correspondence autoencoder (Corr-AE), Corr-Cross-AE, and Corr-Full-AE",
+        "DualGCN model",
+        "COntext-Masked MRC (COM-MRC) framework",
+        "BERT-based Graph Convolutional network Model (BGM)",
+        "Correspondence Autoencoder (Corr-AE), integrating representation learning and correlation learning into a single process",
+        "Bimodal Deep Architecture (BDA)",
+        "Splitting to Tree Decoder (S2TD)",
+        "DualGCN, integrating SynGCN and SemGCN through a mutual BiAffine module, with orthogonal and differential regularizers.",
+        "DualRel model",
+        "Modality disentangled discriminator, AttnGAN, DM-GAN"
+      ],
+      "keywords": [
+        "Text-to-image generation",
+        "Subject-driven image generation",
+        "Cross-image feature grafting",
+        "Semantic matching",
+        "Efficiency",
+        "Multi-subject generation",
+        "Multi-modal learning",
+        "Bimodal representations",
+        "Image-tags",
+        "Word tags",
+        "Restricted Boltzmann Machines",
+        "Siamese network",
+        "Aspect Sentiment Triplet Extraction",
+        "Graph Convolutional Network",
+        "Linguistic Features",
+        "Refining Strategy",
+        "image harmonization",
+        "latent diffusion model",
+        "VAE",
+        "data augmentation",
+        "inverse harmonization",
+        "stable diffusion",
+        "Text-to-image synthesis",
+        "Personalization",
+        "Concept Conductor",
+        "Attribute leakage",
+        "Layout confusion",
+        "Visual feature learning",
+        "Bag of n-grams",
+        "Image retrieval",
+        "CNN",
+        "MAC",
+        "Phrase Grounding",
+        "weak supervision",
+        "zero-shot learning",
+        "alignment strategies",
+        "CLIP",
+        "Weakly supervised phrase grounding",
+        "Visual prompt tuning",
+        "CLIP",
+        "Detector-free",
+        "Multimedia",
+        "Deep Learning",
+        "Emotion Recognition",
+        "Speech",
+        "Correspondence Autoencoders",
+        "Cross-Modal Retrieval",
+        "Cross-modal retrieval",
+        "Correspondence autoencoder",
+        "Representation learning",
+        "Correlation learning",
+        "aspect-based sentiment analysis",
+        "dual graph convolutional networks",
+        "dependency parsing",
+        "semantic correlations",
+        "regularizers",
+        "Aspect Sentiment Triplet Extraction",
+        "Machine Reading Comprehension",
+        "Context Masking",
+        "Sentiment Analysis",
+        "Distant supervision",
+        "Relation extraction",
+        "BERT",
+        "Graph Convolutional Network",
+        "Cross-entropy loss",
+        "Cross-modal",
+        "retrieval",
+        "image and text",
+        "deep learning",
+        "autoencoder",
+        "Multimodal data",
+        "Deep neural learning",
+        "Similarity metric",
+        "Bimodal deep architecture",
+        "image captioning",
+        "paragraph generation",
+        "tree-structured decoder",
+        "vision and language",
+        "Aspect-Based Sentiment Analysis",
+        "DualGCN",
+        "graph convolutional networks",
+        "dependency parsing",
+        "semantic information",
+        "Image paragraph captioning",
+        "Dual Relations",
+        "Spatial Relation",
+        "Semantic Relation",
+        "Weakly Supervised",
+        "Relation-aware Attention",
+        "text-to-image synthesis",
+        "generative adversarial networks",
+        "multi-modal disentangled representation learning"
+      ],
+      "innovations": [
+        "Training-free cross-image feature grafting",
+        "Semantic matching",
+        "Position-constrained attention fusion",
+        "Noise initialization strategy for geometry priors",
+        "Three-level representations in three stages",
+        "Bimodal auto-encoder for level-3 representations",
+        "Data-specific strategy for choosing correct tag words",
+        "Proposed EMC-GCN to exploit word relations",
+        "Defined ten relation types",
+        "Incorporated linguistic features",
+        "Developed refining strategy for improved triplet extraction",
+        "Harmony-VAE to enhance decoded image quality",
+        "Inverse harmonization model for data augmentation",
+        "Introduction of the Human Harmony dataset",
+        "Training-free framework",
+        "Isolates sampling processes",
+        "Self-attention-based spatial guidance",
+        "Shape-aware masks for concept injection",
+        "Using product titles to guide the learning of visual features",
+        "Conversion of product titles into discrete labels for supervised learning",
+        "Bag of n-grams approach",
+        "Triple alignment strategies for zero-shot Phrase Grounding under Weak Supervision",
+        "CLIP-based heatmap generation",
+        "Region-category relations consideration",
+        "Use of similarity tokens for spatial information capture",
+        "Detector-free network fine-tuning",
+        "Integrates representation and correlation learning into a single process",
+        "Proposes a novel loss function",
+        "Extends the Corr-AE to two other correspondence models",
+        "DualGCN architecture",
+        "SynGCN and SemGCN modules",
+        "orthogonal and differential regularizers",
+        "Context augmentation strategy",
+        "Discriminative model",
+        "Two-stage inference method",
+        "Combining a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN)",
+        "Using GCN to directly learn bag representations over instances",
+        "Proposed the Corr-AE",
+        "Integrates representation and correlation learning",
+        "Two correspondence models: Corr-Cross-AE and Corr-Full-AE",
+        "Three interconnected components",
+        "Stacked restricted Boltzmann machines",
+        "Variant autoencoder with predefined loss function",
+        "Tree-structured decoder",
+        "Top-down binary tree expansion",
+        "Split module",
+        "Score module",
+        "Tree structure loss",
+        "DualGCN model",
+        "SynGCN",
+        "SemGCN",
+        "Mutual BiAffine module",
+        "orthogonal and differential regularizers",
+        "Captures spatial and semantic relations among objects",
+        "Weakly supervised multi-label classifier",
+        "Relation-aware attention",
+        "Fusion Gates",
+        "Proposed modality disentangled discriminator",
+        "Separate classification of content and style",
+        "Enhanced text-image correlation",
+        "Style transfer"
+      ],
+      "technical_concepts": [
+        "FreeGraftor",
+        "Semantic-Aware Feature Grafting",
+        "Structure-Consistent Initialization",
+        "Multimodal-Diffusion Transformer",
+        "U-Net",
+        "Transformer",
+        "Stable Diffusion",
+        "FLUX.1",
+        "MPEG-7",
+        "gist descriptors",
+        "Restricted Boltzmann Machines",
+        "Siamese network",
+        "auto-encoder",
+        "Contrastive Divergence",
+        "EMC-GCN",
+        "Aspect-based Sentiment Analysis",
+        "Graph Convolutional Operations",
+        "Linguistic Features",
+        "Biaffine Attention Module",
+        "Latent diffusion models",
+        "Harmony-VAE",
+        "Inverse harmonization model",
+        "Denoising Diffusion Probabilistic Models (DDPMs)",
+        "Stable Diffusion",
+        "Text-to-image diffusion models",
+        "Multipath sampling",
+        "Layout alignment",
+        "Concept injection",
+        "VAE",
+        "Image representations",
+        "Visual content-based indexing and retrieval",
+        "CNN",
+        "MAC",
+        "SPoC",
+        "RMAC",
+        "RAMAC",
+        "MS-RMAC",
+        "GRMAC",
+        "Region-Text Alignment",
+        "Domain Alignment",
+        "Category Alignment",
+        "Contrastive Language-Image Pre-Training (CLIP)",
+        "heatmap generation",
+        "CLIP",
+        "Grounding model",
+        "Similarity tokens",
+        "Cosine similarity",
+        "VGG16",
+        "Facial emotion recognition",
+        "Correspondence autoencoders",
+        "Cross-modal retrieval",
+        "Autoencoders",
+        "Correlation measure",
+        "Loss function",
+        "Deep architecture",
+        "Canonical correlation analysis",
+        "Graph Convolutional Networks",
+        "BiLSTM",
+        "BERT",
+        "dependency probability matrix",
+        "self-attention mechanism",
+        "COntext-Masked MRC",
+        "Aspect Extraction",
+        "Opinion Extraction",
+        "Sentiment Classification",
+        "Aspect Detection",
+        "BERT-based PLM",
+        "Graph Convolutional Network (GCN)",
+        "Bag representation",
+        "Cross-entropy loss",
+        "Gradient descent optimization",
+        "Autoencoders",
+        "Correlation learning",
+        "Multimodal reconstruction",
+        "CCA",
+        "Multimodal data",
+        "Deep neural networks",
+        "Restricted Boltzmann machines",
+        "Autoencoder",
+        "Similarity measure",
+        "Computer vision tasks",
+        "Split module",
+        "Score module",
+        "Word-level RNN",
+        "Tree structure loss",
+        "Cosine similarity",
+        "LSTM",
+        "Highway Network",
+        "Sentence-BERT",
+        "graph neural networks",
+        "GCNs",
+        "GATs",
+        "syntax structures",
+        "semantic correlations",
+        "dependency trees",
+        "DualRel model",
+        "Faster R-CNN",
+        "Relation Embedding Module",
+        "Relation-aware Interaction Module",
+        "Self-critical sequence training",
+        "Generative Adversarial Networks (GANs)",
+        "AttnGAN",
+        "DM-GAN",
+        "Inception Score (IS)",
+        "Fréchet Inception Distance (FID)",
+        "Modality disentangled representation"
+      ]
+    },
+    "detailed_innovations": {
+      "contributions_by_paper": {
+        "2504.15958v2": [
+          "training-free framework",
+          "cross-image feature grafting",
+          "structure-consistent initialization"
+        ],
+        "2022.acl_long.212": [
+          "a novel EMC-GCN model",
+          "a comprehensive exploitation of linguistic features",
+          "an effective refining strategy"
+        ],
+        "3664647.3681466": [
+          "Introduction of the Human Harmony dataset",
+          "Harmony-VAE's effectiveness in enhancing the VAE component in latent diffusion models for image harmonization"
+        ],
+        "2408.03632v3": [
+          "We introduce Concept Conductor, a training-free framework that ensures visual fidelity and correct layout in multi-concept customization."
+        ],
+        "3394171.3416296": [
+          "method for learning product visual representations",
+          "deep CNNs pre-trained and fine-tuned on this dataset can enhance feature effectiveness for product image retrieval"
+        ],
+        "3664647.3680897": [
+          "提出了一种零样本短语接地的新框架",
+          "引入了三重对齐策略"
+        ],
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding": [
+          "use of similarity tokens for spatial information capture",
+          "detector-free network fine-tuning"
+        ],
+        "2647868.2654902": [
+          "We propose the correspondence autoencoder (Corr-AE) based on two basic unimodal autoencoders.",
+          "The Corr-AE integrates representation and correlation learning into a single process.",
+          "A novel loss function is designed, incorporating the losses of autoencoders for all modalities and the loss of correlation between modalities."
+        ],
+        "2021.acl_long.494": [
+          "提出了一种结合语法和语义特征的DualGCN模型",
+          "设计了正交和微分正则化器以增强模型捕获语义关联的能力"
+        ],
+        "2022.emnlp_main.212": [
+          "propose a COntext-Masked MRC (COM-MRC) framework for ASTE tasks",
+          "alleviate interference in ASTE tasks",
+          "the context augmentation strategy effectively expanding the training corpus"
+        ],
+        "2022.coling_1.234": [
+          "提出了一种结合预训练语言模型和图卷积网络的简单模型"
+        ],
+        "2808205": [
+          "We propose the correspondence autoencoder (Corr-AE), which integrates representation learning and correlation learning into a single process."
+        ],
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": [
+          "proposes the BDA to measure similarity in multimodal systems",
+          "combines feature extraction and deep neural networks",
+          "demonstrates effectiveness in classifying image tags"
+        ],
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": [
+          "proposal of DualGCN architecture",
+          "integration of syntactic knowledge through SynGCN and semantic information through SemGCN",
+          "orthogonal and differential regularizers"
+        ],
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations": [
+          "提出DualRel模型，明确捕捉空间和语义关系以改进图像段落字幕生成"
+        ],
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis": [
+          "The proposed discriminator is the first to learn modality disentangled representation for text-to-image synthesis, enhancing discrimination of image-text correlation and facilitating image synthesis manipulation."
+        ]
+      },
+      "novelty_claims_by_paper": {
+        "2022.acl_long.212": [
+          "Our proposed framework is EMC-GCN, which addresses Aspect and Opinion Term Co-Extraction (AOTE) and Aspect-Sentiment Pair Extraction (ASPE)",
+          "We define ten types of relations between words for the ASTE task"
+        ],
+        "3394171.3416296": [
+          "using product titles to guide the learning of visual features",
+          "conversion of product titles into discrete labels for supervised learning"
+        ],
+        "3664647.3680897": [
+          "在弱监督下实现零样本接地",
+          "使用CLIP进行区域文本对齐"
+        ],
+        "2021.acl_long.494": [
+          "DualGCN模型的结构设计",
+          "正交和微分正则化器的应用"
+        ],
+        "2022.emnlp_main.212": [
+          "COM-MRC’s components work collaboratively",
+          "the two-stage inference method reduces interference from other aspects"
+        ],
+        "2022.coling_1.234": [
+          "首次使用GCN直接学习实例之间的包表示"
+        ],
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": [
+          "the BDA's three components are designed to extract features, stack RBMs, and use a variant autoencoder for discriminative learning"
+        ],
+        "3469877.3490585": [
+          "We propose Splitting to Tree Decoder (S2TD), a novel tree-structured decoder that models paragraph decoding as top-down binary tree expansion."
+        ],
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": [
+          "DualGCN architecture",
+          "orthogonal and differential regularizers"
+        ],
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations": [
+          "DualRel模型考虑了特定的语义和空间关系，并使用关系感知交互"
+        ]
+      },
+      "technical_relationships": {
+        "2504.15958v2": {
+          "base_methods": [
+            {
+              "method_name": "FLUX.1",
+              "relationship_type": "基于",
+              "evidence_text": "We build upon FLUX.1, where joint attention is computed as:"
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "FreeCustom",
+              "comparison_result": "FreeCustom suffers from severe attribute confusion",
+              "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+            },
+            {
+              "method_name": "MS-Diffusion",
+              "comparison_result": "MS-Diffusion and OmniGen lack visual faithfulness for small objects",
+              "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+            },
+            {
+              "method_name": "OmniGen",
+              "comparison_result": "OmniGen lacks visual faithfulness for small objects",
+              "evidence_text": "FreeCustom suffers from severe attribute confusion, while MS-Diffusion and OmniGen lack visual faithfulness for small objects."
+            }
+          ]
+        },
+        "2022.acl_long.212": {
+          "base_methods": [
+            {
+              "method_name": "Graph Convolutional Network (GCN)",
+              "relationship_type": "扩展",
+              "evidence_text": "Motivated by CNN, GCN is an efficient variant operating on graphs (Kipf and Welling, 2017)."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "GTS-BERT",
+              "comparison_result": "Our EMC-GCN significantly surpasses GTS-BERT with an average of 1.96% and 2.61% F1-score on D1 and D2, respectively",
+              "evidence_text": "Under the F1 metric, our EMC-GCN model outperforms all pipeline, end-to-end, and MRC-based methods on two groups of datasets."
+            },
+            {
+              "method_name": "BMRC",
+              "comparison_result": "The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods",
+              "evidence_text": "The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods due to its closer proximity to 'transport' than 'light'."
+            }
+          ]
+        },
+        "3664647.3681466": {
+          "base_methods": [
+            {
+              "method_name": "Stable Diffusion",
+              "relationship_type": "基于",
+              "evidence_text": "Harmony-VAE is a method designed for image harmonization, which includes repairing the content of the foreground area while maintaining a harmonized appearance. It builds upon the Stable Diffusion model"
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "HDNet",
+              "comparison_result": "DiffHarmony++ shows superior performance as the foreground proportion increases.",
+              "evidence_text": "On the iHarmony4 dataset, HDNet512 outperforms DiffHarmony++ in samples with small foreground proportions (0% ∼5%), but DiffHarmony++ shows superior performance as the foreground proportion increases."
+            }
+          ]
+        },
+        "2408.03632v3": {
+          "base_methods": [
+            {
+              "method_name": "Stable Diffusion",
+              "relationship_type": "改进",
+              "evidence_text": "Our method is implemented on Stable Diffusion v1.5, utilizing layout references from SDXL."
+            },
+            {
+              "method_name": "ED-LoRA",
+              "relationship_type": "结合",
+              "evidence_text": "ED-LoRA, a method for single-concept customization, is used as our default single-concept model, involving learnable hierarchical text embeddings and low-rank adaptation (LoRA) applied to pre-trained weights."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "Custom Diffusion",
+              "comparison_result": "原文无此信息",
+              "evidence_text": "We compare our method against three baselines: Custom Diffusion, Cones 2, and Mix-of-Show, using their official code implementations."
+            },
+            {
+              "method_name": "Cones 2",
+              "comparison_result": "原文无此信息",
+              "evidence_text": "We compare our method against three baselines: Custom Diffusion, Cones 2, and Mix-of-Show, using their official code implementations."
+            },
+            {
+              "method_name": "Mix-of-Show",
+              "comparison_result": "原文无此信息",
+              "evidence_text": "We compare our method against three baselines: Custom Diffusion, Cones 2, and Mix-of-Show, using their official code implementations."
+            }
+          ]
+        },
+        "3394171.3416296": {
+          "base_methods": [
+            {
+              "method_name": "Deep Convolutional Neural Networks (CNNs)",
+              "relationship_type": "基于",
+              "evidence_text": "Our method, detailed in Figure 2, addresses this by leveraging the titles of product images."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "SEResnet-152 and Densenet-201",
+              "comparison_result": "The deepest model, Densenet-201, shows the best performance among the ImageNet-1k trained models, while the shallowest model, ResNet-50, performs the worst",
+              "evidence_text": "Table 1 presents the results of five deep CNN models with four different pooling methods on the validation set."
+            }
+          ]
+        },
+        "3664647.3680897": {
+          "base_methods": [
+            {
+              "method_name": "CLIP",
+              "relationship_type": "基于",
+              "evidence_text": "Our framework uses a novel PG framework using triple alignment strategies under weak supervision: 1) Region-Text Alignment (RTA) to associate region-level attributes based on Contrastive Language-Image Pre-Training (CLIP)."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "WWbl",
+              "comparison_result": "Our CLIP-based heatmap surpasses the pseudo label used by WWbl, explaining a 9% increase in bbox accuracy.",
+              "evidence_text": "Our CLIP-based heatmap surpasses the pseudo label used by WWbl, explaining a 9% increase in bbox accuracy."
+            },
+            {
+              "method_name": "ZSGNet",
+              "comparison_result": "Our approach exceeds previous methods and will explore interpretable solutions for grounding-related tasks.",
+              "evidence_text": "Our approach exceeds previous methods and will explore interpretable solutions for grounding-related tasks."
+            }
+          ]
+        },
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding": {
+          "base_methods": [
+            {
+              "method_name": "Weakly-Supervised Grounding (WSG)",
+              "relationship_type": "改进",
+              "evidence_text": "We propose a refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations."
+            },
+            {
+              "method_name": "CLIP",
+              "relationship_type": "结合",
+              "evidence_text": "Our approach leverages the relationship between CLIP and the grounding model, refining training through visual prompt tuning."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "WWbl",
+              "comparison_result": "Our method shows improvements in metrics on Flickr30K and ReferIt",
+              "evidence_text": "Our method is trained on COCO and VG train splits and evaluated on the test splits of Flickr30K, VG, and ReferIt. The performance of our method is compared with state-of-the-art DF-WSG methods quantitatively and qualitatively."
+            },
+            {
+              "method_name": "Gbs",
+              "comparison_result": "Our approach not only surpasses detector-free methods like Gbs and WWbl",
+              "evidence_text": "Our approach not only surpasses detector-free methods like Gbs and WWbl but also outperforms detector-based methods on almost all categories for Flickr30K Entities."
+            }
+          ]
+        },
+        "2647868.2654902": {
+          "base_methods": [
+            {
+              "method_name": "Correspondence LDA, deep autoencoders, deep belief networks, and deep Boltzmann Machines",
+              "relationship_type": "基于",
+              "evidence_text": "Shared layer models include topic models like Correspondence LDA and deep architectures such as deep autoencoders, deep belief networks, and deep Boltzmann Machines."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "CCA-based models and multi-modal models",
+              "comparison_result": "Our correspondence autoencoders significantly outperform other models",
+              "evidence_text": "Our correspondence autoencoders significantly outperform other models on both retrieval tasks across Wikipedia, Pascal, and NUS-WIDE-10k data sets."
+            }
+          ]
+        },
+        "2021.acl_long.494": {
+          "base_methods": [
+            {
+              "method_name": "Graph Convolutional Network (GCN)",
+              "relationship_type": "改进",
+              "evidence_text": "We propose a GCN-based method that combines syntactic and semantic features."
+            },
+            {
+              "method_name": "Attention-based LSTM",
+              "relationship_type": "改进",
+              "evidence_text": "Attention-based neural networks, including those proposed by Wang et al. (2016) and others, have been introduced to implicitly model the semantic relation between aspects and their context."
+            },
+            {
+              "method_name": "Recursive neural network by Dong et al. (2014)",
+              "relationship_type": "改进",
+              "evidence_text": "Notable works include the recursive neural network by Dong et al. (2014)"
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, DGEDT+BERT",
+              "comparison_result": "Our DualGCN model consistently outperforms attention-based and syntax-based methods",
+              "evidence_text": "We compare DualGCN with state-of-the-art baselines, including ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, and DGEDT+BERT."
+            }
+          ]
+        },
+        "2022.emnlp_main.212": {
+          "base_methods": [
+            {
+              "method_name": "Aspect Sentiment Triplet Extraction (ASTE)",
+              "relationship_type": "基于",
+              "evidence_text": "Aspect Sentiment Triplet Extraction (ASTE) extracts sentiment triplets from sentences and is formalized as an effective machine reading comprehension (MRC) framework."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "BMRC",
+              "comparison_result": "Our COM-MRC outperforms other baselines in terms of Precision, Recall, and F1 scores on both D1 and D2 datasets",
+              "evidence_text": "Our COM-MRC outperforms other baselines in terms of Precision, Recall, and F1 scores on both D1 and D2 datasets, as shown in Tables 3 and 4."
+            },
+            {
+              "method_name": "EMC-GCN",
+              "comparison_result": "Our COM-MRC outperforms EMC-GCN",
+              "evidence_text": "Our COM-MRC outperforms EMC-GCN on datasets D1 and D2."
+            }
+          ]
+        },
+        "2022.coling_1.234": {
+          "base_methods": [
+            {
+              "method_name": "BERT-based Graph Convolutional network Model (BGM)",
+              "relationship_type": "结合",
+              "evidence_text": "We introduce BGM, a model that combines a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN)"
+            },
+            {
+              "method_name": "PCNN-based methods",
+              "relationship_type": "基于",
+              "evidence_text": "DS-RE methods can be categorized into PCNN-based and PLMs-based approaches"
+            },
+            {
+              "method_name": "PLMs-based methods",
+              "relationship_type": "基于",
+              "evidence_text": "PCNN-based methods use various techniques to acquire effective bag representations, while PLMs-based methods have shown remarkable performance"
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "multiple baseline methods",
+              "comparison_result": "report better performance",
+              "evidence_text": "We compare our BGM with multiple baseline methods and report better performance"
+            },
+            {
+              "method_name": "BGM without GCN",
+              "comparison_result": "performance drop",
+              "evidence_text": "In the ablation study, we find that removing GCN results in a performance drop"
+            },
+            {
+              "method_name": "BGM without EntCon",
+              "comparison_result": "performance drop",
+              "evidence_text": "In the ablation study, we find that removing entity connections results in a performance drop"
+            }
+          ]
+        },
+        "2808205": {
+          "base_methods": [
+            {
+              "method_name": "autoencoder",
+              "relationship_type": "改进",
+              "evidence_text": "We propose several novel models based on different autoencoders, which correlate hidden representations of a pair of autoencoders."
+            },
+            {
+              "method_name": "Canonical Correlation Analysis (CCA)",
+              "relationship_type": "结合",
+              "evidence_text": "The models are trained using a novel optimal objective that minimizes a linear combination of representation learning errors and correlation learning error."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "CCA-based models",
+              "comparison_result": "Our models achieve substantial improvements in mAP scores.",
+              "evidence_text": "Compared to CCA-AE, our Corr-AE enhances the average mAP by 53.6%, 81.5%, and 48.3% on the respective datasets."
+            },
+            {
+              "method_name": "Bimodal AE, Bimodal DBN",
+              "comparison_result": "Our Corr-AE also achieves notable improvements over Bimodal AE and Bimodal DBN.",
+              "evidence_text": "Our Corr-AE also achieves notable improvements over Bimodal AE and Bimodal DBN."
+            }
+          ]
+        },
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": {
+          "base_methods": [
+            {
+              "method_name": "deep neural learning",
+              "relationship_type": "基于",
+              "evidence_text": "Deep neural learning, inspired by biological propagation phenomena in the human brain, has seen rapid development since 2006 and has achieved success in tasks involving single modal data."
+            },
+            {
+              "method_name": "topic models, joint models, undirected Markov random fields",
+              "relationship_type": "扩展",
+              "evidence_text": "Various approaches have been proposed for learning from cross-modal data. These include extensions of topic models, joint models, and undirected Markov random fields, but these single-hidden-layer models struggle with the complexity of images and text."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "Multilayer Perceptrons (MLP)",
+              "comparison_result": "Our deep neural architecture outperforms an MLP-based system",
+              "evidence_text": "Our deep neural architecture outperforms an MLP-based system with two hidden layers and a CCA-based system with two RBMs, achieving an accuracy of 88.96%."
+            },
+            {
+              "method_name": "Canonical Correlation Analysis (CCA)",
+              "comparison_result": "The CCA-based system performs better than the MLP-based system",
+              "evidence_text": "The CCA-based system performs better than the MLP-based system."
+            }
+          ]
+        },
+        "3469877.3490585": {
+          "base_methods": [
+            {
+              "method_name": "hierarchical and non-hierarchical decoders",
+              "relationship_type": "基于",
+              "evidence_text": "Existing approaches, such as hierarchical and non-hierarchical decoders, have limitations in managing visual observations and maintaining paragraph coherence."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "DAM-ATT, SCST, SCST+RP, CRL, OR-ATT, OR-ATT+RP",
+              "comparison_result": "Our S2TD achieves competitive performance, especially in terms of BLEU-1 and CIDEr.",
+              "evidence_text": "Performance evaluation compares S2TD with state-of-the-art sequential decoding methods, grouped into hierarchical and non-hierarchical methods."
+            }
+          ]
+        },
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": {
+          "base_methods": [
+            {
+              "method_name": "GCN",
+              "relationship_type": "改进",
+              "evidence_text": "Incorporating syntactic dependency structure with graph convolutional networks (GCNs) has shown advantages, but performance depends on dependency parsers."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "ATAE-LSTM",
+              "comparison_result": "DualGCN model consistently outperforms attention-based and syntax-based methods",
+              "evidence_text": "The DualGCN model consistently outperforms attention-based and syntax-based methods on Restaurant14, Laptop14 and Twitter datasets."
+            },
+            {
+              "method_name": "GCAE",
+              "comparison_result": "DualGCN model outperforms",
+              "evidence_text": "DualGCN model outperforms SynGCN-head on the Restaurant14 and Laptop14 datasets"
+            },
+            {
+              "method_name": "R-GAT + BERT",
+              "comparison_result": "DualGCN + BERT and DualGCN + BERT-PT show improved performance over the basic DualGCN model and other BERT-based methods",
+              "evidence_text": "DualGCN + BERT and DualGCN + BERT-PT show improved performance over the basic DualGCN model and other BERT-based methods."
+            }
+          ]
+        },
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations": {
+          "base_methods": [
+            {
+              "method_name": "Faster R-CNN",
+              "relationship_type": "基于",
+              "evidence_text": "We employ Faster R-CNN [19] to detect N objects in an image, represented as C={c1, · · · , cN}."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "Regions-Hierarchical",
+              "comparison_result": "DualRel outperforms SCST on all metrics (except for a tie in METEOR) and the recent IMAP method.",
+              "evidence_text": "Baselines: We compare DualRel with baselines including Regions-Hierarchical [1], RTT-GAN [5], DAM [7], SCST [8], DCPG-VAE [6], TMOS [27], CAE-LSTM [11], DHPV [9], CVAP [10], CRL [12], Dual-CNN [15], VREN [17], IMAP [14], S2TD [16], and OR-ATT [18]."
+            },
+            {
+              "method_name": "SCST",
+              "comparison_result": "DualRel outperforms SCST on all metrics (except for a tie in METEOR)",
+              "evidence_text": "Results: Table 1 shows our DualRel method achieves the best scores in B@{1-4} and CIDEr. DualRel outperforms SCST on all metrics (except for a tie in METEOR) and the recent IMAP method."
+            }
+          ]
+        },
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis": {
+          "base_methods": [
+            {
+              "method_name": "AttnGAN",
+              "relationship_type": "改进",
+              "evidence_text": "The modality disentangled discriminator is integrated into two models: AttnGAN and DM-GAN."
+            },
+            {
+              "method_name": "DM-GAN",
+              "relationship_type": "改进",
+              "evidence_text": "The modality disentangled discriminator is integrated into two models: AttnGAN and DM-GAN."
+            }
+          ],
+          "compared_methods": [
+            {
+              "method_name": "GAN-INT-CLS",
+              "comparison_result": "原文无此信息",
+              "evidence_text": "In terms of style manipulation experiments on the CUB dataset, two types of experiments are conducted. The first involves style transfer, where the model uses modality-specific features for direct style transfer, achieving more accurate style reconstruction compared to GAN-INT-CLS."
+            }
+          ]
+        }
+      }
+    },
+    "collaboration_raw": {
+      "collaborators_by_paper": {
+        "2504.15958v2": [
+          "Fangxiang Feng",
+          "Chen Wei",
+          "Xiaojie Wang",
+          "Zebin Yao",
+          "Huixing Jiang",
+          "Ruifan Li",
+          "Lei Ren"
+        ],
+        "1307.1275v1": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Ruifan Li"
+        ],
+        "2022.acl_long.212": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Zepeng Zhai",
+          "Hao Chen",
+          "Ruifan Li"
+        ],
+        "3664647.3681466": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Ruifan Li",
+          "Guang Liu",
+          "Pengfei Zhou"
+        ],
+        "2408.03632v3": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Zebin Yao",
+          "Ruifan Li"
+        ],
+        "3394171.3416296": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Tianrui Niu",
+          "Huixing Jiang",
+          "Ruifan Li"
+        ],
+        "3664647.3680897": [
+          "Fangxiang Feng",
+          "Zhanyu Ma",
+          "Xiaojie Wang",
+          "Ruifei Zhang",
+          "Zhihong Chen",
+          "Guanbin Li",
+          "Yuzhe Ji",
+          "Zhihan Yu",
+          "Yibing Song",
+          "Pengyue Lin",
+          "Ruifan Li",
+          "Xiang Wan"
+        ],
+        "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Mingcong Lu",
+          "Zhihan Yu",
+          "Pengyue Lin",
+          "Ruifan Li"
+        ],
+        "2820400": [
+          "Fangxiang Feng",
+          "George Toderici",
+          "Xiaojie Wang",
+          "Yelin Kim",
+          "Emily Mower-Provost",
+          "Hayley Hung",
+          "Ruifan Li"
+        ],
+        "2647868.2654902": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Ruifan Li"
+        ],
+        "2021.acl_long.494": [
+          "Fangxiang Feng",
+          "Zhanyu Ma",
+          "Xiaojie Wang",
+          "Eduard Hovy",
+          "Hao Chen",
+          "Ruifan Li"
+        ],
+        "2022.emnlp_main.212": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Zepeng Zhai",
+          "Hao Chen",
+          "Dongyan Zhao",
+          "Feifan Fan",
+          "Yansong Feng",
+          "Ruifan Li"
+        ],
+        "2022.coling_1.234": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Ruifan Li",
+          "Ziqin Rao"
+        ],
+        "2808205": [
+          "Fangxiang Feng",
+          "XIAOJIE WANG",
+          "RUIFAN LI",
+          "Xiaojie Wang",
+          "FANGXIANG FENG",
+          "IBRAR AHMAD",
+          "Ruifan Li"
+        ],
+        "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture": [
+          "Fangxiang Feng",
+          "Bohan Li",
+          "Xiaojie Wang",
+          "Peng Lu",
+          "Ruifan Li"
+        ],
+        "3469877.3490585": [
+          "Fangxiang Feng",
+          "Zhanyu Ma",
+          "Yihui Shi",
+          "Xiaojie Wang",
+          "Yun Liu",
+          "Ruifan Li"
+        ],
+        "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis": [
+          "Fangxiang Feng",
+          "Zhanyu Ma",
+          "Xiaojie Wang",
+          "Eduard Hovy",
+          "T. Qian",
+          "M. Zhang",
+          "Hao Chen",
+          "Ruifan Li"
+        ],
+        "Improving_Image_Paragraph_Captioning_with_Dual_Relations": [
+          "Fangxiang Feng",
+          "Zhanyu Ma",
+          "Yihui Shi",
+          "Xiaojie Wang",
+          "Yun Liu",
+          "Ruifan Li"
+        ],
+        "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis": [
+          "Fangxiang Feng",
+          "Xiaojie Wang",
+          "Tianrui Niu",
+          "Member, IEEE",
+          "Ruifan Li"
+        ]
+      },
+      "institutional_networks": [
+        "Beijing University of Posts & Telecommunications",
+        "Engineering Research Center of Information Networks, Ministry of Education, Beijing 100876, China",
+        "Li Auto Inc.",
+        "School of Artificial Intelligence, Beijing University of Posts and Telecommunications",
+        "Beijing Academy of Artificial Intelligence, Beijing, China",
+        "Beijing Natural Science Foundation",
+        "Beijing University of Posts and Telecommunications, Beijing, China",
+        "Beijing Academy of Artificial Intelligence",
+        "Beijing University of Posts and Telecommunications",
+        "High Performance Computing Platform of BUPT",
+        "National Nature Science Foundation of China",
+        "Engineering Research Center of Information Networks, Ministry of Education, China",
+        "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China",
+        "BUPT",
+        "School of Computers, Beijing University of Posts and Telecommunications, Beijing 100876, China"
+      ]
+    },
+    "experimental_details": {
+      "datasets_used": [
+        {
+          "paper": "2504.15958v2",
+          "dataset": "DreamBench",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2504.15958v2",
+          "dataset": "CustomConcept101",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2504.15958v2",
+          "dataset": "Mix-of-Show",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2022.acl_long.212",
+          "dataset": "SemEval ABSA Challenges (Pontiki et al., 2014, 2015, 2016)",
+          "description": "two ABSA datasets"
+        },
+        {
+          "paper": "3664647.3681466",
+          "dataset": "iHarmony4",
+          "description": "Includes HCOCO, HFlickr, HAdobe5K, and Hday2night sub-datasets, consisting of 65,742 training and 7,404 testing pairs of composite and real images."
+        },
+        {
+          "paper": "3664647.3681466",
+          "dataset": "Human Harmony",
+          "description": "Created by filtering the imaterialist-fashion-2020-fgvc7 dataset to exclude images with only products. The cleaned dataset contains 29,106 images."
+        },
+        {
+          "paper": "2408.03632v3",
+          "dataset": "Mix-of-show",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2408.03632v3",
+          "dataset": "DreamBooth",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2408.03632v3",
+          "dataset": "CustomConcept101",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "3394171.3416296",
+          "dataset": "Perfect-500K",
+          "description": "dataset from the 'AI Meets Beauty' challenge"
+        },
+        {
+          "paper": "3664647.3680897",
+          "dataset": "Flickr-Split-S0",
+          "description": "零样本PG设置下的数据集"
+        },
+        {
+          "paper": "3664647.3680897",
+          "dataset": "Flickr-Split-S1",
+          "description": "零样本PG设置下的数据集"
+        },
+        {
+          "paper": "3664647.3680897",
+          "dataset": "VG-Split-S2",
+          "description": "零样本PG设置下的数据集"
+        },
+        {
+          "paper": "3664647.3680897",
+          "dataset": "VG-Split-S3",
+          "description": "零样本PG设置下的数据集"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "dataset": "Flickr30K Entities",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "dataset": "COCO",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "dataset": "Visual Genome",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "dataset": "ReferIt",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2647868.2654902",
+          "dataset": "Wikipedia, Pascal, NUS-WIDE-10k",
+          "description": "These datasets vary in text modality, size, and category numbers."
+        },
+        {
+          "paper": "2021.acl_long.494",
+          "dataset": "Restaurant, Laptop, Twitter",
+          "description": "三个公开数据集"
+        },
+        {
+          "paper": "2022.emnlp_main.212",
+          "dataset": "D1 (Wu et al., 2020a)",
+          "description": "benchmark datasets from SemEval Challenges"
+        },
+        {
+          "paper": "2022.emnlp_main.212",
+          "dataset": "D2 (Xu et al., 2020)",
+          "description": "benchmark datasets from SemEval Challenges"
+        },
+        {
+          "paper": "2022.coling_1.234",
+          "dataset": "NYT10",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2022.coling_1.234",
+          "dataset": "GDS",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "2808205",
+          "dataset": "Wikipedia dataset",
+          "description": "2,866 image/text pairs from ten semantic categories."
+        },
+        {
+          "paper": "2808205",
+          "dataset": "Pascal dataset",
+          "description": "1,000 image/text pairs from twenty categories."
+        },
+        {
+          "paper": "2808205",
+          "dataset": "NUS-WIDE-10k dataset",
+          "description": "1,000 image/text pairs per category from ten categories."
+        },
+        {
+          "paper": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+          "dataset": "Small ESP Game dataset",
+          "description": "contains 100,000 labeled images with corresponding tags"
+        },
+        {
+          "paper": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+          "dataset": "MLC-2013 dataset",
+          "description": "has 1,000 manually labeled images with two labels per image"
+        },
+        {
+          "paper": "3469877.3490585",
+          "dataset": "Stanford image paragraph benchmark dataset",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "dataset": "Restaurant14",
+          "description": "All datasets have three sentimental polarities: positive, neutral, and negative"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "dataset": "Laptop14",
+          "description": "All datasets have three sentimental polarities: positive, neutral, and negative"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "dataset": "Twitter",
+          "description": "All datasets have three sentimental polarities: positive, neutral, and negative"
+        },
+        {
+          "paper": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+          "dataset": "Stanford benchmark dataset",
+          "description": "includes 14575/2487/2489 pairs for training/validation/test. The dataset comprises an average of 67.5 words per paragraph and 5.7 sentences."
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "dataset": "CUB",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "dataset": "Oxford-102",
+          "description": "原文无此信息"
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "dataset": "COCO",
+          "description": "原文无此信息"
+        }
+      ],
+      "evaluation_metrics": [
+        {
+          "paper": "2504.15958v2",
+          "metric": "CLIP"
+        },
+        {
+          "paper": "2504.15958v2",
+          "metric": "DINOv2"
+        },
+        {
+          "paper": "2022.acl_long.212",
+          "metric": "F1"
+        },
+        {
+          "paper": "3664647.3681466",
+          "metric": "PSNR"
+        },
+        {
+          "paper": "3664647.3681466",
+          "metric": "MSE"
+        },
+        {
+          "paper": "3664647.3681466",
+          "metric": "fMSE"
+        },
+        {
+          "paper": "2408.03632v3",
+          "metric": "CLIP"
+        },
+        {
+          "paper": "2408.03632v3",
+          "metric": "ImageReward"
+        },
+        {
+          "paper": "2408.03632v3",
+          "metric": "Segmentation Similarity (SegSim)"
+        },
+        {
+          "paper": "3394171.3416296",
+          "metric": "Mean Average Precision (MAP)"
+        },
+        {
+          "paper": "3664647.3680897",
+          "metric": "IoU"
+        },
+        {
+          "paper": "3664647.3680897",
+          "metric": "bbox accuracy"
+        },
+        {
+          "paper": "3664647.3680897",
+          "metric": "recognition accuracy"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "metric": "pointing game accuracy"
+        },
+        {
+          "paper": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+          "metric": "bounding box accuracy"
+        },
+        {
+          "paper": "2647868.2654902",
+          "metric": "mean average precision (mAP)"
+        },
+        {
+          "paper": "2647868.2654902",
+          "metric": "top 20% percentage"
+        },
+        {
+          "paper": "2021.acl_long.494",
+          "metric": "accuracy"
+        },
+        {
+          "paper": "2021.acl_long.494",
+          "metric": "macro-averaged F1-score"
+        },
+        {
+          "paper": "2022.emnlp_main.212",
+          "metric": "Precision"
+        },
+        {
+          "paper": "2022.emnlp_main.212",
+          "metric": "Recall"
+        },
+        {
+          "paper": "2022.emnlp_main.212",
+          "metric": "F1 scores"
+        },
+        {
+          "paper": "2022.coling_1.234",
+          "metric": "P@N"
+        },
+        {
+          "paper": "2022.coling_1.234",
+          "metric": "AUC"
+        },
+        {
+          "paper": "2022.coling_1.234",
+          "metric": "Micro-F1 score"
+        },
+        {
+          "paper": "2808205",
+          "metric": "mean average precision (mAP)"
+        },
+        {
+          "paper": "2808205",
+          "metric": "top 20% percentage"
+        },
+        {
+          "paper": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+          "metric": "accuracy"
+        },
+        {
+          "paper": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+          "metric": "area under the ROC curve"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "BLEU-1"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "BLEU-2"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "BLEU-3"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "BLEU-4"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "METEOR"
+        },
+        {
+          "paper": "3469877.3490585",
+          "metric": "CIDEr"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "LAL-Parser"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "Glove vectors"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "BiLSTM"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "dropout"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "Adam optimizer"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "learning rate"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "epochs"
+        },
+        {
+          "paper": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+          "metric": "batch size"
+        },
+        {
+          "paper": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+          "metric": "BLEU@{1, 2, 3, 4}"
+        },
+        {
+          "paper": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+          "metric": "METEOR"
+        },
+        {
+          "paper": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+          "metric": "CIDEr"
+        },
+        {
+          "paper": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+          "metric": "BERTScore F metrics"
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "metric": "Inception Score (IS)"
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "metric": "Fréchet Inception Distance (FID)"
+        },
+        {
+          "paper": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+          "metric": "R-Precision"
+        }
+      ],
+      "performance_data": []
+    }
+  },
+  "ai_analysis": {
+    "academic_identity": {
+      "primary_research_identity": "计算机视觉与自然语言处理",
+      "research_signature": [
+        "文本到图像生成",
+        "多模态学习",
+        "图像字幕生成"
+      ],
+      "expertise_domains": [
+        "计算机视觉",
+        "自然语言处理",
+        "机器学习"
+      ],
+      "academic_stage": "成熟期",
+      "unique_strengths": [
+        "跨模态学习",
+        "图像生成",
+        "文本理解"
+      ]
+    },
+    "innovation_assessment": {
+      "innovation_level": 8,
+      "creativity_patterns": "持续创新，注重方法创新",
+      "technical_depth": "深厚",
+      "methodological_innovation": "强",
+      "breakthrough_potential": "高",
+      "innovation_consistency": "持续"
+    },
+    "research_trajectory": {
+      "development_pattern": "稳步上升",
+      "topic_evolution": "从文本到图像生成到多模态学习",
+      "productivity_trend": "持续增长",
+      "collaboration_evolution": "合作范围扩大",
+      "impact_growth": "影响力持续提升"
+    },
+    "technical_capabilities": {
+      "experimental_skills": "强",
+      "dataset_expertise": "丰富",
+      "evaluation_proficiency": "熟练",
+      "technical_breadth": "广",
+      "implementation_ability": "强"
+    },
+    "collaboration_analysis": {
+      "network_position": "核心",
+      "collaboration_quality": "高",
+      "institutional_connections": "广泛",
+      "leadership_potential": "强",
+      "mentoring_ability": "强"
+    },
+    "development_recommendations": {
+      "strategic_directions": [
+        "跨模态学习",
+        "图像生成",
+        "文本理解"
+      ],
+      "skill_enhancement": [
+        "强化深度学习",
+        "拓展合作网络"
+      ],
+      "collaboration_targets": [
+        "跨学科合作"
+      ],
+      "research_priorities": [
+        "多模态学习"
+      ],
+      "career_milestones": [
+        "获得重要奖项"
+      ],
+      "risk_mitigation": [
+        "避免技术过时"
+      ]
+    },
+    "comparative_analysis": {
+      "peer_comparison": "领先",
+      "competitive_advantages": [
+        "跨模态学习",
+        "图像生成",
+        "文本理解"
+      ],
+      "improvement_areas": [
+        "强化深度学习"
+      ],
+      "market_position": "领先"
+    }
+  }
+}

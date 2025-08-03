@@ -1,0 +1,42 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "一种基于强化学习的电力设备检修决策生成方法",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "最小化电网整体运行损失",
+    "key_concepts": [
+      "割集",
+      "强化学习",
+      "马尔可夫决策过程",
+      "动态权重",
+      "价值矩阵",
+      "最优策略"
+    ],
+    "main_methods": [
+      "计算割集",
+      "应用强化学习方法",
+      "动态规划求解",
+      "加权电网运行损失"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": []
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种基于强化学习的电力设备检修决策生成方法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:11:44",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 1151,
+    "processed_text_length": 1151
+  }
+}

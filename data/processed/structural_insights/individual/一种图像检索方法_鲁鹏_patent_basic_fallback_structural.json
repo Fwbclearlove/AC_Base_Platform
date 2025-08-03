@@ -1,0 +1,64 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "一种图像检索方法",
+    "inventors": [
+      "鲁鹏",
+      "李睿凡",
+      "刘咏彬",
+      "袁彩霞",
+      "王小捷"
+    ],
+    "applicant": "北京邮电大学",
+    "patent_number": "201310722183.3"
+  },
+  "technical_solution": {
+    "technical_problem": "基于相似度的图像检索方法在光照和视角变化下性能下降",
+    "solution_overview": "提出一种基于图像相关度的图像检索方法，计算图像数据库中任意两个图像的相关度，构建匹配图，计算查询目标与图像数据库中图像的直接相关度和间接相关度，根据相关度排序得到检索结果",
+    "key_technical_features": [
+      "计算图像数据库中任意两个图像的相关度",
+      "构建匹配图",
+      "计算查询目标与图像数据库中图像的直接相关度和间接相关度",
+      "根据相关度排序得到检索结果"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "以不同视点角度下的图像为例说明方法流程",
+      "以大规模图像数据库为例说明方法流程"
+    ],
+    "technical_effects": [
+      "有效降低光照和视角变化对图像检索的影响",
+      "提高图像检索系统对光照和视角变化的鲁棒性"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "图像检索"
+    ],
+    "use_scenarios": [
+      "大规模图像数据库的图像检索"
+    ]
+  },
+  "claims_info": {
+    "main_claims": [
+      "一种图像检索方法，包括计算图像数据库中任意两个图像的相关度，构建匹配图，计算查询目标与图像数据库中图像的直接相关度和间接相关度，根据相关度排序得到检索结果"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "一种图像检索方法_鲁鹏",
+    "detected_doc_type": "patent",
+    "source_type": "basic_fallback",
+    "extraction_time": "2025-08-02 15:47:07",
+    "validation": {
+      "warnings": [
+        "可疑document_type: patent"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 14916,
+    "processed_text_length": 14916
+  }
+}

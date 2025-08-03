@@ -1,0 +1,98 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Cross-modal Retrieval with Correspondence Autoencoder",
+    "authors": [
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Correspondence LDA, deep autoencoders, deep belief networks, and deep Boltzmann Machines",
+        "relationship_type": "基于",
+        "evidence_text": "Shared layer models include topic models like Correspondence LDA and deep architectures such as deep autoencoders, deep belief networks, and deep Boltzmann Machines."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "CCA-based models and multi-modal models",
+        "comparison_result": "Our correspondence autoencoders significantly outperform other models",
+        "evidence_text": "Our correspondence autoencoders significantly outperform other models on both retrieval tasks across Wikipedia, Pascal, and NUS-WIDE-10k data sets."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Wikipedia, Pascal, NUS-WIDE-10k",
+        "dataset_description": "These datasets vary in text modality, size, and category numbers.",
+        "evidence_text": "We evaluate our models on three real-world datasets: Wikipedia, Pascal, and NUS-WIDE-10k."
+      }
+    ],
+    "evaluation_metrics": [
+      "mean average precision (mAP)",
+      "top 20% percentage"
+    ],
+    "baseline_methods": [
+      "CCA-based models",
+      "multi-modal deep learning models"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "mAP scores and top 20%",
+        "our_result": "significantly better performance",
+        "baseline_result": "原文无此信息",
+        "dataset": "Wikipedia, Pascal, and NUS-WIDE-10k",
+        "evidence_text": "Our correspondence autoencoders significantly outperform other models on both retrieval tasks across Wikipedia, Pascal, and NUS-WIDE-10k data sets."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "We propose the correspondence autoencoder (Corr-AE) based on two basic unimodal autoencoders.",
+      "The Corr-AE integrates representation and correlation learning into a single process.",
+      "A novel loss function is designed, incorporating the losses of autoencoders for all modalities and the loss of correlation between modalities."
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "The advantage of our correspondence models is their integration of these processes, making two-stage methods suboptimal in comparison."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文未明确提及"
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2647868.2654902",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:55:38",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: Correspondence LDA, deep autoencoders, deep belief networks, and deep Boltzmann Machines",
+        "可疑技术关系method_name: CCA-based models and multi-modal models",
+        "可疑数据集: Wikipedia, Pascal, NUS-WIDE-10k"
+      ],
+      "suspicious_count": 4,
+      "validation_score": 20,
+      "quality_level": "low"
+    },
+    "text_length": 16428,
+    "processed_text_length": 14835
+  }
+}

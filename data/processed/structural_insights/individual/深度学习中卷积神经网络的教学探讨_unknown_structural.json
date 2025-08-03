@@ -1,0 +1,52 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "深度学习中卷积神经网络的教学探讨",
+    "authors_or_creators": [
+      "李睿凡",
+      "陈佳洁",
+      "周延泉",
+      "王小捷",
+      "钟义信"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "探讨如何开展卷积神经网络的教学工作，包括教学内容的安排和教学内容之外的考虑两个方面，旨在将智能科学与技术的这一最新成果介绍给学生，使他们能较早接触学科前沿，提升学习兴趣，激发创新动力",
+    "key_concepts": [
+      "智能科学与技术",
+      "深度学习",
+      "卷积神经网络",
+      "教学建议"
+    ],
+    "main_methods": [
+      "原文未明确提及"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "McCulloch和Pitts的人工神经元",
+      "Minsky和Papert的感知器分析",
+      "John Hopfield的Hopfield神经网络模型",
+      "多层前向神经网络的反向传播算法",
+      "Geoffrey Hinton与Salakhutdinov的深度学习"
+    ],
+    "builds_on": [
+      "传统的人工智能专业课程",
+      "深度神经网络的发展"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "深度学习中卷积神经网络的教学探讨",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:16:05",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 1097,
+    "processed_text_length": 1097
+  }
+}

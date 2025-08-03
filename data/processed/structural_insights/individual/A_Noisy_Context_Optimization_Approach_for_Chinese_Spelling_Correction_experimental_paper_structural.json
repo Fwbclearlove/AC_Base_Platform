@@ -1,0 +1,123 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "A Noisy Context Optimization Approach for Chinese Spelling Correction",
+    "authors": [
+      "Guangwei Zhang",
+      "Yongping Xiong",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "School of Computer Science, Beijing University of Posts and Telecommunications, Beijing, China",
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "BERT",
+        "relationship_type": "基于",
+        "evidence_text": "BERT-based models, dominant in CSC research, face performance challenges with noisy contexts."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "BERT",
+        "comparison_result": "NCO-Spell outperforms compared baseline models.",
+        "evidence_text": "Main results in Table IV show improvements, especially for PLOME(cfs) and NCO-Spell."
+      },
+      {
+        "method_name": "PLOME",
+        "comparison_result": "NCO-Spell shows better performance in certain conditions.",
+        "evidence_text": "Main results in Table IV show improvements, especially for PLOME(cfs) and NCO-Spell."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "ChineseNlpCorpus12",
+        "dataset_description": "used as the pre-training data",
+        "evidence_text": "Dataset: We utilize ChineseNlpCorpus12 as the pre-training data"
+      },
+      {
+        "dataset_name": "SIGHAN",
+        "dataset_description": "training data includes 10K manually annotated samples",
+        "evidence_text": "Training data includes 10K manually annotated samples from SIGHAN"
+      }
+    ],
+    "evaluation_metrics": [
+      "Precision",
+      "recall",
+      "F1 scores"
+    ],
+    "baseline_methods": [
+      "BERT",
+      "PLOME",
+      "REALISE",
+      "ECOPO",
+      "LEAD",
+      "CoSPA",
+      "PGBERT",
+      "PLOME(cfs)",
+      "PLOME(iter)",
+      "NCO-Spell(iter)"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Character-level(%)",
+        "our_result": "98.3",
+        "baseline_result": "97.1",
+        "dataset": "Multi-typo Set",
+        "evidence_text": "NCO-Spell 98.3 77.5 86.6 96.9 75.1 84.6"
+      },
+      {
+        "metric_name": "Sentence-level(%)",
+        "our_result": "86.8",
+        "baseline_result": "85.7",
+        "dataset": "Multi-typo Set",
+        "evidence_text": "NCO-Spell(iter) 97.5 81.0 88.5 97.1 78.6 86.8"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "propose NCO-Spell for CSC task in noisy contexts"
+    ],
+    "stated_novelty": [
+      "multi-character masking strategy",
+      "dynamic confusion sets",
+      "iterative inference method"
+    ],
+    "stated_advantages": [
+      "NCO-Spell outperforms compared baseline models"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "In sentences with discontinuous typos, iterative inference shows less improvement compared to the direct inference method."
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "A_Noisy_Context_Optimization_Approach_for_Chinese_Spelling_Correction",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:06:52",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: NCO-Spell shows better performance in certain conditions."
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 8237,
+    "processed_text_length": 8237
+  }
+}

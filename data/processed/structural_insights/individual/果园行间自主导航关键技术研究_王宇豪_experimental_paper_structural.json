@@ -1,0 +1,135 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "果园行间自主导航关键技术研究",
+    "authors": [
+      "毕松",
+      "王宇豪"
+    ],
+    "institutions": [
+      "原文未明确提及"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "统计滤波",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "本文方法根据点云密度动态调整去噪参数，可有效抑制不同点云密度中的噪声，且目标特征保留相对完整。"
+      },
+      {
+        "method_name": "半径滤波",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "本文方法根据点云密度动态调整去噪参数，可有效抑制不同点云密度中的噪声，且目标特征保留相对完整。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "精确率",
+      "召回率",
+      "F1分数"
+    ],
+    "baseline_methods": [
+      "统计滤波",
+      "半径滤波"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "精确率",
+        "our_result": "0.858",
+        "baseline_result": "0.784",
+        "dataset": "白杨树林",
+        "evidence_text": "白杨树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      },
+      {
+        "metric_name": "精确率",
+        "our_result": "0.858",
+        "baseline_result": "0.743",
+        "dataset": "旱柳树林",
+        "evidence_text": "旱柳树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      },
+      {
+        "metric_name": "召回率",
+        "our_result": "0.944",
+        "baseline_result": "0.895",
+        "dataset": "白杨树林",
+        "evidence_text": "白杨树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      },
+      {
+        "metric_name": "召回率",
+        "our_result": "0.941",
+        "baseline_result": "0.821",
+        "dataset": "旱柳树林",
+        "evidence_text": "旱柳树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      },
+      {
+        "metric_name": "F1分数",
+        "our_result": "0.933",
+        "baseline_result": "0.895",
+        "dataset": "白杨树林",
+        "evidence_text": "白杨树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      },
+      {
+        "metric_name": "F1分数",
+        "our_result": "0.923",
+        "baseline_result": "0.821",
+        "dataset": "旱柳树林",
+        "evidence_text": "旱柳树林的聚类真值分别为20和22，其余部分为点云噪声或信息量很少的点云。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出自适应半径滤波方法",
+      "提出基于交叉像素的可通行区域提取方法",
+      "基于单目相机计算果树相对位置"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "果园行间自主导航关键技术研究_王宇豪",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:34:39",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 19705,
+    "processed_text_length": 14996
+  }
+}

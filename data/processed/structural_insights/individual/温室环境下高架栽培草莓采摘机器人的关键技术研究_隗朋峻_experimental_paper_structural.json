@@ -1,0 +1,110 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Key Technology Research on Strawberry Picking Robot in Greenhouse Environment under Elevated Cultivation",
+    "authors": [
+      "Wei Pengjun"
+    ],
+    "institutions": [
+      "North China University of Technology"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "卷积神经网络",
+        "relationship_type": "结合",
+        "evidence_text": "本文采用传统图像方法与卷积神经网络相结合的方式来解决这一问题。"
+      },
+      {
+        "method_name": "全卷积神经网络",
+        "relationship_type": "结合",
+        "evidence_text": "使用全卷积神经网络更有利于精确的找到自然环境下草莓目标所属的像素。"
+      },
+      {
+        "method_name": "支持向量机",
+        "relationship_type": "结合",
+        "evidence_text": "本文采用支持向量机(SVM)算法进行可否采摘判别和遮挡类型判别。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "YOLO算法",
+        "comparison_result": "YOLO算法对多目标的识别能力有限",
+        "evidence_text": "YOLO算法采用回归的方式进行目标检测，每个网格最多只能预测一个物体，这限制了模型对多目标的识别能力。"
+      },
+      {
+        "method_name": "YOLOv2算法",
+        "comparison_result": "YOLOv2对长宽比较大的物体的检测存在一定的问题",
+        "evidence_text": "YOLOv2网络设计中较大的步幅和较少的卷积层还是限制了其对于小目标的检测性能，采用Anchor Boxes的方式虽然提高了检测的精度，但是对于目标形状比较奇异的情况还是会有误检情况。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "草莓数据集",
+        "dataset_description": "包含光照亮斑、遮挡阴影、枝条枝叶遮挡等果实像素点",
+        "evidence_text": "草莓分割网络数据集来自4.3.1中获得的草莓分割前处理结果图像，为了使数据集具有更好的抗干扰性，标注时包含了光照亮斑、遮挡阴影、枝条枝叶遮挡等果实像素点。"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "成熟草莓分类准确率",
+        "our_result": "96.03%",
+        "baseline_result": "原文无此信息",
+        "dataset": "草莓数据集",
+        "evidence_text": "当把阈值设定在0.2时，对成熟草莓分类的准确率为96.03%，对未成熟草莓分类的准确率为91.67%，满足实际场景的应用需求。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种草莓目标识别和精细分割技术",
+      "提出了一种草莓果实的成熟性和遮挡性判断方法",
+      "提出了一种草莓果实空间姿态和采摘点估计方法"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:36:53",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: YOLO算法对多目标的识别能力有限",
+        "可疑技术关系evidence_text: YOLO算法采用回归的方式进行目标检测，每个网格最多只能预测一个物体，这限制了模型对多目标的识别能力。",
+        "可疑技术关系method_name: YOLOv2算法",
+        "可疑技术关系comparison_result: YOLOv2对长宽比较大的物体的检测存在一定的问题"
+      ],
+      "suspicious_count": 5,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 25383,
+    "processed_text_length": 14999
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "使用LDC码的BI—STCM—ID系统中的星座映射分析",
+    "authors": [
+      "赵传钢",
+      "李睿凡"
+    ],
+    "institutions": [
+      "北京林业大学信息学院",
+      "北京邮电大学信息工程学院"
+    ]
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "BI-STCM—ID系统",
+        "relationship_type": "基于"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Alamouti空时编码方案",
+        "comparison_result": "原文无此信息"
+      },
+      {
+        "method_name": "OSTBC码的BI—STCM—ID系统",
+        "comparison_result": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "渐进误比特率性能",
+      "分集增益",
+      "编码增益"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "渐进误比特率性能",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种基于LDC码的BI—STCM—ID系统星座映射分析方法",
+      "简化了在使用LDC码的BI—STCM—ID系统中高位星座映射设计问题"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "对于其他空时编码方案是否适用的问题尚未研究",
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "使用LDC码的BI_STCM_ID系统中的星座映射分析",
+    "detected_doc_type": "experimental_paper",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:54:23",
+    "text_length": 7324,
+    "processed_text_length": 7324,
+    "extraction_method": "supplement_script"
+  }
+}

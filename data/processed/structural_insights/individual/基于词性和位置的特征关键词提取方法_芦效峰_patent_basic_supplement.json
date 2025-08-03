@@ -1,0 +1,51 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "基于词性和位置的特征关键词提取方法",
+    "inventors": [
+      "芦效峰",
+      "王文婷",
+      "李睿凡"
+    ],
+    "applicant": "北京邮电大学, 国网山东省电力公司电力科学研究",
+    "patent_number": "202110184849.9"
+  },
+  "technical_solution": {
+    "technical_problem": "在文本挖掘领域，TF-IDF方法经常挑选词频很高但是实际意义却很小的词作为关键词，且不考虑词在文章中的位置和词性对词的特征权重的影响。",
+    "solution_overview": "本发明提供了一种基于词性和位置的特征关键词提取方法，包括文本预处理，去除特定词性的候选关键词，计算加权词频，计算增量逆文档频率，计算权重，并按权重排序选择关键词。",
+    "key_technical_features": [
+      "词性和位置加权",
+      "增量逆文档频率",
+      "动态数据集适应"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "对文本进行预处理，包括分词,去除停用词和标点符号；去除特定词性的词；考虑词位置和词性计算加权词频；计算增量逆文档频率；计算权重；排序选择关键词"
+    ],
+    "technical_effects": [
+      "提高了关键词提取的正确率",
+      "适用于动态变化的数据集",
+      "避免与文本主题无关的词误认为关键词"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "文本挖掘",
+      "特征提取"
+    ],
+    "use_scenarios": [
+      "实时网络话题检测",
+      "动态数据集关键词提取"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于词性和位置的特征关键词提取方法_芦效峰",
+    "detected_doc_type": "patent",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:53:32",
+    "text_length": 4098,
+    "processed_text_length": 4098,
+    "extraction_method": "supplement_script"
+  }
+}

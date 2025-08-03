@@ -1,0 +1,47 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": [
+      "Hayley Hung",
+      "George Toderici"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "This special issue invites the best papers from ACM Multimedia 2014 to extend their work into journal articles.",
+    "key_concepts": [
+      "Deep Learning for Multimedia",
+      "Emotional and Social Signals in Multimedia"
+    ],
+    "main_methods": [
+      "rigorous review process",
+      "two-day technical program committee meeting"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "ACM Multimedia 2014",
+      "Emotion Recognition During Speech Using Dynamics of Multiple Regions of Face",
+      "Correspondence Autoencoders for Cross-Modal Retrieval"
+    ],
+    "builds_on": [
+      "conference versions of the extended papers"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "2820400",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 12:58:02",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1368,
+    "processed_text_length": 1368
+  }
+}

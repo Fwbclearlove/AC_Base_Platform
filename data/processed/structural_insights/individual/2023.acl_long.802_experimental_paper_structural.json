@@ -1,0 +1,126 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "USSA: A Unified Table Filling Scheme for Structured Sentiment Analysis",
+    "authors": [
+      "Zepeng Zhai",
+      "Hao Chen",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "bi-lexical dependency parsing",
+        "relationship_type": "改进",
+        "evidence_text": "We propose USSA, a unified 2D table-filling scheme that utilizes 13 relation types."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "RACL-BERT, Head-first, Head-final, Frozen PERIN, TGLS",
+        "comparison_result": "USSA generally outperforms other baselines",
+        "evidence_text": "Table 4 shows that USSA generally outperforms other baselines in terms of Span F1."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "NoReCFine, MultiBEU, MultiBCA, MPQA, DSUnis",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We conduct experiments on five benchmark datasets across four languages."
+      }
+    ],
+    "evaluation_metrics": [
+      "Sentiment Graph F1 (SF1)",
+      "Holder F1",
+      "Target F1",
+      "Exp. F1",
+      "Nonpolarity Sentiment Graph F1 (NSF1)"
+    ],
+    "baseline_methods": [
+      "RACL-BERT",
+      "Head-first",
+      "Head-final",
+      "Frozen PERIN",
+      "TGLS"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Span F1",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "MPQA",
+        "evidence_text": "It achieves significant improvements, including a 7.2% F1 score increase for target extraction on MPQA."
+      },
+      {
+        "metric_name": "Holder F1",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "NoReCFine",
+        "evidence_text": "a 5.4% F1 score increase for holder extraction on NoReCFine."
+      },
+      {
+        "metric_name": "NSF1",
+        "our_result": "3.48",
+        "baseline_result": "TGLS",
+        "dataset": "average",
+        "evidence_text": "USSA consistently surpasses other methods in NSF1 and SF1 metrics, with average improvements of 3.48 NSF1 and 3.14% SF1 over TGLS."
+      },
+      {
+        "metric_name": "SF1",
+        "our_result": "3.14%",
+        "baseline_result": "TGLS",
+        "dataset": "average",
+        "evidence_text": "USSA consistently surpasses other methods in NSF1 and SF1 metrics, with average improvements of 3.48 NSF1 and 3.14% SF1 over TGLS."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "a bi-lexical dependency parsing graph converted to a unified 2D table filling scheme (USSA)",
+      "an effective model that collaborates with USSA, utilizing the bi-axial attention module",
+      "extensive experimental validation on benchmark datasets"
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "addressing overlap and discontinuity in SSA",
+      "effective capture of correlations within the table with bi-axial attention module"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "increased training time and memory usage associated with the table filling method",
+      "comparative inefficiency in handling long sentences",
+      "computational challenges"
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2023.acl_long.802",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:52:30",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: RACL-BERT, Head-first, Head-final, Frozen PERIN, TGLS",
+        "可疑数据集: NoReCFine, MultiBEU, MultiBCA, MPQA, DSUnis"
+      ],
+      "suspicious_count": 3,
+      "validation_score": 40,
+      "quality_level": "low"
+    },
+    "text_length": 14066,
+    "processed_text_length": 14066
+  }
+}

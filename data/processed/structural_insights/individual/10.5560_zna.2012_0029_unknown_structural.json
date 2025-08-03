@@ -1,0 +1,90 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "An improved quantum secure direct communication protocol based on a four-particle Green–Horne–Zeilinger (GHZ) state",
+    "authors_or_creators": [
+      "原文无此信息"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "To enhance the efficiency of eavesdropping detection in quantum secure direct communication",
+    "key_concepts": [
+      "Quantum secure direct communication",
+      "Four-particle GHZ state",
+      "Eavesdropping detection",
+      "Entropy theory",
+      "Quantum dense coding"
+    ],
+    "main_methods": [
+      "Utilizing four-particle GHZ state",
+      "Quantum dense coding",
+      "Entropy theory analysis"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "G. S. Vernam, J. Am. Inst. Electr. Eng. 55, 109 (1926)",
+      "C. E. Shannon, Bell Syst. Tech. J. 28, 656 (1949)",
+      "C. H. Bennett and G. Brassard, in: Proc. IEEE Int. Conf. Computers, Systems and Signal Processing, Bangalore 1984, p. 175–179",
+      "A. K. Ekert, Phys. Rev. Lett. 67, 661 (1991)",
+      "C. H. Bennett, Phys. Rev. Lett. 68, 3121 (1992)",
+      "N. Gisin, G. Ribordy, W. Tittel, and H. Zbinden, Rev. Mod. Phys. 74, 145 (2002)",
+      "K. Boström and T. Felbinger, Phys. Rev. Lett. 89, 187902 (2002)",
+      "G. L. Long and X. S. Liu, Phys. Rev. A 65, 032302 (2002)",
+      "Q. Y. Cai and B. W. Li, Chin. Phys. Lett. 21, 601 (2004)",
+      "F. G. Deng, G. L. Long, and G. L. Long, Phys. Rev. A 69, 052319 (2004)",
+      "M. Lucamarini and S. Mancini, Phys. Rev. Lett. 94, 140501 (2005)",
+      "F. G. Deng, G. L. Long, and X. S. Liu, Phys. Rev. A 68, 042317 (2003)",
+      "Q. Y. Cai and B. W. Li, Phys. Rev. A 69, 054301 (2004)",
+      "T. Gao, F. L. Yan, and Z. X. Wang, Chin. Phys. Lett. 22, 2473 (2005)",
+      "C. Wang, F. G. Deng, Y. S. Li, X. S. Liu, and G. L. Long, Phys. Rev. A 71, 044305 (2005)",
+      "C. Wang, F. G. Deng, and G. L. Long, Opt. Commun. 253, 15 (2005)",
+      "X. H. Li, F. G. Deng, and H. Y. Zhou, Phys. Rev. A 74, 054302 (2006)",
+      "X. H. Li, C. Y. Li, F. G. Deng, P. Zhou, Y. J. Liang, and H. Y. Zhou, Chin. Phys. Lett. 16, 2149 (2007)",
+      "B. A. Nguyen, Phys. Lett. A 328, 6 (2004)",
+      "Z. X. Man, Z. J. Zhang, and Y. Li, Chin. Phys. Lett. 22, 22 (2005)",
+      "X. Ji and S. Zhang, Chin. Phys. Lett. 15, 1418 (2006)",
+      "Z. X. Man, Y. J. Xia, and B. A. Nguyen, J. Phys. B, At. Mol. Opt. Phys. 39, 3855 (2006)",
+      "Z. X. Man and Y. J. Xia, Chin. Phys. Lett. 23, 1680 (2006)",
+      "Y. Xia, C. B. Fu, S. Zhang, S. K. Hong, K. H. Yeon, and C. I. Um, J. Korean Phys. Soc. 48, 24 (2006)",
+      "X. R. Jin, X. Ji, Y. Q. Zhang, S. Zhang, S.-K. Hong, K.-H. Yeon, and C.-I. Um, Phys. Lett. A 354, 67 (2006)",
+      "Z. X. Man and Y. J. Xia, Chin. Phys. Lett. 24, 15 (2007)",
+      "Y. Chen, Z. X. Man, and Y. J. Xia, Chin. Phys. Lett. 24, 19 (2007)",
+      "Y. G. Yang, and Q. Y. Wen, Sci. China Ser. G, Phys. Mech. Astron. 50, 558 (2007)",
+      "A. Wojcik, Phys. Rev. Lett. 90, 157901 (2003)",
+      "F. G. Deng, X. H. Li, C. Y. Li, P. Zhou, and H. Y. Zhou, Chin. Phys. Lett. 16, 277 (2007)",
+      "Q. Y. Cai, Phys. Rev. Lett. 91, 109801 (2003)",
+      "Z. J. Zhang and Z. X. Man, Int. J. Quantum Inf. 2, 521 (2004)",
+      "H. Hoffmann, K. Boström, and T. Felbinger, Phys. Rev. A 72, 016301 (2005)",
+      "F. G. Deng and G. L. Long, Phys. Rev. A 72, 016302 (2005)",
+      "F. G. Deng, X. H. Li, C. Y. Li, P. Zhou, and H. Y. Zhou, Phys. Lett. A 359, 359 (2006)",
+      "A. Beige, B. G. Englert, C. Kurtsiefer, and H. Weinfurter, Acta Phys. A 101, 357 (2002)",
+      "M. Hillery, V. Buzek, and A. Berthiaume, Phys. Rev. A 59, 1829 (1999)",
+      "R. Cleve, D. Gottesman, and H. K. Lo, Phys. Rev. Lett. 83, 648 (1999)",
+      "C. H. Bennett, G. Brassard, and N. D. Mermin, Phys. Rev. Lett. 68, 557 (1992)",
+      "F. Gao, F. Z. Guo, Q. Y. Wen, and F. C. Zhu, Phys. Lett. A 349, 53 (2006)",
+      "C. H Bennet and S. J. Wiesner, Phys. Rev. Lett. 69, 2881 (1992)",
+      "C. Y. Li, H. Y. Zhou, Y. Wang, and F. G. Deng, Chin. Phys. Lett. 22, 1049 (2005)",
+      "C. Y. Li, X. H. Li, F. G. Deng, P. Zhou, Y. J. Liang, and H. Y. Zhou, Chin. Phys. Lett. 23, 2896 (2006)"
+    ],
+    "builds_on": [
+      "Quantum secure direct communication",
+      "Four-particle GHZ state",
+      "Eavesdropping detection strategies"
+    ]
+  },
+  "note": "Document type not explicitly stated, thus only basic information has been extracted.",
+  "extraction_metadata": {
+    "file_id": "10.5560_zna.2012_0029",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 12:37:10",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 8901,
+    "processed_text_length": 8901
+  }
+}

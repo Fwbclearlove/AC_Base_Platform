@@ -1,0 +1,59 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "Constructing Hierarchical Image-tags Bimodal Representations for Word Tags Alternative Choice",
+    "authors_or_creators": [
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "This paper presents a solution to the multi-modal learning challenge of ICML, involving the construction of three-level representations in three stages and a data-specific strategy for choosing correct tag words.",
+    "key_concepts": [
+      "Hierarchical Image-tags Bimodal Representations",
+      "Word Tags Alternative Choice",
+      "Multi-modal Learning",
+      "Restricted Boltzmann Machines",
+      "Quasi-Siamese Auto-encoder"
+    ],
+    "main_methods": [
+      "Using MPEG-7, gist descriptors, and additional features for image representation",
+      "Bag-of-words model for tags representation",
+      "Stacked RBMs for level-2 representations",
+      "Quasi-Siamese auto-encoder for level-3 representations"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Salakhutdinov, R., and Hinton, G. (2007)",
+      "Salakhutdinov, R., and Hinton, G. (2009)",
+      "Smolensky, P. (1986)",
+      "Srivastava, N., and Salakhutdinov, R. (2012)",
+      "von Ahn, L., and Dabbish, L. (2004)",
+      "Welling, M., Rosen-Zvi, M., and Hinton, G. (2004)",
+      "LeCun, Y., Chopra, S., Hadsell, R., Ranzato, M., and Huang, F.-J. (2006)"
+    ],
+    "builds_on": [
+      "The multi-modal learning challenge of ICML 2013",
+      "The Small ESP Game Dataset",
+      "The manually labeled dataset by Ian Goodfellow"
+    ]
+  },
+  "note": "Document type is not explicitly mentioned, only the most basic information has been extracted.",
+  "extraction_metadata": {
+    "file_id": "1307.1275v1",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 12:39:11",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 7538,
+    "processed_text_length": 7538
+  }
+}

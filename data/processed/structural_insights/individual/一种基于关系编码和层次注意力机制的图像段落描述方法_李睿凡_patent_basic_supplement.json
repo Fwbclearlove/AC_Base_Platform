@@ -1,0 +1,52 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "一种基于关系编码和层次注意力机制的图像段落描述方法",
+    "inventors": [
+      "李睿凡",
+      "刘云",
+      "石祎晖",
+      "冯方向",
+      "马占宇",
+      "王小捷"
+    ],
+    "applicant": "北京邮电大学",
+    "patent_number": "CN 114186568 B"
+  },
+  "technical_solution": {
+    "technical_problem": "在以前的图像段落描述方法中，物体之间的关系没有得到充分的利用和编码。",
+    "solution_overview": "本发明提供了一种基于关系编码和层次注意力机制的图像段落描述方法，包括关系编码过程和层次注意力解码过程。",
+    "key_technical_features": [
+      "关系编码模块通过两个编码器捕获空间关系信息和语义关系信息",
+      "层次注意力解码模块使用带有关系门和视觉门的层次注意力来动态融合关系信息和物体区域特征"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "关系编码模块包含空间关系编码器和语义关系编码器",
+      "层次注意力解码模块包含区域注意力和关系注意力"
+    ],
+    "technical_effects": [
+      "本发明方法在多个评价指标上显著优于现有方法"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "图像处理技术领域"
+    ],
+    "use_scenarios": [
+      "图像/视频检索",
+      "幼儿教育",
+      "帮助视力受损者理解图像内容"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "一种基于关系编码和层次注意力机制的图像段落描述方法_李睿凡",
+    "detected_doc_type": "patent",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:52:56",
+    "text_length": 15108,
+    "processed_text_length": 12000,
+    "extraction_method": "supplement_script"
+  }
+}

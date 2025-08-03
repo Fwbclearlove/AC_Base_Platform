@@ -1,0 +1,64 @@
+{
+  "document_metadata": {
+    "document_type": "theoretical_paper",
+    "title": "C语言实例对比：从抽象概念到代码直观",
+    "authors": [
+      "无明确列出"
+    ],
+    "institutions": [
+      "北京邮电大学计算机学院",
+      "北京"
+    ]
+  },
+  "theoretical_contributions": {
+    "main_theoretical_results": [
+      "无明确的理论结果"
+    ],
+    "theorems_proposed": [
+      "无提出的定理"
+    ],
+    "mathematical_models": [
+      "无数学模型"
+    ]
+  },
+  "technical_relationships": {
+    "builds_upon": [
+      "无明确基于的理论"
+    ],
+    "extends": [
+      "无明确扩展的理论"
+    ],
+    "relates_to": [
+      "谭浩强教授的C高级语言程序设计教材",
+      "比较教学法",
+      "程序设计语言实用化"
+    ]
+  },
+  "innovation_analysis": {
+    "theoretical_novelty": [
+      "无明确声明的理论新颖性"
+    ],
+    "mathematical_contributions": [
+      "无明确声明的数学贡献"
+    ]
+  },
+  "applications": {
+    "potential_applications": [
+      "无明确提到的潜在应用"
+    ],
+    "application_domains": [
+      "C语言教学",
+      "程序设计教学",
+      "编程习惯培养"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "C语言实例对比_从抽象概念到代码直观",
+    "detected_doc_type": "theoretical_paper",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:53:45",
+    "text_length": 4284,
+    "processed_text_length": 4284,
+    "extraction_method": "supplement_script"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "面向小样本图像分类的任务相关度量学习方法及装置",
+    "inventors": [
+      "李晓旭",
+      "杨世丞",
+      "刘俊",
+      "燕锦涛",
+      "安文娟",
+      "张文斌",
+      "李睿凡",
+      "马占宇",
+      "陶剑"
+    ],
+    "applicant": "兰州理工大学",
+    "patent_number": "CN 114943859 B"
+  },
+  "technical_solution": {
+    "technical_problem": "小样本图像分类中存在的自适应度量学习问题",
+    "solution_overview": "通过考虑不同任务之间的差异性，引入注意力机制的思想，并学习任务相关的空间映射，利用任务自适应度量学习的方式，解决了小样本图像分类中存在的自适应度量学习问题",
+    "key_technical_features": [
+      "引入注意力机制",
+      "学习任务相关的空间映射",
+      "任务自适应度量学习"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "数据预处理阶段",
+      "构建网络模型阶段",
+      "训练模型参数阶段",
+      "测试模型性能阶段"
+    ],
+    "technical_effects": [
+      "提高小样本条件下目标任务分类的准确性",
+      "改善图像的分类效果",
+      "具有很高的实用价值"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "计算机视觉",
+      "图像分类"
+    ],
+    "use_scenarios": [
+      "小样本图像分类任务"
+    ]
+  },
+  "claims_info": {
+    "main_claims": [
+      "一种面向小样本图像分类的任务相关度量学习方法",
+      "一种面向小样本图像分类的任务相关度量学习装置"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭",
+    "detected_doc_type": "patent",
+    "source_type": "basic_fallback",
+    "extraction_time": "2025-08-02 15:57:40",
+    "validation": {
+      "warnings": [
+        "可疑document_type: patent"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 13804,
+    "processed_text_length": 13804
+  }
+}

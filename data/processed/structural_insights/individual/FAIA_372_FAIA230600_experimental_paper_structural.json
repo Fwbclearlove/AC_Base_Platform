@@ -1,0 +1,156 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Enhanced Machine Reading Comprehension Method for Aspect Sentiment Quadruplet Extraction",
+    "authors": [
+      "Shuqin Ye",
+      "Zepeng Zhang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications, China",
+      "Engineering Research Center of Information Networks, Ministry of Education, China",
+      "Key Laboratory of Interactive Technology and Experience System, Ministry of Culture and Tourism, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Machine Reading Comprehension (MRC)",
+        "relationship_type": "基于",
+        "evidence_text": "Our EMRC method is based on Machine Reading Comprehension (MRC)."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Double-Propagation",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Our EMRC model is compared with state-of-art baselines, including pipeline methods like Double-Propagation"
+      },
+      {
+        "method_name": "Extract-Classify",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Our EMRC model is compared with state-of-art baselines, including pipeline methods like Extract-Classify"
+      },
+      {
+        "method_name": "TAS-BERT",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Our EMRC model is compared with state-of-art baselines, including end-to-end methods like TAS-BERT"
+      },
+      {
+        "method_name": "JET",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Our EMRC model is compared with state-of-art baselines, including end-to-end methods like JET"
+      },
+      {
+        "method_name": "BARTABSA",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Generative methods include BARTABSA"
+      },
+      {
+        "method_name": "GAS",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "GAS approaches ABSA tasks in a unified generative framework"
+      },
+      {
+        "method_name": "Paraphrase detection",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Paraphrase detection aims to jointly detect all sentiment elements in quads"
+      },
+      {
+        "method_name": "Opinion tree generation",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Opinion tree generation detects all sentiment elements in a tree for a given review sentence"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Restaurant-ACOS",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our method on two benchmark datasets: Restaurant-ACOS and Laptop-ACOS."
+      },
+      {
+        "dataset_name": "Laptop-ACOS",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our method on two benchmark datasets: Restaurant-ACOS and Laptop-ACOS."
+      }
+    ],
+    "evaluation_metrics": [
+      "Precision",
+      "Recall",
+      "F1-score"
+    ],
+    "baseline_methods": [
+      "Double-Propagation",
+      "Extract-Classify",
+      "TAS-BERT",
+      "JET",
+      "BARTABSA",
+      "GAS",
+      "Paraphrase detection",
+      "Opinion tree generation"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "F1-score",
+        "our_result": "63.02",
+        "baseline_result": "44.61",
+        "dataset": "Restaurant-ACOS",
+        "evidence_text": "Restaurant-ACOS EMRC 63.02 78.23"
+      },
+      {
+        "metric_name": "F1-score",
+        "our_result": "45.92",
+        "baseline_result": "35.80",
+        "dataset": "Laptop-ACOS",
+        "evidence_text": "Laptop-ACOS EMRC 45.92 60.58"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "A novel EMRC model that effectively builds associations among sentimental subtasks.",
+      "A hierarchical category classification strategy to improve the context representation's task-awareness.",
+      "Extensive experimental results demonstrating EMRC's superiority over existing baselines."
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "Our model extracts the opinion term 'nicest' from the given sentence to avoid such generation errors."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性，如无则为空数组"
+    ],
+    "failure_cases": [
+      "In Example 1, the sentence 'Great service with amazon on fulfilling my order.' leads Extract-Classify to incorrectly classify the aspect 'service' into the category LAPTOP#OPERATION_PERFORMANCE",
+      "In Example 2, Paraphrase generates the opinion term 'best', which is not present in the original sentence 'The pizza is delicious and the proprietor is one of the nicest in NYC.'"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "FAIA_372_FAIA230600",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:17:46",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: Our EMRC model is compared with state-of-art baselines, including pipeline methods like Double-Propagation",
+        "可疑技术关系evidence_text: Our EMRC model is compared with state-of-art baselines, including pipeline methods like Extract-Classify",
+        "可疑技术关系evidence_text: Our EMRC model is compared with state-of-art baselines, including end-to-end methods like TAS-BERT",
+        "可疑技术关系evidence_text: Our EMRC model is compared with state-of-art baselines, including end-to-end methods like JET"
+      ],
+      "suspicious_count": 5,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 16456,
+    "processed_text_length": 14906
+  }
+}

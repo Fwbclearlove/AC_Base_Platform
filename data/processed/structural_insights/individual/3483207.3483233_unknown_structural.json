@@ -1,0 +1,67 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "Maintenance Decision Generator for Electrical Equipment Based on Reinforcement Learning",
+    "authors_or_creators": [
+      "Ruifan Li",
+      "Zeyuan Wang",
+      "Yifan Du",
+      "Zepeng Zhai",
+      "Yongping Xiong",
+      "Ziqun Liu"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提出一种基于强化学习的电气设备维护决策模型，并通过电网切割集计算设备权重，增强动态编程决策。",
+    "key_concepts": [
+      "电气设备维护",
+      "强化学习",
+      "动态决策制定"
+    ],
+    "main_methods": [
+      "Markov假设",
+      "动态编程",
+      "多设备维护决策生成"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "[6]",
+      "[9]",
+      "[1]",
+      "[2]",
+      "[3]",
+      "[4]",
+      "[5]",
+      "[7]",
+      "[8]",
+      "[10]",
+      "[11]",
+      "[12]",
+      "[13]",
+      "[14]",
+      "[15]",
+      "[16]",
+      "[17]",
+      "[18]"
+    ],
+    "builds_on": [
+      "Multi-Agent Reinforcement Learning",
+      "Electric Equipment Maintenance"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "3483207.3483233",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:00:26",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 14263,
+    "processed_text_length": 14263
+  }
+}

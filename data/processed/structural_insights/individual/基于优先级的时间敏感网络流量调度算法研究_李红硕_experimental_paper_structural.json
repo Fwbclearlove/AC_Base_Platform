@@ -1,0 +1,113 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "基于优先级的时间敏感网络流量调度算法研究",
+    "authors": [
+      "Yu Q",
+      "等人"
+    ],
+    "institutions": [
+      "西安电子科技大学"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "时间敏感网络流量调度",
+        "relationship_type": "改进",
+        "evidence_text": "本文针对现有调度方法计算复杂度高和路由规划问题，提出以下工作："
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "基于帧的ILP调度方法",
+        "comparison_result": "求解时间减少了36%，但总时延提高了7%",
+        "evidence_text": "与基于帧的ILP调度方法相比，求解时间减少了36%，但总时延提高了7%。"
+      },
+      {
+        "method_name": "基于时间窗口的OMT调度方法",
+        "comparison_result": "求解时间减少了61%，有效降低了计算复杂度；总时延降低了40%",
+        "evidence_text": "与基于时间窗口的OMT调度方法相比，求解时间减少了61%，有效降低了计算复杂度；总时延降低了40%。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "丢包率",
+      "平均端到端时延"
+    ],
+    "baseline_methods": [
+      "SP-TSA算法",
+      "CBS-TSA算法",
+      "SPF算法"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "求解时间",
+        "our_result": "减少了41%",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "本文提出的基于时间窗口的ILP调度方法求解时间减少了41%。"
+      },
+      {
+        "metric_name": "总时延",
+        "our_result": "提高了7%",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "与基于帧的ILP调度方法相比，总时延提高了7%。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出基于时间窗口的ILP调度方法",
+      "引入时间窗口偏移量优化方法"
+    ],
+    "stated_novelty": [
+      "新颖的时间窗口调度对象",
+      "结合软件定义网络（SDN）构建系统模型"
+    ],
+    "stated_advantages": [
+      "降低了计算复杂度",
+      "改善了时延性能",
+      "提高了流量的可调度性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "在路由规划时主要考虑链路利用率，对于实时调度场景下流量的可调度性问题考虑不足"
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于优先级的时间敏感网络流量调度算法研究_李红硕",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:20:32",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: 求解时间减少了36%，但总时延提高了7%",
+        "可疑技术关系evidence_text: 与基于帧的ILP调度方法相比，求解时间减少了36%，但总时延提高了7%。",
+        "可疑技术关系comparison_result: 求解时间减少了61%，有效降低了计算复杂度；总时延降低了40%",
+        "可疑技术关系evidence_text: 与基于时间窗口的OMT调度方法相比，求解时间减少了61%，有效降低了计算复杂度；总时延降低了40%。"
+      ],
+      "suspicious_count": 5,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 12770,
+    "processed_text_length": 12770
+  }
+}

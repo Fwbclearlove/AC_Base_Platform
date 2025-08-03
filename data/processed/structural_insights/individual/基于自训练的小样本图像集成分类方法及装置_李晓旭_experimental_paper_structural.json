@@ -1,0 +1,80 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [],
+    "institutions": [],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Baseline++",
+        "relationship_type": "基于",
+        "evidence_text": "本研究中，我们采用Baseline++网络结构构建基分类器"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "原文无此信息",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文对数据集的描述为：有标签的支持集、无标签的支持集和查询集",
+        "evidence_text": "对于新类数据，我们抽取三个数据集：有标签的支持集、无标签的支持集和查询集"
+      }
+    ],
+    "evaluation_metrics": [],
+    "baseline_methods": [
+      "Baseline++"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "解决了基分类器多样性问题",
+      "提升了图像分类效果"
+    ],
+    "stated_novelty": [
+      "基于查询样本自训练和模型平均的集成分类方法"
+    ],
+    "stated_advantages": [
+      "具有很高的使用价值"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [],
+    "failure_cases": []
+  },
+  "extraction_metadata": {
+    "file_id": "基于自训练的小样本图像集成分类方法及装置_李晓旭",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:13:30",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1361,
+    "processed_text_length": 1361
+  }
+}

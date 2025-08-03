@@ -1,0 +1,50 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "为图像生成描述性的自然语言段落，是跨模态智能的重要研究方向，也是盲人导航和幼儿早期教育等应用的核心技术",
+    "key_concepts": [
+      "段落式图像描述",
+      "编码器与解码器组合",
+      "端到端结构",
+      "卷积神经网络",
+      "循环神经网络",
+      "全卷积结构的图像段落描述算法",
+      "门控机制",
+      "连贯性"
+    ],
+    "main_methods": [
+      "采用基于卷积网络的区域检测器获取图像表示",
+      "构建层次性的深度卷积解码器对图像表示解码",
+      "将门控机制嵌入卷积解码器网络中以提升模型的记忆能力"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Vinyals O, Toshev A, Bengio S, et al. Show and tell: a neural image caption generator",
+      "Lu Jiasen, Xiong Caiming, Parikh D, et al. Knowing when to look: adaptive attention via a visual sentinel for image captioning",
+      "Mao Yuzhao, Zhou Chang, Wang Xiaojie, et al. Show and tell more: topic-oriented multi-sentence image captioning",
+      "...以及其他参考文献"
+    ],
+    "builds_on": [
+      "原文未明确提及"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "全卷积神经结构的段落式图像描述算法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:14:16",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 1693,
+    "processed_text_length": 1693
+  }
+}

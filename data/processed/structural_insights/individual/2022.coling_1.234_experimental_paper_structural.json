@@ -1,0 +1,135 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "A Simple Model for Distantly Supervised Relation Extraction",
+    "authors": [
+      "Ziqin Rao",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "BERT-based Graph Convolutional network Model (BGM)",
+        "relationship_type": "结合",
+        "evidence_text": "We introduce BGM, a model that combines a Pretrained Language Model (PLM) and a Graph Convolutional Network (GCN)"
+      },
+      {
+        "method_name": "PCNN-based methods",
+        "relationship_type": "基于",
+        "evidence_text": "DS-RE methods can be categorized into PCNN-based and PLMs-based approaches"
+      },
+      {
+        "method_name": "PLMs-based methods",
+        "relationship_type": "基于",
+        "evidence_text": "PCNN-based methods use various techniques to acquire effective bag representations, while PLMs-based methods have shown remarkable performance"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "multiple baseline methods",
+        "comparison_result": "report better performance",
+        "evidence_text": "We compare our BGM with multiple baseline methods and report better performance"
+      },
+      {
+        "method_name": "BGM without GCN",
+        "comparison_result": "performance drop",
+        "evidence_text": "In the ablation study, we find that removing GCN results in a performance drop"
+      },
+      {
+        "method_name": "BGM without EntCon",
+        "comparison_result": "performance drop",
+        "evidence_text": "In the ablation study, we find that removing entity connections results in a performance drop"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "NYT10",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Our experiments utilize the BERT-base-uncased model, with a maximum input sequence length of 120 and a hidden size of 768 on the NYT10 and GDS datasets"
+      },
+      {
+        "dataset_name": "GDS",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Our experiments utilize the BERT-base-uncased model, with a maximum input sequence length of 120 and a hidden size of 768 on the NYT10 and GDS datasets"
+      }
+    ],
+    "evaluation_metrics": [
+      "P@N",
+      "AUC",
+      "Micro-F1 score"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "P@N",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "NYT10 and GDS",
+        "evidence_text": "We compare our BGM with multiple baseline methods and report better performance on the NYT10 and GDS datasets in terms of P@N, AUC, and Micro-F1 score"
+      },
+      {
+        "metric_name": "AUC",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "NYT10 and GDS",
+        "evidence_text": "We compare our BGM with multiple baseline methods and report better performance on the NYT10 and GDS datasets in terms of P@N, AUC, and Micro-F1 score"
+      },
+      {
+        "metric_name": "Micro-F1 score",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "NYT10 and GDS",
+        "evidence_text": "We compare our BGM with multiple baseline methods and report better performance on the NYT10 and GDS datasets in terms of P@N, AUC, and Micro-F1 score"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种结合预训练语言模型和图卷积网络的简单模型"
+    ],
+    "stated_novelty": [
+      "首次使用GCN直接学习实例之间的包表示"
+    ],
+    "stated_advantages": [
+      "在基准数据集上表现出更好的性能"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "需要进一步研究背后的理论以提供更好的解释性"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2022.coling_1.234",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:46:45",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: In the ablation study, we find that removing GCN results in a performance drop",
+        "可疑技术关系evidence_text: In the ablation study, we find that removing entity connections results in a performance drop"
+      ],
+      "suspicious_count": 3,
+      "validation_score": 40,
+      "quality_level": "low"
+    },
+    "text_length": 8126,
+    "processed_text_length": 8126
+  }
+}

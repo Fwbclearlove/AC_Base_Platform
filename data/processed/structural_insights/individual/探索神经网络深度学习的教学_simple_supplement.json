@@ -1,0 +1,24 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "探索神经网络深度学习的教学",
+    "authors": [
+      "未找到该信息"
+    ]
+  },
+  "main_content": {
+    "description": "文章讨论如何在本科生与研究生课程中有效开展深度学习教学，介绍智能领域的最新研究成果。内容包括本科生与研究生教学建议，以及深度学习的核心内容与应用。",
+    "keywords": [
+      "智能科学与技术",
+      "深度学习",
+      "教学建议"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "探索神经网络深度学习的教学",
+    "source_type": "cleaned",
+    "extraction_time": "2025-08-03 12:35:06",
+    "extraction_method": "simple_supplement",
+    "text_length": 519
+  }
+}

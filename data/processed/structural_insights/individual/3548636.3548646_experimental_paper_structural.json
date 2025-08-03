@@ -1,0 +1,172 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "EP-BERTGCN: A Simple but Effective Power Equipment Fault Recognition Method",
+    "authors": [
+      "Mingcong Lu",
+      "Yusong Zhang",
+      "Qu-An Zheng",
+      "Zhenyuan Ma",
+      "Liqing Liu",
+      "Yongping Xiong",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "原文未明确提到"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "C-TextGCN",
+        "relationship_type": "改进",
+        "evidence_text": "Our work spans text-based power equipment fault recognition, graph neural networks, pre-trained BERT, and cross-domain BERT adaption. Previous research in power equipment fault recognition has largely focused on image modalities, with recent inroads into text-based models for TPFR. Graph Convolutional Neural Network (GCN) has been applied to text classification by constructing graphs based on textual relationships. This approach is extended with the integration of pre-trained BERT and domain-specific adaption in our EP-BERTGCN method."
+      },
+      {
+        "method_name": "BERT",
+        "relationship_type": "结合",
+        "evidence_text": "EP-BERTGCN constructs a graph among documents and words using pre-trained BERT and combines softmax outputs from BERT and GCNs for classification."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "TextRNN",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRNN 0.4950"
+      },
+      {
+        "method_name": "TextRNN_Att",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRNN_Att 0.5538"
+      },
+      {
+        "method_name": "TextRCNN",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRCNN 0.6126"
+      },
+      {
+        "method_name": "DPCNN",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to DPCNN 0.5753"
+      },
+      {
+        "method_name": "FastText",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to FastText 0.6098"
+      },
+      {
+        "method_name": "Transformer",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to Transformer 0.4570"
+      },
+      {
+        "method_name": "C-TextGCN",
+        "comparison_result": "EP-BERTGCN性能更优",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to C-TextGCN 0.6607"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "CPTF dataset",
+        "dataset_description": "包含1484个实例，跨越12个类别",
+        "evidence_text": "The CPTF dataset, after oversampling to address category imbalance, contains 1484 instances across 12 categories."
+      }
+    ],
+    "evaluation_metrics": [
+      "Acc",
+      "Macro-F1",
+      "Weighted Macro-F1"
+    ],
+    "baseline_methods": [
+      "TextRNN",
+      "TextRNN_Att",
+      "TextRCNN",
+      "DPCNN",
+      "FastText",
+      "Transformer",
+      "C-TextGCN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Acc",
+        "our_result": "0.6700",
+        "baseline_result": "0.4950 (TextRNN)",
+        "dataset": "CPTF dataset",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRNN 0.4950"
+      },
+      {
+        "metric_name": "Macro-F1",
+        "our_result": "0.6645",
+        "baseline_result": "0.4217 (TextRNN)",
+        "dataset": "CPTF dataset",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6645 ... compared to TextRNN 0.4217"
+      },
+      {
+        "metric_name": "Weighted Macro-F1",
+        "our_result": "0.6633",
+        "baseline_result": "0.4642 (TextRNN)",
+        "dataset": "CPTF dataset",
+        "evidence_text": "Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6633 ... compared to TextRNN 0.4642"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "引入BERT模块到C-TextGCN中形成EP-BERTGCN",
+      "在收集的数据集上进行比较实验，展示方法性能的优越性",
+      "对BERT模型进行领域适应，进一步增强了我们方法的能力"
+    ],
+    "stated_novelty": [
+      "原文未明确声明"
+    ],
+    "stated_advantages": [
+      "结合了预训练语言模型的先验知识和GCN在电力领域的鲁棒性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文未明确承认"
+    ],
+    "failure_cases": [
+      "原文未提到"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "3548636.3548646",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:03:11",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑institutions: ['原文未明确提到']",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRNN 0.4950",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRNN_Att 0.5538",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to TextRCNN 0.6126",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to DPCNN 0.5753",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to FastText 0.6098",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to Transformer 0.4570",
+        "可疑技术关系comparison_result: EP-BERTGCN性能更优",
+        "可疑技术关系evidence_text: Table 1 presents Experimental Results on the CPTF Dataset: ... EP-BERTGCN 0.6700 ... compared to C-TextGCN 0.6607",
+        "可疑性能数据baseline_result: 0.4950 (TextRNN)",
+        "可疑性能数据baseline_result: 0.4217 (TextRNN)",
+        "可疑性能数据baseline_result: 0.4642 (TextRNN)"
+      ],
+      "suspicious_count": 19,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 11873,
+    "processed_text_length": 11873
+  }
+}

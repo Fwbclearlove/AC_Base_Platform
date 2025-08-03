@@ -1,0 +1,89 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [
+      "原文无此信息"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "原文无此信息",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "原文无此信息"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "多元组细粒度情感分析研究及应用_翟泽鹏",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:32:52",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 28374,
+    "processed_text_length": 14964
+  }
+}

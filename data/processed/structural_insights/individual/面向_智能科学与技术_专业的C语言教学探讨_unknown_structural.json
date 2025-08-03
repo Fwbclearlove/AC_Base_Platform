@@ -1,0 +1,53 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "面向‘智能科学与技术’专业的C语言教学探讨",
+    "authors_or_creators": [
+      "李睿凡",
+      "李蕾"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "本文探讨了‘智能科学与技术’专业C语言教学的变革，针对新专业要求和学时压缩的问题，提出教学内容和方法改变的具体措施。引入机器智能前沿问题作为实践项目，旨在培养学生的专业兴趣和能力。",
+    "key_concepts": [
+      "C语言",
+      "智能科学与技术",
+      "教学"
+    ],
+    "main_methods": [
+      "教学内容整合设计",
+      "前沿研究导向的项目实践",
+      "教学相关因素讨论"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "[1]谭浩强．C高级语言程序设计[m]．2版．北京：清华大学出版社，2006．",
+      "[2]陈良银，游洪跃，李旭伟．C语言程序设计[m]．C1999．北京：清华大学出版社，2006．",
+      "[3]Brian W．K．，Denni S M．R．The C Programming Language．2版．北京：机械工业出版社，2006．",
+      "[4]TopCoder．ht tp：／／wwW．topcoder．com／．",
+      "[5]蔡自兴，徐光秸．人工智能及其应用(研究生用书)[m]．3版．北京：清华大学出版社，2007．",
+      "[6]钟义信．机器知行学原理[m]．北京：科学出版社，2006．",
+      "[7]Russell S．，Norvig P．Artificial Intelligence：A Modern Approach．2版．北京：人民邮电出版社，2004．"
+    ],
+    "builds_on": [
+      "原文未明确提及"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "面向_智能科学与技术_专业的C语言教学探讨",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:16:38",
+    "validation": {
+      "warnings": [
+        "可疑title: 面向‘智能科学与技术’专业的C语言教学探讨"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1518,
+    "processed_text_length": 1518
+  }
+}

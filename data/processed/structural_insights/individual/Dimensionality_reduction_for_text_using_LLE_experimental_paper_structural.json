@@ -1,0 +1,124 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Dimensionality Reduction for Text Using LLE",
+    "authors": [
+      "Chuan HE",
+      "Zhe DONG",
+      "Ruifan LI",
+      "Yixin ZHONG"
+    ],
+    "institutions": [
+      "School of Information Engineering, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Locally Linear Embedding (LLE)",
+        "relationship_type": "基于",
+        "evidence_text": "This paper introduces LLE, analyzes its advantages and limitations, discusses its relationship with latent semantic indexing (LSI) within the graph embedding framework, and presents experimental results using Reuters21578 and TDT2 datasets."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "LSI",
+        "comparison_result": "LLE significantly outperforms the other methods",
+        "evidence_text": "In terms of classification precision, LLE significantly outperforms the other methods."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Reuters21578",
+        "dataset_description": "document subsets were vectorized after preprocessing, and the number of topics and documents varied",
+        "evidence_text": "Experiments on the Reuters21578 and TDT2 datasets compared text representations in the original space, LLE, and LSI algorithms."
+      },
+      {
+        "dataset_name": "TDT2",
+        "dataset_description": "contains 9394 documents across 30 topics",
+        "evidence_text": "After preprocessing similar to that of Reuters21578, the TDT2 dataset contains 9394 documents across 30 topics."
+      }
+    ],
+    "evaluation_metrics": [
+      "precision"
+    ],
+    "baseline_methods": [
+      "Baseline",
+      "LSI"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "precision",
+        "our_result": "91.28",
+        "baseline_result": "86.06",
+        "dataset": "Reuters21578 subset 1",
+        "evidence_text": "Precisions Dims Precisions Dims Precisions 1 6 539 86.06 529 86.99 19 91.28"
+      },
+      {
+        "metric_name": "precision",
+        "our_result": "95.34",
+        "baseline_result": "91.43",
+        "dataset": "Reuters21578 subset 3",
+        "evidence_text": "Precisions Dims Precisions Dims Precisions 3 5 535 91.43 527 91.24 15 95.34"
+      },
+      {
+        "metric_name": "precision",
+        "our_result": "98.83",
+        "baseline_result": "94.15",
+        "dataset": "Reuters21578 subset 17",
+        "evidence_text": "Precisions Dims Precisions Dims Precisions 17 3 940 94.15 923 94.26 68 98.83"
+      },
+      {
+        "metric_name": "precision",
+        "our_result": "99.85",
+        "baseline_result": "96.09",
+        "dataset": "Reuters21578 subset 19",
+        "evidence_text": "Precisions Dims Precisions Dims Precisions 19 3 665 96.09 653 96.09 5 99.85"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "introduces LLE for text dimensionality reduction",
+      "presents experimental results comparing LLE with LSI"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "LLE's nonlinearity",
+      "fast computation",
+      "LLE significantly outperforms other methods in precision"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "sampling assumption",
+      "use of the Euclidean metric",
+      "constraint of equalizing reconstruction points to the raw point can lead to suboptimal solutions"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Dimensionality_reduction_for_text_using_LLE",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:08:30",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 10467,
+    "processed_text_length": 10467
+  }
+}

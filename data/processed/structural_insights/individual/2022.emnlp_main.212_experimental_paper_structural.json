@@ -1,0 +1,120 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "COM-MRC: A Context-Masked Machine Reading Comprehension Framework for Aspect Sentiment Triplet Extraction",
+    "authors": [
+      "Feifan Fan",
+      "Yansong Feng",
+      "Dongyan Zhao"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China",
+      "Engineering Research Center of Information Networks, Ministry of Education, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Aspect Sentiment Triplet Extraction (ASTE)",
+        "relationship_type": "基于",
+        "evidence_text": "Aspect Sentiment Triplet Extraction (ASTE) extracts sentiment triplets from sentences and is formalized as an effective machine reading comprehension (MRC) framework."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "BMRC",
+        "comparison_result": "Our COM-MRC outperforms other baselines in terms of Precision, Recall, and F1 scores on both D1 and D2 datasets",
+        "evidence_text": "Our COM-MRC outperforms other baselines in terms of Precision, Recall, and F1 scores on both D1 and D2 datasets, as shown in Tables 3 and 4."
+      },
+      {
+        "method_name": "EMC-GCN",
+        "comparison_result": "Our COM-MRC outperforms EMC-GCN",
+        "evidence_text": "Our COM-MRC outperforms EMC-GCN on datasets D1 and D2."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "D1 (Wu et al., 2020a)",
+        "dataset_description": "benchmark datasets from SemEval Challenges",
+        "evidence_text": "We use two groups of benchmark datasets from SemEval Challenges (Pontiki et al., 2014, 2015, 2016): D1 (Wu et al., 2020a) and D2 (Xu et al., 2020)."
+      },
+      {
+        "dataset_name": "D2 (Xu et al., 2020)",
+        "dataset_description": "benchmark datasets from SemEval Challenges",
+        "evidence_text": "We use two groups of benchmark datasets from SemEval Challenges (Pontiki et al., 2014, 2015, 2016): D1 (Wu et al., 2020a) and D2 (Xu et al., 2020)."
+      }
+    ],
+    "evaluation_metrics": [
+      "Precision",
+      "Recall",
+      "F1 scores"
+    ],
+    "baseline_methods": [
+      "pipeline",
+      "end-to-end",
+      "MRC-based methods"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "F1 scores",
+        "our_result": "72.01",
+        "baseline_result": "67.99",
+        "dataset": "D1",
+        "evidence_text": "Our COM-MRC: 75.46, 68.91, 72.01, 62.35, 58.16, 60.17, 68.35, 61.24, 64.53, 71.55, 71.59, 71.57"
+      },
+      {
+        "metric_name": "F1 scores",
+        "our_result": "71.57",
+        "baseline_result": "65.75",
+        "dataset": "D2",
+        "evidence_text": "Our COM-MRC: 75.46, 68.91, 72.01, 62.35, 58.16, 60.17, 68.35, 61.24, 64.53, 71.55, 71.59, 71.57"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "propose a COntext-Masked MRC (COM-MRC) framework for ASTE tasks",
+      "alleviate interference in ASTE tasks",
+      "the context augmentation strategy effectively expanding the training corpus"
+    ],
+    "stated_novelty": [
+      "COM-MRC’s components work collaboratively",
+      "the two-stage inference method reduces interference from other aspects"
+    ],
+    "stated_advantages": [
+      "effectiveness of our COM-MRC framework",
+      "our inference method involving two stages",
+      "context augmentation strategy"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "Our context augmentation strategy may increase training time, preventing COM-MRC from being applied to large-scale data scenarios"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2022.emnlp_main.212",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:48:53",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: Our COM-MRC outperforms EMC-GCN",
+        "可疑技术关系evidence_text: Our COM-MRC outperforms EMC-GCN on datasets D1 and D2."
+      ],
+      "suspicious_count": 3,
+      "validation_score": 40,
+      "quality_level": "low"
+    },
+    "text_length": 22704,
+    "processed_text_length": 14952
+  }
+}

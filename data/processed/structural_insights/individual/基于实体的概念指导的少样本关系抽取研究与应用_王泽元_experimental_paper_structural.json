@@ -1,0 +1,112 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [
+      "原文无此信息"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "embedding models and neural networks",
+        "relationship_type": "基于",
+        "evidence_text": "embedding models and neural networks have shown promise for improving relation extraction by connecting language and knowledge bases."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Gormley et al. (2015) feature-rich compositional embedding model",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Gormley et al. (2015) proposed a model that uses a feature-rich compositional embedding to improve relation extraction."
+      },
+      {
+        "method_name": "Liu et al. (2013) convolutional neural network model",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Liu et al. (2013) proposed a convolutional neural network model for relation extraction."
+      },
+      {
+        "method_name": "Zhang et al. (2015) bidirectional long short-term memory network",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Zhang et al. (2015) used a bidirectional long short-term memory network for relation classification."
+      },
+      {
+        "method_name": "Devlin et al. (2018) BERT model",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Devlin et al. (2018) used BERT for relation extraction by fine-tuning the model on a relation extraction task."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "accuracy of relation extraction"
+    ],
+    "baseline_methods": [
+      "feature-rich compositional embedding model",
+      "convolutional neural network model",
+      "bidirectional long short-term memory network",
+      "BERT model"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "connecting language and knowledge bases with embedding models for relation extraction"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "capture semantic information",
+      "improve the accuracy of relation extraction"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于实体的概念指导的少样本关系抽取研究与应用_王泽元",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:27:53",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: Gormley et al. (2015) feature-rich compositional embedding model",
+        "可疑技术关系method_name: Liu et al. (2013) convolutional neural network model",
+        "可疑技术关系method_name: Zhang et al. (2015) bidirectional long short-term memory network",
+        "可疑技术关系method_name: Devlin et al. (2018) BERT model"
+      ],
+      "suspicious_count": 5,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 9513,
+    "processed_text_length": 9513
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Improved Keystroke Authentication Accuracy Based on Statistics and Weight",
+    "authors": [
+      "Li Jian",
+      "Guo Xiaojing",
+      "Li Meiyun",
+      "Li Ruifan"
+    ],
+    "institutions": [
+      "School of Computer, Beijing University of Posts and Telecommunications, Beijing 100876, P. R. China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Keystroke Dynamics-Based Authentication (KDA)",
+        "relationship_type": "改进",
+        "evidence_text": "This paper aims to enhance login-password recognition accuracy using biometric characteristics, which are unique and cannot be stolen, lost, or forgotten."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "TOP10 detector",
+        "comparison_result": "TOP10 showing the best improvement with an increase in the number of samples",
+        "evidence_text": "The performance of each detector is analyzed, with TOP10 showing the best improvement with an increase in the number of samples."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "benchmark dataset",
+        "dataset_description": "from 51 subjects typing a strong 10-character password",
+        "evidence_text": "A benchmark dataset from 51 subjects typing a strong 10-character password is used."
+      }
+    ],
+    "evaluation_metrics": [
+      "FRR",
+      "FAR",
+      "EER",
+      "FAR + FRR"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "EER",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "benchmark data set for keystroke dynamics",
+        "evidence_text": "The results of the four detectors, including EER (Equal Error Rate), FAR, FRR, and FAR + FRR, are presented in Table I."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "proposes a methodology for improving the recognition accuracy of keystroke authentication"
+    ],
+    "stated_novelty": [
+      "uses typing biometrics to enhance login-password authentication"
+    ],
+    "stated_advantages": [
+      "efficiency compared to the other three detectors",
+      "smallest sum of FAR and FRR"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于统计和加权的提高击键认证识别方法(英文)",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:32:37",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 8405,
+    "processed_text_length": 8405
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "document_metadata": {
+    "document_type": "theoretical_paper",
+    "title": "考虑合成灰数灰度性质的改进区间灰数预测模型",
+    "authors": [
+      "王大鹏",
+      "汪秉文",
+      "李睿凡"
+    ],
+    "institutions": [
+      "华中科技大学控制科学与工程系",
+      "北京邮电大学计算机学院"
+    ]
+  },
+  "theoretical_contributions": {
+    "main_theoretical_results": [
+      "提出合成灰数灰度的定义及性质",
+      "建立灰度序列的GM(1,1)模型实现灰度预测",
+      "改进和完善了原有区间灰数预测模型"
+    ],
+    "theorems_proposed": [
+      "定理1",
+      "定理2",
+      "定理3",
+      "定理4"
+    ],
+    "mathematical_models": [
+      "核序列的GM(1,1)模型",
+      "灰度序列的GM(1,1)模型",
+      "改进的区间灰数预测模型"
+    ]
+  },
+  "technical_relationships": {
+    "builds_upon": [
+      "基于核和灰度的区间灰数预测模型"
+    ],
+    "extends": [
+      "扩展了原有模型，支持误差分析和精度检验"
+    ],
+    "relates_to": [
+      "与区间灰数序列预测相关"
+    ]
+  },
+  "innovation_analysis": {
+    "theoretical_novelty": [
+      "提出了合成灰数灰度的定义及性质"
+    ],
+    "mathematical_contributions": [
+      "建立了灰度序列的GM(1,1)模型"
+    ]
+  },
+  "applications": {
+    "potential_applications": [
+      "区间灰数序列预测"
+    ],
+    "application_domains": [
+      "系统工程与电子技术"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "考虑合成灰数灰度性质的改进区间灰数预测模型",
+    "detected_doc_type": "theoretical_paper",
+    "source_type": "basic",
+    "extraction_time": "2025-08-03 11:52:35",
+    "text_length": 11546,
+    "processed_text_length": 11546,
+    "extraction_method": "supplement_script"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Clothing Image Recognition with Multiple Features and Extreme Learning Machines",
+    "authors": [
+      "Author names not explicitly provided in the text"
+    ],
+    "institutions": [
+      "Institutions not explicitly provided in the text"
+    ],
+    "publication_venue": "Publication venue not explicitly provided in the text"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Traditional CNNs",
+        "relationship_type": "改进",
+        "evidence_text": "Traditional convolutional neural networks (CNNs) do not always provide a satisfactory balance between training time and recognition performance."
+      },
+      {
+        "method_name": "ELMs",
+        "relationship_type": "结合",
+        "evidence_text": "We propose a recognition framework based on multiple features and extreme learning machines (ELMs)."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Hand-crafted features and deep learning methods",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Existing approaches can be categorized into hand-crafted features and deep learning methods."
+      },
+      {
+        "method_name": "CNN features with 4,096 hidden neurons",
+        "comparison_result": "Best performance with the ELM classifier is achieved using CNN features with 4,096 hidden neurons, reaching an accuracy of 80.6% in the test set.",
+        "evidence_text": "The best performance with the ELM classifier is achieved using CNN features with 4,096 hidden neurons, reaching an accuracy of 80.6% in the test set."
+      },
+      {
+        "method_name": "HOG features with 8,192 hidden neurons",
+        "comparison_result": "Best performance is with 8,192 hidden neurons, achieving 71.8% accuracy.",
+        "evidence_text": "For HOG features, the best performance is with 8,192 hidden neurons, achieving 71.8% accuracy."
+      },
+      {
+        "method_name": "Color histograms with 4,096 hidden neurons",
+        "comparison_result": "Best performance is with 4,096 hidden neurons, at an accuracy of 41.6%.",
+        "evidence_text": "For color histograms, the best performance is with 4,096 hidden neurons, at an accuracy of 41.6%."
+      },
+      {
+        "method_name": "MLP classifier with CNN features and 2,048 hidden neurons",
+        "comparison_result": "Best performance is with CNN features and 2,048 hidden neurons, at an accuracy of 80.8%.",
+        "evidence_text": "The best performance with the MLP classifier is with CNN features and 2,048 hidden neurons, at an accuracy of 80.8%."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "DeepFashion dataset",
+        "dataset_description": "Contains 300,000 clothing images across fifty categories.",
+        "evidence_text": "For our experiments, we used the DeepFashion dataset, which contains 300,000 clothing images across fifty categories."
+      }
+    ],
+    "evaluation_metrics": [
+      "Accuracy"
+    ],
+    "baseline_methods": [
+      "CNN combined with a multi-layer perceptron (MLP)"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Accuracy",
+        "our_result": "82.0%",
+        "baseline_result": "80.8%",
+        "dataset": "DeepFashion dataset",
+        "evidence_text": "Using the AE-ELM based on CNN and HOG features with an MLP classifier and 2,048 hidden neurons achieves the best performance, with an accuracy of 82.0% in the test set."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "A recognition framework based on multiple features and ELMs",
+      "Deep feature-level fusion using Autoencoder-ELMs",
+      "Ensemble decision-making with Ada-ELMs"
+    ],
+    "stated_novelty": [
+      "The proposed framework extracts features, fuses them using an Autoencoder variant of ELM, and classifies images with an ensemble strategy called Ada-ELMs"
+    ],
+    "stated_advantages": [
+      "Competitive performance in clothing image recognition",
+      "Balanced time and recognition accuracy"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "The fusion of three features does not improve results",
+      "Training time consumption of AE-ELM and Ada-ELMs"
+    ],
+    "failure_cases": [
+      "Misclassifications primarily between similar clothing items"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:29:46",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑title: Clothing Image Recognition with Multiple Features and Extreme Learning Machines",
+        "可疑authors: ['Author names not explicitly provided in the text']",
+        "可疑institutions: ['Institutions not explicitly provided in the text']",
+        "可疑publication_venue: Publication venue not explicitly provided in the text",
+        "可疑技术关系method_name: Traditional CNNs",
+        "可疑技术关系method_name: Hand-crafted features and deep learning methods",
+        "可疑技术关系comparison_result: Best performance with the ELM classifier is achieved using CNN features with 4,096 hidden neurons, reaching an accuracy of 80.6% in the test set.",
+        "可疑技术关系evidence_text: The best performance with the ELM classifier is achieved using CNN features with 4,096 hidden neurons, reaching an accuracy of 80.6% in the test set.",
+        "可疑技术关系method_name: HOG features with 8,192 hidden neurons",
+        "可疑技术关系comparison_result: Best performance is with 8,192 hidden neurons, achieving 71.8% accuracy.",
+        "可疑技术关系method_name: Color histograms with 4,096 hidden neurons",
+        "可疑技术关系comparison_result: Best performance is with 4,096 hidden neurons, at an accuracy of 41.6%.",
+        "可疑技术关系method_name: MLP classifier with CNN features and 2,048 hidden neurons",
+        "可疑技术关系comparison_result: Best performance is with CNN features and 2,048 hidden neurons, at an accuracy of 80.8%.",
+        "可疑技术关系evidence_text: The best performance with the MLP classifier is with CNN features and 2,048 hidden neurons, at an accuracy of 80.8%."
+      ],
+      "suspicious_count": 16,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 21566,
+    "processed_text_length": 14976
+  }
+}

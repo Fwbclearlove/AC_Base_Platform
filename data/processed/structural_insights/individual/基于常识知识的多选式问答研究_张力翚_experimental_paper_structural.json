@@ -1,0 +1,113 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [
+      "原文无此信息"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "原文无此信息",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "CommonsenseQA",
+        "dataset_description": "常识问答数据集",
+        "evidence_text": "本文在CommonsenseQA、OpenbookQA、SociallQA等三个常识问答数据集上开展了大量的实验。"
+      },
+      {
+        "dataset_name": "OpenbookQA",
+        "dataset_description": "常识问答数据集",
+        "evidence_text": "本文在CommonsenseQA、OpenbookQA、SociallQA等三个常识问答数据集上开展了大量的实验。"
+      },
+      {
+        "dataset_name": "SociallQA",
+        "dataset_description": "常识问答数据集",
+        "evidence_text": "本文在CommonsenseQA、OpenbookQA、SociallQA等三个常识问答数据集上开展了大量的实验。"
+      }
+    ],
+    "evaluation_metrics": [
+      "答案预测准确率"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "答案预测准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "CommonsenseQA",
+        "evidence_text": "在CommonsenseQA数据集上，基于Huggingface框架部署实现了AristoBERTa。"
+      },
+      {
+        "metric_name": "答案预测准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "OpenbookQA",
+        "evidence_text": "在OpenBookQA数据集上，基于Huggingface框架部署实现了AristoBERTa。"
+      },
+      {
+        "metric_name": "答案预测准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "SociallQA",
+        "evidence_text": "在SociallQA数据集上，基于Huggingface框架部署实现了AristoBERTa。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "原文无此信息"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于常识知识的多选式问答研究_张力翚",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:28:35",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 27086,
+    "processed_text_length": 14999
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "A Weighted Cross-entropy Loss for Mitigating LLM Hallucinations in Cross-lingual Continual Pretraining",
+    "authors": [
+      "Yuantao Fan",
+      "Ruifan Li",
+      "Guangwei Zhang",
+      "Chuan Shi",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "Beijing University of Posts and Telecommunications"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Cross-lingual Continual Pretraining",
+        "relationship_type": "扩展",
+        "evidence_text": "Cross-Lingual Continual Pretraining addresses the limitation of LLMs [1, 2, 3, 4] in languages other than English."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "traditional cross-entropy loss",
+        "comparison_result": "InfoLoss aims to avoid learning incorrect language distributions caused by noisy tokens",
+        "evidence_text": "We compare our method, InfoLoss, with the traditional cross-entropy loss for training Llama 2."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "RedPajama-V2 and MAP-CC",
+        "dataset_description": "We sample an equal proportion of 15 billion English and Chinese tokens from RedPajama-V2 and MAP-CC, respectively.",
+        "evidence_text": "For the pretraining dataset, we perform data mixture and deduplication."
+      }
+    ],
+    "evaluation_metrics": [
+      "average accuracy"
+    ],
+    "baseline_methods": [
+      "GPT-4",
+      "GPT-3.5-Turbo",
+      "ChatGLM",
+      "MPT",
+      "Falcon",
+      "Llama",
+      "Llama 2",
+      "C-Llama (w/o InfoLoss)"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy",
+        "our_result": "48.1",
+        "baseline_result": "45.7",
+        "dataset": "multi-task English understanding benchmarks",
+        "evidence_text": "C-Llama | 7B | 48.1 | 9.12 | 29.8"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "the proposal of InfoLoss for continually pretraining LLMs",
+      "the first attempt to mitigate hallucinations in a cross-lingual transfer setting",
+      "extensive experiments on twelve benchmarks"
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "enhancing cross-lingual transfer ability",
+      "mitigating the impact of noisy tokens",
+      "enhancing the truth and credibility of C-Llama"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性，如无则为空数组"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例，如无则为空数组"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "A_Weighted_Cross_entropy_Loss_for_Mitigating_LLM_Hallucinations_in_Cross_lingual_Continual_Pretraining",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:07:22",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: InfoLoss aims to avoid learning incorrect language distributions caused by noisy tokens"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 12140,
+    "processed_text_length": 12140
+  }
+}

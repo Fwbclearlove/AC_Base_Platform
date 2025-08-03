@@ -1,0 +1,104 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "DiffHarmony++: Enhancing Image Harmonization with Harmony-VAE and Inverse Harmonization Model",
+    "authors": [
+      "Pengfei Zhou",
+      "Fangxiang Feng",
+      "Guang Liu",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "Beijing University of Posts & Telecommunications",
+      "Beijing Academy of Artificial Intelligence"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Stable Diffusion",
+        "relationship_type": "基于",
+        "evidence_text": "Harmony-VAE is a method designed for image harmonization, which includes repairing the content of the foreground area while maintaining a harmonized appearance. It builds upon the Stable Diffusion model"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "HDNet",
+        "comparison_result": "DiffHarmony++ shows superior performance as the foreground proportion increases.",
+        "evidence_text": "On the iHarmony4 dataset, HDNet512 outperforms DiffHarmony++ in samples with small foreground proportions (0% ∼5%), but DiffHarmony++ shows superior performance as the foreground proportion increases."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "iHarmony4",
+        "dataset_description": "Includes HCOCO, HFlickr, HAdobe5K, and Hday2night sub-datasets, consisting of 65,742 training and 7,404 testing pairs of composite and real images.",
+        "evidence_text": "In our experiments, we use the iHarmony4 dataset, which includes HCOCO, HFlickr, HAdobe5K, and Hday2night sub-datasets, consisting of 65,742 training and 7,404 testing pairs of composite and real images."
+      },
+      {
+        "dataset_name": "Human Harmony",
+        "dataset_description": "Created by filtering the imaterialist-fashion-2020-fgvc7 dataset to exclude images with only products. The cleaned dataset contains 29,106 images.",
+        "evidence_text": "We also address the lack of human portrait-specific harmonization datasets by constructing a Human Harmony dataset. Utilizing the imaterialist-fashion-2020-fgvc7 dataset, we pair high-resolution portrait photographs with detailed segmentation maps to create accurate foreground masks."
+      }
+    ],
+    "evaluation_metrics": [
+      "PSNR",
+      "MSE",
+      "fMSE"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "PSNR",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "iHarmony4",
+        "evidence_text": "Our approach is compared with various image harmonization methods on the iHarmony4 dataset. Our method significantly outperforms previous SOTA methods on the entire test set, achieving the best results on almost all subsets."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "Introduction of the Human Harmony dataset",
+      "Harmony-VAE's effectiveness in enhancing the VAE component in latent diffusion models for image harmonization"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "Reduces training costs",
+      "Improves LDM-based harmonization models",
+      "Generalizes well to higher-resolution images"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "3664647.3681466",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:04:29",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 23272,
+    "processed_text_length": 14962
+  }
+}

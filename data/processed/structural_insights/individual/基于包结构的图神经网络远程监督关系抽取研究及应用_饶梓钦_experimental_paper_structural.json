@@ -1,0 +1,117 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [
+      "原文无此信息"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "原文无此信息",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "NYT-10",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "本文使用了NYT-10和GDS两个公开数据集。"
+      },
+      {
+        "dataset_name": "GDS",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "本文使用了NYT-10和GDS两个公开数据集。"
+      }
+    ],
+    "evaluation_metrics": [
+      "PR曲线",
+      "AUC值",
+      "Precision@N",
+      "Hits@K"
+    ],
+    "baseline_methods": [
+      "Mintz",
+      "MultiR",
+      "MIMLR",
+      "PCNN",
+      "RESIDE",
+      "DCRE",
+      "PA-TRP"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "P@MEAN",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "metric_name": "AUC",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "metric_name": "Hits@K",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种从局部到全局进行学习的层级图卷积神经网络框架(L2G-GCN)"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:21:14",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 23026,
+    "processed_text_length": 14834
+  }
+}

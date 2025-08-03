@@ -1,0 +1,72 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "智能信息处理 计算机游戏中的智能技术",
+    "authors_or_creators": [
+      "李睿凡",
+      "左申正",
+      "李卫"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "原文未明确提及",
+    "key_concepts": [
+      "人工智能",
+      "有限状态机",
+      "群体智能",
+      "神经网络",
+      "遗传算法"
+    ],
+    "main_methods": [
+      "原文无此信息"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "【1】",
+      "【2】",
+      "【3】",
+      "【4】",
+      "【5】",
+      "【6】",
+      "【8】",
+      "【9】",
+      "【10】",
+      "【11】",
+      "【12】",
+      "【13】",
+      "【14】",
+      "【15】",
+      "【16】",
+      "【17】",
+      "【18】",
+      "【19】",
+      "【20】",
+      "【21】",
+      "【22】",
+      "【23】",
+      "【24】",
+      "【25】",
+      "【26】",
+      "【27】",
+      "【28】"
+    ],
+    "builds_on": [
+      "原文未明确提及"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "计算机游戏中的智能技术",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:16:20",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 4775,
+    "processed_text_length": 4775
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Multimodal Aspect-Based Sentiment Analysis under Conditional Relation",
+    "authors": [
+      "Xinjing Liu",
+      "Ruifan Li",
+      "Shuqin Ye",
+      "Guangwei Zhang",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Traditional methods",
+        "relationship_type": "基于",
+        "evidence_text": "Traditional methods assume the image contains objects referred to by the aspects, which is not always true."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "ChatGPT 3.5, Llama 2, VisualGLM-6B, Llava 1.5, MMICL, mPLUG-Owl2, GPT4V",
+        "comparison_result": "our model outperforms",
+        "evidence_text": "Comparative experiments with large language models (LLMs) and multi-modal LLMs (MLLMs) on the JMASA and MASC tasks demonstrate that our model outperforms ChatGPT 3.5, Llama 2, VisualGLM-6B, Llava 1.5, MMICL, mPLUG-Owl2, and GPT4V, showcasing the advantage of multimodal input and the effectiveness of our approach."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "TWITTER-15 and TWITTER-17",
+        "dataset_description": "benchmark datasets for MABSA tasks, specifically C-MABSA with conditional relations",
+        "evidence_text": "We construct datasets for MABSA tasks, specifically C-MABSA with conditional relations. We automatically annotate two popular datasets, TWITTER-15 and TWITTER-17, using UNINEXT for conditional relation detection and YOLOv8 for visual object annotation."
+      }
+    ],
+    "evaluation_metrics": [
+      "Accuracy",
+      "F1 score"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "F1 score",
+        "our_result": "best performance in Twitter-15 and is second to CMMT in Twitter-17",
+        "baseline_result": "原文无此信息",
+        "dataset": "Twitter-15 and Twitter-17",
+        "evidence_text": "On MATE, our model achieves the best performance in Twitter-15 and is second to CMMT in Twitter-17."
+      },
+      {
+        "metric_name": "Accuracy and F1 score",
+        "our_result": "best results on both datasets",
+        "baseline_result": "原文无此信息",
+        "dataset": "Twitter-15 and Twitter-17",
+        "evidence_text": "For MASC, our model achieves the best results on both datasets in terms of Accuracy and F1 score."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "propose the CORSA framework",
+      "address the impact of irrelevant images",
+      "localize condition-related visual regions"
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "the advantage of multimodal input",
+      "the effectiveness of our approach"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "use of a pre-trained model (UNINEXT) for automatic data annotation",
+      "introduces inaccuracies",
+      "affects the CORSA model's performance"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2025.coling_main.22",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:53:03",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: ChatGPT 3.5, Llama 2, VisualGLM-6B, Llava 1.5, MMICL, mPLUG-Owl2, GPT4V"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 12438,
+    "processed_text_length": 12438
+  }
+}

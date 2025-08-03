@@ -1,0 +1,50 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "一种负例训练样本采集方法及模型训练方法",
+    "authors_or_creators": [
+      "原文无此信息"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提供一种负例训练样本采集方法以及基于该方法的模型训练方法，以提高图像检索模型的检索准确率",
+    "key_concepts": [
+      "负例训练样本采集方法",
+      "模型训练方法",
+      "图像检索模型",
+      "聚类",
+      "目标概率",
+      "训练样本"
+    ],
+    "main_methods": [
+      "对表示向量进行聚类",
+      "确定目标向量的第一聚类和候选聚类的目标概率",
+      "执行聚类抽取操作获取负例训练样本",
+      "模型训练过程中调整聚类结果"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "原文无此信息"
+    ],
+    "builds_on": [
+      "原文无此信息"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "负例训练样本采集方法、装置及模型训练方法、装置_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:14:00",
+    "validation": {
+      "warnings": [
+        "可疑title: 一种负例训练样本采集方法及模型训练方法"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 2527,
+    "processed_text_length": 2527
+  }
+}

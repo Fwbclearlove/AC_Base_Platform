@@ -1,0 +1,604 @@
+{
+  "generation_time": "2025-08-02 15:59:25",
+  "total_documents": 106,
+  "document_type_distribution": {
+    "experimental_paper": 1,
+    "theoretical_paper": 0,
+    "patent": 8,
+    "unknown": 1
+  },
+  "quality_distribution": {
+    "high": 8,
+    "medium": 1,
+    "low": 1
+  },
+  "source_distribution": {
+    "cleaned_text": 2,
+    "basic_text": 20,
+    "fallback_cases": 20
+  },
+  "high_quality_documents": [
+    {
+      "file_id": "0_387_29295_0_82",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "10.5560_zna.2012_0029",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "1307.1275v1",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "2408.03632v3",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "2820400",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "3191835.3191989",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "3483207.3483233",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "3664647.3681466",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "4930_Article_Text_7995_1_10_20190709",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "978_3_642_23223_7_60",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "Dimensionality_reduction_for_text_using_LLE",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "Improved+Eavesdropping+Detection+Strategy+Based+on+Extended+Three_particle+Greenberger_Horne_Zeilinger+State+in+Two_step+Quantum+Direct+Communication+Protocol",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "LGR_NET_Language_Guided_Reasoning_Network_for_Referring_Expression_Comprehension",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "Modality_Disentangled_Discriminator_for_Text_to_Image_Synthesis",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于统计和加权的提高击键认证识别方法(英文)",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种使用深层结构获取双模态相似性测度的方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种图像的文本描述方法及装置_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种图像色彩和谐程度的评估方法及装置_鲁鹏",
+      "doc_type": "patent",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于人工智能挖掘的网络内容风控管理系统_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于图卷积神经网络的方面级情感分析方法及装置_冯方向",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "一种基于图卷积神经网络的方面级情感分析方法及装置_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于对应的深层信念网络的跨模态检索方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于强化学习的电力设备检修决策生成方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "一种基于深层模型的跨模态检索方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于自动编码器的视频分类方法及装置_李睿凡",
+      "doc_type": "patent",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种多特征多通道图卷积网络模型训练方法及属性情感三元组抽取方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "一种方面级情感分析方法、装置、电子设备及存储介质_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "人脸重定向模型、模型训练方法及装置_张航",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "图像生成模型的训练方法和设备以及图像生成方法_杨博",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "基于特征分布迁移的小样本图像特征学习方法及装置_李晓旭",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "基于自训练的小样本图像集成分类方法及装置_李晓旭",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于语言引导的指称表达理解推理网络系统及推理方法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "负例训练样本采集方法、装置及模型训练方法、装置_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "全卷积神经结构的段落式图像描述算法_李睿凡",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "引入深度学习的人工智能类课程",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "深度学习中卷积神经网络的教学探讨",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "计算机游戏中的智能技术",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "面向_智能科学与技术_专业的C语言教学探讨",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "鲁棒局部保持投影的表情识别",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于包结构的图神经网络远程监督关系抽取研究及应用_饶梓钦",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于常识知识的多选式问答研究_张力翚",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于提示学习的少样本文本分类研究与应用_魏志宇",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于树结构的图像段落描述研究_石祎晖",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于知识增强的方面级情感分析研究及应用_杜一帆",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于非自回归方法的图像描述研究及应用_张煜松",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "多元组细粒度情感分析研究及应用_翟泽鹏",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "户外种植园行间可通行区域识别与路径生成方法研究_王远航",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "果园行间自主导航关键技术研究_王宇豪",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "网络化多智能体系统的主动容错预测控制方法研究_王时通",
+      "doc_type": "unknown",
+      "source_type": "unknown",
+      "validation_score": 100
+    },
+    {
+      "file_id": "面向复杂文本的指称表达理解研究_陆明聪",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 80
+    },
+    {
+      "file_id": "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding",
+      "doc_type": "unknown",
+      "source_type": "cleaned",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种图像检索方法_鲁鹏",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "一种基于人工智能的数据安全风险监测追溯系统_黄永军",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于掩码上下文机器阅读理解的方面情感三元组抽取方法_李睿凡",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于文本生成图像的模型训练方法、设备和图像生成方法_冯方向",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "基于采集搜索引擎数据的隐私信息评级方法_芦效峰",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "融入类别自适应度量学习的小样本图像分类方法及装置_李晓旭",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    },
+    {
+      "file_id": "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭",
+      "doc_type": "patent",
+      "source_type": "basic_fallback",
+      "validation_score": 80
+    }
+  ],
+  "low_quality_documents": [
+    {
+      "file_id": "1307.0414v1",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 20,
+      "warnings_count": 4
+    },
+    {
+      "file_id": "1911.09359v1",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 6
+    },
+    {
+      "file_id": "2021.acl_long.494",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 7
+    },
+    {
+      "file_id": "2022.acl_long.212",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 20,
+      "warnings_count": 4
+    },
+    {
+      "file_id": "2022.coling_1.234",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 40,
+      "warnings_count": 3
+    },
+    {
+      "file_id": "2022.emnlp_main.212",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 40,
+      "warnings_count": 3
+    },
+    {
+      "file_id": "2022.findings_emnlp.6",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 40,
+      "warnings_count": 3
+    },
+    {
+      "file_id": "2023.acl_long.802",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 40,
+      "warnings_count": 3
+    },
+    {
+      "file_id": "2647868.2654902",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 20,
+      "warnings_count": 4
+    },
+    {
+      "file_id": "2808205",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "3548636.3548646",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 19
+    },
+    {
+      "file_id": "DualGCN_Exploring_Syntactic_and_Semantic_Information_for_Aspect_Based_Sentiment_Analysis",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "electronics_12_03521_v2",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 10
+    },
+    {
+      "file_id": "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 6
+    },
+    {
+      "file_id": "FAIA_372_FAIA230600",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "Improving_Image_Paragraph_Captioning_with_Dual_Relations",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "Multi_level_fusion_with_deep_neural_networks_for_multimodal_sentiment_classification",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 20,
+      "warnings_count": 4
+    },
+    {
+      "file_id": "Multiple_Features_With_Extreme_Learning_Machines_For_Clothing_Image_Recognition",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 16
+    },
+    {
+      "file_id": "低郁密度条件下果园轮式机器人行间运行控制方法研究_韩奕非",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 20,
+      "warnings_count": 4
+    },
+    {
+      "file_id": "基于优先级的时间敏感网络流量调度算法研究_李红硕",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "基于实体的概念指导的少样本关系抽取研究与应用_王泽元",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "温室环境下高架栽培草莓采摘机器人的关键技术研究_隗朋峻",
+      "doc_type": "experimental_paper",
+      "source_type": "unknown",
+      "validation_score": 0,
+      "warnings_count": 5
+    },
+    {
+      "file_id": "多视图有监督的LDA模型",
+      "doc_type": "experimental_paper",
+      "source_type": "basic_fallback",
+      "validation_score": 0,
+      "warnings_count": 13
+    }
+  ],
+  "fallback_documents": [
+    {
+      "file_id": "多视图有监督的LDA模型",
+      "doc_type": "experimental_paper",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "一种图像检索方法_鲁鹏",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "一种基于人工智能的数据安全风险监测追溯系统_黄永军",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "基于多层神经网络的电力实体识别方法、存储介质和设备_刘子全",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "基于掩码上下文机器阅读理解的方面情感三元组抽取方法_李睿凡",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "基于文本生成图像的模型训练方法、设备和图像生成方法_冯方向",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "基于采集搜索引擎数据的隐私信息评级方法_芦效峰",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "融入类别自适应度量学习的小样本图像分类方法及装置_李晓旭",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    },
+    {
+      "file_id": "面向小样本图像分类的任务相关度量学习方法及装置_李晓旭",
+      "doc_type": "patent",
+      "source_type": "basic_fallback"
+    }
+  ]
+}

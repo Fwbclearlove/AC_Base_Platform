@@ -1,0 +1,115 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Obtaining Cross Modal Similarity Metric with Deep Neural Architecture",
+    "authors": [
+      "Ruifan Li",
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Peng Lu",
+      "Bohan Li"
+    ],
+    "institutions": [
+      "School of Computers, Beijing University of Posts and Telecommunications, Beijing 100876, China",
+      "Engineering Research Center of Information Networks, Ministry of Education, Beijing 100876, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "deep neural learning",
+        "relationship_type": "基于",
+        "evidence_text": "Deep neural learning, inspired by biological propagation phenomena in the human brain, has seen rapid development since 2006 and has achieved success in tasks involving single modal data."
+      },
+      {
+        "method_name": "topic models, joint models, undirected Markov random fields",
+        "relationship_type": "扩展",
+        "evidence_text": "Various approaches have been proposed for learning from cross-modal data. These include extensions of topic models, joint models, and undirected Markov random fields, but these single-hidden-layer models struggle with the complexity of images and text."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Multilayer Perceptrons (MLP)",
+        "comparison_result": "Our deep neural architecture outperforms an MLP-based system",
+        "evidence_text": "Our deep neural architecture outperforms an MLP-based system with two hidden layers and a CCA-based system with two RBMs, achieving an accuracy of 88.96%."
+      },
+      {
+        "method_name": "Canonical Correlation Analysis (CCA)",
+        "comparison_result": "The CCA-based system performs better than the MLP-based system",
+        "evidence_text": "The CCA-based system performs better than the MLP-based system."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Small ESP Game dataset",
+        "dataset_description": "contains 100,000 labeled images with corresponding tags",
+        "evidence_text": "We evaluate our method for image annotation selection against MLP and CCA on two datasets: the Small ESP Game dataset and the MLC-2013 dataset."
+      },
+      {
+        "dataset_name": "MLC-2013 dataset",
+        "dataset_description": "has 1,000 manually labeled images with two labels per image",
+        "evidence_text": "We evaluate our method for image annotation selection against MLP and CCA on two datasets: the Small ESP Game dataset and the MLC-2013 dataset."
+      }
+    ],
+    "evaluation_metrics": [
+      "accuracy",
+      "area under the ROC curve"
+    ],
+    "baseline_methods": [
+      "Multilayer Perceptrons (MLP)",
+      "Canonical Correlation Analysis (CCA)"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy",
+        "our_result": "88.96%",
+        "baseline_result": "原文无此信息",
+        "dataset": "MLC-2013 dataset",
+        "evidence_text": "Our deep neural architecture outperforms an MLP-based system with two hidden layers and a CCA-based system with two RBMs, achieving an accuracy of 88.96%."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "proposes the BDA to measure similarity in multimodal systems",
+      "combines feature extraction and deep neural networks",
+      "demonstrates effectiveness in classifying image tags"
+    ],
+    "stated_novelty": [
+      "the BDA's three components are designed to extract features, stack RBMs, and use a variant autoencoder for discriminative learning"
+    ],
+    "stated_advantages": [
+      "captures information not addressed by CCA",
+      "flexible and can be extended to other modalities"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性，如无则为空数组"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例，如无则为空数组"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Mathematical_Problems_in_Engineering___2015___Li___Obtaining_Cross_Modal_Similarity_Metric_with_Deep_Neural_Architecture",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:24:27",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: topic models, joint models, undirected Markov random fields"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 19030,
+    "processed_text_length": 14776
+  }
+}

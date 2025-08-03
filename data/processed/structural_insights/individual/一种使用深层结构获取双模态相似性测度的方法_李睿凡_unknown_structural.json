@@ -1,0 +1,48 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "本发明通过深度学习框架，实现了双模态数据相似性的计算，适用于多模态数据挖掘和检索等领域。",
+    "key_concepts": [
+      "双模态相似性测度",
+      "深层结构",
+      "受限波尔兹曼机",
+      "自动编码器",
+      "L1范数",
+      "相似性测度C",
+      "损失函数"
+    ],
+    "main_methods": [
+      "使用经典特征提取方法",
+      "堆叠的两层受限波尔兹曼机转换",
+      "自动编码器编码",
+      "相似性测度计算",
+      "训练算法优化"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": [
+      "BB-RBM神经网络结构"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种使用深层结构获取双模态相似性测度的方法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:32:49",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1190,
+    "processed_text_length": 1190
+  }
+}

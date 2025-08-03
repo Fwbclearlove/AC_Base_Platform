@@ -1,0 +1,58 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "原文无此信息",
+    "inventors": [],
+    "applicant": "原文无此信息",
+    "patent_number": "原文无此信息"
+  },
+  "technical_solution": {
+    "technical_problem": "现有技术中，技术人员根据经验选取一些与图像美学评价相关的图像特征描述图像美学质量。然而，经验性地提取图像特征来进行美学评估是一项繁琐的工作，严重依赖于技术人员对照相领域知识的理解，技术人员难以选择合适的图像美学评价的图像特征，致使图像美学评估的准确度不高。",
+    "solution_overview": "本发明提出了一种基于条件随机场的色彩和谐模型，同时考虑影响局部区域色彩和谐度的两种因素。",
+    "key_technical_features": [
+      "利用机器方法从大量的图片中学习色彩和谐关系",
+      "基于条件随机场的色彩和谐模型",
+      "考虑局部区域色彩和谐度与邻域图像块之间的色彩和谐关系"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "通过预设的无向图建立初始条件随机场",
+      "获取多张高质量样本图像和多张低质量样本图像进行神经网络训练",
+      "利用训练后的神经网络确定关联势函数及交互势函数",
+      "对待评估图像进行色彩和谐评估"
+    ],
+    "technical_effects": [
+      "提高图像美学评估的准确性",
+      "实现自动对图像的色彩和谐程度进行评估"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "图像色彩和谐程度的评估"
+    ],
+    "use_scenarios": [
+      "可以应用于可以计算处理图像的终端，例如计算机"
+    ]
+  },
+  "claims_info": {
+    "main_claims": [
+      "一种图像色彩和谐程度的评估方法、装置、电子设备及计算机可读存储介质"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "一种图像色彩和谐程度的评估方法及装置_鲁鹏",
+    "detected_doc_type": "patent",
+    "extraction_time": "2025-08-02 13:33:18",
+    "validation": {
+      "warnings": [
+        "可疑document_type: patent"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 3038,
+    "processed_text_length": 3038
+  }
+}

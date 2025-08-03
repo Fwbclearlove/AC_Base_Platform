@@ -1,0 +1,137 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Visually Enhanced NeUral Encoder for Synset Induction",
+    "authors": [
+      "作者列表在原文中未明确列出"
+    ],
+    "institutions": [
+      "原文明确提到的机构在原文中未明确列出"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "word2vec",
+        "relationship_type": "基于",
+        "evidence_text": "This module captures tag-level embeddings (El) and word-level tag embeddings (Ew) through different training methods. We specifically use word2vec [19] to train word vectors on an external corpus for the word-level embedding."
+      },
+      {
+        "method_name": "CNN",
+        "relationship_type": "基于",
+        "evidence_text": "We use ResNet101 as the visual backbone in our VENUE model, with the image representation dimensionality DI set to 2048."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "word2vec + k-means/HAC",
+        "comparison_result": "我们的方法在某些评估指标上表现更好",
+        "evidence_text": "Our VENUE model and other baselines show varying degrees of success, with SynsetMine, Infomap, MWSI, and CLIP demonstrating competitive performance."
+      },
+      {
+        "method_name": "CNN + k-means/HAC",
+        "comparison_result": "文本信息在语义区分上比视觉信息更有效",
+        "evidence_text": "Text-based methods, such as word2vec + k-means/HAC, InfoMap, and SynsetMine, outperformed vision-based methods."
+      },
+      {
+        "method_name": "MWSI",
+        "comparison_result": "我们的方法在所有评估指标上超过了MWSI",
+        "evidence_text": "VENUE + HAC outperformed MWSI across all evaluated metrics"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "MMAI-Synset",
+        "dataset_description": "包含8509个名词短语及其对应的425,450张图片",
+        "evidence_text": "Our MMAI-Synset dataset is collected using the Wikipedia text subset of the synset dataset. It consists of 8509 noun phrases and their corresponding 425,450 images."
+      }
+    ],
+    "evaluation_metrics": [
+      "h",
+      "c",
+      "v",
+      "p",
+      "r",
+      "f",
+      "FMI",
+      "ARI",
+      "NMI"
+    ],
+    "baseline_methods": [
+      "word2vec + k-means/HAC",
+      "CNN + k-means/HAC",
+      "[word2vec; CNN] + k-means/HAC",
+      "SynsetMine",
+      "Infomap",
+      "MWSI",
+      "CLIP"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "v-measure",
+        "our_result": "95.08",
+        "baseline_result": "93.80 (MWSI)",
+        "dataset": "MMAI-Synset",
+        "evidence_text": "VENUE + HAC achieved scores of 96.41, 93.79, and 95.08 for homogeneity, completeness, and v-measure"
+      },
+      {
+        "metric_name": "ARI",
+        "our_result": "65.15",
+        "baseline_result": "58.78 (MWSI)",
+        "dataset": "MMAI-Synset",
+        "evidence_text": "ARI, FMI, and NMI scores of 65.15, 65.33, and 95.08"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种新的多模态表示学习方法VENUE",
+      "通过视觉交互模块、文本多粒度嵌入模块、掩码模块和门控模块提高了多模态语义表征的区分性"
+    ],
+    "stated_novelty": [
+      "将视觉信息融入到同义词集诱导任务中",
+      "提出了一种新的多模态编码器结构"
+    ],
+    "stated_advantages": [
+      "在多模态数据集上性能优于强基准方法",
+      "能够过滤掉语义上弱相关的图像信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "在某些情况下，多模态信息的融合可能导致预测混淆"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例在原文中未明确列出"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "electronics_12_03521_v2",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:12:27",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑title: Visually Enhanced NeUral Encoder for Synset Induction",
+        "可疑authors: ['作者列表在原文中未明确列出']",
+        "可疑institutions: ['原文明确提到的机构在原文中未明确列出']",
+        "可疑技术关系comparison_result: 我们的方法在某些评估指标上表现更好",
+        "可疑技术关系evidence_text: Our VENUE model and other baselines show varying degrees of success, with SynsetMine, Infomap, MWSI, and CLIP demonstrating competitive performance.",
+        "可疑技术关系comparison_result: 文本信息在语义区分上比视觉信息更有效",
+        "可疑技术关系comparison_result: 我们的方法在所有评估指标上超过了MWSI",
+        "可疑性能数据baseline_result: 93.80 (MWSI)",
+        "可疑性能数据baseline_result: 58.78 (MWSI)"
+      ],
+      "suspicious_count": 10,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 27553,
+    "processed_text_length": 15817
+  }
+}

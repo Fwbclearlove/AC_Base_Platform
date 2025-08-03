@@ -1,0 +1,133 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Enhanced Multi-Channel Graph Convolutional Network for Aspect Sentiment Triplet Extraction",
+    "authors": [
+      "Hao Chen",
+      "Zepeng Zhai",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Graph Convolutional Network (GCN)",
+        "relationship_type": "扩展",
+        "evidence_text": "Motivated by CNN, GCN is an efficient variant operating on graphs (Kipf and Welling, 2017)."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "GTS-BERT",
+        "comparison_result": "Our EMC-GCN significantly surpasses GTS-BERT with an average of 1.96% and 2.61% F1-score on D1 and D2, respectively",
+        "evidence_text": "Under the F1 metric, our EMC-GCN model outperforms all pipeline, end-to-end, and MRC-based methods on two groups of datasets."
+      },
+      {
+        "method_name": "BMRC",
+        "comparison_result": "The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods",
+        "evidence_text": "The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods due to its closer proximity to 'transport' than 'light'."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "SemEval ABSA Challenges (Pontiki et al., 2014, 2015, 2016)",
+        "dataset_description": "two ABSA datasets",
+        "evidence_text": "We evaluate our method on two ABSA datasets from the SemEval ABSA Challenges (Pontiki et al., 2014, 2015, 2016)."
+      }
+    ],
+    "evaluation_metrics": [
+      "F1"
+    ],
+    "baseline_methods": [
+      "CMLA+",
+      "RINANTE+",
+      "Li-unified-R",
+      "Peng-two-stage",
+      "OTE-MTL",
+      "JET-BERT",
+      "GTS-BERT",
+      "BMRC",
+      "BART-ABSA"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "F1",
+        "our_result": "71.21",
+        "baseline_result": "68.09",
+        "dataset": "14res",
+        "evidence_text": "Our EMC-GCN | 71.21 | 71.78 | 61.54 | 68.33"
+      },
+      {
+        "metric_name": "F1",
+        "our_result": "71.78",
+        "baseline_result": "68.81",
+        "dataset": "14lap",
+        "evidence_text": "Our EMC-GCN | 71.21 | 71.78 | 61.54 | 68.33"
+      },
+      {
+        "metric_name": "F1",
+        "our_result": "61.54",
+        "baseline_result": "59.28",
+        "dataset": "15res",
+        "evidence_text": "Our EMC-GCN | 71.21 | 71.78 | 61.54 | 68.33"
+      },
+      {
+        "metric_name": "F1",
+        "our_result": "68.33",
+        "baseline_result": "55.42",
+        "dataset": "16res",
+        "evidence_text": "Our EMC-GCN | 71.21 | 71.78 | 61.54 | 68.33"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "a novel EMC-GCN model",
+      "a comprehensive exploitation of linguistic features",
+      "an effective refining strategy"
+    ],
+    "stated_novelty": [
+      "Our proposed framework is EMC-GCN, which addresses Aspect and Opinion Term Co-Extraction (AOTE) and Aspect-Sentiment Pair Extraction (ASPE)",
+      "We define ten types of relations between words for the ASTE task"
+    ],
+    "stated_advantages": [
+      "Our EMC-GCN model consistently outperforms all baseline methods on benchmark datasets"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "The term 'light' is challenging to identify by GTS-BERT and BMRC"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2022.acl_long.212",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:44:51",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: Graph Convolutional Network (GCN)",
+        "可疑技术关系comparison_result: The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods",
+        "可疑技术关系evidence_text: The term 'light' is challenging to identify by GTS-BERT and BMRC, yet 'easy' is predicted correctly by all methods due to its closer proximity to 'transport' than 'light'."
+      ],
+      "suspicious_count": 4,
+      "validation_score": 20,
+      "quality_level": "low"
+    },
+    "text_length": 17424,
+    "processed_text_length": 14966
+  }
+}

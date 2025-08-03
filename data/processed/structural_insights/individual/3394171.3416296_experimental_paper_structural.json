@@ -1,0 +1,100 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Learning Visual Features from Product Title for Image Retrieval",
+    "authors": [
+      "Fangxiang Feng",
+      "Tianrui Niu",
+      "Ruifan Li",
+      "Xiaojie Wang",
+      "Huixing Jiang"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Deep Convolutional Neural Networks (CNNs)",
+        "relationship_type": "基于",
+        "evidence_text": "Our method, detailed in Figure 2, addresses this by leveraging the titles of product images."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "SEResnet-152 and Densenet-201",
+        "comparison_result": "The deepest model, Densenet-201, shows the best performance among the ImageNet-1k trained models, while the shallowest model, ResNet-50, performs the worst",
+        "evidence_text": "Table 1 presents the results of five deep CNN models with four different pooling methods on the validation set."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Perfect-500K",
+        "dataset_description": "dataset from the 'AI Meets Beauty' challenge",
+        "evidence_text": "For evaluation, we use the Perfect-500K dataset from the 'AI Meets Beauty' challenge."
+      }
+    ],
+    "evaluation_metrics": [
+      "Mean Average Precision (MAP)"
+    ],
+    "baseline_methods": [
+      "SEResnet-152",
+      "Densenet-201",
+      "ResNet-50 trained on ImageNet-1k",
+      "ResNet-50 trained on ImageNet-21k"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "MAP@7",
+        "our_result": "0.402402",
+        "baseline_result": "原文无此信息",
+        "dataset": "private test set",
+        "evidence_text": "Our team, using the fine-tuned ResNet-50 with the simplest MAC feature, ranks fourth with a MAP@7 of 0.402402."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "method for learning product visual representations",
+      "deep CNNs pre-trained and fine-tuned on this dataset can enhance feature effectiveness for product image retrieval"
+    ],
+    "stated_novelty": [
+      "using product titles to guide the learning of visual features",
+      "conversion of product titles into discrete labels for supervised learning"
+    ],
+    "stated_advantages": [
+      "performing well without human annotations or additional processing",
+      "can create a high-quality label set without word segmentation for Chinese titled products"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "3394171.3416296",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:58:51",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: The deepest model, Densenet-201, shows the best performance among the ImageNet-1k trained models, while the shallowest model, ResNet-50, performs the worst"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 8300,
+    "processed_text_length": 8300
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "Designing a Japanese Idiom Education Support System for Overseas’ Students",
+    "authors_or_creators": [
+      "KONISHI Yusuke",
+      "Ruifan LI",
+      "Fuji REN"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "Our Japanese Idiom Education Support System aims to foster learner interest and teach proper idiom usage.",
+    "key_concepts": [
+      "Japanese idioms",
+      "education support system",
+      "overseas students",
+      "idiom retrieval",
+      "teaching functions"
+    ],
+    "main_methods": [
+      "system outline",
+      "retrieval method",
+      "questionnaire results"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "[1] Statistics Bureau and the Director-General for Policy Planning. Statistics of Japan which sees in graph. http://www.stat.go.jp/data/nihon/pdf/ngraph.pdf",
+      "[2] Murano Ryoko. Japanese Language Volunteers in Thai Secondary Schools. The Research Center for Japanese Language Education annual bulletin 9, pp. 1-8, 2000.",
+      "[3] The Japan Foundation. 2006 Survey of Overseas Organizations Involved in Japanese-Language Education. The Japan Foundation, 2006.",
+      "[4] Ishida Koji. Development of the science e-learning teaching materials which utilized student knowledge. Modern educational needs measure support program in the Heisei 16 fiscal year.",
+      "[5] SAITO Koichi and TAKAHASHI Satoshi. A Preliminary Study on Modeling for Making Concerning Cause Belonging of 'Losing Interest in Science'- Based on the Consideration Investigation of the High School Student. Journal of Tokyo University of Information Sciences Vol.9 No.1, pp. 1-9, 2005.",
+      "[6] Ren Fuji. Super-function based machine translation. Communications of COLIPS, pp. 83-100, 1999.",
+      "[7] Matsumoto Yuji. Japanese Morphological Analysis System Chasen. Information Processing Society of Japan.",
+      "[8] NHK Science and Technical Research Laboratories. TVML. http://www.nhk.or.jp/strl/tvml/english/player2/index.html",
+      "[9] Suzuki Makoto and Nozaki Yukiko. How is elementary science education advanced in many foreign countries? Chemistry & education, Vol.56, No.12, Page. 638-641, 2008.",
+      "[10] ANDO Tadashi. The Advantages and Problems in e-Learning -in the Case of Phonetic Education by Using ALC Net Academy-. Nagoya University of Arts and Sciences, the journal of liberal arts, 2005.",
+      "[11] An Open-Source Large Vocabulary CSR Engine Julius. http://julius.sourceforge.jp/en_index.php",
+      "[12] Fine Speech. http://www.animo.co.jp/index.jsp",
+      "[13] Yin Chengjiu, Ogata Hiroaki, and Yano Yoneo. Participatory Simulation for Collaborative Learning Experiences. Information Science Publishing, New York, USA, Oct. 2008."
+    ],
+    "builds_on": [
+      "[6] Ren Fuji. Super-function based machine translation. Communications of COLIPS, pp. 83-100, 1999."
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "Designing_a_Japanese_idiom_education_support_system_for_overseas_students",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:07:52",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 9382,
+    "processed_text_length": 9382
+  }
+}

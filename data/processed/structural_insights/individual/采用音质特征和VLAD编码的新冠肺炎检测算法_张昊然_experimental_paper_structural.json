@@ -1,0 +1,97 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "采用音质特征和VLAD编码的新冠肺炎检测算法",
+    "authors": [
+      "张昊然",
+      "韩易辰",
+      "谭咏梅",
+      "李雅"
+    ],
+    "institutions": [
+      "北京邮电大学",
+      "人工智能学院"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "openSMILE、openXBOW、DeepSpectrum、auDeep和End2You",
+        "relationship_type": "改进",
+        "evidence_text": "Baseline使用openSMILE、openXBOW、DeepSpectrum、auDeep和End2You工具进行特征提取，输入到线性SVM中进行分类。"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "AI4COVID-19项目和剑桥COVID-19声音数据库",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "AI4COVID-19项目通过智能手机应用程序收集咳嗽声进行感染筛查。剑桥COVID-19声音数据库收集朗读语音和咳嗽声。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "INTEＲSPEECH 2021 ComParE竞赛数据集",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "本文提出了基于语音内容分析的新冠肺炎自动识别方法，并在INTEＲSPEECH 2021 ComParE竞赛提供的数据集上进行了验证。"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "线性SVM分类器"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "UAＲ",
+        "our_result": "73.9%和77.2%",
+        "baseline_result": "原文无此信息",
+        "dataset": "两个子任务验证集",
+        "evidence_text": "最后，通过多算法融合进一步提升分类效果，在两个子任务验证集上UAＲ分别达到73.9%和77.2%。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "使用语音端点检测进行数据增广",
+      "引入语音质量特征",
+      "对基线提取的低水平特征进行VLAD编码"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "在小字典规模下有效提升了系统分类性能",
+      "证实了VLAD编码在语音特征编码中的有效性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "字典的具体大小并不能提前确定，需要进行多次尝试确定最佳取值"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "采用音质特征和VLAD编码的新冠肺炎检测算法_张昊然",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:38:17",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: AI4COVID-19项目和剑桥COVID-19声音数据库"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 5878,
+    "processed_text_length": 5878
+  }
+}

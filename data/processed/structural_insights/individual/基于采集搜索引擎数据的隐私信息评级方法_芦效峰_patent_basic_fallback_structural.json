@@ -1,0 +1,71 @@
+{
+  "document_metadata": {
+    "document_type": "patent",
+    "title": "基于采集搜索引擎数据的隐私信息评级方法",
+    "inventors": [
+      "芦效峰",
+      "鲁鹏",
+      "李睿凡",
+      "李蕾",
+      "袁彩霞",
+      "刘咏彬",
+      "曲昭伟",
+      "李晖"
+    ],
+    "applicant": "北京邮电大学",
+    "patent_number": "201410441434.5"
+  },
+  "technical_solution": {
+    "technical_problem": "现有隐私保护的不足之一，提供一种进行系统性地隐私信息间比较的方法",
+    "solution_overview": "本发明采取如下技术方案：第一步：确定每个隐私信息的普遍性分值。第二步：确定每个隐私信息的敏感性分值。第三步：确定隐私信息的安全等级。",
+    "key_technical_features": [
+      "使用搜索引擎采集数据确定隐私信息的普遍性分值U",
+      "使用搜索引擎采集数据确定隐私信息的敏感性分值S",
+      "根据U×S计算结果确定隐私信息的安全等级"
+    ]
+  },
+  "implementation": {
+    "embodiments": [
+      "确定每个隐私信息的普遍性分值U的具体步骤",
+      "确定每个隐私信息的敏感性分值S的具体步骤",
+      "确定隐私信息的安全等级的具体步骤"
+    ],
+    "technical_effects": [
+      "提供一种全面地进行隐私信息评级方法",
+      "评级方法使用的数据具有公正性",
+      "适用于全部隐私信息",
+      "具有灵活而广阔的应用领域"
+    ]
+  },
+  "application_scope": {
+    "application_fields": [
+      "物联网应用",
+      "隐私保护技术"
+    ],
+    "use_scenarios": [
+      "评定全体隐私信息",
+      "评定应用系统中有限数量的隐私信息"
+    ]
+  },
+  "claims_info": {
+    "main_claims": [
+      "基于采集搜索引擎数据的隐私信息评级方法，其特征在于，评级包括以下步骤：第一步：从搜索引擎采集数据确定每个隐私信息的普遍性分值U；第二步：从搜索引擎采集数据确定每个隐私信息的敏感性分值S；第三步：根据U×S计算结果确定隐私信息的安全等级"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "基于采集搜索引擎数据的隐私信息评级方法_芦效峰",
+    "detected_doc_type": "patent",
+    "source_type": "basic_fallback",
+    "extraction_time": "2025-08-02 15:56:24",
+    "validation": {
+      "warnings": [
+        "可疑document_type: patent"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 4494,
+    "processed_text_length": 4494
+  }
+}

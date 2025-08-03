@@ -1,0 +1,71 @@
+{
+  "document_metadata": {
+    "document_type": "theoretical_paper",
+    "title": "文章针对如何实施智能科学与技术专业本科生导师制进行研究",
+    "authors": [
+      "无明确列出"
+    ],
+    "institutions": [
+      "北京邮电大学智能科学技术中心"
+    ]
+  },
+  "theoretical_contributions": {
+    "main_theoretical_results": [
+      "无明确的理论结果"
+    ],
+    "theorems_proposed": [
+      "无明确的定理"
+    ],
+    "mathematical_models": [
+      "无明确的数学模型"
+    ]
+  },
+  "technical_relationships": {
+    "builds_upon": [
+      "导师制教育模式",
+      "智能科学与技术专业教育现状"
+    ],
+    "extends": [
+      "无明确扩展的理论"
+    ],
+    "relates_to": [
+      "已有的导师制实施经验",
+      "智能科学与技术专业特点"
+    ]
+  },
+  "innovation_analysis": {
+    "theoretical_novelty": [
+      "探索适合智能科学与技术专业本科2、3年级学生的导师制工作形式和办法"
+    ],
+    "mathematical_contributions": [
+      "无明确的数学贡献"
+    ]
+  },
+  "applications": {
+    "potential_applications": [
+      "提高智能科学与技术专业教育质量",
+      "促进学生个性化发展"
+    ],
+    "application_domains": [
+      "教育领域",
+      "智能科学与技术专业"
+    ]
+  },
+  "note": "理论性论文，不包含实验数据",
+  "extraction_metadata": {
+    "file_id": "智能科学与技术专业本科生导师制的研究与实践",
+    "detected_doc_type": "theoretical_paper",
+    "extraction_time": "2025-08-02 15:15:50",
+    "validation": {
+      "warnings": [
+        "可疑document_type: theoretical_paper",
+        "可疑authors: ['无明确列出']"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 7246,
+    "processed_text_length": 7246
+  }
+}

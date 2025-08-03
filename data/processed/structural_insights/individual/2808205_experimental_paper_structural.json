@@ -1,0 +1,127 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Cross-modal retrieval with correspondence autoencoder",
+    "authors": [
+      "Fangxiang Feng",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "autoencoder",
+        "relationship_type": "改进",
+        "evidence_text": "We propose several novel models based on different autoencoders, which correlate hidden representations of a pair of autoencoders."
+      },
+      {
+        "method_name": "Canonical Correlation Analysis (CCA)",
+        "relationship_type": "结合",
+        "evidence_text": "The models are trained using a novel optimal objective that minimizes a linear combination of representation learning errors and correlation learning error."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "CCA-based models",
+        "comparison_result": "Our models achieve substantial improvements in mAP scores.",
+        "evidence_text": "Compared to CCA-AE, our Corr-AE enhances the average mAP by 53.6%, 81.5%, and 48.3% on the respective datasets."
+      },
+      {
+        "method_name": "Bimodal AE, Bimodal DBN",
+        "comparison_result": "Our Corr-AE also achieves notable improvements over Bimodal AE and Bimodal DBN.",
+        "evidence_text": "Our Corr-AE also achieves notable improvements over Bimodal AE and Bimodal DBN."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Wikipedia dataset",
+        "dataset_description": "2,866 image/text pairs from ten semantic categories.",
+        "evidence_text": "The Wikipedia dataset [Rasiwasia et al. 2010] consists of 2,866 image/text pairs from ten semantic categories."
+      },
+      {
+        "dataset_name": "Pascal dataset",
+        "dataset_description": "1,000 image/text pairs from twenty categories.",
+        "evidence_text": "The Pascal dataset [Farhadi et al. 2010] contains 1,000 image/text pairs from twenty categories."
+      },
+      {
+        "dataset_name": "NUS-WIDE-10k dataset",
+        "dataset_description": "1,000 image/text pairs per category from ten categories.",
+        "evidence_text": "The NUS-WIDE-10k dataset is a subset of NUS-WIDE [Chua et al. 2009], with 1,000 image/text pairs per category from ten categories."
+      }
+    ],
+    "evaluation_metrics": [
+      "mean average precision (mAP)",
+      "top 20% percentage"
+    ],
+    "baseline_methods": [
+      "CCA-AE",
+      "CCA-Cross-AE",
+      "CCA-Full-AE",
+      "Bimodal AE",
+      "Bimodal DBN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "mAP",
+        "our_result": "12.3% improvement",
+        "baseline_result": "best baseline results",
+        "dataset": "Wikipedia",
+        "evidence_text": "Our three multimodal reconstruction Corr-AEs significantly outperform other models on both text and image retrieval tasks across all datasets."
+      },
+      {
+        "metric_name": "mAP",
+        "our_result": "32.4% improvement",
+        "baseline_result": "best baseline results",
+        "dataset": "NUS-WIDE-10k",
+        "evidence_text": "For instance, Corr-Full-AE improves mAP scores by 12.3% and 16.6% for text-by-image and image-by-text retrieval on Wikipedia, by 12.4% and 2.2% on Pascal, and by 32.4% and 10.2% on NUS-WIDE-10k."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "We propose the correspondence autoencoder (Corr-AE), which integrates representation learning and correlation learning into a single process."
+    ],
+    "stated_novelty": [
+      "原文未明确提及"
+    ],
+    "stated_advantages": [
+      "Our models are categorized into two groups: multimodal reconstruction correspondence autoencoder, which reconstructs both modalities, and unimodal reconstruction correspondence autoencoder, which reconstructs a single modality."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性，如无则为空数组"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例，如无则为空数组"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2808205",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:57:51",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系comparison_result: Our models achieve substantial improvements in mAP scores.",
+        "可疑技术关系method_name: Bimodal AE, Bimodal DBN",
+        "可疑性能数据our_result: 12.3% improvement",
+        "可疑性能数据our_result: 32.4% improvement"
+      ],
+      "suspicious_count": 5,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 22080,
+    "processed_text_length": 16856
+  }
+}

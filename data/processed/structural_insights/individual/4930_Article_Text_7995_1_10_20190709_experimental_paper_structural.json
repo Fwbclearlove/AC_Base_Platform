@@ -1,0 +1,152 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Differential Networks for Visual Question Answering",
+    "authors": [
+      "Chenfei Wu",
+      "Jinlai Liu",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "Center for Intelligence Science and Technology, Beijing University of Posts and Telecommunications"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Attention-based models",
+        "relationship_type": "基于",
+        "evidence_text": "We review current VQA models, focusing on attention-based models and fusion strategies."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "HighOrderAtt",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "HighOrderAtt (Schwartz, Schwing, and Hazan 2017) - - - - 69.4"
+      },
+      {
+        "method_name": "MLB(7)",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "MLB(7) (Kim et al. 2017) 66.77 84.54 39.21 57.81"
+      },
+      {
+        "method_name": "Mutan(5)",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Mutan(5) (Ben-younes et al. 2017) 67.42 85.14 39.81 58.52"
+      },
+      {
+        "method_name": "DualMFA",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "DualMFA (Lu et al. 2018) 66.01 83.59 40.18 56.84 70.04"
+      },
+      {
+        "method_name": "ReasonNet",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "ReasonNet (Ilievski and Feng 2017) - - - - -"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "VQA 1.0",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "VQA 1.0 Test-dev and Test-std"
+      },
+      {
+        "dataset_name": "VQA 2.0",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "VQA 2.0 Test-dev and Test-std"
+      },
+      {
+        "dataset_name": "COCO-QA",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "COCO-QA dataset"
+      },
+      {
+        "dataset_name": "TDIUC",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "TDIUC dataset"
+      }
+    ],
+    "evaluation_metrics": [
+      "Acc(ans)"
+    ],
+    "baseline_methods": [
+      "HighOrderAtt",
+      "MLB(7)",
+      "Mutan(5)",
+      "DualMFA",
+      "ReasonNet"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "All",
+        "our_result": "68.62",
+        "baseline_result": "69.4",
+        "dataset": "VQA 1.0",
+        "evidence_text": "DF (36boxes) (ours) 68.62 86.08 43.52 59.38 73.31"
+      },
+      {
+        "metric_name": "All",
+        "our_result": "67.73",
+        "baseline_result": "67.50",
+        "dataset": "VQA 2.0",
+        "evidence_text": "DF (36 boxes) (ours) 67.73 83.91 46.7 58.7"
+      },
+      {
+        "metric_name": "All Obj.",
+        "our_result": "69.36",
+        "baseline_result": "62.50",
+        "dataset": "COCO-QA",
+        "evidence_text": "DF (36 boxes) (ours) 69.36 70.53 54.92 73.67 61.22 78.25 92.99"
+      },
+      {
+        "metric_name": "Overall(Arithmetric MPT)",
+        "our_result": "72.97",
+        "baseline_result": "67.90",
+        "dataset": "TDIUC",
+        "evidence_text": "DF (36 boxes) 67.90 67.81 69.11 72.97"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "We propose a general DN module and a new DF model for the VQA task."
+    ],
+    "stated_novelty": [
+      "原文明确声明的新颖性，如无则为空数组"
+    ],
+    "stated_advantages": [
+      "By reducing input feature noise and mapping both the image and question to the same differential space, DF effectively improves attention accuracy and confidence."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性，如无则为空数组"
+    ],
+    "failure_cases": [
+      "In Example 4, all four models answered incorrectly, showing that counting remains a challenge for attention-based models."
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "4930_Article_Text_7995_1_10_20190709",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:05:16",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 8155,
+    "processed_text_length": 8155
+  }
+}

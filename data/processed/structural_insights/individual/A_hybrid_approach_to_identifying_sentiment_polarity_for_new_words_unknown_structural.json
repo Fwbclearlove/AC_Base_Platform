@@ -1,0 +1,40 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "讨论学术论文的清洗工作，包括去除非学术内容，修正错误，并保留核心学术内容",
+    "key_concepts": [
+      "学术论文清洗",
+      "非学术内容去除",
+      "错误修正",
+      "核心学术内容保留"
+    ],
+    "main_methods": [
+      "去除页眉、页脚、页码",
+      "修正重复信息和乱码",
+      "纠正PDF解析错误",
+      "去除多余符号和格式问题"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": []
+  },
+  "note": "文档类型不明确，仅提取最基础信息，且未明确提及作者、标题等元数据信息",
+  "extraction_metadata": {
+    "file_id": "A_hybrid_approach_to_identifying_sentiment_polarity_for_new_words",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:06:18",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 6591,
+    "processed_text_length": 6591
+  }
+}

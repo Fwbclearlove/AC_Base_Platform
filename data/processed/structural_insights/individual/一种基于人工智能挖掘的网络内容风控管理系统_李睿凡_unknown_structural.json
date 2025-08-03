@@ -1,0 +1,58 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "提供一种基于人工智能挖掘的网络内容风控管理系统",
+    "key_concepts": [
+      "网络内容风控管理系统",
+      "新业务内容检测模块",
+      "网站内容监管模块",
+      "企业内容安全治理模块",
+      "UGC内容审核模块",
+      "人工智能挖掘"
+    ],
+    "main_methods": [
+      "自动获取新业务内容",
+      "内容审核",
+      "分类",
+      "网站内容检测",
+      "主动拨测",
+      "旁路检测",
+      "文件共享的内容采集技术",
+      "用户原创内容审核",
+      "文本识别",
+      "图像识别",
+      "视频识别",
+      "音频识别"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": [
+      "硬件",
+      "处理器",
+      "计算机程序",
+      "计算机可读介质",
+      "互联网下载"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种基于人工智能挖掘的网络内容风控管理系统_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:33:30",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1065,
+    "processed_text_length": 1065
+  }
+}

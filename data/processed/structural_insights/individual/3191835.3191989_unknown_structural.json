@@ -1,0 +1,62 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "Sentiment Analysis of Microblog Combining Dictionary and Rules",
+    "authors_or_creators": [
+      "Ding Yuan",
+      "Yanquan Zhou",
+      "Ruifan Li",
+      "Peng Lu"
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "Microblogging emotional classification is a key research area based on User-Generated Content (UGC). This paper focuses on distinguishing between positive and negative emotional tendencies in microblogs.",
+    "key_concepts": [
+      "emotional classification",
+      "feature extraction",
+      "weight computing",
+      "support vector machine"
+    ],
+    "main_methods": [
+      "Support Vector Machine (SVM)",
+      "dictionary and rule-based approaches",
+      "vector space model",
+      "Modified CHI algorithm (MCHI)",
+      "Modified TF-IDF (MTF-IDF) algorithm"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Pang B, Lee L, Vaithyanathan S. Sentiment classification using machine learning techniques. EMNLP '02.",
+      "Liu Zhiming, Liu Lu. Empirical study of sentiment classification for Chinese microblog based on machine learning.",
+      "Zhu Yanlan, Min Jin, Zhou Yaqian, Huang Xuanjin, Wu Lide. Semantic Orientation Computing Based on HowNet.",
+      "Yao Tianfang, Lou Decheng. Research on Semantic Orientation Distinction for Chinese Sentiment Words.",
+      "Hu M, Liu B. Mining and summarizing customer reviews. KDD '04.",
+      "Turney P D. Thumbs Up or Thumbs Down? Semantic Orientation Applied to Unsupervised Classification of Reviews. ACL '02.",
+      "Liu Xiaojuan, You Bin, Zhang Aiyun. Review on the Data Used in Researches of Microblogs.",
+      "Zhu Lina. Research of Feature Selection for Chinese Web Page Categorization.",
+      "Ma Wenwen, Deng Yigui. New feature weight calculation method for short text.",
+      "Ma Ting, Geng Guohua, Zhou Mingquan. An effective approach to calculate the feature weights.",
+      "Qin Shian, Li Fayun. Improved TF-IDF Method in Text Classification."
+    ],
+    "builds_on": [
+      "Affective Computing by Picard",
+      "traditional machine learning methods like Naive Bayes, Maximum Entropy, K Nearest Neighbor, and SVM",
+      "Chinese text processing improvements with machine learning techniques and weight calculation algorithms like TF-IDF"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "3191835.3191989",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 12:58:25",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 7288,
+    "processed_text_length": 7288
+  }
+}

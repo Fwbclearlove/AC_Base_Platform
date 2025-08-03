@@ -1,0 +1,131 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Visual Prompt Tuning for Weakly Supervised Phrase Grounding",
+    "authors": [
+      "Pengyue Lin",
+      "Zhihan Yu",
+      "Mingcong Lu",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Weakly-Supervised Grounding (WSG)",
+        "relationship_type": "改进",
+        "evidence_text": "We propose a refinement-based approach using a detector-free phrase grounding model fine-tuned with a visual prompt from CLIP text-related representations."
+      },
+      {
+        "method_name": "CLIP",
+        "relationship_type": "结合",
+        "evidence_text": "Our approach leverages the relationship between CLIP and the grounding model, refining training through visual prompt tuning."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "WWbl",
+        "comparison_result": "Our method shows improvements in metrics on Flickr30K and ReferIt",
+        "evidence_text": "Our method is trained on COCO and VG train splits and evaluated on the test splits of Flickr30K, VG, and ReferIt. The performance of our method is compared with state-of-the-art DF-WSG methods quantitatively and qualitatively."
+      },
+      {
+        "method_name": "Gbs",
+        "comparison_result": "Our approach not only surpasses detector-free methods like Gbs and WWbl",
+        "evidence_text": "Our approach not only surpasses detector-free methods like Gbs and WWbl but also outperforms detector-based methods on almost all categories for Flickr30K Entities."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Flickr30K Entities",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Four benchmark datasets are used for experimental evaluation: Flickr30K Entities"
+      },
+      {
+        "dataset_name": "COCO",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Four benchmark datasets are used for experimental evaluation: COCO"
+      },
+      {
+        "dataset_name": "Visual Genome",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Four benchmark datasets are used for experimental evaluation: Visual Genome"
+      },
+      {
+        "dataset_name": "ReferIt",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Four benchmark datasets are used for experimental evaluation: ReferIt"
+      }
+    ],
+    "evaluation_metrics": [
+      "pointing game accuracy",
+      "bounding box accuracy"
+    ],
+    "baseline_methods": [
+      "WWbl",
+      "Gbs"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "pointing game accuracy",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "Flickr30K and ReferIt",
+        "evidence_text": "Our method shows improvements in metrics on Flickr30K and ReferIt"
+      },
+      {
+        "metric_name": "bounding box accuracy",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "Flickr30K Entities",
+        "evidence_text": "Our approach not only surpasses detector-free methods like Gbs and WWbl but also outperforms detector-based methods on almost all categories for Flickr30K Entities."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "use of similarity tokens for spatial information capture",
+      "detector-free network fine-tuning"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "enhancing weakly-supervised phrase grounding",
+      "overcoming performance constraints of the CLIP structure"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Visual_Prompt_Tuning_for_Weakly_Supervised_Phrase_Grounding",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:31:41",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑title: Visual Prompt Tuning for Weakly Supervised Phrase Grounding"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 8347,
+    "processed_text_length": 8347
+  }
+}

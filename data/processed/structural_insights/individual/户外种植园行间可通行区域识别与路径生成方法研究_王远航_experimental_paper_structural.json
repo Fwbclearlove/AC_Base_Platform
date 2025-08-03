@@ -1,0 +1,93 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "户外种植园行间可通行区域识别与路径生成方法研究",
+    "authors": [
+      "王远航"
+    ],
+    "institutions": [
+      "原文未明确提及"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "原文无此信息",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "精确率",
+      "召回率",
+      "F1分数"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "分析轮式移动机器人不可通行路面的特点及参数",
+      "设计适用于户外种植园行间场景的道路通行性评价指标",
+      "生成可通行区域约束下的导航路径"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "原文无此信息"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "户外种植园行间可通行区域识别与路径生成方法研究_王远航",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:33:22",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 13031,
+    "processed_text_length": 13031
+  }
+}

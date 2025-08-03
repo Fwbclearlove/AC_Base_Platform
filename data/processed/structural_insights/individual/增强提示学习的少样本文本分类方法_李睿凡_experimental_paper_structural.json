@@ -1,0 +1,173 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "针对少样本文本分类任务的一种提示学习增强分类算法",
+    "authors": [],
+    "institutions": [],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "自然语言推理",
+        "relationship_type": "基于",
+        "evidence_text": "该算法首先将文本分类任务转换为基于自然语言推理的提示学习形式"
+      },
+      {
+        "method_name": "掩码语言模型",
+        "relationship_type": "结合",
+        "evidence_text": "同时，掩码语言模型任务作为正则项，提升模型泛化能力"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "基于微调方法",
+        "comparison_result": "在小样本学习场景中模型性能通过表现不佳",
+        "evidence_text": "对于基于微调的方法，在小样本学习场景中模型性能通过表现不佳"
+      },
+      {
+        "method_name": "PET",
+        "comparison_result": "在小样本学习场景中模型的准确率都有大幅提高",
+        "evidence_text": "通过对比EPL4FTC算法与其他基于提示学习的方法(PET、ADAPET、LM-BFF、EFL和P-tuning等)"
+      },
+      {
+        "method_name": "ADAPET",
+        "comparison_result": "在利用预训练模型中已经学习到的通用知识基础上，引入下游任务的类别信息实现更好的建模效果",
+        "evidence_text": "与转换为完形填空任务形式的PET和ADAPET等方法相比"
+      },
+      {
+        "method_name": "EFL",
+        "comparison_result": "在任务的平均准确率上高出4.2%",
+        "evidence_text": "与转化为文本蕴含任务的EFL方法相比"
+      },
+      {
+        "method_name": "LM-BFF",
+        "comparison_result": "在任务的平均准确率上高出1.6%",
+        "evidence_text": "与使用自动构建模板或是非自然语言形式模板的LM-BFF和P-tuning方法相比"
+      },
+      {
+        "method_name": "P-tuningR",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "FewCLUE",
+        "dataset_description": "中文数据集使用少样本评测数据集",
+        "evidence_text": "中文数据集使用少样本评测数据集FewCLUE中的文本分类任务对应的数据集"
+      },
+      {
+        "dataset_name": "AG News",
+        "dataset_description": "学术新闻搜索引擎从多个新闻来源中搜集超过了100万篇新闻文章构成的数据集",
+        "evidence_text": "英文数据集采用3个英文文本分类数据集AG News、TREC以及Yelp Review进行评测"
+      },
+      {
+        "dataset_name": "TREC",
+        "dataset_description": "包含6个一级标签和47个二级标签",
+        "evidence_text": "其中，TREC数据集包含6个一级标签和47个二级标签"
+      },
+      {
+        "dataset_name": "Yelp Review",
+        "dataset_description": "来自Yelp的用户评论，标签是用户对商品的星级打分，共分为5级",
+        "evidence_text": "Yelp Review数据集来自Yelp的用户评论"
+      }
+    ],
+    "evaluation_metrics": [
+      "准确率(Accuracy)"
+    ],
+    "baseline_methods": [
+      "基于微调方法",
+      "Zero-shot方法",
+      "Zero-shot(GPT)方法",
+      "PET方法",
+      "ADAPET方法",
+      "LM-BFF方法",
+      "P-tuningR方法",
+      "EFL方法"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "EPRSTMT",
+        "evidence_text": "在EPRSTMT数据集上取得了优异的成绩"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "CSLDCP",
+        "evidence_text": "在CSLDCP数据集上取得了优异的成绩"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "TNEWS",
+        "evidence_text": "在TNEWS数据集上取得了优异的成绩"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "IFLYTEK",
+        "evidence_text": "在IFLYTEK数据集上也取得了与其他现有方法同等效果的性能"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "平均准确率性能上取得了最高的成绩",
+        "baseline_result": "原文无此信息",
+        "dataset": "中文少样本数据集",
+        "evidence_text": "EPL4FTC算法在中文文本分类任务的平均准确率性能上取得了最高的成绩"
+      },
+      {
+        "metric_name": "准确率",
+        "our_result": "模型准确率远高于其他方法",
+        "baseline_result": "原文无此信息",
+        "dataset": "英文数据集",
+        "evidence_text": "EPL4FTC算法能够有效地对下游任务进行建模，也进一步说明了该算法的有效性"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种名为EPL4FTC的提示学习增强分类算法"
+    ],
+    "stated_novelty": [
+      "利用三元组损失增强提示学习，通过句子和句群粒度的三元组损失优化，捕获下游任务的类别信息"
+    ],
+    "stated_advantages": [
+      "在少样本文本分类任务上取得了明显的准确率性能优势"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "增强提示学习的少样本文本分类方法_李睿凡",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:15:08",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑title: 针对少样本文本分类任务的一种提示学习增强分类算法"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 4267,
+    "processed_text_length": 4267
+  }
+}

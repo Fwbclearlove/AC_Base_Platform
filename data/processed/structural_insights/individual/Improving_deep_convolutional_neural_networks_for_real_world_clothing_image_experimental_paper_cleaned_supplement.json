@@ -1,0 +1,77 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Multi-weight Convolutional Neural Networks for Clothing Image Recognition",
+    "authors": [
+      "作者列表在原文中未明确列出"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ]
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Convolutional Neural Networks",
+        "relationship_type": "改进"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "multi-label CNNs",
+        "comparison_result": "在七个类别中表现最佳"
+      },
+      {
+        "method_name": "multi-task CNNs",
+        "comparison_result": "在五个类别中表现最佳"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "e-Clothing1.4M",
+        "dataset_description": "包含大约一百万张来自四个中国零售商的购物照片的大型数据集"
+      }
+    ],
+    "evaluation_metrics": [
+      "mean Average Precision (mAP)"
+    ],
+    "baseline_methods": [
+      "multi-label CNNs",
+      "multi-task CNNs"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "mAP",
+        "our_result": "55.23%",
+        "baseline_result": "52.48% (multi-label), 53.11% (multi-task)"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种用于处理噪声和类别不平衡的服装图像的多重量卷积神经网络",
+      "在大规模数据集上展示了有效性"
+    ],
+    "stated_novelty": [
+      "引入了多重量学习算法以处理类别不平衡问题"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文明确承认的局限性在原文中未列出"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Improving_deep_convolutional_neural_networks_for_real_world_clothing_image",
+    "detected_doc_type": "experimental_paper",
+    "source_type": "cleaned",
+    "extraction_time": "2025-08-03 11:52:10",
+    "text_length": 14789,
+    "processed_text_length": 12000,
+    "extraction_method": "supplement_script"
+  }
+}

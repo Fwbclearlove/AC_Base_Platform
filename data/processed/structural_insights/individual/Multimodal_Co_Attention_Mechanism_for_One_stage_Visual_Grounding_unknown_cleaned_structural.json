@@ -1,0 +1,33 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "原文无此信息",
+    "key_concepts": [],
+    "main_methods": []
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": []
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "Multimodal_Co_Attention_Mechanism_for_One_stage_Visual_Grounding",
+    "detected_doc_type": "unknown",
+    "source_type": "cleaned",
+    "extraction_time": "2025-08-02 15:44:12",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 6327,
+    "processed_text_length": 6327
+  }
+}

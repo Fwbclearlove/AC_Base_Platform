@@ -1,0 +1,121 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Dual Graph Convolutional Networks for Aspect-based Sentiment Analysis",
+    "authors": [
+      "Ruifan Li",
+      "Hao Chen",
+      "Fangxiang Feng",
+      "Zhanyu Ma",
+      "Xiaojie Wang",
+      "Eduard Hovy"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Graph Convolutional Network (GCN)",
+        "relationship_type": "改进",
+        "evidence_text": "We propose a GCN-based method that combines syntactic and semantic features."
+      },
+      {
+        "method_name": "Attention-based LSTM",
+        "relationship_type": "改进",
+        "evidence_text": "Attention-based neural networks, including those proposed by Wang et al. (2016) and others, have been introduced to implicitly model the semantic relation between aspects and their context."
+      },
+      {
+        "method_name": "Recursive neural network by Dong et al. (2014)",
+        "relationship_type": "改进",
+        "evidence_text": "Notable works include the recursive neural network by Dong et al. (2014)"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, DGEDT+BERT",
+        "comparison_result": "Our DualGCN model consistently outperforms attention-based and syntax-based methods",
+        "evidence_text": "We compare DualGCN with state-of-the-art baselines, including ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, and DGEDT+BERT."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Restaurant, Laptop, Twitter",
+        "dataset_description": "三个公开数据集",
+        "evidence_text": "Experiments are conducted on three public datasets: Restaurant, Laptop, and Twitter."
+      }
+    ],
+    "evaluation_metrics": [
+      "accuracy",
+      "macro-averaged F1-score"
+    ],
+    "baseline_methods": [
+      "ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, DGEDT+BERT"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy",
+        "our_result": "84.27, 78.08, 78.48",
+        "baseline_result": "原文无此信息",
+        "dataset": "Restaurant, Laptop, Twitter",
+        "evidence_text": "DualGCN | 84.27 | 78.08 | 78.48 | 74.74 | 75.92 | 74.29"
+      },
+      {
+        "metric_name": "macro-averaged F1-score",
+        "our_result": "74.74, 75.92, 74.29",
+        "baseline_result": "原文无此信息",
+        "dataset": "Restaurant, Laptop, Twitter",
+        "evidence_text": "DualGCN | 84.27 | 78.08 | 78.48 | 74.74 | 75.92 | 74.29"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种结合语法和语义特征的DualGCN模型",
+      "设计了正交和微分正则化器以增强模型捕获语义关联的能力"
+    ],
+    "stated_novelty": [
+      "DualGCN模型的结构设计",
+      "正交和微分正则化器的应用"
+    ],
+    "stated_advantages": [
+      "能够有效整合语法知识和语义信息",
+      "适应不同的评论风格"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文未明确提及"
+    ],
+    "failure_cases": [
+      "原文提到的失败案例，如无则为空数组"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "2021.acl_long.494",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:42:47",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: We propose a GCN-based method that combines syntactic and semantic features.",
+        "可疑技术关系method_name: Recursive neural network by Dong et al. (2014)",
+        "可疑技术关系method_name: ATAE-LSTM, IAN, RAM, MGAN, TNet, ASGCN, CDT, BiGCN, kumaGCN, InterGCN, R-GAT, DGEDT, BERT, R-GAT+BERT, DGEDT+BERT",
+        "可疑数据集: Restaurant, Laptop, Twitter",
+        "可疑性能数据our_result: 84.27, 78.08, 78.48",
+        "可疑性能数据our_result: 74.74, 75.92, 74.29"
+      ],
+      "suspicious_count": 7,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 15277,
+    "processed_text_length": 14980
+  }
+}

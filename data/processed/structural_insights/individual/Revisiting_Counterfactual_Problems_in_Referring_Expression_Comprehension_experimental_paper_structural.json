@@ -1,0 +1,133 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Revisiting Counterfactual Problems in Referring Expression Comprehension",
+    "authors": [
+      "Zhihan Yu",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "ReferItGame",
+        "relationship_type": "基于",
+        "evidence_text": "Our C-REC samples are based on fine-grained attributes from referring expressions, inspired by the ReferItGame [18]."
+      },
+      {
+        "method_name": "BERT",
+        "relationship_type": "结合",
+        "evidence_text": "Candidate word prediction using BERT"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "SCRE",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "Related work on counterfactual REC includes approaches like SCRE"
+      },
+      {
+        "method_name": "MTG",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "and MTG, which treat C-REC as a matching task based on logical rules."
+      },
+      {
+        "method_name": "SimREC",
+        "comparison_result": "our model outperforms one-stage REC models, particularly SimREC",
+        "evidence_text": "Table 4 shows that our model outperforms one-stage REC models, particularly SimREC [29]."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "RefCOCO",
+        "dataset_description": "based on MS-COCO images and differ in the types of descriptions allowed",
+        "evidence_text": "We evaluate our C-REC framework on three REC benchmark datasets (RefCOCO, RefCOCO+, RefCOCOg)"
+      },
+      {
+        "dataset_name": "C-RefCOCO",
+        "dataset_description": "generated using the CSG method to balance normal and counterfactual samples",
+        "evidence_text": "and our constructed C-REC datasets (C-RefCOCO/+/g)."
+      }
+    ],
+    "evaluation_metrics": [
+      "Acc-Box (IoU@0.5)",
+      "Acc-Cls",
+      "Acc-Cf"
+    ],
+    "baseline_methods": [
+      "Random",
+      "Conf. score (0.01)",
+      "Conf. score (0.1)",
+      "Conf. score (0.5)",
+      "Binary classifier"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Acc-Box",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "RefCOCO/+/g",
+        "evidence_text": "Table 4. Acc-Box (%) comparison of our model with baseline models on RefCOCO/+/g."
+      },
+      {
+        "metric_name": "Acc-Cls",
+        "our_result": "原文无此信息",
+        "baseline_result": "up to 90%",
+        "dataset": "C-RefCOCO/+/g",
+        "evidence_text": "Table 5. Acc-Cls (%) on C-RefCOCO/+/g. Our model's performance against random choice, various confidence scores, and a binary classifier."
+      },
+      {
+        "metric_name": "Acc-Cf",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "C-RefCOCO/+/g",
+        "evidence_text": "Table 6. Acc-Cf (%) of our model on C-RefCOCO/+/g."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "deep examination of fine-grained attributes in C-REC",
+      "effective sample generation method",
+      "robust C-REC framework"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "incorporates contrastive learning with generated counterfactual samples"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "Our model successfully identifies most mismatched attributes but encounters difficulties with complex queries, such as less attention to the size attribute 'small' and an overemphasis on absolute location 'center'."
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Revisiting_Counterfactual_Problems_in_Referring_Expression_Comprehension",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:30:29",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: Candidate word prediction using BERT"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 19809,
+    "processed_text_length": 14917
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Show and Tell More: Topic-Oriented Multi-Sentence Image Captioning",
+    "authors": [
+      "Yuzhao Mao",
+      "Chang Zhou",
+      "Xiaojie Wang",
+      "Ruifan Li"
+    ],
+    "institutions": [
+      "Center for Intelligence Science and Technology, School of Computer Science, Beijing University of Posts and Telecommunications"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Single-sentence (SS) captioning models",
+        "relationship_type": "基于",
+        "evidence_text": "Single-sentence (SS) captioning models have been developed using templates and neural network approaches, but they often provide incomplete descriptions."
+      },
+      {
+        "method_name": "MS captioning methods",
+        "relationship_type": "基于",
+        "evidence_text": "MS captioning methods generate multiple sentences for a complete depiction, with some focusing on regions of interest."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "NIC",
+        "comparison_result": "Our TOMS demonstrates improved performance, especially in terms of IC.",
+        "evidence_text": "Our proposed Topic-Oriented Multi-Sentence (TOMS) captioning model incorporates topic embedding to guide the generation process... Our TOMS demonstrates improved performance, especially in terms of IC."
+      },
+      {
+        "method_name": "ATT-FCN",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "We compare our TOMS model with NIC and ATT-FCN for sentence level MS captioning"
+      },
+      {
+        "method_name": "RTT-GAN",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "We compare our TOMS model with NIC and ATT-FCN for sentence level MS captioning and with RTT-GAN, Regions-Hierarchical, and Sentence-Concat for paragraph level MS captioning."
+      },
+      {
+        "method_name": "Regions-Hierarchical",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "We compare our TOMS model with NIC and ATT-FCN for sentence level MS captioning and with RTT-GAN, Regions-Hierarchical, and Sentence-Concat for paragraph level MS captioning."
+      },
+      {
+        "method_name": "Sentence-Concat",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "We compare our TOMS model with NIC and ATT-FCN for sentence level MS captioning and with RTT-GAN, Regions-Hierarchical, and Sentence-Concat for paragraph level MS captioning."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Flickr8k",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our model on standard datasets like Flickr8k, Flickr30k, COCO for sentence level MS captioning"
+      },
+      {
+        "dataset_name": "Flickr30k",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our model on standard datasets like Flickr8k, Flickr30k, COCO for sentence level MS captioning"
+      },
+      {
+        "dataset_name": "COCO",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We evaluate our model on standard datasets like Flickr8k, Flickr30k, COCO for sentence level MS captioning"
+      },
+      {
+        "dataset_name": "paragraph dataset from Krause et al. (2017)",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "We also introduce Instance Coverage (IC) to measure descriptive completeness on a paragraph dataset from Krause et al. (2017) for paragraph level MS captioning."
+      }
+    ],
+    "evaluation_metrics": [
+      "BELU",
+      "METEOR",
+      "ROUGE L",
+      "CIDEr",
+      "Instance Coverage (IC)"
+    ],
+    "baseline_methods": [
+      "NIC",
+      "ATT-FCN",
+      "RTT-GAN",
+      "Regions-Hierarchical",
+      "Sentence-Concat"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Instance Coverage (IC)",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "Our TOMS demonstrates improved performance, especially in terms of IC."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "a novel topic-oriented captioning model",
+      "the FGU design",
+      "extensive experimental evaluation"
+    ],
+    "stated_novelty": [
+      "Our TOMS model differs by generating sentences from topics of interest, capturing linguistic distinctions in image descriptions.",
+      "The Fusion Gate Unit (FGU) fuses three sources of representations: image, context, and topic."
+    ],
+    "stated_advantages": [
+      "topical consistency and descriptive completeness",
+      "arranges multi-sentence generation using topics",
+      "captures image details better than single-sentence captions"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "0592",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:35:23",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系evidence_text: Our proposed Topic-Oriented Multi-Sentence (TOMS) captioning model incorporates topic embedding to guide the generation process... Our TOMS demonstrates improved performance, especially in terms of IC."
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 9105,
+    "processed_text_length": 9105
+  }
+}

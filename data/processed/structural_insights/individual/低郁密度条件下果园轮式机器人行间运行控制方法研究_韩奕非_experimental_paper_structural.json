@@ -1,0 +1,100 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "低郁密度条件下果园轮式机器人行间运行控制方法研究",
+    "authors": [
+      "Lu Hao"
+    ],
+    "institutions": [
+      "Beijing Institute of Technology"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "原文无此信息",
+        "relationship_type": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "PID控制方法",
+        "comparison_result": "模糊控制方法优于PID控制方法",
+        "evidence_text": "模糊控制具有跟踪平滑，超调量小，后期无反复波动等特点。稳态误差问题也可以通过输入及输出端论域划分得到进一步解决。"
+      },
+      {
+        "method_name": "纯追踪方法",
+        "comparison_result": "模糊控制方法优于纯追踪方法",
+        "evidence_text": "模糊控制具有跟踪平滑，超调量小，后期无反复波动等特点。稳态误差问题也可以通过输入及输出端论域划分得到进一步解决。"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "原文无此信息",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "PID控制方法",
+      "纯追踪方法"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "横向误差",
+        "our_result": "0.04米",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "根据以上仿真结果，模糊控制方法在起伏不平的果园路况下具有较好的适应性。"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种基于陀螺仪的四轮垂直载荷实时估计方法",
+      "提出了轮式滑动转向机器人坡道稳态转向动力学模型",
+      "提出了同侧轮胎最优驱动力估计方法"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "提高了滑动轮式机器人在果园环境下运行稳定性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "低郁密度条件下果园轮式机器人行间运行控制方法研究_韩奕非",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 15:19:01",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: PID控制方法",
+        "可疑技术关系comparison_result: 模糊控制方法优于PID控制方法",
+        "可疑技术关系comparison_result: 模糊控制方法优于纯追踪方法"
+      ],
+      "suspicious_count": 4,
+      "validation_score": 20,
+      "quality_level": "low"
+    },
+    "text_length": 34590,
+    "processed_text_length": 14788
+  }
+}

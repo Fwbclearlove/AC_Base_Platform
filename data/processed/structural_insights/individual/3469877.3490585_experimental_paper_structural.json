@@ -1,0 +1,112 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "S2TD: A Tree-Structured Decoder for Image Paragraph Captioning",
+    "authors": [
+      "Yihui Shi",
+      "Yun Liu",
+      "Fangxiang Feng",
+      "Ruifan Li",
+      "Zhanyu Ma",
+      "Xiaojie Wang"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "hierarchical and non-hierarchical decoders",
+        "relationship_type": "基于",
+        "evidence_text": "Existing approaches, such as hierarchical and non-hierarchical decoders, have limitations in managing visual observations and maintaining paragraph coherence."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "DAM-ATT, SCST, SCST+RP, CRL, OR-ATT, OR-ATT+RP",
+        "comparison_result": "Our S2TD achieves competitive performance, especially in terms of BLEU-1 and CIDEr.",
+        "evidence_text": "Performance evaluation compares S2TD with state-of-the-art sequential decoding methods, grouped into hierarchical and non-hierarchical methods."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Stanford image paragraph benchmark dataset",
+        "dataset_description": "原文无此信息",
+        "evidence_text": "Our experiments are conducted on the Stanford image paragraph benchmark dataset."
+      }
+    ],
+    "evaluation_metrics": [
+      "BLEU-1",
+      "BLEU-2",
+      "BLEU-3",
+      "BLEU-4",
+      "METEOR",
+      "CIDEr"
+    ],
+    "baseline_methods": [
+      "DAM-ATT",
+      "SCST",
+      "SCST+RP",
+      "CRL",
+      "OR-ATT",
+      "OR-ATT+RP"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "BLEU-1",
+        "our_result": "44.32",
+        "baseline_result": "35.02",
+        "dataset": "Stanford image paragraph benchmark dataset",
+        "evidence_text": "Our S2TD: 44.32, 25.86, 14.80, 8.33, 16.89, 21.41, [...] compared to DAM-ATT: 35.02, 20.24, 11.68, 6.57, 13.91, 17.32"
+      },
+      {
+        "metric_name": "CIDEr",
+        "our_result": "21.41",
+        "baseline_result": "17.32",
+        "dataset": "Stanford image paragraph benchmark dataset",
+        "evidence_text": "Our S2TD: 44.32, 25.86, 14.80, 8.33, 16.89, 21.41, [...] compared to DAM-ATT: 35.02, 20.24, 11.68, 6.57, 13.91, 17.32"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "原文无此信息"
+    ],
+    "stated_novelty": [
+      "We propose Splitting to Tree Decoder (S2TD), a novel tree-structured decoder that models paragraph decoding as top-down binary tree expansion."
+    ],
+    "stated_advantages": [
+      "S2TD includes a split module, a score module, and a word-level RNN. The tree structure loss enables end-to-end learning."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "3469877.3490585",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:00:09",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: DAM-ATT, SCST, SCST+RP, CRL, OR-ATT, OR-ATT+RP"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 14823,
+    "processed_text_length": 14823
+  }
+}

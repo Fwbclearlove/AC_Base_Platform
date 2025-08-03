@@ -1,0 +1,27 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "未找到该信息",
+    "authors": [
+      "未找到该信息"
+    ]
+  },
+  "main_content": {
+    "description": "研究了BI-STCM-ID系统中的星座映射问题。证明了在使用TAST空时编码方案的BI-STCM-ID系统中，基于最大化编码增益的高维星座映射设计优化问题等价于基于最大化欧式距调和均值的一维星座映射设计优化问题。",
+    "keywords": [
+      "BI-STCM-ID",
+      "星座映射",
+      "TAST空时编码",
+      "编码增益",
+      "欧式距",
+      "调和均值"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "使用TAST码的BI_STCM_ID系统中的星座映射分析",
+    "source_type": "cleaned",
+    "extraction_time": "2025-08-03 12:35:00",
+    "extraction_method": "simple_supplement",
+    "text_length": 106
+  }
+}

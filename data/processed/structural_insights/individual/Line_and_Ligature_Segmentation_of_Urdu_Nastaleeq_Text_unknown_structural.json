@@ -1,0 +1,64 @@
+{
+  "document_metadata": {
+    "document_type": "原文无此信息",
+    "title": "Line and Ligature Segmentation of Urdu Nastaleeq Text",
+    "authors_or_creators": [
+      "I. Ahmad",
+      "et al."
+    ]
+  },
+  "main_content": {
+    "stated_purpose": "提出两种用于乌尔都语Nastaleeq文本行和连字分割的算法，并提高现有方法的准确性",
+    "key_concepts": [
+      "乌尔都语Nastaleeq文本",
+      "行分割",
+      "连字分割",
+      "Curved Line Split算法"
+    ],
+    "main_methods": [
+      "水平投影",
+      "Curved Line Split算法",
+      "基于基线的分割决策"
+    ]
+  },
+  "relationships": {
+    "references_to": [
+      "Husain, S. A., 'A multi-tier holistic approach for Urdu Nastaliq recognition'",
+      "Pal, U., and Sarkar, A., 'Recognition of printed Urdu script'",
+      "Satti, D., and Saleem, K., 'Complexities and implementation challenges in offline Urdu Nastaliq OCR'",
+      "Hussain, S., 'Complexity of Asian writing systems: A case study of Nafees Nasta'leeq for Urdu'",
+      "Javed, S. T., and Hussain, S., 'Improving Nastalique specific pre-recognition process for Urdu OCR'",
+      "Lehal, G. S., 'Ligature segmentation for Urdu OCR'",
+      "Din, I. U., Malik, Z., Siddiqi, I., and Khalid, S., 'Line and ligature segmentation in printed Urdu document images'",
+      "Shamsher, I., Ahmad, Z., Orakzai, J. K., and Adnan, A., 'OCR for printed Urdu script using feed forward neural network'",
+      "Pathan, I. K., and Ramteke, R., 'Recognition of offline handwritten isolated Urdu character'",
+      "Tariq, J., Nauman, U., and Naru, M. U., 'Softconverter: A novel approach to construct OCR for printed Urdu isolated characters'",
+      "Akram, Q. U. A., Hussain, S., and Habib, Z., 'Font size independent OCR for Noori Nastaleeq'",
+      "Khan, K., Ullah, R., Khan, N. A., and Naveed, K., 'Urdu character recognition using principal component analysis'",
+      "Ahmad, Z., Orakzai, J. K., Shamsher, I., and Adnan, A., 'Urdu Nastaleeq optical character recognition'",
+      "Nawaz, T., Naqvi, S., ur Rehman, H., and Faiz, A., 'Optical character recognition system for Urdu (naskh font) using pattern matching technique'",
+      "Hussain, S., et al., 'Nastalique segmentation-based approach for Urdu OCR'",
+      "Sabbour, N., and Shafait, F., 'A segmentation free approach to Arabic and Urdu OCR'",
+      "Javed, S. T., and Hussain, S., 'Segmentation free nastalique Urdu OCR'"
+    ],
+    "builds_on": [
+      "水平投影方法",
+      "连字分割的垂直直方图、水平投影和边界框方法",
+      "区域分割方法"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "Line_and_Ligature_Segmentation_of_Urdu_Nastaleeq_Text",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 13:23:49",
+    "validation": {
+      "warnings": [],
+      "suspicious_count": 0,
+      "validation_score": 100,
+      "quality_level": "high"
+    },
+    "text_length": 19049,
+    "processed_text_length": 14959
+  }
+}

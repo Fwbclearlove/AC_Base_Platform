@@ -1,0 +1,107 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Multi-Scale RCNN Model for Financial Time-series Classification",
+    "authors": [
+      "Liu Guang",
+      "Wang Xiaojie",
+      "Li Ruifan"
+    ],
+    "institutions": [
+      "原文无此信息"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Multi-Scale (MS) methods, TD-oriented methods",
+        "relationship_type": "结合",
+        "evidence_text": "Existing FTC research can be categorized into MS-oriented and TD-oriented methods. However, few studies effectively integrate both properties."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "Support Vector Machine (SVM), Random Forest (RF), Fuzzy Deep Neural Network (FDNN), TreNet, State-Frequency Memory Recurrent Neural Networks (SFM), Multi-Scale CNN (MS-CNN)",
+        "comparison_result": "Our MSTD-RCNN model is compared with six baseline models on three datasets. The results, listed in Table 5, show that our model achieves the best performance in accuracy and F1.",
+        "evidence_text": "Our MSTD-RCNN model is compared with six baseline models on three datasets."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "SH000001, SZ399005, SZ399006",
+        "dataset_description": "Data spans from January 1, 2016, to December 30, 2016, with a total of 58,000 data points.",
+        "evidence_text": "We describe the datasets from the Chinese stock market: SH000001, SZ399005, and SZ399006."
+      }
+    ],
+    "evaluation_metrics": [
+      "accuracy",
+      "F-score (F1)",
+      "Confusion Matrix (CM)",
+      "accumulated profit"
+    ],
+    "baseline_methods": [
+      "Support Vector Machine (SVM)",
+      "Random Forest (RF)",
+      "Fuzzy Deep Neural Network (FDNN)",
+      "TreNet",
+      "State-Frequency Memory Recurrent Neural Networks (SFM)",
+      "Multi-Scale CNN (MS-CNN)"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "accuracy, F1",
+        "our_result": "3.07%, 3.00%, 2.13% improvement",
+        "baseline_result": "原文无此信息",
+        "dataset": "SH000001, SZ399005, SZ399006",
+        "evidence_text": "Our model effectively extracts MS features and captures Temporal Dependency (TD) within financial time-series."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "A novel method combining both MS and TD properties in financial time-series.",
+      "MS feature extraction with convolutional units without predefined parameters.",
+      "Fusion of different scale features using a Recurrent Neural Network to capture temporal dependencies."
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "End-to-end system",
+      "State-of-the-art performance in trend classification and simulated trading on Chinese stock market datasets."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "1911.09359v1",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 12:40:51",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: Multi-Scale (MS) methods, TD-oriented methods",
+        "可疑技术关系evidence_text: Existing FTC research can be categorized into MS-oriented and TD-oriented methods. However, few studies effectively integrate both properties.",
+        "可疑技术关系method_name: Support Vector Machine (SVM), Random Forest (RF), Fuzzy Deep Neural Network (FDNN), TreNet, State-Frequency Memory Recurrent Neural Networks (SFM), Multi-Scale CNN (MS-CNN)",
+        "可疑数据集: SH000001, SZ399005, SZ399006",
+        "可疑性能数据our_result: 3.07%, 3.00%, 2.13% improvement"
+      ],
+      "suspicious_count": 6,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 19761,
+    "processed_text_length": 14959
+  }
+}

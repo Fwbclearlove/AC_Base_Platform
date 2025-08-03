@@ -1,0 +1,124 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Cross-modal Global and Local Linguistic Representations-based Generative Adversarial Networks for Text-to-image Synthesis",
+    "authors": [
+      "Y. Guo",
+      "J. Johnson",
+      "A. Gupta",
+      "L. Fei-Fei"
+    ],
+    "institutions": [
+      "California Institute of Technology",
+      "State Grid Corporation of China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Generative Adversarial Networks (GANs)",
+        "relationship_type": "基于",
+        "evidence_text": "Most current approaches rely on generative adversarial network (GAN) models and utilize global linguistic representations."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "GAN-INT-CLS",
+        "comparison_result": "Our CGL-GAN model achieves a performance comparable to baseline models, often surpassing those without an attention mechanism on the CUB dataset and significantly outperforming them on the MS-COCO dataset.",
+        "evidence_text": "Our CGL-GAN model achieves higher Inception scores on the CUB dataset compared to state-of-the-art methods not utilizing multiple discriminators."
+      },
+      {
+        "method_name": "GAWWN",
+        "comparison_result": "Our CGL-GAN model generates more realistic images than GAN-INT-CLS, GAWWN, StackGAN, and StackGAN-V2.",
+        "evidence_text": "Examples illustrate that our CGL-GAN model generates more realistic images than GAN-INT-CLS, GAWWN, StackGAN, and StackGAN-V2."
+      },
+      {
+        "method_name": "StackGAN",
+        "comparison_result": "Our model produces images that are closer to real images, capturing fine-grained details that StackGAN fails to represent.",
+        "evidence_text": "For the MS-COCO dataset, our model produces images that are closer to real images, capturing fine-grained details that StackGAN fails to represent."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "CUB",
+        "dataset_description": "Caltech-UCSD Birds-200-2011, consists of 11,788 bird images across 200 categories, partitioned into training and testing subsets of 8,855 and 2,933 images, respectively.",
+        "evidence_text": "We use the Inception score [40] and Fréchet Inception Distance (FID) [41] for evaluation on the CUB and MS-COCO datasets."
+      },
+      {
+        "dataset_name": "MS-COCO",
+        "dataset_description": "Contains images of multiple objects and diverse backgrounds, with 80,000 and 40,000 images in the training and testing sets, respectively, and each image annotated with five descriptive sentences.",
+        "evidence_text": "We use the Inception score [40] and Fréchet Inception Distance (FID) [41] for evaluation on the CUB and MS-COCO datasets."
+      }
+    ],
+    "evaluation_metrics": [
+      "Inception score",
+      "Fréchet Inception Distance (FID)"
+    ],
+    "baseline_methods": [
+      "GAN-INT-CLS",
+      "GAWWN",
+      "StackGAN",
+      "StackGAN-V2",
+      "HDGAN",
+      "AttnGAN",
+      "MirrorGAN",
+      "Obj-GAN"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "Inception score",
+        "our_result": "3.67",
+        "baseline_result": "2.88",
+        "dataset": "CUB",
+        "evidence_text": "Our proposed model exhibits a 27.43% improvement in Inception score over GAN-INT-CLS, increasing from 2.88 to 3.67."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "Proposing cross-modal global and local linguistic representations-based generative adversarial networks (CGL-GAN) for text-to-image synthesis.",
+      "Incorporating fine-grained local linguistic information and cross-modal correlation significantly enhances text-to-image synthesis performance."
+    ],
+    "stated_novelty": [
+      "The use of both global and local linguistic representations for text-to-image synthesis.",
+      "A high-resolution synthesis model that outperforms state-of-the-art methods on the MS-COCO dataset."
+    ],
+    "stated_advantages": [
+      "Comparable performance with fewer trainable parameters than state-of-the-art methods.",
+      "Enhanced text-to-image synthesis performance for high-resolution images."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "Training difficulties due to the sparsity of global representations and lack fine-grained information in the generated images."
+    ],
+    "failure_cases": [
+      "原文未明确提及"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Exploring_Global_and_Local_Linguistic_Representations_for_Text_to_Image_Synthesis",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:15:24",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑title: Cross-modal Global and Local Linguistic Representations-based Generative Adversarial Networks for Text-to-image Synthesis",
+        "可疑技术关系method_name: Generative Adversarial Networks (GANs)",
+        "可疑技术关系evidence_text: Our CGL-GAN model achieves higher Inception scores on the CUB dataset compared to state-of-the-art methods not utilizing multiple discriminators.",
+        "可疑技术关系comparison_result: Our CGL-GAN model generates more realistic images than GAN-INT-CLS, GAWWN, StackGAN, and StackGAN-V2.",
+        "可疑技术关系comparison_result: Our model produces images that are closer to real images, capturing fine-grained details that StackGAN fails to represent."
+      ],
+      "suspicious_count": 6,
+      "validation_score": 0,
+      "quality_level": "low"
+    },
+    "text_length": 19725,
+    "processed_text_length": 14998
+  }
+}

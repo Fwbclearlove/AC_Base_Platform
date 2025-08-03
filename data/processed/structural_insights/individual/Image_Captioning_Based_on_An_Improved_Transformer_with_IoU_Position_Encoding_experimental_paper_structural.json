@@ -1,0 +1,112 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Image Captioning Based on An Improved Transformer with IoU Position Encoding",
+    "authors": [
+      "Yazhou Li",
+      "Yihui Shi",
+      "Yun Liu",
+      "Ruifan Li",
+      "Zhanyu Ma"
+    ],
+    "institutions": [
+      "School of Artiﬁcial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "Neural Image Captioning (NIC)",
+        "relationship_type": "基于",
+        "evidence_text": "The Neural Image Captioning (NIC) model uses a convolutional neural network to extract image features and an LSTM to translate these into sentences."
+      },
+      {
+        "method_name": "Transformer",
+        "relationship_type": "改进",
+        "evidence_text": "To address this, we adopt the transformer structure as the decoder."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "CoordNorm(hw), Coord(hw), Coord",
+        "comparison_result": "IoUc and IoU+ models further enhance performance",
+        "evidence_text": "Table III presents the performance of different position encoding methods. The CoordNorm(hw) model shows improvements over the Coord(hw) and Coord models, indicating the effectiveness of normalization."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "MS-COCO",
+        "dataset_description": "包括 82,783 训练、40,504 验证和 40,775 测试图像",
+        "evidence_text": "Our TIP model's effectiveness is examined through experiments on the MS-COCO dataset [22], which includes 82,783 training, 40,504 validation, and 40,775 test images."
+      }
+    ],
+    "evaluation_metrics": [
+      "CIDEr",
+      "BLEU",
+      "METEOR",
+      "ROUGE",
+      "SPICE"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "CIDEr",
+        "our_result": "最高分",
+        "baseline_result": "原文无此信息",
+        "dataset": "MS-COCO",
+        "evidence_text": "Table I shows that TIP achieves the highest scores in CIDEr and METEOR metrics among different models."
+      },
+      {
+        "metric_name": "METEOR",
+        "our_result": "最高分",
+        "baseline_result": "原文无此信息",
+        "dataset": "MS-COCO",
+        "evidence_text": "Table I shows that TIP achieves the highest scores in CIDEr and METEOR metrics among different models."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "提出了一种改进的Transformer模型TIP",
+      "引入了IoU空间位置编码方法"
+    ],
+    "stated_novelty": [
+      "TIP模型结合了模态内注意力机制和视觉与空间特征的融合"
+    ],
+    "stated_advantages": [
+      "解决了传统模型在长期记忆和空间信息表示上的局限性"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "信息丢失，许多更好的句子被遗漏",
+      "当束搜索大小增加到2和3时，单词搜索空间增加，达到最高的度量分数和最优性能。当束搜索大小为4时，模型生成较短的句子。生成词之间的高度相似性和缺乏多样性略微降低了指标。束搜索增加导致内存使用增加和句子生成速度减慢。"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Image_Captioning_Based_on_An_Improved_Transformer_with_IoU_Position_Encoding",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:18:55",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper",
+        "可疑技术关系method_name: CoordNorm(hw), Coord(hw), Coord"
+      ],
+      "suspicious_count": 2,
+      "validation_score": 60,
+      "quality_level": "medium"
+    },
+    "text_length": 9331,
+    "processed_text_length": 9331
+  }
+}

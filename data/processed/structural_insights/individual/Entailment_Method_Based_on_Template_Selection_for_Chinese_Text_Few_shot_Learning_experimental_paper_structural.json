@@ -1,0 +1,106 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "Entailment Method Based on Template Selection for Chinese Text Few-shot Learning",
+    "authors": [
+      "Zeyuan Wang",
+      "Zhiyu Wei",
+      "Lihui Zhang",
+      "Ruifan Li",
+      "Zhanyu Ma"
+    ],
+    "institutions": [
+      "School of Artificial Intelligence, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "MacBERT",
+        "relationship_type": "基于",
+        "evidence_text": "We choose MacBERT, a pre-training model, as our backbone"
+      },
+      {
+        "method_name": "Entailment-based Few-shot Learning (EFL)",
+        "relationship_type": "结合",
+        "evidence_text": "We address this by introducing a template selection mechanism using a masked language model to assess candidate templates"
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "PET",
+        "comparison_result": "EFL is more effective on sentence-pair tasks, while PET is better for single sentence classification",
+        "evidence_text": "The results on the testing datasets of the nine NLP tasks show that the EFL method with automatic template selection outperforms other methods"
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "Few-CLUE",
+        "dataset_description": "encompassing sentiment analysis, short text classification, long text classification, natural language inference, sentence similarity, Chinese cloze, and co-reference resolution",
+        "evidence_text": "We evaluate nine Chinese few-shot datasets of Few-CLUE"
+      },
+      {
+        "dataset_name": "CMNLI",
+        "dataset_description": "used for intermediate training",
+        "evidence_text": "Intermediate training with an entailment dataset like CMNLI"
+      }
+    ],
+    "evaluation_metrics": [
+      "原文无此信息"
+    ],
+    "baseline_methods": [
+      "MacBERT-large",
+      "MacBERT-base",
+      "PET"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "原文无此信息",
+        "our_result": "原文无此信息",
+        "baseline_result": "原文无此信息",
+        "dataset": "原文无此信息",
+        "evidence_text": "The results on the testing datasets of the nine NLP tasks show that the EFL method with automatic template selection outperforms other methods"
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "introducing a template selection mechanism using a masked language model to assess candidate templates"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "effective on sentence-pair tasks",
+      "automatic template selection"
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "Entailment_Method_Based_on_Template_Selection_for_Chinese_Text_Few_shot_Learning",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:13:17",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 10337,
+    "processed_text_length": 10337
+  }
+}

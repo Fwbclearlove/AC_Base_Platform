@@ -1,0 +1,26 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "一种基于多层次图卷积网络的电力设备故障溯源方法",
+    "authors": [
+      "未找到该信息"
+    ]
+  },
+  "main_content": {
+    "description": "该文档描述了一种基于多层次图卷积网络的电力设备故障溯源方法，包括从电力工单系统中收集故障文本信息，计算TF-IDF和PMI指标，构建电力工单图和多层次图卷积网络，以及使用该网络识别电力设备故障位置等步骤。",
+    "keywords": [
+      "电力设备故障溯源",
+      "多层次图卷积网络",
+      "TF-IDF",
+      "PMI",
+      "电力工单图"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "一种基于多层次图卷积网络的电力设备故障溯源方法_李睿凡",
+    "source_type": "cleaned",
+    "extraction_time": "2025-08-03 12:34:48",
+    "extraction_method": "simple_supplement",
+    "text_length": 875
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "document_metadata": {
+    "document_type": "experimental_paper",
+    "title": "原文无此信息",
+    "authors": [
+      "He Chuan",
+      "Li Ruifan",
+      "Zhong Yixin"
+    ],
+    "institutions": [
+      "School of Computer Science, Beijing University of Posts and Telecommunications, Beijing, China"
+    ],
+    "publication_venue": "原文无此信息"
+  },
+  "technical_relationships": {
+    "base_methods": [
+      {
+        "method_name": "KNN",
+        "relationship_type": "结合",
+        "evidence_text": "K-Nearest Neighbors (KNN) and Singular Value Decomposition (SVD) are two classification methods used in collaborative filtering."
+      },
+      {
+        "method_name": "SVD",
+        "relationship_type": "结合",
+        "evidence_text": "K-Nearest Neighbors (KNN) and Singular Value Decomposition (SVD) are two classification methods used in collaborative filtering."
+      },
+      {
+        "method_name": "logistic regression",
+        "relationship_type": "结合",
+        "evidence_text": "We apply logistic regression to build a classifier using the generated feature vectors."
+      }
+    ],
+    "compared_methods": [
+      {
+        "method_name": "KNN",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "SVD",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "logistic regression",
+        "comparison_result": "原文无此信息",
+        "evidence_text": "原文无此信息"
+      },
+      {
+        "method_name": "combination",
+        "comparison_result": "The combined classifier outperforms single classifiers.",
+        "evidence_text": "The combined classifier outperforms single classifiers."
+      }
+    ]
+  },
+  "experimental_setup": {
+    "datasets_used": [
+      {
+        "dataset_name": "algebra 2008-2009",
+        "dataset_description": "student interaction logs from intelligent tutoring systems",
+        "evidence_text": "Participants were provided with student interaction logs from intelligent tutoring systems, with two datasets: algebra 2008-2009 and bridge to algebra 2008-2009."
+      },
+      {
+        "dataset_name": "bridge to algebra 2008-2009",
+        "dataset_description": "student interaction logs from intelligent tutoring systems",
+        "evidence_text": "Participants were provided with student interaction logs from intelligent tutoring systems, with two datasets: algebra 2008-2009 and bridge to algebra 2008-2009."
+      }
+    ],
+    "evaluation_metrics": [
+      "root mean squared error (RMSE)"
+    ],
+    "baseline_methods": [
+      "原文无此信息"
+    ]
+  },
+  "performance_results": {
+    "quantitative_results": [
+      {
+        "metric_name": "RMSE",
+        "our_result": "0.2820",
+        "baseline_result": "原文无此信息",
+        "dataset": "Algebra 2008-2009",
+        "evidence_text": "The combined classifier achieves an RMSE of 0.2820 on Algebra 2008-2009 dataset."
+      },
+      {
+        "metric_name": "RMSE",
+        "our_result": "0.3257",
+        "baseline_result": "原文无此信息",
+        "dataset": "Algebra 2008-2009",
+        "evidence_text": "KNN: RMSE values on Algebra 2008-2009 dataset is 0.3257 with meta-parameters K β."
+      },
+      {
+        "metric_name": "RMSE",
+        "our_result": "0.446277",
+        "baseline_result": "原文无此信息",
+        "dataset": "Algebra 2008-2009",
+        "evidence_text": "SVD: RMSE values on Algebra 2008-2009 dataset is 0.446277 with meta-parameters N, η, λ."
+      },
+      {
+        "metric_name": "RMSE",
+        "our_result": "0.2895",
+        "baseline_result": "原文无此信息",
+        "dataset": "Algebra 2008-2009",
+        "evidence_text": "Logistic Regression: RMSE on Algebra 2008-2009 dataset is 0.2895."
+      }
+    ]
+  },
+  "innovation_analysis": {
+    "stated_contributions": [
+      "原文无此信息"
+    ],
+    "stated_novelty": [
+      "原文无此信息"
+    ],
+    "stated_advantages": [
+      "The combined classifier outperforms single classifiers.",
+      "Logistic regression shows the best performance due to its exploitation of detailed feature vectors."
+    ]
+  },
+  "limitations": {
+    "acknowledged_limitations": [
+      "原文无此信息"
+    ],
+    "failure_cases": [
+      "原文无此信息"
+    ]
+  },
+  "extraction_metadata": {
+    "file_id": "978_3_642_23223_7_60",
+    "detected_doc_type": "experimental_paper",
+    "extraction_time": "2025-08-02 13:05:54",
+    "validation": {
+      "warnings": [
+        "可疑document_type: experimental_paper"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 3728,
+    "processed_text_length": 3728
+  }
+}

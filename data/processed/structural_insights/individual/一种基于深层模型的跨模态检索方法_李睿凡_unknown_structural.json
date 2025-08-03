@@ -1,0 +1,47 @@
+{
+  "document_metadata": {
+    "document_type": "unknown",
+    "title": "原文无此信息",
+    "authors_or_creators": []
+  },
+  "main_content": {
+    "stated_purpose": "提出一种基于深层模型的跨模态检索方法",
+    "key_concepts": [
+      "跨模态检索",
+      "深层模型",
+      "受限波尔兹曼机",
+      "Corr-RBMs",
+      "低级表达向量",
+      "高级表达向量",
+      "欧氏距离"
+    ],
+    "main_methods": [
+      "利用特征提取方法获得表达向量",
+      "使用Corr-RBMs深层模型处理表达向量",
+      "计算模态间的欧氏距离",
+      "匹配检索对象"
+    ]
+  },
+  "relationships": {
+    "references_to": [],
+    "builds_on": [
+      "受限波尔兹曼机Corr-RBM模型"
+    ]
+  },
+  "note": "文档类型不明确，仅提取最基础信息",
+  "extraction_metadata": {
+    "file_id": "一种基于深层模型的跨模态检索方法_李睿凡",
+    "detected_doc_type": "unknown",
+    "extraction_time": "2025-08-02 15:11:55",
+    "validation": {
+      "warnings": [
+        "可疑document_type: unknown"
+      ],
+      "suspicious_count": 1,
+      "validation_score": 80,
+      "quality_level": "high"
+    },
+    "text_length": 1099,
+    "processed_text_length": 1099
+  }
+}
