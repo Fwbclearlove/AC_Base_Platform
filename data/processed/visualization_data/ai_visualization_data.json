@@ -9,55 +9,28 @@
       "国际化": 5.8
     },
     "evidence_analysis": {
-      "研究产出": "基于20篇论文分析，团队在图像生成、文本理解、股票预测等多个领域持续产出高质量论文，发表频率较高。",
-      "技术创新": "发现X个创新点，如基于图卷积网络的方面级情感分析、多模态对比学习等，显示团队具有较强的技术创新能力。",
-      "合作网络": "平均每篇X位作者合作，跨机构合作频繁，表明团队具有较好的合作网络和开放性。",
-      "学术影响": "方法在多个数据集上取得state-of-the-art性能，被多个后续工作引用和对比，显示团队具有较大的学术影响力。",
-      "人才培养": "作者梯队结构合理，有资深教授和年轻博士，研究深度不断拓展，显示团队在人才培养方面表现良好。",
-      "国际化": "与国际知名学者合作发表，使用国际数据集，表明团队具有国际化视野，但国际合作程度仍有提升空间。"
+      "研究产出": "基于20篇论文分析，论文数量和质量较高，发表频率稳定。",
+      "技术创新": "发现多个创新点，如基于提示学习的少样本文本分类方法、双模态融合的文本图像检索等。",
+      "合作网络": "平均每篇论文有3-4位作者合作，跨机构合作频繁，如北京邮电大学、兰州理工大学等。"
     }
   },
   "comparison_data": {
     "comparison_matrix": [
       {
-        "name": "Ruifan Li",
-        "研究产出": 8.5,
-        "创新能力": 8.7,
-        "技术深度": 8.3,
-        "合作能力": 7.8,
-        "影响力": 8.0
-      },
-      {
-        "name": "Xiaojie Wang",
-        "研究产出": 7.9,
-        "创新能力": 8.1,
-        "技术深度": 7.7,
-        "合作能力": 7.5,
-        "影响力": 7.9
-      },
-      {
-        "name": "Fangxiang Feng",
-        "研究产出": 7.5,
-        "创新能力": 7.8,
-        "技术深度": 7.6,
-        "合作能力": 7.3,
-        "影响力": 7.7
-      },
-      {
         "name": "李睿凡",
-        "研究产出": 6.8,
-        "创新能力": 7.1,
-        "技术深度": 6.9,
-        "合作能力": 6.5,
-        "影响力": 6.7
+        "研究产出": 9.2,
+        "创新能力": 8.8,
+        "技术深度": 8.5,
+        "合作能力": 7.9,
+        "影响力": 8.1
       },
       {
-        "name": "Zhanyu Ma",
-        "研究产出": 7.2,
-        "创新能力": 7.5,
-        "技术深度": 7.4,
-        "合作能力": 7.0,
-        "影响力": 7.3
+        "name": "Wang Xiaojie",
+        "研究产出": 8.5,
+        "创新能力": 7.8,
+        "技术深度": 8.2,
+        "合作能力": 8.3,
+        "影响力": 7.6
       }
     ],
     "dimensions": [
@@ -68,57 +41,107 @@
       "影响力"
     ],
     "analysis_basis": {
-      "Ruifan Li": "基于33篇论文，发现多个创新点，如基于IoU位置编码的图像字幕生成模型、多尺度双向深度神经网络等，被广泛引用和对比。",
-      "Xiaojie Wang": "基于23篇论文，提出多个创新方法，如基于模板选择的中文文本少样本学习、树结构解码器等，合作网络广泛。",
-      "Fangxiang Feng": "基于17篇论文，提出多个创新方法，如模态解耦判别器、多通道图卷积网络等，技术深度较好。",
-      "李睿凡": "基于14篇论文，提出多个创新方法，如合成灰数预测模型、多视图LDA模型等，但合作网络和技术深度相对较弱。",
-      "Zhanyu Ma": "基于6篇论文，提出多个创新方法，如基于IoU位置编码的图像字幕生成模型、基于模板选择的中文文本少样本学习等，合作网络和技术深度较好。"
+      "李睿凡": "基于55篇论文，发现多个创新点，如基于统计和加权的提高击键认证识别方法，以及多视图有监督的LDA模型等。",
+      "Wang Xiaojie": "基于23篇论文，主要研究领域包括文本生成、图像处理等，提出了多个创新方法，如基于模态解耦的文本到图像生成方法，以及基于双分支注意力融合的图像段落字幕生成方法等。"
     }
   },
   "trend_data": {
     "time_series_data": [
       {
         "year": 2020,
-        "papers_published": 15,
-        "innovation_index": 6.8,
-        "collaboration_intensity": 4.2
+        "创新指数": 6.8,
+        "合作强度": 4.2
       },
       {
         "year": 2021,
-        "papers_published": 23,
-        "innovation_index": 7.2,
-        "collaboration_intensity": 5.1
+        "创新指数": 7.2,
+        "合作强度": 5.1
       },
       {
         "year": 2022,
-        "papers_published": 31,
-        "innovation_index": 7.8,
-        "collaboration_intensity": 6.3
+        "创新指数": 7.8,
+        "合作强度": 6.3
       },
       {
         "year": 2023,
-        "papers_published": 28,
-        "innovation_index": 8.1,
-        "collaboration_intensity": 7.0
+        "创新指数": 8.1,
+        "合作强度": 7.0
       },
       {
         "year": 2024,
-        "papers_published": 21,
-        "innovation_index": 8.4,
-        "collaboration_intensity": 7.5
+        "创新指数": 8.4,
+        "合作强度": 7.5
       }
     ],
     "trend_analysis": {
-      "papers_published_trend": "increasing_then_decreasing_with_peak_in_2022",
-      "innovation_index_trend": "steadily_rising",
-      "collaboration_intensity_trend": "continuously_strengthening"
+      "创新指数_trend": "稳步上升",
+      "合作强度_trend": "持续增强"
     },
     "future_prediction": {
       "2025_forecast": {
-        "papers_published": 25,
-        "innovation_index": 8.6,
-        "collaboration_intensity": 8.0
+        "创新指数": 8.6,
+        "合作强度": 8.0
       }
+    }
+  },
+  "network_data": {
+    "nodes": [
+      {
+        "id": "李睿凡",
+        "size": 25,
+        "group": "核心",
+        "papers": 65,
+        "centrality": 0.85
+      },
+      {
+        "id": "Wang Xiaojie",
+        "size": 18,
+        "group": "活跃",
+        "papers": 25,
+        "centrality": 0.62
+      },
+      {
+        "id": "Feng Fangxiang",
+        "size": 15,
+        "group": "活跃",
+        "papers": 19,
+        "centrality": 0.48
+      }
+    ],
+    "edges": [
+      {
+        "source": "李睿凡",
+        "target": "Wang Xiaojie",
+        "weight": 8,
+        "papers": 8
+      },
+      {
+        "source": "李睿凡",
+        "target": "Feng Fangxiang",
+        "weight": 5,
+        "papers": 5
+      },
+      {
+        "source": "Wang Xiaojie",
+        "target": "Feng Fangxiang",
+        "weight": 3,
+        "papers": 3
+      }
+    ],
+    "network_metrics": {
+      "density": 0.65,
+      "avg_clustering": 0.73,
+      "core_nodes": [
+        "李睿凡"
+      ],
+      "bridge_nodes": [
+        "Wang Xiaojie"
+      ]
+    },
+    "collaboration_statistics": {
+      "collaboration_papers": 64,
+      "total_papers": 118,
+      "avg_authors_per_paper": 2.4661016949152543
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "total_documents": 118,
+  "total_chunks": 2937,
+  "chunks_by_section": {
+    "introduction": 631,
+    "abstract": 655,
+    "related_work": 110,
+    "experiment": 153,
+    "default": 908,
+    "conclusion": 30,
+    "reference": 322,
+    "method": 122,
+    "discussion": 6
+  },
+  "avg_chunk_length": 411.8437180796731,
+  "failed_documents": [],
+  "text_sources": {
+    "cleaned": 118,
+    "extracted": 0
+  }
+}

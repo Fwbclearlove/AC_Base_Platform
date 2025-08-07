@@ -1,0 +1,17 @@
+{
+  "model_name": "BAAI/bge-large-zh-v1.5",
+  "dimension": 1024,
+  "indices": [
+    "main",
+    "section_introduction",
+    "section_abstract",
+    "section_related_work",
+    "section_experiment",
+    "section_default",
+    "section_conclusion",
+    "section_reference",
+    "section_method",
+    "summary"
+  ],
+  "creation_time": "2025-08-05 15:00:09.165682"
+}

@@ -1,4 +1,4 @@
-# src/ai_visualization_data_generator.py
+# src/ai_visualization_data_generator.py - 完整修复版
 import json
 import os
 import time
@@ -13,6 +13,8 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import pandas as pd
 import numpy as np
+import logging
+from typing import Dict, Any, Optional
 
 from config import PROCESSED_DATA_DIR
 
@@ -28,9 +30,13 @@ VIZ_DATA_DIR.mkdir(exist_ok=True)
 VIZ_CHARTS_DIR = VIZ_DATA_DIR / "charts"
 VIZ_CHARTS_DIR.mkdir(exist_ok=True)
 
+# 设置日志
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 
 class VisualizationDataGenerator:
-    """专门生成可视化数据的AI分析器"""
+    """专门生成可视化数据的AI分析器 - 修复版"""
 
     def __init__(self):
         self.summaries = {}
@@ -45,9 +51,9 @@ class VisualizationDataGenerator:
         try:
             with open(summaries_path, 'r', encoding='utf-8') as f:
                 self.summaries = json.load(f)
-            print(f"✅ 加载概要层数据: {len(self.summaries)} 个文档")
+            print(f"加载概要层数据: {len(self.summaries)} 个文档")
         except Exception as e:
-            print(f"❌ 加载概要层数据失败: {e}")
+            print(f"加载概要层数据失败: {e}")
             return False
 
         # 加载结构化数据
@@ -55,12 +61,101 @@ class VisualizationDataGenerator:
         try:
             with open(structural_path, 'r', encoding='utf-8') as f:
                 self.structural_insights = json.load(f)
-            print(f"✅ 加载结构化数据: {len(self.structural_insights)} 个文档")
+            print(f"加载结构化数据: {len(self.structural_insights)} 个文档")
         except Exception as e:
-            print(f"❌ 加载结构化数据失败: {e}")
+            print(f"加载结构化数据失败: {e}")
             return False
 
         return True
+
+    def safe_ai_call(self, prompt: str, operation_name: str) -> Optional[Dict]:
+        """安全的AI调用，包含详细错误打印和重试机制"""
+        max_retries = 3
+
+        for attempt in range(max_retries):
+            try:
+                print(f"\n正在调用AI生成{operation_name}... (尝试 {attempt + 1}/{max_retries})")
+
+                response = CLIENT.chat.completions.create(
+                    model=MODEL_NAME,
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.3,
+                    max_tokens=1500,
+                )
+
+                result_str = response.choices[0].message.content.strip()
+                print(f"AI原始响应 ({operation_name}):")
+                print("-" * 50)
+                print(result_str)
+                print("-" * 50)
+
+                # 清理响应内容
+                result_str = self.clean_ai_response(result_str)
+                print(f"清理后的JSON ({operation_name}):")
+                print("-" * 30)
+                print(result_str)
+                print("-" * 30)
+
+                # 尝试解析JSON
+                result = json.loads(result_str)
+                print(f"{operation_name}生成成功")
+                return result
+
+            except json.JSONDecodeError as e:
+                print(f"JSON解析失败 ({operation_name}), 尝试 {attempt + 1}/{max_retries}")
+                print(f"错误详情: {e}")
+                print(f"原始响应: {result_str}")
+                print(f"响应长度: {len(result_str)}")
+                print(f"响应类型: {type(result_str)}")
+
+                if attempt == max_retries - 1:
+                    print(f"{operation_name}最终失败，跳过生成")
+                    return None
+
+            except Exception as e:
+                print(f"API调用失败 ({operation_name}), 尝试 {attempt + 1}/{max_retries}")
+                print(f"错误详情: {e}")
+                print(f"错误类型: {type(e)}")
+
+                if attempt == max_retries - 1:
+                    print(f"{operation_name}最终失败，跳过生成")
+                    return None
+
+            # 等待后重试
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                print(f"等待 {wait_time} 秒后重试...")
+                time.sleep(wait_time)
+
+        return None
+
+    def clean_ai_response(self, response: str) -> str:
+        """清理AI响应，提取JSON部分"""
+        # 移除常见的非JSON内容
+        response = response.replace("```json", "").replace("```", "").strip()
+
+        # 查找JSON开始和结束
+        start_idx = response.find('{')
+        end_idx = response.rfind('}')
+
+        if start_idx != -1 and end_idx != -1 and end_idx > start_idx:
+            return response[start_idx:end_idx + 1]
+
+        return response
+
+    def get_author_standardization_guide(self):
+        """获取作者姓名标准化指南"""
+        return """
+作者姓名标准化规则：
+1. Li Ruifan, Ruifan Li, 李睿凡 → 统一为 "李睿凡"
+2. Wang Xiaojie, Xiaojie Wang → 统一为 "Wang Xiaojie"  
+3. Feng Fangxiang, Fangxiang Feng → 统一为 "Feng Fangxiang"
+4. 中文姓名保持原样
+5. 英文姓名采用 "Firstname Lastname" 格式
+6. 去除多余空格和标点符号
+
+请确保返回的所有作者姓名都经过标准化处理。
+"""
 
     def generate_team_radar_data_with_ai(self):
         """AI生成团队雷达图数据（基于每篇文章的详细数据）"""
@@ -70,6 +165,8 @@ class VisualizationDataGenerator:
 
         prompt = f"""
 你是学术团队评估专家。请基于以下每篇论文的详细数据，为团队能力评估生成雷达图数据。
+
+{self.get_author_standardization_guide()}
 
 每篇论文的详细信息:
 {json.dumps(detailed_papers, ensure_ascii=False, indent=1)}
@@ -83,7 +180,7 @@ class VisualizationDataGenerator:
 5. 人才培养：基于作者梯队和研究深度
 6. 国际化：基于国际合作和研究视野
 
-返回格式：
+严格按照以下JSON格式返回，不要添加任何解释文字：
 {{
   "radar_data": {{
     "研究产出": 8.5,
@@ -99,28 +196,9 @@ class VisualizationDataGenerator:
     "合作网络": "平均每篇X位作者合作..."
   }}
 }}
-
-只输出JSON格式。
 """
 
-        try:
-            response = CLIENT.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-                max_tokens=800,
-            )
-
-            result_str = response.choices[0].message.content.strip()
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-
-            radar_data = json.loads(result_str)
-            print("✅ 团队雷达图数据生成成功")
-            return radar_data
-
-        except Exception as e:
-            print(f"❌ 团队雷达图数据生成失败: {e}")
-            return None
+        return self.safe_ai_call(prompt, "团队雷达图数据")
 
     def generate_author_comparison_data_with_ai(self):
         """AI生成作者对比数据（基于每位作者的具体论文）"""
@@ -130,6 +208,8 @@ class VisualizationDataGenerator:
 
         prompt = f"""
 你是学术人才评估专家。基于以下每位研究者的具体论文内容，生成能力对比数据。
+
+{self.get_author_standardization_guide()}
 
 研究者及其论文详情:
 {json.dumps(author_papers_data, ensure_ascii=False, indent=1)}
@@ -142,43 +222,24 @@ class VisualizationDataGenerator:
 4. 合作能力：合作网络广度、团队协作
 5. 影响力：被引用、方法被对比情况
 
-返回格式：
+严格按照以下JSON格式返回，确保作者姓名经过标准化处理：
 {{
   "comparison_matrix": [
-    {{"name": "研究者姓名", "研究产出": 9.2, "创新能力": 8.8, "技术深度": 8.5, "合作能力": 7.9, "影响力": 8.1}},
-    ...
+    {{"name": "李睿凡", "研究产出": 9.2, "创新能力": 8.8, "技术深度": 8.5, "合作能力": 7.9, "影响力": 8.1}},
+    {{"name": "Wang Xiaojie", "研究产出": 8.5, "创新能力": 7.8, "技术深度": 8.2, "合作能力": 8.3, "影响力": 7.6}}
   ],
   "dimensions": ["研究产出", "创新能力", "技术深度", "合作能力", "影响力"],
   "analysis_basis": {{
-    "研究者姓名": "基于X篇论文，发现Y个创新点...",
-    ...
+    "李睿凡": "基于X篇论文，发现Y个创新点...",
+    "Wang Xiaojie": "基于X篇论文，主要研究领域..."
   }}
 }}
-
-只输出JSON数据。
 """
 
-        try:
-            response = CLIENT.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=1200,
-            )
-
-            result_str = response.choices[0].message.content.strip()
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-
-            comparison_data = json.loads(result_str)
-            print("✅ 作者对比数据生成成功")
-            return comparison_data
-
-        except Exception as e:
-            print(f"❌ 作者对比数据生成失败: {e}")
-            return None
+        return self.safe_ai_call(prompt, "作者对比数据")
 
     def generate_research_trend_data_with_ai(self):
-        """AI生成研究趋势时间序列数据"""
+        """AI生成研究趋势时间序列数据 - 修复版（移除论文数量列）"""
 
         # 收集按年份的研究数据
         yearly_stats = self._collect_yearly_research_data()
@@ -188,47 +249,28 @@ class VisualizationDataGenerator:
 
 年度数据: {json.dumps(yearly_stats, ensure_ascii=False)}
 
-请生成2020-2024年的研究趋势数据：
+请生成2020-2024年的研究趋势数据，只包含创新指数和合作强度（不包含论文数量）：
 
+严格按照以下JSON格式返回：
 {{
   "time_series_data": [
-    {{"year": 2020, "论文数量": 15, "创新指数": 6.8, "合作强度": 4.2}},
-    {{"year": 2021, "论文数量": 23, "创新指数": 7.2, "合作强度": 5.1}},
-    {{"year": 2022, "论文数量": 31, "创新指数": 7.8, "合作强度": 6.3}},
-    {{"year": 2023, "论文数量": 28, "创新指数": 8.1, "合作强度": 7.0}},
-    {{"year": 2024, "论文数量": 21, "创新指数": 8.4, "合作强度": 7.5}}
+    {{"year": 2020, "创新指数": 6.8, "合作强度": 4.2}},
+    {{"year": 2021, "创新指数": 7.2, "合作强度": 5.1}},
+    {{"year": 2022, "创新指数": 7.8, "合作强度": 6.3}},
+    {{"year": 2023, "创新指数": 8.1, "合作强度": 7.0}},
+    {{"year": 2024, "创新指数": 8.4, "合作强度": 7.5}}
   ],
   "trend_analysis": {{
-    "论文数量_trend": "先增后减，2022年达峰",
     "创新指数_trend": "稳步上升",
     "合作强度_trend": "持续增强"
   }},
   "future_prediction": {{
-    "2025_forecast": {{"论文数量": 25, "创新指数": 8.6, "合作强度": 8.0}}
+    "2025_forecast": {{"创新指数": 8.6, "合作强度": 8.0}}
   }}
 }}
-
-只输出JSON数据。
 """
 
-        try:
-            response = CLIENT.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.3,
-                max_tokens=1000,
-            )
-
-            result_str = response.choices[0].message.content.strip()
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-
-            trend_data = json.loads(result_str)
-            print("✅ 研究趋势数据生成成功")
-            return trend_data
-
-        except Exception as e:
-            print(f"❌ 研究趋势数据生成失败: {e}")
-            return None
+        return self.safe_ai_call(prompt, "研究趋势数据")
 
     def generate_collaboration_network_data_with_ai(self):
         """AI生成合作网络图数据"""
@@ -239,9 +281,11 @@ class VisualizationDataGenerator:
         prompt = f"""
 你是网络分析专家。基于合作数据生成网络图数据。
 
+{self.get_author_standardization_guide()}
+
 合作统计: {json.dumps(collab_stats, ensure_ascii=False)}
 
-请生成网络图的节点和边数据：
+请严格按照以下JSON格式返回数据，确保作者姓名经过标准化处理：
 
 {{
   "nodes": [
@@ -261,28 +305,9 @@ class VisualizationDataGenerator:
     "bridge_nodes": ["Wang Xiaojie"]
   }}
 }}
-
-只输出JSON数据。
 """
 
-        try:
-            response = CLIENT.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=1200,
-            )
-
-            result_str = response.choices[0].message.content.strip()
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-
-            network_data = json.loads(result_str)
-            print("✅ 合作网络数据生成成功")
-            return network_data
-
-        except Exception as e:
-            print(f"❌ 合作网络数据生成失败: {e}")
-            return None
+        return self.safe_ai_call(prompt, "合作网络数据")
 
     def generate_research_domain_pie_data_with_ai(self):
         """AI生成研究领域饼图数据"""
@@ -294,7 +319,7 @@ class VisualizationDataGenerator:
 
 领域统计: {json.dumps(domain_stats, ensure_ascii=False)}
 
-请生成研究领域分布的饼图数据：
+请严格按照以下JSON格式返回数据：
 
 {{
   "pie_data": [
@@ -311,28 +336,9 @@ class VisualizationDataGenerator:
     "diversity_index": 0.78
   }}
 }}
-
-只输出JSON数据。
 """
 
-        try:
-            response = CLIENT.chat.completions.create(
-                model=MODEL_NAME,
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.2,
-                max_tokens=800,
-            )
-
-            result_str = response.choices[0].message.content.strip()
-            result_str = result_str.replace("```json", "").replace("```", "").strip()
-
-            pie_data = json.loads(result_str)
-            print("✅ 研究领域饼图数据生成成功")
-            return pie_data
-
-        except Exception as e:
-            print(f"❌ 研究领域饼图数据生成失败: {e}")
-            return None
+        return self.safe_ai_call(prompt, "研究领域饼图数据")
 
     def clean_field_data(self, field_value, invalid_values=None):
         """清洗字段数据，移除无效值"""
@@ -582,7 +588,7 @@ class VisualizationDataGenerator:
     def create_visualizations_from_ai_data(self):
         """基于AI生成的数据创建可视化"""
 
-        print("\n🎨 开始创建可视化图表...")
+        print("\n开始创建可视化图表...")
 
         # 1. 团队雷达图
         if 'radar_data' in self.viz_data:
@@ -641,7 +647,7 @@ class VisualizationDataGenerator:
         )
 
         fig.write_html(VIZ_CHARTS_DIR / "team_radar_chart.html")
-        print("✅ 团队雷达图已生成")
+        print("团队雷达图已生成")
 
     def _create_author_comparison_heatmap(self):
         """创建作者能力对比热图"""
@@ -673,46 +679,54 @@ class VisualizationDataGenerator:
         )
 
         fig.write_html(VIZ_CHARTS_DIR / "author_comparison_heatmap.html")
-        print("✅ 作者对比热图已生成")
+        print("作者对比热图已生成")
 
     def _create_research_trend_chart(self):
-        """创建研究趋势图"""
+        """创建研究趋势图 - 修复版（移除论文数量）"""
         trend_data = self.viz_data['trend_data']['time_series_data']
 
         df = pd.DataFrame(trend_data)
+        print(f"趋势数据DataFrame列: {df.columns.tolist()}")
 
         fig = make_subplots(
             rows=2, cols=2,
-            subplot_titles=('论文数量趋势', '创新指数趋势', '合作强度趋势', '综合趋势'),
+            subplot_titles=('创新指数趋势', '合作强度趋势', '指数对比', '综合趋势'),
             specs=[[{"secondary_y": False}, {"secondary_y": False}],
                    [{"secondary_y": False}, {"secondary_y": False}]]
-        )
-
-        # 论文数量
-        fig.add_trace(
-            go.Scatter(x=df['year'], y=df['论文数量'], name='论文数量', line=dict(color='blue', width=3)),
-            row=1, col=1
         )
 
         # 创新指数
         fig.add_trace(
             go.Scatter(x=df['year'], y=df['创新指数'], name='创新指数', line=dict(color='red', width=3)),
-            row=1, col=2
+            row=1, col=1
         )
 
         # 合作强度
         fig.add_trace(
             go.Scatter(x=df['year'], y=df['合作强度'], name='合作强度', line=dict(color='green', width=3)),
+            row=1, col=2
+        )
+
+        # 指数对比
+        fig.add_trace(
+            go.Scatter(x=df['year'], y=df['创新指数'], name='创新指数', line=dict(color='red')),
+            row=2, col=1
+        )
+        fig.add_trace(
+            go.Scatter(x=df['year'], y=df['合作强度'], name='合作强度', line=dict(color='green')),
             row=2, col=1
         )
 
-        # 综合趋势
+        # 综合趋势（归一化显示）
+        normalized_innovation = df['创新指数'] / df['创新指数'].max() * 10
+        normalized_collaboration = df['合作强度'] / df['合作强度'].max() * 10
+
         fig.add_trace(
-            go.Scatter(x=df['year'], y=df['论文数量'], name='论文数量', line=dict(color='blue')),
+            go.Scatter(x=df['year'], y=normalized_innovation, name='创新指数(归一化)', line=dict(color='red')),
             row=2, col=2
         )
         fig.add_trace(
-            go.Scatter(x=df['year'], y=df['创新指数'] * 5, name='创新指数×5', line=dict(color='red')),
+            go.Scatter(x=df['year'], y=normalized_collaboration, name='合作强度(归一化)', line=dict(color='green')),
             row=2, col=2
         )
 
@@ -724,7 +738,7 @@ class VisualizationDataGenerator:
         )
 
         fig.write_html(VIZ_CHARTS_DIR / "research_trend_chart.html")
-        print("✅ 研究趋势图已生成")
+        print("研究趋势图已生成")
 
     def _create_collaboration_network_chart(self):
         """创建合作网络图"""
@@ -796,7 +810,7 @@ class VisualizationDataGenerator:
                             font=dict(family="Microsoft YaHei", size=12)))
 
         fig.write_html(VIZ_CHARTS_DIR / "collaboration_network.html")
-        print("✅ 合作网络图已生成")
+        print("合作网络图已生成")
 
     def _create_research_domain_pie_chart(self):
         """创建研究领域饼图"""
@@ -823,12 +837,12 @@ class VisualizationDataGenerator:
         )
 
         fig.write_html(VIZ_CHARTS_DIR / "research_domain_pie.html")
-        print("✅ 研究领域饼图已生成")
+        print("研究领域饼图已生成")
 
     def run_complete_visualization_pipeline(self):
-        """运行完整的可视化数据生成流程"""
+        """运行完整的可视化数据生成流程 - 修复版"""
         print("=" * 80)
-        print("AI可视化数据生成器")
+        print("AI可视化数据生成器 - 修复版")
         print("专门生成可用于图表可视化的数据")
         print("=" * 80)
 
@@ -836,45 +850,54 @@ class VisualizationDataGenerator:
         if not self.load_data_sources():
             return None
 
-        # 2. 生成各类可视化数据
-        print("\n🤖 使用AI生成可视化数据...")
+        # 2. 构建作者姓名映射
+        self.build_author_name_mapping()
+
+        # 3. 生成各类可视化数据
+        print("\n使用AI生成可视化数据...")
 
         # 团队雷达图数据
+        print("\n" + "=" * 50)
         radar_data = self.generate_team_radar_data_with_ai()
         if radar_data:
             self.viz_data['radar_data'] = radar_data
 
         # 作者对比数据
+        print("\n" + "=" * 50)
         comparison_data = self.generate_author_comparison_data_with_ai()
         if comparison_data:
             self.viz_data['comparison_data'] = comparison_data
 
         # 研究趋势数据
+        print("\n" + "=" * 50)
         trend_data = self.generate_research_trend_data_with_ai()
         if trend_data:
             self.viz_data['trend_data'] = trend_data
 
         # 合作网络数据
+        print("\n" + "=" * 50)
         network_data = self.generate_collaboration_network_data_with_ai()
         if network_data:
             self.viz_data['network_data'] = network_data
 
         # 研究领域饼图数据
+        print("\n" + "=" * 50)
         pie_data = self.generate_research_domain_pie_data_with_ai()
         if pie_data:
             self.viz_data['pie_data'] = pie_data
 
-        # 3. 保存可视化数据
+        # 4. 保存可视化数据
         with open(VIZ_DATA_DIR / "ai_visualization_data.json", 'w', encoding='utf-8') as f:
             json.dump(self.viz_data, f, indent=2, ensure_ascii=False)
 
-        # 4. 创建图表
+        # 5. 创建图表（只创建成功生成数据的图表）
         self.create_visualizations_from_ai_data()
 
         print(f"\n" + "=" * 80)
         print("AI可视化数据生成完成！")
-        print(f"📊 可视化数据: {VIZ_DATA_DIR / 'ai_visualization_data.json'}")
-        print(f"📈 图表文件: {VIZ_CHARTS_DIR}")
+        print(f"可视化数据: {VIZ_DATA_DIR / 'ai_visualization_data.json'}")
+        print(f"图表文件: {VIZ_CHARTS_DIR}")
+        print(f"成功生成 {len(self.viz_data)} 种可视化数据")
         print("=" * 80)
 
         return self.viz_data
